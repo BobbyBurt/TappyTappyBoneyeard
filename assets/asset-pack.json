@@ -1,0 +1,154 @@
+{
+    "section1": {
+        "files": [
+            {
+                "url": "src/components/Align.js",
+                "type": "script",
+                "key": "Align"
+            },
+            {
+                "url": [
+                    "assets/sfx/bird drop.mp3"
+                ],
+                "type": "audio",
+                "key": "bird drop"
+            },
+            {
+                "url": [
+                    "assets/sfx/bird egg lay.mp3"
+                ],
+                "type": "audio",
+                "key": "bird egg lay"
+            },
+            {
+                "url": [
+                    "assets/sfx/bird flap.mp3"
+                ],
+                "type": "audio",
+                "key": "bird flap"
+            },
+            {
+                "url": "assets/bird1dive.png",
+                "type": "image",
+                "key": "bird1dive"
+            },
+            {
+                "url": "assets/bird1egg.png",
+                "type": "image",
+                "key": "bird1egg"
+            },
+            {
+                "url": "assets/bird1mid.png",
+                "type": "image",
+                "key": "bird1mid"
+            },
+            {
+                "url": "assets/bird1punch.png",
+                "type": "image",
+                "key": "bird1punch"
+            },
+            {
+                "url": "assets/bird1squash.png",
+                "type": "image",
+                "key": "bird1squash"
+            },
+            {
+                "url": "assets/bird1stretch.png",
+                "type": "image",
+                "key": "bird1stretch"
+            },
+            {
+                "url": "assets/dino.png",
+                "key": "dino",
+                "type": "image"
+            },
+            {
+                "url": [
+                    "assets/sfx/egg drop.mp3"
+                ],
+                "type": "audio",
+                "key": "egg drop"
+            },
+            {
+                "url": [
+                    "assets/sfx/enemy death.mp3"
+                ],
+                "type": "audio",
+                "key": "enemy death"
+            },
+            {
+                "url": [
+                    "assets/sfx/enemy shoot.mp3"
+                ],
+                "type": "audio",
+                "key": "enemy shoot"
+            },
+            {
+                "url": [
+                    "assets/sfx/explosion.mp3"
+                ],
+                "type": "audio",
+                "key": "explosion"
+            },
+            {
+                "url": "assets/logo.png",
+                "type": "image",
+                "key": "logo"
+            },
+            {
+                "textureURL": "assets/nokia.png",
+                "fontDataURL": "assets/nokia.xml",
+                "type": "bitmapFont",
+                "key": "nokia"
+            },
+            {
+                "url": "src/components/PhysicsBody.js",
+                "type": "script",
+                "key": "PhysicsBody"
+            },
+            {
+                "url": "src/prefabs/playerPrefab.js",
+                "type": "script",
+                "key": "playerPrefab"
+            },
+            {
+                "url": [
+                    "assets/sfx/Pogo stick.mp3"
+                ],
+                "type": "audio",
+                "key": "Pogo stick"
+            },
+            {
+                "url": [
+                    "assets/sfx/Punch swing.mp3"
+                ],
+                "type": "audio",
+                "key": "Punch swing"
+            },
+            {
+                "url": [
+                    "assets/sfx/reflect.mp3"
+                ],
+                "type": "audio",
+                "key": "reflect"
+            },
+            {
+                "url": "assets/test-map-2.json",
+                "type": "tilemapTiledJSON",
+                "key": "test-map-2"
+            },
+            {
+                "url": "assets/tileset.png",
+                "type": "image",
+                "key": "tileset"
+            }
+        ]
+    },
+    "meta": {
+        "app": "Phaser Editor 2D - Asset Pack Editor",
+        "contentType": "phasereditor2d.pack.core.AssetContentType",
+        "url": "https://phasereditor2d.com",
+        "version": 2,
+        "showAllFilesInBlocks": false
+    }
+}

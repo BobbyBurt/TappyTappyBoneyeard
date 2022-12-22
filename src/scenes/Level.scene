@@ -1,0 +1,111 @@
+{
+    "id": "01aefa93-6044-4159-8358-7e91310aa05f",
+    "sceneType": "SCENE",
+    "settings": {
+        "preloadPackFiles": [],
+        "createMethodName": "editorCreate",
+        "sceneKey": "Level",
+        "borderWidth": 0,
+        "borderHeight": 0
+    },
+    "displayList": [
+        {
+            "type": "Layer",
+            "id": "6f3e4cb4-2649-40ee-b6ef-11f87265d5f0",
+            "label": "UILayer",
+            "scope": "CLASS",
+            "components": [],
+            "list": [
+                {
+                    "type": "BitmapText",
+                    "id": "861d6b11-9fd4-4bf7-9234-1929e7323733",
+                    "label": "buildText",
+                    "components": [
+                        "Align"
+                    ],
+                    "Align.up": true,
+                    "Align.left": true,
+                    "Align.horizontalOffset": 5,
+                    "Align.verticalOffset": 5,
+                    "x": 3,
+                    "y": -4,
+                    "text": "Tappy Tappy Boneyard\nv1",
+                    "font": "nokia",
+                    "fontSize": -8,
+                    "dropShadowX": -1,
+                    "dropShadowY": 1,
+                    "dropShadowColor": "#000000ff"
+                }
+            ]
+        },
+        {
+            "type": "Layer",
+            "id": "74ede788-7820-49aa-b167-86ea282dd558",
+            "label": "mainLayer",
+            "scope": "CLASS",
+            "components": [],
+            "list": [
+                {
+                    "type": "TilemapLayer",
+                    "id": "bd40acd7-eec6-4e37-95b4-2bd2a159d5d9",
+                    "label": "tileLayer",
+                    "scope": "CLASS",
+                    "components": [],
+                    "tilemapId": "24fe45a2-ddf6-4d66-9417-d86e9ac6199d",
+                    "layerName": "Tile Layer 1",
+                    "tilesets": [
+                        "tileset"
+                    ]
+                },
+                {
+                    "prefabId": "3f838717-1748-46a2-999c-c73f8b1a2e4e",
+                    "id": "4659f446-ab3a-42ff-b5c3-94d65c0ead0b",
+                    "unlock": [
+                        "x",
+                        "y"
+                    ],
+                    "label": "player",
+                    "scope": "CLASS",
+                    "components": [],
+                    "x": 351,
+                    "y": 131
+                }
+            ]
+        }
+    ],
+    "plainObjects": [
+        {
+            "id": "24fe45a2-ddf6-4d66-9417-d86e9ac6199d",
+            "type": "Tilemap",
+            "label": "test-map-2",
+            "key": "test-map-2",
+            "tilesets": [
+                {
+                    "name": "tileset",
+                    "imageKey": "tileset"
+                }
+            ]
+        },
+        {
+            "id": "0326fb0b-5b37-495c-9dfc-f79063ead1d1",
+            "type": "Collider",
+            "label": "collidePlayerVsTilemap",
+            "object1": "player",
+            "object2": "tileLayer",
+            "collideCallback": "this.playerHitTilemap"
+        }
+    ],
+    "meta": {
+        "app": "Phaser Editor 2D - Scene Editor",
+        "url": "https://phasereditor2d.com",
+        "contentType": "phasereditor2d.core.scene.SceneContentType",
+        "version": 3
+    },
+    "lists": [
+        {
+            "id": "80df39a5-783b-4b00-89d3-6af9650d4ada",
+            "label": "public-list",
+            "scope": "PUBLIC"
+        }
+    ]
+}
