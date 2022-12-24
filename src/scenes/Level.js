@@ -24,12 +24,21 @@ class Level extends Phaser.Scene {
 		const uILayer = this.add.layer();
 
 		// buildText
-		const buildText = this.add.bitmapText(3, -4, "nokia", "Tappy Tappy Boneyard\nv1");
-		buildText.text = "Tappy Tappy Boneyard\nv1";
+		const buildText = this.add.bitmapText(3, -4, "nokia", "Tappy Tappy Boneyard\nv2");
+		buildText.text = "Tappy Tappy Boneyard\nv2";
 		buildText.fontSize = -8;
 		buildText.dropShadowX = -1;
 		buildText.dropShadowY = 1;
 		uILayer.add(buildText);
+
+		// debugText
+		const debugText = this.add.bitmapText(-9, 66, "nokia", "debug textdfdfasdf");
+		debugText.setOrigin(0, 1);
+		debugText.text = "debug textdfdfasdf";
+		debugText.fontSize = -8;
+		debugText.dropShadowX = -1;
+		debugText.dropShadowY = 1;
+		uILayer.add(debugText);
 
 		// mainLayer
 		const mainLayer = this.add.layer();
@@ -55,7 +64,16 @@ class Level extends Phaser.Scene {
 		buildTextAlign.horizontalOffset = 5;
 		buildTextAlign.verticalOffset = 5;
 
+		// debugText (components)
+		const debugTextAlign = new Align(debugText);
+		debugTextAlign.down = true;
+		debugTextAlign.left = true;
+		debugTextAlign.horizontalOffset = 5;
+		debugTextAlign.verticalOffset = -5;
+
 		this.uILayer = uILayer;
+		this.buildText = buildText;
+		this.debugText = debugText;
 		this.mainLayer = mainLayer;
 		this.tileLayer = tileLayer;
 		this.player = player;
@@ -68,6 +86,10 @@ class Level extends Phaser.Scene {
 
 	/** @type {Phaser.GameObjects.Layer} */
 	uILayer;
+	/** @type {Phaser.GameObjects.BitmapText} */
+	buildText;
+	/** @type {Phaser.GameObjects.BitmapText} */
+	debugText;
 	/** @type {Phaser.GameObjects.Layer} */
 	mainLayer;
 	/** @type {Phaser.Tilemaps.TilemapLayer} */
@@ -103,6 +125,9 @@ class Level extends Phaser.Scene {
 	// player
 		this.player.setVelocityX(this.playerMoveSpeed);
 		this.player.flipX = true;
+		this.player.moves = true;
+		this.player.status = new StateController(this.player, this);
+		this.player.status.setState('running');
 
 	// input event handler
 		this.input.on("pointerdown", () =>
@@ -132,11 +157,15 @@ class Level extends Phaser.Scene {
 	// resize init
 		this.events.on('resize', this.resize, this);
 		this.resize();
+
+		this.buildText.setText('Tappy Tappy Boneyard v' + this.game.config.gameVersion);
 	}
 
 	update()
 	{
+		console.log(this.player.moves);
 
+		this.player.status.update();
 	}
 
 	/**
@@ -147,7 +176,7 @@ class Level extends Phaser.Scene {
 	// stop player when hitting wall
 		if (_player.body.onWall())
 		{
-			_player.allowGravity = false;
+			// _player.allowGravity = false;
 			_player.moves = false;
 		}
 	}

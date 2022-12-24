@@ -20,6 +20,7 @@
                     "type": "BitmapText",
                     "id": "861d6b11-9fd4-4bf7-9234-1929e7323733",
                     "label": "buildText",
+                    "scope": "CLASS",
                     "components": [
                         "Align"
                     ],
@@ -29,7 +30,29 @@
                     "Align.verticalOffset": 5,
                     "x": 3,
                     "y": -4,
-                    "text": "Tappy Tappy Boneyard\nv1",
+                    "text": "Tappy Tappy Boneyard\nv2",
+                    "font": "nokia",
+                    "fontSize": -8,
+                    "dropShadowX": -1,
+                    "dropShadowY": 1,
+                    "dropShadowColor": "#000000ff"
+                },
+                {
+                    "type": "BitmapText",
+                    "id": "3c005f98-2661-4e9f-981c-2773a3e80fe0",
+                    "label": "debugText",
+                    "scope": "CLASS",
+                    "components": [
+                        "Align"
+                    ],
+                    "Align.down": true,
+                    "Align.left": true,
+                    "Align.horizontalOffset": 5,
+                    "Align.verticalOffset": -5,
+                    "x": -9,
+                    "y": 66,
+                    "originY": 1,
+                    "text": "debug textdfdfasdf",
                     "font": "nokia",
                     "fontSize": -8,
                     "dropShadowX": -1,
