@@ -15,7 +15,7 @@
         {
             "name": "Align",
             "baseClass": "UserComponent",
-            "gameObjectType": "Phaser.GameObjects.Image",
+            "gameObjectType": "Phaser.GameObjects.Text | Phaser.GameObjects.Image | Phaser.GameObjects.BitmapText | Phaser.GameObjects.Sprite",
             "properties": [
                 {
                     "name": "up",
@@ -158,8 +158,11 @@
         }
     ],
     "meta": {
-        "app": "Phaser Editor 2D - Object Script Editor",
+        "app": "Phaser Editor 2D - User Components Editor",
         "url": "https://phasereditor2d.com",
-        "contentType": "phasereditor2d.core.scene.SceneContentType"
-    }
+        "contentType": "phasereditor2d.core.scene.UserComponents"
+    },
+    "outputLang": "TYPE_SCRIPT",
+    "exportClass": true,
+    "autoImport": true
 }

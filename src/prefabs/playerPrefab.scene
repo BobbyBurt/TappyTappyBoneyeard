@@ -2,9 +2,12 @@
     "id": "3f838717-1748-46a2-999c-c73f8b1a2e4e",
     "sceneType": "PREFAB",
     "settings": {
+        "exportClass": true,
+        "autoImport": true,
         "preloadMethodName": "",
         "preloadPackFiles": [],
         "createMethodName": "",
+        "compilerOutputLanguage": "TYPE_SCRIPT",
         "borderWidth": 0,
         "borderHeight": 0
     },

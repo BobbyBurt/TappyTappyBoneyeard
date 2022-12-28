@@ -2,12 +2,15 @@
     "id": "04331fb6-ed91-4d74-b6e9-4bfe0fcfb457",
     "sceneType": "SCENE",
     "settings": {
+        "exportClass": true,
+        "autoImport": true,
         "preloadMethodName": "editorPreload",
         "preloadPackFiles": [
             "starter-template-basic-typescript/assets/asset-pack.json"
         ],
         "createMethodName": "editorCreate",
-        "sceneKey": "Preload"
+        "sceneKey": "Preload",
+        "compilerOutputLanguage": "TYPE_SCRIPT"
     },
     "displayList": [
         {
@@ -17,6 +20,8 @@
             "components": [
                 "PreloadText"
             ],
+            "x": 48,
+            "y": 55,
             "originX": 0.5,
             "originY": 0.5,
             "text": "0%",

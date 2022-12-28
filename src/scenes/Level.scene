@@ -2,9 +2,12 @@
     "id": "01aefa93-6044-4159-8358-7e91310aa05f",
     "sceneType": "SCENE",
     "settings": {
+        "exportClass": true,
+        "autoImport": true,
         "preloadPackFiles": [],
         "createMethodName": "editorCreate",
         "sceneKey": "Level",
+        "compilerOutputLanguage": "TYPE_SCRIPT",
         "borderWidth": 0,
         "borderHeight": 0
     },
@@ -69,18 +72,6 @@
             "components": [],
             "list": [
                 {
-                    "type": "TilemapLayer",
-                    "id": "bd40acd7-eec6-4e37-95b4-2bd2a159d5d9",
-                    "label": "tileLayer",
-                    "scope": "CLASS",
-                    "components": [],
-                    "tilemapId": "24fe45a2-ddf6-4d66-9417-d86e9ac6199d",
-                    "layerName": "Tile Layer 1",
-                    "tilesets": [
-                        "tileset"
-                    ]
-                },
-                {
                     "prefabId": "3f838717-1748-46a2-999c-c73f8b1a2e4e",
                     "id": "4659f446-ab3a-42ff-b5c3-94d65c0ead0b",
                     "unlock": [
@@ -92,15 +83,27 @@
                     "components": [],
                     "x": 351,
                     "y": 131
+                },
+                {
+                    "type": "TilemapLayer",
+                    "id": "558fb209-e7b7-4cc6-8cbc-b0316f4f9896",
+                    "label": "tileLayer",
+                    "scope": "CLASS",
+                    "components": [],
+                    "tilemapId": "0ae695c2-cb12-4494-ab92-ddbfb142b5fb",
+                    "layerName": "Tile Layer 1",
+                    "tilesets": [
+                        "tileset"
+                    ]
                 }
             ]
         }
     ],
     "plainObjects": [
         {
-            "id": "24fe45a2-ddf6-4d66-9417-d86e9ac6199d",
+            "id": "0ae695c2-cb12-4494-ab92-ddbfb142b5fb",
             "type": "Tilemap",
-            "label": "test-map-2",
+            "label": "test_map_2",
             "key": "test-map-2",
             "tilesets": [
                 {
@@ -110,12 +113,14 @@
             ]
         },
         {
-            "id": "0326fb0b-5b37-495c-9dfc-f79063ead1d1",
+            "id": "b35c18cc-c588-42dd-a559-2626fc993e58",
             "type": "Collider",
-            "label": "collidePlayerVsTilemap",
+            "label": "playerTilemapCollider",
+            "scope": "METHOD",
             "object1": "player",
             "object2": "tileLayer",
-            "collideCallback": "this.playerHitTilemap"
+            "collideCallback": "this.playerHitTilemap",
+            "callbackContext": "this"
         }
     ],
     "meta": {

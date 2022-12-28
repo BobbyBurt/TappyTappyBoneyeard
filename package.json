@@ -1,33 +1,33 @@
 {
-  "name": "starter-template-basic-javascript",
+  "name": "tappy-tappy-boneyard",
   "version": "1.0.0",
-  "description": "Basic JavaScript project template for Phaser Editor 2D.",
-  "main": "main.js",
-  "directories": {
-    "lib": "lib"
-  },
+  "description": "cool game",
+  "main": "webpack.config.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+
+    "dev": "esbuild src/main.ts --serve=3000 --servedir=public --bundle --sourcemap --target=es6 --define:__DEV__=true --outfile=public/main.js",
+    "prod": "esbuild src/main.ts --serve=3000 --servedir=public --bundle --minify --target=es6 --define:__DEV__=false --outfile=public/main.js",
+    "build": "esbuild src/main.ts --bundle --minify --target=es6 --define:__DEV__=false --outfile=public/main.js",
+
     "editor": "phasereditor2d-launcher -project . -port 1959",
     "editor-remote": "phasereditor2d-launcher -project . -disable-open-browser -public -port 1959"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/PhaserEditor2D/starter-template-basic-javascript.git"
-  },
-  "keywords": [
-    "phaser",
-    "phasereditor2d",
-    "html5",
-    "video-game"
-  ],
-  "author": "Arian Fornaris <developers@phasereditor2d.com> (https://phasereditor2d.com/)",
+  "author": "Phaser Editor 2D <developers@phasereditor2d.com> (https://phasereditor2d.com/)",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/PhaserEditor2D/starter-template-basic-javascript/issues"
+  "dependencies": {
+    "phaser": "^3.55.0"
   },
-  "homepage": "https://github.com/PhaserEditor2D/starter-template-basic-javascript#readme",
   "devDependencies": {
-    "phasereditor2d-launcher": "^3.32.0"
+    "clean-webpack-plugin": "^3.0.0",
+    "copy-webpack-plugin": "^8.1.0",
+    "html-webpack-plugin": "^5.3.1",
+    "phaser-asset-pack-hashing": "^1.0.5",
+    "phasereditor2d-launcher": "^3.32.0",
+    "ts-loader": "^8.0.18",
+    "typescript": "^4.2.3",
+    "webpack": "^5.28.0",
+    "webpack-clean-plugin": "^0.2.3",
+    "webpack-cli": "^4.9.1",
+    "webpack-dev-server": "^4.4.0"
   }
 }
