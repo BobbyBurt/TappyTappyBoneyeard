@@ -15,8 +15,8 @@ export default interface playerPrefab {
 	 body: Phaser.Physics.Arcade.Body;
 }
 
-
 export default class playerPrefab extends Phaser.Physics.Arcade.Sprite {
+	// TODO: refactor the class name, it bugs me
 
 	stateController:StateController;
 
@@ -34,16 +34,48 @@ export default class playerPrefab extends Phaser.Physics.Arcade.Sprite {
 		/* START-USER-CTR-CODE */
 	
 		this.stateController = new StateController(this);
-		this.enterState(Running);
+		this.stateController.setState('running');
+
+		this.scene.events.once(Phaser.Scenes.Events.UPDATE, this.start, this);
+		this.scene.events.on(Phaser.Scenes.Events.UPDATE, this.update, this);
 
 		/* END-USER-CTR-CODE */
 	}
 
 	/* START-USER-CODE */
 
-	enterState(_state:any)
+	private upKey: Phaser.Input.Keyboard.Key | undefined;
+	private upDown = false;
+
+	start()
 	{
-		this.stateController.setState(_state);
+		this.upKey = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP);
+	}
+
+	update()
+	{
+		this.stateController.update();
+
+		this.upDown = this.upDown || this.isKeyDown(this.upKey);
+
+		if (this.upDown)
+		{
+			this.stateController.handleInput('flap')
+		}
+
+		// LEFT: just figuring out how to get input from this class and send it to the current state
+	}
+
+	/** this is a loophole past a TS annoyance */
+	private isKeyDown(key?: Phaser.Input.Keyboard.Key) {
+
+		if (key) {
+
+			console.log('down');
+			return key.isDown;
+		}
+
+		return false;
 	}
 
 	/* END-USER-CODE */

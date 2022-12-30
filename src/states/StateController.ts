@@ -1,26 +1,25 @@
 import playerPrefab from "~/prefabs/playerPrefab";
-import PlayerState from "./playerState";
 import Running from "states/Running";
+import State from "states/State";
 
-var currentState:PlayerState;
+var currentState:State;
 var states:any;
 	// TODO: define type
 
 export default class StateController
-{
+{	
 	constructor(_player:playerPrefab)
 	{
-        /** all state classes */
 		states =
 		{
-			running: new Running(_player),
+			running: new Running(_player)
 		}
 
         // set reference to this so states can call transition()
-        for (const state of Object.keys(states).map(key => states[key]))
-		{
-            state.stateControl = this;
-        }
+        // for (const state of Object.keys(states).map(key => states[key]))
+		// {
+        //     state.stateControl = this;
+        // }
 	}
 
 	setState(name:any)
@@ -38,5 +37,10 @@ export default class StateController
 	update()
 	{
         currentState.update();
+	}
+
+	handleInput(input:String)
+	{
+        currentState.handleInput(input);
 	}
 }

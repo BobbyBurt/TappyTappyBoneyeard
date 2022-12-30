@@ -15,11 +15,10 @@ export default class PreloadText extends UserComponent {
 
 		/* START-USER-CTR-CODE */
 
-		// this.scene.load.on(Phaser.Loader.Events.PROGRESS, p => {
+		this.scene.load.on(Phaser.Loader.Events.PROGRESS, (p:number) => {
 
-		// 	this.gameObject.text = Math.floor(p * 100) + "%";
-		// });
-			// TODO: Fix this, it was broken by typescript migration
+			this.gameObject.text = Math.floor(p * 100) + "%";
+		});
 
 		/* END-USER-CTR-CODE */
 	}
@@ -31,8 +30,6 @@ export default class PreloadText extends UserComponent {
 	private gameObject: Phaser.GameObjects.Text;
 
 	/* START-USER-CODE */
-
-	// Write your code here.
 
 	/* END-USER-CODE */
 }

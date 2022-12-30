@@ -1,30 +1,36 @@
-import PlayerState from "states/playerState";
 import playerPrefab from "~/prefabs/playerPrefab";
+import State from "states/State";
 
-export default class Running implements PlayerState {
+export default class Running implements State {
 
+	name: String = 'running';
+	
 	player:playerPrefab;
 	
 	constructor(_player:playerPrefab)
 	{
 		this.player = _player;
-
 	}
 	
 	enter()
 	{
-		
+		console.log('enter');
 	}
 	
 	update()
 	{	
-		console.log('running');
+		console.log('update');
 	}
 
-	handleInput(input:any)
+	exit()
 	{
-
+		console.log('exit');
 	}
-// set state example
-	// this.stateControl.setState('walk')
+
+	handleInput(input:String)
+	{
+		console.log('input: ' + input);
+		if (input == 'flap')
+			console.log('thems a flap');
+	}
 }
