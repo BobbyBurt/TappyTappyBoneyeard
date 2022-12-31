@@ -2,20 +2,27 @@ import playerPrefab from "~/prefabs/playerPrefab";
 import Running from "states/Running";
 import State from "states/State";
 import Airborne from "./Airborne";
-
-var currentState:State;
-var states:any;
-	// TODO: define type
+import Cling from "./Cling";
+import GroundCling from "./GroundCling";
 
 export default class StateController
 {	
+	states:any;
+	public currentState:State;
+	// TODO: define type
+
 	constructor(_player:playerPrefab)
 	{
-		states =
+		this.states =
 		{
 			running: new Running(_player, this),
-			airborne: new Airborne(_player, this)
+			airborne: new Airborne(_player, this),
+			cling: new Cling(_player, this),
+			groundCling: new GroundCling(_player, this)
 		}
+
+		this.currentState = new Running(_player, this);
+			// this is just so typescript doesn't get upset that the var can't be undefined
 
         // set reference to this so states can call transition()
         // for (const state of Object.keys(states).map(key => states[key]))
@@ -27,17 +34,17 @@ export default class StateController
 	setState(name:any)
 	// TODO: define type
 	{
-		if (currentState === states[name])
+		if (this.currentState === this.states[name])
 		{	
 			return;
 		}
 		
-		currentState = states[name];
-		currentState.enter();
+		this.currentState = this.states[name];
+		this.currentState.enter();
 	}
 
 	update()
 	{
-        currentState.update();
+        this.currentState.update();
 	}
 }

@@ -31,6 +31,11 @@ export default class Preload extends Phaser.Scene {
 		progress.text = "0%";
 		progress.setStyle({ "fontFamily": "nokia cellphone fc small", "fontSize": "30px" });
 
+		// logo
+		const logo = this.add.image(43, -94, "logo");
+		logo.scaleX = 3.09831503427523;
+		logo.scaleY = 3.09831503427523;
+
 		// progress (components)
 		new PreloadText(progress);
 

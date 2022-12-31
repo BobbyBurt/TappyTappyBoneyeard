@@ -4,7 +4,6 @@
 import Phaser from "phaser";
 import Align from "../components/Align";
 import playerPrefab from "../prefabs/playerPrefab";
-
 /* START-USER-IMPORTS */
 
 import AdaptiveZoom from "../AdaptiveZoom";
@@ -101,10 +100,6 @@ export default class Level extends Phaser.Scene {
 
 	/* START-USER-CODE */
 
-	playerMoveSpeed = 120;
-	playerMaxSpeed = 200;
-	playerJumpForce = 300;
-
 	create()
 	{
 		this.editorCreate();
@@ -114,43 +109,34 @@ export default class Level extends Phaser.Scene {
 	// tilemap
 		this.tileLayer.setCollision([1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18,
 			 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36], true);
-			// TODO: typescript migration broke tileLayer initialization and I'm confused
 
-	// player
-		this.player.setVelocityX(this.playerMoveSpeed);
-		this.player.flipX = true;
-		// this.player.moves = new Boolean;
-		// this.player.status = new StateController(this.player, this);
-		// this.player.status.setState('running');
-			// TODO: make the player it's own class and attach the statemachine to it. Can't do 
-			// things the wrong way anymore :(
-
-	// input event handler
-		this.input.on("pointerdown", () =>
-		{
-			if (this.player.body.velocity.x != 0)
-			{
-			// jump
-				this.player.setVelocityY(-this.playerJumpForce);
-			}
-			else
-			{
-			// launch from wall
-				this.player.flipX = !this.player.flipX;
-				if (this.player.flipX)
-				{
-					this.player.setVelocityX(this.playerMoveSpeed);
-					// this.player.moves = true;
-						// TODO: refactor
-				}
-				else
-				{
-					this.player.setVelocityX(-this.playerMoveSpeed);
-					// this.player.moves = true;
-						// TODO: refactor
-				}
-			}
-		});
+	// DEPRECATED input event handler
+		// this.input.on("pointerdown", () =>
+		// {
+		// 	if (this.player.body.velocity.x != 0)
+		// 	{
+		// 	// jump
+		// 		this.player.setVelocityY(-this.playerJumpForce);
+		// 	}
+		// 	else
+		// 	{
+		// 	// launch from wall
+		// 		this.player.flipX = !this.player.flipX;
+		// 		if (this.player.flipX)
+		// 		{
+		// 			this.player.setVelocityX(this.playerMoveSpeed);
+		// 			// this.player.moves = true;
+		// 				// TODO: refactor
+		// 		}
+		// 		else
+		// 		{
+		// 			this.player.setVelocityX(-this.playerMoveSpeed);
+		// 			// this.player.moves = true;
+		// 				// TODO: refactor
+		// 		}
+		// 	}
+		// });
+			// TODO: delete when this has been recreated with state machine
 
 	// resize init
 		this.events.on('pre-resize', this.resize, this);
@@ -161,6 +147,10 @@ export default class Level extends Phaser.Scene {
 
 	update()
 	{
+		// this.debugText.setText(`${this.player.stateController.currentState.name}`);
+		this.debugText.setText(`${this.player.onWall}`);
+		// this.debugText.setText(`${this.player.onFloor}`);
+
 	// reset collision values to be overridden by callbacks
 		this.player.onWall = 'false';
 		this.player.onFloor = false;
@@ -173,7 +163,6 @@ export default class Level extends Phaser.Scene {
 		// TODO: specify type annotation. Call back gives 
 		// Phaser.Types.Physics.Arcade.GameObjectWithBody, but onFloor() is a member
 	{
-		
 		if (_player.body.blocked.down)
 		{
 			this.player.onFloor = true;
@@ -182,11 +171,15 @@ export default class Level extends Phaser.Scene {
 		if (_player.body.blocked.left)
 		{
 			this.player.onWall = 'left';
+			console.log('left')
 		}
 		else if (_player.body.blocked.right)
 		{
 			this.player.onWall = 'right';
+			console.log('right')
 		}
+		// LEFT: this doesn't work as a way to continually check if touching a wall. Works fine 
+		// for onFloor because gravity is causing a collision callback every frame
 
 		// else if (_player.body.onWallRight())
 		// {
@@ -211,16 +204,17 @@ export default class Level extends Phaser.Scene {
 		this.cameras.main.ignore(this.uILayer.getChildren());
 
 	// UI		
-		var UICam = this.cameras.add(0, 0, this.cameras.main.width, this.cameras.main.height);
+		var UICam = this.cameras.add(0, 0, this.cameras.main.width, this.cameras.main.height) as any;
+			// TODO: define type annotation. the infered type doesn't have access to prerender()
 		UICam.setName('UIcam')
 		UICam.setZoom(3);
 		UICam.ignore(this.mainLayer.getChildren());
-		// prerender UI cam
+		UICam.preRender(1);
 	}
 
 	resize()
 	{
-		// prerender UI cap
+
 	}
 
 	/* END-USER-CODE */

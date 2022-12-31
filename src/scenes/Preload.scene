@@ -27,6 +27,19 @@
             "text": "0%",
             "fontFamily": "nokia cellphone fc small",
             "fontSize": "30px"
+        },
+        {
+            "type": "Image",
+            "id": "8e10acf3-b18b-4fe0-a4ea-cada93cd5b65",
+            "label": "logo",
+            "components": [],
+            "texture": {
+                "key": "logo"
+            },
+            "x": 43,
+            "y": -94,
+            "scaleX": 3.09831503427523,
+            "scaleY": 3.09831503427523
         }
     ],
     "plainObjects": [],

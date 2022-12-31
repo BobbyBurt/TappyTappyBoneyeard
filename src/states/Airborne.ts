@@ -8,8 +8,6 @@ export default class Airborne implements State {
 	name: string = 'airborne';
 	player: playerPrefab;
 	stateController: StateController;
-
-	jumpForce: number = 200;
 	
 	constructor(_player:playerPrefab, _stateController:StateController)
 	{
@@ -19,7 +17,7 @@ export default class Airborne implements State {
 	
 	enter()
 	{
-		console.log('airborne');
+		
 	}
 	
 	update()
@@ -29,14 +27,26 @@ export default class Airborne implements State {
 			this.flap();
 		}
 
+		// state transitions
 		if (this.player.onFloor)
 		{
-			this.stateController.setState('running');
+			if (this.player.onWall != 'false')
+			{
+				this.stateController.setState('groundCling')
+			}
+			else
+			{
+				this.stateController.setState('airborne');
+			}
+		}
+		if (this.player.onWall != 'false')
+		{
+			this.stateController.setState('groundCling')
 		}
 	}
 
 	flap()
 	{
-		this.player.setVelocityY(-this.jumpForce);
+		this.player.setVelocityY(-this.player.jumpForce);
 	}
 }

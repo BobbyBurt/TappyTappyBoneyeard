@@ -15,9 +15,6 @@ export default interface playerPrefab {
 }
 
 export default class playerPrefab extends Phaser.Physics.Arcade.Sprite {
-	// TODO: refactor the class name, it bugs me
-
-	stateController:StateController;
 
 	constructor(scene: Phaser.Scene, x?: number, y?: number, texture?: string, frame?: number | string) {
 		super(scene, x ?? 0, y ?? 0, texture || "bird1mid", frame);
@@ -25,13 +22,12 @@ export default class playerPrefab extends Phaser.Physics.Arcade.Sprite {
 		scene.physics.add.existing(this, false);
 		this.body.gravity.y = 100;
 		this.body.friction.x = 0;
-		this.body.bounce.x = 1;
 		this.body.allowRotation = false;
 		this.body.setOffset(3, 6);
 		this.body.setSize(12, 12, false);
 
 		/* START-USER-CTR-CODE */
-	
+
 		this.stateController = new StateController(this);
 		this.stateController.setState('running');
 
@@ -39,7 +35,7 @@ export default class playerPrefab extends Phaser.Physics.Arcade.Sprite {
 		this.scene.events.on(Phaser.Scenes.Events.UPDATE, this.update, this);
 
 		let _this = this;
-		
+
 	// setup gamepad
 		this.scene.input.gamepad.on('down', function 
 			(pad:Phaser.Input.Gamepad.Gamepad, button:Phaser.Input.Gamepad.Button, index:number)
@@ -51,6 +47,8 @@ export default class playerPrefab extends Phaser.Physics.Arcade.Sprite {
 	}
 
 	/* START-USER-CODE */
+
+	stateController: StateController;
 
 	private gamepad:Phaser.Input.Gamepad.Gamepad | undefined;
 
@@ -69,18 +67,23 @@ export default class playerPrefab extends Phaser.Physics.Arcade.Sprite {
 	/** updated by scene, used by states */
 	public onWall: 'left' | 'right' | 'false' = 'false';
 
+	public moveSpeed = 120;
+	public jumpForce = 250;
+
 	start()
 	{
+		this.setVelocityX(this.moveSpeed);
 
+		this.flipX = true;
 	}
 
 	update()
 	{	
 		this.inputCheck();
-		
+
 		this.stateController.update();
 	}
-	
+
 	/** update input values based on key / gamepad button state */
 	inputCheck()
 	{
