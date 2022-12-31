@@ -7,5 +7,5 @@ export default interface State
 	enter: () => void;
 	update: () => void;
 	exit: () => void;
-	handleInput: (input:any) => void;
+	// handleInput: (input:any) => void;
 }

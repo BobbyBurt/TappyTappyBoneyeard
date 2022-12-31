@@ -1,6 +1,4 @@
 
-// You can write more code here
-
 /* START OF COMPILED CODE */
 
 import Phaser from "phaser";
@@ -44,38 +42,89 @@ export default class playerPrefab extends Phaser.Physics.Arcade.Sprite {
 
 	/* START-USER-CODE */
 
-	private upKey: Phaser.Input.Keyboard.Key | undefined;
-	private upDown = false;
+	private gamepad:Phaser.Input.Gamepad.Gamepad | undefined;
+
+	public jumpInput: input = 'up';
+	private jumpKey: Phaser.Input.Keyboard.Key 
+		= this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP);
+	private jumpButton: number = 1;
+
+	public punchInput: input = 'up';
+	private punchKey: Phaser.Input.Keyboard.Key 
+		= this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.DOWN);
+	private punchButton: number = 0;
 
 	start()
 	{
-		this.upKey = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP);
+		// this.upKey = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP);
+
+		let _this = this;
+
+	// setup gamepad
+		this.scene.input.gamepad.on('down', function 
+			(pad:Phaser.Input.Gamepad.Gamepad, button:Phaser.Input.Gamepad.Button, index:number)
+		{
+			_this.gamepad = pad;
+		});
 	}
 
 	update()
 	{
 		this.stateController.update();
-
-		this.upDown = this.upDown || this.isKeyDown(this.upKey);
-
-		if (this.upDown)
-		{
-			this.stateController.handleInput('flap')
-		}
-
-		// LEFT: just figuring out how to get input from this class and send it to the current state
+		
+		this.inputCheck();
 	}
-
-	/** this is a loophole past a TS annoyance */
-	private isKeyDown(key?: Phaser.Input.Keyboard.Key) {
-
-		if (key) {
-
-			console.log('down');
-			return key.isDown;
+	
+	/** update input values based on key / gamepad button state */
+	inputCheck()
+	{
+	// jump
+		if (this.gamepad?.isButtonDown(this.jumpButton) || this.jumpKey.isDown)
+		{
+			if (this.jumpInput != 'just-down' && this.jumpInput != 'down')
+			{
+				this.jumpInput = 'just-down'
+			}
+			else
+			{
+				this.jumpInput = 'down'
+			}
+		}
+		else
+		{
+			if (this.jumpInput != 'just-up' && this.jumpInput != 'up')
+			{
+				this.jumpInput = 'just-up'
+			}
+			else
+			{
+				this.jumpInput = 'up'
+			}
 		}
 
-		return false;
+	// punch
+		if (this.gamepad?.isButtonDown(this.punchButton) || this.punchKey.isDown)
+		{
+			if (this.punchInput != 'just-down' && this.punchInput != 'down')
+			{
+				this.punchInput = 'just-down'
+			}
+			else
+			{
+				this.punchInput = 'down'
+			}
+		}
+		else
+		{
+			if (this.punchInput != 'just-up' && this.punchInput != 'up')
+			{
+				this.punchInput = 'just-up'
+			}
+			else
+			{
+				this.punchInput = 'up'
+			}
+		}
 	}
 
 	/* END-USER-CODE */

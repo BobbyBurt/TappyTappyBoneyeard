@@ -14,6 +14,9 @@ window.addEventListener('load', function ()
 		backgroundColor: "#FFD3DF",
 		pixelArt: true,
 		roundPixels: true,
+		input: {
+			gamepad: true
+		},
 		scale: {
 			mode: Phaser.Scale.NONE,
 			width: window.innerWidth * window.devicePixelRatio,

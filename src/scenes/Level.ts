@@ -171,7 +171,7 @@ export default class Level extends Phaser.Scene {
 	playerHitTilemap(_player:any, _tilemap:any)
 		// TODO: define these types
 	{
-		console.log('tilemap collide!');
+		// console.log('tilemap collide!');
 
 	// stop player when hitting wall
 		if (_player.body.onWall())

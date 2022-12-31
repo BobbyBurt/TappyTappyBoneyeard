@@ -1,11 +1,13 @@
 import playerPrefab from "~/prefabs/playerPrefab";
 import State from "states/State";
 
+/** player is grounded, moving in either direction */
 export default class Running implements State {
 
-	name: String = 'running';
-	
-	player:playerPrefab;
+	name: string = 'running';
+	player: playerPrefab;
+
+	jumpForce: number = 300;
 	
 	constructor(_player:playerPrefab)
 	{
@@ -14,23 +16,24 @@ export default class Running implements State {
 	
 	enter()
 	{
-		console.log('enter');
+		// console.log('enter');
 	}
 	
 	update()
 	{	
-		console.log('update');
+		if (this.player.jumpInput == 'just-down')
+		{
+			this.jump();
+		}
 	}
 
 	exit()
 	{
-		console.log('exit');
+		// console.log('exit');
 	}
 
-	handleInput(input:String)
+	jump()
 	{
-		console.log('input: ' + input);
-		if (input == 'flap')
-			console.log('thems a flap');
+		this.player.setVelocityY(-this.jumpForce);
 	}
 }
