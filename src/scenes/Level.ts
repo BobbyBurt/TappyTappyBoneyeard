@@ -161,24 +161,37 @@ export default class Level extends Phaser.Scene {
 
 	update()
 	{
-		// this.player.status.update();
-			// TODO: refactor
+	// reset collision values to be overridden by callbacks
+		this.player.onWall = 'false';
+		this.player.onFloor = false;
 	}
 
 	/**
 	 * physics callback on every frame that the player and tilemap are touching.
 	 */
-	playerHitTilemap(_player:any, _tilemap:any)
-		// TODO: define these types
+	playerHitTilemap(_player:Phaser.Types.Physics.Arcade.GameObjectWithBody, _tilemap:any)
+		// TODO: specify type annotation. Call back gives 
+		// Phaser.Types.Physics.Arcade.GameObjectWithBody, but onFloor() is a member
 	{
-		// console.log('tilemap collide!');
-
-	// stop player when hitting wall
-		if (_player.body.onWall())
+		
+		if (_player.body.blocked.down)
 		{
-			// _player.allowGravity = false;
-			_player.moves = false;
+			this.player.onFloor = true;
 		}
+
+		if (_player.body.blocked.left)
+		{
+			this.player.onWall = 'left';
+		}
+		else if (_player.body.blocked.right)
+		{
+			this.player.onWall = 'right';
+		}
+
+		// else if (_player.body.onWallRight())
+		// {
+		// 	this.player.onWallRight = true;
+		// }
 	}
 
 	/**

@@ -1,6 +1,7 @@
 import playerPrefab from "~/prefabs/playerPrefab";
 import Running from "states/Running";
 import State from "states/State";
+import Airborne from "./Airborne";
 
 var currentState:State;
 var states:any;
@@ -12,7 +13,8 @@ export default class StateController
 	{
 		states =
 		{
-			running: new Running(_player)
+			running: new Running(_player, this),
+			airborne: new Airborne(_player, this)
 		}
 
         // set reference to this so states can call transition()
@@ -37,10 +39,5 @@ export default class StateController
 	update()
 	{
         currentState.update();
-	}
-
-	handleInput(input:String)
-	{
-        currentState.handleInput(input);
 	}
 }

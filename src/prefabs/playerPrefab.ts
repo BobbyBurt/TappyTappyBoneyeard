@@ -1,3 +1,4 @@
+type input = 'down' | 'up' | 'just-down' | 'just-up';
 
 /* START OF COMPILED CODE */
 
@@ -37,6 +38,15 @@ export default class playerPrefab extends Phaser.Physics.Arcade.Sprite {
 		this.scene.events.once(Phaser.Scenes.Events.UPDATE, this.start, this);
 		this.scene.events.on(Phaser.Scenes.Events.UPDATE, this.update, this);
 
+		let _this = this;
+		
+	// setup gamepad
+		this.scene.input.gamepad.on('down', function 
+			(pad:Phaser.Input.Gamepad.Gamepad, button:Phaser.Input.Gamepad.Button, index:number)
+			{
+				_this.gamepad = pad;
+			});
+
 		/* END-USER-CTR-CODE */
 	}
 
@@ -54,25 +64,21 @@ export default class playerPrefab extends Phaser.Physics.Arcade.Sprite {
 		= this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.DOWN);
 	private punchButton: number = 0;
 
+	/** updated by scene, used by states */
+	public onFloor:Boolean = true;
+	/** updated by scene, used by states */
+	public onWall: 'left' | 'right' | 'false' = 'false';
+
 	start()
 	{
-		// this.upKey = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP);
 
-		let _this = this;
-
-	// setup gamepad
-		this.scene.input.gamepad.on('down', function 
-			(pad:Phaser.Input.Gamepad.Gamepad, button:Phaser.Input.Gamepad.Button, index:number)
-		{
-			_this.gamepad = pad;
-		});
 	}
 
 	update()
-	{
-		this.stateController.update();
-		
+	{	
 		this.inputCheck();
+		
+		this.stateController.update();
 	}
 	
 	/** update input values based on key / gamepad button state */

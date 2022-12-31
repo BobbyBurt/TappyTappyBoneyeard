@@ -6,6 +6,6 @@ export default interface State
 	player:playerPrefab;
 	enter: () => void;
 	update: () => void;
-	exit: () => void;
+	// exit: () => void;
 	// handleInput: (input:any) => void;
 }

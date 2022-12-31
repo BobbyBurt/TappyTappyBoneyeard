@@ -3,14 +3,13 @@ import State from "states/State";
 import StateController from "./StateController";
 
 /** player is grounded, moving in either direction */
-export default class Running implements State {
+export default class Airborne implements State {
 
-	name: string = 'running';
+	name: string = 'airborne';
 	player: playerPrefab;
 	stateController: StateController;
 
-
-	jumpForce: number = 300;
+	jumpForce: number = 200;
 	
 	constructor(_player:playerPrefab, _stateController:StateController)
 	{
@@ -20,23 +19,23 @@ export default class Running implements State {
 	
 	enter()
 	{
-		// console.log('enter');
+		console.log('airborne');
 	}
 	
 	update()
 	{	
 		if (this.player.jumpInput == 'just-down')
 		{
-			this.jump();
+			this.flap();
 		}
 
-		if (!this.player.onFloor)
+		if (this.player.onFloor)
 		{
-			this.stateController.setState('airborne');
+			this.stateController.setState('running');
 		}
 	}
 
-	jump()
+	flap()
 	{
 		this.player.setVelocityY(-this.jumpForce);
 	}
