@@ -1,8 +1,13 @@
 # Changelog
 
-### version 2
+## [version 3] - 2023-01-04
 
-### version 3
-#### additions
-- punch move
-#### fixes
+### changed
+
+### added
+
+- Jump move
+
+### removed
+
+### fixed
