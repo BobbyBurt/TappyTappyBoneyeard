@@ -46,7 +46,7 @@
                         "key": "Parallax-Cityscape"
                     },
                     "x": 480,
-                    "y": 420
+                    "y": 552
                 },
                 {
                     "type": "Image",
@@ -61,7 +61,7 @@
                         "key": "Parallax-Cityscape"
                     },
                     "x": 160,
-                    "y": 420
+                    "y": 552
                 },
                 {
                     "type": "Image",
@@ -76,7 +76,7 @@
                         "key": "Parallax-Cityscape"
                     },
                     "x": 800,
-                    "y": 420
+                    "y": 552
                 },
                 {
                     "type": "Image",
@@ -91,7 +91,7 @@
                         "key": "Parallax-Cityscape"
                     },
                     "x": -160,
-                    "y": 420
+                    "y": 552
                 },
                 {
                     "type": "Image",
@@ -106,7 +106,7 @@
                         "key": "Parallax-Cityscape"
                     },
                     "x": 1119,
-                    "y": 420
+                    "y": 552
                 },
                 {
                     "type": "Image",
@@ -120,7 +120,7 @@
                         "key": "Parallax-Cityscape"
                     },
                     "x": 357,
-                    "y": 486.5,
+                    "y": 619,
                     "scaleX": 5.641336094532861,
                     "scaleY": 5.641336094532861,
                     "originY": 0,

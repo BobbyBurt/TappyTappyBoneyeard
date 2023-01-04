@@ -40,27 +40,27 @@ export default class Level extends Phaser.Scene {
 		bGLayer.add(parallax_Backing);
 
 		// parallax_Cityscape
-		const parallax_Cityscape = this.add.image(480, 420, "Parallax-Cityscape");
+		const parallax_Cityscape = this.add.image(480, 552, "Parallax-Cityscape");
 		bGLayer.add(parallax_Cityscape);
 
 		// parallax_Cityscape_1
-		const parallax_Cityscape_1 = this.add.image(160, 420, "Parallax-Cityscape");
+		const parallax_Cityscape_1 = this.add.image(160, 552, "Parallax-Cityscape");
 		bGLayer.add(parallax_Cityscape_1);
 
 		// parallax_Cityscape_2
-		const parallax_Cityscape_2 = this.add.image(800, 420, "Parallax-Cityscape");
+		const parallax_Cityscape_2 = this.add.image(800, 552, "Parallax-Cityscape");
 		bGLayer.add(parallax_Cityscape_2);
 
 		// parallax_Cityscape_3
-		const parallax_Cityscape_3 = this.add.image(-160, 420, "Parallax-Cityscape");
+		const parallax_Cityscape_3 = this.add.image(-160, 552, "Parallax-Cityscape");
 		bGLayer.add(parallax_Cityscape_3);
 
 		// parallax_Cityscape_4
-		const parallax_Cityscape_4 = this.add.image(1119, 420, "Parallax-Cityscape");
+		const parallax_Cityscape_4 = this.add.image(1119, 552, "Parallax-Cityscape");
 		bGLayer.add(parallax_Cityscape_4);
 
 		// parallax_Cityscape_5
-		const parallax_Cityscape_5 = this.add.image(357, 486.5, "Parallax-Cityscape");
+		const parallax_Cityscape_5 = this.add.image(357, 619, "Parallax-Cityscape");
 		parallax_Cityscape_5.scaleX = 5.641336094532861;
 		parallax_Cityscape_5.scaleY = 5.641336094532861;
 		parallax_Cityscape_5.setOrigin(0.5, 0);
