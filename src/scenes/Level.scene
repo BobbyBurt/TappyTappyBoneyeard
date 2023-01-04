@@ -14,6 +14,158 @@
     "displayList": [
         {
             "type": "Layer",
+            "id": "c5b9c71f-7b15-4028-af74-e2268c419acb",
+            "label": "BGLayer",
+            "scope": "CLASS",
+            "components": [],
+            "list": [
+                {
+                    "type": "Image",
+                    "id": "6a8068b9-48df-4909-a1fb-5ca871d543b3",
+                    "label": "parallax_Backing",
+                    "components": [
+                        "ScrollFactor"
+                    ],
+                    "texture": {
+                        "key": "Parallax-Backing"
+                    },
+                    "x": 352,
+                    "y": 474,
+                    "scaleX": 8.415017240244449
+                },
+                {
+                    "type": "Image",
+                    "id": "ed14520c-e297-45c8-a905-f08c31e4de19",
+                    "label": "parallax_Cityscape",
+                    "components": [
+                        "ScrollFactor"
+                    ],
+                    "ScrollFactor.factorX": 0.2,
+                    "ScrollFactor.factorY": 0.1,
+                    "texture": {
+                        "key": "Parallax-Cityscape"
+                    },
+                    "x": 480,
+                    "y": 420
+                },
+                {
+                    "type": "Image",
+                    "id": "a09aa196-9006-4c1d-b873-4c6fd6a30ddd",
+                    "label": "parallax_Cityscape_1",
+                    "components": [
+                        "ScrollFactor"
+                    ],
+                    "ScrollFactor.factorX": 0.2,
+                    "ScrollFactor.factorY": 0.1,
+                    "texture": {
+                        "key": "Parallax-Cityscape"
+                    },
+                    "x": 160,
+                    "y": 420
+                },
+                {
+                    "type": "Image",
+                    "id": "186eadfb-a985-4fc8-a25e-e91db024a452",
+                    "label": "parallax_Cityscape_2",
+                    "components": [
+                        "ScrollFactor"
+                    ],
+                    "ScrollFactor.factorX": 0.2,
+                    "ScrollFactor.factorY": 0.1,
+                    "texture": {
+                        "key": "Parallax-Cityscape"
+                    },
+                    "x": 800,
+                    "y": 420
+                },
+                {
+                    "type": "Image",
+                    "id": "c48bc8e5-a68b-4394-be70-23831ce7f1ef",
+                    "label": "parallax_Cityscape_3",
+                    "components": [
+                        "ScrollFactor"
+                    ],
+                    "ScrollFactor.factorX": 0.2,
+                    "ScrollFactor.factorY": 0.1,
+                    "texture": {
+                        "key": "Parallax-Cityscape"
+                    },
+                    "x": -160,
+                    "y": 420
+                },
+                {
+                    "type": "Image",
+                    "id": "3969e6a7-45ab-457f-aada-74be0ad2d04d",
+                    "label": "parallax_Cityscape_4",
+                    "components": [
+                        "ScrollFactor"
+                    ],
+                    "ScrollFactor.factorX": 0.2,
+                    "ScrollFactor.factorY": 0.1,
+                    "texture": {
+                        "key": "Parallax-Cityscape"
+                    },
+                    "x": 1119,
+                    "y": 420
+                },
+                {
+                    "type": "Image",
+                    "id": "18043833-eda3-4db3-94ca-5a8b094c1d76",
+                    "label": "parallax_Cityscape_5",
+                    "components": [
+                        "ScrollFactor"
+                    ],
+                    "ScrollFactor.factorY": 0.1,
+                    "texture": {
+                        "key": "Parallax-Cityscape"
+                    },
+                    "x": 357,
+                    "y": 486.5,
+                    "scaleX": 5.641336094532861,
+                    "scaleY": 5.641336094532861,
+                    "originY": 0,
+                    "flipY": true
+                }
+            ]
+        },
+        {
+            "type": "Layer",
+            "id": "74ede788-7820-49aa-b167-86ea282dd558",
+            "label": "mainLayer",
+            "scope": "CLASS",
+            "components": [],
+            "list": [
+                {
+                    "prefabId": "3f838717-1748-46a2-999c-c73f8b1a2e4e",
+                    "id": "4659f446-ab3a-42ff-b5c3-94d65c0ead0b",
+                    "unlock": [
+                        "x",
+                        "y"
+                    ],
+                    "label": "player",
+                    "scope": "CLASS",
+                    "components": [],
+                    "x": 351,
+                    "y": 131,
+                    "nestedPrefabs": [],
+                    "list": []
+                },
+                {
+                    "type": "TilemapLayer",
+                    "id": "558fb209-e7b7-4cc6-8cbc-b0316f4f9896",
+                    "label": "tileLayer",
+                    "scope": "CLASS",
+                    "components": [],
+                    "tilemapId": "0ae695c2-cb12-4494-ab92-ddbfb142b5fb",
+                    "layerName": "Tile Layer 1",
+                    "tilesets": [
+                        "tileset"
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "Layer",
             "id": "6f3e4cb4-2649-40ee-b6ef-11f87265d5f0",
             "label": "UILayer",
             "scope": "CLASS",
@@ -61,40 +213,6 @@
                     "dropShadowX": -1,
                     "dropShadowY": 1,
                     "dropShadowColor": "#000000ff"
-                }
-            ]
-        },
-        {
-            "type": "Layer",
-            "id": "74ede788-7820-49aa-b167-86ea282dd558",
-            "label": "mainLayer",
-            "scope": "CLASS",
-            "components": [],
-            "list": [
-                {
-                    "prefabId": "3f838717-1748-46a2-999c-c73f8b1a2e4e",
-                    "id": "4659f446-ab3a-42ff-b5c3-94d65c0ead0b",
-                    "unlock": [
-                        "x",
-                        "y"
-                    ],
-                    "label": "player",
-                    "scope": "CLASS",
-                    "components": [],
-                    "x": 351,
-                    "y": 131
-                },
-                {
-                    "type": "TilemapLayer",
-                    "id": "558fb209-e7b7-4cc6-8cbc-b0316f4f9896",
-                    "label": "tileLayer",
-                    "scope": "CLASS",
-                    "components": [],
-                    "tilemapId": "0ae695c2-cb12-4494-ab92-ddbfb142b5fb",
-                    "layerName": "Tile Layer 1",
-                    "tilesets": [
-                        "tileset"
-                    ]
                 }
             ]
         }

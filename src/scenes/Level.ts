@@ -2,8 +2,9 @@
 /* START OF COMPILED CODE */
 
 import Phaser from "phaser";
-import Align from "../components/Align";
+import ScrollFactor from "../components/ScrollFactor";
 import playerPrefab from "../prefabs/playerPrefab";
+import Align from "../components/Align";
 /* START-USER-IMPORTS */
 
 import AdaptiveZoom from "../AdaptiveZoom";
@@ -26,6 +27,53 @@ export default class Level extends Phaser.Scene {
 		const test_map_2 = this.add.tilemap("test-map-2");
 		test_map_2.addTilesetImage("tileset", "tileset");
 
+		// BGLayer
+		const bGLayer = this.add.layer();
+
+		// parallax_Backing
+		const parallax_Backing = this.add.image(352, 474, "Parallax-Backing");
+		parallax_Backing.scaleX = 8.415017240244449;
+		bGLayer.add(parallax_Backing);
+
+		// parallax_Cityscape
+		const parallax_Cityscape = this.add.image(480, 420, "Parallax-Cityscape");
+		bGLayer.add(parallax_Cityscape);
+
+		// parallax_Cityscape_1
+		const parallax_Cityscape_1 = this.add.image(160, 420, "Parallax-Cityscape");
+		bGLayer.add(parallax_Cityscape_1);
+
+		// parallax_Cityscape_2
+		const parallax_Cityscape_2 = this.add.image(800, 420, "Parallax-Cityscape");
+		bGLayer.add(parallax_Cityscape_2);
+
+		// parallax_Cityscape_3
+		const parallax_Cityscape_3 = this.add.image(-160, 420, "Parallax-Cityscape");
+		bGLayer.add(parallax_Cityscape_3);
+
+		// parallax_Cityscape_4
+		const parallax_Cityscape_4 = this.add.image(1119, 420, "Parallax-Cityscape");
+		bGLayer.add(parallax_Cityscape_4);
+
+		// parallax_Cityscape_5
+		const parallax_Cityscape_5 = this.add.image(357, 486.5, "Parallax-Cityscape");
+		parallax_Cityscape_5.scaleX = 5.641336094532861;
+		parallax_Cityscape_5.scaleY = 5.641336094532861;
+		parallax_Cityscape_5.setOrigin(0.5, 0);
+		parallax_Cityscape_5.flipY = true;
+		bGLayer.add(parallax_Cityscape_5);
+
+		// mainLayer
+		const mainLayer = this.add.layer();
+
+		// player
+		const player = new playerPrefab(this, 351, 131);
+		mainLayer.add(player);
+
+		// tileLayer
+		const tileLayer = test_map_2.createLayer("Tile Layer 1", ["tileset"], 0, 0);
+		mainLayer.add(tileLayer);
+
 		// UILayer
 		const uILayer = this.add.layer();
 
@@ -46,22 +94,43 @@ export default class Level extends Phaser.Scene {
 		debugText.dropShadowY = 1;
 		uILayer.add(debugText);
 
-		// mainLayer
-		const mainLayer = this.add.layer();
-
-		// player
-		const player = new playerPrefab(this, 351, 131);
-		mainLayer.add(player);
-
-		// tileLayer
-		const tileLayer = test_map_2.createLayer("Tile Layer 1", ["tileset"], 0, 0);
-		mainLayer.add(tileLayer);
-
 		// lists
 		const public_list: Array<any> = [];
 
 		// playerTilemapCollider
 		this.physics.add.collider(player, tileLayer, this.playerHitTilemap, undefined, this);
+
+		// parallax_Backing (components)
+		new ScrollFactor(parallax_Backing);
+
+		// parallax_Cityscape (components)
+		const parallax_CityscapeScrollFactor = new ScrollFactor(parallax_Cityscape);
+		parallax_CityscapeScrollFactor.factorX = 0.2;
+		parallax_CityscapeScrollFactor.factorY = 0.1;
+
+		// parallax_Cityscape_1 (components)
+		const parallax_Cityscape_1ScrollFactor = new ScrollFactor(parallax_Cityscape_1);
+		parallax_Cityscape_1ScrollFactor.factorX = 0.2;
+		parallax_Cityscape_1ScrollFactor.factorY = 0.1;
+
+		// parallax_Cityscape_2 (components)
+		const parallax_Cityscape_2ScrollFactor = new ScrollFactor(parallax_Cityscape_2);
+		parallax_Cityscape_2ScrollFactor.factorX = 0.2;
+		parallax_Cityscape_2ScrollFactor.factorY = 0.1;
+
+		// parallax_Cityscape_3 (components)
+		const parallax_Cityscape_3ScrollFactor = new ScrollFactor(parallax_Cityscape_3);
+		parallax_Cityscape_3ScrollFactor.factorX = 0.2;
+		parallax_Cityscape_3ScrollFactor.factorY = 0.1;
+
+		// parallax_Cityscape_4 (components)
+		const parallax_Cityscape_4ScrollFactor = new ScrollFactor(parallax_Cityscape_4);
+		parallax_Cityscape_4ScrollFactor.factorX = 0.2;
+		parallax_Cityscape_4ScrollFactor.factorY = 0.1;
+
+		// parallax_Cityscape_5 (components)
+		const parallax_Cityscape_5ScrollFactor = new ScrollFactor(parallax_Cityscape_5);
+		parallax_Cityscape_5ScrollFactor.factorY = 0.1;
 
 		// buildText (components)
 		const buildTextAlign = new Align(buildText);
@@ -77,24 +146,26 @@ export default class Level extends Phaser.Scene {
 		debugTextAlign.horizontalOffset = 5;
 		debugTextAlign.verticalOffset = -5;
 
-		this.uILayer = uILayer;
-		this.buildText = buildText;
-		this.debugText = debugText;
+		this.bGLayer = bGLayer;
 		this.mainLayer = mainLayer;
 		this.player = player;
 		this.tileLayer = tileLayer;
+		this.uILayer = uILayer;
+		this.buildText = buildText;
+		this.debugText = debugText;
 		this.test_map_2 = test_map_2;
 		this.public_list = public_list;
 
 		this.events.emit("scene-awake");
 	}
 
-	private uILayer!: Phaser.GameObjects.Layer;
-	private buildText!: Phaser.GameObjects.BitmapText;
-	private debugText!: Phaser.GameObjects.BitmapText;
+	private bGLayer!: Phaser.GameObjects.Layer;
 	private mainLayer!: Phaser.GameObjects.Layer;
 	private player!: playerPrefab;
 	private tileLayer!: Phaser.Tilemaps.TilemapLayer;
+	private uILayer!: Phaser.GameObjects.Layer;
+	private buildText!: Phaser.GameObjects.BitmapText;
+	private debugText!: Phaser.GameObjects.BitmapText;
 	private test_map_2!: Phaser.Tilemaps.Tilemap;
 	public public_list!: Array<any>;
 
@@ -145,15 +216,21 @@ export default class Level extends Phaser.Scene {
 		this.buildText.setText('Tappy Tappy Boneyard v' + this.game.config.gameVersion);
 	}
 
-	update()
+	update(dt:number)
 	{
 		// this.debugText.setText(`${this.player.stateController.currentState.name}`);
-		this.debugText.setText(`${this.player.onWall}`);
+		this.debugText.setText(`${this.player.onWallLeft}`);
 		// this.debugText.setText(`${this.player.onFloor}`);
 
 	// reset collision values to be overridden by callbacks
-		this.player.onWall = 'false';
 		this.player.onFloor = false;
+
+	// player wall check
+		this.player.onWallLeft = 
+			(this.tileLayer.getTileAtWorldXY(this.player.x - 7, this.player.y) != undefined);
+		this.player.onWallRight = 
+			(this.tileLayer.getTileAtWorldXY(this.player.x + 6, this.player.y) != undefined);
+
 	}
 
 	/**
@@ -168,16 +245,22 @@ export default class Level extends Phaser.Scene {
 			this.player.onFloor = true;
 		}
 
-		if (_player.body.blocked.left)
-		{
-			this.player.onWall = 'left';
-			console.log('left')
-		}
-		else if (_player.body.blocked.right)
-		{
-			this.player.onWall = 'right';
-			console.log('right')
-		}
+		// if (_player.body.touching.down)
+		// {
+		// 	console.log('touch');
+		// }
+			// touching just doesn't seem to work with tilemaps
+
+		// if (_player.body.blocked.left)
+		// {
+		// 	this.player.onWall = 'left';
+		// 	console.log('left')
+		// }
+		// else if (_player.body.blocked.right)
+		// {
+		// 	this.player.onWall = 'right';
+		// 	console.log('right')
+		// }
 		// LEFT: this doesn't work as a way to continually check if touching a wall. Works fine 
 		// for onFloor because gravity is causing a collision callback every frame
 
@@ -209,6 +292,7 @@ export default class Level extends Phaser.Scene {
 		UICam.setName('UIcam')
 		UICam.setZoom(3);
 		UICam.ignore(this.mainLayer.getChildren());
+		UICam.ignore(this.bGLayer.getChildren());
 		UICam.preRender(1);
 	}
 

@@ -11,7 +11,7 @@ window.addEventListener('load', function ()
 		
 	// visuals
 		type: Phaser.AUTO,
-		backgroundColor: "#FFD3DF",
+		backgroundColor: "#ffeaf0",
 		pixelArt: true,
 		roundPixels: true,
 		input: {
@@ -79,7 +79,10 @@ class Boot extends Phaser.Scene
 		{	
 			if (scene.scene.settings.active)
 			{
+				// scene.cameras.cameras[0].setViewport(0, 0, w, h);
+				// scene.cameras.cameras[1].setViewport(0, 0, w, h);
 				scene.cameras.main.setViewport(0, 0, w, h);
+					// TODO: make this dymanic for more cameras
 
 			// prerender UICam so that scale is up to date
 				const uiCam = scene.cameras.getCamera('UIcam');

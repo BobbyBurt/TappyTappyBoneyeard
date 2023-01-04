@@ -13,20 +13,28 @@
     },
     "displayList": [
         {
-            "type": "ArcadeSprite",
-            "id": "96b3ef4c-d953-48b7-b063-ad23b9ed549b",
-            "label": "arcadesprite_1",
+            "type": "Container",
+            "id": "65be5a64-16c1-49e4-9197-a329b48a03fa",
+            "label": "container_1",
             "components": [],
-            "texture": {
-                "key": "bird1mid"
-            },
-            "body.friction.x": 0,
-            "body.gravity.y": 100,
-            "allowRotation": false,
-            "body.width": 12,
-            "body.height": 12,
-            "body.offset.x": 3,
-            "body.offset.y": 6
+            "list": [
+                {
+                    "type": "ArcadeSprite",
+                    "id": "96b3ef4c-d953-48b7-b063-ad23b9ed549b",
+                    "label": "arcadesprite_1",
+                    "components": [],
+                    "texture": {
+                        "key": "bird1mid"
+                    },
+                    "body.friction.x": 0,
+                    "body.gravity.y": 100,
+                    "allowRotation": false,
+                    "body.width": 12,
+                    "body.height": 12,
+                    "body.offset.x": 3,
+                    "body.offset.y": 6
+                }
+            ]
         }
     ],
     "plainObjects": [],

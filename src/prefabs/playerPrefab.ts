@@ -63,16 +63,18 @@ export default class playerPrefab extends Phaser.Physics.Arcade.Sprite {
 	private punchButton: number = 0;
 
 	/** updated by scene, used by states */
-	public onFloor:Boolean = true;
+	public onFloor: boolean = true;
 	/** updated by scene, used by states */
-	public onWall: 'left' | 'right' | 'false' = 'false';
+	public onWallLeft: boolean = false;
+	/** updated by scene, used by states */
+	public onWallRight: boolean = false;
 
 	public moveSpeed = 120;
 	public jumpForce = 250;
 
 	start()
 	{
-		this.setVelocityX(this.moveSpeed);
+		this.setVelocityX(-this.moveSpeed);
 
 		this.flipX = true;
 	}
@@ -82,6 +84,8 @@ export default class playerPrefab extends Phaser.Physics.Arcade.Sprite {
 		this.inputCheck();
 
 		this.stateController.update();
+
+		
 	}
 
 	/** update input values based on key / gamepad button state */

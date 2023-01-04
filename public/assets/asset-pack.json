@@ -87,6 +87,21 @@
                 "key": "nokia"
             },
             {
+                "url": "assets/Parallax-Backing.png",
+                "type": "image",
+                "key": "Parallax-Backing"
+            },
+            {
+                "url": "assets/Parallax-Cityscape.png",
+                "type": "image",
+                "key": "Parallax-Cityscape"
+            },
+            {
+                "url": "assets/Parallax-Forest.png",
+                "type": "image",
+                "key": "Parallax-Forest"
+            },
+            {
                 "url": [
                     "assets/sfx/Pogo stick.mp3"
                 ],
