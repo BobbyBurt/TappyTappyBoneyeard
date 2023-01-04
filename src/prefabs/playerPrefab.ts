@@ -74,7 +74,7 @@ export default class playerPrefab extends Phaser.Physics.Arcade.Sprite {
 
 	start()
 	{
-		this.setVelocityX(-this.moveSpeed);
+		this.setVelocityX(this.moveSpeed);
 
 		this.flipX = true;
 	}
@@ -136,6 +136,37 @@ export default class playerPrefab extends Phaser.Physics.Arcade.Sprite {
 			else
 			{
 				this.punchInput = 'up'
+			}
+		}
+	}
+
+	/**
+	 * is the player against the wall in front of behind them?
+	 * @param ahead or behind
+	 * @returns on wall
+	 */
+	onWallFacing(ahead: boolean): boolean
+	{
+		if (ahead)
+		{
+			if (this.flipX)
+			{
+				return this.onWallRight;
+			}
+			else
+			{
+				return this.onWallLeft;
+			}
+		}
+		else
+		{
+			if (this.flipX)
+			{
+				return this.onWallLeft;
+			}
+			else
+			{
+				return this.onWallRight;
 			}
 		}
 	}

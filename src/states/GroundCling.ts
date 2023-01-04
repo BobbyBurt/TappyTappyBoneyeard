@@ -5,7 +5,7 @@ import StateController from "./StateController";
 /** player is grounded, moving in either direction */
 export default class GroundCling implements State {
 
-	name: string = 'groundCling';
+	name: playerStateName = 'groundCling';
 	player: playerPrefab;
 	stateController: StateController;
 	
@@ -17,11 +17,12 @@ export default class GroundCling implements State {
 	
 	enter()
 	{
-		if (this.player.onWall == 'right')
+	// update sprite flip
+		if (this.player.onWallRight)
 		{
 			this.player.flipX = false;
 		}
-		else if (this.player.onWall == 'left')
+		else if (this.player.onWallLeft)
 		{
 			this.player.flipX = true;
 		}
@@ -36,7 +37,14 @@ export default class GroundCling implements State {
 
 		if (!this.player.onFloor)
 		{
-			this.stateController.setState('cling');
+			if (this.player.onWallFacing(false))
+			{
+				this.stateController.setState('cling');
+			}
+			else
+			{
+				this.stateController.setState('airborne');
+			}
 		}
 	}
 

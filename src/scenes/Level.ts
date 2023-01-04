@@ -94,6 +94,24 @@ export default class Level extends Phaser.Scene {
 		debugText.dropShadowY = 1;
 		uILayer.add(debugText);
 
+		// debugText2
+		const debugText2 = this.add.bitmapText(-10, 38, "nokia", "debug textdfdfasdf");
+		debugText2.setOrigin(0, 1);
+		debugText2.text = "debug textdfdfasdf";
+		debugText2.fontSize = -8;
+		debugText2.dropShadowX = -1;
+		debugText2.dropShadowY = 1;
+		uILayer.add(debugText2);
+
+		// debugText3
+		const debugText3 = this.add.bitmapText(-9, 52, "nokia", "debug textdfdfasdf");
+		debugText3.setOrigin(0, 1);
+		debugText3.text = "debug textdfdfasdf";
+		debugText3.fontSize = -8;
+		debugText3.dropShadowX = -1;
+		debugText3.dropShadowY = 1;
+		uILayer.add(debugText3);
+
 		// lists
 		const public_list: Array<any> = [];
 
@@ -146,6 +164,20 @@ export default class Level extends Phaser.Scene {
 		debugTextAlign.horizontalOffset = 5;
 		debugTextAlign.verticalOffset = -5;
 
+		// debugText2 (components)
+		const debugText2Align = new Align(debugText2);
+		debugText2Align.down = true;
+		debugText2Align.left = true;
+		debugText2Align.horizontalOffset = 5;
+		debugText2Align.verticalOffset = -15;
+
+		// debugText3 (components)
+		const debugText3Align = new Align(debugText3);
+		debugText3Align.down = true;
+		debugText3Align.left = true;
+		debugText3Align.horizontalOffset = 5;
+		debugText3Align.verticalOffset = -25;
+
 		this.bGLayer = bGLayer;
 		this.mainLayer = mainLayer;
 		this.player = player;
@@ -153,6 +185,8 @@ export default class Level extends Phaser.Scene {
 		this.uILayer = uILayer;
 		this.buildText = buildText;
 		this.debugText = debugText;
+		this.debugText2 = debugText2;
+		this.debugText3 = debugText3;
 		this.test_map_2 = test_map_2;
 		this.public_list = public_list;
 
@@ -166,6 +200,8 @@ export default class Level extends Phaser.Scene {
 	private uILayer!: Phaser.GameObjects.Layer;
 	private buildText!: Phaser.GameObjects.BitmapText;
 	private debugText!: Phaser.GameObjects.BitmapText;
+	private debugText2!: Phaser.GameObjects.BitmapText;
+	private debugText3!: Phaser.GameObjects.BitmapText;
 	private test_map_2!: Phaser.Tilemaps.Tilemap;
 	public public_list!: Array<any>;
 
@@ -219,7 +255,9 @@ export default class Level extends Phaser.Scene {
 	update(dt:number)
 	{
 		// this.debugText.setText(`${this.player.stateController.currentState.name}`);
-		this.debugText.setText(`${this.player.onWallLeft}`);
+		this.debugText.setText(`${this.player.stateController.currentState.name}`);
+		this.debugText2.setText(`${this.player.onWallFacing(true)}`);
+		this.debugText3.setText(`${this.player.onWallFacing(false)}`);
 		// this.debugText.setText(`${this.player.onFloor}`);
 
 	// reset collision values to be overridden by callbacks

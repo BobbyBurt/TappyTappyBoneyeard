@@ -31,9 +31,10 @@ export default class StateController
         // }
 	}
 
-	setState(name:any)
-	// TODO: define type
+	setState(name:playerStateName)
 	{
+		console.log(`state transition: ${this.currentState} => ${name}`);
+		
 		if (this.currentState === this.states[name])
 		{	
 			return;

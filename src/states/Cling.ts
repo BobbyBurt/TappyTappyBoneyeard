@@ -5,7 +5,7 @@ import StateController from "./StateController";
 /** player is grounded, moving in either direction */
 export default class Cling implements State {
 
-	name: string = 'cling';
+	name: playerStateName = 'cling';
 	player: playerPrefab;
 	stateController: StateController;
 	
@@ -17,11 +17,12 @@ export default class Cling implements State {
 	
 	enter()
 	{
-		if (this.player.onWall == 'right')
+	// update sprite flip
+		if (this.player.onWallRight)
 		{
 			this.player.flipX = false;
 		}
-		else if (this.player.onWall == 'left')
+		else if (this.player.onWallLeft)
 		{
 			this.player.flipX = true;
 		}
@@ -34,24 +35,34 @@ export default class Cling implements State {
 			this.wallJump();
 		}
 
-		if (this.player.onFloor)
+		if (this.player.onWallFacing(false))
 		{
-			this.stateController.setState('groundCling');
+			if (this.player.onFloor)
+			{
+				this.stateController.setState('groundCling');
+			}
+		}
+		else
+		{
+			if (!this.player.onFloor)
+			{
+				this.stateController.setState('airborne');
+			}
 		}
 	}
 
 	wallJump()
 	{
 		let velocityX = 0;
-		if (this.player.onWall == 'right')
-		{
-			velocityX =	-this.player.moveSpeed;
-		}
-		if (this.player.onWall == 'left')
+		if (this.player.flipX)
 		{
 			velocityX =	this.player.moveSpeed;
 		}
-		console.log(this.player.onWall, velocityX);
+		else
+		{
+			velocityX =	-this.player.moveSpeed;
+		}
+		console.log(velocityX);
 			// LEFT: this doesn't work because onWall isn't correct
 
 		this.player.setVelocity(velocityX, -this.player.jumpForce);

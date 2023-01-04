@@ -213,6 +213,50 @@
                     "dropShadowX": -1,
                     "dropShadowY": 1,
                     "dropShadowColor": "#000000ff"
+                },
+                {
+                    "type": "BitmapText",
+                    "id": "ad17d03f-18c2-4e7f-a9b6-b42f3335b13c",
+                    "label": "debugText2",
+                    "scope": "CLASS",
+                    "components": [
+                        "Align"
+                    ],
+                    "Align.down": true,
+                    "Align.left": true,
+                    "Align.horizontalOffset": 5,
+                    "Align.verticalOffset": -15,
+                    "x": -10,
+                    "y": 38,
+                    "originY": 1,
+                    "text": "debug textdfdfasdf",
+                    "font": "nokia",
+                    "fontSize": -8,
+                    "dropShadowX": -1,
+                    "dropShadowY": 1,
+                    "dropShadowColor": "#000000ff"
+                },
+                {
+                    "type": "BitmapText",
+                    "id": "2b224966-332b-487c-a95a-0628e26f8687",
+                    "label": "debugText3",
+                    "scope": "CLASS",
+                    "components": [
+                        "Align"
+                    ],
+                    "Align.down": true,
+                    "Align.left": true,
+                    "Align.horizontalOffset": 5,
+                    "Align.verticalOffset": -25,
+                    "x": -9,
+                    "y": 52,
+                    "originY": 1,
+                    "text": "debug textdfdfasdf",
+                    "font": "nokia",
+                    "fontSize": -8,
+                    "dropShadowX": -1,
+                    "dropShadowY": 1,
+                    "dropShadowColor": "#000000ff"
                 }
             ]
         }

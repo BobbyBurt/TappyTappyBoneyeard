@@ -5,7 +5,7 @@ import StateController from "./StateController";
 /** player is grounded, moving in either direction */
 export default class Running implements State {
 
-	name: string = 'running';
+	name: playerStateName = 'running';
 	player: playerPrefab;
 	stateController: StateController;
 	
@@ -30,7 +30,7 @@ export default class Running implements State {
 	// state transitions
 		if (!this.player.onFloor)
 		{
-			if (this.player.onWall != 'false')
+			if (this.player.onWallFacing(true))
 			{
 				this.stateController.setState('cling')
 			}
@@ -39,7 +39,7 @@ export default class Running implements State {
 				this.stateController.setState('airborne');
 			}
 		}
-		if (this.player.onWall != 'false')
+		if (this.player.onWallFacing(true))
 		{
 			this.stateController.setState('groundCling')
 		}
