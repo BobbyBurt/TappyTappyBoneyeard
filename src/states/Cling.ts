@@ -2,7 +2,7 @@ import playerPrefab from "~/prefabs/playerPrefab";
 import State from "states/State";
 import StateController from "./StateController";
 
-/** player is grounded, moving in either direction */
+/** player is against a wall above ground */
 export default class Cling implements State {
 
 	name: playerStateName = 'cling';
@@ -17,6 +17,8 @@ export default class Cling implements State {
 	
 	enter()
 	{
+		this.player.setTexture('bird1mid');
+	
 	// update sprite flip
 		if (this.player.onWallRight)
 		{
@@ -62,8 +64,6 @@ export default class Cling implements State {
 		{
 			velocityX =	-this.player.moveSpeed;
 		}
-		console.log(velocityX);
-			// LEFT: this doesn't work because onWall isn't correct
 
 		this.player.setVelocity(velocityX, -this.player.jumpForce);
 	}

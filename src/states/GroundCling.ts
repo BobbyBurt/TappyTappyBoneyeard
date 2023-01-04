@@ -2,7 +2,7 @@ import playerPrefab from "~/prefabs/playerPrefab";
 import State from "states/State";
 import StateController from "./StateController";
 
-/** player is grounded, moving in either direction */
+/** player is against a wall on ground */
 export default class GroundCling implements State {
 
 	name: playerStateName = 'groundCling';
@@ -17,6 +17,8 @@ export default class GroundCling implements State {
 	
 	enter()
 	{
+		this.player.setTexture('bird1mid');
+
 	// update sprite flip
 		if (this.player.onWallRight)
 		{

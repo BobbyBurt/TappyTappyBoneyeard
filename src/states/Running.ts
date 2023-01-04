@@ -17,22 +17,32 @@ export default class Running implements State {
 	
 	enter()
 	{
-		// console.log('enter');
+		this.player.setTexture('bird1mid');
 	}
 	
 	update()
 	{	
 		if (this.player.jumpInput == 'just-down')
 		{
-			if (this.player.body.velocity.x == 0)
-			{
-				this.player.body.setVelocityX(this.player.flipX? this.player.moveSpeed : -this.player.moveSpeed);
-			}
-			else
-			{
-				this.jump();
-				this.player.sqaush();
-			}
+		// DEPRECATED: if standing still, start moving instead of jumping
+			// if (this.player.body.velocity.x == 0)
+			// {
+			// 	this.player.body.setVelocityX
+			// 	(this.player.flipX? this.player.moveSpeed : -this.player.moveSpeed);
+			// }
+			// else
+			// {
+			// 	this.jump();
+			// 	this.player.sqaush();
+			// }
+				// this is obsolete thanks to punch.
+
+			this.jump();
+			this.player.sqaush();
+		}
+		else if (this.player.punchInput == 'just-down')
+		{
+			this.stateController.setState('punch');
 		}
 
 	// state transitions
@@ -58,3 +68,6 @@ export default class Running implements State {
 		this.player.setVelocityY(-this.player.jumpForce);
 	}
 }
+
+// TODO: it may be necessary to create another 'standing' state seperate from this for the case in 
+// which the player isn't moving.

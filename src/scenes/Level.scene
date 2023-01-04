@@ -152,11 +152,13 @@
                 },
                 {
                     "type": "TilemapLayer",
-                    "id": "558fb209-e7b7-4cc6-8cbc-b0316f4f9896",
+                    "id": "aa5626c3-8f36-4e54-92d0-dac4ce5ebe43",
                     "label": "tileLayer",
                     "scope": "CLASS",
                     "components": [],
-                    "tilemapId": "0ae695c2-cb12-4494-ab92-ddbfb142b5fb",
+                    "x": -549,
+                    "y": -227,
+                    "tilemapId": "b204441a-da85-4549-9fd2-0ae3e08f1acc",
                     "layerName": "Tile Layer 1",
                     "tilesets": [
                         "tileset"
@@ -283,6 +285,18 @@
             "object2": "tileLayer",
             "collideCallback": "this.playerHitTilemap",
             "callbackContext": "this"
+        },
+        {
+            "id": "b204441a-da85-4549-9fd2-0ae3e08f1acc",
+            "type": "Tilemap",
+            "label": "test_map_3",
+            "key": "test-map-3",
+            "tilesets": [
+                {
+                    "name": "tileset",
+                    "imageKey": "tileset"
+                }
+            ]
         }
     ],
     "meta": {

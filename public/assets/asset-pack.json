@@ -128,6 +128,11 @@
                 "key": "test-map-2"
             },
             {
+                "url": "assets/test-map-3.json",
+                "type": "tilemapTiledJSON",
+                "key": "test-map-3"
+            },
+            {
                 "url": "assets/tileset.png",
                 "type": "image",
                 "key": "tileset"

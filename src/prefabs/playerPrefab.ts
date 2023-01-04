@@ -61,6 +61,7 @@ export default class playerPrefab extends Phaser.Physics.Arcade.Sprite {
 	private punchKey: Phaser.Input.Keyboard.Key 
 		= this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.DOWN);
 	private punchButton: number = 0;
+	public punchCharged: boolean = true;
 
 	/** updated by scene, used by states */
 	public onFloor: boolean = true;
@@ -84,6 +85,12 @@ export default class playerPrefab extends Phaser.Physics.Arcade.Sprite {
 		this.inputCheck();
 
 		this.stateController.update();
+
+	// punch charge check
+		if (this.onFloor && !this.punchCharged)
+		{
+			this.punchCharged = true;
+		}
 
 		
 	}

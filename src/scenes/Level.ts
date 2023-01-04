@@ -27,6 +27,10 @@ export default class Level extends Phaser.Scene {
 		const test_map_2 = this.add.tilemap("test-map-2");
 		test_map_2.addTilesetImage("tileset", "tileset");
 
+		// test_map_3
+		const test_map_3 = this.add.tilemap("test-map-3");
+		test_map_3.addTilesetImage("tileset", "tileset");
+
 		// BGLayer
 		const bGLayer = this.add.layer();
 
@@ -71,7 +75,7 @@ export default class Level extends Phaser.Scene {
 		mainLayer.add(player);
 
 		// tileLayer
-		const tileLayer = test_map_2.createLayer("Tile Layer 1", ["tileset"], 0, 0);
+		const tileLayer = test_map_3.createLayer("Tile Layer 1", ["tileset"], -549, -227);
 		mainLayer.add(tileLayer);
 
 		// UILayer
@@ -188,6 +192,7 @@ export default class Level extends Phaser.Scene {
 		this.debugText2 = debugText2;
 		this.debugText3 = debugText3;
 		this.test_map_2 = test_map_2;
+		this.test_map_3 = test_map_3;
 		this.public_list = public_list;
 
 		this.events.emit("scene-awake");
@@ -203,6 +208,7 @@ export default class Level extends Phaser.Scene {
 	private debugText2!: Phaser.GameObjects.BitmapText;
 	private debugText3!: Phaser.GameObjects.BitmapText;
 	private test_map_2!: Phaser.Tilemaps.Tilemap;
+	private test_map_3!: Phaser.Tilemaps.Tilemap;
 	public public_list!: Array<any>;
 
 	/* START-USER-CODE */
@@ -213,9 +219,9 @@ export default class Level extends Phaser.Scene {
 
 		this.initCameras();
 
-	// tilemap
+	// tilemap`
 		this.tileLayer.setCollision([1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18,
-			 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36], true);
+			19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36], true);
 
 	// DEPRECATED input event handler
 		// this.input.on("pointerdown", () =>
@@ -256,8 +262,8 @@ export default class Level extends Phaser.Scene {
 	{
 		// this.debugText.setText(`${this.player.stateController.currentState.name}`);
 		this.debugText.setText(`${this.player.stateController.currentState.name}`);
-		this.debugText2.setText(`${this.player.onWallFacing(true)}`);
-		this.debugText3.setText(`${this.player.onWallFacing(false)}`);
+		this.debugText2.setText(`on floor: ${this.player.onFloor}`);
+		this.debugText3.setText(`punch charge: ${this.player.punchCharged}`);
 		// this.debugText.setText(`${this.player.onFloor}`);
 
 	// reset collision values to be overridden by callbacks
@@ -268,13 +274,15 @@ export default class Level extends Phaser.Scene {
 			(this.tileLayer.getTileAtWorldXY(this.player.x - 7, this.player.y) != undefined);
 		this.player.onWallRight = 
 			(this.tileLayer.getTileAtWorldXY(this.player.x + 6, this.player.y) != undefined);
+			// TODO: decorative tiles without collision, as defined at tileLayer.setCollision, 
+			// should not count as wall.
 
 	// player out-of-bounds check
 		if (this.player.y > 400)
 		{
 			this.player.setPosition(351, 131);
 			this.player.stateController.setState('airborne');
-			this.player.setVelocityX(this.player.moveSpeed);
+			this.player.setVelocity(this.player.moveSpeed, 0);
 		}
 
 	}

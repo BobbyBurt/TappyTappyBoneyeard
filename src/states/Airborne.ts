@@ -2,7 +2,7 @@ import playerPrefab from "~/prefabs/playerPrefab";
 import State from "states/State";
 import StateController from "./StateController";
 
-/** player is grounded, moving in either direction */
+/** player is airborne */
 export default class Airborne implements State {
 
 	name: playerStateName = 'airborne';
@@ -17,7 +17,7 @@ export default class Airborne implements State {
 	
 	enter()
 	{
-		
+		this.player.setTexture('bird1mid');
 	}
 	
 	update()
@@ -26,6 +26,10 @@ export default class Airborne implements State {
 		{
 			this.flap();
 			this.player.sqaush();
+		}
+		else if (this.player.punchInput == 'just-down' && this.player.punchCharged)
+		{
+			this.stateController.setState('punch');
 		}
 
 	// state transitions
