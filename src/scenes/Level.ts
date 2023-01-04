@@ -67,7 +67,7 @@ export default class Level extends Phaser.Scene {
 		const mainLayer = this.add.layer();
 
 		// player
-		const player = new playerPrefab(this, 351, 131);
+		const player = new playerPrefab(this, 264, 141);
 		mainLayer.add(player);
 
 		// tileLayer
@@ -268,6 +268,14 @@ export default class Level extends Phaser.Scene {
 			(this.tileLayer.getTileAtWorldXY(this.player.x - 7, this.player.y) != undefined);
 		this.player.onWallRight = 
 			(this.tileLayer.getTileAtWorldXY(this.player.x + 6, this.player.y) != undefined);
+
+	// player out-of-bounds check
+		if (this.player.y > 400)
+		{
+			this.player.setPosition(351, 131);
+			this.player.stateController.setState('airborne');
+			this.player.setVelocityX(this.player.moveSpeed);
+		}
 
 	}
 

@@ -24,7 +24,15 @@ export default class Running implements State {
 	{	
 		if (this.player.jumpInput == 'just-down')
 		{
-			this.jump();
+			if (this.player.body.velocity.x == 0)
+			{
+				this.player.body.setVelocityX(this.player.flipX? this.player.moveSpeed : -this.player.moveSpeed);
+			}
+			else
+			{
+				this.jump();
+				this.player.sqaush();
+			}
 		}
 
 	// state transitions

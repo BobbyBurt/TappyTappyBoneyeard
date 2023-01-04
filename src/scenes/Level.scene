@@ -145,8 +145,8 @@
                     "label": "player",
                     "scope": "CLASS",
                     "components": [],
-                    "x": 351,
-                    "y": 131,
+                    "x": 264,
+                    "y": 141,
                     "nestedPrefabs": [],
                     "list": []
                 },

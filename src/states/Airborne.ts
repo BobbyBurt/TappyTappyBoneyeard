@@ -25,6 +25,7 @@ export default class Airborne implements State {
 		if (this.player.jumpInput == 'just-down')
 		{
 			this.flap();
+			this.player.sqaush();
 		}
 
 	// state transitions

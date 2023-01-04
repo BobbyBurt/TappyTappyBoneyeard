@@ -140,6 +140,20 @@ export default class playerPrefab extends Phaser.Physics.Arcade.Sprite {
 		}
 	}
 
+	sqaush()
+	{
+		this.setScale(1, .3);
+
+		this.scene.tweens.add
+		({
+			targets: this,
+			scaleY: 1,
+			duration: 300,
+			ease: Phaser.Math.Easing.Quartic.Out
+		});
+			// TODO: replace this with acutal squash & stretch sprites
+	}
+
 	/**
 	 * is the player against the wall in front of behind them?
 	 * @param ahead or behind
