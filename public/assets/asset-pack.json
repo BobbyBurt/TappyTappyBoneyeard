@@ -123,6 +123,46 @@
                 "key": "reflect"
             },
             {
+                "url": "assets/soldierfalling.png",
+                "type": "image",
+                "key": "soldierfalling"
+            },
+            {
+                "url": "assets/soldiermid.png",
+                "type": "image",
+                "key": "soldiermid"
+            },
+            {
+                "url": "assets/soldieronballoon.png",
+                "type": "image",
+                "key": "soldieronballoon"
+            },
+            {
+                "url": "assets/soldierpogomid.png",
+                "type": "image",
+                "key": "soldierpogomid"
+            },
+            {
+                "url": "assets/soldierpogosquash.png",
+                "type": "image",
+                "key": "soldierpogosquash"
+            },
+            {
+                "url": "assets/soldierpogostretch.png",
+                "type": "image",
+                "key": "soldierpogostretch"
+            },
+            {
+                "url": "assets/soldiersquash.png",
+                "type": "image",
+                "key": "soldiersquash"
+            },
+            {
+                "url": "assets/soldierstretch.png",
+                "type": "image",
+                "key": "soldierstretch"
+            },
+            {
                 "url": "assets/test-map-2.json",
                 "type": "tilemapTiledJSON",
                 "key": "test-map-2"

@@ -163,6 +163,18 @@
                     "tilesets": [
                         "tileset"
                     ]
+                },
+                {
+                    "prefabId": "ed9eaa4a-e16e-41c8-b171-c52fbade9815",
+                    "id": "ab2770fb-0448-4a53-aff0-4784dcd94581",
+                    "unlock": [
+                        "x",
+                        "y"
+                    ],
+                    "label": "soldiermid",
+                    "components": [],
+                    "x": 223,
+                    "y": 181
                 }
             ]
         },
@@ -297,6 +309,25 @@
                     "imageKey": "tileset"
                 }
             ]
+        },
+        {
+            "id": "ada05cf6-56b5-454e-b312-28b327bc114b",
+            "type": "Collider",
+            "label": "soldierTilemapCollide",
+            "scope": "METHOD",
+            "object1": "soldiermid",
+            "object2": "tileLayer"
+        },
+        {
+            "id": "27872d3d-1f4f-4f61-8a24-2a741c638d05",
+            "type": "Collider",
+            "label": "playerEnemyOverlap",
+            "scope": "METHOD",
+            "object1": "player",
+            "object2": "soldiermid",
+            "overlapOnly": true,
+            "collideCallback": "this.playerEnemyOverlap",
+            "callbackContext": "this"
         }
     ],
     "meta": {

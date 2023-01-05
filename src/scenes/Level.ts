@@ -4,6 +4,7 @@
 import Phaser from "phaser";
 import ScrollFactor from "../components/ScrollFactor";
 import playerPrefab from "../prefabs/playerPrefab";
+import SoldierPrefab from "../prefabs/SoldierPrefab";
 import Align from "../components/Align";
 /* START-USER-IMPORTS */
 
@@ -78,6 +79,10 @@ export default class Level extends Phaser.Scene {
 		const tileLayer = test_map_3.createLayer("Tile Layer 1", ["tileset"], -549, -227);
 		mainLayer.add(tileLayer);
 
+		// soldiermid
+		const soldiermid = new SoldierPrefab(this, 223, 181);
+		mainLayer.add(soldiermid);
+
 		// UILayer
 		const uILayer = this.add.layer();
 
@@ -121,6 +126,12 @@ export default class Level extends Phaser.Scene {
 
 		// playerTilemapCollider
 		this.physics.add.collider(player, tileLayer, this.playerHitTilemap, undefined, this);
+
+		// soldierTilemapCollide
+		this.physics.add.collider(soldiermid, tileLayer);
+
+		// playerEnemyOverlap
+		this.physics.add.overlap(player, soldiermid, this.playerEnemyOverlap, undefined, this);
 
 		// parallax_Backing (components)
 		new ScrollFactor(parallax_Backing);
@@ -322,6 +333,11 @@ export default class Level extends Phaser.Scene {
 		// {
 		// 	this.player.onWallRight = true;
 		// }
+	}
+
+	playerEnemyOverlap(_player:any, _enemy:any)
+	{
+		console.log(_player, _enemy);
 	}
 
 	/**
