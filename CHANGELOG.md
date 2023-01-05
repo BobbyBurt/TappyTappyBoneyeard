@@ -1,6 +1,6 @@
 # Changelog
 
-## Version 3
+## Version 3 - 2023-01-05
 
 ### changed
 
