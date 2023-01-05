@@ -145,7 +145,7 @@
                     "label": "player",
                     "scope": "CLASS",
                     "components": [],
-                    "x": 264,
+                    "x": 265,
                     "y": 141,
                     "nestedPrefabs": [],
                     "list": []
@@ -175,6 +175,172 @@
                     "components": [],
                     "x": 223,
                     "y": 181
+                },
+                {
+                    "type": "Image",
+                    "id": "7d59ea82-e407-40be-a716-cae80ac4e393",
+                    "label": "balloon",
+                    "components": [],
+                    "texture": {
+                        "key": "balloon"
+                    },
+                    "x": 2,
+                    "y": 170
+                },
+                {
+                    "type": "Image",
+                    "id": "c93b8070-d676-4260-a3b3-592edef49241",
+                    "label": "soldieronballoon",
+                    "components": [],
+                    "texture": {
+                        "key": "soldieronballoon"
+                    },
+                    "x": -3,
+                    "y": 179,
+                    "ArcadeComponent.active": true,
+                    "allowGravity": false,
+                    "body.width": 16,
+                    "body.height": 17
+                },
+                {
+                    "type": "Image",
+                    "id": "9c880685-c557-4dda-92b1-fa5b8fa4d543",
+                    "label": "balloon_1",
+                    "components": [],
+                    "texture": {
+                        "key": "balloon"
+                    },
+                    "x": 460,
+                    "y": 54
+                },
+                {
+                    "type": "Image",
+                    "id": "d74e1505-dfc5-4295-a883-d63a7f35da71",
+                    "label": "soldieronballoon_1",
+                    "components": [],
+                    "texture": {
+                        "key": "soldieronballoon"
+                    },
+                    "x": 455,
+                    "y": 63,
+                    "ArcadeComponent.active": true,
+                    "allowGravity": false,
+                    "body.width": 16,
+                    "body.height": 17
+                },
+                {
+                    "type": "Image",
+                    "id": "b8240cea-4274-408a-997e-5e1feda5760c",
+                    "label": "balloon_2",
+                    "components": [],
+                    "texture": {
+                        "key": "balloon"
+                    },
+                    "x": 250,
+                    "y": -63
+                },
+                {
+                    "type": "Image",
+                    "id": "691239bd-f537-42bb-84c1-6675f1da1ed0",
+                    "label": "soldieronballoon_2",
+                    "components": [],
+                    "texture": {
+                        "key": "soldieronballoon"
+                    },
+                    "x": 245,
+                    "y": -54,
+                    "ArcadeComponent.active": true,
+                    "allowGravity": false,
+                    "body.width": 16,
+                    "body.height": 17
+                },
+                {
+                    "type": "Image",
+                    "id": "accdc19d-7dae-4ee8-b8b8-ab13db7e15b0",
+                    "label": "balloon_3",
+                    "components": [],
+                    "texture": {
+                        "key": "balloon"
+                    },
+                    "x": -168,
+                    "y": 34
+                },
+                {
+                    "type": "Image",
+                    "id": "0608b8cb-babd-4b8c-95e4-1e511bd5973a",
+                    "label": "soldieronballoon_3",
+                    "components": [],
+                    "texture": {
+                        "key": "soldieronballoon"
+                    },
+                    "x": -173,
+                    "y": 43,
+                    "ArcadeComponent.active": true,
+                    "allowGravity": false,
+                    "body.width": 16,
+                    "body.height": 17
+                },
+                {
+                    "type": "Image",
+                    "id": "604e879d-d652-4d07-8634-50d5ba9e84d6",
+                    "label": "balloon_4",
+                    "components": [],
+                    "texture": {
+                        "key": "balloon"
+                    },
+                    "x": -384.24695617335885,
+                    "y": 16.301220894787473
+                },
+                {
+                    "type": "Image",
+                    "id": "5c646d0a-2b08-44db-ac5a-f99846326181",
+                    "label": "soldieronballoon_4",
+                    "components": [],
+                    "texture": {
+                        "key": "soldieronballoon"
+                    },
+                    "x": -389.24695617335885,
+                    "y": 25.301220894787473,
+                    "ArcadeComponent.active": true,
+                    "allowGravity": false,
+                    "body.width": 16,
+                    "body.height": 17
+                },
+                {
+                    "prefabId": "ed9eaa4a-e16e-41c8-b171-c52fbade9815",
+                    "id": "77f6a3f6-7215-42cc-81e4-99aa231ac45b",
+                    "unlock": [
+                        "x",
+                        "y"
+                    ],
+                    "label": "soldiermid_1",
+                    "components": [],
+                    "x": 414,
+                    "y": -19
+                },
+                {
+                    "prefabId": "ed9eaa4a-e16e-41c8-b171-c52fbade9815",
+                    "id": "1a3ab54f-5913-4d71-9da4-79367c7f20f7",
+                    "unlock": [
+                        "x",
+                        "y"
+                    ],
+                    "label": "soldiermid_2",
+                    "components": [],
+                    "x": -389,
+                    "y": 155
+                },
+                {
+                    "prefabId": "ed9eaa4a-e16e-41c8-b171-c52fbade9815",
+                    "id": "8b42ff9b-d372-4ee6-9baf-9685b8d95ffd",
+                    "unlock": [
+                        "x",
+                        "y"
+                    ],
+                    "label": "soldiermid_3",
+                    "components": [],
+                    "x": -55,
+                    "y": 91
                 }
             ]
         },
@@ -315,7 +481,7 @@
             "type": "Collider",
             "label": "soldierTilemapCollide",
             "scope": "METHOD",
-            "object1": "soldiermid",
+            "object1": "enemyList",
             "object2": "tileLayer"
         },
         {
@@ -324,7 +490,7 @@
             "label": "playerEnemyOverlap",
             "scope": "METHOD",
             "object1": "player",
-            "object2": "soldiermid",
+            "object2": "enemyList",
             "overlapOnly": true,
             "collideCallback": "this.playerEnemyOverlap",
             "callbackContext": "this"
@@ -341,6 +507,21 @@
             "id": "80df39a5-783b-4b00-89d3-6af9650d4ada",
             "label": "public-list",
             "scope": "PUBLIC"
+        },
+        {
+            "id": "ba8a8f59-dac4-499f-af01-63a37964e5ba",
+            "label": "enemyList",
+            "objectIds": [
+                "ab2770fb-0448-4a53-aff0-4784dcd94581",
+                "c93b8070-d676-4260-a3b3-592edef49241",
+                "d74e1505-dfc5-4295-a883-d63a7f35da71",
+                "691239bd-f537-42bb-84c1-6675f1da1ed0",
+                "0608b8cb-babd-4b8c-95e4-1e511bd5973a",
+                "5c646d0a-2b08-44db-ac5a-f99846326181",
+                "77f6a3f6-7215-42cc-81e4-99aa231ac45b",
+                "1a3ab54f-5913-4d71-9da4-79367c7f20f7",
+                "8b42ff9b-d372-4ee6-9baf-9685b8d95ffd"
+            ]
         }
     ]
 }

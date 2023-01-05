@@ -2,6 +2,11 @@
     "section1": {
         "files": [
             {
+                "url": "assets/balloon.png",
+                "type": "image",
+                "key": "balloon"
+            },
+            {
                 "url": [
                     "assets/sfx/bird drop.mp3"
                 ],

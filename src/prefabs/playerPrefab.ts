@@ -59,7 +59,7 @@ export default class playerPrefab extends Phaser.Physics.Arcade.Sprite {
 
 	public punchInput: input = 'up';
 	private punchKey: Phaser.Input.Keyboard.Key 
-		= this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.DOWN);
+		= this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.X);
 	private punchButton: number = 0;
 	public punchCharged: boolean = true;
 
@@ -144,6 +144,27 @@ export default class playerPrefab extends Phaser.Physics.Arcade.Sprite {
 			{
 				this.punchInput = 'up'
 			}
+		}
+	}
+
+	/** 
+	 * called by scene by enemy overlap. */
+	hitEnemy(_enemy:Phaser.Types.Physics.Arcade.GameObjectWithBody)
+		// TODO: specify type annotation
+	{
+		if (this.stateController.currentState.name == 'punch')
+		{
+			_enemy.destroy();
+
+			// have the enemy go flying or something cool
+				// I can't set velocity on this type, but that's the type that the callback gives 
+				// me.
+		}
+		else
+		{
+			this.setPosition(351, 131);
+			this.stateController.setState('airborne');
+			this.setVelocity(this.moveSpeed, 0);
 		}
 	}
 

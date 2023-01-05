@@ -72,7 +72,7 @@ export default class Level extends Phaser.Scene {
 		const mainLayer = this.add.layer();
 
 		// player
-		const player = new playerPrefab(this, 264, 141);
+		const player = new playerPrefab(this, 265, 141);
 		mainLayer.add(player);
 
 		// tileLayer
@@ -82,6 +82,73 @@ export default class Level extends Phaser.Scene {
 		// soldiermid
 		const soldiermid = new SoldierPrefab(this, 223, 181);
 		mainLayer.add(soldiermid);
+
+		// balloon
+		const balloon = this.add.image(2, 170, "balloon");
+		mainLayer.add(balloon);
+
+		// soldieronballoon
+		const soldieronballoon = this.add.image(-3, 179, "soldieronballoon") as Phaser.GameObjects.Image & { body: Phaser.Physics.Arcade.Body };
+		this.physics.add.existing(soldieronballoon, false);
+		soldieronballoon.body.allowGravity = false;
+		soldieronballoon.body.setSize(16, 17, false);
+		mainLayer.add(soldieronballoon);
+
+		// balloon_1
+		const balloon_1 = this.add.image(460, 54, "balloon");
+		mainLayer.add(balloon_1);
+
+		// soldieronballoon_1
+		const soldieronballoon_1 = this.add.image(455, 63, "soldieronballoon") as Phaser.GameObjects.Image & { body: Phaser.Physics.Arcade.Body };
+		this.physics.add.existing(soldieronballoon_1, false);
+		soldieronballoon_1.body.allowGravity = false;
+		soldieronballoon_1.body.setSize(16, 17, false);
+		mainLayer.add(soldieronballoon_1);
+
+		// balloon_2
+		const balloon_2 = this.add.image(250, -63, "balloon");
+		mainLayer.add(balloon_2);
+
+		// soldieronballoon_2
+		const soldieronballoon_2 = this.add.image(245, -54, "soldieronballoon") as Phaser.GameObjects.Image & { body: Phaser.Physics.Arcade.Body };
+		this.physics.add.existing(soldieronballoon_2, false);
+		soldieronballoon_2.body.allowGravity = false;
+		soldieronballoon_2.body.setSize(16, 17, false);
+		mainLayer.add(soldieronballoon_2);
+
+		// balloon_3
+		const balloon_3 = this.add.image(-168, 34, "balloon");
+		mainLayer.add(balloon_3);
+
+		// soldieronballoon_3
+		const soldieronballoon_3 = this.add.image(-173, 43, "soldieronballoon") as Phaser.GameObjects.Image & { body: Phaser.Physics.Arcade.Body };
+		this.physics.add.existing(soldieronballoon_3, false);
+		soldieronballoon_3.body.allowGravity = false;
+		soldieronballoon_3.body.setSize(16, 17, false);
+		mainLayer.add(soldieronballoon_3);
+
+		// balloon_4
+		const balloon_4 = this.add.image(-384.24695617335885, 16.301220894787473, "balloon");
+		mainLayer.add(balloon_4);
+
+		// soldieronballoon_4
+		const soldieronballoon_4 = this.add.image(-389.24695617335885, 25.301220894787473, "soldieronballoon") as Phaser.GameObjects.Image & { body: Phaser.Physics.Arcade.Body };
+		this.physics.add.existing(soldieronballoon_4, false);
+		soldieronballoon_4.body.allowGravity = false;
+		soldieronballoon_4.body.setSize(16, 17, false);
+		mainLayer.add(soldieronballoon_4);
+
+		// soldiermid_1
+		const soldiermid_1 = new SoldierPrefab(this, 414, -19);
+		mainLayer.add(soldiermid_1);
+
+		// soldiermid_2
+		const soldiermid_2 = new SoldierPrefab(this, -389, 155);
+		mainLayer.add(soldiermid_2);
+
+		// soldiermid_3
+		const soldiermid_3 = new SoldierPrefab(this, -55, 91);
+		mainLayer.add(soldiermid_3);
 
 		// UILayer
 		const uILayer = this.add.layer();
@@ -123,15 +190,16 @@ export default class Level extends Phaser.Scene {
 
 		// lists
 		const public_list: Array<any> = [];
+		const enemyList = [soldiermid, soldieronballoon, soldieronballoon_1, soldieronballoon_2, soldieronballoon_3, soldieronballoon_4, soldiermid_1, soldiermid_2, soldiermid_3];
 
 		// playerTilemapCollider
 		this.physics.add.collider(player, tileLayer, this.playerHitTilemap, undefined, this);
 
 		// soldierTilemapCollide
-		this.physics.add.collider(soldiermid, tileLayer);
+		this.physics.add.collider(enemyList, tileLayer);
 
 		// playerEnemyOverlap
-		this.physics.add.overlap(player, soldiermid, this.playerEnemyOverlap, undefined, this);
+		this.physics.add.overlap(player, enemyList, this.playerEnemyOverlap, undefined, this);
 
 		// parallax_Backing (components)
 		new ScrollFactor(parallax_Backing);
@@ -205,6 +273,7 @@ export default class Level extends Phaser.Scene {
 		this.test_map_2 = test_map_2;
 		this.test_map_3 = test_map_3;
 		this.public_list = public_list;
+		this.enemyList = enemyList;
 
 		this.events.emit("scene-awake");
 	}
@@ -221,6 +290,7 @@ export default class Level extends Phaser.Scene {
 	private test_map_2!: Phaser.Tilemaps.Tilemap;
 	private test_map_3!: Phaser.Tilemaps.Tilemap;
 	public public_list!: Array<any>;
+	private enemyList!: Array<SoldierPrefab|Phaser.GameObjects.Image>;
 
 	/* START-USER-CODE */
 
@@ -335,9 +405,10 @@ export default class Level extends Phaser.Scene {
 		// }
 	}
 
-	playerEnemyOverlap(_player:any, _enemy:any)
+	playerEnemyOverlap(_player:Phaser.Types.Physics.Arcade.GameObjectWithBody, _enemy:Phaser.Types.Physics.Arcade.GameObjectWithBody)
+		// TODO: specify type annotation
 	{
-		console.log(_player, _enemy);
+		this.player.hitEnemy(_enemy);
 	}
 
 	/**

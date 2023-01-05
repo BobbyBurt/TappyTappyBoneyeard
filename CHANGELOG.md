@@ -1,5 +1,23 @@
 # Changelog
 
+## Version 3
+
+### changed
+
+- adjusted BG positioning
+
+### added
+
+- Jump move.
+- solider prefab: grounded and airborne.
+- placed soldiers around the map.
+
+### removed
+
+- jump input while standing to start moving.
+
+### fixed
+
 ## Version 2 - 2023-01-04
 
 ### changed
@@ -18,17 +36,3 @@
 - Added BG visuals.
 - Created bigger test map.
 - Out-of-bounds reset.
-
-## Version 3
-
-### changed
-
-### added
-
-- Jump move.
-
-### removed
-
-- jump input while standing.
-
-### fixed
