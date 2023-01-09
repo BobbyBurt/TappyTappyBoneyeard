@@ -341,6 +341,22 @@
                     "components": [],
                     "x": -55,
                     "y": 91
+                },
+                {
+                    "type": "Image",
+                    "id": "2c019803-40cd-44be-8bcb-187aa9e40df0",
+                    "label": "egg",
+                    "scope": "CLASS",
+                    "components": [],
+                    "texture": {
+                        "key": "bird1egg"
+                    },
+                    "x": 272,
+                    "y": 170,
+                    "ArcadeComponent.active": true,
+                    "body.gravity.y": 100,
+                    "body.width": 11,
+                    "body.height": 12
                 }
             ]
         },
@@ -494,6 +510,14 @@
             "overlapOnly": true,
             "collideCallback": "this.playerEnemyOverlap",
             "callbackContext": "this"
+        },
+        {
+            "id": "6fa8e79d-6484-4db0-8831-e9ae813e08dd",
+            "type": "Collider",
+            "label": "eggTilemapCollider",
+            "scope": "METHOD",
+            "object1": "egg",
+            "object2": "tileLayer"
         }
     ],
     "meta": {

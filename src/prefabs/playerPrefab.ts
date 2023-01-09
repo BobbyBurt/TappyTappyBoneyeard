@@ -189,7 +189,32 @@ export default class playerPrefab extends Phaser.Physics.Arcade.Sprite {
 				this.diveInput = 'up'
 			}
 		}
+
+	// egg
+		if (this.gamepad?.isButtonDown(this.eggButton) || this.eggKey.isDown)
+		{
+			if (this.eggInput != 'just-down' && this.eggInput != 'down')
+			{
+				this.eggInput = 'just-down'
+			}
+			else
+			{
+				this.eggInput = 'down'
+			}
+		}
+		else
+		{
+			if (this.eggInput != 'just-up' && this.eggInput != 'up')
+			{
+				this.eggInput = 'just-up'
+			}
+			else
+			{
+				this.eggInput = 'up'
+			}
+		}
 	}
+
 
 	/** 
 	 * called by scene by enemy overlap. */

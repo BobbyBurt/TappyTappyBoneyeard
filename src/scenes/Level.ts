@@ -150,6 +150,13 @@ export default class Level extends Phaser.Scene {
 		const soldiermid_3 = new SoldierPrefab(this, -55, 91);
 		mainLayer.add(soldiermid_3);
 
+		// egg
+		const egg = this.add.image(272, 170, "bird1egg") as Phaser.GameObjects.Image & { body: Phaser.Physics.Arcade.Body };
+		this.physics.add.existing(egg, false);
+		egg.body.gravity.y = 100;
+		egg.body.setSize(11, 12, false);
+		mainLayer.add(egg);
+
 		// UILayer
 		const uILayer = this.add.layer();
 
@@ -200,6 +207,9 @@ export default class Level extends Phaser.Scene {
 
 		// playerEnemyOverlap
 		this.physics.add.overlap(player, enemyList, this.playerEnemyOverlap, undefined, this);
+
+		// eggTilemapCollider
+		this.physics.add.collider(egg, tileLayer);
 
 		// parallax_Backing (components)
 		new ScrollFactor(parallax_Backing);
@@ -265,6 +275,7 @@ export default class Level extends Phaser.Scene {
 		this.mainLayer = mainLayer;
 		this.player = player;
 		this.tileLayer = tileLayer;
+		this.egg = egg;
 		this.uILayer = uILayer;
 		this.buildText = buildText;
 		this.debugText = debugText;
@@ -282,6 +293,7 @@ export default class Level extends Phaser.Scene {
 	private mainLayer!: Phaser.GameObjects.Layer;
 	private player!: playerPrefab;
 	private tileLayer!: Phaser.Tilemaps.TilemapLayer;
+	private egg!: Phaser.GameObjects.Image & { body: Phaser.Physics.Arcade.Body };
 	private uILayer!: Phaser.GameObjects.Layer;
 	private buildText!: Phaser.GameObjects.BitmapText;
 	private debugText!: Phaser.GameObjects.BitmapText;
@@ -304,33 +316,8 @@ export default class Level extends Phaser.Scene {
 		this.tileLayer.setCollision([1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18,
 			19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36], true);
 
-	// DEPRECATED input event handler
-		// this.input.on("pointerdown", () =>
-		// {
-		// 	if (this.player.body.velocity.x != 0)
-		// 	{
-		// 	// jump
-		// 		this.player.setVelocityY(-this.playerJumpForce);
-		// 	}
-		// 	else
-		// 	{
-		// 	// launch from wall
-		// 		this.player.flipX = !this.player.flipX;
-		// 		if (this.player.flipX)
-		// 		{
-		// 			this.player.setVelocityX(this.playerMoveSpeed);
-		// 			// this.player.moves = true;
-		// 				// TODO: refactor
-		// 		}
-		// 		else
-		// 		{
-		// 			this.player.setVelocityX(-this.playerMoveSpeed);
-		// 			// this.player.moves = true;
-		// 				// TODO: refactor
-		// 		}
-		// 	}
-		// });
-			// TODO: delete when this has been recreated with state machine
+	// egg drop listener
+		this.events.on('egg-drop', this.dropEgg, this);
 
 	// resize init
 		this.events.on('pre-resize', this.resize, this);
@@ -409,6 +396,11 @@ export default class Level extends Phaser.Scene {
 		// TODO: specify type annotation
 	{
 		this.player.hitEnemy(_enemy);
+	}
+
+	dropEgg()
+	{
+		this.egg.setPosition(this.player.x, this.player.y);
 	}
 
 	/**

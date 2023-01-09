@@ -2,12 +2,13 @@
 
 ### changed
 
-- preloader automatically starts game (to be disabled on build)
+- Preloader automatically starts game (to be disabled on build)
 
 ### added
 
-- flap limit
-- dive
+- Flap limit.
+- Dive ability.
+- Egg drop ability.
 
 ### removed
 
@@ -17,11 +18,11 @@
 
 ### changed
 
-- adjusted BG positioning
+- Adjusted BG positioning.
 
 ### added
 
-- Jump move.
+- Punch ability.
 - solider prefab: grounded and airborne.
 - placed soldiers around the map.
 
