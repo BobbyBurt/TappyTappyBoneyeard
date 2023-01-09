@@ -5,12 +5,14 @@
 ### changed
 
 - adjusted BG positioning
+- preloader automatically starts game (to be disabled on build)
 
 ### added
 
 - Jump move.
 - solider prefab: grounded and airborne.
 - placed soldiers around the map.
+- flap limit
 
 ### removed
 

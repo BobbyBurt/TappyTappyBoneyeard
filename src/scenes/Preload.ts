@@ -66,6 +66,11 @@ export default class Preload extends Phaser.Scene {
 		this.load.on(Phaser.Loader.Events.COMPLETE, () => 
 		{
 			this.loaded = true;
+
+		// DEBUG: auto load
+			this.scene.stop(this);
+			this.scene.launch("Level");
+				// disable this on production build
 		});
 	}
 

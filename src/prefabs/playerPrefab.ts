@@ -72,6 +72,10 @@ export default class playerPrefab extends Phaser.Physics.Arcade.Sprite {
 
 	public moveSpeed = 120;
 	public jumpForce = 250;
+	public maxFlaps = 3;
+		// TODO: should this be const? It would have to be outside the class
+
+	public flapCharge: number = this.maxFlaps;
 
 	start()
 	{
@@ -86,10 +90,16 @@ export default class playerPrefab extends Phaser.Physics.Arcade.Sprite {
 
 		this.stateController.update();
 
-	// punch charge check
+	// punch charge
 		if (this.onFloor && !this.punchCharged)
 		{
 			this.punchCharged = true;
+		}
+
+	// jump charge
+		if (this.onFloor && this.flapCharge != this.maxFlaps)
+		{
+			this.flapCharge = this.maxFlaps;
 		}
 
 		

@@ -22,7 +22,7 @@ export default class Running implements State {
 	
 	update()
 	{	
-		if (this.player.jumpInput == 'just-down')
+		if (this.player.jumpInput == 'just-down' && this.player.flapCharge > 0)
 		{
 		// DEPRECATED: if standing still, start moving instead of jumping
 			// if (this.player.body.velocity.x == 0)

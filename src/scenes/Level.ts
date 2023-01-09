@@ -344,7 +344,7 @@ export default class Level extends Phaser.Scene {
 		// this.debugText.setText(`${this.player.stateController.currentState.name}`);
 		this.debugText.setText(`${this.player.stateController.currentState.name}`);
 		this.debugText2.setText(`on floor: ${this.player.onFloor}`);
-		this.debugText3.setText(`punch charge: ${this.player.punchCharged}`);
+		this.debugText3.setText(`jump charge: ${this.player.flapCharge}`);
 		// this.debugText.setText(`${this.player.onFloor}`);
 
 	// reset collision values to be overridden by callbacks
