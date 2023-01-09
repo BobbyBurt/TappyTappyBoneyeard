@@ -5,6 +5,7 @@ import Airborne from "./Airborne";
 import Cling from "./Cling";
 import GroundCling from "./GroundCling";
 import Punch from "./Punch";
+import Dive from "./Dive";
 
 export default class StateController
 {	
@@ -20,7 +21,8 @@ export default class StateController
 			airborne: new Airborne(_player, this),
 			cling: new Cling(_player, this),
 			groundCling: new GroundCling(_player, this),
-			punch: new Punch(_player, this)
+			punch: new Punch(_player, this),
+			dive: new Dive(_player, this)
 		}
 
 		this.currentState = new Running(_player, this);

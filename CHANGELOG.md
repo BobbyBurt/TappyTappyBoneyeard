@@ -1,24 +1,33 @@
 # Changelog
 
+### changed
+
+- preloader automatically starts game (to be disabled on build)
+
+### added
+
+- flap limit
+- dive
+
+### removed
+
+### fixed
+
 ## Version 3 - 2023-01-05
 
 ### changed
 
 - adjusted BG positioning
-- preloader automatically starts game (to be disabled on build)
 
 ### added
 
 - Jump move.
 - solider prefab: grounded and airborne.
 - placed soldiers around the map.
-- flap limit
 
 ### removed
 
 - jump input while standing to start moving.
-
-### fixed
 
 ## Version 2 - 2023-01-04
 

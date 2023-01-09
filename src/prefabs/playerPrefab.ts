@@ -59,9 +59,19 @@ export default class playerPrefab extends Phaser.Physics.Arcade.Sprite {
 
 	public punchInput: input = 'up';
 	private punchKey: Phaser.Input.Keyboard.Key 
-		= this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.X);
+		= this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.C);
 	private punchButton: number = 0;
 	public punchCharged: boolean = true;
+
+	public diveInput: input = 'up';
+	private diveKey: Phaser.Input.Keyboard.Key 
+		= this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Z);
+	private diveButton: number = 2;
+
+	public eggInput: input = 'up';
+	private eggKey: Phaser.Input.Keyboard.Key 
+		= this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.X);
+	private eggButton: number = 3;
 
 	/** updated by scene, used by states */
 	public onFloor: boolean = true;
@@ -155,6 +165,30 @@ export default class playerPrefab extends Phaser.Physics.Arcade.Sprite {
 				this.punchInput = 'up'
 			}
 		}
+
+	// dive
+		if (this.gamepad?.isButtonDown(this.diveButton) || this.diveKey.isDown)
+		{
+			if (this.diveInput != 'just-down' && this.diveInput != 'down')
+			{
+				this.diveInput = 'just-down'
+			}
+			else
+			{
+				this.diveInput = 'down'
+			}
+		}
+		else
+		{
+			if (this.diveInput != 'just-up' && this.diveInput != 'up')
+			{
+				this.diveInput = 'just-up'
+			}
+			else
+			{
+				this.diveInput = 'up'
+			}
+		}
 	}
 
 	/** 
@@ -162,7 +196,8 @@ export default class playerPrefab extends Phaser.Physics.Arcade.Sprite {
 	hitEnemy(_enemy:Phaser.Types.Physics.Arcade.GameObjectWithBody)
 		// TODO: specify type annotation
 	{
-		if (this.stateController.currentState.name == 'punch')
+		if (this.stateController.currentState.name == 'punch' 
+			|| this.stateController.currentState.name == 'dive')
 		{
 			_enemy.destroy();
 

@@ -31,6 +31,11 @@ export default class Airborne implements State {
 		{
 			this.stateController.setState('punch');
 		}
+		else if (this.player.diveInput == 'just-down')
+		{
+			this.stateController.setState('dive');
+		}
+			// TODO: consider priority of these inputs
 
 	// state transitions
 		if (this.player.onFloor)
