@@ -10,7 +10,7 @@ import Phaser from "phaser";
 
 export default class Align extends UserComponent {
 
-	constructor(gameObject: Phaser.GameObjects.Text | Phaser.GameObjects.Image | Phaser.GameObjects.BitmapText | Phaser.GameObjects.Sprite) {
+	constructor(gameObject: Phaser.GameObjects.Text | Phaser.GameObjects.Image | Phaser.GameObjects.BitmapText | Phaser.GameObjects.Sprite | Phaser.GameObjects.Rectangle) {
 		super(gameObject);
 
 		this.gameObject = gameObject;
@@ -23,11 +23,11 @@ export default class Align extends UserComponent {
 		/* END-USER-CTR-CODE */
 	}
 
-	static getComponent(gameObject: Phaser.GameObjects.Text | Phaser.GameObjects.Image | Phaser.GameObjects.BitmapText | Phaser.GameObjects.Sprite): Align {
+	static getComponent(gameObject: Phaser.GameObjects.Text | Phaser.GameObjects.Image | Phaser.GameObjects.BitmapText | Phaser.GameObjects.Sprite | Phaser.GameObjects.Rectangle): Align {
 		return (gameObject as any)["__Align"];
 	}
 
-	private gameObject: Phaser.GameObjects.Text | Phaser.GameObjects.Image | Phaser.GameObjects.BitmapText | Phaser.GameObjects.Sprite;
+	private gameObject: Phaser.GameObjects.Text | Phaser.GameObjects.Image | Phaser.GameObjects.BitmapText | Phaser.GameObjects.Sprite | Phaser.GameObjects.Rectangle;
 	public up: boolean = false;
 	public middle: boolean = false;
 	public down: boolean = false;

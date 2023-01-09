@@ -52,26 +52,34 @@ export default class playerPrefab extends Phaser.Physics.Arcade.Sprite {
 
 	private gamepad:Phaser.Input.Gamepad.Gamepad | undefined;
 
+	/** set based on key, gamepad or mobile input */
 	public jumpInput: input = 'up';
 	private jumpKey: Phaser.Input.Keyboard.Key 
-		= this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP);
+	= this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP);
 	private jumpButton: number = 1;
+	public jumpMobileButton: boolean = false;
 
+	/** set based on key, gamepad or mobile input */
 	public punchInput: input = 'up';
 	private punchKey: Phaser.Input.Keyboard.Key 
 		= this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.C);
 	private punchButton: number = 0;
 	public punchCharged: boolean = true;
+	public punchMobileButton: boolean = false;
 
+	/** set based on key, gamepad or mobile input */
 	public diveInput: input = 'up';
 	private diveKey: Phaser.Input.Keyboard.Key 
 		= this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Z);
 	private diveButton: number = 2;
+	public diveMobileButton: boolean = false;
 
+	/** set based on key, gamepad or mobile input */
 	public eggInput: input = 'up';
 	private eggKey: Phaser.Input.Keyboard.Key 
 		= this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.X);
 	private eggButton: number = 3;
+	public eggMobileButton: boolean = false;
 
 	/** updated by scene, used by states */
 	public onFloor: boolean = true;
@@ -115,11 +123,12 @@ export default class playerPrefab extends Phaser.Physics.Arcade.Sprite {
 		
 	}
 
-	/** update input values based on key / gamepad button state */
+	/** update input values based on key / gamepad / mobile button state */
 	inputCheck()
 	{
 	// jump
-		if (this.gamepad?.isButtonDown(this.jumpButton) || this.jumpKey.isDown)
+		if (this.gamepad?.isButtonDown(this.jumpButton) 
+			|| this.jumpKey.isDown || this.jumpMobileButton)
 		{
 			if (this.jumpInput != 'just-down' && this.jumpInput != 'down')
 			{
@@ -143,7 +152,8 @@ export default class playerPrefab extends Phaser.Physics.Arcade.Sprite {
 		}
 
 	// punch
-		if (this.gamepad?.isButtonDown(this.punchButton) || this.punchKey.isDown)
+		if (this.gamepad?.isButtonDown(this.punchButton) 
+			|| this.punchKey.isDown || this.punchMobileButton)
 		{
 			if (this.punchInput != 'just-down' && this.punchInput != 'down')
 			{
@@ -167,7 +177,8 @@ export default class playerPrefab extends Phaser.Physics.Arcade.Sprite {
 		}
 
 	// dive
-		if (this.gamepad?.isButtonDown(this.diveButton) || this.diveKey.isDown)
+		if (this.gamepad?.isButtonDown(this.diveButton) 
+			|| this.diveKey.isDown || this.diveMobileButton)
 		{
 			if (this.diveInput != 'just-down' && this.diveInput != 'down')
 			{
@@ -191,7 +202,8 @@ export default class playerPrefab extends Phaser.Physics.Arcade.Sprite {
 		}
 
 	// egg
-		if (this.gamepad?.isButtonDown(this.eggButton) || this.eggKey.isDown)
+		if (this.gamepad?.isButtonDown(this.eggButton) 
+			|| this.eggKey.isDown || this.eggMobileButton)
 		{
 			if (this.eggInput != 'just-down' && this.eggInput != 'down')
 			{

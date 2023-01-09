@@ -396,10 +396,10 @@
                     "components": [
                         "Align"
                     ],
-                    "Align.down": true,
+                    "Align.up": true,
                     "Align.left": true,
                     "Align.horizontalOffset": 5,
-                    "Align.verticalOffset": -5,
+                    "Align.verticalOffset": 25,
                     "x": -9,
                     "y": 66,
                     "originY": 1,
@@ -418,10 +418,10 @@
                     "components": [
                         "Align"
                     ],
-                    "Align.down": true,
+                    "Align.up": true,
                     "Align.left": true,
                     "Align.horizontalOffset": 5,
-                    "Align.verticalOffset": -15,
+                    "Align.verticalOffset": 35,
                     "x": -10,
                     "y": 38,
                     "originY": 1,
@@ -440,10 +440,10 @@
                     "components": [
                         "Align"
                     ],
-                    "Align.down": true,
+                    "Align.up": true,
                     "Align.left": true,
                     "Align.horizontalOffset": 5,
-                    "Align.verticalOffset": -25,
+                    "Align.verticalOffset": 45,
                     "x": -9,
                     "y": 52,
                     "originY": 1,
@@ -453,6 +453,97 @@
                     "dropShadowX": -1,
                     "dropShadowY": 1,
                     "dropShadowColor": "#000000ff"
+                },
+                {
+                    "type": "Rectangle",
+                    "id": "f081c791-72c7-4e7d-b8ea-d39695c156ab",
+                    "label": "mobileButtonJump",
+                    "scope": "CLASS",
+                    "components": [
+                        "Align",
+                        "MobileDependent",
+                        "MobileButton"
+                    ],
+                    "Align.down": true,
+                    "Align.right": true,
+                    "MobileButton.input": "jump",
+                    "x": 71,
+                    "y": -163,
+                    "originX": 1,
+                    "originY": 1,
+                    "alpha": 0.5,
+                    "isFilled": true,
+                    "fillColor": "#7ca3ed",
+                    "width": 100,
+                    "height": 100
+                },
+                {
+                    "type": "Rectangle",
+                    "id": "4d3fac02-5ee4-4a3a-a604-131297392905",
+                    "label": "mobileButtonDive",
+                    "scope": "CLASS",
+                    "components": [
+                        "Align",
+                        "MobileDependent",
+                        "MobileButton"
+                    ],
+                    "Align.down": true,
+                    "Align.right": true,
+                    "Align.verticalOffset": -100,
+                    "x": 72,
+                    "y": -266,
+                    "originX": 1,
+                    "originY": 1,
+                    "alpha": 0.5,
+                    "isFilled": true,
+                    "fillColor": "#7eed7c",
+                    "width": 100,
+                    "height": 100
+                },
+                {
+                    "type": "Rectangle",
+                    "id": "8e00a3ae-dc37-49f2-8e42-6d5e5eaa44a7",
+                    "label": "mobileButtonEgg",
+                    "scope": "CLASS",
+                    "components": [
+                        "Align",
+                        "MobileDependent",
+                        "MobileButton"
+                    ],
+                    "Align.down": true,
+                    "Align.left": true,
+                    "Align.verticalOffset": -100,
+                    "x": -304,
+                    "y": -244,
+                    "originX": 0,
+                    "originY": 1,
+                    "alpha": 0.5,
+                    "isFilled": true,
+                    "fillColor": "#ede67c",
+                    "width": 100,
+                    "height": 100
+                },
+                {
+                    "type": "Rectangle",
+                    "id": "92718eee-9d72-483e-afbb-bfd08d8c6f51",
+                    "label": "mobileButtonPunch",
+                    "scope": "CLASS",
+                    "components": [
+                        "Align",
+                        "MobileDependent",
+                        "MobileButton"
+                    ],
+                    "Align.down": true,
+                    "Align.left": true,
+                    "x": -305,
+                    "y": -142,
+                    "originX": 0,
+                    "originY": 1,
+                    "alpha": 0.5,
+                    "isFilled": true,
+                    "fillColor": "#ed7c7c",
+                    "width": 100,
+                    "height": 100
                 }
             ]
         }

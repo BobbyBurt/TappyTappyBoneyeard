@@ -2,17 +2,14 @@
 
 ### changed
 
-- Preloader automatically starts game (to be disabled on build)
+- Auto game start in preloader. (to be disabled on build)
 
 ### added
 
 - Flap limit.
 - Dive ability.
 - Egg drop ability.
-
-### removed
-
-### fixed
+- Mobile input.
 
 ## Version 3 - 2023-01-05
 

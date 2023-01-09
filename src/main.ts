@@ -7,7 +7,7 @@ window.addEventListener('load', function ()
 	{
 		title: 'Tappy Tappy Boneyard',
 		url: 'https://www.newgrounds.com/projects/games/1923225/preview',
-		version: '3',
+		version: '4',
 		
 	// visuals
 		type: Phaser.AUTO,
@@ -85,10 +85,10 @@ class Boot extends Phaser.Scene
 					// TODO: make this dymanic for more cameras
 
 			// prerender UICam so that scale is up to date
-				const uiCam = scene.cameras.getCamera('UIcam');
+				const uiCam = scene.cameras.getCamera('UIcam') as any;
 				if (uiCam)
 				{
-					// uiCam.preRender(1);
+					uiCam.preRender(1);
 						// TODO: fix this. Doesn't work in Typescript.
 						// I can't call it outside of the scene it seems
 				}

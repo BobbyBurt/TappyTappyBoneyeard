@@ -15,7 +15,7 @@
         {
             "name": "Align",
             "baseClass": "UserComponent",
-            "gameObjectType": "Phaser.GameObjects.Text | Phaser.GameObjects.Image | Phaser.GameObjects.BitmapText | Phaser.GameObjects.Sprite",
+            "gameObjectType": "Phaser.GameObjects.Text | Phaser.GameObjects.Image | Phaser.GameObjects.BitmapText | Phaser.GameObjects.Sprite | Phaser.GameObjects.Rectangle",
             "properties": [
                 {
                     "name": "up",
@@ -179,6 +179,40 @@
                     "customDefinition": false,
                     "type": {
                         "id": "number"
+                    }
+                }
+            ]
+        },
+        {
+            "name": "MobileDependent",
+            "baseClass": "UserComponent",
+            "gameObjectType": "Phaser.GameObjects.Text | Phaser.GameObjects.Image | Phaser.GameObjects.BitmapText | Phaser.GameObjects.Sprite | Phaser.GameObjects.Rectangle",
+            "properties": [
+                {
+                    "name": "activeIfMobile",
+                    "label": "Active If Mobile",
+                    "tooltip": "enables when mobile, disables when desktop. Vice-versa if false.",
+                    "defValue": true,
+                    "customDefinition": false,
+                    "type": {
+                        "id": "boolean"
+                    }
+                }
+            ]
+        },
+        {
+            "name": "MobileButton",
+            "baseClass": "UserComponent",
+            "gameObjectType": "Phaser.GameObjects.Rectangle",
+            "properties": [
+                {
+                    "name": "input",
+                    "label": "Input",
+                    "tooltip": "Which input in PlayerPrefab does this button correlate to",
+                    "defValue": "",
+                    "customDefinition": false,
+                    "type": {
+                        "id": "string"
                     }
                 }
             ]

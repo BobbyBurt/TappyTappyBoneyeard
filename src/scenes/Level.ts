@@ -6,6 +6,8 @@ import ScrollFactor from "../components/ScrollFactor";
 import playerPrefab from "../prefabs/playerPrefab";
 import SoldierPrefab from "../prefabs/SoldierPrefab";
 import Align from "../components/Align";
+import MobileDependent from "../components/MobileDependent";
+import MobileButton from "../components/MobileButton";
 /* START-USER-IMPORTS */
 
 import AdaptiveZoom from "../AdaptiveZoom";
@@ -195,6 +197,38 @@ export default class Level extends Phaser.Scene {
 		debugText3.dropShadowY = 1;
 		uILayer.add(debugText3);
 
+		// mobileButtonJump
+		const mobileButtonJump = this.add.rectangle(71, -163, 100, 100);
+		mobileButtonJump.setOrigin(1, 1);
+		mobileButtonJump.alpha = 0.5;
+		mobileButtonJump.isFilled = true;
+		mobileButtonJump.fillColor = 8168429;
+		uILayer.add(mobileButtonJump);
+
+		// mobileButtonDive
+		const mobileButtonDive = this.add.rectangle(72, -266, 100, 100);
+		mobileButtonDive.setOrigin(1, 1);
+		mobileButtonDive.alpha = 0.5;
+		mobileButtonDive.isFilled = true;
+		mobileButtonDive.fillColor = 8318332;
+		uILayer.add(mobileButtonDive);
+
+		// mobileButtonEgg
+		const mobileButtonEgg = this.add.rectangle(-304, -244, 100, 100);
+		mobileButtonEgg.setOrigin(0, 1);
+		mobileButtonEgg.alpha = 0.5;
+		mobileButtonEgg.isFilled = true;
+		mobileButtonEgg.fillColor = 15591036;
+		uILayer.add(mobileButtonEgg);
+
+		// mobileButtonPunch
+		const mobileButtonPunch = this.add.rectangle(-305, -142, 100, 100);
+		mobileButtonPunch.setOrigin(0, 1);
+		mobileButtonPunch.alpha = 0.5;
+		mobileButtonPunch.isFilled = true;
+		mobileButtonPunch.fillColor = 15563900;
+		uILayer.add(mobileButtonPunch);
+
 		// lists
 		const public_list: Array<any> = [];
 		const enemyList = [soldiermid, soldieronballoon, soldieronballoon_1, soldieronballoon_2, soldieronballoon_3, soldieronballoon_4, soldiermid_1, soldiermid_2, soldiermid_3];
@@ -252,24 +286,55 @@ export default class Level extends Phaser.Scene {
 
 		// debugText (components)
 		const debugTextAlign = new Align(debugText);
-		debugTextAlign.down = true;
+		debugTextAlign.up = true;
 		debugTextAlign.left = true;
 		debugTextAlign.horizontalOffset = 5;
-		debugTextAlign.verticalOffset = -5;
+		debugTextAlign.verticalOffset = 25;
 
 		// debugText2 (components)
 		const debugText2Align = new Align(debugText2);
-		debugText2Align.down = true;
+		debugText2Align.up = true;
 		debugText2Align.left = true;
 		debugText2Align.horizontalOffset = 5;
-		debugText2Align.verticalOffset = -15;
+		debugText2Align.verticalOffset = 35;
 
 		// debugText3 (components)
 		const debugText3Align = new Align(debugText3);
-		debugText3Align.down = true;
+		debugText3Align.up = true;
 		debugText3Align.left = true;
 		debugText3Align.horizontalOffset = 5;
-		debugText3Align.verticalOffset = -25;
+		debugText3Align.verticalOffset = 45;
+
+		// mobileButtonJump (components)
+		const mobileButtonJumpAlign = new Align(mobileButtonJump);
+		mobileButtonJumpAlign.down = true;
+		mobileButtonJumpAlign.right = true;
+		new MobileDependent(mobileButtonJump);
+		const mobileButtonJumpMobileButton = new MobileButton(mobileButtonJump);
+		mobileButtonJumpMobileButton.input = "jump";
+
+		// mobileButtonDive (components)
+		const mobileButtonDiveAlign = new Align(mobileButtonDive);
+		mobileButtonDiveAlign.down = true;
+		mobileButtonDiveAlign.right = true;
+		mobileButtonDiveAlign.verticalOffset = -100;
+		new MobileDependent(mobileButtonDive);
+		new MobileButton(mobileButtonDive);
+
+		// mobileButtonEgg (components)
+		const mobileButtonEggAlign = new Align(mobileButtonEgg);
+		mobileButtonEggAlign.down = true;
+		mobileButtonEggAlign.left = true;
+		mobileButtonEggAlign.verticalOffset = -100;
+		new MobileDependent(mobileButtonEgg);
+		new MobileButton(mobileButtonEgg);
+
+		// mobileButtonPunch (components)
+		const mobileButtonPunchAlign = new Align(mobileButtonPunch);
+		mobileButtonPunchAlign.down = true;
+		mobileButtonPunchAlign.left = true;
+		new MobileDependent(mobileButtonPunch);
+		new MobileButton(mobileButtonPunch);
 
 		this.bGLayer = bGLayer;
 		this.mainLayer = mainLayer;
@@ -281,6 +346,10 @@ export default class Level extends Phaser.Scene {
 		this.debugText = debugText;
 		this.debugText2 = debugText2;
 		this.debugText3 = debugText3;
+		this.mobileButtonJump = mobileButtonJump;
+		this.mobileButtonDive = mobileButtonDive;
+		this.mobileButtonEgg = mobileButtonEgg;
+		this.mobileButtonPunch = mobileButtonPunch;
 		this.test_map_2 = test_map_2;
 		this.test_map_3 = test_map_3;
 		this.public_list = public_list;
@@ -299,6 +368,10 @@ export default class Level extends Phaser.Scene {
 	private debugText!: Phaser.GameObjects.BitmapText;
 	private debugText2!: Phaser.GameObjects.BitmapText;
 	private debugText3!: Phaser.GameObjects.BitmapText;
+	private mobileButtonJump!: Phaser.GameObjects.Rectangle;
+	private mobileButtonDive!: Phaser.GameObjects.Rectangle;
+	private mobileButtonEgg!: Phaser.GameObjects.Rectangle;
+	private mobileButtonPunch!: Phaser.GameObjects.Rectangle;
 	private test_map_2!: Phaser.Tilemaps.Tilemap;
 	private test_map_3!: Phaser.Tilemaps.Tilemap;
 	public public_list!: Array<any>;
@@ -311,6 +384,8 @@ export default class Level extends Phaser.Scene {
 		this.editorCreate();
 
 		this.initCameras();
+
+		this.initMobileButtons();
 
 	// tilemap`
 		this.tileLayer.setCollision([1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18,
@@ -330,7 +405,7 @@ export default class Level extends Phaser.Scene {
 	{
 		// this.debugText.setText(`${this.player.stateController.currentState.name}`);
 		this.debugText.setText(`${this.player.stateController.currentState.name}`);
-		this.debugText2.setText(`on floor: ${this.player.onFloor}`);
+		this.debugText2.setText(`mobile jump: ${this.player.jumpMobileButton}`);
 		this.debugText3.setText(`jump charge: ${this.player.flapCharge}`);
 		// this.debugText.setText(`${this.player.onFloor}`);
 
@@ -400,6 +475,7 @@ export default class Level extends Phaser.Scene {
 
 	dropEgg()
 	{
+		this.egg.body.setVelocity(0, 0);
 		this.egg.setPosition(this.player.x, this.player.y);
 	}
 
@@ -427,6 +503,69 @@ export default class Level extends Phaser.Scene {
 		UICam.ignore(this.mainLayer.getChildren());
 		UICam.ignore(this.bGLayer.getChildren());
 		UICam.preRender(1);
+	}
+
+	initMobileButtons()
+	{
+	// jump
+		this.mobileButtonJump.setInteractive();
+		this.mobileButtonJump.on('pointerdown', () =>
+		{
+			this.player.jumpMobileButton = true;
+		});
+		this.mobileButtonJump.on('pointerup', () =>
+		{
+			this.player.jumpMobileButton = false;
+		});
+		this.mobileButtonJump.on('pointerout', () =>
+		{
+			this.player.jumpMobileButton = false;
+		});
+
+	// punch
+		this.mobileButtonPunch.setInteractive();
+		this.mobileButtonPunch.on('pointerdown', () =>
+		{
+			this.player.punchMobileButton = true;
+		});
+		this.mobileButtonPunch.on('pointerup', () =>
+		{
+			this.player.punchMobileButton = false;
+		});
+		this.mobileButtonPunch.on('pointerout', () =>
+		{
+			this.player.punchMobileButton = false;
+		});
+
+	// egg
+		this.mobileButtonEgg.setInteractive();
+		this.mobileButtonEgg.on('pointerdown', () =>
+		{
+			this.player.eggMobileButton = true;
+		});
+		this.mobileButtonEgg.on('pointerup', () =>
+		{
+			this.player.eggMobileButton = false;
+		});
+		this.mobileButtonEgg.on('pointerout', () =>
+		{
+			this.player.eggMobileButton = false;
+		});
+
+	// dive
+		this.mobileButtonDive.setInteractive();
+		this.mobileButtonDive.on('pointerdown', () =>
+		{
+			this.player.diveMobileButton = true;
+		});
+		this.mobileButtonDive.on('pointerup', () =>
+		{
+			this.player.diveMobileButton = false;
+		});
+		this.mobileButtonDive.on('pointerout', () =>
+		{
+			this.player.diveMobileButton = false;
+		});
 	}
 
 	resize()
