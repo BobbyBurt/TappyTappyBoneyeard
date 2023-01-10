@@ -58,6 +58,11 @@
                 "key": "bird1stretch"
             },
             {
+                "url": "assets/bomb.png",
+                "type": "image",
+                "key": "bomb"
+            },
+            {
                 "url": [
                     "assets/sfx/egg drop.mp3"
                 ],

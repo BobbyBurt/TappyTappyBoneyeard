@@ -1,10 +1,25 @@
 # Changelog
 
-### changed
+## Version 5
+
+### Changed
+
+- Egg drop cannot be performed before the last egg has landed.
+
+### Added
+
+- Explosion visual & impact on sprites.
+
+### Removed
+### Fixed
+
+## Version 4 - 2023-01-09
+
+### Changed
 
 - Auto game start in preloader. (to be disabled on build)
 
-### added
+### Added
 
 - Flap limit.
 - Dive ability.
@@ -13,23 +28,23 @@
 
 ## Version 3 - 2023-01-05
 
-### changed
+### Changed
 
 - Adjusted BG positioning.
 
-### added
+### Added
 
 - Punch ability.
 - solider prefab: grounded and airborne.
 - placed soldiers around the map.
 
-### removed
+### Removed
 
 - jump input while standing to start moving.
 
 ## Version 2 - 2023-01-04
 
-### changed
+### Changed
 
 - Created git repository.
 - Migrated all code to Typescript.
@@ -38,7 +53,7 @@
 - Replaced player movement code in `Level.js` with a state machine.
 - Working floor & wall detection.
 
-### added
+### Added
 
 - Player clings to walls.
 - jump input while standing makes the player start moving.

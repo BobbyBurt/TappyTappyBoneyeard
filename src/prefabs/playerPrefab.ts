@@ -80,6 +80,8 @@ export default class playerPrefab extends Phaser.Physics.Arcade.Sprite {
 		= this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.X);
 	private eggButton: number = 3;
 	public eggMobileButton: boolean = false;
+	/** set by scene based on egg state, determines is player can drop egg */
+	public eggReady: boolean = true;
 
 	/** updated by scene, used by states */
 	public onFloor: boolean = true;
@@ -100,6 +102,8 @@ export default class playerPrefab extends Phaser.Physics.Arcade.Sprite {
 		this.setVelocityX(this.moveSpeed);
 
 		this.flipX = true;
+
+		this.setName('player');
 	}
 
 	update()
@@ -238,16 +242,26 @@ export default class playerPrefab extends Phaser.Physics.Arcade.Sprite {
 		{
 			_enemy.destroy();
 
-			// have the enemy go flying or something cool
+			// TODO: have the enemy go flying or something cool
 				// I can't set velocity on this type, but that's the type that the callback gives 
 				// me.
 		}
 		else
 		{
-			this.setPosition(351, 131);
-			this.stateController.setState('airborne');
-			this.setVelocity(this.moveSpeed, 0);
+			this.reset();
 		}
+	}
+
+	hitExplosion()
+	{
+		this.reset();
+	}
+
+	reset()
+	{
+		this.setPosition(351, 131);
+		this.stateController.setState('airborne');
+		this.setVelocity(this.moveSpeed, 0);
 	}
 
 	sqaush()

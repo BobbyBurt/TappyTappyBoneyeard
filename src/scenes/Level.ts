@@ -3,8 +3,10 @@
 
 import Phaser from "phaser";
 import ScrollFactor from "../components/ScrollFactor";
-import playerPrefab from "../prefabs/playerPrefab";
+import explosionPrefab from "../prefabs/explosionPrefab";
 import SoldierPrefab from "../prefabs/SoldierPrefab";
+import eggPrefab from "../prefabs/eggPrefab";
+import playerPrefab from "../prefabs/playerPrefab";
 import Align from "../components/Align";
 import MobileDependent from "../components/MobileDependent";
 import MobileButton from "../components/MobileButton";
@@ -73,13 +75,9 @@ export default class Level extends Phaser.Scene {
 		// mainLayer
 		const mainLayer = this.add.layer();
 
-		// player
-		const player = new playerPrefab(this, 265, 141);
-		mainLayer.add(player);
-
-		// tileLayer
-		const tileLayer = test_map_3.createLayer("Tile Layer 1", ["tileset"], -549, -227);
-		mainLayer.add(tileLayer);
+		// explosion
+		const explosion = new explosionPrefab(this, 272, -547);
+		mainLayer.add(explosion);
 
 		// soldiermid
 		const soldiermid = new SoldierPrefab(this, 223, 181);
@@ -153,11 +151,16 @@ export default class Level extends Phaser.Scene {
 		mainLayer.add(soldiermid_3);
 
 		// egg
-		const egg = this.add.image(272, 170, "bird1egg") as Phaser.GameObjects.Image & { body: Phaser.Physics.Arcade.Body };
-		this.physics.add.existing(egg, false);
-		egg.body.gravity.y = 100;
-		egg.body.setSize(11, 12, false);
+		const egg = new eggPrefab(this, 272, 170);
 		mainLayer.add(egg);
+
+		// player
+		const player = new playerPrefab(this, 265, 141);
+		mainLayer.add(player);
+
+		// tileLayer
+		const tileLayer = test_map_3.createLayer("Tile Layer 1", ["tileset"], -549, -227);
+		mainLayer.add(tileLayer);
 
 		// UILayer
 		const uILayer = this.add.layer();
@@ -243,7 +246,10 @@ export default class Level extends Phaser.Scene {
 		this.physics.add.overlap(player, enemyList, this.playerEnemyOverlap, undefined, this);
 
 		// eggTilemapCollider
-		this.physics.add.collider(egg, tileLayer);
+		this.physics.add.collider(egg, tileLayer, this.eggHitTilemap, undefined, this);
+
+		// eggSoldierCollider
+		this.physics.add.collider(egg, enemyList, this.eggHitSoldier, undefined, this);
 
 		// parallax_Backing (components)
 		new ScrollFactor(parallax_Backing);
@@ -338,9 +344,10 @@ export default class Level extends Phaser.Scene {
 
 		this.bGLayer = bGLayer;
 		this.mainLayer = mainLayer;
+		this.explosion = explosion;
+		this.egg = egg;
 		this.player = player;
 		this.tileLayer = tileLayer;
-		this.egg = egg;
 		this.uILayer = uILayer;
 		this.buildText = buildText;
 		this.debugText = debugText;
@@ -360,9 +367,10 @@ export default class Level extends Phaser.Scene {
 
 	private bGLayer!: Phaser.GameObjects.Layer;
 	private mainLayer!: Phaser.GameObjects.Layer;
+	private explosion!: explosionPrefab;
+	private egg!: eggPrefab;
 	private player!: playerPrefab;
 	private tileLayer!: Phaser.Tilemaps.TilemapLayer;
-	private egg!: Phaser.GameObjects.Image & { body: Phaser.Physics.Arcade.Body };
 	private uILayer!: Phaser.GameObjects.Layer;
 	private buildText!: Phaser.GameObjects.BitmapText;
 	private debugText!: Phaser.GameObjects.BitmapText;
@@ -391,7 +399,9 @@ export default class Level extends Phaser.Scene {
 		this.tileLayer.setCollision([1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18,
 			19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36], true);
 
-	// egg drop listener
+	// egg
+		this.egg.setActive(false);
+		this.egg.setVisible(false);
 		this.events.on('egg-drop', this.dropEgg, this);
 
 	// resize init
@@ -420,12 +430,16 @@ export default class Level extends Phaser.Scene {
 			// TODO: decorative tiles without collision, as defined at tileLayer.setCollision, 
 			// should not count as wall.
 
-	// player out-of-bounds check
+	// out-of-bounds checks
 		if (this.player.y > 400)
 		{
-			this.player.setPosition(351, 131);
-			this.player.stateController.setState('airborne');
-			this.player.setVelocity(this.player.moveSpeed, 0);
+			this.player.reset();
+		}
+		if (this.egg.y > 400)
+		{
+			this.egg.disable();
+
+			this.player.eggReady = true;
 		}
 
 	}
@@ -467,16 +481,68 @@ export default class Level extends Phaser.Scene {
 		// }
 	}
 
-	playerEnemyOverlap(_player:Phaser.Types.Physics.Arcade.GameObjectWithBody, _enemy:Phaser.Types.Physics.Arcade.GameObjectWithBody)
+	playerEnemyOverlap(_player:Phaser.Types.Physics.Arcade.GameObjectWithBody, 
+		_enemy:Phaser.Types.Physics.Arcade.GameObjectWithBody)
 		// TODO: specify type annotation
 	{
 		this.player.hitEnemy(_enemy);
+	}
+
+	eggHitTilemap(_egg:any, _tilemap:any)
+		// TODO: specify type annotations
+	{
+		this.eggHit(_egg);
+	}
+
+	eggHitSoldier(_egg:any, _soldier:any)
+		// TODO: specify type annotations
+	{
+		this.eggHit(_egg);
+	}
+
+	/** called by egg physics callback */
+	eggHit(_egg:any)
+	{
+		this.egg.disable();
+
+		const explosion = new explosionPrefab(this, _egg.x, _egg.y);
+		this.mainLayer.add(explosion);
+			// TODO: this should be an object pool or something
+
+		this.explosionCheck(_egg.x, _egg.y);
+
+		this.player.eggReady = true;
+	}
+
+	/** detects physics bodies within explosion range and impacts them appropriately */
+	explosionCheck(x: number, y: number)
+	{
+		this.physics.overlapCirc(x, y, 20, true, false).forEach(function (element: any)
+			// TODO: specify type annotation
+		{
+			if (element.gameObject.name == 'player')
+			{
+				element.reset();
+			}
+			if (element.gameObject.name == 'soldier')
+			{
+				element.gameObject.destroy();
+			}
+				// TODO: fix floating soldiers falling instead of being destroyed
+					// this happens because this is checking the object's name, which is only 
+					// being set to ground soldiers because I forgot to set the floating ones as a
+					// prefab. I'm using the solider list for collision checks, so if I could use 
+					// it here as well that'd be best.
+		});
 	}
 
 	dropEgg()
 	{
 		this.egg.body.setVelocity(0, 0);
 		this.egg.setPosition(this.player.x, this.player.y);
+		this.egg.enable();
+
+		this.player.eggReady = false;
 	}
 
 	/**

@@ -31,10 +31,10 @@ export default class Airborne implements State {
 		{
 			this.stateController.setState('punch');
 		}
-		else if (this.player.eggInput == 'just-down')
-			// TODO: add conditionals, can player drop egg?
+		else if (this.player.eggInput == 'just-down' && this.player.eggReady)
 		{
 			this.player.scene.events.emit('egg-drop');
+
 		}
 		else if (this.player.diveInput == 'just-down')
 		{

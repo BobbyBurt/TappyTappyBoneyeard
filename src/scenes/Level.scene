@@ -136,33 +136,17 @@
             "components": [],
             "list": [
                 {
-                    "prefabId": "3f838717-1748-46a2-999c-c73f8b1a2e4e",
-                    "id": "4659f446-ab3a-42ff-b5c3-94d65c0ead0b",
+                    "prefabId": "d5bad8d6-5062-45c9-a99d-6c411da426c1",
+                    "id": "481330ec-c193-494a-9fe3-6ab3b993fcbc",
                     "unlock": [
                         "x",
                         "y"
                     ],
-                    "label": "player",
+                    "label": "explosion",
                     "scope": "CLASS",
                     "components": [],
-                    "x": 265,
-                    "y": 141,
-                    "nestedPrefabs": [],
-                    "list": []
-                },
-                {
-                    "type": "TilemapLayer",
-                    "id": "aa5626c3-8f36-4e54-92d0-dac4ce5ebe43",
-                    "label": "tileLayer",
-                    "scope": "CLASS",
-                    "components": [],
-                    "x": -549,
-                    "y": -227,
-                    "tilemapId": "b204441a-da85-4549-9fd2-0ae3e08f1acc",
-                    "layerName": "Tile Layer 1",
-                    "tilesets": [
-                        "tileset"
-                    ]
+                    "x": 272,
+                    "y": -547
                 },
                 {
                     "prefabId": "ed9eaa4a-e16e-41c8-b171-c52fbade9815",
@@ -343,20 +327,46 @@
                     "y": 91
                 },
                 {
-                    "type": "Image",
+                    "prefabId": "58e3738c-041e-4c6c-bbc7-5ed4b852107c",
                     "id": "2c019803-40cd-44be-8bcb-187aa9e40df0",
+                    "unlock": [
+                        "x",
+                        "y"
+                    ],
                     "label": "egg",
                     "scope": "CLASS",
                     "components": [],
-                    "texture": {
-                        "key": "bird1egg"
-                    },
                     "x": 272,
-                    "y": 170,
-                    "ArcadeComponent.active": true,
-                    "body.gravity.y": 100,
-                    "body.width": 11,
-                    "body.height": 12
+                    "y": 170
+                },
+                {
+                    "prefabId": "3f838717-1748-46a2-999c-c73f8b1a2e4e",
+                    "id": "4659f446-ab3a-42ff-b5c3-94d65c0ead0b",
+                    "unlock": [
+                        "x",
+                        "y"
+                    ],
+                    "label": "player",
+                    "scope": "CLASS",
+                    "components": [],
+                    "x": 265,
+                    "y": 141,
+                    "nestedPrefabs": [],
+                    "list": []
+                },
+                {
+                    "type": "TilemapLayer",
+                    "id": "aa5626c3-8f36-4e54-92d0-dac4ce5ebe43",
+                    "label": "tileLayer",
+                    "scope": "CLASS",
+                    "components": [],
+                    "x": -549,
+                    "y": -227,
+                    "tilemapId": "b204441a-da85-4549-9fd2-0ae3e08f1acc",
+                    "layerName": "Tile Layer 1",
+                    "tilesets": [
+                        "tileset"
+                    ]
                 }
             ]
         },
@@ -608,7 +618,19 @@
             "label": "eggTilemapCollider",
             "scope": "METHOD",
             "object1": "egg",
-            "object2": "tileLayer"
+            "object2": "tileLayer",
+            "collideCallback": "this.eggHitTilemap",
+            "callbackContext": "this"
+        },
+        {
+            "id": "5c9ba877-81dc-4190-9a7a-95968b044481",
+            "type": "Collider",
+            "label": "eggSoldierCollider",
+            "scope": "METHOD",
+            "object1": "egg",
+            "object2": "enemyList",
+            "collideCallback": "this.eggHitSoldier",
+            "callbackContext": "this"
         }
     ],
     "meta": {
