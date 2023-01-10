@@ -9,6 +9,7 @@
 ### Added
 
 - Explosion visual & impact on sprites.
+- Uppercut ability w/ mobile button
 
 ### Removed
 ### Fixed

@@ -26,9 +26,19 @@ export default class Dive implements State {
 	{	
 		if (this.player.onFloor)
 		{
-			this.stateController.setState('running');
 
-			// TODO: groundcling transition
+			if (this.player.onWallFacing(true))
+			{
+				this.stateController.setState('groundCling')
+			}
+			else
+			{
+				this.stateController.setState('running');
+			}
+		}
+		else if (this.player.onWallFacing(true))
+		{
+			this.stateController.setState('cling');
 		}
 	}
 }

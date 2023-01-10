@@ -232,6 +232,14 @@ export default class Level extends Phaser.Scene {
 		mobileButtonPunch.fillColor = 15563900;
 		uILayer.add(mobileButtonPunch);
 
+		// mobileButtonUppercut
+		const mobileButtonUppercut = this.add.rectangle(-302, -346, 100, 100);
+		mobileButtonUppercut.setOrigin(0, 1);
+		mobileButtonUppercut.alpha = 0.5;
+		mobileButtonUppercut.isFilled = true;
+		mobileButtonUppercut.fillColor = 15579772;
+		uILayer.add(mobileButtonUppercut);
+
 		// lists
 		const public_list: Array<any> = [];
 		const enemyList = [soldiermid, soldieronballoon, soldieronballoon_1, soldieronballoon_2, soldieronballoon_3, soldieronballoon_4, soldiermid_1, soldiermid_2, soldiermid_3];
@@ -342,6 +350,14 @@ export default class Level extends Phaser.Scene {
 		new MobileDependent(mobileButtonPunch);
 		new MobileButton(mobileButtonPunch);
 
+		// mobileButtonUppercut (components)
+		const mobileButtonUppercutAlign = new Align(mobileButtonUppercut);
+		mobileButtonUppercutAlign.down = true;
+		mobileButtonUppercutAlign.left = true;
+		mobileButtonUppercutAlign.verticalOffset = -200;
+		new MobileDependent(mobileButtonUppercut);
+		new MobileButton(mobileButtonUppercut);
+
 		this.bGLayer = bGLayer;
 		this.mainLayer = mainLayer;
 		this.explosion = explosion;
@@ -357,6 +373,7 @@ export default class Level extends Phaser.Scene {
 		this.mobileButtonDive = mobileButtonDive;
 		this.mobileButtonEgg = mobileButtonEgg;
 		this.mobileButtonPunch = mobileButtonPunch;
+		this.mobileButtonUppercut = mobileButtonUppercut;
 		this.test_map_2 = test_map_2;
 		this.test_map_3 = test_map_3;
 		this.public_list = public_list;
@@ -380,6 +397,7 @@ export default class Level extends Phaser.Scene {
 	private mobileButtonDive!: Phaser.GameObjects.Rectangle;
 	private mobileButtonEgg!: Phaser.GameObjects.Rectangle;
 	private mobileButtonPunch!: Phaser.GameObjects.Rectangle;
+	private mobileButtonUppercut!: Phaser.GameObjects.Rectangle;
 	private test_map_2!: Phaser.Tilemaps.Tilemap;
 	private test_map_3!: Phaser.Tilemaps.Tilemap;
 	public public_list!: Array<any>;
@@ -601,6 +619,21 @@ export default class Level extends Phaser.Scene {
 		this.mobileButtonPunch.on('pointerout', () =>
 		{
 			this.player.punchMobileButton = false;
+		});
+
+	// uppercut
+		this.mobileButtonUppercut.setInteractive();
+		this.mobileButtonUppercut.on('pointerdown', () =>
+		{
+			this.player.uppercutMobileButton = true;
+		});
+		this.mobileButtonUppercut.on('pointerup', () =>
+		{
+			this.player.uppercutMobileButton = false;
+		});
+		this.mobileButtonUppercut.on('pointerout', () =>
+		{
+			this.player.uppercutMobileButton = false;
 		});
 
 	// egg

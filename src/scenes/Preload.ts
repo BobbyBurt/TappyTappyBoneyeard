@@ -68,7 +68,7 @@ export default class Preload extends Phaser.Scene {
 			this.loaded = true;
 
 		// DEBUG: auto load
-			this.start();
+			// this.start();
 				// disable this on production build
 				// mobile detection will not run if enabled
 		});

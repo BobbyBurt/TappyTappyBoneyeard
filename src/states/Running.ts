@@ -24,25 +24,16 @@ export default class Running implements State {
 	{	
 		if (this.player.jumpInput == 'just-down' && this.player.flapCharge > 0)
 		{
-		// DEPRECATED: if standing still, start moving instead of jumping
-			// if (this.player.body.velocity.x == 0)
-			// {
-			// 	this.player.body.setVelocityX
-			// 	(this.player.flipX? this.player.moveSpeed : -this.player.moveSpeed);
-			// }
-			// else
-			// {
-			// 	this.jump();
-			// 	this.player.sqaush();
-			// }
-				// this is obsolete thanks to punch.
-
 			this.jump();
 			this.player.sqaush();
 		}
 		else if (this.player.punchInput == 'just-down')
 		{
 			this.stateController.setState('punch');
+		}
+		else if (this.player.uppercutInput == 'just-down' && this.player.uppercutCharged)
+		{
+			this.stateController.setState('uppercut');
 		}
 
 	// state transitions

@@ -285,6 +285,11 @@ export default class playerPrefab extends Phaser.Physics.Arcade.Sprite {
 			// TODO: have the enemy go flying or something cool
 				// I can't set velocity on this type, but that's the type that the callback gives 
 				// me.
+
+			if (this.stateController.currentState.name == 'dive')
+			{
+				this.setVelocityY(-this.jumpForce);
+			}
 		}
 		else
 		{
