@@ -415,7 +415,7 @@ export default class Level extends Phaser.Scene {
 	{
 		// this.debugText.setText(`${this.player.stateController.currentState.name}`);
 		this.debugText.setText(`${this.player.stateController.currentState.name}`);
-		this.debugText2.setText(`mobile jump: ${this.player.jumpMobileButton}`);
+		this.debugText2.setText(`uppercut charge: ${this.player.uppercutCharged}`);
 		this.debugText3.setText(`jump charge: ${this.player.flapCharge}`);
 		// this.debugText.setText(`${this.player.onFloor}`);
 

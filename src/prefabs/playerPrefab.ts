@@ -68,6 +68,14 @@ export default class playerPrefab extends Phaser.Physics.Arcade.Sprite {
 	public punchMobileButton: boolean = false;
 
 	/** set based on key, gamepad or mobile input */
+	public uppercutInput: input = 'up';
+	private uppercutKey: Phaser.Input.Keyboard.Key 
+		= this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
+	private uppercutButton: number = 5;
+	public uppercutCharged: boolean = true;
+	public uppercutMobileButton: boolean = false;
+
+	/** set based on key, gamepad or mobile input */
 	public diveInput: input = 'up';
 	private diveKey: Phaser.Input.Keyboard.Key 
 		= this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Z);
@@ -116,6 +124,12 @@ export default class playerPrefab extends Phaser.Physics.Arcade.Sprite {
 		if (this.onFloor && !this.punchCharged)
 		{
 			this.punchCharged = true;
+		}
+
+	// uppercut charge
+		if (this.onFloor && !this.uppercutCharged)
+		{
+			this.uppercutCharged = true;
 		}
 
 	// jump charge
@@ -180,6 +194,31 @@ export default class playerPrefab extends Phaser.Physics.Arcade.Sprite {
 			}
 		}
 
+	// uppercut
+		if (this.gamepad?.isButtonDown(this.uppercutButton)
+		|| this.uppercutKey.isDown || this.uppercutMobileButton)
+		{
+			if (this.uppercutInput != 'just-down' && this.uppercutInput != 'down')
+			{
+				this.uppercutInput = 'just-down'
+			}
+			else
+			{
+				this.uppercutInput = 'down'
+			}
+		}
+		else
+		{
+			if (this.uppercutInput != 'just-up' && this.uppercutInput != 'up')
+			{
+				this.uppercutInput = 'just-up'
+			}
+			else
+			{
+				this.uppercutInput = 'up'
+			}
+		}
+
 	// dive
 		if (this.gamepad?.isButtonDown(this.diveButton) 
 			|| this.diveKey.isDown || this.diveMobileButton)
@@ -238,7 +277,8 @@ export default class playerPrefab extends Phaser.Physics.Arcade.Sprite {
 		// TODO: specify type annotation
 	{
 		if (this.stateController.currentState.name == 'punch' 
-			|| this.stateController.currentState.name == 'dive')
+			|| this.stateController.currentState.name == 'dive'
+			|| this.stateController.currentState.name == 'uppercut')
 		{
 			_enemy.destroy();
 

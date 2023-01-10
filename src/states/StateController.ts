@@ -6,6 +6,7 @@ import Cling from "./Cling";
 import GroundCling from "./GroundCling";
 import Punch from "./Punch";
 import Dive from "./Dive";
+import Uppercut from "./Uppercut";
 
 export default class StateController
 {	
@@ -22,7 +23,8 @@ export default class StateController
 			cling: new Cling(_player, this),
 			groundCling: new GroundCling(_player, this),
 			punch: new Punch(_player, this),
-			dive: new Dive(_player, this)
+			dive: new Dive(_player, this),
+			uppercut: new Uppercut(_player, this)
 		}
 
 		this.currentState = new Running(_player, this);
