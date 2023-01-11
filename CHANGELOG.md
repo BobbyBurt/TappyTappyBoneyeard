@@ -5,6 +5,8 @@
 ### Changed
 
 - Egg drop cannot be performed before the last egg has landed.
+- Diving onto an enemy bounces the player.
+- Eggs are now BombPrefabs that in an object pool
 
 ### Added
 

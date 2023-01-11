@@ -51,6 +51,8 @@ export default class Cling implements State {
 				this.stateController.setState('airborne');
 			}
 		}
+
+		// 	TODO: allow egg drop
 	}
 
 	wallJump()

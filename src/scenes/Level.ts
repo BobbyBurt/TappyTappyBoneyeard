@@ -4,9 +4,11 @@
 import Phaser from "phaser";
 import ScrollFactor from "../components/ScrollFactor";
 import explosionPrefab from "../prefabs/explosionPrefab";
+import SoldierBalloonPrefab from "../prefabs/SoldierBalloonPrefab";
 import SoldierPrefab from "../prefabs/SoldierPrefab";
 import eggPrefab from "../prefabs/eggPrefab";
 import playerPrefab from "../prefabs/playerPrefab";
+import BombPrefab from "../prefabs/BombPrefab";
 import Align from "../components/Align";
 import MobileDependent from "../components/MobileDependent";
 import MobileButton from "../components/MobileButton";
@@ -79,64 +81,49 @@ export default class Level extends Phaser.Scene {
 		const explosion = new explosionPrefab(this, 272, -547);
 		mainLayer.add(explosion);
 
-		// soldiermid
-		const soldiermid = new SoldierPrefab(this, 223, 181);
-		mainLayer.add(soldiermid);
+		// soldieronballoon
+		const soldieronballoon = new SoldierBalloonPrefab(this, -3, 180);
+		mainLayer.add(soldieronballoon);
+
+		// soldierBalloonPrefab
+		const soldierBalloonPrefab = new SoldierBalloonPrefab(this, -174, 42);
+		mainLayer.add(soldierBalloonPrefab);
+
+		// soldierBalloonPrefab_1
+		const soldierBalloonPrefab_1 = new SoldierBalloonPrefab(this, -384, 31);
+		mainLayer.add(soldierBalloonPrefab_1);
+
+		// soldierBalloonPrefab_2
+		const soldierBalloonPrefab_2 = new SoldierBalloonPrefab(this, 248, -57);
+		mainLayer.add(soldierBalloonPrefab_2);
+
+		// soldierBalloonPrefab_3
+		const soldierBalloonPrefab_3 = new SoldierBalloonPrefab(this, 455, 75);
+		mainLayer.add(soldierBalloonPrefab_3);
 
 		// balloon
-		const balloon = this.add.image(2, 170, "balloon");
+		const balloon = this.add.image(2, 171, "balloon");
 		mainLayer.add(balloon);
-
-		// soldieronballoon
-		const soldieronballoon = this.add.image(-3, 179, "soldieronballoon") as Phaser.GameObjects.Image & { body: Phaser.Physics.Arcade.Body };
-		this.physics.add.existing(soldieronballoon, false);
-		soldieronballoon.body.allowGravity = false;
-		soldieronballoon.body.setSize(16, 17, false);
-		mainLayer.add(soldieronballoon);
 
 		// balloon_1
 		const balloon_1 = this.add.image(460, 54, "balloon");
 		mainLayer.add(balloon_1);
 
-		// soldieronballoon_1
-		const soldieronballoon_1 = this.add.image(455, 63, "soldieronballoon") as Phaser.GameObjects.Image & { body: Phaser.Physics.Arcade.Body };
-		this.physics.add.existing(soldieronballoon_1, false);
-		soldieronballoon_1.body.allowGravity = false;
-		soldieronballoon_1.body.setSize(16, 17, false);
-		mainLayer.add(soldieronballoon_1);
-
 		// balloon_2
 		const balloon_2 = this.add.image(250, -63, "balloon");
 		mainLayer.add(balloon_2);
-
-		// soldieronballoon_2
-		const soldieronballoon_2 = this.add.image(245, -54, "soldieronballoon") as Phaser.GameObjects.Image & { body: Phaser.Physics.Arcade.Body };
-		this.physics.add.existing(soldieronballoon_2, false);
-		soldieronballoon_2.body.allowGravity = false;
-		soldieronballoon_2.body.setSize(16, 17, false);
-		mainLayer.add(soldieronballoon_2);
 
 		// balloon_3
 		const balloon_3 = this.add.image(-168, 34, "balloon");
 		mainLayer.add(balloon_3);
 
-		// soldieronballoon_3
-		const soldieronballoon_3 = this.add.image(-173, 43, "soldieronballoon") as Phaser.GameObjects.Image & { body: Phaser.Physics.Arcade.Body };
-		this.physics.add.existing(soldieronballoon_3, false);
-		soldieronballoon_3.body.allowGravity = false;
-		soldieronballoon_3.body.setSize(16, 17, false);
-		mainLayer.add(soldieronballoon_3);
-
 		// balloon_4
 		const balloon_4 = this.add.image(-384.24695617335885, 16.301220894787473, "balloon");
 		mainLayer.add(balloon_4);
 
-		// soldieronballoon_4
-		const soldieronballoon_4 = this.add.image(-389.24695617335885, 25.301220894787473, "soldieronballoon") as Phaser.GameObjects.Image & { body: Phaser.Physics.Arcade.Body };
-		this.physics.add.existing(soldieronballoon_4, false);
-		soldieronballoon_4.body.allowGravity = false;
-		soldieronballoon_4.body.setSize(16, 17, false);
-		mainLayer.add(soldieronballoon_4);
+		// soldiermid
+		const soldiermid = new SoldierPrefab(this, 223, 181);
+		mainLayer.add(soldiermid);
 
 		// soldiermid_1
 		const soldiermid_1 = new SoldierPrefab(this, 414, -19);
@@ -161,6 +148,10 @@ export default class Level extends Phaser.Scene {
 		// tileLayer
 		const tileLayer = test_map_3.createLayer("Tile Layer 1", ["tileset"], -549, -227);
 		mainLayer.add(tileLayer);
+
+		// bomb
+		const bomb = new BombPrefab(this, -83, 41);
+		mainLayer.add(bomb);
 
 		// UILayer
 		const uILayer = this.add.layer();
@@ -242,7 +233,8 @@ export default class Level extends Phaser.Scene {
 
 		// lists
 		const public_list: Array<any> = [];
-		const enemyList = [soldiermid, soldieronballoon, soldieronballoon_1, soldieronballoon_2, soldieronballoon_3, soldieronballoon_4, soldiermid_1, soldiermid_2, soldiermid_3];
+		const enemyList = [soldiermid, soldieronballoon, soldiermid_1, soldiermid_2, soldiermid_3, soldierBalloonPrefab, soldierBalloonPrefab_3, soldierBalloonPrefab_2, soldierBalloonPrefab_1];
+		const collidesWithBombList = [soldieronballoon, soldierBalloonPrefab_3, soldierBalloonPrefab_2, soldierBalloonPrefab_1, soldierBalloonPrefab, soldiermid, soldiermid_3, soldiermid_2, soldiermid_1, tileLayer];
 
 		// playerTilemapCollider
 		this.physics.add.collider(player, tileLayer, this.playerHitTilemap, undefined, this);
@@ -252,9 +244,6 @@ export default class Level extends Phaser.Scene {
 
 		// playerEnemyOverlap
 		this.physics.add.overlap(player, enemyList, this.playerEnemyOverlap, undefined, this);
-
-		// eggTilemapCollider
-		this.physics.add.collider(egg, tileLayer, this.eggHitTilemap, undefined, this);
 
 		// eggSoldierCollider
 		this.physics.add.collider(egg, enemyList, this.eggHitSoldier, undefined, this);
@@ -364,6 +353,7 @@ export default class Level extends Phaser.Scene {
 		this.egg = egg;
 		this.player = player;
 		this.tileLayer = tileLayer;
+		this.bomb = bomb;
 		this.uILayer = uILayer;
 		this.buildText = buildText;
 		this.debugText = debugText;
@@ -378,6 +368,7 @@ export default class Level extends Phaser.Scene {
 		this.test_map_3 = test_map_3;
 		this.public_list = public_list;
 		this.enemyList = enemyList;
+		this.collidesWithBombList = collidesWithBombList;
 
 		this.events.emit("scene-awake");
 	}
@@ -388,6 +379,7 @@ export default class Level extends Phaser.Scene {
 	private egg!: eggPrefab;
 	private player!: playerPrefab;
 	private tileLayer!: Phaser.Tilemaps.TilemapLayer;
+	private bomb!: BombPrefab;
 	private uILayer!: Phaser.GameObjects.Layer;
 	private buildText!: Phaser.GameObjects.BitmapText;
 	private debugText!: Phaser.GameObjects.BitmapText;
@@ -401,9 +393,12 @@ export default class Level extends Phaser.Scene {
 	private test_map_2!: Phaser.Tilemaps.Tilemap;
 	private test_map_3!: Phaser.Tilemaps.Tilemap;
 	public public_list!: Array<any>;
-	private enemyList!: Array<SoldierPrefab|Phaser.GameObjects.Image>;
+	private enemyList!: Array<SoldierPrefab|SoldierBalloonPrefab>;
+	private collidesWithBombList!: Array<SoldierBalloonPrefab|SoldierPrefab|Phaser.Tilemaps.TilemapLayer>;
 
 	/* START-USER-CODE */
+
+	private bombGroup!: Phaser.GameObjects.Group;
 
 	create()
 	{
@@ -422,6 +417,11 @@ export default class Level extends Phaser.Scene {
 		this.egg.setVisible(false);
 		this.events.on('egg-drop', this.dropEgg, this);
 
+	// bombs
+		this.bombGroup = this.add.group({maxSize: 30, classType: BombPrefab});
+			// TODO: define max
+		this.physics.add.collider(this.bombGroup, this.collidesWithBombList, this.bombHit, undefined, this);
+
 	// resize init
 		this.events.on('pre-resize', this.resize, this);
 		this.resize();
@@ -433,8 +433,8 @@ export default class Level extends Phaser.Scene {
 	{
 		// this.debugText.setText(`${this.player.stateController.currentState.name}`);
 		this.debugText.setText(`${this.player.stateController.currentState.name}`);
-		this.debugText2.setText(`uppercut charge: ${this.player.uppercutCharged}`);
-		this.debugText3.setText(`jump charge: ${this.player.flapCharge}`);
+		this.debugText2.setText(`bombs active in group: ${this.bombGroup.countActive()}`);
+		this.debugText3.setText(`flap charge: ${this.player.flapCharge}`);
 		// this.debugText.setText(`${this.player.onFloor}`);
 
 	// reset collision values to be overridden by callbacks
@@ -532,9 +532,16 @@ export default class Level extends Phaser.Scene {
 		this.player.eggReady = true;
 	}
 
+	bombHit(_bomb:any, _collidedWith:any)
+	{
+		_bomb as BombPrefab;
+		_bomb.disappear();
+	}
+
 	/** detects physics bodies within explosion range and impacts them appropriately */
 	explosionCheck(x: number, y: number)
 	{
+		let _this = this;
 		this.physics.overlapCirc(x, y, 20, true, false).forEach(function (element: any)
 			// TODO: specify type annotation
 		{
@@ -542,25 +549,33 @@ export default class Level extends Phaser.Scene {
 			{
 				element.reset();
 			}
-			if (element.gameObject.name == 'soldier')
+			if (_this.enemyList.includes(element.gameObject))
 			{
 				element.gameObject.destroy();
 			}
-				// TODO: fix floating soldiers falling instead of being destroyed
-					// this happens because this is checking the object's name, which is only 
-					// being set to ground soldiers because I forgot to set the floating ones as a
-					// prefab. I'm using the solider list for collision checks, so if I could use 
-					// it here as well that'd be best.
 		});
 	}
 
 	dropEgg()
 	{
-		this.egg.body.setVelocity(0, 0);
-		this.egg.setPosition(this.player.x, this.player.y);
-		this.egg.enable();
+		// this.egg.body.setVelocity(0, 0);
+		// this.egg.setPosition(this.player.x, this.player.y);
+		// this.egg.enable();
 
-		this.player.eggReady = false;
+		this.bombGroup.get(this.player.x, this.player.y, 'bird1egg').appear();
+
+		// LEFT: I guess this is working now? it was acting super weird for awhile.
+		// next I'll have the egg hit result in a explosion. Those will also have to be pooled
+		// and then I can get rid of the physics callbacks and whatnot of my first attempt
+
+		if (this.bombGroup.countActive() == this.bombGroup.maxSize)
+		{
+			this.bombGroup.getFirstAlive()?.setActive(false);
+			this.bombGroup.shuffle();
+				// TODO: figure out what exactly shuffle() does. Worked for me before
+		}
+
+		// this.player.eggReady = false;
 	}
 
 	/**

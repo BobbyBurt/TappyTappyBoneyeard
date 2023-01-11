@@ -149,16 +149,64 @@
                     "y": -547
                 },
                 {
-                    "prefabId": "ed9eaa4a-e16e-41c8-b171-c52fbade9815",
-                    "id": "ab2770fb-0448-4a53-aff0-4784dcd94581",
+                    "prefabId": "d81d92c1-f62d-4e48-8d13-7b2050e8add7",
+                    "id": "c93b8070-d676-4260-a3b3-592edef49241",
                     "unlock": [
                         "x",
                         "y"
                     ],
-                    "label": "soldiermid",
+                    "label": "soldieronballoon",
                     "components": [],
-                    "x": 223,
-                    "y": 181
+                    "x": -3,
+                    "y": 180
+                },
+                {
+                    "prefabId": "d81d92c1-f62d-4e48-8d13-7b2050e8add7",
+                    "id": "26189906-c128-44ea-8166-fb7e2a96824c",
+                    "unlock": [
+                        "x",
+                        "y"
+                    ],
+                    "label": "soldierBalloonPrefab",
+                    "components": [],
+                    "x": -174,
+                    "y": 42
+                },
+                {
+                    "prefabId": "d81d92c1-f62d-4e48-8d13-7b2050e8add7",
+                    "id": "b2bcf1fc-ddf6-439a-ba82-cd5468d7ad1c",
+                    "unlock": [
+                        "x",
+                        "y"
+                    ],
+                    "label": "soldierBalloonPrefab_1",
+                    "components": [],
+                    "x": -384,
+                    "y": 31
+                },
+                {
+                    "prefabId": "d81d92c1-f62d-4e48-8d13-7b2050e8add7",
+                    "id": "92209aa0-856c-4e83-8378-02c6a695fdcb",
+                    "unlock": [
+                        "x",
+                        "y"
+                    ],
+                    "label": "soldierBalloonPrefab_2",
+                    "components": [],
+                    "x": 248,
+                    "y": -57
+                },
+                {
+                    "prefabId": "d81d92c1-f62d-4e48-8d13-7b2050e8add7",
+                    "id": "ead49282-9df3-4c24-a3bb-e691a23c9921",
+                    "unlock": [
+                        "x",
+                        "y"
+                    ],
+                    "label": "soldierBalloonPrefab_3",
+                    "components": [],
+                    "x": 455,
+                    "y": 75
                 },
                 {
                     "type": "Image",
@@ -169,22 +217,7 @@
                         "key": "balloon"
                     },
                     "x": 2,
-                    "y": 170
-                },
-                {
-                    "type": "Image",
-                    "id": "c93b8070-d676-4260-a3b3-592edef49241",
-                    "label": "soldieronballoon",
-                    "components": [],
-                    "texture": {
-                        "key": "soldieronballoon"
-                    },
-                    "x": -3,
-                    "y": 179,
-                    "ArcadeComponent.active": true,
-                    "allowGravity": false,
-                    "body.width": 16,
-                    "body.height": 17
+                    "y": 171
                 },
                 {
                     "type": "Image",
@@ -199,21 +232,6 @@
                 },
                 {
                     "type": "Image",
-                    "id": "d74e1505-dfc5-4295-a883-d63a7f35da71",
-                    "label": "soldieronballoon_1",
-                    "components": [],
-                    "texture": {
-                        "key": "soldieronballoon"
-                    },
-                    "x": 455,
-                    "y": 63,
-                    "ArcadeComponent.active": true,
-                    "allowGravity": false,
-                    "body.width": 16,
-                    "body.height": 17
-                },
-                {
-                    "type": "Image",
                     "id": "b8240cea-4274-408a-997e-5e1feda5760c",
                     "label": "balloon_2",
                     "components": [],
@@ -222,21 +240,6 @@
                     },
                     "x": 250,
                     "y": -63
-                },
-                {
-                    "type": "Image",
-                    "id": "691239bd-f537-42bb-84c1-6675f1da1ed0",
-                    "label": "soldieronballoon_2",
-                    "components": [],
-                    "texture": {
-                        "key": "soldieronballoon"
-                    },
-                    "x": 245,
-                    "y": -54,
-                    "ArcadeComponent.active": true,
-                    "allowGravity": false,
-                    "body.width": 16,
-                    "body.height": 17
                 },
                 {
                     "type": "Image",
@@ -251,21 +254,6 @@
                 },
                 {
                     "type": "Image",
-                    "id": "0608b8cb-babd-4b8c-95e4-1e511bd5973a",
-                    "label": "soldieronballoon_3",
-                    "components": [],
-                    "texture": {
-                        "key": "soldieronballoon"
-                    },
-                    "x": -173,
-                    "y": 43,
-                    "ArcadeComponent.active": true,
-                    "allowGravity": false,
-                    "body.width": 16,
-                    "body.height": 17
-                },
-                {
-                    "type": "Image",
                     "id": "604e879d-d652-4d07-8634-50d5ba9e84d6",
                     "label": "balloon_4",
                     "components": [],
@@ -276,19 +264,16 @@
                     "y": 16.301220894787473
                 },
                 {
-                    "type": "Image",
-                    "id": "5c646d0a-2b08-44db-ac5a-f99846326181",
-                    "label": "soldieronballoon_4",
+                    "prefabId": "ed9eaa4a-e16e-41c8-b171-c52fbade9815",
+                    "id": "ab2770fb-0448-4a53-aff0-4784dcd94581",
+                    "unlock": [
+                        "x",
+                        "y"
+                    ],
+                    "label": "soldiermid",
                     "components": [],
-                    "texture": {
-                        "key": "soldieronballoon"
-                    },
-                    "x": -389.24695617335885,
-                    "y": 25.301220894787473,
-                    "ArcadeComponent.active": true,
-                    "allowGravity": false,
-                    "body.width": 16,
-                    "body.height": 17
+                    "x": 223,
+                    "y": 181
                 },
                 {
                     "prefabId": "ed9eaa4a-e16e-41c8-b171-c52fbade9815",
@@ -367,6 +352,19 @@
                     "tilesets": [
                         "tileset"
                     ]
+                },
+                {
+                    "prefabId": "4b660cad-7a29-4745-9a29-2e05b0dc0c7c",
+                    "id": "3bcd662a-bb7f-4dd2-ace2-2f3e5f3aebf9",
+                    "unlock": [
+                        "x",
+                        "y"
+                    ],
+                    "label": "bomb",
+                    "scope": "CLASS",
+                    "components": [],
+                    "x": -83,
+                    "y": 41
                 }
             ]
         },
@@ -636,16 +634,6 @@
             "callbackContext": "this"
         },
         {
-            "id": "6fa8e79d-6484-4db0-8831-e9ae813e08dd",
-            "type": "Collider",
-            "label": "eggTilemapCollider",
-            "scope": "METHOD",
-            "object1": "egg",
-            "object2": "tileLayer",
-            "collideCallback": "this.eggHitTilemap",
-            "callbackContext": "this"
-        },
-        {
             "id": "5c9ba877-81dc-4190-9a7a-95968b044481",
             "type": "Collider",
             "label": "eggSoldierCollider",
@@ -674,13 +662,29 @@
             "objectIds": [
                 "ab2770fb-0448-4a53-aff0-4784dcd94581",
                 "c93b8070-d676-4260-a3b3-592edef49241",
-                "d74e1505-dfc5-4295-a883-d63a7f35da71",
-                "691239bd-f537-42bb-84c1-6675f1da1ed0",
-                "0608b8cb-babd-4b8c-95e4-1e511bd5973a",
-                "5c646d0a-2b08-44db-ac5a-f99846326181",
                 "77f6a3f6-7215-42cc-81e4-99aa231ac45b",
                 "1a3ab54f-5913-4d71-9da4-79367c7f20f7",
-                "8b42ff9b-d372-4ee6-9baf-9685b8d95ffd"
+                "8b42ff9b-d372-4ee6-9baf-9685b8d95ffd",
+                "26189906-c128-44ea-8166-fb7e2a96824c",
+                "ead49282-9df3-4c24-a3bb-e691a23c9921",
+                "92209aa0-856c-4e83-8378-02c6a695fdcb",
+                "b2bcf1fc-ddf6-439a-ba82-cd5468d7ad1c"
+            ]
+        },
+        {
+            "id": "4e0108a5-e4fe-408d-8b3f-26e132d30002",
+            "label": "collidesWithBombList",
+            "objectIds": [
+                "c93b8070-d676-4260-a3b3-592edef49241",
+                "ead49282-9df3-4c24-a3bb-e691a23c9921",
+                "92209aa0-856c-4e83-8378-02c6a695fdcb",
+                "b2bcf1fc-ddf6-439a-ba82-cd5468d7ad1c",
+                "26189906-c128-44ea-8166-fb7e2a96824c",
+                "ab2770fb-0448-4a53-aff0-4784dcd94581",
+                "8b42ff9b-d372-4ee6-9baf-9685b8d95ffd",
+                "1a3ab54f-5913-4d71-9da4-79367c7f20f7",
+                "77f6a3f6-7215-42cc-81e4-99aa231ac45b",
+                "aa5626c3-8f36-4e54-92d0-dac4ce5ebe43"
             ]
         }
     ]

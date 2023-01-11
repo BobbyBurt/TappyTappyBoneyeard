@@ -1,0 +1,36 @@
+{
+    "id": "d81d92c1-f62d-4e48-8d13-7b2050e8add7",
+    "sceneType": "PREFAB",
+    "settings": {
+        "exportClass": true,
+        "autoImport": true,
+        "preloadMethodName": "",
+        "preloadPackFiles": [],
+        "createMethodName": "",
+        "compilerOutputLanguage": "TYPE_SCRIPT",
+        "borderWidth": 0,
+        "borderHeight": 0
+    },
+    "displayList": [
+        {
+            "type": "Image",
+            "id": "48014da0-a34b-432b-8f3e-b25f3c273b79",
+            "label": "soldieronballoon",
+            "components": [],
+            "texture": {
+                "key": "soldieronballoon"
+            },
+            "ArcadeComponent.active": true,
+            "allowGravity": false,
+            "body.width": 16,
+            "body.height": 17
+        }
+    ],
+    "plainObjects": [],
+    "meta": {
+        "app": "Phaser Editor 2D - Scene Editor",
+        "url": "https://phasereditor2d.com",
+        "contentType": "phasereditor2d.core.scene.SceneContentType",
+        "version": 3
+    }
+}

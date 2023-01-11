@@ -7,39 +7,32 @@ import Phaser from "phaser";
 /* START-USER-IMPORTS */
 /* END-USER-IMPORTS */
 
-export default interface eggPrefab {
+export default interface SoldierBalloonPrefab {
 
 	 body: Phaser.Physics.Arcade.Body;
 }
 
-export default class eggPrefab extends Phaser.GameObjects.Image {
+export default class SoldierBalloonPrefab extends Phaser.GameObjects.Image {
 
 	constructor(scene: Phaser.Scene, x?: number, y?: number, texture?: string, frame?: number | string) {
-		super(scene, x ?? 0, y ?? 0, texture || "bird1egg", frame);
+		super(scene, x ?? 0, y ?? 0, texture || "soldieronballoon", frame);
 
 		scene.physics.add.existing(this, false);
-		this.body.gravity.y = 100;
-		this.body.setSize(11, 12, false);
+		this.body.allowGravity = false;
+		this.body.setSize(16, 17, false);
 
 		/* START-USER-CTR-CODE */
+		
+		this.scene.events.once(Phaser.Scenes.Events.UPDATE, this.start, this);
 
 		/* END-USER-CTR-CODE */
 	}
 
 	/* START-USER-CODE */
 
-	enable()
+	start()
 	{
-		this.setActive(true);
-		this.setVisible(true);
-		this.body.setEnable(true);
-	}
-
-	disable()
-	{
-		this.setActive(false);
-		this.body.setEnable(false);
-		this.setVisible(false);
+		this.setName('soldierBalloon');
 	}
 
 	/* END-USER-CODE */
