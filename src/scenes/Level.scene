@@ -169,8 +169,8 @@
                     ],
                     "label": "soldierBalloonPrefab",
                     "components": [],
-                    "x": -174,
-                    "y": 42
+                    "x": -200,
+                    "y": 66
                 },
                 {
                     "prefabId": "d81d92c1-f62d-4e48-8d13-7b2050e8add7",
@@ -249,8 +249,8 @@
                     "texture": {
                         "key": "balloon"
                     },
-                    "x": -168,
-                    "y": 34
+                    "x": -198,
+                    "y": 49
                 },
                 {
                     "type": "Image",
@@ -272,8 +272,8 @@
                     ],
                     "label": "soldiermid",
                     "components": [],
-                    "x": 223,
-                    "y": 181
+                    "x": 387,
+                    "y": 302
                 },
                 {
                     "prefabId": "ed9eaa4a-e16e-41c8-b171-c52fbade9815",
@@ -296,8 +296,8 @@
                     ],
                     "label": "soldiermid_2",
                     "components": [],
-                    "x": -389,
-                    "y": 155
+                    "x": -302,
+                    "y": 203
                 },
                 {
                     "prefabId": "ed9eaa4a-e16e-41c8-b171-c52fbade9815",
@@ -363,7 +363,7 @@
                     "label": "bomb",
                     "scope": "CLASS",
                     "components": [],
-                    "x": -83,
+                    "x": -79,
                     "y": 41
                 }
             ]
@@ -386,14 +386,13 @@
                     "Align.up": true,
                     "Align.left": true,
                     "Align.horizontalOffset": 5,
-                    "Align.verticalOffset": 5,
+                    "Align.verticalOffset": -95,
                     "x": 3,
                     "y": -4,
                     "text": "Tappy Tappy Boneyard\nv2",
                     "font": "nokia",
                     "fontSize": -8,
-                    "dropShadowX": -1,
-                    "dropShadowY": 1,
+                    "dropShadowY": 100,
                     "dropShadowColor": "#000000ff"
                 },
                 {
@@ -407,15 +406,14 @@
                     "Align.up": true,
                     "Align.left": true,
                     "Align.horizontalOffset": 5,
-                    "Align.verticalOffset": 25,
+                    "Align.verticalOffset": -75,
                     "x": -9,
                     "y": 66,
                     "originY": 1,
                     "text": "debug textdfdfasdf",
                     "font": "nokia",
                     "fontSize": -8,
-                    "dropShadowX": -1,
-                    "dropShadowY": 1,
+                    "dropShadowY": 100,
                     "dropShadowColor": "#000000ff"
                 },
                 {
@@ -429,15 +427,14 @@
                     "Align.up": true,
                     "Align.left": true,
                     "Align.horizontalOffset": 5,
-                    "Align.verticalOffset": 35,
+                    "Align.verticalOffset": -65,
                     "x": -10,
                     "y": 38,
                     "originY": 1,
                     "text": "debug textdfdfasdf",
                     "font": "nokia",
                     "fontSize": -8,
-                    "dropShadowX": -1,
-                    "dropShadowY": 1,
+                    "dropShadowY": 100,
                     "dropShadowColor": "#000000ff"
                 },
                 {
@@ -451,15 +448,14 @@
                     "Align.up": true,
                     "Align.left": true,
                     "Align.horizontalOffset": 5,
-                    "Align.verticalOffset": 45,
+                    "Align.verticalOffset": -55,
                     "x": -9,
                     "y": 52,
                     "originY": 1,
                     "text": "debug textdfdfasdf",
                     "font": "nokia",
                     "fontSize": -8,
-                    "dropShadowX": -1,
-                    "dropShadowY": 1,
+                    "dropShadowY": 100,
                     "dropShadowColor": "#000000ff"
                 },
                 {
@@ -632,16 +628,6 @@
             "overlapOnly": true,
             "collideCallback": "this.playerEnemyOverlap",
             "callbackContext": "this"
-        },
-        {
-            "id": "5c9ba877-81dc-4190-9a7a-95968b044481",
-            "type": "Collider",
-            "label": "eggSoldierCollider",
-            "scope": "METHOD",
-            "object1": "egg",
-            "object2": "enemyList",
-            "collideCallback": "this.eggHitSoldier",
-            "callbackContext": "this"
         }
     ],
     "meta": {
@@ -684,7 +670,19 @@
                 "8b42ff9b-d372-4ee6-9baf-9685b8d95ffd",
                 "1a3ab54f-5913-4d71-9da4-79367c7f20f7",
                 "77f6a3f6-7215-42cc-81e4-99aa231ac45b",
-                "aa5626c3-8f36-4e54-92d0-dac4ce5ebe43"
+                "aa5626c3-8f36-4e54-92d0-dac4ce5ebe43",
+                "4659f446-ab3a-42ff-b5c3-94d65c0ead0b"
+            ]
+        },
+        {
+            "id": "28f3ba6c-1f32-4365-ae87-beb6c5af8c38",
+            "label": "balloonEnemyList",
+            "objectIds": [
+                "c93b8070-d676-4260-a3b3-592edef49241",
+                "ead49282-9df3-4c24-a3bb-e691a23c9921",
+                "92209aa0-856c-4e83-8378-02c6a695fdcb",
+                "b2bcf1fc-ddf6-439a-ba82-cd5468d7ad1c",
+                "26189906-c128-44ea-8166-fb7e2a96824c"
             ]
         }
     ]

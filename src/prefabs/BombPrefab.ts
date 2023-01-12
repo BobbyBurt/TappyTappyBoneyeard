@@ -28,8 +28,10 @@ export default class BombPrefab extends Phaser.GameObjects.Image {
 	/* START-USER-CODE */
 
 	/** asdf */
-	appear()
+	appear(textureKey: string)
 	{
+		this.setTexture(textureKey);
+		
 		this.setActive(true);
 		this.setVisible(true);
 		this.body.setEnable(true);
@@ -42,6 +44,7 @@ export default class BombPrefab extends Phaser.GameObjects.Image {
 		this.setActive(false);
 		this.setVisible(false);
 		this.body.setEnable(false);
+		this.body.setVelocity(0, 0);
 	}
 
 	/* END-USER-CODE */

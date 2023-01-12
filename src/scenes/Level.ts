@@ -86,7 +86,7 @@ export default class Level extends Phaser.Scene {
 		mainLayer.add(soldieronballoon);
 
 		// soldierBalloonPrefab
-		const soldierBalloonPrefab = new SoldierBalloonPrefab(this, -174, 42);
+		const soldierBalloonPrefab = new SoldierBalloonPrefab(this, -200, 66);
 		mainLayer.add(soldierBalloonPrefab);
 
 		// soldierBalloonPrefab_1
@@ -114,7 +114,7 @@ export default class Level extends Phaser.Scene {
 		mainLayer.add(balloon_2);
 
 		// balloon_3
-		const balloon_3 = this.add.image(-168, 34, "balloon");
+		const balloon_3 = this.add.image(-198, 49, "balloon");
 		mainLayer.add(balloon_3);
 
 		// balloon_4
@@ -122,7 +122,7 @@ export default class Level extends Phaser.Scene {
 		mainLayer.add(balloon_4);
 
 		// soldiermid
-		const soldiermid = new SoldierPrefab(this, 223, 181);
+		const soldiermid = new SoldierPrefab(this, 387, 302);
 		mainLayer.add(soldiermid);
 
 		// soldiermid_1
@@ -130,7 +130,7 @@ export default class Level extends Phaser.Scene {
 		mainLayer.add(soldiermid_1);
 
 		// soldiermid_2
-		const soldiermid_2 = new SoldierPrefab(this, -389, 155);
+		const soldiermid_2 = new SoldierPrefab(this, -302, 203);
 		mainLayer.add(soldiermid_2);
 
 		// soldiermid_3
@@ -150,7 +150,7 @@ export default class Level extends Phaser.Scene {
 		mainLayer.add(tileLayer);
 
 		// bomb
-		const bomb = new BombPrefab(this, -83, 41);
+		const bomb = new BombPrefab(this, -79, 41);
 		mainLayer.add(bomb);
 
 		// UILayer
@@ -160,8 +160,7 @@ export default class Level extends Phaser.Scene {
 		const buildText = this.add.bitmapText(3, -4, "nokia", "Tappy Tappy Boneyard\nv2");
 		buildText.text = "Tappy Tappy Boneyard\nv2";
 		buildText.fontSize = -8;
-		buildText.dropShadowX = -1;
-		buildText.dropShadowY = 1;
+		buildText.dropShadowY = 100;
 		uILayer.add(buildText);
 
 		// debugText
@@ -169,8 +168,7 @@ export default class Level extends Phaser.Scene {
 		debugText.setOrigin(0, 1);
 		debugText.text = "debug textdfdfasdf";
 		debugText.fontSize = -8;
-		debugText.dropShadowX = -1;
-		debugText.dropShadowY = 1;
+		debugText.dropShadowY = 100;
 		uILayer.add(debugText);
 
 		// debugText2
@@ -178,8 +176,7 @@ export default class Level extends Phaser.Scene {
 		debugText2.setOrigin(0, 1);
 		debugText2.text = "debug textdfdfasdf";
 		debugText2.fontSize = -8;
-		debugText2.dropShadowX = -1;
-		debugText2.dropShadowY = 1;
+		debugText2.dropShadowY = 100;
 		uILayer.add(debugText2);
 
 		// debugText3
@@ -187,8 +184,7 @@ export default class Level extends Phaser.Scene {
 		debugText3.setOrigin(0, 1);
 		debugText3.text = "debug textdfdfasdf";
 		debugText3.fontSize = -8;
-		debugText3.dropShadowX = -1;
-		debugText3.dropShadowY = 1;
+		debugText3.dropShadowY = 100;
 		uILayer.add(debugText3);
 
 		// mobileButtonJump
@@ -234,7 +230,8 @@ export default class Level extends Phaser.Scene {
 		// lists
 		const public_list: Array<any> = [];
 		const enemyList = [soldiermid, soldieronballoon, soldiermid_1, soldiermid_2, soldiermid_3, soldierBalloonPrefab, soldierBalloonPrefab_3, soldierBalloonPrefab_2, soldierBalloonPrefab_1];
-		const collidesWithBombList = [soldieronballoon, soldierBalloonPrefab_3, soldierBalloonPrefab_2, soldierBalloonPrefab_1, soldierBalloonPrefab, soldiermid, soldiermid_3, soldiermid_2, soldiermid_1, tileLayer];
+		const collidesWithBombList = [soldieronballoon, soldierBalloonPrefab_3, soldierBalloonPrefab_2, soldierBalloonPrefab_1, soldierBalloonPrefab, soldiermid, soldiermid_3, soldiermid_2, soldiermid_1, tileLayer, player];
+		const balloonEnemyList = [soldieronballoon, soldierBalloonPrefab_3, soldierBalloonPrefab_2, soldierBalloonPrefab_1, soldierBalloonPrefab];
 
 		// playerTilemapCollider
 		this.physics.add.collider(player, tileLayer, this.playerHitTilemap, undefined, this);
@@ -244,9 +241,6 @@ export default class Level extends Phaser.Scene {
 
 		// playerEnemyOverlap
 		this.physics.add.overlap(player, enemyList, this.playerEnemyOverlap, undefined, this);
-
-		// eggSoldierCollider
-		this.physics.add.collider(egg, enemyList, this.eggHitSoldier, undefined, this);
 
 		// parallax_Backing (components)
 		new ScrollFactor(parallax_Backing);
@@ -285,28 +279,28 @@ export default class Level extends Phaser.Scene {
 		buildTextAlign.up = true;
 		buildTextAlign.left = true;
 		buildTextAlign.horizontalOffset = 5;
-		buildTextAlign.verticalOffset = 5;
+		buildTextAlign.verticalOffset = -95;
 
 		// debugText (components)
 		const debugTextAlign = new Align(debugText);
 		debugTextAlign.up = true;
 		debugTextAlign.left = true;
 		debugTextAlign.horizontalOffset = 5;
-		debugTextAlign.verticalOffset = 25;
+		debugTextAlign.verticalOffset = -75;
 
 		// debugText2 (components)
 		const debugText2Align = new Align(debugText2);
 		debugText2Align.up = true;
 		debugText2Align.left = true;
 		debugText2Align.horizontalOffset = 5;
-		debugText2Align.verticalOffset = 35;
+		debugText2Align.verticalOffset = -65;
 
 		// debugText3 (components)
 		const debugText3Align = new Align(debugText3);
 		debugText3Align.up = true;
 		debugText3Align.left = true;
 		debugText3Align.horizontalOffset = 5;
-		debugText3Align.verticalOffset = 45;
+		debugText3Align.verticalOffset = -55;
 
 		// mobileButtonJump (components)
 		const mobileButtonJumpAlign = new Align(mobileButtonJump);
@@ -369,6 +363,7 @@ export default class Level extends Phaser.Scene {
 		this.public_list = public_list;
 		this.enemyList = enemyList;
 		this.collidesWithBombList = collidesWithBombList;
+		this.balloonEnemyList = balloonEnemyList;
 
 		this.events.emit("scene-awake");
 	}
@@ -394,11 +389,13 @@ export default class Level extends Phaser.Scene {
 	private test_map_3!: Phaser.Tilemaps.Tilemap;
 	public public_list!: Array<any>;
 	private enemyList!: Array<SoldierPrefab|SoldierBalloonPrefab>;
-	private collidesWithBombList!: Array<SoldierBalloonPrefab|SoldierPrefab|Phaser.Tilemaps.TilemapLayer>;
+	private collidesWithBombList!: Array<SoldierBalloonPrefab|SoldierPrefab|Phaser.Tilemaps.TilemapLayer|playerPrefab>;
+	private balloonEnemyList!: SoldierBalloonPrefab[];
 
 	/* START-USER-CODE */
 
 	private bombGroup!: Phaser.GameObjects.Group;
+	private explosionGroup!: Phaser.GameObjects.Group;
 
 	create()
 	{
@@ -420,7 +417,19 @@ export default class Level extends Phaser.Scene {
 	// bombs
 		this.bombGroup = this.add.group({maxSize: 30, classType: BombPrefab});
 			// TODO: define max
-		this.physics.add.collider(this.bombGroup, this.collidesWithBombList, this.bombHit, undefined, this);
+		// this.bombGroup.getChildren().forEach(member =>
+		// {
+		// 	this.mainLayer.add(member);
+		// });
+			// this would be necessary if any bombs are created initially, rather than during 
+			// update
+		this.physics.add.collider
+			(this.bombGroup, this.collidesWithBombList, this.bombHit, undefined, this);
+		this.time.addEvent({delay: 1000, callback: this.dropBombs, callbackScope: this, loop: true});
+
+	// explosions
+		this.explosionGroup = this.add.group({maxSize: 30, classType: explosionPrefab})
+			// TODO: define max
 
 	// resize init
 		this.events.on('pre-resize', this.resize, this);
@@ -433,8 +442,8 @@ export default class Level extends Phaser.Scene {
 	{
 		// this.debugText.setText(`${this.player.stateController.currentState.name}`);
 		this.debugText.setText(`${this.player.stateController.currentState.name}`);
-		this.debugText2.setText(`bombs active in group: ${this.bombGroup.countActive()}`);
-		this.debugText3.setText(`flap charge: ${this.player.flapCharge}`);
+		this.debugText2.setText(`bombs active: ${this.bombGroup.countActive()}`);
+		this.debugText3.setText(`explosions active: ${this.explosionGroup.countActive()}`);
 		// this.debugText.setText(`${this.player.onFloor}`);
 
 	// reset collision values to be overridden by callbacks
@@ -453,17 +462,28 @@ export default class Level extends Phaser.Scene {
 		{
 			this.player.reset();
 		}
-		if (this.egg.y > 400)
+		this.bombGroup.getChildren().forEach(member =>
 		{
-			this.egg.disable();
+			let _member = member as BombPrefab;
+			if (_member.y > 400)
+				// why can't I access y just by member.y?
+			{
+				if (_member.texture.key == 'bird1egg')
+				{
+					this.player.eggReady = true;
+				}
 
-			this.player.eggReady = true;
-		}
+				_member.disappear();
+			}
+		});
+			// TODO: change this to bomb group
 
 	}
 
 	/**
 	 * physics callback on every frame that the player and tilemap are touching.
+	 * 
+	 * Only sets Player.onFloor
 	 */
 	playerHitTilemap(_player:Phaser.Types.Physics.Arcade.GameObjectWithBody, _tilemap:any)
 		// TODO: specify type annotation. Call back gives 
@@ -473,30 +493,6 @@ export default class Level extends Phaser.Scene {
 		{
 			this.player.onFloor = true;
 		}
-
-		// if (_player.body.touching.down)
-		// {
-		// 	console.log('touch');
-		// }
-			// touching just doesn't seem to work with tilemaps
-
-		// if (_player.body.blocked.left)
-		// {
-		// 	this.player.onWall = 'left';
-		// 	console.log('left')
-		// }
-		// else if (_player.body.blocked.right)
-		// {
-		// 	this.player.onWall = 'right';
-		// 	console.log('right')
-		// }
-		// LEFT: this doesn't work as a way to continually check if touching a wall. Works fine 
-		// for onFloor because gravity is causing a collision callback every frame
-
-		// else if (_player.body.onWallRight())
-		// {
-		// 	this.player.onWallRight = true;
-		// }
 	}
 
 	playerEnemyOverlap(_player:Phaser.Types.Physics.Arcade.GameObjectWithBody, 
@@ -506,44 +502,13 @@ export default class Level extends Phaser.Scene {
 		this.player.hitEnemy(_enemy);
 	}
 
-	eggHitTilemap(_egg:any, _tilemap:any)
-		// TODO: specify type annotations
-	{
-		this.eggHit(_egg);
-	}
-
-	eggHitSoldier(_egg:any, _soldier:any)
-		// TODO: specify type annotations
-	{
-		this.eggHit(_egg);
-	}
-
-	/** called by egg physics callback */
-	eggHit(_egg:any)
-	{
-		this.egg.disable();
-
-		const explosion = new explosionPrefab(this, _egg.x, _egg.y);
-		this.mainLayer.add(explosion);
-			// TODO: this should be an object pool or something
-
-		this.explosionCheck(_egg.x, _egg.y);
-
-		this.player.eggReady = true;
-	}
-
-	bombHit(_bomb:any, _collidedWith:any)
-	{
-		_bomb as BombPrefab;
-		_bomb.disappear();
-	}
 
 	/** detects physics bodies within explosion range and impacts them appropriately */
 	explosionCheck(x: number, y: number)
 	{
 		let _this = this;
 		this.physics.overlapCirc(x, y, 20, true, false).forEach(function (element: any)
-			// TODO: specify type annotation
+		// TODO: specify type annotation
 		{
 			if (element.gameObject.name == 'player')
 			{
@@ -556,17 +521,57 @@ export default class Level extends Phaser.Scene {
 		});
 	}
 
+	/** egg collision callback */
+	bombHit(_bomb:any, _collidedWith:any)
+	{
+		_bomb as BombPrefab;
+
+	// player - egg collision check
+		if (_bomb.texture.key == 'bird1egg' && _collidedWith.name == 'player')
+		{	
+			return;
+		}
+			// player is included in the bomb collision list, but egg - player should be ignored
+
+		_bomb.disappear();
+
+		let newExplosion = this.explosionGroup.get(_bomb.x, _bomb.y).appear();
+		// this.mainLayer.add(newExplosion);
+			// error in phaser.js
+
+		this.explosionCheck(_bomb.x, _bomb.y);
+
+		if (_bomb.texture.key == 'bird1egg')
+		{
+			this.player.eggReady = true;
+		}
+	}
+
 	dropEgg()
 	{
-		// this.egg.body.setVelocity(0, 0);
-		// this.egg.setPosition(this.player.x, this.player.y);
-		// this.egg.enable();
+		this.setBomb(this.player.x, this.player.y, 'bird1egg');
 
-		this.bombGroup.get(this.player.x, this.player.y, 'bird1egg').appear();
+		this.player.eggReady = false;
+	}
 
-		// LEFT: I guess this is working now? it was acting super weird for awhile.
-		// next I'll have the egg hit result in a explosion. Those will also have to be pooled
-		// and then I can get rid of the physics callbacks and whatnot of my first attempt
+	/** drops bombs from each active balloon soldier */
+	dropBombs()
+	{
+		this.balloonEnemyList.forEach(element =>
+		{
+			if (element.active)	
+			{
+				this.setBomb(element.x, element.y + 25, 'bomb');
+			}
+		});
+	}
+
+	/** activates bomb in bombGroup pool */
+	setBomb(x: number, y: number, textureKey: string)
+	{
+		let newBomb = this.bombGroup.get(x, y).appear(textureKey);
+		// this.mainLayer.add(newBomb);
+			// error in phaser.js
 
 		if (this.bombGroup.countActive() == this.bombGroup.maxSize)
 		{
@@ -574,8 +579,6 @@ export default class Level extends Phaser.Scene {
 			this.bombGroup.shuffle();
 				// TODO: figure out what exactly shuffle() does. Worked for me before
 		}
-
-		// this.player.eggReady = false;
 	}
 
 	/**
@@ -600,8 +603,13 @@ export default class Level extends Phaser.Scene {
 		UICam.setName('UIcam')
 		UICam.setZoom(3);
 		UICam.ignore(this.mainLayer.getChildren());
+			// anything in the displayList not under one of the main layers is caught by the UI 
+			// cam and appears at an offset
 		UICam.ignore(this.bGLayer.getChildren());
 		UICam.preRender(1);
+		UICam.alpha = 0;
+			// TODO: add new bomb and explosions to the mainLayer so they aren't also being seen 
+			// by the UICam
 	}
 
 	initMobileButtons()

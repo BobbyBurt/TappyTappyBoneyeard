@@ -24,8 +24,6 @@ export default class explosionPrefab extends Phaser.GameObjects.Ellipse {
 		this.smoothness = 35;
 
 		/* START-USER-CTR-CODE */
-		
-		this.startTimer();
 
 		/* END-USER-CTR-CODE */
 	}
@@ -38,12 +36,21 @@ export default class explosionPrefab extends Phaser.GameObjects.Ellipse {
 	{
 		this.timer = new Phaser.Time.TimerEvent({ delay: 60, loop: false, callback: () =>
 		{	
-			this.destroy();
+			this.setActive(false);
+			this.setVisible(false);
 		}});
 		
 		this.scene.time.addEvent(this.timer);
 
 		// TODO: does this timer need to be removed from the scene as well?
+	}
+
+	appear()
+	{
+		this.setActive(true);
+		this.setVisible(true);
+
+		this.startTimer();
 	}
 
 	/* END-USER-CODE */

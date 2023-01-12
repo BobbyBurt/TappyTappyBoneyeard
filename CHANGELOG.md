@@ -1,17 +1,21 @@
 # Changelog
 
-## Version 5
+## Version 5 - 2023-01-12
 
 ### Changed
 
+- Keyboard & gamepad input bindings changed to be consistent.
 - Egg drop cannot be performed before the last egg has landed.
 - Diving onto an enemy bounces the player.
-- Eggs are now BombPrefabs that in an object pool
+- Eggs are now BombPrefabs in an object pool with enemy bombs.
+- Debug text only has it's shadow visible.
+- UI is invisible until a UICam glitch is fixed.
 
 ### Added
 
 - Explosion visual & impact on sprites.
 - Uppercut ability w/ mobile button
+- Floating enemies drop bombs.
 
 ### Removed
 ### Fixed

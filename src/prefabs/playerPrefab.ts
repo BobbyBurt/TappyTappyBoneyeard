@@ -56,37 +56,37 @@ export default class playerPrefab extends Phaser.Physics.Arcade.Sprite {
 	public jumpInput: input = 'up';
 	private jumpKey: Phaser.Input.Keyboard.Key 
 	= this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP);
-	private jumpButton: number = 1;
+	private jumpButton: number = 5;
 	public jumpMobileButton: boolean = false;
 
 	/** set based on key, gamepad or mobile input */
 	public punchInput: input = 'up';
 	private punchKey: Phaser.Input.Keyboard.Key 
-		= this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.C);
-	private punchButton: number = 0;
+		= this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
+	private punchButton: number = 1;
 	public punchCharged: boolean = true;
 	public punchMobileButton: boolean = false;
 
 	/** set based on key, gamepad or mobile input */
 	public uppercutInput: input = 'up';
 	private uppercutKey: Phaser.Input.Keyboard.Key 
-		= this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
-	private uppercutButton: number = 5;
+		= this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
+	private uppercutButton: number = 3;
 	public uppercutCharged: boolean = true;
 	public uppercutMobileButton: boolean = false;
 
 	/** set based on key, gamepad or mobile input */
 	public diveInput: input = 'up';
 	private diveKey: Phaser.Input.Keyboard.Key 
-		= this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Z);
+		= this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
 	private diveButton: number = 2;
 	public diveMobileButton: boolean = false;
 
 	/** set based on key, gamepad or mobile input */
 	public eggInput: input = 'up';
 	private eggKey: Phaser.Input.Keyboard.Key 
-		= this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.X);
-	private eggButton: number = 3;
+		= this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
+	private eggButton: number = 0;
 	public eggMobileButton: boolean = false;
 	/** set by scene based on egg state, determines is player can drop egg */
 	public eggReady: boolean = true;
@@ -304,9 +304,10 @@ export default class playerPrefab extends Phaser.Physics.Arcade.Sprite {
 
 	reset()
 	{
-		this.setPosition(351, 131);
+		this.setPosition(265, 141);
 		this.stateController.setState('airborne');
 		this.setVelocity(this.moveSpeed, 0);
+		this.flipX = true;
 	}
 
 	sqaush()
