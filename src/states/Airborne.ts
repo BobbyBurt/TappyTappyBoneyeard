@@ -38,7 +38,8 @@ export default class Airborne implements State {
 		else if (this.player.eggInput == 'just-down' && this.player.eggReady)
 		{
 			this.player.scene.events.emit('egg-drop');
-
+			
+			this.player.body.setVelocityY(-150);
 		}
 		else if (this.player.diveInput == 'just-down')
 		{

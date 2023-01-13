@@ -28,7 +28,7 @@ export default class BombPrefab extends Phaser.GameObjects.Image {
 	/* START-USER-CODE */
 
 	/** asdf */
-	appear(textureKey: string)
+	appear(textureKey: string): void
 	{
 		this.setTexture(textureKey);
 		

@@ -1,5 +1,16 @@
 # Changelog
 
+## Version 5.1 - 2023-01-12
+
+### Changed
+
+- Some upward velocity added to egg drop ability.
+- UI is visible again.
+
+### Fixed
+
+- Bomb & explosions added during gameplay are added to the correct layer and ignored by the UI camera.
+
 ## Version 5 - 2023-01-12
 
 ### Changed
@@ -16,9 +27,6 @@
 - Explosion visual & impact on sprites.
 - Uppercut ability w/ mobile button
 - Floating enemies drop bombs.
-
-### Removed
-### Fixed
 
 ## Version 4 - 2023-01-09
 

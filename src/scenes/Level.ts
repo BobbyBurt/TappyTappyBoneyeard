@@ -397,6 +397,9 @@ export default class Level extends Phaser.Scene {
 	private bombGroup!: Phaser.GameObjects.Group;
 	private explosionGroup!: Phaser.GameObjects.Group;
 
+	private UICam!: Phaser.Cameras.Scene2D.BaseCamera | any;
+		// TODO: define type annotation. the infered type doesn't have access to prerender()
+
 	create()
 	{
 		this.editorCreate();
@@ -474,6 +477,7 @@ export default class Level extends Phaser.Scene {
 				}
 
 				_member.disappear();
+				console.log(_member.displayList);
 			}
 		});
 			// TODO: change this to bomb group
@@ -535,9 +539,11 @@ export default class Level extends Phaser.Scene {
 
 		_bomb.disappear();
 
-		let newExplosion = this.explosionGroup.get(_bomb.x, _bomb.y).appear();
-		// this.mainLayer.add(newExplosion);
-			// error in phaser.js
+		let newExplosion = this.explosionGroup.get(_bomb.x, _bomb.y);
+		newExplosion.appear();
+		this.mainLayer.add(newExplosion);
+		this.UICam.ignore(newExplosion);
+			// TODO: this stuff should only be called if the object is being initialized
 
 		this.explosionCheck(_bomb.x, _bomb.y);
 
@@ -569,9 +575,10 @@ export default class Level extends Phaser.Scene {
 	/** activates bomb in bombGroup pool */
 	setBomb(x: number, y: number, textureKey: string)
 	{
-		let newBomb = this.bombGroup.get(x, y).appear(textureKey);
-		// this.mainLayer.add(newBomb);
-			// error in phaser.js
+		let newBomb = this.bombGroup.get(x, y);
+		newBomb.appear(textureKey);
+		this.mainLayer.add(newBomb);
+		this.UICam.ignore(newBomb);
 
 		if (this.bombGroup.countActive() == this.bombGroup.maxSize)
 		{
@@ -598,16 +605,15 @@ export default class Level extends Phaser.Scene {
 		this.cameras.main.ignore(this.uILayer.getChildren());
 
 	// UI		
-		var UICam = this.cameras.add(0, 0, this.cameras.main.width, this.cameras.main.height) as any;
-			// TODO: define type annotation. the infered type doesn't have access to prerender()
-		UICam.setName('UIcam')
-		UICam.setZoom(3);
-		UICam.ignore(this.mainLayer.getChildren());
+		this.UICam = this.cameras.add(0, 0, this.cameras.main.width, this.cameras.main.height) as any;
+		this.UICam.setName('UIcam')
+		this.UICam.setZoom(3);
+		this.UICam.ignore(this.mainLayer.getChildren());
 			// anything in the displayList not under one of the main layers is caught by the UI 
 			// cam and appears at an offset
-		UICam.ignore(this.bGLayer.getChildren());
-		UICam.preRender(1);
-		UICam.alpha = 0;
+		this.UICam.ignore(this.bGLayer.getChildren());
+		this.UICam.preRender(1);
+		// UICam.alpha = 0;
 			// TODO: add new bomb and explosions to the mainLayer so they aren't also being seen 
 			// by the UICam
 	}
