@@ -12,6 +12,7 @@ import BombPrefab from "../prefabs/BombPrefab";
 import Align from "../components/Align";
 import MobileDependent from "../components/MobileDependent";
 import MobileButton from "../components/MobileButton";
+import EnemyPrefab from "../prefabs/EnemyPrefab";
 /* START-USER-IMPORTS */
 
 import AdaptiveZoom from "../AdaptiveZoom";
@@ -37,6 +38,14 @@ export default class Level extends Phaser.Scene {
 		// test_map_3
 		const test_map_3 = this.add.tilemap("test-map-3");
 		test_map_3.addTilesetImage("tileset", "tileset");
+
+		// test_map_4
+		const test_map_4 = this.add.tilemap("test-map-4");
+		test_map_4.addTilesetImage("tileset", "tileset");
+
+		// test_map_5
+		const test_map_5 = this.add.tilemap("test-map-5");
+		test_map_5.addTilesetImage("tileset", "tileset");
 
 		// BGLayer
 		const bGLayer = this.add.layer();
@@ -81,77 +90,33 @@ export default class Level extends Phaser.Scene {
 		const explosion = new explosionPrefab(this, 272, -547);
 		mainLayer.add(explosion);
 
-		// soldieronballoon
-		const soldieronballoon = new SoldierBalloonPrefab(this, -3, 180);
-		mainLayer.add(soldieronballoon);
-
-		// soldierBalloonPrefab
-		const soldierBalloonPrefab = new SoldierBalloonPrefab(this, -200, 66);
-		mainLayer.add(soldierBalloonPrefab);
-
 		// soldierBalloonPrefab_1
 		const soldierBalloonPrefab_1 = new SoldierBalloonPrefab(this, -384, 31);
 		mainLayer.add(soldierBalloonPrefab_1);
-
-		// soldierBalloonPrefab_2
-		const soldierBalloonPrefab_2 = new SoldierBalloonPrefab(this, 248, -57);
-		mainLayer.add(soldierBalloonPrefab_2);
-
-		// soldierBalloonPrefab_3
-		const soldierBalloonPrefab_3 = new SoldierBalloonPrefab(this, 455, 75);
-		mainLayer.add(soldierBalloonPrefab_3);
-
-		// balloon
-		const balloon = this.add.image(2, 171, "balloon");
-		mainLayer.add(balloon);
-
-		// balloon_1
-		const balloon_1 = this.add.image(460, 54, "balloon");
-		mainLayer.add(balloon_1);
-
-		// balloon_2
-		const balloon_2 = this.add.image(250, -63, "balloon");
-		mainLayer.add(balloon_2);
-
-		// balloon_3
-		const balloon_3 = this.add.image(-198, 49, "balloon");
-		mainLayer.add(balloon_3);
 
 		// balloon_4
 		const balloon_4 = this.add.image(-384.24695617335885, 16.301220894787473, "balloon");
 		mainLayer.add(balloon_4);
 
 		// soldiermid
-		const soldiermid = new SoldierPrefab(this, 387, 302);
+		const soldiermid = new SoldierPrefab(this, -372, 59);
 		mainLayer.add(soldiermid);
 
-		// soldiermid_1
-		const soldiermid_1 = new SoldierPrefab(this, 414, -19);
-		mainLayer.add(soldiermid_1);
-
-		// soldiermid_2
-		const soldiermid_2 = new SoldierPrefab(this, -302, 203);
-		mainLayer.add(soldiermid_2);
-
-		// soldiermid_3
-		const soldiermid_3 = new SoldierPrefab(this, -55, 91);
-		mainLayer.add(soldiermid_3);
-
 		// egg
-		const egg = new eggPrefab(this, 272, 170);
+		const egg = new eggPrefab(this, 0, 0);
 		mainLayer.add(egg);
 
 		// player
 		const player = new playerPrefab(this, 265, 141);
 		mainLayer.add(player);
 
-		// tileLayer
-		const tileLayer = test_map_3.createLayer("Tile Layer 1", ["tileset"], -549, -227);
-		mainLayer.add(tileLayer);
-
 		// bomb
-		const bomb = new BombPrefab(this, -79, 41);
+		const bomb = new BombPrefab(this, 0, 0);
 		mainLayer.add(bomb);
+
+		// tileLayer
+		const tileLayer = test_map_5.createLayer("Tile Layer 1", ["tileset"], 0, 0);
+		mainLayer.add(tileLayer);
 
 		// UILayer
 		const uILayer = this.add.layer();
@@ -227,11 +192,15 @@ export default class Level extends Phaser.Scene {
 		mobileButtonUppercut.fillColor = 15579772;
 		uILayer.add(mobileButtonUppercut);
 
+		// enemyPrefab
+		const enemyPrefab = new EnemyPrefab(this, -326, 13);
+		this.add.existing(enemyPrefab);
+
 		// lists
 		const public_list: Array<any> = [];
-		const enemyList = [soldiermid, soldieronballoon, soldiermid_1, soldiermid_2, soldiermid_3, soldierBalloonPrefab, soldierBalloonPrefab_3, soldierBalloonPrefab_2, soldierBalloonPrefab_1];
-		const collidesWithBombList = [soldieronballoon, soldierBalloonPrefab_3, soldierBalloonPrefab_2, soldierBalloonPrefab_1, soldierBalloonPrefab, soldiermid, soldiermid_3, soldiermid_2, soldiermid_1, tileLayer, player];
-		const balloonEnemyList = [soldieronballoon, soldierBalloonPrefab_3, soldierBalloonPrefab_2, soldierBalloonPrefab_1, soldierBalloonPrefab];
+		const enemyList = [soldiermid, soldierBalloonPrefab_1, enemyPrefab];
+		const collidesWithBombList = [soldierBalloonPrefab_1, soldiermid, player];
+		const balloonEnemyList = [soldierBalloonPrefab_1];
 
 		// playerTilemapCollider
 		this.physics.add.collider(player, tileLayer, this.playerHitTilemap, undefined, this);
@@ -346,8 +315,8 @@ export default class Level extends Phaser.Scene {
 		this.explosion = explosion;
 		this.egg = egg;
 		this.player = player;
-		this.tileLayer = tileLayer;
 		this.bomb = bomb;
+		this.tileLayer = tileLayer;
 		this.uILayer = uILayer;
 		this.buildText = buildText;
 		this.debugText = debugText;
@@ -360,6 +329,8 @@ export default class Level extends Phaser.Scene {
 		this.mobileButtonUppercut = mobileButtonUppercut;
 		this.test_map_2 = test_map_2;
 		this.test_map_3 = test_map_3;
+		this.test_map_4 = test_map_4;
+		this.test_map_5 = test_map_5;
 		this.public_list = public_list;
 		this.enemyList = enemyList;
 		this.collidesWithBombList = collidesWithBombList;
@@ -373,8 +344,8 @@ export default class Level extends Phaser.Scene {
 	private explosion!: explosionPrefab;
 	private egg!: eggPrefab;
 	private player!: playerPrefab;
-	private tileLayer!: Phaser.Tilemaps.TilemapLayer;
 	private bomb!: BombPrefab;
+	private tileLayer!: Phaser.Tilemaps.TilemapLayer;
 	private uILayer!: Phaser.GameObjects.Layer;
 	private buildText!: Phaser.GameObjects.BitmapText;
 	private debugText!: Phaser.GameObjects.BitmapText;
@@ -387,30 +358,67 @@ export default class Level extends Phaser.Scene {
 	private mobileButtonUppercut!: Phaser.GameObjects.Rectangle;
 	private test_map_2!: Phaser.Tilemaps.Tilemap;
 	private test_map_3!: Phaser.Tilemaps.Tilemap;
+	private test_map_4!: Phaser.Tilemaps.Tilemap;
+	private test_map_5!: Phaser.Tilemaps.Tilemap;
 	public public_list!: Array<any>;
-	private enemyList!: Array<SoldierPrefab|SoldierBalloonPrefab>;
-	private collidesWithBombList!: Array<SoldierBalloonPrefab|SoldierPrefab|Phaser.Tilemaps.TilemapLayer|playerPrefab>;
+	private enemyList!: Array<SoldierPrefab|SoldierBalloonPrefab|EnemyPrefab>;
+	private collidesWithBombList!: Array<SoldierBalloonPrefab|SoldierPrefab|playerPrefab>;
 	private balloonEnemyList!: SoldierBalloonPrefab[];
 
 	/* START-USER-CODE */
 
 	private bombGroup!: Phaser.GameObjects.Group;
 	private explosionGroup!: Phaser.GameObjects.Group;
+	private enemyGroup!: Phaser.GameObjects.Group;
 
 	private UICam!: Phaser.Cameras.Scene2D.BaseCamera | any;
 		// TODO: define type annotation. the infered type doesn't have access to prerender()
 
+	private debugWallDetectGraphics!: Phaser.GameObjects.Graphics;
+
+	/** player is reset, objects are removed if below this Y coordinate. Set based on tilemap object */
+	private resetY: number | undefined;
+
 	create()
-	{
+	{	
 		this.editorCreate();
 
 		this.initCameras();
 
 		this.initMobileButtons();
 
+	// enemy group
+		this.enemyGroup = this.add.group({classType: EnemyPrefab});
+
 	// tilemap`
 		this.tileLayer.setCollision([1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18,
 			19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36], true);
+		
+	// enemies
+		let _levelEnemies = this.test_map_5.createFromObjects('enemies', {name: 'soldier', classType: EnemyPrefab as any, key: 'soldiermid'});
+		_levelEnemies.forEach((enemy) =>
+		{
+			let _enemy = enemy as EnemyPrefab;
+			this.enemyList.push(_enemy);
+
+			this.mainLayer.add(enemy);
+			this.UICam.ignore(enemy);
+		});
+			// this is a weird way of adding the newly created enemies to the list
+
+	// spawn point
+		let _startPoint = this.test_map_5.findObject('elements', function (obj) 
+		{
+			return obj.name === 'startPoint';
+		});
+		this.player.setPosition(_startPoint.x, _startPoint.y);
+		this.data.set('startPoint', {x: _startPoint.x, y: _startPoint.y});
+
+	// reset Y
+		this.resetY = this.test_map_5.findObject('elements', function (obj) 
+		{
+			return obj.name === 'resetY';
+		}).y
 
 	// egg
 		this.egg.setActive(false);
@@ -434,6 +442,9 @@ export default class Level extends Phaser.Scene {
 		this.explosionGroup = this.add.group({maxSize: 30, classType: explosionPrefab})
 			// TODO: define max
 
+	// debug wall detect visual
+		this.debugWallDetectGraphics = this.add.graphics({fillStyle: { color: 0x0000ff, alpha: (__DEV__? 1 : 0)}});
+
 	// resize init
 		this.events.on('pre-resize', this.resize, this);
 		this.resize();
@@ -445,8 +456,8 @@ export default class Level extends Phaser.Scene {
 	{
 		// this.debugText.setText(`${this.player.stateController.currentState.name}`);
 		this.debugText.setText(`${this.player.stateController.currentState.name}`);
-		this.debugText2.setText(`bombs active: ${this.bombGroup.countActive()}`);
-		this.debugText3.setText(`explosions active: ${this.explosionGroup.countActive()}`);
+		this.debugText2.setText(`wall left: ${this.player.onWallLeft}`);
+		this.debugText3.setText(`wall right: ${this.player.onWallRight}`);
 		// this.debugText.setText(`${this.player.onFloor}`);
 
 	// reset collision values to be overridden by callbacks
@@ -454,21 +465,29 @@ export default class Level extends Phaser.Scene {
 
 	// player wall check
 		this.player.onWallLeft = 
-			(this.tileLayer.getTileAtWorldXY(this.player.x - 7, this.player.y) != undefined);
+			(this.tileLayer.getTileAtWorldXY(this.player.body.x - 1, this.player.body.y + 9) != undefined 
+			|| this.tileLayer.getTileAtWorldXY(this.player.body.x - 1, this.player.body.y - 1) != undefined);
 		this.player.onWallRight = 
-			(this.tileLayer.getTileAtWorldXY(this.player.x + 6, this.player.y) != undefined);
-			// TODO: decorative tiles without collision, as defined at tileLayer.setCollision, 
-			// should not count as wall.
+			(this.tileLayer.getTileAtWorldXY(this.player.body.x + 12, this.player.body.y + 9) != undefined
+			|| this.tileLayer.getTileAtWorldXY(this.player.body.x + 12, this.player.body.y - 1) != undefined);
+				// TODO: decorative tiles without collision, as defined at tileLayer.setCollision, 
+				// should not count as wall.
+	// DEBUG: collision points visual
+		this.debugWallDetectGraphics.clear();
+		this.debugWallDetectGraphics.fillPoint(this.player.body.x - 1, this.player.body.y + 9);
+		this.debugWallDetectGraphics.fillPoint(this.player.body.x - 1, this.player.body.y - 1);
+		this.debugWallDetectGraphics.fillPoint(this.player.body.x + 12, this.player.body.y + 9);
+		this.debugWallDetectGraphics.fillPoint(this.player.body.x + 12, this.player.body.y - 1);
 
 	// out-of-bounds checks
-		if (this.player.y > 400)
+		if (this.player.y > this.resetY!)
 		{
 			this.player.reset();
 		}
 		this.bombGroup.getChildren().forEach(member =>
 		{
 			let _member = member as BombPrefab;
-			if (_member.y > 400)
+			if (_member.y > this.resetY!)
 				// why can't I access y just by member.y?
 			{
 				if (_member.texture.key == 'bird1egg')
@@ -477,7 +496,6 @@ export default class Level extends Phaser.Scene {
 				}
 
 				_member.disappear();
-				console.log(_member.displayList);
 			}
 		});
 			// TODO: change this to bomb group

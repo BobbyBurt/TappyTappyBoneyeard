@@ -183,6 +183,16 @@
                 "key": "test-map-3"
             },
             {
+                "url": "assets/test-map-4.json",
+                "type": "tilemapTiledJSON",
+                "key": "test-map-4"
+            },
+            {
+                "url": "assets/test-map-5.json",
+                "type": "tilemapTiledJSON",
+                "key": "test-map-5"
+            },
+            {
                 "url": "assets/tileset.png",
                 "type": "image",
                 "key": "tileset"

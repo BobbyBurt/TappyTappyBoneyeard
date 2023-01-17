@@ -7,4 +7,6 @@ declare global
         // this isn't necessary, I can put it at the top of the player class
 
     type playerStateName = 'running' | 'airborne' | 'groundCling' | 'cling' | 'punch' | 'dive' | 'uppercut'
+
+    var __DEV__: boolean;
 }

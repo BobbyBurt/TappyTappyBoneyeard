@@ -56,36 +56,52 @@ export default class playerPrefab extends Phaser.Physics.Arcade.Sprite {
 	public jumpInput: input = 'up';
 	private jumpKey: Phaser.Input.Keyboard.Key 
 	= this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP);
-	private jumpButton: number = 5;
+	private jumpButton: number = 1;
 	public jumpMobileButton: boolean = false;
 
 	/** set based on key, gamepad or mobile input */
 	public punchInput: input = 'up';
 	private punchKey: Phaser.Input.Keyboard.Key 
-		= this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
-	private punchButton: number = 1;
+		= this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.E);
+	private punchButton: number = 2;
 	public punchCharged: boolean = true;
 	public punchMobileButton: boolean = false;
+
+	/** set based on key, gamepad or mobile input */
+	public punchLeftInput: input = 'up';
+	private punchLeftKey: Phaser.Input.Keyboard.Key 
+		= this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
+	private punchLeftButton: number = 14;
+	public punchLeftCharged: boolean = true;
+	public punchLeftMobileButton: boolean = false;
+
+	/** set based on key, gamepad or mobile input */
+	public punchRightInput: input = 'up';
+	private punchRightKey: Phaser.Input.Keyboard.Key 
+		= this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
+	private punchRightButton: number = 15;
+	public punchRightCharged: boolean = true;
+	public punchRightMobileButton: boolean = false;
 
 	/** set based on key, gamepad or mobile input */
 	public uppercutInput: input = 'up';
 	private uppercutKey: Phaser.Input.Keyboard.Key 
 		= this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
-	private uppercutButton: number = 3;
+	private uppercutButton: number = 12;
 	public uppercutCharged: boolean = true;
 	public uppercutMobileButton: boolean = false;
 
 	/** set based on key, gamepad or mobile input */
 	public diveInput: input = 'up';
 	private diveKey: Phaser.Input.Keyboard.Key 
-		= this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
-	private diveButton: number = 2;
+		= this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
+	private diveButton: number = 13;
 	public diveMobileButton: boolean = false;
 
 	/** set based on key, gamepad or mobile input */
 	public eggInput: input = 'up';
 	private eggKey: Phaser.Input.Keyboard.Key 
-		= this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
+		= this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.E);
 	private eggButton: number = 0;
 	public eggMobileButton: boolean = false;
 	/** set by scene based on egg state, determines is player can drop egg */
@@ -170,27 +186,77 @@ export default class playerPrefab extends Phaser.Physics.Arcade.Sprite {
 		}
 
 	// punch
-		if (this.gamepad?.isButtonDown(this.punchButton) 
-			|| this.punchKey.isDown || this.punchMobileButton)
+		// if (this.gamepad?.isButtonDown(this.punchButton) 
+		// 	|| this.punchKey.isDown || this.punchMobileButton)
+		// {
+		// 	if (this.punchInput != 'just-down' && this.punchInput != 'down')
+		// 	{
+		// 		this.punchInput = 'just-down'
+		// 	}
+		// 	else
+		// 	{
+		// 		this.punchInput = 'down'
+		// 	}
+		// }
+		// else
+		// {
+		// 	if (this.punchInput != 'just-up' && this.punchInput != 'up')
+		// 	{
+		// 		this.punchInput = 'just-up'
+		// 	}
+		// 	else
+		// 	{
+		// 		this.punchInput = 'up'
+		// 	}
+		// }
+
+	// punch left
+		if (this.gamepad?.isButtonDown(this.punchLeftButton) 
+			|| this.punchLeftKey.isDown || this.punchLeftMobileButton)
 		{
-			if (this.punchInput != 'just-down' && this.punchInput != 'down')
+			if (this.punchLeftInput != 'just-down' && this.punchLeftInput != 'down')
 			{
-				this.punchInput = 'just-down'
+				this.punchLeftInput = 'just-down'
 			}
 			else
 			{
-				this.punchInput = 'down'
+				this.punchLeftInput = 'down'
 			}
 		}
 		else
 		{
-			if (this.punchInput != 'just-up' && this.punchInput != 'up')
+			if (this.punchLeftInput != 'just-up' && this.punchLeftInput != 'up')
 			{
-				this.punchInput = 'just-up'
+				this.punchLeftInput = 'just-up'
 			}
 			else
 			{
-				this.punchInput = 'up'
+				this.punchLeftInput = 'up'
+			}
+		}
+
+	// punch right
+		if (this.gamepad?.isButtonDown(this.punchRightButton) 
+			|| this.punchRightKey.isDown || this.punchRightMobileButton)
+		{
+			if (this.punchRightInput != 'just-down' && this.punchRightInput != 'down')
+			{
+				this.punchRightInput = 'just-down'
+			}
+			else
+			{
+				this.punchRightInput = 'down'
+			}
+		}
+		else
+		{
+			if (this.punchRightInput != 'just-up' && this.punchRightInput != 'up')
+			{
+				this.punchRightInput = 'just-up'
+			}
+			else
+			{
+				this.punchRightInput = 'up'
 			}
 		}
 
@@ -245,29 +311,29 @@ export default class playerPrefab extends Phaser.Physics.Arcade.Sprite {
 		}
 
 	// egg
-		if (this.gamepad?.isButtonDown(this.eggButton) 
-			|| this.eggKey.isDown || this.eggMobileButton)
-		{
-			if (this.eggInput != 'just-down' && this.eggInput != 'down')
-			{
-				this.eggInput = 'just-down'
-			}
-			else
-			{
-				this.eggInput = 'down'
-			}
-		}
-		else
-		{
-			if (this.eggInput != 'just-up' && this.eggInput != 'up')
-			{
-				this.eggInput = 'just-up'
-			}
-			else
-			{
-				this.eggInput = 'up'
-			}
-		}
+		// if (this.gamepad?.isButtonDown(this.eggButton) 
+		// 	|| this.eggKey.isDown || this.eggMobileButton)
+		// {
+		// 	if (this.eggInput != 'just-down' && this.eggInput != 'down')
+		// 	{
+		// 		this.eggInput = 'just-down'
+		// 	}
+		// 	else
+		// 	{
+		// 		this.eggInput = 'down'
+		// 	}
+		// }
+		// else
+		// {
+		// 	if (this.eggInput != 'just-up' && this.eggInput != 'up')
+		// 	{
+		// 		this.eggInput = 'just-up'
+		// 	}
+		// 	else
+		// 	{
+		// 		this.eggInput = 'up'
+		// 	}
+		// }
 	}
 
 
@@ -304,9 +370,11 @@ export default class playerPrefab extends Phaser.Physics.Arcade.Sprite {
 
 	reset()
 	{
-		this.setPosition(265, 141);
+		let _startPoint = this.scene.data.get('startPoint');
+		this.setPosition(_startPoint.x, _startPoint.y);
+			// TODO: add offset
 		this.stateController.setState('airborne');
-		this.setVelocity(this.moveSpeed, 0);
+		this.setVelocity(0, 0);
 		this.flipX = true;
 	}
 

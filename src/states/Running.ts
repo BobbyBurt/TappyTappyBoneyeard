@@ -27,8 +27,19 @@ export default class Running implements State {
 			this.jump();
 			this.player.sqaush();
 		}
-		else if (this.player.punchInput == 'just-down')
+		// else if (this.player.punchInput == 'just-down')
+		// {
+		// 	this.stateController.setState('punch');
+		// }
+			// MARKED FOR DELETION
+		else if (this.player.punchLeftInput == 'just-down' && this.player.punchCharged)
 		{
+			this.player.flipX = false;
+			this.stateController.setState('punch');
+		}
+		else if (this.player.punchRightInput == 'just-down' && this.player.punchCharged)
+		{
+			this.player.flipX = true;
 			this.stateController.setState('punch');
 		}
 		else if (this.player.uppercutInput == 'just-down' && this.player.uppercutCharged)

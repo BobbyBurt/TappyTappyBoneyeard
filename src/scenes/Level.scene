@@ -150,30 +150,6 @@
                 },
                 {
                     "prefabId": "d81d92c1-f62d-4e48-8d13-7b2050e8add7",
-                    "id": "c93b8070-d676-4260-a3b3-592edef49241",
-                    "unlock": [
-                        "x",
-                        "y"
-                    ],
-                    "label": "soldieronballoon",
-                    "components": [],
-                    "x": -3,
-                    "y": 180
-                },
-                {
-                    "prefabId": "d81d92c1-f62d-4e48-8d13-7b2050e8add7",
-                    "id": "26189906-c128-44ea-8166-fb7e2a96824c",
-                    "unlock": [
-                        "x",
-                        "y"
-                    ],
-                    "label": "soldierBalloonPrefab",
-                    "components": [],
-                    "x": -200,
-                    "y": 66
-                },
-                {
-                    "prefabId": "d81d92c1-f62d-4e48-8d13-7b2050e8add7",
                     "id": "b2bcf1fc-ddf6-439a-ba82-cd5468d7ad1c",
                     "unlock": [
                         "x",
@@ -183,74 +159,6 @@
                     "components": [],
                     "x": -384,
                     "y": 31
-                },
-                {
-                    "prefabId": "d81d92c1-f62d-4e48-8d13-7b2050e8add7",
-                    "id": "92209aa0-856c-4e83-8378-02c6a695fdcb",
-                    "unlock": [
-                        "x",
-                        "y"
-                    ],
-                    "label": "soldierBalloonPrefab_2",
-                    "components": [],
-                    "x": 248,
-                    "y": -57
-                },
-                {
-                    "prefabId": "d81d92c1-f62d-4e48-8d13-7b2050e8add7",
-                    "id": "ead49282-9df3-4c24-a3bb-e691a23c9921",
-                    "unlock": [
-                        "x",
-                        "y"
-                    ],
-                    "label": "soldierBalloonPrefab_3",
-                    "components": [],
-                    "x": 455,
-                    "y": 75
-                },
-                {
-                    "type": "Image",
-                    "id": "7d59ea82-e407-40be-a716-cae80ac4e393",
-                    "label": "balloon",
-                    "components": [],
-                    "texture": {
-                        "key": "balloon"
-                    },
-                    "x": 2,
-                    "y": 171
-                },
-                {
-                    "type": "Image",
-                    "id": "9c880685-c557-4dda-92b1-fa5b8fa4d543",
-                    "label": "balloon_1",
-                    "components": [],
-                    "texture": {
-                        "key": "balloon"
-                    },
-                    "x": 460,
-                    "y": 54
-                },
-                {
-                    "type": "Image",
-                    "id": "b8240cea-4274-408a-997e-5e1feda5760c",
-                    "label": "balloon_2",
-                    "components": [],
-                    "texture": {
-                        "key": "balloon"
-                    },
-                    "x": 250,
-                    "y": -63
-                },
-                {
-                    "type": "Image",
-                    "id": "accdc19d-7dae-4ee8-b8b8-ab13db7e15b0",
-                    "label": "balloon_3",
-                    "components": [],
-                    "texture": {
-                        "key": "balloon"
-                    },
-                    "x": -198,
-                    "y": 49
                 },
                 {
                     "type": "Image",
@@ -272,44 +180,8 @@
                     ],
                     "label": "soldiermid",
                     "components": [],
-                    "x": 387,
-                    "y": 302
-                },
-                {
-                    "prefabId": "ed9eaa4a-e16e-41c8-b171-c52fbade9815",
-                    "id": "77f6a3f6-7215-42cc-81e4-99aa231ac45b",
-                    "unlock": [
-                        "x",
-                        "y"
-                    ],
-                    "label": "soldiermid_1",
-                    "components": [],
-                    "x": 414,
-                    "y": -19
-                },
-                {
-                    "prefabId": "ed9eaa4a-e16e-41c8-b171-c52fbade9815",
-                    "id": "1a3ab54f-5913-4d71-9da4-79367c7f20f7",
-                    "unlock": [
-                        "x",
-                        "y"
-                    ],
-                    "label": "soldiermid_2",
-                    "components": [],
-                    "x": -302,
-                    "y": 203
-                },
-                {
-                    "prefabId": "ed9eaa4a-e16e-41c8-b171-c52fbade9815",
-                    "id": "8b42ff9b-d372-4ee6-9baf-9685b8d95ffd",
-                    "unlock": [
-                        "x",
-                        "y"
-                    ],
-                    "label": "soldiermid_3",
-                    "components": [],
-                    "x": -55,
-                    "y": 91
+                    "x": -372,
+                    "y": 59
                 },
                 {
                     "prefabId": "58e3738c-041e-4c6c-bbc7-5ed4b852107c",
@@ -321,8 +193,8 @@
                     "label": "egg",
                     "scope": "CLASS",
                     "components": [],
-                    "x": 272,
-                    "y": 170
+                    "x": 0,
+                    "y": 0
                 },
                 {
                     "prefabId": "3f838717-1748-46a2-999c-c73f8b1a2e4e",
@@ -340,20 +212,6 @@
                     "list": []
                 },
                 {
-                    "type": "TilemapLayer",
-                    "id": "aa5626c3-8f36-4e54-92d0-dac4ce5ebe43",
-                    "label": "tileLayer",
-                    "scope": "CLASS",
-                    "components": [],
-                    "x": -549,
-                    "y": -227,
-                    "tilemapId": "b204441a-da85-4549-9fd2-0ae3e08f1acc",
-                    "layerName": "Tile Layer 1",
-                    "tilesets": [
-                        "tileset"
-                    ]
-                },
-                {
                     "prefabId": "4b660cad-7a29-4745-9a29-2e05b0dc0c7c",
                     "id": "3bcd662a-bb7f-4dd2-ace2-2f3e5f3aebf9",
                     "unlock": [
@@ -363,8 +221,20 @@
                     "label": "bomb",
                     "scope": "CLASS",
                     "components": [],
-                    "x": -79,
-                    "y": 41
+                    "x": 0,
+                    "y": 0
+                },
+                {
+                    "type": "TilemapLayer",
+                    "id": "b7e12f80-11db-45fb-a844-a38aa8de519f",
+                    "label": "tileLayer",
+                    "scope": "CLASS",
+                    "components": [],
+                    "tilemapId": "e293de4b-b164-43a3-a4fa-45872a08f362",
+                    "layerName": "Tile Layer 1",
+                    "tilesets": [
+                        "tileset"
+                    ]
                 }
             ]
         },
@@ -573,6 +443,18 @@
                     "height": 100
                 }
             ]
+        },
+        {
+            "prefabId": "b6d5f782-7378-4227-9b43-4d0fb4826858",
+            "id": "dd50246a-eb50-441e-abe0-2eff39ba8af9",
+            "unlock": [
+                "x",
+                "y"
+            ],
+            "label": "enemyPrefab",
+            "components": [],
+            "x": -326,
+            "y": 13
         }
     ],
     "plainObjects": [
@@ -628,6 +510,30 @@
             "overlapOnly": true,
             "collideCallback": "this.playerEnemyOverlap",
             "callbackContext": "this"
+        },
+        {
+            "id": "93114ee4-dc76-4f16-9572-739014eca71b",
+            "type": "Tilemap",
+            "label": "test_map_4",
+            "key": "test-map-4",
+            "tilesets": [
+                {
+                    "name": "tileset",
+                    "imageKey": "tileset"
+                }
+            ]
+        },
+        {
+            "id": "e293de4b-b164-43a3-a4fa-45872a08f362",
+            "type": "Tilemap",
+            "label": "test_map_5",
+            "key": "test-map-5",
+            "tilesets": [
+                {
+                    "name": "tileset",
+                    "imageKey": "tileset"
+                }
+            ]
         }
     ],
     "meta": {
@@ -647,30 +553,16 @@
             "label": "enemyList",
             "objectIds": [
                 "ab2770fb-0448-4a53-aff0-4784dcd94581",
-                "c93b8070-d676-4260-a3b3-592edef49241",
-                "77f6a3f6-7215-42cc-81e4-99aa231ac45b",
-                "1a3ab54f-5913-4d71-9da4-79367c7f20f7",
-                "8b42ff9b-d372-4ee6-9baf-9685b8d95ffd",
-                "26189906-c128-44ea-8166-fb7e2a96824c",
-                "ead49282-9df3-4c24-a3bb-e691a23c9921",
-                "92209aa0-856c-4e83-8378-02c6a695fdcb",
-                "b2bcf1fc-ddf6-439a-ba82-cd5468d7ad1c"
+                "b2bcf1fc-ddf6-439a-ba82-cd5468d7ad1c",
+                "dd50246a-eb50-441e-abe0-2eff39ba8af9"
             ]
         },
         {
             "id": "4e0108a5-e4fe-408d-8b3f-26e132d30002",
             "label": "collidesWithBombList",
             "objectIds": [
-                "c93b8070-d676-4260-a3b3-592edef49241",
-                "ead49282-9df3-4c24-a3bb-e691a23c9921",
-                "92209aa0-856c-4e83-8378-02c6a695fdcb",
                 "b2bcf1fc-ddf6-439a-ba82-cd5468d7ad1c",
-                "26189906-c128-44ea-8166-fb7e2a96824c",
                 "ab2770fb-0448-4a53-aff0-4784dcd94581",
-                "8b42ff9b-d372-4ee6-9baf-9685b8d95ffd",
-                "1a3ab54f-5913-4d71-9da4-79367c7f20f7",
-                "77f6a3f6-7215-42cc-81e4-99aa231ac45b",
-                "aa5626c3-8f36-4e54-92d0-dac4ce5ebe43",
                 "4659f446-ab3a-42ff-b5c3-94d65c0ead0b"
             ]
         },
@@ -678,11 +570,7 @@
             "id": "28f3ba6c-1f32-4365-ae87-beb6c5af8c38",
             "label": "balloonEnemyList",
             "objectIds": [
-                "c93b8070-d676-4260-a3b3-592edef49241",
-                "ead49282-9df3-4c24-a3bb-e691a23c9921",
-                "92209aa0-856c-4e83-8378-02c6a695fdcb",
-                "b2bcf1fc-ddf6-439a-ba82-cd5468d7ad1c",
-                "26189906-c128-44ea-8166-fb7e2a96824c"
+                "b2bcf1fc-ddf6-439a-ba82-cd5468d7ad1c"
             ]
         }
     ]

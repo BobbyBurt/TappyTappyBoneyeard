@@ -1,5 +1,20 @@
 # Changelog
 
+## Version 6 -
+
+### Changed
+
+- Two punch inputs for either direction.
+- Changed keyboard and gamepad control scheme to something simpler and understandable.
+- Improved wall detection
+
+### Added
+### Removed
+
+- Egg drop ability
+
+### Fixed
+
 ## Version 5.1 - 2023-01-12
 
 ### Changed
