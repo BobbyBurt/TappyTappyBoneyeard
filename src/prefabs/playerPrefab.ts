@@ -123,11 +123,84 @@ export default class playerPrefab extends Phaser.Physics.Arcade.Sprite {
 
 	start()
 	{
-		this.setVelocityX(this.moveSpeed);
-
 		this.flipX = true;
 
 		this.setName('player');
+
+	// animations
+		this.anims.create
+		({
+			key: 'flap',
+			frames:
+			[
+				{ key: 'bird1squash' },
+				{ key: 'bird1mid' },
+				{ key: 'bird1stretch' },
+				{ key: 'bird1stretch' }
+			],
+			frameRate: 16,
+			repeat: 0
+		});
+
+		this.anims.create
+		({
+			key: 'running',
+			frames:
+			[
+				{ key: 'bird1squash' },
+				{ key: 'bird1squash' },
+				{ key: 'bird1squash' },
+				{ key: 'bird1mid' },
+				{ key: 'bird1mid' },
+				{ key: 'bird1mid' },
+				{ key: 'bird1mid' },
+				{ key: 'bird1mid' }
+			],
+			frameRate: 16,
+			repeat: -1
+		});
+
+		this.anims.create
+		({
+			key: 'idle',
+			frames:
+			[
+				{ key: 'bird1mid' },
+				{ key: 'bird1mid' },
+				{ key: 'bird1mid' },
+				{ key: 'bird1mid' },
+				{ key: 'bird1squash' },
+				{ key: 'bird1squash' },
+				{ key: 'bird1stretch' },
+				{ key: 'bird1stretch' }
+			],
+			frameRate: 8,
+			repeat: -1
+		});
+
+		this.anims.create
+		({
+			key: 'punch',
+			frames:
+			[
+				{ key: 'bird1punch' }
+			],
+			frameRate: 16,
+			repeat: 0
+		});
+
+		this.anims.create
+		({
+			key: 'dive',
+			frames:
+			[
+				{ key: 'bird1dive' }
+			],
+			frameRate: 16,
+			repeat: 0
+		});
+
+		this.play('idle');
 	}
 
 	update()
@@ -342,25 +415,26 @@ export default class playerPrefab extends Phaser.Physics.Arcade.Sprite {
 	hitEnemy(_enemy:Phaser.Types.Physics.Arcade.GameObjectWithBody)
 		// TODO: specify type annotation
 	{
-		if (this.stateController.currentState.name == 'punch' 
-			|| this.stateController.currentState.name == 'dive'
-			|| this.stateController.currentState.name == 'uppercut')
-		{
-			_enemy.destroy();
+		// if (this.stateController.currentState.name == 'punch' 
+		// 	|| this.stateController.currentState.name == 'dive'
+		// 	|| this.stateController.currentState.name == 'uppercut')
+		// {
+		// 	_enemy.destroy();
 
-			// TODO: have the enemy go flying or something cool
-				// I can't set velocity on this type, but that's the type that the callback gives 
-				// me.
+		// 	// TODO: have the enemy go flying or something cool
+		// 		// I can't set velocity on this type, but that's the type that the callback gives 
+		// 		// me.
 
-			if (this.stateController.currentState.name == 'dive')
-			{
-				this.setVelocityY(-this.jumpForce);
-			}
-		}
-		else
-		{
-			this.reset();
-		}
+		// 	if (this.stateController.currentState.name == 'dive')
+		// 	{
+		// 		this.setVelocityY(-this.jumpForce);
+		// 	}
+		// }
+		// else
+		// {
+		// 	this.reset();
+		// }
+			// MARKED FOR DELETION
 	}
 
 	hitExplosion()

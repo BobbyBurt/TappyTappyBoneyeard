@@ -379,6 +379,8 @@ export default class Level extends Phaser.Scene {
 	/** player is reset, objects are removed if below this Y coordinate. Set based on tilemap object */
 	private resetY: number | undefined;
 
+	private music!: Phaser.Sound.BaseSound;
+
 	create()
 	{	
 		this.editorCreate();
@@ -441,6 +443,19 @@ export default class Level extends Phaser.Scene {
 	// explosions
 		this.explosionGroup = this.add.group({maxSize: 30, classType: explosionPrefab})
 			// TODO: define max
+
+	// music
+		this.music = this.sound.add('main-game');
+		if (!__DEV__)
+		{
+			this.music.play({loop: true});
+		}
+
+	// SFX
+		// this.sound.add('bird-flap', {volume: 1});
+		// this.sound.add('smushing', {volume: 1});
+		// this.sound.add('smushing', {volume: 1});
+		// this.sound.add('smushing', {volume: 1});
 
 	// debug wall detect visual
 		this.debugWallDetectGraphics = this.add.graphics({fillStyle: { color: 0x0000ff, alpha: (__DEV__? 1 : 0)}});
@@ -517,11 +532,27 @@ export default class Level extends Phaser.Scene {
 		}
 	}
 
-	playerEnemyOverlap(_player:Phaser.Types.Physics.Arcade.GameObjectWithBody, 
-		_enemy:Phaser.Types.Physics.Arcade.GameObjectWithBody)
+	playerEnemyOverlap(player:Phaser.Types.Physics.Arcade.GameObjectWithBody, 
+		enemy:Phaser.Types.Physics.Arcade.GameObjectWithBody)
 		// TODO: specify type annotation
 	{
-		this.player.hitEnemy(_enemy);
+		let _enemy = enemy as EnemyPrefab;
+		
+		if (this.player.stateController.currentState.name == 'punch' 
+			|| this.player.stateController.currentState.name == 'dive'
+			|| this.player.stateController.currentState.name == 'uppercut')
+		{
+			_enemy.hit(this.player.body.velocity.x, this.player.body.velocity.y);
+
+			if (this.player.stateController.currentState.name == 'dive')
+			{
+				this.player.setVelocityY(-this.player.jumpForce);
+			}
+		}
+		else
+		{
+			this.player.reset();
+		}
 	}
 
 

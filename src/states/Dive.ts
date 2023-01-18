@@ -17,7 +17,7 @@ export default class Dive implements State {
 	
 	enter()
 	{
-		this.player.setTexture('bird1dive');
+		this.player.play('dive');
 
 		this.player.body.setVelocityY(250);
 	}

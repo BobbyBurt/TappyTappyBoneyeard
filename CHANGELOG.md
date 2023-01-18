@@ -6,9 +6,17 @@
 
 - Two punch inputs for either direction.
 - Changed keyboard and gamepad control scheme to something simpler and understandable.
-- Improved wall detection
+- Improved wall detection.
+- Enemy placement is now loaded in from tilemap data rather than placed afterwards in the Phaser Editor.
+- __DEV__ variable is now used to automatically alter code between dev and release.
+- Enemies now have death behaviour rather than disappearing.
 
 ### Added
+
+- New test map.
+- Animation for enemies.
+- Rough animation for the player.
+
 ### Removed
 
 - Egg drop ability

@@ -25,7 +25,7 @@ export default class Airborne implements State {
 		if (this.player.jumpInput == 'just-down' && this.player.flapCharge > 0)
 		{
 			this.flap();
-			this.player.sqaush();
+			// this.player.sqaush();
 		}
 		// else if (this.player.punchInput == 'just-down' && this.player.punchCharged)
 		// {
@@ -81,5 +81,7 @@ export default class Airborne implements State {
 		this.player.setVelocityY(-this.player.jumpForce);
 
 		this.player.flapCharge--;
+
+		this.player.play('flap');
 	}
 }

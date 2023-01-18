@@ -17,7 +17,7 @@ export default class Running implements State {
 	
 	enter()
 	{
-		this.player.setTexture('bird1mid');
+		this.player.play('running');
 	}
 	
 	update()
@@ -25,7 +25,7 @@ export default class Running implements State {
 		if (this.player.jumpInput == 'just-down' && this.player.flapCharge > 0)
 		{
 			this.jump();
-			this.player.sqaush();
+			// this.player.sqaush();
 		}
 		// else if (this.player.punchInput == 'just-down')
 		// {
@@ -68,6 +68,8 @@ export default class Running implements State {
 	jump()
 	{
 		this.player.setVelocityY(-this.player.jumpForce);
+
+		this.player.play('flap');
 	}
 }
 

@@ -11,21 +11,21 @@
                     "assets/sfx/bird drop.mp3"
                 ],
                 "type": "audio",
-                "key": "bird drop"
+                "key": "bird -drop"
             },
             {
                 "url": [
                     "assets/sfx/bird egg lay.mp3"
                 ],
                 "type": "audio",
-                "key": "bird egg lay"
+                "key": "bird-egg-lay"
             },
             {
                 "url": [
                     "assets/sfx/bird flap.mp3"
                 ],
                 "type": "audio",
-                "key": "bird flap"
+                "key": "bird-flap"
             },
             {
                 "url": "assets/bird1dive.png",
@@ -67,21 +67,21 @@
                     "assets/sfx/egg drop.mp3"
                 ],
                 "type": "audio",
-                "key": "egg drop"
+                "key": "egg-drop"
             },
             {
                 "url": [
                     "assets/sfx/enemy death.mp3"
                 ],
                 "type": "audio",
-                "key": "enemy death"
+                "key": "enemy-death"
             },
             {
                 "url": [
                     "assets/sfx/enemy shoot.mp3"
                 ],
                 "type": "audio",
-                "key": "enemy shoot"
+                "key": "enemy-shoot"
             },
             {
                 "url": [
@@ -89,6 +89,13 @@
                 ],
                 "type": "audio",
                 "key": "explosion"
+            },
+            {
+                "url": [
+                    "assets/music/main-game.mp3"
+                ],
+                "type": "audio",
+                "key": "main-game"
             },
             {
                 "textureURL": "assets/nokia.png",
@@ -116,14 +123,14 @@
                     "assets/sfx/Pogo stick.mp3"
                 ],
                 "type": "audio",
-                "key": "Pogo stick"
+                "key": "pogo-stick"
             },
             {
                 "url": [
                     "assets/sfx/Punch swing.mp3"
                 ],
                 "type": "audio",
-                "key": "Punch swing"
+                "key": "punch-swing"
             },
             {
                 "url": [

@@ -23,11 +23,14 @@ export default class EnemyPrefab extends Phaser.GameObjects.Sprite {
 		/* START-USER-CTR-CODE */
 
 		this.scene.events.once(Phaser.Scenes.Events.UPDATE, this.start, this);
+		this.scene.events.on(Phaser.Scenes.Events.UPDATE, this.update, this);
 
 		/* END-USER-CTR-CODE */
 	}
 
 	/* START-USER-CODE */
+
+	private spin: number = 0;
 
 	start()
 	{
@@ -54,6 +57,23 @@ export default class EnemyPrefab extends Phaser.GameObjects.Sprite {
 			repeat: -1
 		});
 		this.play('idle');
+	}
+
+	update()
+	{
+		this.rotation += this.spin;
+			// TODO: enemies sometimes spin really fast
+	}
+
+	hit(directionX: number, directionY: number)
+	{
+		this.body.setVelocity(directionX, -150);
+		this.body.checkCollision.none = true;
+
+		this.stop();
+		this.setTexture('soldierfalling');
+			// i suppose this should be its own animation
+		this.spin = (directionX > 0? .1 : -.1);
 	}
 
 	/* END-USER-CODE */

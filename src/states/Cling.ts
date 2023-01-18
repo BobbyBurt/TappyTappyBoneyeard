@@ -78,5 +78,7 @@ export default class Cling implements State {
 		}
 
 		this.player.setVelocity(velocityX, -this.player.jumpForce);
+
+		this.player.play('flap');
 	}
 }

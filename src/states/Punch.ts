@@ -19,7 +19,7 @@ export default class Punch implements State {
 	
 	enter()
 	{
-		this.player.setTexture('bird1punch');
+		this.player.play('punch');
 
 		this.player.punchCharged = false;
 		
