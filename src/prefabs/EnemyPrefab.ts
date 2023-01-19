@@ -25,12 +25,24 @@ export default class EnemyPrefab extends Phaser.GameObjects.Sprite {
 		this.scene.events.once(Phaser.Scenes.Events.UPDATE, this.start, this);
 		this.scene.events.on(Phaser.Scenes.Events.UPDATE, this.update, this);
 
+		this.scene.time.addEvent
+		({
+			delay: 1,
+			callback: () =>
+			{
+				this.rotation += this.spin;
+			},
+			loop: true
+		})
+
 		/* END-USER-CTR-CODE */
 	}
 
 	/* START-USER-CODE */
 
-	private spin: number = 0;
+	private _spin: number = 0;
+	public get spin() { return this._spin };
+	private set spin(setSpin: number) { this._spin = setSpin };
 
 	start()
 	{
@@ -61,12 +73,14 @@ export default class EnemyPrefab extends Phaser.GameObjects.Sprite {
 
 	update()
 	{
-		this.rotation += this.spin;
+		// this.rotation += this.spin;
 			// TODO: enemies sometimes spin really fast
 	}
 
 	hit(directionX: number, directionY: number)
 	{
+		this.body.allowGravity = true;
+			// since floating enemies have gravity disabled
 		this.body.setVelocity(directionX, -150);
 		this.body.checkCollision.none = true;
 

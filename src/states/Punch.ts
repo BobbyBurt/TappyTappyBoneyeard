@@ -20,6 +20,7 @@ export default class Punch implements State {
 	enter()
 	{
 		this.player.play('punch');
+		this.player.scene.sound.play('punch-swing')
 
 		this.player.punchCharged = false;
 		

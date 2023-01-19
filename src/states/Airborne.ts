@@ -17,7 +17,14 @@ export default class Airborne implements State {
 	
 	enter()
 	{
+		if (this.player.flapCharge == 0)
+		{
+			this.player.play('no-more-flaps');
+		}
+		else
 		this.player.setTexture('bird1mid');
+			// this should be the airborne animation, played on the condition that the jump or 
+			// flap animation is not playing. Not sure how to check current animation.
 	}
 	
 	update()
@@ -82,6 +89,15 @@ export default class Airborne implements State {
 
 		this.player.flapCharge--;
 
-		this.player.play('flap');
+		if (this.player.flapCharge == 0)
+		{
+			this.player.play('no-more-flaps-flap');
+		}
+		else
+		{
+			this.player.play('flap');
+		}
+		this.player.scene.sound.play('bird-flap');
+
 	}
 }

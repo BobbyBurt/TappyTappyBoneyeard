@@ -6,22 +6,28 @@
 
 - Two punch inputs for either direction.
 - Changed keyboard and gamepad control scheme to something simpler and understandable.
-- Improved wall detection.
 - Enemy placement is now loaded in from tilemap data rather than placed afterwards in the Phaser Editor.
-- __DEV__ variable is now used to automatically alter code between dev and release.
+- `__DEV__` variable is now used to automatically alter code between dev and release.
 - Enemies now have death behaviour rather than disappearing.
 
 ### Added
 
 - New test map.
-- Animation for enemies.
-- Rough animation for the player.
+- Implemented animation for enemies.
+- Implemented rough animation for the player. This includes feedback for when the player cannot flap again.
+- Implemented music. (Disabled on dev compile.)
+- Implemented SFX:
+  - Flap
+  - Enemy death
+  - Punch
 
 ### Removed
 
 - Egg drop ability
 
 ### Fixed
+
+- Wall detection is more correct / generous, checking at the top and bottom of the player.
 
 ## Version 5.1 - 2023-01-12
 

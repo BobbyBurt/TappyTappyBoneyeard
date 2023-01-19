@@ -39,7 +39,7 @@ export default class StateController
 
 	setState(name:playerStateName)
 	{
-		console.log(`state transition: ${this.currentState.name} => ${name}`);
+		// console.log(`state transition: ${this.currentState.name} => ${name}`);
 		
 		if (this.currentState === this.states[name])
 		{	

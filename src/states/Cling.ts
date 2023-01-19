@@ -79,6 +79,7 @@ export default class Cling implements State {
 
 		this.player.setVelocity(velocityX, -this.player.jumpForce);
 
-		this.player.play('flap');
+		this.player.play('jump');
+		this.player.scene.sound.play('bird-flap');
 	}
 }

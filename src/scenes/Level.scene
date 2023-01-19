@@ -443,18 +443,6 @@
                     "height": 100
                 }
             ]
-        },
-        {
-            "prefabId": "b6d5f782-7378-4227-9b43-4d0fb4826858",
-            "id": "dd50246a-eb50-441e-abe0-2eff39ba8af9",
-            "unlock": [
-                "x",
-                "y"
-            ],
-            "label": "enemyPrefab",
-            "components": [],
-            "x": -326,
-            "y": 13
         }
     ],
     "plainObjects": [
@@ -553,8 +541,7 @@
             "label": "enemyList",
             "objectIds": [
                 "ab2770fb-0448-4a53-aff0-4784dcd94581",
-                "b2bcf1fc-ddf6-439a-ba82-cd5468d7ad1c",
-                "dd50246a-eb50-441e-abe0-2eff39ba8af9"
+                "b2bcf1fc-ddf6-439a-ba82-cd5468d7ad1c"
             ]
         },
         {

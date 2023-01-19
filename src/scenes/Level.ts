@@ -12,10 +12,12 @@ import BombPrefab from "../prefabs/BombPrefab";
 import Align from "../components/Align";
 import MobileDependent from "../components/MobileDependent";
 import MobileButton from "../components/MobileButton";
-import EnemyPrefab from "../prefabs/EnemyPrefab";
+
 /* START-USER-IMPORTS */
 
 import AdaptiveZoom from "../AdaptiveZoom";
+import BalloonEnemy from "~/prefabs/BalloonEnemy";
+import EnemyPrefab from "~/prefabs/EnemyPrefab";
 
 /* END-USER-IMPORTS */
 
@@ -192,13 +194,9 @@ export default class Level extends Phaser.Scene {
 		mobileButtonUppercut.fillColor = 15579772;
 		uILayer.add(mobileButtonUppercut);
 
-		// enemyPrefab
-		const enemyPrefab = new EnemyPrefab(this, -326, 13);
-		this.add.existing(enemyPrefab);
-
 		// lists
 		const public_list: Array<any> = [];
-		const enemyList = [soldiermid, soldierBalloonPrefab_1, enemyPrefab];
+		const enemyList = [soldiermid, soldierBalloonPrefab_1];
 		const collidesWithBombList = [soldierBalloonPrefab_1, soldiermid, player];
 		const balloonEnemyList = [soldierBalloonPrefab_1];
 
@@ -361,7 +359,7 @@ export default class Level extends Phaser.Scene {
 	private test_map_4!: Phaser.Tilemaps.Tilemap;
 	private test_map_5!: Phaser.Tilemaps.Tilemap;
 	public public_list!: Array<any>;
-	private enemyList!: Array<SoldierPrefab|SoldierBalloonPrefab|EnemyPrefab>;
+	private enemyList!: Array<SoldierPrefab|SoldierBalloonPrefab>;
 	private collidesWithBombList!: Array<SoldierBalloonPrefab|SoldierPrefab|playerPrefab>;
 	private balloonEnemyList!: SoldierBalloonPrefab[];
 
@@ -395,9 +393,10 @@ export default class Level extends Phaser.Scene {
 	// tilemap`
 		this.tileLayer.setCollision([1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18,
 			19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36], true);
-		
+
 	// enemies
-		let _levelEnemies = this.test_map_5.createFromObjects('enemies', {name: 'soldier', classType: EnemyPrefab as any, key: 'soldiermid'});
+		// let _levelEnemies = this.test_map_5.createFromObjects('enemies', {name: 'soldier', classType: EnemyPrefab as any, key: 'soldiermid'});
+		let _levelEnemies = this.test_map_5.createFromObjects('enemies', {name: 'soldier', classType: BalloonEnemy as any});
 		_levelEnemies.forEach((enemy) =>
 		{
 			let _enemy = enemy as EnemyPrefab;
@@ -445,17 +444,18 @@ export default class Level extends Phaser.Scene {
 			// TODO: define max
 
 	// music
-		this.music = this.sound.add('main-game');
+		this.music = this.sound.add('main-game', {volume: .7});
 		if (!__DEV__)
 		{
 			this.music.play({loop: true});
 		}
 
 	// SFX
-		// this.sound.add('bird-flap', {volume: 1});
-		// this.sound.add('smushing', {volume: 1});
-		// this.sound.add('smushing', {volume: 1});
-		// this.sound.add('smushing', {volume: 1});
+		this.sound.add('bird-flap', {volume: 1});
+		this.sound.add('enemy-death', {volume: 1});
+		this.sound.add('explosion', {volume: 1});
+			// TODO: impliment explosion sound w/ spacial audio or something
+		this.sound.add('punch-swing', {volume: 1});
 
 	// debug wall detect visual
 		this.debugWallDetectGraphics = this.add.graphics({fillStyle: { color: 0x0000ff, alpha: (__DEV__? 1 : 0)}});
@@ -537,12 +537,14 @@ export default class Level extends Phaser.Scene {
 		// TODO: specify type annotation
 	{
 		let _enemy = enemy as EnemyPrefab;
-		
+
 		if (this.player.stateController.currentState.name == 'punch' 
 			|| this.player.stateController.currentState.name == 'dive'
 			|| this.player.stateController.currentState.name == 'uppercut')
 		{
 			_enemy.hit(this.player.body.velocity.x, this.player.body.velocity.y);
+
+			this.sound.play('enemy-death');
 
 			if (this.player.stateController.currentState.name == 'dive')
 			{

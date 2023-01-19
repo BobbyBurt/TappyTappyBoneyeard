@@ -127,79 +127,7 @@ export default class playerPrefab extends Phaser.Physics.Arcade.Sprite {
 
 		this.setName('player');
 
-	// animations
-		this.anims.create
-		({
-			key: 'flap',
-			frames:
-			[
-				{ key: 'bird1squash' },
-				{ key: 'bird1mid' },
-				{ key: 'bird1stretch' },
-				{ key: 'bird1stretch' }
-			],
-			frameRate: 16,
-			repeat: 0
-		});
-
-		this.anims.create
-		({
-			key: 'running',
-			frames:
-			[
-				{ key: 'bird1squash' },
-				{ key: 'bird1squash' },
-				{ key: 'bird1squash' },
-				{ key: 'bird1mid' },
-				{ key: 'bird1mid' },
-				{ key: 'bird1mid' },
-				{ key: 'bird1mid' },
-				{ key: 'bird1mid' }
-			],
-			frameRate: 16,
-			repeat: -1
-		});
-
-		this.anims.create
-		({
-			key: 'idle',
-			frames:
-			[
-				{ key: 'bird1mid' },
-				{ key: 'bird1mid' },
-				{ key: 'bird1mid' },
-				{ key: 'bird1mid' },
-				{ key: 'bird1squash' },
-				{ key: 'bird1squash' },
-				{ key: 'bird1stretch' },
-				{ key: 'bird1stretch' }
-			],
-			frameRate: 8,
-			repeat: -1
-		});
-
-		this.anims.create
-		({
-			key: 'punch',
-			frames:
-			[
-				{ key: 'bird1punch' }
-			],
-			frameRate: 16,
-			repeat: 0
-		});
-
-		this.anims.create
-		({
-			key: 'dive',
-			frames:
-			[
-				{ key: 'bird1dive' }
-			],
-			frameRate: 16,
-			repeat: 0
-		});
-
+		this.createAnimations();
 		this.play('idle');
 	}
 
@@ -495,6 +423,136 @@ export default class playerPrefab extends Phaser.Physics.Arcade.Sprite {
 				return this.onWallRight;
 			}
 		}
+	}
+
+	/** called on start to initialize animations */
+	createAnimations()
+	{
+		this.anims.create
+		({
+			key: 'flap',
+			frames:
+			[
+				{ key: 'bird1squash' },
+				{ key: 'bird1mid' },
+				{ key: 'bird1stretch' },
+				{ key: 'bird1stretch' }
+			],
+			frameRate: 16,
+			repeat: 0
+		});
+
+		this.anims.create
+		({
+			key: 'no-more-flaps-flap',
+				// TODO: think of a better name
+			frames:
+			[
+				{ key: 'bird1squash' },
+				{ key: 'bird1mid' },
+				{ key: 'bird1stretch' },
+				{ key: 'bird1stretch' },
+				{ key: 'bird1squash' }
+			],
+			frameRate: 16,
+			repeat: 0
+		});
+		
+		this.anims.create
+		({
+			key: 'no-more-flaps',
+				// TODO: think of a better name
+			frames:
+			[
+				{ key: 'bird1squash' }
+			],
+			frameRate: 16,
+			repeat: 0
+		});
+
+		this.anims.create
+		({
+			key: 'jump',
+			frames:
+			[
+				{ key: 'bird1squash' },
+				{ key: 'bird1squash' },
+				{ key: 'bird1stretch' },
+				{ key: 'bird1stretch' },
+				{ key: 'bird1mid' },
+			],
+			frameRate: 16,
+			repeat: 0
+		});
+
+		this.anims.create
+		({
+			key: 'running',
+			frames:
+			[
+				{ key: 'bird1squash' },
+				{ key: 'bird1squash' },
+				{ key: 'bird1squash' },
+				{ key: 'bird1mid' },
+				{ key: 'bird1mid' },
+				{ key: 'bird1mid' },
+				{ key: 'bird1mid' },
+				{ key: 'bird1mid' }
+			],
+			frameRate: 16,
+			repeat: -1
+		});
+
+		this.anims.create
+		({
+			key: 'idle',
+			frames:
+			[
+				{ key: 'bird1mid' },
+				{ key: 'bird1mid' },
+				{ key: 'bird1mid' },
+				{ key: 'bird1mid' },
+				{ key: 'bird1squash' },
+				{ key: 'bird1squash' },
+				{ key: 'bird1stretch' },
+				{ key: 'bird1stretch' }
+			],
+			frameRate: 8,
+			repeat: -1
+		});
+
+		this.anims.create
+		({
+			key: 'punch',
+			frames:
+			[
+				{ key: 'bird1punch' }
+			],
+			frameRate: 16,
+			repeat: 0
+		});
+
+		this.anims.create
+		({
+			key: 'dive',
+			frames:
+			[
+				{ key: 'bird1dive' }
+			],
+			frameRate: 16,
+			repeat: 0
+		});
+
+		this.anims.create
+		({
+			key: 'airborne',
+			frames:
+			[
+				{ key: 'bird1mid' }
+			],
+			frameRate: 16,
+			repeat: 0
+		});
 	}
 
 	/* END-USER-CODE */
