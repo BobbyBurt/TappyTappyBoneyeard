@@ -91,6 +91,16 @@
                 "key": "explosion"
             },
             {
+                "url": "assets/gun.png",
+                "type": "image",
+                "key": "gun"
+            },
+            {
+                "url": "assets/gundiagonal.png",
+                "type": "image",
+                "key": "gundiagonal"
+            },
+            {
                 "url": [
                     "assets/music/main-game.mp3"
                 ],
@@ -200,9 +210,19 @@
                 "key": "test-map-5"
             },
             {
+                "url": "assets/levels/test-map-6.json",
+                "type": "tilemapTiledJSON",
+                "key": "test-map-6"
+            },
+            {
                 "url": "assets/tileset.png",
                 "type": "image",
                 "key": "tileset"
+            },
+            {
+                "url": "assets/levels/tileset.png",
+                "type": "image",
+                "key": "tileset_1"
             }
         ]
     },

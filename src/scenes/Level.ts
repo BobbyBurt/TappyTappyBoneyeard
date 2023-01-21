@@ -4,20 +4,18 @@
 import Phaser from "phaser";
 import ScrollFactor from "../components/ScrollFactor";
 import explosionPrefab from "../prefabs/explosionPrefab";
-import SoldierBalloonPrefab from "../prefabs/SoldierBalloonPrefab";
-import SoldierPrefab from "../prefabs/SoldierPrefab";
 import eggPrefab from "../prefabs/eggPrefab";
 import playerPrefab from "../prefabs/playerPrefab";
 import BombPrefab from "../prefabs/BombPrefab";
 import Align from "../components/Align";
 import MobileDependent from "../components/MobileDependent";
 import MobileButton from "../components/MobileButton";
-
 /* START-USER-IMPORTS */
 
 import AdaptiveZoom from "../AdaptiveZoom";
 import BalloonEnemy from "~/prefabs/BalloonEnemy";
 import EnemyPrefab from "~/prefabs/EnemyPrefab";
+import GroundEnemy from "~/prefabs/GroundEnemy";
 
 /* END-USER-IMPORTS */
 
@@ -48,6 +46,10 @@ export default class Level extends Phaser.Scene {
 		// test_map_5
 		const test_map_5 = this.add.tilemap("test-map-5");
 		test_map_5.addTilesetImage("tileset", "tileset");
+
+		// test_map_6
+		const test_map_6 = this.add.tilemap("test-map-6");
+		test_map_6.addTilesetImage("tilleset", "tileset");
 
 		// BGLayer
 		const bGLayer = this.add.layer();
@@ -92,20 +94,8 @@ export default class Level extends Phaser.Scene {
 		const explosion = new explosionPrefab(this, 272, -547);
 		mainLayer.add(explosion);
 
-		// soldierBalloonPrefab_1
-		const soldierBalloonPrefab_1 = new SoldierBalloonPrefab(this, -384, 31);
-		mainLayer.add(soldierBalloonPrefab_1);
-
-		// balloon_4
-		const balloon_4 = this.add.image(-384.24695617335885, 16.301220894787473, "balloon");
-		mainLayer.add(balloon_4);
-
-		// soldiermid
-		const soldiermid = new SoldierPrefab(this, -372, 59);
-		mainLayer.add(soldiermid);
-
 		// egg
-		const egg = new eggPrefab(this, 0, 0);
+		const egg = new eggPrefab(this, -525, -53);
 		mainLayer.add(egg);
 
 		// player
@@ -113,11 +103,11 @@ export default class Level extends Phaser.Scene {
 		mainLayer.add(player);
 
 		// bomb
-		const bomb = new BombPrefab(this, 0, 0);
+		const bomb = new BombPrefab(this, -525, -53);
 		mainLayer.add(bomb);
 
 		// tileLayer
-		const tileLayer = test_map_5.createLayer("Tile Layer 1", ["tileset"], 0, 0);
+		const tileLayer = test_map_6.createLayer("Tile Layer 1", ["tilleset"], 0, 0);
 		mainLayer.add(tileLayer);
 
 		// UILayer
@@ -196,9 +186,9 @@ export default class Level extends Phaser.Scene {
 
 		// lists
 		const public_list: Array<any> = [];
-		const enemyList = [soldiermid, soldierBalloonPrefab_1];
-		const collidesWithBombList = [soldierBalloonPrefab_1, soldiermid, player];
-		const balloonEnemyList = [soldierBalloonPrefab_1];
+		const enemyList: Array<any> = [];
+		const collidesWithBombList = [player];
+		const balloonEnemyList: Array<any> = [];
 
 		// playerTilemapCollider
 		this.physics.add.collider(player, tileLayer, this.playerHitTilemap, undefined, this);
@@ -329,6 +319,7 @@ export default class Level extends Phaser.Scene {
 		this.test_map_3 = test_map_3;
 		this.test_map_4 = test_map_4;
 		this.test_map_5 = test_map_5;
+		this.test_map_6 = test_map_6;
 		this.public_list = public_list;
 		this.enemyList = enemyList;
 		this.collidesWithBombList = collidesWithBombList;
@@ -358,10 +349,11 @@ export default class Level extends Phaser.Scene {
 	private test_map_3!: Phaser.Tilemaps.Tilemap;
 	private test_map_4!: Phaser.Tilemaps.Tilemap;
 	private test_map_5!: Phaser.Tilemaps.Tilemap;
+	private test_map_6!: Phaser.Tilemaps.Tilemap;
 	public public_list!: Array<any>;
-	private enemyList!: Array<SoldierPrefab|SoldierBalloonPrefab>;
-	private collidesWithBombList!: Array<SoldierBalloonPrefab|SoldierPrefab|playerPrefab>;
-	private balloonEnemyList!: SoldierBalloonPrefab[];
+	private enemyList!: Array<any>;
+	private collidesWithBombList!: playerPrefab[];
+	private balloonEnemyList!: Array<any>;
 
 	/* START-USER-CODE */
 
@@ -396,8 +388,21 @@ export default class Level extends Phaser.Scene {
 
 	// enemies
 		// let _levelEnemies = this.test_map_5.createFromObjects('enemies', {name: 'soldier', classType: EnemyPrefab as any, key: 'soldiermid'});
-		let _levelEnemies = this.test_map_5.createFromObjects('enemies', {name: 'soldier', classType: BalloonEnemy as any});
-		_levelEnemies.forEach((enemy) =>
+
+		this.createMapEnemies();
+
+		// let _levelEnemies = this.test_map_6.createFromObjects('elements', {gid: 37, classType: GroundEnemy as any});
+		// _levelEnemies.forEach((enemy) =>
+		// {
+		// 	let _enemy = enemy as EnemyPrefab;
+		// 	this.enemyList.push(_enemy);
+
+		// 	this.mainLayer.add(enemy);
+		// 	this.UICam.ignore(enemy);
+		// });
+
+		let _levelEnemies2 = this.test_map_6.createFromObjects('enemies', {name: 'soldierBalloon', classType: BalloonEnemy as any});
+		_levelEnemies2.forEach((enemy) =>
 		{
 			let _enemy = enemy as EnemyPrefab;
 			this.enemyList.push(_enemy);
@@ -408,15 +413,15 @@ export default class Level extends Phaser.Scene {
 			// this is a weird way of adding the newly created enemies to the list
 
 	// spawn point
-		let _startPoint = this.test_map_5.findObject('elements', function (obj) 
+		let _startPoint = this.test_map_6.findObject('elements', function (obj) 
 		{
 			return obj.name === 'startPoint';
 		});
-		this.player.setPosition(_startPoint.x, _startPoint.y);
-		this.data.set('startPoint', {x: _startPoint.x, y: _startPoint.y});
+		this.player.setPosition(_startPoint.x! + 8, _startPoint.y! - 8);
+		this.data.set('startPoint', {x: _startPoint.x! + 8, y: _startPoint.y! - 8});
 
 	// reset Y
-		this.resetY = this.test_map_5.findObject('elements', function (obj) 
+		this.resetY = this.test_map_6.findObject('elements', function (obj) 
 		{
 			return obj.name === 'resetY';
 		}).y
@@ -637,6 +642,67 @@ export default class Level extends Phaser.Scene {
 			this.bombGroup.shuffle();
 				// TODO: figure out what exactly shuffle() does. Worked for me before
 		}
+	}
+
+	/** iterates through everything in the 'elements' object layer of the map and creates enemies 
+	 * based on their GID. */
+	createMapEnemies()
+	{
+		console.log(this.test_map_6.getObjectLayer('elements'));
+		let _mapObjects = this.test_map_6.getObjectLayer('elements')
+		_mapObjects.objects.forEach((object) =>
+		{
+			console.log('loop:' + object.gid)
+			let _enemy: any = undefined;
+			switch (object.gid)
+			{
+				case 37:
+				{
+					_enemy = new GroundEnemy(this, object.x! + 8, object.y! - 8);
+					break;
+				}
+				case 38:
+				{
+
+					_enemy = new GroundEnemy(this, object.x! + 8, object.y! - 8, 'forward');
+					break;
+				}
+				case 39:
+				{
+
+					_enemy = new GroundEnemy(this, object.x! + 8, object.y! - 8, 'upward');
+					break;
+				}
+				case 40:
+				{
+
+					_enemy = new GroundEnemy(this, object.x! + 8, object.y! - 8, 'up');
+					break;
+				}
+				case 41:
+				{
+
+					_enemy = new GroundEnemy(this, object.x! + 8, object.y! - 8, 'downward');
+					break;
+				}
+				case 42:
+				{
+
+					_enemy = new BalloonEnemy(this, object.x! + 8, object.y! - 8);
+					break;
+				}
+			}
+			if (_enemy == undefined)
+			{
+				return;
+			}
+
+			_enemy.flipX = object.flippedHorizontal;
+
+			this.enemyList.push(_enemy);
+			this.mainLayer.add(_enemy);
+			this.UICam.ignore(_enemy);
+		});
 	}
 
 	/**

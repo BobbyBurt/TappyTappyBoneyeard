@@ -149,41 +149,6 @@
                     "y": -547
                 },
                 {
-                    "prefabId": "d81d92c1-f62d-4e48-8d13-7b2050e8add7",
-                    "id": "b2bcf1fc-ddf6-439a-ba82-cd5468d7ad1c",
-                    "unlock": [
-                        "x",
-                        "y"
-                    ],
-                    "label": "soldierBalloonPrefab_1",
-                    "components": [],
-                    "x": -384,
-                    "y": 31
-                },
-                {
-                    "type": "Image",
-                    "id": "604e879d-d652-4d07-8634-50d5ba9e84d6",
-                    "label": "balloon_4",
-                    "components": [],
-                    "texture": {
-                        "key": "balloon"
-                    },
-                    "x": -384.24695617335885,
-                    "y": 16.301220894787473
-                },
-                {
-                    "prefabId": "ed9eaa4a-e16e-41c8-b171-c52fbade9815",
-                    "id": "ab2770fb-0448-4a53-aff0-4784dcd94581",
-                    "unlock": [
-                        "x",
-                        "y"
-                    ],
-                    "label": "soldiermid",
-                    "components": [],
-                    "x": -372,
-                    "y": 59
-                },
-                {
                     "prefabId": "58e3738c-041e-4c6c-bbc7-5ed4b852107c",
                     "id": "2c019803-40cd-44be-8bcb-187aa9e40df0",
                     "unlock": [
@@ -193,8 +158,8 @@
                     "label": "egg",
                     "scope": "CLASS",
                     "components": [],
-                    "x": 0,
-                    "y": 0
+                    "x": -525,
+                    "y": -53
                 },
                 {
                     "prefabId": "3f838717-1748-46a2-999c-c73f8b1a2e4e",
@@ -221,19 +186,19 @@
                     "label": "bomb",
                     "scope": "CLASS",
                     "components": [],
-                    "x": 0,
-                    "y": 0
+                    "x": -525,
+                    "y": -53
                 },
                 {
                     "type": "TilemapLayer",
-                    "id": "b7e12f80-11db-45fb-a844-a38aa8de519f",
+                    "id": "b7cb4953-6490-4930-a234-d912cbe5de6d",
                     "label": "tileLayer",
                     "scope": "CLASS",
                     "components": [],
-                    "tilemapId": "e293de4b-b164-43a3-a4fa-45872a08f362",
+                    "tilemapId": "72c08077-96a1-4f87-8d76-b2a9083b1194",
                     "layerName": "Tile Layer 1",
                     "tilesets": [
-                        "tileset"
+                        "tilleset"
                     ]
                 }
             ]
@@ -522,6 +487,18 @@
                     "imageKey": "tileset"
                 }
             ]
+        },
+        {
+            "id": "72c08077-96a1-4f87-8d76-b2a9083b1194",
+            "type": "Tilemap",
+            "label": "test_map_6",
+            "key": "test-map-6",
+            "tilesets": [
+                {
+                    "name": "tilleset",
+                    "imageKey": "tileset"
+                }
+            ]
         }
     ],
     "meta": {
@@ -538,27 +515,18 @@
         },
         {
             "id": "ba8a8f59-dac4-499f-af01-63a37964e5ba",
-            "label": "enemyList",
-            "objectIds": [
-                "ab2770fb-0448-4a53-aff0-4784dcd94581",
-                "b2bcf1fc-ddf6-439a-ba82-cd5468d7ad1c"
-            ]
+            "label": "enemyList"
         },
         {
             "id": "4e0108a5-e4fe-408d-8b3f-26e132d30002",
             "label": "collidesWithBombList",
             "objectIds": [
-                "b2bcf1fc-ddf6-439a-ba82-cd5468d7ad1c",
-                "ab2770fb-0448-4a53-aff0-4784dcd94581",
                 "4659f446-ab3a-42ff-b5c3-94d65c0ead0b"
             ]
         },
         {
             "id": "28f3ba6c-1f32-4365-ae87-beb6c5af8c38",
-            "label": "balloonEnemyList",
-            "objectIds": [
-                "b2bcf1fc-ddf6-439a-ba82-cd5468d7ad1c"
-            ]
+            "label": "balloonEnemyList"
         }
     ]
 }

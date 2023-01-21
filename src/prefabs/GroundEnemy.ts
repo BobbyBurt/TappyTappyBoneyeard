@@ -8,7 +8,7 @@ import EnemyPrefab from "./EnemyPrefab";
 /* START-USER-IMPORTS */
 /* END-USER-IMPORTS */
 
-export default class BalloonEnemy extends EnemyPrefab {
+export default class GroundEnemy extends EnemyPrefab {
 
 	constructor(scene: Phaser.Scene, x?: number, y?: number, gunDirection?: GunDirection, texture?: string, frame?: number | string) {
 		super(scene, x ?? 0, y ?? 0, gunDirection, texture || "soldiermid", frame);
@@ -32,36 +32,29 @@ export default class BalloonEnemy extends EnemyPrefab {
 
 		this.originalPos.setTo(this.x, this.y);
 
-	// animation test
+	// animation
 		this.anims.create
 		({
 			key: 'idle',
 			frames:
 			[
-				{ key: 'soldieronballoon' }
+				{ key: 'soldiermid' },
+				{ key: 'soldiermid' },
+				{ key: 'soldiermid' },
+				{ key: 'soldiermid' },
+				{ key: 'soldiersquash' },
+				{ key: 'soldiersquash' },
+				{ key: 'soldierstretch' },
+				{ key: 'soldierstretch' }
 			],
 			frameRate: 16,
 			repeat: -1
 		});
 		this.play('idle');
-
-		this.floatYTween = this.scene.tweens.addCounter
-		({
-			from: -10,
-			to: 10,
-			duration: 3000,
-			ease: Phaser.Math.Easing.Quadratic.InOut,
-			yoyo: true,
-			repeat: -1
-		});
 	}
 
 	update(): void
 	{
-		if (super.spin == 0)
-		{
-			this.y = this.originalPos.y + this.floatYTween.getValue();
-		}
 
 	}
 

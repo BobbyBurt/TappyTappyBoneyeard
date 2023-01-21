@@ -8,7 +8,10 @@
 - Changed keyboard and gamepad control scheme to something simpler and understandable.
 - Enemy placement is now loaded in from tilemap data rather than placed afterwards in the Phaser Editor.
 - `__DEV__` variable is now used to automatically alter code between dev and release.
+- Four blue debug pixels representing wall deteciton points are now visible in `__DEV__` mode.
 - Enemies now have death behaviour rather than disappearing.
+- Enemy types are now seperate classes extending from `EnemyPrefab`.
+- Enemies are now loaded in based on object GID rather than name, allowing enemy types to be added to the Tiled tileset and placed more easily.
 
 ### Added
 
@@ -20,10 +23,13 @@
   - Flap
   - Enemy death
   - Punch
+- Balloon enemies move vertically.
+- Guns attached to enemies as set in the Tilemap.
 
 ### Removed
 
-- Egg drop ability
+- Egg drop ability.
+- Old test map.
 
 ### Fixed
 
