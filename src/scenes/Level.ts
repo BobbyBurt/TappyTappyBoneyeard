@@ -188,6 +188,7 @@ export default class Level extends Phaser.Scene {
 		const public_list: Array<any> = [];
 		const enemyList: Array<any> = [];
 		const collidesWithBombList = [player];
+		const gunEnemyList: Array<any> = [];
 		const balloonEnemyList: Array<any> = [];
 
 		// playerTilemapCollider
@@ -323,6 +324,7 @@ export default class Level extends Phaser.Scene {
 		this.public_list = public_list;
 		this.enemyList = enemyList;
 		this.collidesWithBombList = collidesWithBombList;
+		this.gunEnemyList = gunEnemyList;
 		this.balloonEnemyList = balloonEnemyList;
 
 		this.events.emit("scene-awake");
@@ -353,6 +355,7 @@ export default class Level extends Phaser.Scene {
 	public public_list!: Array<any>;
 	private enemyList!: Array<any>;
 	private collidesWithBombList!: playerPrefab[];
+	private gunEnemyList!: Array<any>;
 	private balloonEnemyList!: Array<any>;
 
 	/* START-USER-CODE */
@@ -473,7 +476,7 @@ export default class Level extends Phaser.Scene {
 	}
 
 	update(dt:number)
-	{
+	{	
 		// this.debugText.setText(`${this.player.stateController.currentState.name}`);
 		this.debugText.setText(`${this.player.stateController.currentState.name}`);
 		this.debugText2.setText(`wall left: ${this.player.onWallLeft}`);
@@ -648,11 +651,9 @@ export default class Level extends Phaser.Scene {
 	 * based on their GID. */
 	createMapEnemies()
 	{
-		console.log(this.test_map_6.getObjectLayer('elements'));
 		let _mapObjects = this.test_map_6.getObjectLayer('elements')
 		_mapObjects.objects.forEach((object) =>
 		{
-			console.log('loop:' + object.gid)
 			let _enemy: any = undefined;
 			switch (object.gid)
 			{
@@ -663,32 +664,32 @@ export default class Level extends Phaser.Scene {
 				}
 				case 38:
 				{
-
 					_enemy = new GroundEnemy(this, object.x! + 8, object.y! - 8, 'forward');
+					this.gunEnemyList.push(_enemy);
 					break;
 				}
 				case 39:
 				{
-
 					_enemy = new GroundEnemy(this, object.x! + 8, object.y! - 8, 'upward');
+					this.gunEnemyList.push(_enemy);
 					break;
 				}
 				case 40:
 				{
-
 					_enemy = new GroundEnemy(this, object.x! + 8, object.y! - 8, 'up');
+					this.gunEnemyList.push(_enemy);
 					break;
 				}
 				case 41:
 				{
-
 					_enemy = new GroundEnemy(this, object.x! + 8, object.y! - 8, 'downward');
+					this.gunEnemyList.push(_enemy);
 					break;
 				}
 				case 42:
 				{
-
 					_enemy = new BalloonEnemy(this, object.x! + 8, object.y! - 8);
+					this.balloonEnemyList.push(_enemy);
 					break;
 				}
 			}

@@ -525,7 +525,11 @@
             ]
         },
         {
-            "id": "28f3ba6c-1f32-4365-ae87-beb6c5af8c38",
+            "id": "3f521e89-f910-4cc1-ac5c-90d1d3fdb117",
+            "label": "gunEnemyList"
+        },
+        {
+            "id": "01965a6c-c8f0-4c61-80a8-136eb8304ca4",
             "label": "balloonEnemyList"
         }
     ]

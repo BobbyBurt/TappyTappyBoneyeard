@@ -7,18 +7,17 @@
 - Two punch inputs for either direction.
 - Changed keyboard and gamepad control scheme to something simpler and understandable.
 - Enemy placement is now loaded in from tilemap data rather than placed afterwards in the Phaser Editor.
-- `__DEV__` variable is now used to automatically alter code between dev and release.
-- Four blue debug pixels representing wall deteciton points are now visible in `__DEV__` mode.
+- `__DEV__` variable is now used to automatically alter code between dev mode and public build.
+- Four blue debug pixels representing wall deteciton points are now visible in dev mode.
 - Enemies now have death behaviour rather than disappearing.
 - Enemy types are now seperate classes extending from `EnemyPrefab`.
 - Enemies are now loaded in based on object GID rather than name, allowing enemy types to be added to the Tiled tileset and placed more easily.
 
 ### Added
 
-- New test map.
 - Implemented animation for enemies.
 - Implemented rough animation for the player. This includes feedback for when the player cannot flap again.
-- Implemented music. (Disabled on dev compile.)
+- Implemented music. (Disabled in dev mode.)
 - Implemented SFX:
   - Flap
   - Enemy death
@@ -28,8 +27,8 @@
 
 ### Removed
 
-- Egg drop ability.
-- Old test map.
+- Disabled egg drop ability.
+- Replaced old test map.
 
 ### Fixed
 

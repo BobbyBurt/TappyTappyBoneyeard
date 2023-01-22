@@ -35,23 +35,68 @@ export default class EnemyPrefab extends Phaser.GameObjects.Sprite {
 				// this.rotation += this.spin;
 			},
 			loop: true
-		})
+		});
 
-		if (gunDirection)
+		this.gunDirection = gunDirection;
+
+		/* END-USER-CTR-CODE */
+	}
+
+	/* START-USER-CODE */
+
+	private gun!: Phaser.GameObjects.Image;
+	private gunDirection!: GunDirection;
+
+	protected _spin: number = 0;
+	public get spin() { return this._spin };
+	private set spin(setSpin: number) { this._spin = setSpin };
+
+	/** update which runs on all enemy classes. Each enemy class has it's own start() for specific
+	 *  setup */
+	enemyStart()
+	{	
+		this.setScale(1);
+		this.y -= 2;
+			// tilemap offset correction
+
+		if (this.gunDirection)
 		{
-			this.gun = this.scene.add.image(this.x, this.y, 'gun');
+			this.createGun();
+		}
+	}
+
+	/** update which runs on all enemy classes. Each enemy class has it's own update() for specific
+	 *  behaviour */
+	enemyUpdate()
+	{
+		this.rotation += this.spin;
+		if (this.gun)
+		{
+			this.gun.rotation += this.spin * 3;
+		}
+	}
+
+	createGun()
+	{
+		this.gun = this.scene.add.image(this.x, this.y, 'gun');
+				// TODO: this needs to be added to the mainLayer, but we can't access it's variable
+			this.scene.physics.add.existing(this.gun, false);
+			let _gunBody = this.gun.body as Phaser.Physics.Arcade.Body;
+				// simply calling this.gun.body doesn't give me much to work with. There must be 
+				// a better way to do this
+			_gunBody.allowGravity = false;
 			this.gun.flipX = this.flipX;
-			switch (gunDirection)
+			switch (this.gunDirection)
 			{
 				case 'forward':
 				{
-					this.gun.x += (this.gun.flipX? 10 : -10);
+					this.gun.x += (this.flipX? 10 : -10);
 					break;
 				}
 				case 'upward':
 				{
 					this.gun.setTexture('gundiagonal');
-					this.gun.x += (this.gun.flipX? 10 : -10);
+					this.gun.x += (this.flipX? 10 : -10);
 					// this.gun.y += 7;
 
 					break;
@@ -60,7 +105,7 @@ export default class EnemyPrefab extends Phaser.GameObjects.Sprite {
 				{
 					this.gun.setTexture('gundiagonal');
 					this.gun.setAngle(-90);
-					this.gun.x += (this.gun.flipX? 10 : -10);
+					this.gun.x += (this.flipX? 10 : -10);
 					this.gun.y += 7;
 					break;
 				}
@@ -75,33 +120,6 @@ export default class EnemyPrefab extends Phaser.GameObjects.Sprite {
 					break;
 				}
 			}
-		}
-
-		/* END-USER-CTR-CODE */
-	}
-
-	/* START-USER-CODE */
-
-	private gun!: Phaser.GameObjects.Image;
-
-	protected _spin: number = 0;
-	public get spin() { return this._spin };
-	private set spin(setSpin: number) { this._spin = setSpin };
-
-	/** update which runs on all enemy classes. Each enemy class has it's own start() for specific
-	 *  setup */
-	enemyStart()
-	{	
-		this.setScale(1);
-		this.y -= 2;
-			// tilemap offset correction
-	}
-
-	/** update which runs on all enemy classes. Each enemy class has it's own update() for specific
-	 *  behaviour */
-	enemyUpdate()
-	{
-		this.rotation += this.spin;
 	}
 
 	hit(directionX: number, directionY: number)
@@ -115,6 +133,13 @@ export default class EnemyPrefab extends Phaser.GameObjects.Sprite {
 		this.setTexture('soldierfalling');
 			// i suppose this should be its own animation
 		this.spin = (directionX > 0? .1 : -.1);
+
+		if (this.gun)
+		{
+			let _gunBody = this.gun.body as Phaser.Physics.Arcade.Body;
+			_gunBody.allowGravity = true;
+			_gunBody.setVelocity(directionX * 1.2, -170)
+		}
 	}
 
 	/* END-USER-CODE */
