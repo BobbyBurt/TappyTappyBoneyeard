@@ -12,6 +12,7 @@
 - Enemies now have death behaviour rather than disappearing.
 - Enemy types are now seperate classes extending from `EnemyPrefab`.
 - Enemies are now loaded in based on object GID rather than name, allowing enemy types to be added to the Tiled tileset and placed more easily.
+- top-left debug text now only appears in dev mode.
 
 ### Added
 
@@ -23,7 +24,9 @@
   - Enemy death
   - Punch
 - Balloon enemies move vertically.
-- Guns attached to enemies as set in the Tilemap.
+- Guns attached to enemies as set in the Tilemap, including visual behaviour when enemy is taken out.
+- New test map
+- Bullets fired from enemy guns.
 
 ### Removed
 

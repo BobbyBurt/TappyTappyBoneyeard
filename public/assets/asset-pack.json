@@ -63,6 +63,11 @@
                 "key": "bomb"
             },
             {
+                "url": "assets/bullet.png",
+                "type": "image",
+                "key": "bullet"
+            },
+            {
                 "url": [
                     "assets/sfx/egg drop.mp3"
                 ],

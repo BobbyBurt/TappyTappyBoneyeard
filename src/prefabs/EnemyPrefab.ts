@@ -45,7 +45,7 @@ export default class EnemyPrefab extends Phaser.GameObjects.Sprite {
 	/* START-USER-CODE */
 
 	private gun!: Phaser.GameObjects.Image;
-	private gunDirection!: GunDirection;
+	public gunDirection!: GunDirection;
 
 	protected _spin: number = 0;
 	public get spin() { return this._spin };
@@ -84,7 +84,7 @@ export default class EnemyPrefab extends Phaser.GameObjects.Sprite {
 			let _gunBody = this.gun.body as Phaser.Physics.Arcade.Body;
 				// simply calling this.gun.body doesn't give me much to work with. There must be 
 				// a better way to do this
-			_gunBody.allowGravity = false;
+			_gunBody.setAllowGravity(false);
 			this.gun.flipX = this.flipX;
 			switch (this.gunDirection)
 			{
@@ -137,7 +137,7 @@ export default class EnemyPrefab extends Phaser.GameObjects.Sprite {
 		if (this.gun)
 		{
 			let _gunBody = this.gun.body as Phaser.Physics.Arcade.Body;
-			_gunBody.allowGravity = true;
+			_gunBody.setAllowGravity(true);
 			_gunBody.setVelocity(directionX * 1.2, -170)
 		}
 	}

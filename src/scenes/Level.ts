@@ -16,6 +16,7 @@ import AdaptiveZoom from "../AdaptiveZoom";
 import BalloonEnemy from "~/prefabs/BalloonEnemy";
 import EnemyPrefab from "~/prefabs/EnemyPrefab";
 import GroundEnemy from "~/prefabs/GroundEnemy";
+import BulletPrefab from "~/prefabs/BulletPrefab";
 
 /* END-USER-IMPORTS */
 
@@ -121,25 +122,22 @@ export default class Level extends Phaser.Scene {
 		uILayer.add(buildText);
 
 		// debugText
-		const debugText = this.add.bitmapText(-9, 66, "nokia", "debug textdfdfasdf");
+		const debugText = this.add.bitmapText(-9, 66, "nokia", "");
 		debugText.setOrigin(0, 1);
-		debugText.text = "debug textdfdfasdf";
 		debugText.fontSize = -8;
 		debugText.dropShadowY = 100;
 		uILayer.add(debugText);
 
 		// debugText2
-		const debugText2 = this.add.bitmapText(-10, 38, "nokia", "debug textdfdfasdf");
+		const debugText2 = this.add.bitmapText(-10, 38, "nokia", "");
 		debugText2.setOrigin(0, 1);
-		debugText2.text = "debug textdfdfasdf";
 		debugText2.fontSize = -8;
 		debugText2.dropShadowY = 100;
 		uILayer.add(debugText2);
 
 		// debugText3
-		const debugText3 = this.add.bitmapText(-9, 52, "nokia", "debug textdfdfasdf");
+		const debugText3 = this.add.bitmapText(-9, 52, "nokia", "");
 		debugText3.setOrigin(0, 1);
-		debugText3.text = "debug textdfdfasdf";
 		debugText3.fontSize = -8;
 		debugText3.dropShadowY = 100;
 		uILayer.add(debugText3);
@@ -362,6 +360,7 @@ export default class Level extends Phaser.Scene {
 
 	private bombGroup!: Phaser.GameObjects.Group;
 	private explosionGroup!: Phaser.GameObjects.Group;
+	private bulletGroup!: Phaser.GameObjects.Group;
 	private enemyGroup!: Phaser.GameObjects.Group;
 
 	private UICam!: Phaser.Cameras.Scene2D.BaseCamera | any;
@@ -389,31 +388,7 @@ export default class Level extends Phaser.Scene {
 		this.tileLayer.setCollision([1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18,
 			19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36], true);
 
-	// enemies
-		// let _levelEnemies = this.test_map_5.createFromObjects('enemies', {name: 'soldier', classType: EnemyPrefab as any, key: 'soldiermid'});
-
 		this.createMapEnemies();
-
-		// let _levelEnemies = this.test_map_6.createFromObjects('elements', {gid: 37, classType: GroundEnemy as any});
-		// _levelEnemies.forEach((enemy) =>
-		// {
-		// 	let _enemy = enemy as EnemyPrefab;
-		// 	this.enemyList.push(_enemy);
-
-		// 	this.mainLayer.add(enemy);
-		// 	this.UICam.ignore(enemy);
-		// });
-
-		let _levelEnemies2 = this.test_map_6.createFromObjects('enemies', {name: 'soldierBalloon', classType: BalloonEnemy as any});
-		_levelEnemies2.forEach((enemy) =>
-		{
-			let _enemy = enemy as EnemyPrefab;
-			this.enemyList.push(_enemy);
-
-			this.mainLayer.add(enemy);
-			this.UICam.ignore(enemy);
-		});
-			// this is a weird way of adding the newly created enemies to the list
 
 	// spawn point
 		let _startPoint = this.test_map_6.findObject('elements', function (obj) 
@@ -447,13 +422,26 @@ export default class Level extends Phaser.Scene {
 			(this.bombGroup, this.collidesWithBombList, this.bombHit, undefined, this);
 		this.time.addEvent({delay: 1000, callback: this.dropBombs, callbackScope: this, loop: true});
 
+	// bullets
+		this.bulletGroup = this.add.group({maxSize: 100, classType: BulletPrefab})
+			// TODO: define justifies max size
+		this.physics.overlap(this.bulletGroup, this.player, this.bulletHit);
+		this.physics.collide(this.bulletGroup, this.tileLayer, this.bulletCollideTilemap);
+		this.time.addEvent({delay: 3000, callback: this.enemyGunFire, callbackScope: this, loop: true})
+
+	// balloon physics
+		// let _balloonEnemy = this.balloonEnemyList[0] as BalloonEnemy;
+		// let _balloon = _balloonEnemy.balloon;
+		// console.log(_balloon);
+		// this.physics.add.overlap(_balloon, this.player, this.balloonHit)
+
 	// explosions
 		this.explosionGroup = this.add.group({maxSize: 30, classType: explosionPrefab})
 			// TODO: define max
 
 	// music
 		this.music = this.sound.add('main-game', {volume: .7});
-		if (!__DEV__)
+		if (__DEV__)
 		{
 			this.music.play({loop: true});
 		}
@@ -478,9 +466,12 @@ export default class Level extends Phaser.Scene {
 	update(dt:number)
 	{	
 		// this.debugText.setText(`${this.player.stateController.currentState.name}`);
-		this.debugText.setText(`${this.player.stateController.currentState.name}`);
-		this.debugText2.setText(`wall left: ${this.player.onWallLeft}`);
-		this.debugText3.setText(`wall right: ${this.player.onWallRight}`);
+		if (__DEV__)
+		{
+			this.debugText.setText(`${this.player.stateController.currentState.name}`);
+			this.debugText2.setText(`wall left: ${this.player.onWallLeft}`);
+			this.debugText3.setText(`bullets: ${this.bulletGroup.countActive()}`);	
+		}
 		// this.debugText.setText(`${this.player.onFloor}`);
 
 	// reset collision values to be overridden by callbacks
@@ -612,6 +603,24 @@ export default class Level extends Phaser.Scene {
 		}
 	}
 
+	/** TEST */
+	balloonHit(_balloon:any, _player:any)
+	{
+		console.log('balloon hit');
+	}
+
+	bulletHit(_bullet:any, _player:any)
+	{
+		this.player.reset();
+	}
+
+	bulletCollideTilemap(_bullet: any, _tilemap: any)
+	{
+		_bullet.setActive(false);
+		_bullet.setVisible(false);
+		_bullet.body.setEnable(false);
+	}
+
 	dropEgg()
 	{
 		this.setBomb(this.player.x, this.player.y, 'bird1egg');
@@ -628,6 +637,47 @@ export default class Level extends Phaser.Scene {
 			{
 				this.setBomb(element.x, element.y + 25, 'bomb');
 			}
+		});
+	}
+
+	/** creates bullets from all enemies with a gun */
+	enemyGunFire()
+	{
+		this.gunEnemyList.forEach((_enemy, _index) => 
+		{
+			let enemy = _enemy as EnemyPrefab;
+			let _newBullet = this.bulletGroup.get(enemy.x, enemy.y) as BulletPrefab;
+			_newBullet.appear();
+			let velocity = {x: 0, y: 0};
+			switch(enemy.gunDirection)
+			{
+				case 'up':
+				{
+					velocity = {x: 0, y: -30};
+					break;
+				}
+				case 'down':
+				{
+					velocity = {x: 0, y: 30};
+					break;
+				}
+				case 'downward':
+				{
+					velocity = {x: (enemy.flipX? 15 : -15), y: 15};
+					break;
+				}
+				case 'upward':
+				{
+					velocity = {x: (enemy.flipX? 15 : -15), y: -15};
+					break;
+				}
+				case 'forward':
+				{
+					velocity = {x: (enemy.flipX? 30 : -30), y: 0};
+					break;
+				}
+			}
+			_newBullet.body.setVelocity(velocity.x, velocity.y);
 		});
 	}
 

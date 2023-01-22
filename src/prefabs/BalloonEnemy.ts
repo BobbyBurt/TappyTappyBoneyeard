@@ -26,11 +26,21 @@ export default class BalloonEnemy extends EnemyPrefab {
 	private floatYTween!: Phaser.Tweens.Tween;
 	private originalPos = new Phaser.Geom.Point(0, 0);
 
+	public balloon!: Phaser.GameObjects.Image;
+
 	start()
 	{
 		this.body.allowGravity = false;
 
 		this.originalPos.setTo(this.x, this.y);
+
+	// create balloon
+		this.balloon = this.scene.add.image(this.x, this.y - 30, 'balloon');
+		this.scene.physics.add.existing(this.balloon);
+		let _balloonBody = this.balloon.body as Phaser.Physics.Arcade.Body;
+		_balloonBody.setAllowGravity(false);
+		_balloonBody.setGravityY(-550);
+		_balloonBody.setMaxVelocityY(60);
 
 	// animation test
 		this.anims.create
@@ -61,6 +71,15 @@ export default class BalloonEnemy extends EnemyPrefab {
 		if (super.spin == 0)
 		{
 			this.y = this.originalPos.y + this.floatYTween.getValue();
+			this.balloon.setY((this.originalPos.y - 30) + this.floatYTween.getValue());
+		}
+		else
+		{
+			let _balloonBody = this.balloon.body as Phaser.Physics.Arcade.Body;
+			_balloonBody.setAllowGravity(true);
+				/** it would be best if super.hit() also triggered this behaviour. if there isn't a
+				 * good way to do it then i can set up the balloon in EnemyPrefab, but it would 
+				 * be better here if most enemies don't use it. */
 		}
 
 	}
