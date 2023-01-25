@@ -37,6 +37,7 @@ export default class BulletPrefab extends Phaser.GameObjects.Image {
 		{	
 			this.setActive(false);
 			this.setVisible(false);
+			this.body.setEnable(false);
 		}});
 
 		this.scene.time.addEvent(this.timer);
@@ -48,8 +49,18 @@ export default class BulletPrefab extends Phaser.GameObjects.Image {
 	{
 		this.setActive(true);
 		this.setVisible(true);
+		this.body.setEnable(true);
 
 		this.startTimer();
+	}
+
+	disappear()
+	{
+		this.setActive(false);
+		this.setVisible(false);
+		this.body.setEnable(false);
+
+		this.timer?.remove();
 	}
 
 	/* END-USER-CODE */

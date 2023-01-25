@@ -100,7 +100,7 @@ export default class Level extends Phaser.Scene {
 		mainLayer.add(egg);
 
 		// player
-		const player = new playerPrefab(this, 265, 141);
+		const player = new playerPrefab(this, 284, 160);
 		mainLayer.add(player);
 
 		// bomb
@@ -185,9 +185,10 @@ export default class Level extends Phaser.Scene {
 		// lists
 		const public_list: Array<any> = [];
 		const enemyList: Array<any> = [];
-		const collidesWithBombList = [player];
+		const collidesWithBombList = [player, tileLayer];
 		const gunEnemyList: Array<any> = [];
 		const balloonEnemyList: Array<any> = [];
+		const bulletList: Array<any> = [];
 
 		// playerTilemapCollider
 		this.physics.add.collider(player, tileLayer, this.playerHitTilemap, undefined, this);
@@ -197,6 +198,12 @@ export default class Level extends Phaser.Scene {
 
 		// playerEnemyOverlap
 		this.physics.add.overlap(player, enemyList, this.playerEnemyOverlap, undefined, this);
+
+		// bulletTilemapCollide
+		this.physics.add.collider(bulletList, tileLayer, this.bulletCollideTilemap, undefined, this);
+
+		// playerBulletOverlap
+		this.physics.add.overlap(bulletList, player, this.bulletHit, undefined, this);
 
 		// parallax_Backing (components)
 		new ScrollFactor(parallax_Backing);
@@ -324,6 +331,7 @@ export default class Level extends Phaser.Scene {
 		this.collidesWithBombList = collidesWithBombList;
 		this.gunEnemyList = gunEnemyList;
 		this.balloonEnemyList = balloonEnemyList;
+		this.bulletList = bulletList;
 
 		this.events.emit("scene-awake");
 	}
@@ -352,9 +360,10 @@ export default class Level extends Phaser.Scene {
 	private test_map_6!: Phaser.Tilemaps.Tilemap;
 	public public_list!: Array<any>;
 	private enemyList!: Array<any>;
-	private collidesWithBombList!: playerPrefab[];
+	private collidesWithBombList!: Array<playerPrefab|Phaser.Tilemaps.TilemapLayer>;
 	private gunEnemyList!: Array<any>;
 	private balloonEnemyList!: Array<any>;
+	private bulletList!: Array<any>;
 
 	/* START-USER-CODE */
 
@@ -425,8 +434,14 @@ export default class Level extends Phaser.Scene {
 	// bullets
 		this.bulletGroup = this.add.group({maxSize: 100, classType: BulletPrefab})
 			// TODO: define justifies max size
-		this.physics.overlap(this.bulletGroup, this.player, this.bulletHit);
-		this.physics.collide(this.bulletGroup, this.tileLayer, this.bulletCollideTilemap);
+		for (let i = 0; i < 100; i++)
+		{
+			// let _newBullet = this.bulletGroup.get(i, i);
+			// this.mainLayer.add(_newBullet);
+			// this.bulletList.push(_newBullet);
+			// console.log(i);
+			// this.bulletGroup.getChildren()[i].setActive(false)
+		}
 		this.time.addEvent({delay: 3000, callback: this.enemyGunFire, callbackScope: this, loop: true})
 
 	// balloon physics
@@ -441,7 +456,7 @@ export default class Level extends Phaser.Scene {
 
 	// music
 		this.music = this.sound.add('main-game', {volume: .7});
-		if (__DEV__)
+		if (!__DEV__)
 		{
 			this.music.play({loop: true});
 		}
@@ -496,7 +511,9 @@ export default class Level extends Phaser.Scene {
 	// out-of-bounds checks
 		if (this.player.y > this.resetY!)
 		{
-			this.player.reset();
+			// this.player.reset();
+
+			this.resetLevel();
 		}
 		this.bombGroup.getChildren().forEach(member =>
 		{
@@ -552,10 +569,19 @@ export default class Level extends Phaser.Scene {
 		}
 		else
 		{
-			this.player.reset();
+			this.resetLevel();
+
+			// this.player.reset();
 		}
 	}
 
+	/** reloads the scene. This is necessary because */
+	resetLevel()
+	{
+		this.player.reset();
+
+		// this.scene.restart();
+	}
 
 	/** detects physics bodies within explosion range and impacts them appropriately */
 	explosionCheck(x: number, y: number)
@@ -566,7 +592,8 @@ export default class Level extends Phaser.Scene {
 		{
 			if (element.gameObject.name == 'player')
 			{
-				element.reset();
+				// _this.player.reset();
+				_this.resetLevel();
 			}
 			if (_this.enemyList.includes(element.gameObject))
 			{
@@ -616,9 +643,7 @@ export default class Level extends Phaser.Scene {
 
 	bulletCollideTilemap(_bullet: any, _tilemap: any)
 	{
-		_bullet.setActive(false);
-		_bullet.setVisible(false);
-		_bullet.body.setEnable(false);
+		_bullet.disappear();
 	}
 
 	dropEgg()
@@ -647,7 +672,15 @@ export default class Level extends Phaser.Scene {
 		{
 			let enemy = _enemy as EnemyPrefab;
 			let _newBullet = this.bulletGroup.get(enemy.x, enemy.y) as BulletPrefab;
+			if (_newBullet == undefined)
+			{
+				console.log('out of bullets')
+				return;
+			}
 			_newBullet.appear();
+			this.mainLayer.add(_newBullet);
+			this.bulletList.push(_newBullet);
+				/* does this add existing bullets to the list, adding them infinitely? */
 			let velocity = {x: 0, y: 0};
 			switch(enemy.gunDirection)
 			{

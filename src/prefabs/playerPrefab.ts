@@ -371,11 +371,11 @@ export default class playerPrefab extends Phaser.Physics.Arcade.Sprite {
 	}
 
 	reset()
-	{
+	{	
 		let _startPoint = this.scene.data.get('startPoint');
 		this.setPosition(_startPoint.x, _startPoint.y);
 			// TODO: add offset
-		this.stateController.setState('airborne');
+		this.stateController.setState('running');
 		this.setVelocity(0, 0);
 		this.flipX = true;
 	}

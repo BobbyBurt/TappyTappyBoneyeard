@@ -171,8 +171,8 @@
                     "label": "player",
                     "scope": "CLASS",
                     "components": [],
-                    "x": 265,
-                    "y": 141,
+                    "x": 284,
+                    "y": 160,
                     "nestedPrefabs": [],
                     "list": []
                 },
@@ -496,6 +496,27 @@
                     "imageKey": "tileset"
                 }
             ]
+        },
+        {
+            "id": "f1c6fb66-8637-4391-9287-c86628d65bd9",
+            "type": "Collider",
+            "label": "bulletTilemapCollide",
+            "scope": "METHOD",
+            "object1": "bulletList",
+            "object2": "tileLayer",
+            "collideCallback": "this.bulletCollideTilemap",
+            "callbackContext": "this"
+        },
+        {
+            "id": "18d33349-2e1e-4448-9cd9-9eb5798320d3",
+            "type": "Collider",
+            "label": "playerBulletOverlap",
+            "scope": "METHOD",
+            "object1": "bulletList",
+            "object2": "player",
+            "overlapOnly": true,
+            "collideCallback": "this.bulletHit",
+            "callbackContext": "this"
         }
     ],
     "meta": {
@@ -518,7 +539,8 @@
             "id": "4e0108a5-e4fe-408d-8b3f-26e132d30002",
             "label": "collidesWithBombList",
             "objectIds": [
-                "4659f446-ab3a-42ff-b5c3-94d65c0ead0b"
+                "4659f446-ab3a-42ff-b5c3-94d65c0ead0b",
+                "b7cb4953-6490-4930-a234-d912cbe5de6d"
             ]
         },
         {
@@ -528,6 +550,10 @@
         {
             "id": "01965a6c-c8f0-4c61-80a8-136eb8304ca4",
             "label": "balloonEnemyList"
+        },
+        {
+            "id": "7bec6967-43c2-43fc-817f-8681120d3a19",
+            "label": "bulletList"
         }
     ]
 }
