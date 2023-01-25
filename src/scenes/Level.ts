@@ -142,37 +142,37 @@ export default class Level extends Phaser.Scene {
 		debugText3.dropShadowY = 100;
 		uILayer.add(debugText3);
 
+		// mobileButtonPunchRight
+		const mobileButtonPunchRight = this.add.rectangle(71, -163, 100, 100);
+		mobileButtonPunchRight.setOrigin(1, 1);
+		mobileButtonPunchRight.alpha = 0.5;
+		mobileButtonPunchRight.isFilled = true;
+		mobileButtonPunchRight.fillColor = 8168429;
+		uILayer.add(mobileButtonPunchRight);
+
 		// mobileButtonJump
-		const mobileButtonJump = this.add.rectangle(71, -163, 100, 100);
+		const mobileButtonJump = this.add.rectangle(72, -266, 100, 100);
 		mobileButtonJump.setOrigin(1, 1);
 		mobileButtonJump.alpha = 0.5;
 		mobileButtonJump.isFilled = true;
-		mobileButtonJump.fillColor = 8168429;
+		mobileButtonJump.fillColor = 8318332;
 		uILayer.add(mobileButtonJump);
 
 		// mobileButtonDive
-		const mobileButtonDive = this.add.rectangle(72, -266, 100, 100);
-		mobileButtonDive.setOrigin(1, 1);
+		const mobileButtonDive = this.add.rectangle(-304, -244, 100, 100);
+		mobileButtonDive.setOrigin(0, 1);
 		mobileButtonDive.alpha = 0.5;
 		mobileButtonDive.isFilled = true;
-		mobileButtonDive.fillColor = 8318332;
+		mobileButtonDive.fillColor = 15591036;
 		uILayer.add(mobileButtonDive);
 
-		// mobileButtonEgg
-		const mobileButtonEgg = this.add.rectangle(-304, -244, 100, 100);
-		mobileButtonEgg.setOrigin(0, 1);
-		mobileButtonEgg.alpha = 0.5;
-		mobileButtonEgg.isFilled = true;
-		mobileButtonEgg.fillColor = 15591036;
-		uILayer.add(mobileButtonEgg);
-
-		// mobileButtonPunch
-		const mobileButtonPunch = this.add.rectangle(-305, -142, 100, 100);
-		mobileButtonPunch.setOrigin(0, 1);
-		mobileButtonPunch.alpha = 0.5;
-		mobileButtonPunch.isFilled = true;
-		mobileButtonPunch.fillColor = 15563900;
-		uILayer.add(mobileButtonPunch);
+		// mobileButtonPunchLeft
+		const mobileButtonPunchLeft = this.add.rectangle(-305, -142, 100, 100);
+		mobileButtonPunchLeft.setOrigin(0, 1);
+		mobileButtonPunchLeft.alpha = 0.5;
+		mobileButtonPunchLeft.isFilled = true;
+		mobileButtonPunchLeft.fillColor = 15563900;
+		uILayer.add(mobileButtonPunchLeft);
 
 		// mobileButtonUppercut
 		const mobileButtonUppercut = this.add.rectangle(-302, -346, 100, 100);
@@ -265,36 +265,36 @@ export default class Level extends Phaser.Scene {
 		debugText3Align.horizontalOffset = 5;
 		debugText3Align.verticalOffset = -55;
 
+		// mobileButtonPunchRight (components)
+		const mobileButtonPunchRightAlign = new Align(mobileButtonPunchRight);
+		mobileButtonPunchRightAlign.down = true;
+		mobileButtonPunchRightAlign.right = true;
+		new MobileDependent(mobileButtonPunchRight);
+		const mobileButtonPunchRightMobileButton = new MobileButton(mobileButtonPunchRight);
+		mobileButtonPunchRightMobileButton.input = "jump";
+
 		// mobileButtonJump (components)
 		const mobileButtonJumpAlign = new Align(mobileButtonJump);
 		mobileButtonJumpAlign.down = true;
 		mobileButtonJumpAlign.right = true;
+		mobileButtonJumpAlign.verticalOffset = -100;
 		new MobileDependent(mobileButtonJump);
-		const mobileButtonJumpMobileButton = new MobileButton(mobileButtonJump);
-		mobileButtonJumpMobileButton.input = "jump";
+		new MobileButton(mobileButtonJump);
 
 		// mobileButtonDive (components)
 		const mobileButtonDiveAlign = new Align(mobileButtonDive);
 		mobileButtonDiveAlign.down = true;
-		mobileButtonDiveAlign.right = true;
+		mobileButtonDiveAlign.left = true;
 		mobileButtonDiveAlign.verticalOffset = -100;
 		new MobileDependent(mobileButtonDive);
 		new MobileButton(mobileButtonDive);
 
-		// mobileButtonEgg (components)
-		const mobileButtonEggAlign = new Align(mobileButtonEgg);
-		mobileButtonEggAlign.down = true;
-		mobileButtonEggAlign.left = true;
-		mobileButtonEggAlign.verticalOffset = -100;
-		new MobileDependent(mobileButtonEgg);
-		new MobileButton(mobileButtonEgg);
-
-		// mobileButtonPunch (components)
-		const mobileButtonPunchAlign = new Align(mobileButtonPunch);
-		mobileButtonPunchAlign.down = true;
-		mobileButtonPunchAlign.left = true;
-		new MobileDependent(mobileButtonPunch);
-		new MobileButton(mobileButtonPunch);
+		// mobileButtonPunchLeft (components)
+		const mobileButtonPunchLeftAlign = new Align(mobileButtonPunchLeft);
+		mobileButtonPunchLeftAlign.down = true;
+		mobileButtonPunchLeftAlign.left = true;
+		new MobileDependent(mobileButtonPunchLeft);
+		new MobileButton(mobileButtonPunchLeft);
 
 		// mobileButtonUppercut (components)
 		const mobileButtonUppercutAlign = new Align(mobileButtonUppercut);
@@ -316,10 +316,10 @@ export default class Level extends Phaser.Scene {
 		this.debugText = debugText;
 		this.debugText2 = debugText2;
 		this.debugText3 = debugText3;
+		this.mobileButtonPunchRight = mobileButtonPunchRight;
 		this.mobileButtonJump = mobileButtonJump;
 		this.mobileButtonDive = mobileButtonDive;
-		this.mobileButtonEgg = mobileButtonEgg;
-		this.mobileButtonPunch = mobileButtonPunch;
+		this.mobileButtonPunchLeft = mobileButtonPunchLeft;
 		this.mobileButtonUppercut = mobileButtonUppercut;
 		this.test_map_2 = test_map_2;
 		this.test_map_3 = test_map_3;
@@ -348,10 +348,10 @@ export default class Level extends Phaser.Scene {
 	private debugText!: Phaser.GameObjects.BitmapText;
 	private debugText2!: Phaser.GameObjects.BitmapText;
 	private debugText3!: Phaser.GameObjects.BitmapText;
+	private mobileButtonPunchRight!: Phaser.GameObjects.Rectangle;
 	private mobileButtonJump!: Phaser.GameObjects.Rectangle;
 	private mobileButtonDive!: Phaser.GameObjects.Rectangle;
-	private mobileButtonEgg!: Phaser.GameObjects.Rectangle;
-	private mobileButtonPunch!: Phaser.GameObjects.Rectangle;
+	private mobileButtonPunchLeft!: Phaser.GameObjects.Rectangle;
 	private mobileButtonUppercut!: Phaser.GameObjects.Rectangle;
 	private test_map_2!: Phaser.Tilemaps.Tilemap;
 	private test_map_3!: Phaser.Tilemaps.Tilemap;
@@ -680,7 +680,9 @@ export default class Level extends Phaser.Scene {
 			_newBullet.appear();
 			this.mainLayer.add(_newBullet);
 			this.bulletList.push(_newBullet);
+			this.UICam.ignore(_newBullet);
 				/* does this add existing bullets to the list, adding them infinitely? */
+				// TODO: these should be added once on object initialization, not recycle
 			let velocity = {x: 0, y: 0};
 			switch(enemy.gunDirection)
 			{
@@ -837,18 +839,18 @@ export default class Level extends Phaser.Scene {
 		});
 
 	// punch
-		this.mobileButtonPunch.setInteractive();
-		this.mobileButtonPunch.on('pointerdown', () =>
+		this.mobileButtonPunchLeft.setInteractive();
+		this.mobileButtonPunchLeft.on('pointerdown', () =>
 		{
-			this.player.punchMobileButton = true;
+			this.player.punchLeftMobileButton = true;
 		});
-		this.mobileButtonPunch.on('pointerup', () =>
+		this.mobileButtonPunchLeft.on('pointerup', () =>
 		{
-			this.player.punchMobileButton = false;
+			this.player.punchLeftMobileButton = false;
 		});
-		this.mobileButtonPunch.on('pointerout', () =>
+		this.mobileButtonPunchLeft.on('pointerout', () =>
 		{
-			this.player.punchMobileButton = false;
+			this.player.punchLeftMobileButton = false;
 		});
 
 	// uppercut
@@ -867,18 +869,18 @@ export default class Level extends Phaser.Scene {
 		});
 
 	// egg
-		this.mobileButtonEgg.setInteractive();
-		this.mobileButtonEgg.on('pointerdown', () =>
+		this.mobileButtonPunchRight.setInteractive();
+		this.mobileButtonPunchRight.on('pointerdown', () =>
 		{
-			this.player.eggMobileButton = true;
+			this.player.punchRightMobileButton = true;
 		});
-		this.mobileButtonEgg.on('pointerup', () =>
+		this.mobileButtonPunchRight.on('pointerup', () =>
 		{
-			this.player.eggMobileButton = false;
+			this.player.punchRightMobileButton = false;
 		});
-		this.mobileButtonEgg.on('pointerout', () =>
+		this.mobileButtonPunchRight.on('pointerout', () =>
 		{
-			this.player.eggMobileButton = false;
+			this.player.punchRightMobileButton = false;
 		});
 
 	// dive

@@ -5,7 +5,7 @@
 ### Changed
 
 - Two punch inputs for either direction.
-- Changed keyboard and gamepad control scheme to something simpler and understandable.
+- Changed keyboard, gamepad and mobile control scheme to something simpler and understandable.
 - Enemy placement is now loaded in from tilemap data rather than placed afterwards in the Phaser Editor.
 - `__DEV__` variable is now used to automatically alter code between dev mode and public build.
 - Four blue debug pixels representing wall deteciton points are now visible in dev mode.

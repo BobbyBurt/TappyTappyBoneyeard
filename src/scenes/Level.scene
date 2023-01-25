@@ -293,7 +293,7 @@
                 {
                     "type": "Rectangle",
                     "id": "f081c791-72c7-4e7d-b8ea-d39695c156ab",
-                    "label": "mobileButtonJump",
+                    "label": "mobileButtonPunchRight",
                     "scope": "CLASS",
                     "components": [
                         "Align",
@@ -316,7 +316,7 @@
                 {
                     "type": "Rectangle",
                     "id": "4d3fac02-5ee4-4a3a-a604-131297392905",
-                    "label": "mobileButtonDive",
+                    "label": "mobileButtonJump",
                     "scope": "CLASS",
                     "components": [
                         "Align",
@@ -339,7 +339,7 @@
                 {
                     "type": "Rectangle",
                     "id": "8e00a3ae-dc37-49f2-8e42-6d5e5eaa44a7",
-                    "label": "mobileButtonEgg",
+                    "label": "mobileButtonDive",
                     "scope": "CLASS",
                     "components": [
                         "Align",
@@ -362,7 +362,7 @@
                 {
                     "type": "Rectangle",
                     "id": "92718eee-9d72-483e-afbb-bfd08d8c6f51",
-                    "label": "mobileButtonPunch",
+                    "label": "mobileButtonPunchLeft",
                     "scope": "CLASS",
                     "components": [
                         "Align",
