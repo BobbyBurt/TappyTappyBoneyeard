@@ -88,7 +88,6 @@ export default class playerPrefab extends Phaser.Physics.Arcade.Sprite {
 	private uppercutKey: Phaser.Input.Keyboard.Key 
 		= this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
 	private uppercutButton: number = 12;
-	public uppercutCharged: boolean = true;
 	public uppercutMobileButton: boolean = false;
 
 	/** set based on key, gamepad or mobile input */
@@ -133,20 +132,12 @@ export default class playerPrefab extends Phaser.Physics.Arcade.Sprite {
 
 	update()
 	{	
-		this.inputCheck();
-
-		this.stateController.update();
-
 	// punch charge
-		if (this.onFloor && !this.punchCharged)
+		if (this.onFloor && !this.punchCharged 
+			&& this.stateController.currentState.name != 'punch' 
+			&& this.stateController.currentState.name != 'uppercut')
 		{
 			this.punchCharged = true;
-		}
-
-	// uppercut charge
-		if (this.onFloor && !this.uppercutCharged)
-		{
-			this.uppercutCharged = true;
 		}
 
 	// jump charge
@@ -155,7 +146,9 @@ export default class playerPrefab extends Phaser.Physics.Arcade.Sprite {
 			this.flapCharge = this.maxFlaps;
 		}
 
-		
+		this.inputCheck();
+
+		this.stateController.update();
 	}
 
 	/** update input values based on key / gamepad / mobile button state */
@@ -337,61 +330,17 @@ export default class playerPrefab extends Phaser.Physics.Arcade.Sprite {
 		// }
 	}
 
-
-	/** 
-	 * called by scene by enemy overlap. */
-	hitEnemy(_enemy:Phaser.Types.Physics.Arcade.GameObjectWithBody)
-		// TODO: specify type annotation
-	{
-		// if (this.stateController.currentState.name == 'punch' 
-		// 	|| this.stateController.currentState.name == 'dive'
-		// 	|| this.stateController.currentState.name == 'uppercut')
-		// {
-		// 	_enemy.destroy();
-
-		// 	// TODO: have the enemy go flying or something cool
-		// 		// I can't set velocity on this type, but that's the type that the callback gives 
-		// 		// me.
-
-		// 	if (this.stateController.currentState.name == 'dive')
-		// 	{
-		// 		this.setVelocityY(-this.jumpForce);
-		// 	}
-		// }
-		// else
-		// {
-		// 	this.reset();
-		// }
-			// MARKED FOR DELETION
-	}
-
-	hitExplosion()
-	{
-		this.reset();
-	}
-
+	/** resets the player to starting state
+	 * 
+	 * currently unused because it's done automatically by restarting the scene.
+	 */
 	reset()
 	{	
 		let _startPoint = this.scene.data.get('startPoint');
 		this.setPosition(_startPoint.x, _startPoint.y);
-			// TODO: add offset
 		this.stateController.setState('running');
 		this.setVelocity(0, 0);
 		this.flipX = true;
-	}
-
-	sqaush()
-	{
-		this.setScale(1, .3);
-
-		this.scene.tweens.add
-		({
-			targets: this,
-			scaleY: 1,
-			duration: 300,
-			ease: Phaser.Math.Easing.Quartic.Out
-		});
-			// TODO: replace this with acutal squash & stretch sprites
 	}
 
 	/**
@@ -426,7 +375,7 @@ export default class playerPrefab extends Phaser.Physics.Arcade.Sprite {
 	}
 
 	/** called on start to initialize animations */
-	createAnimations()
+	private createAnimations()
 	{
 		this.anims.create
 		({
@@ -553,6 +502,14 @@ export default class playerPrefab extends Phaser.Physics.Arcade.Sprite {
 			frameRate: 16,
 			repeat: 0
 		});
+	}
+
+	/** to be called upon scene reset, otherwise the update will still be called and likely 
+	 * cause a crash */
+	public removeUpdateListener()
+	{
+		this.off(Phaser.Scenes.Events.UPDATE, this.start, this);
+		this.off(Phaser.Scenes.Events.UPDATE, this.update, this);
 	}
 
 	/* END-USER-CODE */

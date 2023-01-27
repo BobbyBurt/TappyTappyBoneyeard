@@ -22,7 +22,7 @@ export default class Uppercut implements State {
 		this.player.setTexture('bird1punch');
 		this.player.setRotation(this.player.flipX? -1.5 : 1.5);
 
-		this.player.uppercutCharged = false;
+		this.player.punchCharged = false;
 		
 		this.timer = new Phaser.Time.TimerEvent({ delay: 150, loop: false, callback: () =>
 		{	
@@ -35,14 +35,15 @@ export default class Uppercut implements State {
 	
 	update()
 	{	
-		if (this.player.onWallFacing(true))
-		{
-			this.player.body.setVelocity(0, 0);
-			this.player.setRotation(0);
-			this.stateController.setState('cling');
-			this.timer?.remove();
-			return;
-		}
+		// if (this.player.onWallFacing(true))
+		// {
+		// 	this.player.body.setVelocity(0, 0);
+		// 	this.player.setRotation(0);
+		// 	this.stateController.setState('cling');
+		// 	this.timer?.remove();
+		// 	return;
+		// }
+			// as velocity x is now set to 0, this transition is no longer possible
 
 		this.player.body.setVelocityY(-300);
 	}

@@ -3,10 +3,7 @@
 
 import Phaser from "phaser";
 import ScrollFactor from "../components/ScrollFactor";
-import explosionPrefab from "../prefabs/explosionPrefab";
-import eggPrefab from "../prefabs/eggPrefab";
 import playerPrefab from "../prefabs/playerPrefab";
-import BombPrefab from "../prefabs/BombPrefab";
 import Align from "../components/Align";
 import MobileDependent from "../components/MobileDependent";
 import MobileButton from "../components/MobileButton";
@@ -17,6 +14,8 @@ import BalloonEnemy from "~/prefabs/BalloonEnemy";
 import EnemyPrefab from "~/prefabs/EnemyPrefab";
 import GroundEnemy from "~/prefabs/GroundEnemy";
 import BulletPrefab from "~/prefabs/BulletPrefab";
+import BombPrefab from "~/prefabs/BombPrefab";
+import explosionPrefab from "~/prefabs/explosionPrefab";
 
 /* END-USER-IMPORTS */
 
@@ -91,21 +90,9 @@ export default class Level extends Phaser.Scene {
 		// mainLayer
 		const mainLayer = this.add.layer();
 
-		// explosion
-		const explosion = new explosionPrefab(this, 272, -547);
-		mainLayer.add(explosion);
-
-		// egg
-		const egg = new eggPrefab(this, -525, -53);
-		mainLayer.add(egg);
-
 		// player
-		const player = new playerPrefab(this, 284, 160);
+		const player = new playerPrefab(this, 295, 194);
 		mainLayer.add(player);
-
-		// bomb
-		const bomb = new BombPrefab(this, -525, -53);
-		mainLayer.add(bomb);
 
 		// tileLayer
 		const tileLayer = test_map_6.createLayer("Tile Layer 1", ["tilleset"], 0, 0);
@@ -151,7 +138,7 @@ export default class Level extends Phaser.Scene {
 		uILayer.add(mobileButtonPunchRight);
 
 		// mobileButtonJump
-		const mobileButtonJump = this.add.rectangle(72, -266, 100, 100);
+		const mobileButtonJump = this.add.rectangle(101, -273, 100, 100);
 		mobileButtonJump.setOrigin(1, 1);
 		mobileButtonJump.alpha = 0.5;
 		mobileButtonJump.isFilled = true;
@@ -187,11 +174,11 @@ export default class Level extends Phaser.Scene {
 		const enemyList: Array<any> = [];
 		const collidesWithBombList = [player, tileLayer];
 		const gunEnemyList: Array<any> = [];
-		const balloonEnemyList: Array<any> = [];
+		const bombEnemyList: Array<any> = [];
 		const bulletList: Array<any> = [];
 
 		// playerTilemapCollider
-		this.physics.add.collider(player, tileLayer, this.playerHitTilemap, undefined, this);
+		this.physics.add.collider(player, tileLayer, this.playerTilemapCollide, undefined, this);
 
 		// soldierTilemapCollide
 		this.physics.add.collider(enemyList, tileLayer);
@@ -200,10 +187,10 @@ export default class Level extends Phaser.Scene {
 		this.physics.add.overlap(player, enemyList, this.playerEnemyOverlap, undefined, this);
 
 		// bulletTilemapCollide
-		this.physics.add.collider(bulletList, tileLayer, this.bulletCollideTilemap, undefined, this);
+		this.physics.add.collider(bulletList, tileLayer, this.bulletTilemapCollide, undefined, this);
 
 		// playerBulletOverlap
-		this.physics.add.overlap(bulletList, player, this.bulletHit, undefined, this);
+		this.physics.add.overlap(bulletList, player, this.bulletPlayerCollide, undefined, this);
 
 		// parallax_Backing (components)
 		new ScrollFactor(parallax_Backing);
@@ -306,10 +293,7 @@ export default class Level extends Phaser.Scene {
 
 		this.bGLayer = bGLayer;
 		this.mainLayer = mainLayer;
-		this.explosion = explosion;
-		this.egg = egg;
 		this.player = player;
-		this.bomb = bomb;
 		this.tileLayer = tileLayer;
 		this.uILayer = uILayer;
 		this.buildText = buildText;
@@ -330,7 +314,7 @@ export default class Level extends Phaser.Scene {
 		this.enemyList = enemyList;
 		this.collidesWithBombList = collidesWithBombList;
 		this.gunEnemyList = gunEnemyList;
-		this.balloonEnemyList = balloonEnemyList;
+		this.bombEnemyList = bombEnemyList;
 		this.bulletList = bulletList;
 
 		this.events.emit("scene-awake");
@@ -338,10 +322,7 @@ export default class Level extends Phaser.Scene {
 
 	private bGLayer!: Phaser.GameObjects.Layer;
 	private mainLayer!: Phaser.GameObjects.Layer;
-	private explosion!: explosionPrefab;
-	private egg!: eggPrefab;
 	private player!: playerPrefab;
-	private bomb!: BombPrefab;
 	private tileLayer!: Phaser.Tilemaps.TilemapLayer;
 	private uILayer!: Phaser.GameObjects.Layer;
 	private buildText!: Phaser.GameObjects.BitmapText;
@@ -362,7 +343,7 @@ export default class Level extends Phaser.Scene {
 	private enemyList!: Array<any>;
 	private collidesWithBombList!: Array<playerPrefab|Phaser.Tilemaps.TilemapLayer>;
 	private gunEnemyList!: Array<any>;
-	private balloonEnemyList!: Array<any>;
+	private bombEnemyList!: Array<any>;
 	private bulletList!: Array<any>;
 
 	/* START-USER-CODE */
@@ -370,7 +351,6 @@ export default class Level extends Phaser.Scene {
 	private bombGroup!: Phaser.GameObjects.Group;
 	private explosionGroup!: Phaser.GameObjects.Group;
 	private bulletGroup!: Phaser.GameObjects.Group;
-	private enemyGroup!: Phaser.GameObjects.Group;
 
 	private UICam!: Phaser.Cameras.Scene2D.BaseCamera | any;
 		// TODO: define type annotation. the infered type doesn't have access to prerender()
@@ -378,28 +358,29 @@ export default class Level extends Phaser.Scene {
 	private debugWallDetectGraphics!: Phaser.GameObjects.Graphics;
 
 	/** player is reset, objects are removed if below this Y coordinate. Set based on tilemap object */
-	private resetY: number | undefined;
+	private bottomBoundary: number | undefined;
 
 	private music!: Phaser.Sound.BaseSound;
+
+	/** used to make sure level restart is only called once */
+	private restarting = false;
 
 	create()
 	{	
 		this.editorCreate();
 
-		this.initCameras();
+		this.createCameras();
 
-		this.initMobileButtons();
+		this.createMobileButtons();
 
-	// enemy group
-		this.enemyGroup = this.add.group({classType: EnemyPrefab});
+		this.restarting = false;
 
-	// tilemap`
 		this.tileLayer.setCollision([1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18,
 			19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36], true);
 
 		this.createMapEnemies();
 
-	// spawn point
+	// start point
 		let _startPoint = this.test_map_6.findObject('elements', function (obj) 
 		{
 			return obj.name === 'startPoint';
@@ -407,42 +388,31 @@ export default class Level extends Phaser.Scene {
 		this.player.setPosition(_startPoint.x! + 8, _startPoint.y! - 8);
 		this.data.set('startPoint', {x: _startPoint.x! + 8, y: _startPoint.y! - 8});
 
-	// reset Y
-		this.resetY = this.test_map_6.findObject('elements', function (obj) 
+	// bottom boundary
+		this.bottomBoundary = this.test_map_6.findObject('elements', function (obj) 
 		{
 			return obj.name === 'resetY';
-		}).y
-
-	// egg
-		this.egg.setActive(false);
-		this.egg.setVisible(false);
-		this.events.on('egg-drop', this.dropEgg, this);
+		}).y;
 
 	// bombs
 		this.bombGroup = this.add.group({maxSize: 30, classType: BombPrefab});
 			// TODO: define max
-		// this.bombGroup.getChildren().forEach(member =>
-		// {
-		// 	this.mainLayer.add(member);
-		// });
-			// this would be necessary if any bombs are created initially, rather than during 
-			// update
 		this.physics.add.collider
-			(this.bombGroup, this.collidesWithBombList, this.bombHit, undefined, this);
+			(this.bombGroup, this.collidesWithBombList, this.bombCollide, undefined, this);
 		this.time.addEvent({delay: 1000, callback: this.dropBombs, callbackScope: this, loop: true});
 
 	// bullets
 		this.bulletGroup = this.add.group({maxSize: 100, classType: BulletPrefab})
 			// TODO: define justifies max size
-		for (let i = 0; i < 100; i++)
-		{
+		// for (let i = 0; i < 100; i++)
+		// {
 			// let _newBullet = this.bulletGroup.get(i, i);
 			// this.mainLayer.add(_newBullet);
 			// this.bulletList.push(_newBullet);
 			// console.log(i);
 			// this.bulletGroup.getChildren()[i].setActive(false)
-		}
-		this.time.addEvent({delay: 3000, callback: this.enemyGunFire, callbackScope: this, loop: true})
+		// }
+		// this.time.addEvent({delay: 3000, callback: this.enemyGunFire, callbackScope: this, loop: true})
 
 	// balloon physics
 		// let _balloonEnemy = this.balloonEnemyList[0] as BalloonEnemy;
@@ -465,6 +435,7 @@ export default class Level extends Phaser.Scene {
 		this.sound.add('bird-flap', {volume: 1});
 		this.sound.add('enemy-death', {volume: 1});
 		this.sound.add('explosion', {volume: 1});
+		this.sound.add('bird-die', {volume: 1});
 			// TODO: impliment explosion sound w/ spacial audio or something
 		this.sound.add('punch-swing', {volume: 1});
 
@@ -509,7 +480,7 @@ export default class Level extends Phaser.Scene {
 		this.debugWallDetectGraphics.fillPoint(this.player.body.x + 12, this.player.body.y - 1);
 
 	// out-of-bounds checks
-		if (this.player.y > this.resetY!)
+		if (this.player.y > this.bottomBoundary!)
 		{
 			// this.player.reset();
 
@@ -518,7 +489,7 @@ export default class Level extends Phaser.Scene {
 		this.bombGroup.getChildren().forEach(member =>
 		{
 			let _member = member as BombPrefab;
-			if (_member.y > this.resetY!)
+			if (_member.y > this.bottomBoundary!)
 				// why can't I access y just by member.y?
 			{
 				if (_member.texture.key == 'bird1egg')
@@ -531,14 +502,46 @@ export default class Level extends Phaser.Scene {
 		});
 			// TODO: change this to bomb group
 
+		this.gunFireCheck();
+
+	}
+
+	/** reloads the scene */
+	resetLevel()
+	{
+	// this function should only happen once
+		if (!this.restarting)
+		{
+			this.restarting = true;
+		}
+		else 
+		{
+			return;
+		}
+
+	// OLD
+		// this.player.reset();
+
+		// this.sound.play('bird-die');
+
+	// remove update listeners to avoid crash
+		this.events.off(Phaser.Scenes.Events.UPDATE);
+		this.player.removeUpdateListener();
+		this.enemyList.forEach((enemy) =>
+		{
+			let _enemy = enemy as EnemyPrefab;
+			_enemy.removeUpdateListener();
+		});
+
+		this.scene.restart();
 	}
 
 	/**
 	 * physics callback on every frame that the player and tilemap are touching.
 	 * 
-	 * Only sets Player.onFloor
+	 * sets Player.onFloor
 	 */
-	playerHitTilemap(_player:Phaser.Types.Physics.Arcade.GameObjectWithBody, _tilemap:any)
+	playerTilemapCollide(_player:Phaser.Types.Physics.Arcade.GameObjectWithBody, _tilemap:any)
 		// TODO: specify type annotation. Call back gives 
 		// Phaser.Types.Physics.Arcade.GameObjectWithBody, but onFloor() is a member
 	{
@@ -560,6 +563,8 @@ export default class Level extends Phaser.Scene {
 		{
 			_enemy.hit(this.player.body.velocity.x, this.player.body.velocity.y);
 
+			this.player.punchCharged = true;
+
 			this.sound.play('enemy-death');
 
 			if (this.player.stateController.currentState.name == 'dive')
@@ -570,40 +575,11 @@ export default class Level extends Phaser.Scene {
 		else
 		{
 			this.resetLevel();
-
-			// this.player.reset();
 		}
 	}
 
-	/** reloads the scene. This is necessary because */
-	resetLevel()
-	{
-		this.player.reset();
-
-		// this.scene.restart();
-	}
-
-	/** detects physics bodies within explosion range and impacts them appropriately */
-	explosionCheck(x: number, y: number)
-	{
-		let _this = this;
-		this.physics.overlapCirc(x, y, 20, true, false).forEach(function (element: any)
-		// TODO: specify type annotation
-		{
-			if (element.gameObject.name == 'player')
-			{
-				// _this.player.reset();
-				_this.resetLevel();
-			}
-			if (_this.enemyList.includes(element.gameObject))
-			{
-				element.gameObject.destroy();
-			}
-		});
-	}
-
 	/** egg collision callback */
-	bombHit(_bomb:any, _collidedWith:any)
+	bombCollide(_bomb:any, _collidedWith:any)
 	{
 		_bomb as BombPrefab;
 
@@ -631,38 +607,178 @@ export default class Level extends Phaser.Scene {
 	}
 
 	/** TEST */
-	balloonHit(_balloon:any, _player:any)
+	balloonPlayerCollide(_balloon:any, _player:any)
 	{
 		console.log('balloon hit');
 	}
 
-	bulletHit(_bullet:any, _player:any)
+	bulletPlayerCollide(_bullet:any, _player:any)
 	{
-		this.player.reset();
+		this.resetLevel();
 	}
 
-	bulletCollideTilemap(_bullet: any, _tilemap: any)
+	bulletTilemapCollide(_bullet: any, _tilemap: any)
 	{
 		_bullet.disappear();
 	}
 
-	dropEgg()
+	/** activates bomb in bombGroup pool */
+	setBomb(x: number, y: number, textureKey: string)
 	{
-		this.setBomb(this.player.x, this.player.y, 'bird1egg');
+		let newBomb = this.bombGroup.get(x, y);
+		newBomb.appear(textureKey);
+		this.mainLayer.add(newBomb);
+		this.UICam.ignore(newBomb);
 
-		this.player.eggReady = false;
+		if (this.bombGroup.countActive() == this.bombGroup.maxSize)
+		{
+			this.bombGroup.getFirstAlive()?.setActive(false);
+			this.bombGroup.shuffle();
+				// TODO: figure out what exactly shuffle() does. Worked for me before
+		}
 	}
 
 	/** drops bombs from each active balloon soldier */
 	dropBombs()
 	{
-		this.balloonEnemyList.forEach(element =>
+		this.bombEnemyList.forEach(element =>
 		{
-			if (element.active)	
+			let _enemy = element as EnemyPrefab
+			if (!_enemy.isFalling())	
 			{
 				this.setBomb(element.x, element.y + 25, 'bomb');
 			}
 		});
+	}
+
+	/** detects physics bodies within explosion range and impacts them appropriately */
+	explosionCheck(x: number, y: number)
+	{
+		let _this = this;
+		this.physics.overlapCirc(x, y, 20, true, false).forEach(function (element: any)
+		// TODO: specify type annotation
+		{
+			if (_this.enemyList.includes(element.gameObject))
+			{
+				element.gameObject.destroy();
+			}
+			if (element.gameObject.name == 'player')
+			{
+				// _this.player.reset();
+				_this.resetLevel();
+			}
+		});
+	}
+
+	/** checks line of sight for each active gun enemy and fires if player is detected */
+	gunFireCheck()
+	{
+		this.gunEnemyList.forEach((enemey) =>
+		{
+			let _enemy = enemey as EnemyPrefab;
+
+			if (_enemy.isFalling())
+			{
+				return;
+			}
+
+		// setup line
+			let lineOfSight = new Phaser.Geom.Line(0, 0, 0, 0);
+			let lineLength = 300;
+			switch (_enemy.gunDirection)
+			{
+				case 'up':
+				{
+					lineOfSight.setTo
+						(_enemy.x + 7.5, _enemy.y + 10, _enemy.x + 7.5, _enemy.y - lineLength,);
+					break;
+				}
+				case 'upward':
+				{
+					break;
+				}
+				case 'forward':
+				{
+					lineOfSight.setTo
+						(_enemy.x + 7.5, _enemy.y + 10, 
+						_enemy.x + (_enemy.flipX? lineLength : -lineLength ), _enemy.y + 10,);
+					break;
+				}
+				case 'downward':
+				{
+					break;
+				}
+				case 'down':
+				{
+					break;
+				}
+			}
+				/* setting up a new line on each frame is not efficient, but it's dynamic for 
+				moving enemies which could have a greater presence later for all i know. */
+
+			if (Phaser.Geom.Intersects.LineToRectangle(lineOfSight, new Phaser.Geom.Rectangle(this.player.x, this.player.y, this.player.width, this.player.height)))
+			{
+				// this.gunFire(_enemy);
+
+				_enemy.firingGun = true;
+			}
+			else
+			{
+				_enemy.firingGun = false;
+			}
+
+			/* TODO: this is a quick solution which isn't efficient and doesn't account tile tiles
+			being in the way. There's a raycaster plugin which is probably the best option for a 
+			more permenent solution. */
+		});
+	}
+
+	/** fires gun from any enemy */
+	gunFire(enemy: EnemyPrefab)
+	{
+		let _newBullet = this.bulletGroup.get(enemy.x, enemy.y) as BulletPrefab;
+		if (_newBullet == undefined)
+		{
+			console.log('out of bullets')
+			return;
+		}
+		_newBullet.appear();
+		this.mainLayer.add(_newBullet);
+		this.bulletList.push(_newBullet);
+		this.UICam.ignore(_newBullet);
+			/* does this add existing bullets to the list, adding them infinitely? */
+			// TODO: these should be added once on object initialization, not recycle
+		let velocity = {x: 0, y: 0};
+		switch(enemy.gunDirection)
+		{
+			case 'up':
+			{
+				velocity = {x: 0, y: -60};
+				break;
+			}
+			case 'down':
+			{
+				velocity = {x: 0, y: 60};
+				break;
+			}
+			case 'downward':
+			{
+				velocity = {x: (enemy.flipX? 15 : -15), y: 15};
+				break;
+			}
+			case 'upward':
+			{
+				velocity = {x: (enemy.flipX? 15 : -15), y: -15};
+				break;
+			}
+			case 'forward':
+			{
+				velocity = {x: (enemy.flipX? 60 : -60), y: 0};
+				break;
+			}
+		}
+
+		_newBullet.body.setVelocity(velocity.x, velocity.y);
 	}
 
 	/** creates bullets from all enemies with a gun */
@@ -671,6 +787,10 @@ export default class Level extends Phaser.Scene {
 		this.gunEnemyList.forEach((_enemy, _index) => 
 		{
 			let enemy = _enemy as EnemyPrefab;
+			if (enemy.isFalling())
+			{
+				return;
+			}
 			let _newBullet = this.bulletGroup.get(enemy.x, enemy.y) as BulletPrefab;
 			if (_newBullet == undefined)
 			{
@@ -716,71 +836,75 @@ export default class Level extends Phaser.Scene {
 		});
 	}
 
-	/** activates bomb in bombGroup pool */
-	setBomb(x: number, y: number, textureKey: string)
-	{
-		let newBomb = this.bombGroup.get(x, y);
-		newBomb.appear(textureKey);
-		this.mainLayer.add(newBomb);
-		this.UICam.ignore(newBomb);
-
-		if (this.bombGroup.countActive() == this.bombGroup.maxSize)
-		{
-			this.bombGroup.getFirstAlive()?.setActive(false);
-			this.bombGroup.shuffle();
-				// TODO: figure out what exactly shuffle() does. Worked for me before
-		}
-	}
-
 	/** iterates through everything in the 'elements' object layer of the map and creates enemies 
 	 * based on their GID. */
 	createMapEnemies()
 	{
 		let _mapObjects = this.test_map_6.getObjectLayer('elements')
-		_mapObjects.objects.forEach((object) =>
+		_mapObjects.objects.forEach((object, index) =>
 		{
 			let _enemy: any = undefined;
+			let _gunDirection: GunDirection;
+			let _bomb = false;
+
+		// determine weapon from tile gid
 			switch (object.gid)
 			{
 				case 37:
 				{
-					_enemy = new GroundEnemy(this, object.x! + 8, object.y! - 8);
+					_gunDirection = undefined;
 					break;
 				}
 				case 38:
 				{
-					_enemy = new GroundEnemy(this, object.x! + 8, object.y! - 8, 'forward');
-					this.gunEnemyList.push(_enemy);
+					_gunDirection = 'forward';
 					break;
 				}
 				case 39:
 				{
-					_enemy = new GroundEnemy(this, object.x! + 8, object.y! - 8, 'upward');
-					this.gunEnemyList.push(_enemy);
+					_gunDirection = 'upward';
 					break;
 				}
 				case 40:
 				{
-					_enemy = new GroundEnemy(this, object.x! + 8, object.y! - 8, 'up');
-					this.gunEnemyList.push(_enemy);
+					_gunDirection = 'up';
 					break;
 				}
 				case 41:
 				{
-					_enemy = new GroundEnemy(this, object.x! + 8, object.y! - 8, 'downward');
-					this.gunEnemyList.push(_enemy);
+					_gunDirection = 'downward';
 					break;
 				}
 				case 42:
 				{
-					_enemy = new BalloonEnemy(this, object.x! + 8, object.y! - 8);
-					this.balloonEnemyList.push(_enemy);
+					_gunDirection = undefined;
+					_bomb = true;
 					break;
 				}
+				default:
+				{
+					return;
+						// this isn't an enemy tile
+				}
 			}
-			if (_enemy == undefined)
+
+		// enemy type
+			if (object.type == 'balloon')
 			{
-				return;
+				_enemy = new BalloonEnemy(this, object.x! + 8, object.y! - 8, _gunDirection);
+			}
+			else
+			{
+				_enemy = new GroundEnemy(this, object.x! + 8, object.y! - 8, _gunDirection);
+			}
+
+			if (_gunDirection !== undefined)
+			{
+				this.gunEnemyList.push(_enemy);
+			}
+			if (_bomb)
+			{
+				this.bombEnemyList.push(_enemy)
 			}
 
 			_enemy.flipX = object.flippedHorizontal;
@@ -796,7 +920,7 @@ export default class Level extends Phaser.Scene {
 	 * 
 	 * scene is seperated into two layers, each camera ignoring the other layer.
 	 */
-	initCameras()
+	createCameras()
 	{
 		let adaptiveZoom = new AdaptiveZoom();
 		// TODO: set adaptive zoom or whatever solution to different PPIs
@@ -821,7 +945,7 @@ export default class Level extends Phaser.Scene {
 			// by the UICam
 	}
 
-	initMobileButtons()
+	createMobileButtons()
 	{
 	// jump
 		this.mobileButtonJump.setInteractive();

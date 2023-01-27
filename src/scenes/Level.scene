@@ -136,32 +136,6 @@
             "components": [],
             "list": [
                 {
-                    "prefabId": "d5bad8d6-5062-45c9-a99d-6c411da426c1",
-                    "id": "481330ec-c193-494a-9fe3-6ab3b993fcbc",
-                    "unlock": [
-                        "x",
-                        "y"
-                    ],
-                    "label": "explosion",
-                    "scope": "CLASS",
-                    "components": [],
-                    "x": 272,
-                    "y": -547
-                },
-                {
-                    "prefabId": "58e3738c-041e-4c6c-bbc7-5ed4b852107c",
-                    "id": "2c019803-40cd-44be-8bcb-187aa9e40df0",
-                    "unlock": [
-                        "x",
-                        "y"
-                    ],
-                    "label": "egg",
-                    "scope": "CLASS",
-                    "components": [],
-                    "x": -525,
-                    "y": -53
-                },
-                {
                     "prefabId": "3f838717-1748-46a2-999c-c73f8b1a2e4e",
                     "id": "4659f446-ab3a-42ff-b5c3-94d65c0ead0b",
                     "unlock": [
@@ -171,23 +145,10 @@
                     "label": "player",
                     "scope": "CLASS",
                     "components": [],
-                    "x": 284,
-                    "y": 160,
+                    "x": 295,
+                    "y": 194,
                     "nestedPrefabs": [],
                     "list": []
-                },
-                {
-                    "prefabId": "4b660cad-7a29-4745-9a29-2e05b0dc0c7c",
-                    "id": "3bcd662a-bb7f-4dd2-ace2-2f3e5f3aebf9",
-                    "unlock": [
-                        "x",
-                        "y"
-                    ],
-                    "label": "bomb",
-                    "scope": "CLASS",
-                    "components": [],
-                    "x": -525,
-                    "y": -53
                 },
                 {
                     "type": "TilemapLayer",
@@ -326,8 +287,8 @@
                     "Align.down": true,
                     "Align.right": true,
                     "Align.verticalOffset": -100,
-                    "x": 72,
-                    "y": -266,
+                    "x": 101,
+                    "y": -273,
                     "originX": 1,
                     "originY": 1,
                     "alpha": 0.5,
@@ -427,7 +388,7 @@
             "scope": "METHOD",
             "object1": "player",
             "object2": "tileLayer",
-            "collideCallback": "this.playerHitTilemap",
+            "collideCallback": "this.playerTilemapCollide",
             "callbackContext": "this"
         },
         {
@@ -504,7 +465,7 @@
             "scope": "METHOD",
             "object1": "bulletList",
             "object2": "tileLayer",
-            "collideCallback": "this.bulletCollideTilemap",
+            "collideCallback": "this.bulletTilemapCollide",
             "callbackContext": "this"
         },
         {
@@ -515,7 +476,7 @@
             "object1": "bulletList",
             "object2": "player",
             "overlapOnly": true,
-            "collideCallback": "this.bulletHit",
+            "collideCallback": "this.bulletPlayerCollide",
             "callbackContext": "this"
         }
     ],
@@ -549,7 +510,7 @@
         },
         {
             "id": "01965a6c-c8f0-4c61-80a8-136eb8304ca4",
-            "label": "balloonEnemyList"
+            "label": "bombEnemyList"
         },
         {
             "id": "7bec6967-43c2-43fc-817f-8681120d3a19",

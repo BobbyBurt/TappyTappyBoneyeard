@@ -32,7 +32,6 @@ export default class Airborne implements State {
 		if (this.player.jumpInput == 'just-down' && this.player.flapCharge > 0)
 		{
 			this.flap();
-			// this.player.sqaush();
 		}
 		// else if (this.player.punchInput == 'just-down' && this.player.punchCharged)
 		// {
@@ -49,7 +48,7 @@ export default class Airborne implements State {
 			this.player.flipX = true;
 			this.stateController.setState('punch');
 		}
-		else if (this.player.uppercutInput == 'just-down' && this.player.uppercutCharged)
+		else if (this.player.uppercutInput == 'just-down' && this.player.punchCharged)
 		{
 			this.stateController.setState('uppercut');
 		}

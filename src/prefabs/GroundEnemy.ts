@@ -1,6 +1,4 @@
 
-type GunDirection = undefined | 'up' | 'upward' | 'forward' | 'downward' | 'down';
-
 /* START OF COMPILED CODE */
 
 import Phaser from "phaser";
@@ -24,13 +22,10 @@ export default class GroundEnemy extends EnemyPrefab {
 	/* START-USER-CODE */
 
 	private floatYTween!: Phaser.Tweens.Tween;
-	private originalPos = new Phaser.Geom.Point(0, 0);
 
 	start()
 	{
 		this.body.allowGravity = false;
-
-		this.originalPos.setTo(this.x, this.y);
 
 	// animation
 		this.anims.create

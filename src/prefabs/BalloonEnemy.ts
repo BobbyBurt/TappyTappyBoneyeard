@@ -68,7 +68,7 @@ export default class BalloonEnemy extends EnemyPrefab {
 
 	update(): void
 	{
-		if (super.spin == 0)
+		if (!super.isFalling())
 		{
 			this.y = this.originalPos.y + this.floatYTween.getValue();
 			this.balloon.setY((this.originalPos.y - 30) + this.floatYTween.getValue());
@@ -81,7 +81,18 @@ export default class BalloonEnemy extends EnemyPrefab {
 				 * good way to do it then i can set up the balloon in EnemyPrefab, but it would 
 				 * be better here if most enemies don't use it. */
 		}
+	}
 
+
+	/** to be called upon scene reset, otherwise the update will still be called and likely 
+	 * cause a crash.
+	 * 
+	 * Calls the same method in the parent class which has it's own update */
+	removeUpdateListener()
+	{
+		this.scene.events.off(Phaser.Scenes.Events.UPDATE);
+		this.scene.events.off(Phaser.Scenes.Events.UPDATE);
+		super.removeUpdateListener();
 	}
 
 	/* END-USER-CODE */

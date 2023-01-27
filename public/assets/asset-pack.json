@@ -15,6 +15,13 @@
             },
             {
                 "url": [
+                    "assets/sfx/bird die TEMP.wav"
+                ],
+                "type": "audio",
+                "key": "bird-die"
+            },
+            {
+                "url": [
                     "assets/sfx/bird egg lay.mp3"
                 ],
                 "type": "audio",

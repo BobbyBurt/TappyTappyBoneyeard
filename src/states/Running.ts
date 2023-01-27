@@ -25,7 +25,6 @@ export default class Running implements State {
 		if (this.player.jumpInput == 'just-down' && this.player.flapCharge > 0)
 		{
 			this.jump();
-			// this.player.sqaush();
 		}
 		// else if (this.player.punchInput == 'just-down')
 		// {
@@ -42,7 +41,7 @@ export default class Running implements State {
 			this.player.flipX = true;
 			this.stateController.setState('punch');
 		}
-		else if (this.player.uppercutInput == 'just-down' && this.player.uppercutCharged)
+		else if (this.player.uppercutInput == 'just-down' && this.player.punchCharged)
 		{
 			this.stateController.setState('uppercut');
 		}

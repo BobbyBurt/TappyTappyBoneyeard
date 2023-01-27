@@ -1,6 +1,26 @@
 # Changelog
 
-## Version 6 -
+## Version 7 - 
+
+## Changed
+
+- Uppercuts now also use punch charge rather than a seperate variable.
+- Upon death, the level restarts with enemies reset rather than simply moving the player to the start.
+- Enemies are set to be balloon enemies from the type field of the object in the Tiled editor, allowing them to have guns.
+- Bomb enemies are set in the Tiled editor as another enemy type rather than automatically being assigned to all balloon enemies.
+- Changed test map
+
+## Added
+
+- Added Balloon enemies with guns.
+
+## Removed
+## Fixed
+
+- Punches charge is no longer restored during punch / uppercut state, allowing for multiple uses while airborne.
+- Bullets and bombs no longer spawn from falling enemies.
+
+## Version 6 - 2023-01-24
 
 ### Changed
 
@@ -32,9 +52,6 @@
 
 - Disabled egg drop ability.
 - Replaced old test map.
-
-### Fixed
-
 - Wall detection is more correct / generous, checking at the top and bottom of the player.
 
 ## Version 5.1 - 2023-01-12

@@ -1,6 +1,3 @@
-
-type GunDirection = undefined | 'up' | 'upward' | 'forward' | 'downward' | 'down';
-
 /* START OF COMPILED CODE */
 
 import Phaser from "phaser";
@@ -14,7 +11,7 @@ export default interface EnemyPrefab {
 
 export default class EnemyPrefab extends Phaser.GameObjects.Sprite {
 
-	constructor(scene: Phaser.Scene, x?: number, y?: number, gunDirection?: GunDirection, texture?: string, frame?: number | string) {
+	constructor(scene: Phaser.Scene, x?: number, y?: number, gunDirection?:GunDirection, texture?: string, frame?: number | string) {
 		super(scene, x ?? 0, y ?? 0, texture || "soldiermid", frame);
 
 		scene.physics.add.existing(this, false);
@@ -46,18 +43,21 @@ export default class EnemyPrefab extends Phaser.GameObjects.Sprite {
 
 	private gun!: Phaser.GameObjects.Image;
 	public gunDirection!: GunDirection;
+	/** set and used by scene */
+	public firingGun = false;
 
-	protected _spin: number = 0;
-	public get spin() { return this._spin };
-	private set spin(setSpin: number) { this._spin = setSpin };
+	/** rotation applied to sprite when falling. */
+	private spin: number = 0;
+	public isFalling() { return (this.spin != 0) }
 
 	/** update which runs on all enemy classes. Each enemy class has it's own start() for specific
 	 *  setup */
-	enemyStart()
+	private enemyStart()
 	{	
 		this.setScale(1);
 		this.y -= 2;
 			// tilemap offset correction
+			// TODO: this sometimes doesn't work? enemy floats above ground
 
 		if (this.gunDirection)
 		{
@@ -67,16 +67,20 @@ export default class EnemyPrefab extends Phaser.GameObjects.Sprite {
 
 	/** update which runs on all enemy classes. Each enemy class has it's own update() for specific
 	 *  behaviour */
-	enemyUpdate()
+	private enemyUpdate()
 	{
 		this.rotation += this.spin;
 		if (this.gun)
 		{
 			this.gun.rotation += this.spin * 3;
+			if (this.spin == 0)
+			{
+				this.gun.setPosition(this.x, this.y)
+			}
 		}
 	}
 
-	createGun()
+	private createGun()
 	{
 		this.gun = this.scene.add.image(this.x, this.y, 'gun');
 				// TODO: this needs to be added to the mainLayer, but we can't access it's variable
@@ -122,7 +126,11 @@ export default class EnemyPrefab extends Phaser.GameObjects.Sprite {
 			}
 	}
 
-	hit(directionX: number, directionY: number)
+	/** activate fall behaviour
+	 * 
+	 * called by scene
+	 */
+	public hit(directionX: number, directionY: number)
 	{
 		this.body.allowGravity = true;
 			// since floating enemies have gravity disabled
@@ -140,6 +148,14 @@ export default class EnemyPrefab extends Phaser.GameObjects.Sprite {
 			_gunBody.setAllowGravity(true);
 			_gunBody.setVelocity(directionX * 1.2, -170)
 		}
+	}
+
+	/** to be called upon scene reset, otherwise the update will still be called and likely 
+	 * cause a crash */
+	public removeUpdateListener()
+	{
+		this.scene.events.off(Phaser.Scenes.Events.UPDATE, this.enemyStart, this);
+		this.scene.events.off(Phaser.Scenes.Events.UPDATE, this.enemyUpdate, this);
 	}
 
 	/* END-USER-CODE */
