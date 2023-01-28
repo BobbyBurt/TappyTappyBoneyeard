@@ -5,20 +5,22 @@
 ## Changed
 
 - Uppercuts now also use punch charge rather than a seperate variable.
-- Upon death, the level restarts with enemies reset rather than simply moving the player to the start.
 - Enemies are set to be balloon enemies from the type field of the object in the Tiled editor, allowing them to have guns.
 - Bomb enemies are set in the Tiled editor as another enemy type rather than automatically being assigned to all balloon enemies.
 - Changed test map
 
 ## Added
 
+- Added restart funciton, used when the player is hit rather than just moving them to the start.
 - Added Balloon enemies with guns.
-- Guns fire in 3-bullet spray and cooldown pattern when the player is in the line of sight.
+- Added a 3-bullet spray and cooldown pattern.
+- Added line of sight detection to trigger gunfire.
+- Added a fuse for bombs which is set upon collision rather than immediately exploding.
 
 ## Removed
 ## Fixed
 
-- Punches charge is no longer restored during punch / uppercut state, allowing for multiple uses while airborne.
+- Punches charge is no longer restored during punch / uppercut state, which allowed for multiple uses while airborne.
 - Bullets and bombs no longer spawn from falling enemies.
 
 ## Version 6 - 2023-01-24

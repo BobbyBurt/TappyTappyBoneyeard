@@ -399,7 +399,7 @@ export default class Level extends Phaser.Scene {
 			// TODO: define max
 		this.physics.add.collider
 			(this.bombGroup, this.collidesWithBombList, this.bombCollide, undefined, this);
-		this.time.addEvent({delay: 1000, callback: this.dropBombs, callbackScope: this, loop: true});
+		this.time.addEvent({delay: 2000, callback: this.dropBombs, callbackScope: this, loop: true});
 
 	// bullets
 		this.bulletGroup = this.add.group({maxSize: 100, classType: BulletPrefab})
@@ -579,9 +579,9 @@ export default class Level extends Phaser.Scene {
 	}
 
 	/** egg collision callback */
-	bombCollide(_bomb:any, _collidedWith:any)
+	bombCollide(bomb:any, _collidedWith:any)
 	{
-		_bomb as BombPrefab;
+		let _bomb = bomb as BombPrefab;
 
 	// player - egg collision check
 		if (_bomb.texture.key == 'bird1egg' && _collidedWith.name == 'player')
@@ -590,15 +590,24 @@ export default class Level extends Phaser.Scene {
 		}
 			// player is included in the bomb collision list, but egg - player should be ignored
 
-		_bomb.disappear();
+			if (_bomb.fuseTimer.getProgress() == 1)
+			{
+				_bomb.setTint(0xff0000)
 
-		let newExplosion = this.explosionGroup.get(_bomb.x, _bomb.y);
-		newExplosion.appear();
-		this.mainLayer.add(newExplosion);
-		this.UICam.ignore(newExplosion);
-			// TODO: this stuff should only be called if the object is being initialized
+				_bomb.fuseTimer = this.time.addEvent({ delay: 500, callback: () =>
+				{
+					_bomb.disappear();
+	
+					let newExplosion = this.explosionGroup.get(_bomb.x, _bomb.y);
+					newExplosion.appear();
+					this.mainLayer.add(newExplosion);
+					this.UICam.ignore(newExplosion);
+						// TODO: this stuff should only be called if the object is being initialized
+			
+					this.explosionCheck(_bomb.x, _bomb.y);
+				}});
+			}
 
-		this.explosionCheck(_bomb.x, _bomb.y);
 
 		if (_bomb.texture.key == 'bird1egg')
 		{
@@ -660,7 +669,9 @@ export default class Level extends Phaser.Scene {
 		{
 			if (_this.enemyList.includes(element.gameObject))
 			{
-				element.gameObject.destroy();
+				// let _element = element as EnemyPrefab;
+				// _element.hit(0, -150);
+					// TODO: define enemy explosion behaviour.
 			}
 			if (element.gameObject.name == 'player')
 			{
@@ -719,7 +730,6 @@ export default class Level extends Phaser.Scene {
 			if (Phaser.Geom.Intersects.LineToRectangle(lineOfSight, new Phaser.Geom.Rectangle(this.player.x, this.player.y, this.player.width, this.player.height)))
 			{
 				// this.gunFire(_enemy);
-				console.log(_enemy.gunSprayTimer.getProgress(), _enemy.gunCoolDownTimer.getProgress())
 
 				if (_enemy.gunSprayTimer.getProgress() == 1 && _enemy.gunCoolDownTimer.getProgress() == 1)
 				{
@@ -732,9 +742,6 @@ export default class Level extends Phaser.Scene {
 					}});
 
 					_enemy.gunCoolDownTimer = this.time.addEvent({delay: 1000});
-
-					console.log(_enemy.gunSprayTimer, _enemy.gunCoolDownTimer)
-
 				}
 			}
 			else

@@ -27,10 +27,15 @@ export default class BombPrefab extends Phaser.GameObjects.Image {
 
 	/* START-USER-CODE */
 
+	public fuseTimer!: Phaser.Time.TimerEvent;
+
 	/** asdf */
 	appear(textureKey: string): void
 	{
+		this.fuseTimer = this.scene.time.addEvent({delay: 1})
+		
 		this.setTexture(textureKey);
+		this.clearTint();
 		
 		this.setActive(true);
 		this.setVisible(true);
