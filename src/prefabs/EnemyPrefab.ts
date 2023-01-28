@@ -43,8 +43,9 @@ export default class EnemyPrefab extends Phaser.GameObjects.Sprite {
 
 	private gun!: Phaser.GameObjects.Image;
 	public gunDirection!: GunDirection;
-	/** set and used by scene */
-	public firingGun = false;
+	/** is there an active timer event for the spray fire? */
+	public gunSprayTimer!: Phaser.Time.TimerEvent;
+	public gunCoolDownTimer!: Phaser.Time.TimerEvent;
 
 	/** rotation applied to sprite when falling. */
 	private spin: number = 0;
@@ -58,6 +59,10 @@ export default class EnemyPrefab extends Phaser.GameObjects.Sprite {
 		this.y -= 2;
 			// tilemap offset correction
 			// TODO: this sometimes doesn't work? enemy floats above ground
+
+	// create timers and have their progress set to complete
+		this.gunSprayTimer = this.scene.time.addEvent({delay: 1});
+		this.gunCoolDownTimer = this.scene.time.addEvent({delay: 1});
 
 		if (this.gunDirection)
 		{
@@ -83,47 +88,47 @@ export default class EnemyPrefab extends Phaser.GameObjects.Sprite {
 	private createGun()
 	{
 		this.gun = this.scene.add.image(this.x, this.y, 'gun');
-				// TODO: this needs to be added to the mainLayer, but we can't access it's variable
-			this.scene.physics.add.existing(this.gun, false);
-			let _gunBody = this.gun.body as Phaser.Physics.Arcade.Body;
-				// simply calling this.gun.body doesn't give me much to work with. There must be 
-				// a better way to do this
-			_gunBody.setAllowGravity(false);
-			this.gun.flipX = this.flipX;
-			switch (this.gunDirection)
+			// TODO: this needs to be added to the mainLayer, but we can't access it's variable
+		this.scene.physics.add.existing(this.gun, false);
+		let _gunBody = this.gun.body as Phaser.Physics.Arcade.Body;
+			// simply calling this.gun.body doesn't give me much to work with. There must be 
+			// a better way to do this
+		_gunBody.setAllowGravity(false);
+		this.gun.flipX = this.flipX;
+		switch (this.gunDirection)
+		{
+			case 'forward':
 			{
-				case 'forward':
-				{
-					this.gun.x += (this.flipX? 10 : -10);
-					break;
-				}
-				case 'upward':
-				{
-					this.gun.setTexture('gundiagonal');
-					this.gun.x += (this.flipX? 10 : -10);
-					// this.gun.y += 7;
-
-					break;
-				}
-				case 'downward':
-				{
-					this.gun.setTexture('gundiagonal');
-					this.gun.setAngle(-90);
-					this.gun.x += (this.flipX? 10 : -10);
-					this.gun.y += 7;
-					break;
-				}
-				case 'up':
-				{
-					this.gun.setAngle(90);
-					break;
-				}
-				case 'down':
-				{
-					this.gun.setAngle(-90);
-					break;
-				}
+				this.gun.x += (this.flipX? 10 : -10);
+				break;
 			}
+			case 'upward':
+			{
+				this.gun.setTexture('gundiagonal');
+				this.gun.x += (this.flipX? 10 : -10);
+				// this.gun.y += 7;
+
+				break;
+			}
+			case 'downward':
+			{
+				this.gun.setTexture('gundiagonal');
+				this.gun.setAngle(-90);
+				this.gun.x += (this.flipX? 10 : -10);
+				this.gun.y += 7;
+				break;
+			}
+			case 'up':
+			{
+				this.gun.setAngle(90);
+				break;
+			}
+			case 'down':
+			{
+				this.gun.setAngle(-90);
+				break;
+			}
+		}
 	}
 
 	/** activate fall behaviour
