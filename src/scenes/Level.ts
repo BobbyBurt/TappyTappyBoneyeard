@@ -455,8 +455,8 @@ export default class Level extends Phaser.Scene {
 		if (__DEV__)
 		{
 			this.debugText.setText(`${this.player.stateController.currentState.name}`);
-			this.debugText2.setText(`wall left: ${this.player.onWallLeft}`);
-			this.debugText3.setText(`bullets: ${this.bulletGroup.countActive()}`);	
+			this.debugText2.setText(`cooldown progress: ${this.gunEnemyList[5].gunCoolDownTimer.getProgress()}`);
+			this.debugText3.setText(`spray progress: ${this.gunEnemyList[5].gunSprayTimer.getProgress()}`);	
 		}
 		// this.debugText.setText(`${this.player.onFloor}`);
 
@@ -719,12 +719,27 @@ export default class Level extends Phaser.Scene {
 			if (Phaser.Geom.Intersects.LineToRectangle(lineOfSight, new Phaser.Geom.Rectangle(this.player.x, this.player.y, this.player.width, this.player.height)))
 			{
 				// this.gunFire(_enemy);
+				console.log(_enemy.gunSprayTimer.getProgress(), _enemy.gunCoolDownTimer.getProgress())
 
-				_enemy.firingGun = true;
+				if (_enemy.gunSprayTimer.getProgress() == 1 && _enemy.gunCoolDownTimer.getProgress() == 1)
+				{
+					_enemy.gunSprayTimer = this.time.addEvent({ delay: 100, repeat: 2, callback: () =>
+					{
+						if (!_enemy.isFalling())
+						{
+							this.gunFire(_enemy);
+						}
+					}});
+
+					_enemy.gunCoolDownTimer = this.time.addEvent({delay: 1000});
+
+					console.log(_enemy.gunSprayTimer, _enemy.gunCoolDownTimer)
+
+				}
 			}
 			else
 			{
-				_enemy.firingGun = false;
+				
 			}
 
 			/* TODO: this is a quick solution which isn't efficient and doesn't account tile tiles

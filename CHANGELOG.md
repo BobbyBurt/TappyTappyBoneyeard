@@ -13,6 +13,7 @@
 ## Added
 
 - Added Balloon enemies with guns.
+- Guns fire in 3-bullet spray and cooldown pattern when the player is in the line of sight.
 
 ## Removed
 ## Fixed
