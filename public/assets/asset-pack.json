@@ -120,6 +120,11 @@
                 "key": "main-game"
             },
             {
+                "url": "assets/levels/map-1.json",
+                "type": "tilemapTiledJSON",
+                "key": "map-1"
+            },
+            {
                 "textureURL": "assets/nokia.png",
                 "fontDataURL": "assets/nokia.xml",
                 "type": "bitmapFont",

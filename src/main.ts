@@ -1,4 +1,5 @@
 import Level from './scenes/Level';
+import LevelSelect from './scenes/LevelSelect';
 import Preload from './scenes/Preload';
 
 window.addEventListener('load', function ()
@@ -40,6 +41,7 @@ window.addEventListener('load', function ()
 	
 	game.scene.add("Preload", Preload);
 	game.scene.add("Level", Level);
+	game.scene.add("LevelSelect", LevelSelect);
 	game.scene.add("Boot", Boot, true);
 });
 

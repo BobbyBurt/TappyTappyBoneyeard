@@ -145,22 +145,10 @@
                     "label": "player",
                     "scope": "CLASS",
                     "components": [],
-                    "x": 295,
-                    "y": 194,
+                    "x": 321,
+                    "y": 201,
                     "nestedPrefabs": [],
                     "list": []
-                },
-                {
-                    "type": "TilemapLayer",
-                    "id": "b7cb4953-6490-4930-a234-d912cbe5de6d",
-                    "label": "tileLayer",
-                    "scope": "CLASS",
-                    "components": [],
-                    "tilemapId": "72c08077-96a1-4f87-8d76-b2a9083b1194",
-                    "layerName": "Tile Layer 1",
-                    "tilesets": [
-                        "tilleset"
-                    ]
                 }
             ]
         },
@@ -370,38 +358,14 @@
     ],
     "plainObjects": [
         {
-            "id": "0ae695c2-cb12-4494-ab92-ddbfb142b5fb",
-            "type": "Tilemap",
-            "label": "test_map_2",
-            "key": "test-map-2",
-            "tilesets": [
-                {
-                    "name": "tileset",
-                    "imageKey": "tileset"
-                }
-            ]
-        },
-        {
             "id": "b35c18cc-c588-42dd-a559-2626fc993e58",
             "type": "Collider",
             "label": "playerTilemapCollider",
             "scope": "METHOD",
             "object1": "player",
-            "object2": "tileLayer",
+            "object2": "this.tileLayer",
             "collideCallback": "this.playerTilemapCollide",
             "callbackContext": "this"
-        },
-        {
-            "id": "b204441a-da85-4549-9fd2-0ae3e08f1acc",
-            "type": "Tilemap",
-            "label": "test_map_3",
-            "key": "test-map-3",
-            "tilesets": [
-                {
-                    "name": "tileset",
-                    "imageKey": "tileset"
-                }
-            ]
         },
         {
             "id": "ada05cf6-56b5-454e-b312-28b327bc114b",
@@ -409,7 +373,7 @@
             "label": "soldierTilemapCollide",
             "scope": "METHOD",
             "object1": "enemyList",
-            "object2": "tileLayer"
+            "object2": "this.tileLayer"
         },
         {
             "id": "27872d3d-1f4f-4f61-8a24-2a741c638d05",
@@ -423,48 +387,12 @@
             "callbackContext": "this"
         },
         {
-            "id": "93114ee4-dc76-4f16-9572-739014eca71b",
-            "type": "Tilemap",
-            "label": "test_map_4",
-            "key": "test-map-4",
-            "tilesets": [
-                {
-                    "name": "tileset",
-                    "imageKey": "tileset"
-                }
-            ]
-        },
-        {
-            "id": "e293de4b-b164-43a3-a4fa-45872a08f362",
-            "type": "Tilemap",
-            "label": "test_map_5",
-            "key": "test-map-5",
-            "tilesets": [
-                {
-                    "name": "tileset",
-                    "imageKey": "tileset"
-                }
-            ]
-        },
-        {
-            "id": "72c08077-96a1-4f87-8d76-b2a9083b1194",
-            "type": "Tilemap",
-            "label": "test_map_6",
-            "key": "test-map-6",
-            "tilesets": [
-                {
-                    "name": "tilleset",
-                    "imageKey": "tileset"
-                }
-            ]
-        },
-        {
             "id": "f1c6fb66-8637-4391-9287-c86628d65bd9",
             "type": "Collider",
             "label": "bulletTilemapCollide",
             "scope": "METHOD",
             "object1": "bulletList",
-            "object2": "tileLayer",
+            "object2": "this.tileLayer",
             "collideCallback": "this.bulletTilemapCollide",
             "callbackContext": "this"
         },
@@ -498,11 +426,7 @@
         },
         {
             "id": "4e0108a5-e4fe-408d-8b3f-26e132d30002",
-            "label": "collidesWithBombList",
-            "objectIds": [
-                "4659f446-ab3a-42ff-b5c3-94d65c0ead0b",
-                "b7cb4953-6490-4930-a234-d912cbe5de6d"
-            ]
+            "label": "collidesWithBombList"
         },
         {
             "id": "3f521e89-f910-4cc1-ac5c-90d1d3fdb117",

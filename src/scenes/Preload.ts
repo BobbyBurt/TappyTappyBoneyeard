@@ -110,7 +110,7 @@ export default class Preload extends Phaser.Scene {
 		// remove music here if applicable
 
 		this.scene.stop(this);
-		this.scene.launch("Level");
+		this.scene.launch("LevelSelect");
 	}
 
 	resize()

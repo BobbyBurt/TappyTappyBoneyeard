@@ -16,6 +16,7 @@
 - Added a 3-bullet spray and cooldown pattern.
 - Added line of sight detection to trigger gunfire.
 - Added a fuse for bombs which is set upon collision rather than immediately exploding.
+- Added a level selection menu.
 
 ## Removed
 ## Fixed

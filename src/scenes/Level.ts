@@ -31,26 +31,6 @@ export default class Level extends Phaser.Scene {
 
 	editorCreate(): void {
 
-		// test_map_2
-		const test_map_2 = this.add.tilemap("test-map-2");
-		test_map_2.addTilesetImage("tileset", "tileset");
-
-		// test_map_3
-		const test_map_3 = this.add.tilemap("test-map-3");
-		test_map_3.addTilesetImage("tileset", "tileset");
-
-		// test_map_4
-		const test_map_4 = this.add.tilemap("test-map-4");
-		test_map_4.addTilesetImage("tileset", "tileset");
-
-		// test_map_5
-		const test_map_5 = this.add.tilemap("test-map-5");
-		test_map_5.addTilesetImage("tileset", "tileset");
-
-		// test_map_6
-		const test_map_6 = this.add.tilemap("test-map-6");
-		test_map_6.addTilesetImage("tilleset", "tileset");
-
 		// BGLayer
 		const bGLayer = this.add.layer();
 
@@ -91,12 +71,8 @@ export default class Level extends Phaser.Scene {
 		const mainLayer = this.add.layer();
 
 		// player
-		const player = new playerPrefab(this, 295, 194);
+		const player = new playerPrefab(this, 321, 201);
 		mainLayer.add(player);
-
-		// tileLayer
-		const tileLayer = test_map_6.createLayer("Tile Layer 1", ["tilleset"], 0, 0);
-		mainLayer.add(tileLayer);
 
 		// UILayer
 		const uILayer = this.add.layer();
@@ -172,22 +148,22 @@ export default class Level extends Phaser.Scene {
 		// lists
 		const public_list: Array<any> = [];
 		const enemyList: Array<any> = [];
-		const collidesWithBombList = [player, tileLayer];
+		const collidesWithBombList: Array<any> = [];
 		const gunEnemyList: Array<any> = [];
 		const bombEnemyList: Array<any> = [];
 		const bulletList: Array<any> = [];
 
 		// playerTilemapCollider
-		this.physics.add.collider(player, tileLayer, this.playerTilemapCollide, undefined, this);
+		this.physics.add.collider(player, this.tileLayer, this.playerTilemapCollide, undefined, this);
 
 		// soldierTilemapCollide
-		this.physics.add.collider(enemyList, tileLayer);
+		this.physics.add.collider(enemyList, this.tileLayer);
 
 		// playerEnemyOverlap
 		this.physics.add.overlap(player, enemyList, this.playerEnemyOverlap, undefined, this);
 
 		// bulletTilemapCollide
-		this.physics.add.collider(bulletList, tileLayer, this.bulletTilemapCollide, undefined, this);
+		this.physics.add.collider(bulletList, this.tileLayer, this.bulletTilemapCollide, undefined, this);
 
 		// playerBulletOverlap
 		this.physics.add.overlap(bulletList, player, this.bulletPlayerCollide, undefined, this);
@@ -294,7 +270,6 @@ export default class Level extends Phaser.Scene {
 		this.bGLayer = bGLayer;
 		this.mainLayer = mainLayer;
 		this.player = player;
-		this.tileLayer = tileLayer;
 		this.uILayer = uILayer;
 		this.buildText = buildText;
 		this.debugText = debugText;
@@ -305,11 +280,6 @@ export default class Level extends Phaser.Scene {
 		this.mobileButtonDive = mobileButtonDive;
 		this.mobileButtonPunchLeft = mobileButtonPunchLeft;
 		this.mobileButtonUppercut = mobileButtonUppercut;
-		this.test_map_2 = test_map_2;
-		this.test_map_3 = test_map_3;
-		this.test_map_4 = test_map_4;
-		this.test_map_5 = test_map_5;
-		this.test_map_6 = test_map_6;
 		this.public_list = public_list;
 		this.enemyList = enemyList;
 		this.collidesWithBombList = collidesWithBombList;
@@ -323,7 +293,6 @@ export default class Level extends Phaser.Scene {
 	private bGLayer!: Phaser.GameObjects.Layer;
 	private mainLayer!: Phaser.GameObjects.Layer;
 	private player!: playerPrefab;
-	private tileLayer!: Phaser.Tilemaps.TilemapLayer;
 	private uILayer!: Phaser.GameObjects.Layer;
 	private buildText!: Phaser.GameObjects.BitmapText;
 	private debugText!: Phaser.GameObjects.BitmapText;
@@ -334,14 +303,9 @@ export default class Level extends Phaser.Scene {
 	private mobileButtonDive!: Phaser.GameObjects.Rectangle;
 	private mobileButtonPunchLeft!: Phaser.GameObjects.Rectangle;
 	private mobileButtonUppercut!: Phaser.GameObjects.Rectangle;
-	private test_map_2!: Phaser.Tilemaps.Tilemap;
-	private test_map_3!: Phaser.Tilemaps.Tilemap;
-	private test_map_4!: Phaser.Tilemaps.Tilemap;
-	private test_map_5!: Phaser.Tilemaps.Tilemap;
-	private test_map_6!: Phaser.Tilemaps.Tilemap;
 	public public_list!: Array<any>;
 	private enemyList!: Array<any>;
-	private collidesWithBombList!: Array<playerPrefab|Phaser.Tilemaps.TilemapLayer>;
+	private collidesWithBombList!: Array<any>;
 	private gunEnemyList!: Array<any>;
 	private bombEnemyList!: Array<any>;
 	private bulletList!: Array<any>;
@@ -365,23 +329,51 @@ export default class Level extends Phaser.Scene {
 	/** used to make sure level restart is only called once */
 	private restarting = false;
 
+	private tileMap!: Phaser.Tilemaps.Tilemap;
+	private tileLayer!: Phaser.Tilemaps.TilemapLayer;
+
 	create()
 	{	
 		this.editorCreate();
-
-		this.createCameras();
 
 		this.createMobileButtons();
 
 		this.restarting = false;
 
+		console.log(this.registry.get('current-level'));
+		this.tileMap = this.add.tilemap(this.registry.get('current-level'));
+		this.tileMap.addTilesetImage("tilleset", "tileset");
+
+		this.tileLayer = this.tileMap.createLayer("Tile Layer 1", ["tilleset"], 0, 0);
+		this.mainLayer.add(this.tileLayer);
+
+		this.collidesWithBombList.push(this.player);
+		this.collidesWithBombList.push(this.tileLayer);
+
 		this.tileLayer.setCollision([1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18,
 			19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36], true);
 
+		// playerTilemapCollider
+		this.physics.add.collider(this.player, this.tileLayer, this.playerTilemapCollide, undefined, this);
+
+		// soldierTilemapCollide
+		this.physics.add.collider(this.enemyList, this.tileLayer);
+
+		// playerEnemyOverlap
+		this.physics.add.overlap(this.player, this.enemyList, this.playerEnemyOverlap, undefined, this);
+
+		// bulletTilemapCollide
+		this.physics.add.collider(this.bulletList, this.tileLayer, this.bulletTilemapCollide, undefined, this);
+
+		// playerBulletOverlap
+		this.physics.add.overlap(this.bulletList, this.player, this.bulletPlayerCollide, undefined, this);
+
+		this.createCameras();
+
 		this.createMapEnemies();
 
-	// start point
-		let _startPoint = this.test_map_6.findObject('elements', function (obj) 
+		// start point
+		let _startPoint = this.tileMap.findObject('elements', function (obj) 
 		{
 			return obj.name === 'startPoint';
 		});
@@ -389,7 +381,7 @@ export default class Level extends Phaser.Scene {
 		this.data.set('startPoint', {x: _startPoint.x! + 8, y: _startPoint.y! - 8});
 
 	// bottom boundary
-		this.bottomBoundary = this.test_map_6.findObject('elements', function (obj) 
+		this.bottomBoundary = this.tileMap.findObject('elements', function (obj) 
 		{
 			return obj.name === 'resetY';
 		}).y;
@@ -455,8 +447,8 @@ export default class Level extends Phaser.Scene {
 		if (__DEV__)
 		{
 			this.debugText.setText(`${this.player.stateController.currentState.name}`);
-			this.debugText2.setText(`cooldown progress: ${this.gunEnemyList[5].gunCoolDownTimer.getProgress()}`);
-			this.debugText3.setText(`spray progress: ${this.gunEnemyList[5].gunSprayTimer.getProgress()}`);	
+			this.debugText2.setText(`flap charge: ${this.player.flapCharge}`);
+			this.debugText3.setText(`punch charge: ${this.player.punchCharged}`);	
 		}
 		// this.debugText.setText(`${this.player.onFloor}`);
 
@@ -597,13 +589,13 @@ export default class Level extends Phaser.Scene {
 				_bomb.fuseTimer = this.time.addEvent({ delay: 500, callback: () =>
 				{
 					_bomb.disappear();
-	
+
 					let newExplosion = this.explosionGroup.get(_bomb.x, _bomb.y);
 					newExplosion.appear();
 					this.mainLayer.add(newExplosion);
 					this.UICam.ignore(newExplosion);
 						// TODO: this stuff should only be called if the object is being initialized
-			
+
 					this.explosionCheck(_bomb.x, _bomb.y);
 				}});
 			}
@@ -727,7 +719,9 @@ export default class Level extends Phaser.Scene {
 				/* setting up a new line on each frame is not efficient, but it's dynamic for 
 				moving enemies which could have a greater presence later for all i know. */
 
-			if (Phaser.Geom.Intersects.LineToRectangle(lineOfSight, new Phaser.Geom.Rectangle(this.player.x, this.player.y, this.player.width, this.player.height)))
+			if (Phaser.Geom.Intersects.LineToRectangle
+				(lineOfSight, new Phaser.Geom.Rectangle
+				(this.player.x, this.player.y, this.player.width, this.player.height)))
 			{
 				// this.gunFire(_enemy);
 
@@ -746,7 +740,7 @@ export default class Level extends Phaser.Scene {
 			}
 			else
 			{
-				
+
 			}
 
 			/* TODO: this is a quick solution which isn't efficient and doesn't account tile tiles
@@ -862,7 +856,7 @@ export default class Level extends Phaser.Scene {
 	 * based on their GID. */
 	createMapEnemies()
 	{
-		let _mapObjects = this.test_map_6.getObjectLayer('elements')
+		let _mapObjects = this.tileMap.getObjectLayer('elements')
 		_mapObjects.objects.forEach((object, index) =>
 		{
 			let _enemy: any = undefined;
