@@ -145,8 +145,8 @@
                     "label": "player",
                     "scope": "CLASS",
                     "components": [],
-                    "x": 321,
-                    "y": 201,
+                    "x": 345,
+                    "y": 199,
                     "nestedPrefabs": [],
                     "list": []
                 }
@@ -352,62 +352,33 @@
                     "fillColor": "#edba7c",
                     "width": 100,
                     "height": 100
+                },
+                {
+                    "type": "Rectangle",
+                    "id": "6abd45a0-5ec4-4ea8-92cc-a8d3fc91b0c4",
+                    "label": "mobileButtonLevelSelect",
+                    "scope": "CLASS",
+                    "components": [
+                        "Align",
+                        "MobileDependent",
+                        "MobileButton"
+                    ],
+                    "Align.up": true,
+                    "Align.right": true,
+                    "x": 103.45460510253906,
+                    "y": -587.1264343261719,
+                    "originX": 1,
+                    "originY": 0,
+                    "alpha": 0.5,
+                    "isFilled": true,
+                    "fillColor": "#ce7ced",
+                    "width": 75,
+                    "height": 75
                 }
             ]
         }
     ],
-    "plainObjects": [
-        {
-            "id": "b35c18cc-c588-42dd-a559-2626fc993e58",
-            "type": "Collider",
-            "label": "playerTilemapCollider",
-            "scope": "METHOD",
-            "object1": "player",
-            "object2": "this.tileLayer",
-            "collideCallback": "this.playerTilemapCollide",
-            "callbackContext": "this"
-        },
-        {
-            "id": "ada05cf6-56b5-454e-b312-28b327bc114b",
-            "type": "Collider",
-            "label": "soldierTilemapCollide",
-            "scope": "METHOD",
-            "object1": "enemyList",
-            "object2": "this.tileLayer"
-        },
-        {
-            "id": "27872d3d-1f4f-4f61-8a24-2a741c638d05",
-            "type": "Collider",
-            "label": "playerEnemyOverlap",
-            "scope": "METHOD",
-            "object1": "player",
-            "object2": "enemyList",
-            "overlapOnly": true,
-            "collideCallback": "this.playerEnemyOverlap",
-            "callbackContext": "this"
-        },
-        {
-            "id": "f1c6fb66-8637-4391-9287-c86628d65bd9",
-            "type": "Collider",
-            "label": "bulletTilemapCollide",
-            "scope": "METHOD",
-            "object1": "bulletList",
-            "object2": "this.tileLayer",
-            "collideCallback": "this.bulletTilemapCollide",
-            "callbackContext": "this"
-        },
-        {
-            "id": "18d33349-2e1e-4448-9cd9-9eb5798320d3",
-            "type": "Collider",
-            "label": "playerBulletOverlap",
-            "scope": "METHOD",
-            "object1": "bulletList",
-            "object2": "player",
-            "overlapOnly": true,
-            "collideCallback": "this.bulletPlayerCollide",
-            "callbackContext": "this"
-        }
-    ],
+    "plainObjects": [],
     "meta": {
         "app": "Phaser Editor 2D - Scene Editor",
         "url": "https://phasereditor2d.com",

@@ -17,7 +17,16 @@ export default class LevelSelect extends Phaser.Scene {
 		super("LevelSelect");
 
 		/* START-USER-CTR-CODE */
-		// Write your code here.
+		
+		let _this = this;
+
+	// setup gamepad
+	// this.input.gamepad.on('down', function 
+	// 		(pad:Phaser.Input.Gamepad.Gamepad, button:Phaser.Input.Gamepad.Button, index:number)
+	// 		{
+	// 			_this.gamepad = pad;
+	// 		});
+
 		/* END-USER-CTR-CODE */
 	}
 
@@ -183,6 +192,17 @@ export default class LevelSelect extends Phaser.Scene {
 
 	private levelsKey = ['test-map-6', 'map-1', 'map-1', 'map-1', 'map-1'];
 
+	private gamepad:Phaser.Input.Gamepad.Gamepad | undefined;
+	private SelectKey!: Phaser.Input.Keyboard.Key;
+	private StartKey!: Phaser.Input.Keyboard.Key;
+	
+// selected level
+	private selectedLevel = 0;
+
+	/** used to only call functionality on down */
+	private gamepadSelectorDown = false;
+
+
 	create() {
 
 		this.editorCreate();
@@ -201,6 +221,56 @@ export default class LevelSelect extends Phaser.Scene {
 			});
 		});
 
+		let _this = this;
+
+		this.input.gamepad.on('down', function 
+			(pad:Phaser.Input.Gamepad.Gamepad, button:Phaser.Input.Gamepad.Button, index:number)
+			{
+				_this.gamepad = pad;
+			});
+
+		this.SelectKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.E);
+		this.StartKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.R);
+
+		this.time.addEvent({ delay: 100, callback: () =>
+		{
+			this.setSelectorVisual();
+		}});
+			/* this must be done after align component has positioned the level boxes. Not sure 
+			what a better way would be, but this works for now. */
+
+	}
+
+	update(time: number, delta: number): void
+	{
+		if (this.gamepad?.isButtonDown(9) || this.StartKey.isDown)
+		{
+			this.registry.set('current-level', this.levelsKey[this.selectedLevel]);
+			this.loadLevel();
+		}
+
+		if ((this.gamepad?.isButtonDown(8) || this.SelectKey.isDown) && !this.gamepadSelectorDown)
+		{
+			this.gamepadSelectorDown = true;
+			
+			this.selectedLevel++;
+			if (this.selectedLevel == this.levelBackList.length)
+			{
+				this.selectedLevel = 0;
+			}
+			this.setSelectorVisual();
+		}
+		if (!this.gamepad?.isButtonDown(8) && !this.SelectKey.isDown)
+		{
+			this.gamepadSelectorDown = false;
+		}
+		
+	}
+
+	setSelectorVisual()
+	{
+		let selectedBack = this.levelBackList[this.selectedLevel];
+		this.birdSelector.setPosition(selectedBack.x +70, selectedBack.y);
 	}
 
 	loadLevel()

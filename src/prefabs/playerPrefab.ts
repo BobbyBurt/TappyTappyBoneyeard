@@ -3,6 +3,7 @@ type input = 'down' | 'up' | 'just-down' | 'just-up';
 /* START OF COMPILED CODE */
 
 import Phaser from "phaser";
+import Level from "~/scenes/Level";
 /* START-USER-IMPORTS */
 
 import StateController from "~/states/StateController";
@@ -18,7 +19,6 @@ export default class playerPrefab extends Phaser.Physics.Arcade.Sprite {
 
 	constructor(scene: Phaser.Scene, x?: number, y?: number, texture?: string, frame?: number | string) {
 		super(scene, x ?? 0, y ?? 0, texture || "bird1mid", frame);
-
 		scene.physics.add.existing(this, false);
 		this.body.gravity.y = 100;
 		this.body.friction.x = 0;
@@ -302,6 +302,22 @@ export default class playerPrefab extends Phaser.Physics.Arcade.Sprite {
 			{
 				this.diveInput = 'up'
 			}
+		}
+
+	// restart
+		if (this.gamepad?.isButtonDown(9))
+		{
+			let _scene = this.scene as Level;
+
+			_scene.resetLevel();
+		}
+
+	// level select
+		if (this.gamepad?.isButtonDown(8))
+		{
+			let _scene = this.scene as Level;
+
+			_scene.LoadLevelSelect();
 		}
 
 	// egg

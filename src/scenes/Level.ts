@@ -71,7 +71,7 @@ export default class Level extends Phaser.Scene {
 		const mainLayer = this.add.layer();
 
 		// player
-		const player = new playerPrefab(this, 321, 201);
+		const player = new playerPrefab(this, 345, 199);
 		mainLayer.add(player);
 
 		// UILayer
@@ -145,6 +145,14 @@ export default class Level extends Phaser.Scene {
 		mobileButtonUppercut.fillColor = 15579772;
 		uILayer.add(mobileButtonUppercut);
 
+		// mobileButtonLevelSelect
+		const mobileButtonLevelSelect = this.add.rectangle(103.45460510253906, -587.1264343261719, 75, 75);
+		mobileButtonLevelSelect.setOrigin(1, 0);
+		mobileButtonLevelSelect.alpha = 0.5;
+		mobileButtonLevelSelect.isFilled = true;
+		mobileButtonLevelSelect.fillColor = 13532397;
+		uILayer.add(mobileButtonLevelSelect);
+
 		// lists
 		const public_list: Array<any> = [];
 		const enemyList: Array<any> = [];
@@ -152,21 +160,6 @@ export default class Level extends Phaser.Scene {
 		const gunEnemyList: Array<any> = [];
 		const bombEnemyList: Array<any> = [];
 		const bulletList: Array<any> = [];
-
-		// playerTilemapCollider
-		this.physics.add.collider(player, this.tileLayer, this.playerTilemapCollide, undefined, this);
-
-		// soldierTilemapCollide
-		this.physics.add.collider(enemyList, this.tileLayer);
-
-		// playerEnemyOverlap
-		this.physics.add.overlap(player, enemyList, this.playerEnemyOverlap, undefined, this);
-
-		// bulletTilemapCollide
-		this.physics.add.collider(bulletList, this.tileLayer, this.bulletTilemapCollide, undefined, this);
-
-		// playerBulletOverlap
-		this.physics.add.overlap(bulletList, player, this.bulletPlayerCollide, undefined, this);
 
 		// parallax_Backing (components)
 		new ScrollFactor(parallax_Backing);
@@ -267,6 +260,13 @@ export default class Level extends Phaser.Scene {
 		new MobileDependent(mobileButtonUppercut);
 		new MobileButton(mobileButtonUppercut);
 
+		// mobileButtonLevelSelect (components)
+		const mobileButtonLevelSelectAlign = new Align(mobileButtonLevelSelect);
+		mobileButtonLevelSelectAlign.up = true;
+		mobileButtonLevelSelectAlign.right = true;
+		new MobileDependent(mobileButtonLevelSelect);
+		new MobileButton(mobileButtonLevelSelect);
+
 		this.bGLayer = bGLayer;
 		this.mainLayer = mainLayer;
 		this.player = player;
@@ -280,6 +280,7 @@ export default class Level extends Phaser.Scene {
 		this.mobileButtonDive = mobileButtonDive;
 		this.mobileButtonPunchLeft = mobileButtonPunchLeft;
 		this.mobileButtonUppercut = mobileButtonUppercut;
+		this.mobileButtonLevelSelect = mobileButtonLevelSelect;
 		this.public_list = public_list;
 		this.enemyList = enemyList;
 		this.collidesWithBombList = collidesWithBombList;
@@ -303,6 +304,7 @@ export default class Level extends Phaser.Scene {
 	private mobileButtonDive!: Phaser.GameObjects.Rectangle;
 	private mobileButtonPunchLeft!: Phaser.GameObjects.Rectangle;
 	private mobileButtonUppercut!: Phaser.GameObjects.Rectangle;
+	private mobileButtonLevelSelect!: Phaser.GameObjects.Rectangle;
 	public public_list!: Array<any>;
 	private enemyList!: Array<any>;
 	private collidesWithBombList!: Array<any>;
@@ -340,7 +342,6 @@ export default class Level extends Phaser.Scene {
 
 		this.restarting = false;
 
-		console.log(this.registry.get('current-level'));
 		this.tileMap = this.add.tilemap(this.registry.get('current-level'));
 		this.tileMap.addTilesetImage("tilleset", "tileset");
 
@@ -434,6 +435,18 @@ export default class Level extends Phaser.Scene {
 	// debug wall detect visual
 		this.debugWallDetectGraphics = this.add.graphics({fillStyle: { color: 0x0000ff, alpha: (__DEV__? 1 : 0)}});
 
+	// quick restart input
+		this.input.keyboard.on('keydown-R', () =>
+		{
+			this.resetLevel();
+		});
+
+	// level select input
+		this.input.keyboard.on('keydown-E', () =>
+		{
+			this.LoadLevelSelect();
+		});
+
 	// resize init
 		this.events.on('pre-resize', this.resize, this);
 		this.resize();
@@ -526,6 +539,36 @@ export default class Level extends Phaser.Scene {
 		});
 
 		this.scene.restart();
+	}
+
+	/** stops this scene, shutting down update listeners, and starts level select scene */
+	LoadLevelSelect()
+	{
+	// this function should only happen once
+		if (!this.restarting)
+		{
+			this.restarting = true;
+		}
+		else 
+		{
+			return;
+		}
+
+	// OLD
+		// this.player.reset();
+
+		// this.sound.play('bird-die');
+
+	// remove update listeners to avoid crash
+		this.events.off(Phaser.Scenes.Events.UPDATE);
+		this.player.removeUpdateListener();
+		this.enemyList.forEach((enemy) =>
+		{
+			let _enemy = enemy as EnemyPrefab;
+			_enemy.removeUpdateListener();
+		});
+
+		this.scene.start('LevelSelect');
 	}
 
 	/**
@@ -1036,6 +1079,13 @@ export default class Level extends Phaser.Scene {
 		this.mobileButtonDive.on('pointerout', () =>
 		{
 			this.player.diveMobileButton = false;
+		});
+
+	// level select
+		this.mobileButtonLevelSelect.setInteractive();
+		this.mobileButtonLevelSelect.on('pointerdown', () =>
+		{
+			this.LoadLevelSelect();
 		});
 	}
 
