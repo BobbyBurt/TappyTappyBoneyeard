@@ -19,11 +19,15 @@
             "scope": "CLASS",
             "components": [],
             "texture": {
-                "key": "bird1egg"
+                "key": "bomb"
             },
             "ArcadeComponent.active": true,
-            "body.width": 11,
-            "body.height": 12
+            "body.maxVelocity.y": 400,
+            "body.bounce.x": 0.4,
+            "body.bounce.y": 0.4,
+            "mass": 0.7,
+            "body.width": 14,
+            "body.height": 18
         }
     ],
     "plainObjects": [],

@@ -27,6 +27,8 @@ After evaluating the project, this build makes a lot of changes in order to allo
 - Added audio cue for scene start / restart.
 - Guns can now aim down.
 - Added parasols that enemies can have to protect from player's dive ability.
+- Bombs can be launched by the punch or uppercut ability.
+- Explosions have a sfx and screen shake effect.
 
 ## Removed
 ## Fixed

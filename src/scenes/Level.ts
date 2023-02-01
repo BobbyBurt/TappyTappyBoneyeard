@@ -409,9 +409,11 @@ export default class Level extends Phaser.Scene {
 	// bombs
 		this.bombGroup = this.add.group({maxSize: 30, classType: BombPrefab});
 			// TODO: define max
-		this.physics.add.collider
-			(this.bombGroup, this.collidesWithBombList, this.bombCollide, undefined, this);
-		this.time.addEvent({delay: 2000, callback: this.dropBombs, callbackScope: this, loop: true});
+		// this.physics.add.collider
+		// 	(this.bombGroup, this.collidesWithBombList, this.bombCollide, undefined, this);
+		this.physics.add.overlap(this.bombGroup, this.player, this.bombPlayerCollide, undefined, this);
+		this.physics.add.overlap(this.bombGroup, this.enemyList, this.bombEnemyCollide, undefined, this);
+		this.physics.add.collider(this.bombGroup, this.tileLayer, this.bombTilemapCollide, undefined, this);
 
 	// bullets
 		this.bulletGroup = this.add.group({maxSize: 100, classType: BulletPrefab})
@@ -520,12 +522,12 @@ export default class Level extends Phaser.Scene {
 			if (_member.y > this.bottomBoundary!)
 				// why can't I access y just by member.y?
 			{
-				if (_member.texture.key == 'bird1egg')
-				{
-					this.player.eggReady = true;
-				}
-
 				_member.disappear();
+				_member.setPosition(9999, -9999);
+				_member.enemy.bombDropTimer = this.time.addEvent({delay: 1000, callback: () =>
+				{
+					this.setBomb(_member.enemy.x, _member.enemy.y, _member.enemy);
+				}});
 			}
 		});
 			// TODO: change this to bomb group
@@ -643,41 +645,46 @@ export default class Level extends Phaser.Scene {
 		}
 	}
 
+	bombPlayerCollide(bomb: any, player: any)
+	{
+		let _bomb = bomb as BombPrefab;
+		let _player = bomb as playerPrefab;
+
+		if (this.player.stateController.currentState.name == 'punch' 
+		|| this.player.stateController.currentState.name == 'uppercut')
+		{
+			this.setBombFuse(_bomb);
+			_bomb.setPosition(_bomb.x, _bomb.y -10);
+			_bomb.body.setVelocity(this.player.body.velocity.x,(this.player.body.velocity.y * 1.5) - 150);
+			// _bomb.body.setVelocity(200, -200);
+		}
+		else
+		{
+			this.bombExplode(_bomb);
+		}
+	}
+
+	bombEnemyCollide(bomb: any, player: any)
+	{
+
+	}
+
+	bombTilemapCollide(bomb: any, tileLayer: any)
+	{
+		let _bomb = bomb as BombPrefab;
+		if (_bomb.fuseTimer.getProgress() == 1)
+		{
+			console.log('tilemap set bomb fuse')
+			this.setBombFuse(_bomb);
+		}
+	}
+
 	/** egg collision callback */
 	bombCollide(bomb:any, _collidedWith:any)
 	{
 		let _bomb = bomb as BombPrefab;
 
-	// player - egg collision check
-		if (_bomb.texture.key == 'bird1egg' && _collidedWith.name == 'player')
-		{	
-			return;
-		}
-			// player is included in the bomb collision list, but egg - player should be ignored
-
-			if (_bomb.fuseTimer.getProgress() == 1)
-			{
-				_bomb.setTint(0xff0000)
-
-				_bomb.fuseTimer = this.time.addEvent({ delay: 500, callback: () =>
-				{
-					_bomb.disappear();
-
-					let newExplosion = this.explosionGroup.get(_bomb.x, _bomb.y);
-					newExplosion.appear();
-					this.mainLayer.add(newExplosion);
-					this.UICam.ignore(newExplosion);
-						// TODO: this stuff should only be called if the object is being initialized
-
-					this.explosionCheck(_bomb.x, _bomb.y);
-				}});
-			}
-
-
-		if (_bomb.texture.key == 'bird1egg')
-		{
-			this.player.eggReady = true;
-		}
+		// player is included in the bomb collision list, but egg - player should be ignored
 	}
 
 	/** TEST */
@@ -697,10 +704,10 @@ export default class Level extends Phaser.Scene {
 	}
 
 	/** activates bomb in bombGroup pool */
-	setBomb(x: number, y: number, textureKey: string)
+	setBomb(x: number, y: number, enemy: EnemyPrefab)
 	{
 		let newBomb = this.bombGroup.get(x, y);
-		newBomb.appear(textureKey);
+		newBomb.appear(enemy);
 		this.mainLayer.add(newBomb);
 		this.UICam.ignore(newBomb);
 
@@ -712,17 +719,56 @@ export default class Level extends Phaser.Scene {
 		}
 	}
 
-	/** drops bombs from each active balloon soldier */
-	dropBombs()
+	/** starts or restarts bomb fuse timer & visual */
+	setBombFuse(bomb: BombPrefab)
 	{
-		this.bombEnemyList.forEach(element =>
+	// fuse visual blink
+		bomb.fuseVisualTimer.destroy();
+		bomb.fuseVisualTimer = this.time.addEvent({ delay: 100, loop: true, callback: () =>
 		{
-			let _enemy = element as EnemyPrefab
-			if (!_enemy.isFalling())	
+			if (bomb.isTinted)
 			{
-				this.setBomb(element.x, element.y + 25, 'bomb');
+				bomb.clearTint();
 			}
-		});
+			else
+			{
+				bomb.setTintFill(0xffffff);
+			}
+		}});
+
+	// explosion delay
+		bomb.fuseTimer.destroy();
+		bomb.fuseTimer = this.time.addEvent({ delay: 1000, callback: () =>
+		{
+			this.bombExplode(bomb);
+		}});
+	}
+
+	/** bomb behaviour, explosion setup */
+	bombExplode(bomb: BombPrefab)
+	{
+		bomb.disappear();
+		bomb.fuseVisualTimer.paused = true;
+
+		let newExplosion = this.explosionGroup.get(bomb.x, bomb.y);
+		newExplosion.appear();
+		this.mainLayer.add(newExplosion);
+		this.UICam.ignore(newExplosion);
+			// TODO: this stuff should only be called if the object is being initialized
+
+		this.explosionCheck(bomb.x, bomb.y);
+
+	// explosion visual / audio
+		if (this.cameras.main.worldView.contains(bomb.x, bomb.y))
+		{
+			this.sound.play('explosion');
+			this.cameras.main.shake(200, 0.001);
+		}
+
+		bomb.enemy.bombDropTimer = this.time.addEvent({delay: 1000, callback: () =>
+		{
+			this.setBomb(bomb.enemy.x, bomb.enemy.y, bomb.enemy);
+		}});
 	}
 
 	/** detects physics bodies within explosion range and impacts them appropriately */
@@ -1041,11 +1087,15 @@ export default class Level extends Phaser.Scene {
 		// enemy type
 			if (object.type == 'balloon' || object.type == 'balloon-parasol')
 			{
-				_enemy = new BalloonEnemy(this, object.x! + 8, object.y! - 8, _gunDirection, (object.type == 'balloon-parasol'));
+				_enemy = new BalloonEnemy
+					(this, object.x! + 8, object.y! - 8, _gunDirection, 
+						(object.type == 'balloon-parasol'));
 			}
 			else
 			{
-				_enemy = new GroundEnemy(this, object.x! + 8, object.y! - 8, _gunDirection, (object.type == 'parasol'));
+				_enemy = new GroundEnemy
+					(this, object.x! + 8, object.y! - 8, _gunDirection, 
+						(object.type == 'parasol'));
 			}
 
 			if (_gunDirection !== undefined)
@@ -1054,7 +1104,11 @@ export default class Level extends Phaser.Scene {
 			}
 			if (_bomb)
 			{
-				this.bombEnemyList.push(_enemy)
+				this.bombEnemyList.push(_enemy);
+				_enemy.bombDropTimer = this.time.addEvent({delay: 1000, callback: () =>
+				{
+					this.setBomb(_enemy.x, _enemy.y, _enemy);
+				}});
 			}
 
 			_enemy.flipX = object.flippedHorizontal;

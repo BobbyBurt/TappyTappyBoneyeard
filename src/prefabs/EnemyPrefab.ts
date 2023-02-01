@@ -57,6 +57,8 @@ export default class EnemyPrefab extends Phaser.GameObjects.Sprite {
 	private _hasParasol = false;
 	public get hasParasol() { return this._hasParasol }
 
+	public bombDropTimer!: Phaser.Time.TimerEvent;
+
 	/** rotation applied to sprite when falling. */
 	private spin: number = 0;
 	public isFalling() { return (this.spin != 0) }
