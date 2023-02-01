@@ -7,8 +7,6 @@ import Phaser from "phaser";
 import Align from "../components/Align";
 /* START-USER-IMPORTS */
 
-import AdaptiveZoom from "~/AdaptiveZoom";
-
 /* END-USER-IMPORTS */
 
 export default class LevelSelect extends Phaser.Scene {
@@ -190,7 +188,7 @@ export default class LevelSelect extends Phaser.Scene {
 
 	private UICam!: Phaser.Cameras.Scene2D.BaseCamera | any;
 
-	private levelsKey = ['test-map-6', 'map-1', 'map-1', 'map-1', 'map-1'];
+	private levelsKey = ['test-map-6', 'map-1', 'map-2', 'map-1', 'map-1'];
 
 	private gamepad:Phaser.Input.Gamepad.Gamepad | undefined;
 	private SelectKey!: Phaser.Input.Keyboard.Key;
@@ -286,8 +284,7 @@ export default class LevelSelect extends Phaser.Scene {
 	 */
 	createCameras()
 	{
-		let adaptiveZoom = new AdaptiveZoom();
-		// TODO: set adaptive zoom or whatever solution to different PPIs
+		// does this need adaptive zoom too?
 
 	// main
 		this.cameras.main.setName('main');

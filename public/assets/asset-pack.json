@@ -125,6 +125,11 @@
                 "key": "map-1"
             },
             {
+                "url": "assets/levels/map-2.json",
+                "type": "tilemapTiledJSON",
+                "key": "map-2"
+            },
+            {
                 "textureURL": "assets/nokia.png",
                 "fontDataURL": "assets/nokia.xml",
                 "type": "bitmapFont",
@@ -240,6 +245,13 @@
                 "url": "assets/levels/tileset.png",
                 "type": "image",
                 "key": "tileset_1"
+            },
+            {
+                "url": [
+                    "assets/sfx/victory TEMP.wav"
+                ],
+                "type": "audio",
+                "key": "victory"
             }
         ]
     },

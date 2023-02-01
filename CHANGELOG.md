@@ -2,12 +2,14 @@
 
 ## Version 7 - 
 
+After evaluating the project, this build makes a lot of changes in order to allow gameplay experimentation.
+
 ## Changed
 
 - Uppercuts now also use punch charge rather than a seperate variable.
 - Enemies are set to be balloon enemies from the type field of the object in the Tiled editor, allowing them to have guns.
 - Bomb enemies are set in the Tiled editor as another enemy type rather than automatically being assigned to all balloon enemies.
-- Changed test map
+- In smaller windows, the camera is zoomed out.
 
 ## Added
 
@@ -19,12 +21,17 @@
 - Added a level selection menu with pointer, gamepad and keyboard input.
 - Added quick restart input for gamepad, mobile and keyboard.
 - Added return to level select input for gamepad, mobile and keyboard.
+- Added simple adaptive zoom.
+- Added fade in effect upon level start / restart.
+- Added visual & audio feedback for when all enemies are defeated.
 
 ## Removed
 ## Fixed
 
 - Punches charge is no longer restored during punch / uppercut state, which allowed for multiple uses while airborne.
 - Bullets and bombs no longer spawn from falling enemies.
+- Guns and balloons are now ignored by the UICam.
+- Camera no longer rushes to the player upon level start / restart.
 
 ## Version 6 - 2023-01-24
 

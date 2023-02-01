@@ -1,6 +1,7 @@
 /* START OF COMPILED CODE */
 
 import Phaser from "phaser";
+import Level from "~/scenes/Level";
 /* START-USER-IMPORTS */
 /* END-USER-IMPORTS */
 
@@ -51,6 +52,11 @@ export default class EnemyPrefab extends Phaser.GameObjects.Sprite {
 	private spin: number = 0;
 	public isFalling() { return (this.spin != 0) }
 
+	public get _scene()
+	{
+		return this.scene as Level;
+	}
+
 	/** update which runs on all enemy classes. Each enemy class has it's own start() for specific
 	 *  setup */
 	private enemyStart()
@@ -90,6 +96,7 @@ export default class EnemyPrefab extends Phaser.GameObjects.Sprite {
 		this.gun = this.scene.add.image(this.x, this.y, 'gun');
 			// TODO: this needs to be added to the mainLayer, but we can't access it's variable
 		this.scene.physics.add.existing(this.gun, false);
+		this._scene.UICam.ignore(this.gun);
 		let _gunBody = this.gun.body as Phaser.Physics.Arcade.Body;
 			// simply calling this.gun.body doesn't give me much to work with. There must be 
 			// a better way to do this

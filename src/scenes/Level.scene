@@ -132,7 +132,7 @@
             "type": "Layer",
             "id": "74ede788-7820-49aa-b167-86ea282dd558",
             "label": "mainLayer",
-            "scope": "CLASS",
+            "scope": "PUBLIC",
             "components": [],
             "list": [
                 {
@@ -145,8 +145,8 @@
                     "label": "player",
                     "scope": "CLASS",
                     "components": [],
-                    "x": 345,
-                    "y": 199,
+                    "x": 383,
+                    "y": 203,
                     "nestedPrefabs": [],
                     "list": []
                 }
@@ -156,7 +156,7 @@
             "type": "Layer",
             "id": "6f3e4cb4-2649-40ee-b6ef-11f87265d5f0",
             "label": "UILayer",
-            "scope": "CLASS",
+            "scope": "PUBLIC",
             "components": [],
             "list": [
                 {
@@ -374,6 +374,31 @@
                     "fillColor": "#ce7ced",
                     "width": 75,
                     "height": 75
+                },
+                {
+                    "type": "BitmapText",
+                    "id": "7a13caa7-341f-4f81-8406-30fb738dace3",
+                    "label": "winText",
+                    "scope": "CLASS",
+                    "components": [
+                        "Align"
+                    ],
+                    "Align.middle": true,
+                    "Align.center": true,
+                    "x": 435,
+                    "y": 100,
+                    "scaleX": 1.3,
+                    "angle": -30,
+                    "originX": 0.5,
+                    "originY": 0.5,
+                    "visible": false,
+                    "text": "ENEMIES DEFEATED!",
+                    "font": "nokia",
+                    "align": 1,
+                    "fontSize": -16,
+                    "dropShadowX": 1,
+                    "dropShadowY": 1,
+                    "dropShadowColor": "#000000ff"
                 }
             ]
         }

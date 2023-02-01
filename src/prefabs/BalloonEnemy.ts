@@ -5,6 +5,7 @@ type GunDirection = undefined | 'up' | 'upward' | 'forward' | 'downward' | 'down
 
 import Phaser from "phaser";
 import EnemyPrefab from "./EnemyPrefab";
+import Level from "~/scenes/Level";
 /* START-USER-IMPORTS */
 /* END-USER-IMPORTS */
 
@@ -28,6 +29,7 @@ export default class BalloonEnemy extends EnemyPrefab {
 
 	public balloon!: Phaser.GameObjects.Image;
 
+
 	start()
 	{
 		this.body.allowGravity = false;
@@ -36,6 +38,7 @@ export default class BalloonEnemy extends EnemyPrefab {
 
 	// create balloon
 		this.balloon = this.scene.add.image(this.x, this.y - 30, 'balloon');
+		this._scene.UICam.ignore(this.balloon);
 		this.scene.physics.add.existing(this.balloon);
 		let _balloonBody = this.balloon.body as Phaser.Physics.Arcade.Body;
 		_balloonBody.setAllowGravity(false);

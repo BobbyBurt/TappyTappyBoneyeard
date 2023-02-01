@@ -9,7 +9,6 @@ import MobileDependent from "../components/MobileDependent";
 import MobileButton from "../components/MobileButton";
 /* START-USER-IMPORTS */
 
-import AdaptiveZoom from "../AdaptiveZoom";
 import BalloonEnemy from "~/prefabs/BalloonEnemy";
 import EnemyPrefab from "~/prefabs/EnemyPrefab";
 import GroundEnemy from "~/prefabs/GroundEnemy";
@@ -71,7 +70,7 @@ export default class Level extends Phaser.Scene {
 		const mainLayer = this.add.layer();
 
 		// player
-		const player = new playerPrefab(this, 345, 199);
+		const player = new playerPrefab(this, 383, 203);
 		mainLayer.add(player);
 
 		// UILayer
@@ -152,6 +151,19 @@ export default class Level extends Phaser.Scene {
 		mobileButtonLevelSelect.isFilled = true;
 		mobileButtonLevelSelect.fillColor = 13532397;
 		uILayer.add(mobileButtonLevelSelect);
+
+		// winText
+		const winText = this.add.bitmapText(435, 100, "nokia", "ENEMIES DEFEATED!");
+		winText.scaleX = 1.3;
+		winText.angle = -30;
+		winText.setOrigin(0.5, 0.5);
+		winText.visible = false;
+		winText.text = "ENEMIES DEFEATED!";
+		winText.fontSize = -16;
+		winText.align = 1;
+		winText.dropShadowX = 1;
+		winText.dropShadowY = 1;
+		uILayer.add(winText);
 
 		// lists
 		const public_list: Array<any> = [];
@@ -267,6 +279,11 @@ export default class Level extends Phaser.Scene {
 		new MobileDependent(mobileButtonLevelSelect);
 		new MobileButton(mobileButtonLevelSelect);
 
+		// winText (components)
+		const winTextAlign = new Align(winText);
+		winTextAlign.middle = true;
+		winTextAlign.center = true;
+
 		this.bGLayer = bGLayer;
 		this.mainLayer = mainLayer;
 		this.player = player;
@@ -281,6 +298,7 @@ export default class Level extends Phaser.Scene {
 		this.mobileButtonPunchLeft = mobileButtonPunchLeft;
 		this.mobileButtonUppercut = mobileButtonUppercut;
 		this.mobileButtonLevelSelect = mobileButtonLevelSelect;
+		this.winText = winText;
 		this.public_list = public_list;
 		this.enemyList = enemyList;
 		this.collidesWithBombList = collidesWithBombList;
@@ -292,9 +310,9 @@ export default class Level extends Phaser.Scene {
 	}
 
 	private bGLayer!: Phaser.GameObjects.Layer;
-	private mainLayer!: Phaser.GameObjects.Layer;
+	public mainLayer!: Phaser.GameObjects.Layer;
 	private player!: playerPrefab;
-	private uILayer!: Phaser.GameObjects.Layer;
+	public uILayer!: Phaser.GameObjects.Layer;
 	private buildText!: Phaser.GameObjects.BitmapText;
 	private debugText!: Phaser.GameObjects.BitmapText;
 	private debugText2!: Phaser.GameObjects.BitmapText;
@@ -305,6 +323,7 @@ export default class Level extends Phaser.Scene {
 	private mobileButtonPunchLeft!: Phaser.GameObjects.Rectangle;
 	private mobileButtonUppercut!: Phaser.GameObjects.Rectangle;
 	private mobileButtonLevelSelect!: Phaser.GameObjects.Rectangle;
+	private winText!: Phaser.GameObjects.BitmapText;
 	public public_list!: Array<any>;
 	private enemyList!: Array<any>;
 	private collidesWithBombList!: Array<any>;
@@ -318,7 +337,7 @@ export default class Level extends Phaser.Scene {
 	private explosionGroup!: Phaser.GameObjects.Group;
 	private bulletGroup!: Phaser.GameObjects.Group;
 
-	private UICam!: Phaser.Cameras.Scene2D.BaseCamera | any;
+	public UICam!: Phaser.Cameras.Scene2D.BaseCamera | any;
 		// TODO: define type annotation. the infered type doesn't have access to prerender()
 
 	private debugWallDetectGraphics!: Phaser.GameObjects.Graphics;
@@ -369,10 +388,6 @@ export default class Level extends Phaser.Scene {
 		// playerBulletOverlap
 		this.physics.add.overlap(this.bulletList, this.player, this.bulletPlayerCollide, undefined, this);
 
-		this.createCameras();
-
-		this.createMapEnemies();
-
 		// start point
 		let _startPoint = this.tileMap.findObject('elements', function (obj) 
 		{
@@ -380,6 +395,10 @@ export default class Level extends Phaser.Scene {
 		});
 		this.player.setPosition(_startPoint.x! + 8, _startPoint.y! - 8);
 		this.data.set('startPoint', {x: _startPoint.x! + 8, y: _startPoint.y! - 8});
+
+		this.createCameras();
+
+		this.createMapEnemies();
 
 	// bottom boundary
 		this.bottomBoundary = this.tileMap.findObject('elements', function (obj) 
@@ -429,6 +448,7 @@ export default class Level extends Phaser.Scene {
 		this.sound.add('enemy-death', {volume: 1});
 		this.sound.add('explosion', {volume: 1});
 		this.sound.add('bird-die', {volume: 1});
+		this.sound.add('victory', {volume: 1});
 			// TODO: impliment explosion sound w/ spacial audio or something
 		this.sound.add('punch-swing', {volume: 1});
 
@@ -606,6 +626,8 @@ export default class Level extends Phaser.Scene {
 			{
 				this.player.setVelocityY(-this.player.jumpForce);
 			}
+
+			this.enemiesDefeatedCheck();
 		}
 		else
 		{
@@ -895,6 +917,48 @@ export default class Level extends Phaser.Scene {
 		});
 	}
 
+	/** checks if all enemies are defeated and shows victory audio / visual */
+	enemiesDefeatedCheck()
+	{
+	// check
+		let _anyEnemies = false;
+		this.enemyList.forEach((enemy) => 
+		{
+			let _enemy = enemy as EnemyPrefab;
+			if (!_enemy.isFalling())
+			{
+				_anyEnemies = true;
+			}
+		});
+		if (_anyEnemies)
+		{
+			return;
+		}
+
+	// win text visual
+		this.winText.setVisible(true);
+		this.tweens.add
+		({
+			targets: this.winText,
+			duration: 1000,
+			yoyo: true,
+			// hold: 1000,
+			// repeatDelay: 1000,
+			repeat: -1,
+			ease: Phaser.Math.Easing.Sine.In,
+			scaleY: 1.3,
+			scaleX: 1,
+			angle: 30
+		});
+		this.time.addEvent({ delay: 5000, callback: () => 
+		{
+			this.winText.setVisible(false);
+		}});
+
+	// win audio
+		this.sound.play('victory');
+	}
+
 	/** iterates through everything in the 'elements' object layer of the map and creates enemies 
 	 * based on their GID. */
 	createMapEnemies()
@@ -981,14 +1045,19 @@ export default class Level extends Phaser.Scene {
 	 */
 	createCameras()
 	{
-		let adaptiveZoom = new AdaptiveZoom();
-		// TODO: set adaptive zoom or whatever solution to different PPIs
+	// adaptive zoom
+		let zoom = (this.scale.width > 1000? 3 : 2);
+			/* pixel art games cannot zoom between whole numbers without becoming misaligned and 
+			causing graphical issues, so the old dynamic solution isn't gonna work. */
 
 	// main
 		this.cameras.main.setName('main');
-		this.cameras.main.setZoom(3);
+		this.cameras.main.setZoom(zoom);
+		this.cameras.main.setScroll(this.player.x, this.player.y);;
 		this.cameras.main.startFollow(this.player, true, .1, .1);
 		this.cameras.main.ignore(this.uILayer.getChildren());
+
+		this.cameras.main.fadeIn(200, 255, 255, 255);
 
 	// UI		
 		this.UICam = this.cameras.add(0, 0, this.cameras.main.width, this.cameras.main.height) as any;
