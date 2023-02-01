@@ -8,8 +8,8 @@ import EnemyPrefab from "./EnemyPrefab";
 
 export default class GroundEnemy extends EnemyPrefab {
 
-	constructor(scene: Phaser.Scene, x?: number, y?: number, gunDirection?: GunDirection, texture?: string, frame?: number | string) {
-		super(scene, x ?? 0, y ?? 0, gunDirection, texture || "soldiermid", frame);
+	constructor(scene: Phaser.Scene, x?: number, y?: number, gunDirection?: GunDirection, parasol?: boolean, texture?: string, frame?: number | string) {
+		super(scene, x ?? 0, y ?? 0, gunDirection, parasol, texture || "soldiermid", frame);
 
 		/* START-USER-CTR-CODE */
 

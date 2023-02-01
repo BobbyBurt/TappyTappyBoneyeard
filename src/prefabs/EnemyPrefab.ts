@@ -12,7 +12,7 @@ export default interface EnemyPrefab {
 
 export default class EnemyPrefab extends Phaser.GameObjects.Sprite {
 
-	constructor(scene: Phaser.Scene, x?: number, y?: number, gunDirection?:GunDirection, texture?: string, frame?: number | string) {
+	constructor(scene: Phaser.Scene, x?: number, y?: number, gunDirection?:GunDirection, parasol?: boolean, texture?: string, frame?: number | string) {
 		super(scene, x ?? 0, y ?? 0, texture || "soldiermid", frame);
 
 		scene.physics.add.existing(this, false);
@@ -36,6 +36,10 @@ export default class EnemyPrefab extends Phaser.GameObjects.Sprite {
 		});
 
 		this.gunDirection = gunDirection;
+		if (parasol)
+		{
+			this._hasParasol = true;
+		}
 
 		/* END-USER-CTR-CODE */
 	}
@@ -47,6 +51,11 @@ export default class EnemyPrefab extends Phaser.GameObjects.Sprite {
 	/** is there an active timer event for the spray fire? */
 	public gunSprayTimer!: Phaser.Time.TimerEvent;
 	public gunCoolDownTimer!: Phaser.Time.TimerEvent;
+
+	private _parasol!: Phaser.GameObjects.Image;
+	protected get parasol() { return this._parasol }
+	private _hasParasol = false;
+	public get hasParasol() { return this._hasParasol }
 
 	/** rotation applied to sprite when falling. */
 	private spin: number = 0;
@@ -74,6 +83,11 @@ export default class EnemyPrefab extends Phaser.GameObjects.Sprite {
 		{
 			this.createGun();
 		}
+
+		if (this._hasParasol)
+		{
+			this.createParasol();
+		}
 	}
 
 	/** update which runs on all enemy classes. Each enemy class has it's own update() for specific
@@ -89,12 +103,15 @@ export default class EnemyPrefab extends Phaser.GameObjects.Sprite {
 				this.gun.setPosition(this.x, this.y)
 			}
 		}
+		if (this.hasParasol)
+		{
+			this.parasol.rotation += this.spin * 3;
+		}
 	}
 
 	private createGun()
 	{
 		this.gun = this.scene.add.image(this.x, this.y, 'gun');
-			// TODO: this needs to be added to the mainLayer, but we can't access it's variable
 		this.scene.physics.add.existing(this.gun, false);
 		this._scene.UICam.ignore(this.gun);
 		let _gunBody = this.gun.body as Phaser.Physics.Arcade.Body;
@@ -138,6 +155,18 @@ export default class EnemyPrefab extends Phaser.GameObjects.Sprite {
 		}
 	}
 
+	createParasol()
+	{
+		this._parasol = this.scene.add.image(this.x, this.y - 15, 'parasol');
+		// this.parasol.setDepth(this.depth - 1);
+		this.scene.physics.add.existing(this.parasol, false);
+		this._scene.UICam.ignore(this.parasol);
+		let _parasolBody = this.parasol.body as Phaser.Physics.Arcade.Body;
+			// simply calling this.gun.body doesn't give me much to work with. There must be 
+			// a better way to do this
+		_parasolBody.setAllowGravity(false);
+	}
+
 	/** activate fall behaviour
 	 * 
 	 * called by scene
@@ -159,6 +188,13 @@ export default class EnemyPrefab extends Phaser.GameObjects.Sprite {
 			let _gunBody = this.gun.body as Phaser.Physics.Arcade.Body;
 			_gunBody.setAllowGravity(true);
 			_gunBody.setVelocity(directionX * 1.2, -170)
+		}
+
+		if (this.parasol)
+		{
+			let _parasolBody = this.parasol.body as Phaser.Physics.Arcade.Body;
+			_parasolBody.setAllowGravity(true);
+			_parasolBody.setVelocity(directionX * .8, -200)
 		}
 	}
 

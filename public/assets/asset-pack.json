@@ -151,6 +151,11 @@
                 "key": "Parallax-Forest"
             },
             {
+                "url": "assets/parasol.png",
+                "type": "image",
+                "key": "parasol"
+            },
+            {
                 "url": [
                     "assets/sfx/Pogo stick.mp3"
                 ],

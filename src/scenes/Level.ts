@@ -449,8 +449,11 @@ export default class Level extends Phaser.Scene {
 		this.sound.add('explosion', {volume: 1});
 		this.sound.add('bird-die', {volume: 1});
 		this.sound.add('victory', {volume: 1});
+		this.sound.add('reflect', {volume: 1});
 			// TODO: impliment explosion sound w/ spacial audio or something
 		this.sound.add('punch-swing', {volume: 1});
+
+		this.sound.play('reflect');
 
 	// debug wall detect visual
 		this.debugWallDetectGraphics = this.add.graphics({fillStyle: { color: 0x0000ff, alpha: (__DEV__? 1 : 0)}});
@@ -616,16 +619,21 @@ export default class Level extends Phaser.Scene {
 			|| this.player.stateController.currentState.name == 'dive'
 			|| this.player.stateController.currentState.name == 'uppercut')
 		{
+			if (this.player.stateController.currentState.name == 'dive')
+			{
+				this.player.setVelocityY(-this.player.jumpForce);
+				if (_enemy.hasParasol)
+				{
+					return;
+				}
+			}
+
 			_enemy.hit(this.player.body.velocity.x, this.player.body.velocity.y);
 
 			this.player.punchCharged = true;
 
 			this.sound.play('enemy-death');
 
-			if (this.player.stateController.currentState.name == 'dive')
-			{
-				this.player.setVelocityY(-this.player.jumpForce);
-			}
 
 			this.enemiesDefeatedCheck();
 		}
@@ -758,11 +766,15 @@ export default class Level extends Phaser.Scene {
 				case 'up':
 				{
 					lineOfSight.setTo
-						(_enemy.x + 7.5, _enemy.y + 10, _enemy.x + 7.5, _enemy.y - lineLength,);
+						(_enemy.x + 7.5, _enemy.y + 10, _enemy.x + 7.5, (_enemy.y + 10) - lineLength,);
 					break;
 				}
 				case 'upward':
 				{
+					lineOfSight.setTo
+						(_enemy.x + 7.5, _enemy.y + 10, 
+						_enemy.x + (_enemy.flipX? lineLength : -lineLength ), 
+						(_enemy.y + 10) - lineLength,);
 					break;
 				}
 				case 'forward':
@@ -774,10 +786,16 @@ export default class Level extends Phaser.Scene {
 				}
 				case 'downward':
 				{
+					lineOfSight.setTo
+						(_enemy.x + 7.5, _enemy.y + 10, 
+						_enemy.x + (_enemy.flipX? lineLength : -lineLength ), 
+						(_enemy.y + 10) + lineLength,);
 					break;
 				}
 				case 'down':
 				{
+					lineOfSight.setTo
+						(_enemy.x + 7.5, _enemy.y + 10, _enemy.x + 7.5, (_enemy.y + 10) + lineLength,);
 					break;
 				}
 			}
@@ -830,31 +848,35 @@ export default class Level extends Phaser.Scene {
 			/* does this add existing bullets to the list, adding them infinitely? */
 			// TODO: these should be added once on object initialization, not recycle
 		let velocity = {x: 0, y: 0};
+		const _speed = 60;
+		const _speedHorizontal = 45;
 		switch(enemy.gunDirection)
 		{
 			case 'up':
 			{
-				velocity = {x: 0, y: -60};
+				velocity = {x: 0, y: -_speed};
 				break;
 			}
 			case 'down':
 			{
-				velocity = {x: 0, y: 60};
+				velocity = {x: 0, y: _speed};
 				break;
 			}
 			case 'downward':
 			{
-				velocity = {x: (enemy.flipX? 15 : -15), y: 15};
+				velocity = {x: (enemy.flipX? _speedHorizontal : -_speedHorizontal),
+					y: _speedHorizontal};
 				break;
 			}
 			case 'upward':
 			{
-				velocity = {x: (enemy.flipX? 15 : -15), y: -15};
+				velocity = {x: (enemy.flipX? _speedHorizontal : -_speedHorizontal), 
+					y: -_speedHorizontal};
 				break;
 			}
 			case 'forward':
 			{
-				velocity = {x: (enemy.flipX? 60 : -60), y: 0};
+				velocity = {x: (enemy.flipX? _speed : -_speed), y: 0};
 				break;
 			}
 		}
@@ -1000,6 +1022,11 @@ export default class Level extends Phaser.Scene {
 				}
 				case 42:
 				{
+					_gunDirection = 'down';
+					break;
+				}
+				case 48:
+				{
 					_gunDirection = undefined;
 					_bomb = true;
 					break;
@@ -1012,13 +1039,13 @@ export default class Level extends Phaser.Scene {
 			}
 
 		// enemy type
-			if (object.type == 'balloon')
+			if (object.type == 'balloon' || object.type == 'balloon-parasol')
 			{
-				_enemy = new BalloonEnemy(this, object.x! + 8, object.y! - 8, _gunDirection);
+				_enemy = new BalloonEnemy(this, object.x! + 8, object.y! - 8, _gunDirection, (object.type == 'balloon-parasol'));
 			}
 			else
 			{
-				_enemy = new GroundEnemy(this, object.x! + 8, object.y! - 8, _gunDirection);
+				_enemy = new GroundEnemy(this, object.x! + 8, object.y! - 8, _gunDirection, (object.type == 'parasol'));
 			}
 
 			if (_gunDirection !== undefined)

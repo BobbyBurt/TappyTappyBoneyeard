@@ -2,7 +2,7 @@
 
 ## Version 7 - 
 
-After evaluating the project, this build makes a lot of changes in order to allow gameplay experimentation.
+After evaluating the project, this build makes a lot of changes in order to allow gameplay experimentation. Most significantly gunfire, bomb behaviour and level select.
 
 ## Changed
 
@@ -24,6 +24,9 @@ After evaluating the project, this build makes a lot of changes in order to allo
 - Added simple adaptive zoom.
 - Added fade in effect upon level start / restart.
 - Added visual & audio feedback for when all enemies are defeated.
+- Added audio cue for scene start / restart.
+- Guns can now aim down.
+- Added parasols that enemies can have to protect from player's dive ability.
 
 ## Removed
 ## Fixed

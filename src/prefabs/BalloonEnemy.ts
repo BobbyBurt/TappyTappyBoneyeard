@@ -11,8 +11,8 @@ import Level from "~/scenes/Level";
 
 export default class BalloonEnemy extends EnemyPrefab {
 
-	constructor(scene: Phaser.Scene, x?: number, y?: number, gunDirection?: GunDirection, texture?: string, frame?: number | string) {
-		super(scene, x ?? 0, y ?? 0, gunDirection, texture || "soldiermid", frame);
+	constructor(scene: Phaser.Scene, x?: number, y?: number, gunDirection?: GunDirection, parasol?: boolean, texture?: string, frame?: number | string) {
+		super(scene, x ?? 0, y ?? 0, gunDirection, parasol, texture || "soldiermid", frame);
 
 		/* START-USER-CTR-CODE */
 
@@ -75,6 +75,10 @@ export default class BalloonEnemy extends EnemyPrefab {
 		{
 			this.y = this.originalPos.y + this.floatYTween.getValue();
 			this.balloon.setY((this.originalPos.y - 30) + this.floatYTween.getValue());
+			if (super.hasParasol)
+			{
+				super.parasol.setY((this.originalPos.y - 15) + this.floatYTween.getValue());
+			}
 		}
 		else
 		{
