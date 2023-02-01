@@ -188,7 +188,7 @@ export default class LevelSelect extends Phaser.Scene {
 
 	private UICam!: Phaser.Cameras.Scene2D.BaseCamera | any;
 
-	private levelsKey = ['test-map-6', 'map-1', 'map-2', 'map-1', 'map-1'];
+	private levelsKey = ['intro', 'charge', 'bombs', 'gunfire', 'map-1'];
 
 	private gamepad:Phaser.Input.Gamepad.Gamepad | undefined;
 	private SelectKey!: Phaser.Input.Keyboard.Key;

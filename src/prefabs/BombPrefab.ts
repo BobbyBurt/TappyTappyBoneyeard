@@ -23,7 +23,7 @@ export default class BombPrefab extends Phaser.GameObjects.Image {
 		scene.physics.add.existing(this, false);
 		this.body.maxVelocity.y = 400;
 		this.body.bounce.x = 0.4;
-		this.body.bounce.y = 0.4;
+		this.body.bounce.y = 0.3;
 		this.body.mass = 0.7;
 		this.body.setSize(14, 18, false);
 

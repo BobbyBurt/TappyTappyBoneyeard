@@ -70,9 +70,19 @@
                 "key": "bomb"
             },
             {
+                "url": "assets/levels/bombs.json",
+                "type": "tilemapTiledJSON",
+                "key": "bombs"
+            },
+            {
                 "url": "assets/bullet.png",
                 "type": "image",
                 "key": "bullet"
+            },
+            {
+                "url": "assets/levels/charge.json",
+                "type": "tilemapTiledJSON",
+                "key": "charge"
             },
             {
                 "url": [
@@ -111,6 +121,16 @@
                 "url": "assets/gundiagonal.png",
                 "type": "image",
                 "key": "gundiagonal"
+            },
+            {
+                "url": "assets/levels/gunfire.json",
+                "type": "tilemapTiledJSON",
+                "key": "gunfire"
+            },
+            {
+                "url": "assets/levels/intro.json",
+                "type": "tilemapTiledJSON",
+                "key": "intro"
             },
             {
                 "url": [

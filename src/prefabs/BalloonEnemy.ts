@@ -90,7 +90,6 @@ export default class BalloonEnemy extends EnemyPrefab {
 		}
 	}
 
-
 	/** to be called upon scene reset, otherwise the update will still be called and likely 
 	 * cause a crash.
 	 * 

@@ -29,6 +29,7 @@ After evaluating the project, this build makes a lot of changes in order to allo
 - Added parasols that enemies can have to protect from player's dive ability.
 - Bombs can be launched by the punch or uppercut ability.
 - Explosions have a sfx and screen shake effect.
+- Created 5 Levels.
 
 ## Removed
 ## Fixed

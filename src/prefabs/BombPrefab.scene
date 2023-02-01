@@ -24,7 +24,7 @@
             "ArcadeComponent.active": true,
             "body.maxVelocity.y": 400,
             "body.bounce.x": 0.4,
-            "body.bounce.y": 0.4,
+            "body.bounce.y": 0.3,
             "mass": 0.7,
             "body.width": 14,
             "body.height": 18

@@ -60,11 +60,15 @@ export default class Level extends Phaser.Scene {
 
 		// parallax_Cityscape_5
 		const parallax_Cityscape_5 = this.add.image(357, 619, "Parallax-Cityscape");
-		parallax_Cityscape_5.scaleX = 5.641336094532861;
-		parallax_Cityscape_5.scaleY = 5.641336094532861;
+		parallax_Cityscape_5.scaleX = 9.144642541425284;
+		parallax_Cityscape_5.scaleY = 9.144642541425284;
 		parallax_Cityscape_5.setOrigin(0.5, 0);
 		parallax_Cityscape_5.flipY = true;
 		bGLayer.add(parallax_Cityscape_5);
+
+		// parallax_Cityscape_6
+		const parallax_Cityscape_6 = this.add.image(1439, 552, "Parallax-Cityscape");
+		bGLayer.add(parallax_Cityscape_6);
 
 		// mainLayer
 		const mainLayer = this.add.layer();
@@ -204,6 +208,11 @@ export default class Level extends Phaser.Scene {
 		// parallax_Cityscape_5 (components)
 		const parallax_Cityscape_5ScrollFactor = new ScrollFactor(parallax_Cityscape_5);
 		parallax_Cityscape_5ScrollFactor.factorY = 0.1;
+
+		// parallax_Cityscape_6 (components)
+		const parallax_Cityscape_6ScrollFactor = new ScrollFactor(parallax_Cityscape_6);
+		parallax_Cityscape_6ScrollFactor.factorX = 0.2;
+		parallax_Cityscape_6ScrollFactor.factorY = 0.1;
 
 		// buildText (components)
 		const buildTextAlign = new Align(buildText);
@@ -448,7 +457,7 @@ export default class Level extends Phaser.Scene {
 	// SFX
 		this.sound.add('bird-flap', {volume: 1});
 		this.sound.add('enemy-death', {volume: 1});
-		this.sound.add('explosion', {volume: 1});
+		this.sound.add('explosion', {volume: .7});
 		this.sound.add('bird-die', {volume: 1});
 		this.sound.add('victory', {volume: 1});
 		this.sound.add('reflect', {volume: 1});
@@ -524,6 +533,7 @@ export default class Level extends Phaser.Scene {
 			{
 				_member.disappear();
 				_member.setPosition(9999, -9999);
+				_member.enemy.bombDropTimer.destroy();
 				_member.enemy.bombDropTimer = this.time.addEvent({delay: 1000, callback: () =>
 				{
 					this.setBomb(_member.enemy.x, _member.enemy.y, _member.enemy);
@@ -654,27 +664,48 @@ export default class Level extends Phaser.Scene {
 		|| this.player.stateController.currentState.name == 'uppercut')
 		{
 			this.setBombFuse(_bomb);
-			_bomb.setPosition(_bomb.x, _bomb.y -10);
-			_bomb.body.setVelocity(this.player.body.velocity.x,(this.player.body.velocity.y * 1.5) - 150);
+			_bomb.setPosition(_bomb.x, _bomb.y -3);
+			_bomb.body.setVelocity(this.player.body.velocity.x * 1.3, (this.player.body.velocity.y * 1.5) - 150);
 			// _bomb.body.setVelocity(200, -200);
 		}
 		else
 		{
+			_bomb.fuseTimer.destroy();
 			this.bombExplode(_bomb);
 		}
 	}
 
-	bombEnemyCollide(bomb: any, player: any)
+	bombEnemyCollide(bomb: any, enemy: any)
 	{
+		let _bomb = bomb as BombPrefab;
+		let _enemy = enemy as EnemyPrefab;
 
+
+		if (_enemy == _bomb.enemy)
+		{
+			return;
+		}
+
+		_bomb.fuseTimer.destroy();
+		this.bombExplode(bomb);
 	}
 
 	bombTilemapCollide(bomb: any, tileLayer: any)
 	{
 		let _bomb = bomb as BombPrefab;
+
+		// if (_bomb.body.touching.left || _bomb.body.touching.right || _bomb.body.touching.up)
+		// {
+		// 	this.bombExplode(_bomb);
+
+		// 	console.log('tilemap explode')
+
+		// 	return;
+		// }
+			/* yeah this don't work */
+
 		if (_bomb.fuseTimer.getProgress() == 1)
 		{
-			console.log('tilemap set bomb fuse')
 			this.setBombFuse(_bomb);
 		}
 	}
@@ -746,7 +777,7 @@ export default class Level extends Phaser.Scene {
 
 	/** bomb behaviour, explosion setup */
 	bombExplode(bomb: BombPrefab)
-	{
+	{	
 		bomb.disappear();
 		bomb.fuseVisualTimer.paused = true;
 
@@ -765,6 +796,7 @@ export default class Level extends Phaser.Scene {
 			this.cameras.main.shake(200, 0.001);
 		}
 
+		bomb.enemy.bombDropTimer.destroy();
 		bomb.enemy.bombDropTimer = this.time.addEvent({delay: 1000, callback: () =>
 		{
 			this.setBomb(bomb.enemy.x, bomb.enemy.y, bomb.enemy);
@@ -780,9 +812,7 @@ export default class Level extends Phaser.Scene {
 		{
 			if (_this.enemyList.includes(element.gameObject))
 			{
-				// let _element = element as EnemyPrefab;
-				// _element.hit(0, -150);
-					// TODO: define enemy explosion behaviour.
+				element.gameObject.hit(0, -400);
 			}
 			if (element.gameObject.name == 'player')
 			{

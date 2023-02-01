@@ -121,10 +121,25 @@
                     },
                     "x": 357,
                     "y": 619,
-                    "scaleX": 5.641336094532861,
-                    "scaleY": 5.641336094532861,
+                    "scaleX": 9.144642541425284,
+                    "scaleY": 9.144642541425284,
                     "originY": 0,
                     "flipY": true
+                },
+                {
+                    "type": "Image",
+                    "id": "c8974638-a0a2-4230-b5a0-a82a38e159fa",
+                    "label": "parallax_Cityscape_6",
+                    "components": [
+                        "ScrollFactor"
+                    ],
+                    "ScrollFactor.factorX": 0.2,
+                    "ScrollFactor.factorY": 0.1,
+                    "texture": {
+                        "key": "Parallax-Cityscape"
+                    },
+                    "x": 1439,
+                    "y": 552
                 }
             ]
         },
