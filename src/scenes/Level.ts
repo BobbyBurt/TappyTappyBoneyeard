@@ -448,11 +448,16 @@ export default class Level extends Phaser.Scene {
 			// TODO: define max
 
 	// music
-		this.music = this.sound.add('main-game', {volume: .7});
-		if (!__DEV__)
+		if (this.music == undefined)	
 		{
-			this.music.play({loop: true});
+			this.music = this.sound.add('main-game', {volume: .7});
+			
+			if (!__DEV__)
+			{
+				this.music.play({loop: true});
+			}
 		}
+		this.music.resume();
 
 	// SFX
 		this.sound.add('bird-flap', {volume: 1});
@@ -494,8 +499,10 @@ export default class Level extends Phaser.Scene {
 		if (__DEV__)
 		{
 			this.debugText.setText(`${this.player.stateController.currentState.name}`);
-			this.debugText2.setText(`flap charge: ${this.player.flapCharge}`);
-			this.debugText3.setText(`punch charge: ${this.player.punchCharged}`);	
+			// this.debugText2.setText(`flap charge: ${this.player.flapCharge}`);
+			// this.debugText3.setText(`punch charge: ${this.player.punchCharged}`);	
+			this.debugText2.setText(`bombs: ${this.bombGroup.countActive()}`);
+			this.debugText3.setText(`punch charge: ${this.player.punchCharged}`);
 		}
 		// this.debugText.setText(`${this.player.onFloor}`);
 
@@ -642,10 +649,15 @@ export default class Level extends Phaser.Scene {
 
 			_enemy.hit(this.player.body.velocity.x, this.player.body.velocity.y);
 
+			if (_enemy.bombDropTimer != undefined)
+			{
+				_enemy.bombDropTimer.destroy();
+				console.log('bomb drop timer (should) be gone');
+			}
+
 			this.player.punchCharged = true;
 
 			this.sound.play('enemy-death');
-
 
 			this.enemiesDefeatedCheck();
 		}
@@ -793,13 +805,20 @@ export default class Level extends Phaser.Scene {
 		if (this.cameras.main.worldView.contains(bomb.x, bomb.y))
 		{
 			this.sound.play('explosion');
-			this.cameras.main.shake(200, 0.001);
+			this.cameras.main.shake(200, 0.0005);
 		}
+
+		let bombEnemy = bomb.enemy;
+			/* for whatever reason, bomb.enemy changes from this line to callback, so this is used 
+			as a consistent reference. */
 
 		bomb.enemy.bombDropTimer.destroy();
 		bomb.enemy.bombDropTimer = this.time.addEvent({delay: 1000, callback: () =>
 		{
-			this.setBomb(bomb.enemy.x, bomb.enemy.y, bomb.enemy);
+			if (!bombEnemy.isFalling())
+			{
+				this.setBomb(bombEnemy.x, bombEnemy.y, bombEnemy);
+			}
 		}});
 	}
 
@@ -1055,6 +1074,7 @@ export default class Level extends Phaser.Scene {
 
 	// win audio
 		this.sound.play('victory');
+		this.music.pause();
 	}
 
 	/** iterates through everything in the 'elements' object layer of the map and creates enemies 
@@ -1144,6 +1164,7 @@ export default class Level extends Phaser.Scene {
 			_enemy.flipX = object.flippedHorizontal;
 
 			this.enemyList.push(_enemy);
+			_enemy.enemyListIndex = this.enemyList.length - 1;
 			this.mainLayer.add(_enemy);
 			this.UICam.ignore(_enemy);
 		});
@@ -1164,8 +1185,9 @@ export default class Level extends Phaser.Scene {
 	// main
 		this.cameras.main.setName('main');
 		this.cameras.main.setZoom(zoom);
-		this.cameras.main.setScroll(this.player.x, this.player.y);;
+		this.cameras.main.setScroll(this.player.x, this.player.y);
 		this.cameras.main.startFollow(this.player, true, .1, .1);
+		this.cameras.main.setBounds(0, 0, this.tileLayer.width, this.tileLayer.height);
 		this.cameras.main.ignore(this.uILayer.getChildren());
 
 		this.cameras.main.fadeIn(200, 255, 255, 255);

@@ -133,6 +133,11 @@
                 "key": "intro"
             },
             {
+                "url": "assets/levels/level-2.json",
+                "type": "tilemapTiledJSON",
+                "key": "level-2"
+            },
+            {
                 "url": [
                     "assets/music/main-game.mp3"
                 ],

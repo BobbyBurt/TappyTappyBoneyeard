@@ -38,6 +38,7 @@ After evaluating the project, this build makes a lot of changes in order to allo
 - Bullets and bombs no longer spawn from falling enemies.
 - Guns and balloons are now ignored by the UICam.
 - Camera no longer rushes to the player upon level start / restart.
+- Set camera bounds to tilemap edges.
 
 ## Version 6 - 2023-01-24
 
