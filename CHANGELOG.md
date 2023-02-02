@@ -1,17 +1,24 @@
 # Changelog
 
-## Version 7 - 
+## Version 8 - 
+
+### Changed
+### Added
+### Removed
+### Fixed
+
+## Version 7 - 2023-02-01
 
 After evaluating the project, this build makes a lot of changes in order to allow gameplay experimentation. Most significantly gunfire, bomb behaviour and level select.
 
-## Changed
+### Changed
 
 - Uppercuts now also use punch charge rather than a seperate variable.
 - Enemies are set to be balloon enemies from the type field of the object in the Tiled editor, allowing them to have guns.
 - Bomb enemies are set in the Tiled editor as another enemy type rather than automatically being assigned to all balloon enemies.
 - In smaller windows, the camera is zoomed out.
 
-## Added
+### Added
 
 - Added restart funciton, used when the player is hit rather than just moving them to the start.
 - Added Balloon enemies with guns.
@@ -31,8 +38,11 @@ After evaluating the project, this build makes a lot of changes in order to allo
 - Explosions have a sfx and screen shake effect.
 - Created 5 Levels.
 
-## Removed
-## Fixed
+### Removed
+
+- Old test level is inaccessible.
+
+### Fixed
 
 - Punches charge is no longer restored during punch / uppercut state, which allowed for multiple uses while airborne.
 - Bullets and bombs no longer spawn from falling enemies.
