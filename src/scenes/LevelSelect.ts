@@ -15,7 +15,7 @@ export default class LevelSelect extends Phaser.Scene {
 		super("LevelSelect");
 
 		/* START-USER-CTR-CODE */
-		
+
 		let _this = this;
 
 	// setup gamepad
@@ -117,59 +117,67 @@ export default class LevelSelect extends Phaser.Scene {
 		const back_L1Align = new Align(back_L1);
 		back_L1Align.middle = true;
 		back_L1Align.center = true;
-		back_L1Align.verticalOffset = -100;
+		back_L1Align.horizontalOffset = -65;
+		back_L1Align.verticalOffset = -50;
 
 		// label_L1 (components)
 		const label_L1Align = new Align(label_L1);
 		label_L1Align.middle = true;
 		label_L1Align.center = true;
-		label_L1Align.verticalOffset = -100;
+		label_L1Align.horizontalOffset = -65;
+		label_L1Align.verticalOffset = -50;
 
 		// back_L2 (components)
 		const back_L2Align = new Align(back_L2);
 		back_L2Align.middle = true;
 		back_L2Align.center = true;
-		back_L2Align.verticalOffset = -50;
+		back_L2Align.horizontalOffset = -65;
 
 		// label_L2 (components)
 		const label_L2Align = new Align(label_L2);
 		label_L2Align.middle = true;
 		label_L2Align.center = true;
-		label_L2Align.verticalOffset = -50;
+		label_L2Align.horizontalOffset = -65;
 
 		// back_L3 (components)
 		const back_L3Align = new Align(back_L3);
 		back_L3Align.middle = true;
 		back_L3Align.center = true;
+		back_L3Align.horizontalOffset = -65;
+		back_L3Align.verticalOffset = 50;
 
 		// label_L3 (components)
 		const label_L3Align = new Align(label_L3);
 		label_L3Align.middle = true;
 		label_L3Align.center = true;
+		label_L3Align.horizontalOffset = -65;
+		label_L3Align.verticalOffset = 50;
 
 		// back_L4 (components)
 		const back_L4Align = new Align(back_L4);
 		back_L4Align.middle = true;
 		back_L4Align.center = true;
+		back_L4Align.horizontalOffset = 65;
 		back_L4Align.verticalOffset = 50;
 
 		// label_L4 (components)
 		const label_L4Align = new Align(label_L4);
 		label_L4Align.middle = true;
 		label_L4Align.center = true;
+		label_L4Align.horizontalOffset = 65;
 		label_L4Align.verticalOffset = 50;
 
 		// back_L5 (components)
 		const back_L5Align = new Align(back_L5);
 		back_L5Align.middle = true;
 		back_L5Align.center = true;
-		back_L5Align.verticalOffset = 100;
+		back_L5Align.horizontalOffset = 65;
 
 		// label_L5 (components)
 		const label_L5Align = new Align(label_L5);
 		label_L5Align.middle = true;
 		label_L5Align.center = true;
-		label_L5Align.verticalOffset = 100;
+		label_L5Align.horizontalOffset = 65;
 
 		this.mainLayer = mainLayer;
 		this.uILayer = uILayer;
@@ -188,12 +196,12 @@ export default class LevelSelect extends Phaser.Scene {
 
 	private UICam!: Phaser.Cameras.Scene2D.BaseCamera | any;
 
-	private levelsKey = ['intro', 'level-2', 'bombs', 'gunfire', 'map-1'];
+	private levelsKey = ['intro', 'level-2', 'level-4', 'level-3', 'map-1'];
 
 	private gamepad:Phaser.Input.Gamepad.Gamepad | undefined;
 	private SelectKey!: Phaser.Input.Keyboard.Key;
 	private StartKey!: Phaser.Input.Keyboard.Key;
-	
+
 // selected level
 	private selectedLevel = 0;
 
@@ -250,7 +258,7 @@ export default class LevelSelect extends Phaser.Scene {
 		if ((this.gamepad?.isButtonDown(8) || this.SelectKey.isDown) && !this.gamepadSelectorDown)
 		{
 			this.gamepadSelectorDown = true;
-			
+
 			this.selectedLevel++;
 			if (this.selectedLevel == this.levelBackList.length)
 			{
@@ -262,7 +270,7 @@ export default class LevelSelect extends Phaser.Scene {
 		{
 			this.gamepadSelectorDown = false;
 		}
-		
+
 	}
 
 	setSelectorVisual()
