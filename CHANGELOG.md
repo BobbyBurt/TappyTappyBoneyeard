@@ -3,6 +3,9 @@
 ## Version 8 - 
 
 ### Changed
+
+- Level select menu has been changed to allow for any number of levels which can be added without adding UI elements.
+
 ### Added
 ### Removed
 ### Fixed

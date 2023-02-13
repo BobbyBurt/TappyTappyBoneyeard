@@ -157,17 +157,24 @@ export default class Level extends Phaser.Scene {
 		uILayer.add(mobileButtonLevelSelect);
 
 		// winText
-		const winText = this.add.bitmapText(435, 100, "nokia", "ENEMIES DEFEATED!");
+		const winText = this.add.bitmapText(435, 100, "nokia", "Level Complete!!!");
 		winText.scaleX = 1.3;
 		winText.angle = -30;
 		winText.setOrigin(0.5, 0.5);
 		winText.visible = false;
-		winText.text = "ENEMIES DEFEATED!";
+		winText.text = "Level Complete!!!";
 		winText.fontSize = -16;
 		winText.align = 1;
 		winText.dropShadowX = 1;
 		winText.dropShadowY = 1;
 		uILayer.add(winText);
+
+		// endEgg
+		const endEgg = this.add.image(286, 143, "bird1egg") as Phaser.GameObjects.Image & { body: Phaser.Physics.Arcade.Body };
+		this.physics.add.existing(endEgg, false);
+		endEgg.body.moves = false;
+		endEgg.body.pushable = false;
+		endEgg.body.setSize(11, 12, false);
 
 		// lists
 		const public_list: Array<any> = [];
@@ -308,6 +315,7 @@ export default class Level extends Phaser.Scene {
 		this.mobileButtonUppercut = mobileButtonUppercut;
 		this.mobileButtonLevelSelect = mobileButtonLevelSelect;
 		this.winText = winText;
+		this.endEgg = endEgg;
 		this.public_list = public_list;
 		this.enemyList = enemyList;
 		this.collidesWithBombList = collidesWithBombList;
@@ -333,6 +341,7 @@ export default class Level extends Phaser.Scene {
 	private mobileButtonUppercut!: Phaser.GameObjects.Rectangle;
 	private mobileButtonLevelSelect!: Phaser.GameObjects.Rectangle;
 	private winText!: Phaser.GameObjects.BitmapText;
+	private endEgg!: Phaser.GameObjects.Image & { body: Phaser.Physics.Arcade.Body };
 	public public_list!: Array<any>;
 	private enemyList!: Array<any>;
 	private collidesWithBombList!: Array<any>;
@@ -358,6 +367,8 @@ export default class Level extends Phaser.Scene {
 
 	/** used to make sure level restart is only called once */
 	private restarting = false;
+
+	private won = false;
 
 	private tileMap!: Phaser.Tilemaps.Tilemap;
 	private tileLayer!: Phaser.Tilemaps.TilemapLayer;
@@ -397,6 +408,11 @@ export default class Level extends Phaser.Scene {
 		// playerBulletOverlap
 		this.physics.add.overlap(this.bulletList, this.player, this.bulletPlayerCollide, undefined, this);
 
+		// playerEndEggOverlap
+		this.physics.add.overlap(this.player, this.endEgg, this.playerEndEggOverlap, undefined, this)
+
+		this.won = false;
+
 		// start point
 		let _startPoint = this.tileMap.findObject('elements', function (obj) 
 		{
@@ -408,6 +424,14 @@ export default class Level extends Phaser.Scene {
 		this.createCameras();
 
 		this.createMapEnemies();
+
+	// end egg
+		let endEgg = this.tileMap.findObject('elements', function (obj) 
+		{
+			return obj.name === 'endEgg';
+		});
+			// TODO: I shouldn't have to name these anymore, since they have unique GIDs.
+		this.endEgg.setPosition(endEgg.x! + 6, endEgg.y! - 6);
 
 	// bottom boundary
 		this.bottomBoundary = this.tileMap.findObject('elements', function (obj) 
@@ -451,7 +475,7 @@ export default class Level extends Phaser.Scene {
 		if (this.music == undefined)	
 		{
 			this.music = this.sound.add('main-game', {volume: .7});
-			
+
 			if (!__DEV__)
 			{
 				this.music.play({loop: true});
@@ -744,6 +768,16 @@ export default class Level extends Phaser.Scene {
 	bulletTilemapCollide(_bullet: any, _tilemap: any)
 	{
 		_bullet.disappear();
+	}
+
+	playerEndEggOverlap(_player: any, _endEgg: any)
+	{
+		if (!this.won)
+		{
+			this.levelEndFeedback();
+
+			this.won = true;
+		}
 	}
 
 	/** activates bomb in bombGroup pool */
@@ -1052,6 +1086,11 @@ export default class Level extends Phaser.Scene {
 			return;
 		}
 
+		// here is where the level end code would go
+	}
+
+	levelEndFeedback()
+	{
 	// win text visual
 		this.winText.setVisible(true);
 		this.tweens.add
@@ -1076,6 +1115,7 @@ export default class Level extends Phaser.Scene {
 		this.sound.play('victory');
 		this.music.pause();
 	}
+
 
 	/** iterates through everything in the 'elements' object layer of the map and creates enemies 
 	 * based on their GID. */

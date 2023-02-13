@@ -407,7 +407,7 @@
                     "originX": 0.5,
                     "originY": 0.5,
                     "visible": false,
-                    "text": "ENEMIES DEFEATED!",
+                    "text": "Level Complete!!!",
                     "font": "nokia",
                     "align": 1,
                     "fontSize": -16,
@@ -416,6 +416,23 @@
                     "dropShadowColor": "#000000ff"
                 }
             ]
+        },
+        {
+            "type": "Image",
+            "id": "6c0a134c-830b-49d1-9f12-88ea71dda152",
+            "label": "endEgg",
+            "scope": "CLASS",
+            "components": [],
+            "texture": {
+                "key": "bird1egg"
+            },
+            "x": 286,
+            "y": 143,
+            "ArcadeComponent.active": true,
+            "moves": false,
+            "pushable": false,
+            "body.width": 11,
+            "body.height": 12
         }
     ],
     "plainObjects": [],
