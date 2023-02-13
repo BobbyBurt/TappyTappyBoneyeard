@@ -372,6 +372,7 @@ export default class Level extends Phaser.Scene {
 
 	private tileMap!: Phaser.Tilemaps.Tilemap;
 	private tileLayer!: Phaser.Tilemaps.TilemapLayer;
+	private hazardTileLayer!: Phaser.Tilemaps.TilemapLayer;
 
 	create()
 	{	
@@ -383,18 +384,30 @@ export default class Level extends Phaser.Scene {
 
 		this.tileMap = this.add.tilemap(this.registry.get('current-level'));
 		this.tileMap.addTilesetImage("tilleset", "tileset");
+		this.tileMap.addTilesetImage("hazard-tileset", "tileset-hazards");
 
 		this.tileLayer = this.tileMap.createLayer("Tile Layer 1", ["tilleset"], 0, 0);
+			// why is it misspelled 'tillset'?
 		this.mainLayer.add(this.tileLayer);
+
+		// this.hazardTileLayer = this.tileMap.createLayer('Hazard Tile Layer', ['hazard-tileset'], 0, 0);
+		// this.mainLayer.add(this.hazardTileLayer);
 
 		this.collidesWithBombList.push(this.player);
 		this.collidesWithBombList.push(this.tileLayer);
+		// this.collidesWithBombList.push(this.hazardTileLayer);
 
 		this.tileLayer.setCollision([1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18,
 			19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36], true);
 
+		// this.hazardTileLayer.setCollision([1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18,
+		// 	19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36], true);
+
 		// playerTilemapCollider
 		this.physics.add.collider(this.player, this.tileLayer, this.playerTilemapCollide, undefined, this);
+
+		// playerHazardTilemapCollider
+		// this.physics.add.collider(this.player, this.hazardTileLayer, this.playerHazardTilemapCollide, undefined, this);
 
 		// soldierTilemapCollide
 		this.physics.add.collider(this.enemyList, this.tileLayer);
@@ -650,6 +663,13 @@ export default class Level extends Phaser.Scene {
 		{
 			this.player.onFloor = true;
 		}
+	}
+
+	playerHazardTilemapCollide(_player:Phaser.Types.Physics.Arcade.GameObjectWithBody, _tilemap:any)
+	{
+		// this.resetLevel();
+
+		console.log('overlapping. for some reason?')
 	}
 
 	playerEnemyOverlap(player:Phaser.Types.Physics.Arcade.GameObjectWithBody, 
@@ -939,7 +959,7 @@ export default class Level extends Phaser.Scene {
 
 				if (_enemy.gunSprayTimer.getProgress() == 1 && _enemy.gunCoolDownTimer.getProgress() == 1)
 				{
-					_enemy.gunSprayTimer = this.time.addEvent({ delay: 100, repeat: 2, callback: () =>
+					_enemy.gunSprayTimer = this.time.addEvent({ delay: 100, repeat: 10, callback: () =>
 					{
 						if (!_enemy.isFalling())
 						{
@@ -947,7 +967,7 @@ export default class Level extends Phaser.Scene {
 						}
 					}});
 
-					_enemy.gunCoolDownTimer = this.time.addEvent({delay: 1000});
+					_enemy.gunCoolDownTimer = this.time.addEvent({delay: 1500});
 				}
 			}
 			else
@@ -977,8 +997,8 @@ export default class Level extends Phaser.Scene {
 			/* does this add existing bullets to the list, adding them infinitely? */
 			// TODO: these should be added once on object initialization, not recycle
 		let velocity = {x: 0, y: 0};
-		const _speed = 60;
-		const _speedHorizontal = 45;
+		const _speed = 200;
+		const _speedHorizontal = 150;
 		switch(enemy.gunDirection)
 		{
 			case 'up':

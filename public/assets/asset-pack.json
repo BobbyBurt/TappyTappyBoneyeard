@@ -300,6 +300,11 @@
                 "key": "tileset_1"
             },
             {
+                "url": "assets/tileset-hazards.png",
+                "type": "image",
+                "key": "tileset-hazards"
+            },
+            {
                 "url": [
                     "assets/sfx/victory TEMP.wav"
                 ],
