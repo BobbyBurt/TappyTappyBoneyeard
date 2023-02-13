@@ -409,6 +409,22 @@ export default class playerPrefab extends Phaser.Physics.Arcade.Sprite {
 
 		this.anims.create
 		({
+			key: 'flap-2',
+			frames: this.anims.generateFrameNumbers('flap-sprites', { frames: [ 3, 4, 5, 5 ] }),
+			frameRate: 16,
+			repeat: 0
+		});
+
+		this.anims.create
+		({
+			key: 'flap-3',
+			frames: this.anims.generateFrameNumbers('flap-sprites', { frames: [ 6, 7, 8, 8 ] }),
+			frameRate: 16,
+			repeat: 0
+		});
+
+		this.anims.create
+		({
 			key: 'no-more-flaps-flap',
 				// TODO: think of a better name
 			frames:

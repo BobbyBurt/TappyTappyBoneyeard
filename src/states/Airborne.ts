@@ -90,11 +90,11 @@ export default class Airborne implements State {
 
 		if (this.player.flapCharge == 0)
 		{
-			this.player.play('no-more-flaps-flap');
+			this.player.play('flap-3');
 		}
 		else
 		{
-			this.player.play('flap');
+			this.player.play('flap-2');
 		}
 		this.player.scene.sound.play('bird-flap');
 

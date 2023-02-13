@@ -36,152 +36,92 @@ export default class LevelSelect extends Phaser.Scene {
 		// UILayer
 		const uILayer = this.add.layer();
 
-		// back-L1
-		const back_L1 = this.add.rectangle(0, 0, 100, 40);
-		back_L1.isFilled = true;
-		back_L1.fillColor = 2697513;
-		uILayer.add(back_L1);
+		// levelBack
+		const levelBack = this.add.rectangle(0, 0, 150, 40);
+		levelBack.isFilled = true;
+		levelBack.fillColor = 2697513;
+		uILayer.add(levelBack);
 
-		// label-L1
-		const label_L1 = this.add.bitmapText(0, 0, "nokia", "Level 1\n");
-		label_L1.setOrigin(0.5, 0.5);
-		label_L1.text = "Level 1\n";
-		label_L1.fontSize = -8;
-		label_L1.align = 1;
-		uILayer.add(label_L1);
+		// levelText
+		const levelText = this.add.bitmapText(0, 0, "nokia", "Level 1\n");
+		levelText.setOrigin(0.5, 0.5);
+		levelText.text = "Level 1\n";
+		levelText.fontSize = -8;
+		levelText.align = 1;
+		uILayer.add(levelText);
 
-		// back-L2
-		const back_L2 = this.add.rectangle(-3, 48, 100, 40);
-		back_L2.isFilled = true;
-		back_L2.fillColor = 2697513;
-		uILayer.add(back_L2);
+		// downBack
+		const downBack = this.add.rectangle(-3, 48, 100, 40);
+		downBack.isFilled = true;
+		downBack.fillColor = 2697513;
+		uILayer.add(downBack);
 
-		// label-L2
-		const label_L2 = this.add.bitmapText(6, 48, "nokia", "Level 2\n");
-		label_L2.setOrigin(0.5, 0.5);
-		label_L2.text = "Level 2\n";
-		label_L2.fontSize = -8;
-		label_L2.align = 1;
-		uILayer.add(label_L2);
+		// downText
+		const downText = this.add.bitmapText(6, 48, "nokia", "v\n");
+		downText.setOrigin(0.5, 0.5);
+		downText.text = "v\n";
+		downText.fontSize = -16;
+		downText.align = 1;
+		uILayer.add(downText);
 
-		// back-L3
-		const back_L3 = this.add.rectangle(-2, 91, 100, 40);
-		back_L3.isFilled = true;
-		back_L3.fillColor = 2697513;
-		uILayer.add(back_L3);
+		// upBack
+		const upBack = this.add.rectangle(-2, 91, 100, 40);
+		upBack.isFilled = true;
+		upBack.fillColor = 2697513;
+		uILayer.add(upBack);
 
-		// label-L3
-		const label_L3 = this.add.bitmapText(7, 91, "nokia", "Level 3");
-		label_L3.setOrigin(0.5, 0.5);
-		label_L3.text = "Level 3";
-		label_L3.fontSize = -8;
-		label_L3.align = 1;
-		uILayer.add(label_L3);
-
-		// back-L4
-		const back_L4 = this.add.rectangle(-2, 138, 100, 40);
-		back_L4.isFilled = true;
-		back_L4.fillColor = 2697513;
-		uILayer.add(back_L4);
-
-		// label-L4
-		const label_L4 = this.add.bitmapText(7, 138, "nokia", "Level 4");
-		label_L4.setOrigin(0.5, 0.5);
-		label_L4.text = "Level 4";
-		label_L4.fontSize = -8;
-		label_L4.align = 1;
-		uILayer.add(label_L4);
-
-		// back-L5
-		const back_L5 = this.add.rectangle(-2, 182, 100, 40);
-		back_L5.isFilled = true;
-		back_L5.fillColor = 2697513;
-		uILayer.add(back_L5);
-
-		// label-L5
-		const label_L5 = this.add.bitmapText(7, 182, "nokia", "Level 5");
-		label_L5.setOrigin(0.5, 0.5);
-		label_L5.text = "Level 5";
-		label_L5.fontSize = -8;
-		label_L5.align = 1;
-		uILayer.add(label_L5);
-
-		// birdSelector
-		const birdSelector = this.add.image(65, -6, "bird1dive");
-		uILayer.add(birdSelector);
+		// upText
+		const upText = this.add.bitmapText(7, 91, "nokia", "v");
+		upText.angle = -180;
+		upText.setOrigin(0.5, 0.5);
+		upText.text = "v";
+		upText.fontSize = -16;
+		upText.align = 1;
+		uILayer.add(upText);
 
 		// lists
-		const levelBackList = [back_L1, back_L2, back_L3, back_L4, back_L5];
+		const levelBackList = [levelBack, downBack, upBack];
 
-		// back_L1 (components)
-		const back_L1Align = new Align(back_L1);
-		back_L1Align.middle = true;
-		back_L1Align.center = true;
-		back_L1Align.horizontalOffset = -65;
-		back_L1Align.verticalOffset = -50;
+		// levelBack (components)
+		const levelBackAlign = new Align(levelBack);
+		levelBackAlign.middle = true;
+		levelBackAlign.center = true;
 
-		// label_L1 (components)
-		const label_L1Align = new Align(label_L1);
-		label_L1Align.middle = true;
-		label_L1Align.center = true;
-		label_L1Align.horizontalOffset = -65;
-		label_L1Align.verticalOffset = -50;
+		// levelText (components)
+		const levelTextAlign = new Align(levelText);
+		levelTextAlign.middle = true;
+		levelTextAlign.center = true;
 
-		// back_L2 (components)
-		const back_L2Align = new Align(back_L2);
-		back_L2Align.middle = true;
-		back_L2Align.center = true;
-		back_L2Align.horizontalOffset = -65;
+		// downBack (components)
+		const downBackAlign = new Align(downBack);
+		downBackAlign.middle = true;
+		downBackAlign.center = true;
+		downBackAlign.verticalOffset = 50;
 
-		// label_L2 (components)
-		const label_L2Align = new Align(label_L2);
-		label_L2Align.middle = true;
-		label_L2Align.center = true;
-		label_L2Align.horizontalOffset = -65;
+		// downText (components)
+		const downTextAlign = new Align(downText);
+		downTextAlign.middle = true;
+		downTextAlign.center = true;
+		downTextAlign.verticalOffset = 50;
 
-		// back_L3 (components)
-		const back_L3Align = new Align(back_L3);
-		back_L3Align.middle = true;
-		back_L3Align.center = true;
-		back_L3Align.horizontalOffset = -65;
-		back_L3Align.verticalOffset = 50;
+		// upBack (components)
+		const upBackAlign = new Align(upBack);
+		upBackAlign.middle = true;
+		upBackAlign.center = true;
+		upBackAlign.verticalOffset = -50;
 
-		// label_L3 (components)
-		const label_L3Align = new Align(label_L3);
-		label_L3Align.middle = true;
-		label_L3Align.center = true;
-		label_L3Align.horizontalOffset = -65;
-		label_L3Align.verticalOffset = 50;
-
-		// back_L4 (components)
-		const back_L4Align = new Align(back_L4);
-		back_L4Align.middle = true;
-		back_L4Align.center = true;
-		back_L4Align.horizontalOffset = 65;
-		back_L4Align.verticalOffset = 50;
-
-		// label_L4 (components)
-		const label_L4Align = new Align(label_L4);
-		label_L4Align.middle = true;
-		label_L4Align.center = true;
-		label_L4Align.horizontalOffset = 65;
-		label_L4Align.verticalOffset = 50;
-
-		// back_L5 (components)
-		const back_L5Align = new Align(back_L5);
-		back_L5Align.middle = true;
-		back_L5Align.center = true;
-		back_L5Align.horizontalOffset = 65;
-
-		// label_L5 (components)
-		const label_L5Align = new Align(label_L5);
-		label_L5Align.middle = true;
-		label_L5Align.center = true;
-		label_L5Align.horizontalOffset = 65;
+		// upText (components)
+		const upTextAlign = new Align(upText);
+		upTextAlign.middle = true;
+		upTextAlign.center = true;
+		upTextAlign.verticalOffset = -50;
 
 		this.mainLayer = mainLayer;
 		this.uILayer = uILayer;
-		this.birdSelector = birdSelector;
+		this.levelBack = levelBack;
+		this.levelText = levelText;
+		this.downBack = downBack;
+		this.upBack = upBack;
 		this.levelBackList = levelBackList;
 
 		this.events.emit("scene-awake");
@@ -189,14 +129,17 @@ export default class LevelSelect extends Phaser.Scene {
 
 	private mainLayer!: Phaser.GameObjects.Layer;
 	private uILayer!: Phaser.GameObjects.Layer;
-	private birdSelector!: Phaser.GameObjects.Image;
+	private levelBack!: Phaser.GameObjects.Rectangle;
+	private levelText!: Phaser.GameObjects.BitmapText;
+	private downBack!: Phaser.GameObjects.Rectangle;
+	private upBack!: Phaser.GameObjects.Rectangle;
 	private levelBackList!: Phaser.GameObjects.Rectangle[];
 
 	/* START-USER-CODE */
 
 	private UICam!: Phaser.Cameras.Scene2D.BaseCamera | any;
 
-	private levelsKey = ['intro', 'level-2', 'level-4', 'level-3', 'map-1'];
+	private levelsKey = ['intro', 'level-2', 'level-3', 'level-4', 'map-1'];
 
 	private gamepad:Phaser.Input.Gamepad.Gamepad | undefined;
 	private SelectKey!: Phaser.Input.Keyboard.Key;
@@ -215,16 +158,26 @@ export default class LevelSelect extends Phaser.Scene {
 
 		this.createCameras();
 
-		this.levelBackList.forEach((element, index) =>
-		{
-			let _back = element as Phaser.GameObjects.Rectangle;
+		this.selectedLevel = 0;
 
-			_back.setInteractive();
-			_back.on('pointerdown', () => 
-			{
-				this.registry.set('current-level', this.levelsKey[index])
-				this.loadLevel();
-			});
+	// load level button event
+		this.levelBack.setInteractive();
+		this.levelBack.on('pointerdown', () =>
+		{
+			this.registry.set('current-level', this.levelsKey[this.selectedLevel]);
+			this.loadLevel();
+		});
+
+	// up & down button events
+		this.upBack.setInteractive();
+		this.upBack.on('pointerdown', () =>
+		{
+			this.setSelectedLevel('up');
+		});
+		this.downBack.setInteractive();
+		this.downBack.on('pointerdown', () =>
+		{
+			this.setSelectedLevel('down');
 		});
 
 		let _this = this;
@@ -237,14 +190,6 @@ export default class LevelSelect extends Phaser.Scene {
 
 		this.SelectKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.E);
 		this.StartKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.R);
-
-		this.time.addEvent({ delay: 100, callback: () =>
-		{
-			this.setSelectorVisual();
-		}});
-			/* this must be done after align component has positioned the level boxes. Not sure 
-			what a better way would be, but this works for now. */
-
 	}
 
 	update(time: number, delta: number): void
@@ -259,12 +204,7 @@ export default class LevelSelect extends Phaser.Scene {
 		{
 			this.gamepadSelectorDown = true;
 
-			this.selectedLevel++;
-			if (this.selectedLevel == this.levelBackList.length)
-			{
-				this.selectedLevel = 0;
-			}
-			this.setSelectorVisual();
+			this.setSelectedLevel('down');
 		}
 		if (!this.gamepad?.isButtonDown(8) && !this.SelectKey.isDown)
 		{
@@ -273,10 +213,23 @@ export default class LevelSelect extends Phaser.Scene {
 
 	}
 
-	setSelectorVisual()
+	/** Also updates visual. */
+	setSelectedLevel(direction: 'up' | 'down')
 	{
-		let selectedBack = this.levelBackList[this.selectedLevel];
-		this.birdSelector.setPosition(selectedBack.x +70, selectedBack.y);
+		this.selectedLevel += (direction == 'up' ? -1 : 1);
+
+	// wrap variable to levelsKey array length
+		if (this.selectedLevel == this.levelsKey.length)
+		{
+			this.selectedLevel = 0;
+		}
+		else if (this.selectedLevel == -1)
+		{
+			this.selectedLevel = this.levelsKey.length - 1;
+		}
+
+	// update visual
+		this.levelText.setText(this.levelsKey[this.selectedLevel]);
 	}
 
 	loadLevel()
