@@ -8,7 +8,7 @@ declare global
 
     type playerStateName = 'running' | 'airborne' | 'groundCling' | 'cling' | 'punch' | 'dive' | 'uppercut'
 
-    type GunDirection = undefined | 'up' | 'upward' | 'forward' | 'downward' | 'down';
+    type GunDirection = null | 'up' | 'upward' | 'forward' | 'downward' | 'down';
 
     var __DEV__: boolean;
 }

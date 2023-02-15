@@ -30,7 +30,7 @@ window.addEventListener('load', function ()
 		physics: {
 			default: 'arcade',
 			arcade: {
-				debug: true,
+				// debug: true,
 				gravity: {
 					y: 500,
 					x: 0
@@ -81,19 +81,7 @@ class Boot extends Phaser.Scene
 		{	
 			if (scene.scene.settings.active)
 			{
-				// scene.cameras.cameras[0].setViewport(0, 0, w, h);
-				// scene.cameras.cameras[1].setViewport(0, 0, w, h);
 				scene.cameras.main.setViewport(0, 0, w, h);
-					// TODO: make this dymanic for more cameras
-
-			// prerender UICam so that scale is up to date
-				const uiCam = scene.cameras.getCamera('UIcam') as any;
-				if (uiCam)
-				{
-					uiCam.preRender(1);
-						// TODO: fix this. Doesn't work in Typescript.
-						// I can't call it outside of the scene it seems
-				}
 			}
 		}
 

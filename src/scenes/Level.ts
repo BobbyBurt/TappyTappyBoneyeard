@@ -15,6 +15,8 @@ import GroundEnemy from "~/prefabs/GroundEnemy";
 import BulletPrefab from "~/prefabs/BulletPrefab";
 import BombPrefab from "~/prefabs/BombPrefab";
 import explosionPrefab from "~/prefabs/explosionPrefab";
+import CameraUtil from "~/components/CameraUtil";
+import TilemapUtil from "~/components/TilemapUtil";
 
 /* END-USER-IMPORTS */
 
@@ -351,36 +353,40 @@ export default class Level extends Phaser.Scene {
 
 	/* START-USER-CODE */
 
-	private bombGroup!: Phaser.GameObjects.Group;
-	private explosionGroup!: Phaser.GameObjects.Group;
-	private bulletGroup!: Phaser.GameObjects.Group;
+// game state
+	/** used to make sure level restart is only called once */
+	private restarting = false;
+	private won = false;
 
-	public UICam!: Phaser.Cameras.Scene2D.BaseCamera | any;
-		// TODO: define type annotation. the infered type doesn't have access to prerender()
-
-	private debugWallDetectGraphics!: Phaser.GameObjects.Graphics;
-
+// tilemap
+	private tileMap: Phaser.Tilemaps.Tilemap;
+	private tileLayer: Phaser.Tilemaps.TilemapLayer;
+	private hazardTileLayer: Phaser.Tilemaps.TilemapLayer;
 	/** player is reset, objects are removed if below this Y coordinate. Set based on tilemap object */
-	private bottomBoundary: number | undefined;
+	private bottomBoundary: number;
+
+// object groups
+	private bombGroup: Phaser.GameObjects.Group;
+	private explosionGroup: Phaser.GameObjects.Group;
+	private bulletGroup: Phaser.GameObjects.Group;
+
+// debug
+	private debugWallDetectGraphics: Phaser.GameObjects.Graphics;
+
+	public UICam: Phaser.Cameras.Scene2D.BaseCamera;
 
 	private music!: Phaser.Sound.BaseSound;
 
-	/** used to make sure level restart is only called once */
-	private restarting = false;
-
-	private won = false;
-
-	private tileMap!: Phaser.Tilemaps.Tilemap;
-	private tileLayer!: Phaser.Tilemaps.TilemapLayer;
-	private hazardTileLayer!: Phaser.Tilemaps.TilemapLayer;
-
 	create()
 	{	
+		// super.create();
+
 		this.editorCreate();
 
 		this.createMobileButtons();
 
 		this.restarting = false;
+		this.won = false;
 
 		this.tileMap = this.add.tilemap(this.registry.get('current-level'));
 		this.tileMap.addTilesetImage("tilleset", "tileset");
@@ -390,24 +396,24 @@ export default class Level extends Phaser.Scene {
 			// why is it misspelled 'tillset'?
 		this.mainLayer.add(this.tileLayer);
 
-		// this.hazardTileLayer = this.tileMap.createLayer('Hazard Tile Layer', ['hazard-tileset'], 0, 0);
-		// this.mainLayer.add(this.hazardTileLayer);
+		this.hazardTileLayer = this.tileMap.createLayer('Hazard Tile Layer', ['hazard-tileset'], 0, 0);
+		this.mainLayer.add(this.hazardTileLayer);
 
 		this.collidesWithBombList.push(this.player);
 		this.collidesWithBombList.push(this.tileLayer);
-		// this.collidesWithBombList.push(this.hazardTileLayer);
+		this.collidesWithBombList.push(this.hazardTileLayer);
 
 		this.tileLayer.setCollision([1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18,
 			19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36], true);
 
-		// this.hazardTileLayer.setCollision([1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18,
-		// 	19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36], true);
+		this.hazardTileLayer.setCollision([1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18,
+			19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36], true);
 
 		// playerTilemapCollider
 		this.physics.add.collider(this.player, this.tileLayer, this.playerTilemapCollide, undefined, this);
 
 		// playerHazardTilemapCollider
-		// this.physics.add.collider(this.player, this.hazardTileLayer, this.playerHazardTilemapCollide, undefined, this);
+		this.physics.add.collider(this.player, this.hazardTileLayer, this.playerHazardTilemapCollide, undefined, this);
 
 		// soldierTilemapCollide
 		this.physics.add.collider(this.enemyList, this.tileLayer);
@@ -422,35 +428,25 @@ export default class Level extends Phaser.Scene {
 		this.physics.add.overlap(this.bulletList, this.player, this.bulletPlayerCollide, undefined, this);
 
 		// playerEndEggOverlap
-		this.physics.add.overlap(this.player, this.endEgg, this.playerEndEggOverlap, undefined, this)
-
-		this.won = false;
-
-		// start point
-		let _startPoint = this.tileMap.findObject('elements', function (obj) 
-		{
-			return obj.name === 'startPoint';
-		});
-		this.player.setPosition(_startPoint.x! + 8, _startPoint.y! - 8);
-		this.data.set('startPoint', {x: _startPoint.x! + 8, y: _startPoint.y! - 8});
+		this.physics.add.overlap(this.player, this.endEgg, this.playerEndEggOverlap, undefined, this);
 
 		this.createCameras();
 
 		this.createMapEnemies();
 
-	// end egg
-		let endEgg = this.tileMap.findObject('elements', function (obj) 
-		{
-			return obj.name === 'endEgg';
-		});
-			// TODO: I shouldn't have to name these anymore, since they have unique GIDs.
-		this.endEgg.setPosition(endEgg.x! + 6, endEgg.y! - 6);
+	// tilemap special elements
+		const startPoint = TilemapUtil.getObjectPosition('startPoint', this.tileMap);
+		startPoint.x += 8;
+		startPoint.y -= 8;
+		this.player.setPosition(startPoint.x, startPoint.y);
+		this.data.set('startPoint', startPoint);
 
-	// bottom boundary
-		this.bottomBoundary = this.tileMap.findObject('elements', function (obj) 
-		{
-			return obj.name === 'resetY';
-		}).y;
+		const endEgg = TilemapUtil.getObjectPosition('endEgg', this.tileMap);
+		endEgg.x += 6;
+		endEgg.y -= 6;
+		this.endEgg.setPosition(endEgg.x, endEgg.y);
+
+		this.bottomBoundary = TilemapUtil.getObjectPosition('resetY', this.tileMap).y
 
 	// bombs
 		this.bombGroup = this.add.group({maxSize: 30, classType: BombPrefab});
@@ -530,8 +526,10 @@ export default class Level extends Phaser.Scene {
 		this.buildText.setText('Tappy Tappy Boneyard v' + this.game.config.gameVersion);
 	}
 
-	update(dt:number)
+	update(time:number, delta: number): void
 	{	
+		super.update(time, delta);
+
 		// this.debugText.setText(`${this.player.stateController.currentState.name}`);
 		if (__DEV__)
 		{
@@ -587,7 +585,6 @@ export default class Level extends Phaser.Scene {
 			// TODO: change this to bomb group
 
 		this.gunFireCheck();
-
 	}
 
 	/** reloads the scene */
@@ -1144,7 +1141,7 @@ export default class Level extends Phaser.Scene {
 		let _mapObjects = this.tileMap.getObjectLayer('elements')
 		_mapObjects.objects.forEach((object, index) =>
 		{
-			let _enemy: any = undefined;
+			let _enemy: any = null;
 			let _gunDirection: GunDirection;
 			let _bomb = false;
 
@@ -1153,7 +1150,7 @@ export default class Level extends Phaser.Scene {
 			{
 				case 37:
 				{
-					_gunDirection = undefined;
+					_gunDirection = null;
 					break;
 				}
 				case 38:
@@ -1183,7 +1180,7 @@ export default class Level extends Phaser.Scene {
 				}
 				case 48:
 				{
-					_gunDirection = undefined;
+					_gunDirection = null;
 					_bomb = true;
 					break;
 				}
@@ -1231,39 +1228,66 @@ export default class Level extends Phaser.Scene {
 	}
 
 	/**
+	 * Decoupled from createMapEnemies(). Currently unused.
+	 * @param x 
+	 * @param y 
+	 * @param flipX 
+	 * @param gunDirection 
+	 * @param balloon 
+	 * @param bomb 
+	 * @param parasol 
+	 */
+	public createEnemy(x: number, y: number, flipX: boolean, gunDirection: GunDirection, balloon: boolean, 
+		bomb: boolean, parasol: boolean): void
+	{
+		let newEnemy: EnemyPrefab;
+		
+		if (balloon)
+		{
+			newEnemy = new BalloonEnemy(this, x + 8, y - 8, gunDirection, parasol);
+		}
+		else
+		{
+			newEnemy = new GroundEnemy(this, x + 8, y - 8, gunDirection, parasol);
+		}
+
+		newEnemy.flipX = flipX;
+
+		if (gunDirection !== null)
+		{
+			this.gunEnemyList.push(newEnemy);
+		}
+		if (bomb)
+		{
+			this.bombEnemyList.push(newEnemy);
+			newEnemy.bombDropTimer = this.time.addEvent({delay: 1000, callback: () =>
+			{
+				this.setBomb(x, y, newEnemy);
+			}});
+		}
+
+		this.enemyList.push(newEnemy);
+		newEnemy.enemyListIndex = this.enemyList.length - 1;
+		// this.mainLayer.add(newEnemy);
+		// this.UICam.ignore(newEnemy);
+	}
+
+	/**
 	 * initialize main & UI cameras.
 	 * 
 	 * scene is seperated into two layers, each camera ignoring the other layer.
 	 */
 	createCameras()
 	{
-	// adaptive zoom
-		let zoom = (this.scale.width > 1000? 3 : 2);
-			/* pixel art games cannot zoom between whole numbers without becoming misaligned and 
-			causing graphical issues, so the old dynamic solution isn't gonna work. */
-
-	// main
-		this.cameras.main.setName('main');
-		this.cameras.main.setZoom(zoom);
+		CameraUtil.configureMainCamera(this);
 		this.cameras.main.setScroll(this.player.x, this.player.y);
 		this.cameras.main.startFollow(this.player, true, .1, .1);
 		this.cameras.main.setBounds(0, 0, this.tileLayer.width, this.tileLayer.height);
 		this.cameras.main.ignore(this.uILayer.getChildren());
 
-		this.cameras.main.fadeIn(200, 255, 255, 255);
-
-	// UI		
-		this.UICam = this.cameras.add(0, 0, this.cameras.main.width, this.cameras.main.height) as any;
-		this.UICam.setName('UIcam')
-		this.UICam.setZoom(3);
+		this.UICam = CameraUtil.createUICamera(this);
 		this.UICam.ignore(this.mainLayer.getChildren());
-			// anything in the displayList not under one of the main layers is caught by the UI 
-			// cam and appears at an offset
 		this.UICam.ignore(this.bGLayer.getChildren());
-		this.UICam.preRender(1);
-		// UICam.alpha = 0;
-			// TODO: add new bomb and explosions to the mainLayer so they aren't also being seen 
-			// by the UICam
 	}
 
 	createMobileButtons()

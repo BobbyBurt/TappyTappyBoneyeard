@@ -1,6 +1,4 @@
 
-type GunDirection = undefined | 'up' | 'upward' | 'forward' | 'downward' | 'down';
-
 /* START OF COMPILED CODE */
 
 import Phaser from "phaser";

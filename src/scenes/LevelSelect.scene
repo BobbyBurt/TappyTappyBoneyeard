@@ -14,7 +14,7 @@
     "displayList": [
         {
             "type": "Layer",
-            "id": "ec886623-984e-4ac6-9e30-2ecd4daf3ba6",
+            "id": "11f9358b-435b-4e69-a55f-e43fcd8653d9",
             "label": "mainLayer",
             "scope": "CLASS",
             "components": [],
@@ -22,8 +22,8 @@
         },
         {
             "type": "Layer",
-            "id": "64a11297-4594-4bab-ac89-c804b4616109",
-            "label": "UILayer",
+            "id": "fb95060c-c6c3-4450-813e-0d96beb09f26",
+            "label": "uiLayer",
             "scope": "CLASS",
             "components": [],
             "list": [
@@ -54,7 +54,7 @@
                     "Align.center": true,
                     "originX": 0.5,
                     "originY": 0.5,
-                    "text": "Level 1\n",
+                    "text": "intro\n",
                     "font": "nokia",
                     "align": 1,
                     "fontSize": -8
@@ -107,8 +107,8 @@
                     "Align.middle": true,
                     "Align.center": true,
                     "Align.verticalOffset": -50,
-                    "x": -2,
-                    "y": 91,
+                    "x": 3,
+                    "y": 96,
                     "isFilled": true,
                     "fillColor": "#292929",
                     "width": 100,

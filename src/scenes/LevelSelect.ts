@@ -7,6 +7,8 @@ import Phaser from "phaser";
 import Align from "../components/Align";
 /* START-USER-IMPORTS */
 
+import CameraUtil from "~/components/CameraUtil";
+
 /* END-USER-IMPORTS */
 
 export default class LevelSelect extends Phaser.Scene {
@@ -33,28 +35,28 @@ export default class LevelSelect extends Phaser.Scene {
 		// mainLayer
 		const mainLayer = this.add.layer();
 
-		// UILayer
-		const uILayer = this.add.layer();
+		// uiLayer
+		const uiLayer = this.add.layer();
 
 		// levelBack
 		const levelBack = this.add.rectangle(0, 0, 150, 40);
 		levelBack.isFilled = true;
 		levelBack.fillColor = 2697513;
-		uILayer.add(levelBack);
+		uiLayer.add(levelBack);
 
 		// levelText
-		const levelText = this.add.bitmapText(0, 0, "nokia", "Level 1\n");
+		const levelText = this.add.bitmapText(0, 0, "nokia", "intro\n");
 		levelText.setOrigin(0.5, 0.5);
-		levelText.text = "Level 1\n";
+		levelText.text = "intro\n";
 		levelText.fontSize = -8;
 		levelText.align = 1;
-		uILayer.add(levelText);
+		uiLayer.add(levelText);
 
 		// downBack
 		const downBack = this.add.rectangle(-3, 48, 100, 40);
 		downBack.isFilled = true;
 		downBack.fillColor = 2697513;
-		uILayer.add(downBack);
+		uiLayer.add(downBack);
 
 		// downText
 		const downText = this.add.bitmapText(6, 48, "nokia", "v\n");
@@ -62,13 +64,13 @@ export default class LevelSelect extends Phaser.Scene {
 		downText.text = "v\n";
 		downText.fontSize = -16;
 		downText.align = 1;
-		uILayer.add(downText);
+		uiLayer.add(downText);
 
 		// upBack
-		const upBack = this.add.rectangle(-2, 91, 100, 40);
+		const upBack = this.add.rectangle(3, 96, 100, 40);
 		upBack.isFilled = true;
 		upBack.fillColor = 2697513;
-		uILayer.add(upBack);
+		uiLayer.add(upBack);
 
 		// upText
 		const upText = this.add.bitmapText(7, 91, "nokia", "v");
@@ -77,7 +79,7 @@ export default class LevelSelect extends Phaser.Scene {
 		upText.text = "v";
 		upText.fontSize = -16;
 		upText.align = 1;
-		uILayer.add(upText);
+		uiLayer.add(upText);
 
 		// lists
 		const levelBackList = [levelBack, downBack, upBack];
@@ -117,7 +119,7 @@ export default class LevelSelect extends Phaser.Scene {
 		upTextAlign.verticalOffset = -50;
 
 		this.mainLayer = mainLayer;
-		this.uILayer = uILayer;
+		this.uiLayer = uiLayer;
 		this.levelBack = levelBack;
 		this.levelText = levelText;
 		this.downBack = downBack;
@@ -128,7 +130,7 @@ export default class LevelSelect extends Phaser.Scene {
 	}
 
 	private mainLayer!: Phaser.GameObjects.Layer;
-	private uILayer!: Phaser.GameObjects.Layer;
+	private uiLayer!: Phaser.GameObjects.Layer;
 	private levelBack!: Phaser.GameObjects.Rectangle;
 	private levelText!: Phaser.GameObjects.BitmapText;
 	private downBack!: Phaser.GameObjects.Rectangle;
@@ -155,7 +157,7 @@ export default class LevelSelect extends Phaser.Scene {
 	create() {
 
 		this.editorCreate();
-
+		
 		this.createCameras();
 
 		this.selectedLevel = 0;
@@ -245,25 +247,11 @@ export default class LevelSelect extends Phaser.Scene {
 	 */
 	createCameras()
 	{
-		// does this need adaptive zoom too?
+		CameraUtil.configureMainCamera(this);
+		this.cameras.main.ignore(this.uiLayer.getChildren());
 
-	// main
-		this.cameras.main.setName('main');
-		this.cameras.main.setZoom(3);
-		this.cameras.main.ignore(this.uILayer .getChildren());
-
-	// UI		
-		this.UICam = this.cameras.add
-			(0, 0, this.cameras.main.width, this.cameras.main.height) as any;
-		this.UICam.setName('UIcam')
-		this.UICam.setZoom(3);
+		this.UICam = CameraUtil.createUICamera(this);
 		this.UICam.ignore(this.mainLayer.getChildren());
-			// anything in the displayList not under one of the main layers is caught by the UI 
-			// cam and appears at an offset
-		this.UICam.preRender(1);
-		// UICam.alpha = 0;
-			// TODO: add new bomb and explosions to the mainLayer so they aren't also being seen 
-			// by the UICam
 	}
 
 	resize()

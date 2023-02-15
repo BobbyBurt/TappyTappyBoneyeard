@@ -56,7 +56,9 @@ export default class Align extends UserComponent {
 	 */
 	align()
 	{
-		let worldView = this.scene.cameras.getCamera('UIcam').worldView;
+		let worldView = this.scene.cameras.getCamera('UICam').worldView;
+
+		console.log(worldView);
 
 		if (this.up)
 		{

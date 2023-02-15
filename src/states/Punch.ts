@@ -22,6 +22,8 @@ export default class Punch implements State {
 		this.player.play('punch');
 		this.player.scene.sound.play('punch-swing')
 
+		this.player.setPosition(this.player.x + (this.player.flipX ? 5 : -5 ), this.player.y);
+
 		this.player.punchCharged = false;
 		
 		this.timer = new Phaser.Time.TimerEvent({ delay: 150, loop: false, callback: () =>
