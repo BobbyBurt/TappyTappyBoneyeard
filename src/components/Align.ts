@@ -58,8 +58,6 @@ export default class Align extends UserComponent {
 	{
 		let worldView = this.scene.cameras.getCamera('UICam').worldView;
 
-		console.log(worldView);
-
 		if (this.up)
 		{
 			this.gameObject.setY(worldView.top + this.verticalOffset);

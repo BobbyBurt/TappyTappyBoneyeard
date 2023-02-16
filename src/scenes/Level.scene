@@ -414,6 +414,75 @@
                     "dropShadowX": 1,
                     "dropShadowY": 1,
                     "dropShadowColor": "#000000ff"
+                },
+                {
+                    "type": "BitmapText",
+                    "id": "15be839a-2ff8-401a-91bc-3229b1eef38c",
+                    "label": "enemiesLabelText",
+                    "components": [
+                        "Align"
+                    ],
+                    "Align.up": true,
+                    "Align.right": true,
+                    "Align.horizontalOffset": -5,
+                    "Align.verticalOffset": -95,
+                    "x": 479,
+                    "y": -72,
+                    "originX": 1,
+                    "text": "Enemies \ndefeated:",
+                    "font": "nokia",
+                    "align": 2,
+                    "fontSize": -8,
+                    "dropShadowY": 100,
+                    "dropShadowAlpha": 1,
+                    "dropShadowColor": "#222222ff"
+                },
+                {
+                    "type": "BitmapText",
+                    "id": "11a56797-10b8-41ca-a8b8-fb05b9ac81c6",
+                    "label": "enemiesText",
+                    "scope": "CLASS",
+                    "components": [
+                        "Align"
+                    ],
+                    "Align.up": true,
+                    "Align.right": true,
+                    "Align.horizontalOffset": -5,
+                    "Align.verticalOffset": -75,
+                    "x": 475,
+                    "y": -58,
+                    "originX": 1,
+                    "text": "5/6",
+                    "font": "nokia",
+                    "align": 2,
+                    "fontSize": -16,
+                    "dropShadowY": 100,
+                    "dropShadowAlpha": 1,
+                    "dropShadowColor": "#222222ff"
+                },
+                {
+                    "type": "BitmapText",
+                    "id": "c43677ed-a048-439b-b87c-b1a75dee0826",
+                    "label": "chargeText",
+                    "scope": "CLASS",
+                    "components": [
+                        "Align"
+                    ],
+                    "Align.down": true,
+                    "Align.right": true,
+                    "Align.horizontalOffset": -5,
+                    "Align.verticalOffset": 95,
+                    "x": 365,
+                    "y": 8,
+                    "originX": 1,
+                    "originY": 1,
+                    "text": "Punch",
+                    "font": "nokia",
+                    "align": 2,
+                    "fontSize": -16,
+                    "dropShadowY": -100,
+                    "dropShadowAlpha": 1,
+                    "dropShadowColor": "#e62020ff"
                 }
             ]
         },

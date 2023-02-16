@@ -17,7 +17,7 @@ export default class GroundCling implements State {
 	
 	enter()
 	{
-		this.player.setTexture('bird1mid');
+		this.player.playAnimation('cling');
 
 	// update sprite flip
 		if (this.player.onWallRight)

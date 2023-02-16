@@ -5,11 +5,13 @@
 ### Changed
 
 - Level select menu has been changed to allow for any number of levels which can be added without adding UI elements.
-- Added goal egg to end of existing levels, edited level to accomodate and increase linearity
+- Added goal egg to end of existing levels, edited level to accomodate and increase linearity.
 
 ### Added
 
 - New level goal: reaching an egg sprite at the end of the level.
+- Added Player sprites correlating to flap charge.
+- Added cling sprite.
 
 ### Removed
 ### Fixed

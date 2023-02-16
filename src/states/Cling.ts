@@ -17,7 +17,7 @@ export default class Cling implements State {
 	
 	enter()
 	{
-		this.player.setTexture('bird1mid');
+		this.player.playAnimation('cling');
 	
 	// update sprite flip
 		if (this.player.onWallRight)
@@ -79,7 +79,7 @@ export default class Cling implements State {
 
 		this.player.setVelocity(velocityX, -this.player.jumpForce);
 
-		this.player.play('jump');
+		this.player.playAnimation('flap');
 		this.player.scene.sound.play('bird-flap');
 	}
 }

@@ -35,6 +35,11 @@
                 "key": "bird-flap"
             },
             {
+                "url": "assets/bird1cling.png",
+                "type": "image",
+                "key": "bird1cling"
+            },
+            {
                 "url": "assets/bird1dive.png",
                 "type": "image",
                 "key": "bird1dive"
@@ -63,6 +68,36 @@
                 "url": "assets/bird1stretch.png",
                 "type": "image",
                 "key": "bird1stretch"
+            },
+            {
+                "url": "assets/bird3cling.png",
+                "type": "image",
+                "key": "bird3cling"
+            },
+            {
+                "url": "assets/bird3dive.png",
+                "type": "image",
+                "key": "bird3dive"
+            },
+            {
+                "url": "assets/bird3punch.png",
+                "type": "image",
+                "key": "bird3punch"
+            },
+            {
+                "url": "assets/bird4cling.png",
+                "type": "image",
+                "key": "bird4cling"
+            },
+            {
+                "url": "assets/bird4dive.png",
+                "type": "image",
+                "key": "bird4dive"
+            },
+            {
+                "url": "assets/bird4punch.png",
+                "type": "image",
+                "key": "bird4punch"
             },
             {
                 "url": "assets/bomb.png",

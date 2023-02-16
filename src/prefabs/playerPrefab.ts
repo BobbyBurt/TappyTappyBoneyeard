@@ -115,9 +115,9 @@ export default class playerPrefab extends Phaser.Physics.Arcade.Sprite {
 
 	public moveSpeed = 120;
 	public jumpForce = 250;
-	public maxFlaps = 3;
-		// TODO: should this be const? It would have to be outside the class
 
+	public maxFlaps = 2;
+	/** How many flaps can the player do? */
 	public flapCharge: number = this.maxFlaps;
 
 	start()
@@ -390,12 +390,31 @@ export default class playerPrefab extends Phaser.Physics.Arcade.Sprite {
 		}
 	}
 
-	/** called on start to initialize animations */
+	/**
+	 * Plays animation correlated to flap state for applicable animations.
+	 * @param key 
+	 */
+	public playAnimation(key: string): void
+	{
+		if (key === 'flap' || key === 'punch' || key === 'dive' || key === 'cling' || key === 'airborne')
+		{
+			this.play(key + '-' + this.flapCharge.toString());
+		}
+		else
+		{
+			this.play(key);
+		}
+	}
+
+	/**
+	 * Called on create(). Keys with versions correlating to flap state have the flap state number 
+	 * postfix.
+	 */
 	private createAnimations()
 	{
 		this.anims.create
 		({
-			key: 'flap',
+			key: 'flap-2',
 			frames:
 			[
 				{ key: 'bird1squash' },
@@ -409,7 +428,7 @@ export default class playerPrefab extends Phaser.Physics.Arcade.Sprite {
 
 		this.anims.create
 		({
-			key: 'flap-2',
+			key: 'flap-1',
 			frames: this.anims.generateFrameNumbers('flap-sprites', { frames: [ 3, 4, 5, 5 ] }),
 			frameRate: 16,
 			repeat: 0
@@ -417,36 +436,8 @@ export default class playerPrefab extends Phaser.Physics.Arcade.Sprite {
 
 		this.anims.create
 		({
-			key: 'flap-3',
+			key: 'flap-0',
 			frames: this.anims.generateFrameNumbers('flap-sprites', { frames: [ 6, 7, 8, 8 ] }),
-			frameRate: 16,
-			repeat: 0
-		});
-
-		this.anims.create
-		({
-			key: 'no-more-flaps-flap',
-				// TODO: think of a better name
-			frames:
-			[
-				{ key: 'bird1squash' },
-				{ key: 'bird1mid' },
-				{ key: 'bird1stretch' },
-				{ key: 'bird1stretch' },
-				{ key: 'bird1squash' }
-			],
-			frameRate: 16,
-			repeat: 0
-		});
-		
-		this.anims.create
-		({
-			key: 'no-more-flaps',
-				// TODO: think of a better name
-			frames:
-			[
-				{ key: 'bird1squash' }
-			],
 			frameRate: 16,
 			repeat: 0
 		});
@@ -504,7 +495,7 @@ export default class playerPrefab extends Phaser.Physics.Arcade.Sprite {
 
 		this.anims.create
 		({
-			key: 'punch',
+			key: 'punch-2',
 			frames:
 			[
 				{ key: 'bird1punch' }
@@ -515,7 +506,29 @@ export default class playerPrefab extends Phaser.Physics.Arcade.Sprite {
 
 		this.anims.create
 		({
-			key: 'dive',
+			key: 'punch-1',
+			frames:
+			[
+				{ key: 'bird3punch' }
+			],
+			frameRate: 16,
+			repeat: 0
+		});
+
+		this.anims.create
+		({
+			key: 'punch-0',
+			frames:
+			[
+				{ key: 'bird4punch' }
+			],
+			frameRate: 16,
+			repeat: 0
+		});
+
+		this.anims.create
+		({
+			key: 'dive-2',
 			frames:
 			[
 				{ key: 'bird1dive' }
@@ -526,7 +539,97 @@ export default class playerPrefab extends Phaser.Physics.Arcade.Sprite {
 
 		this.anims.create
 		({
+			key: 'dive-1',
+			frames:
+			[
+				{ key: 'bird3dive' }
+			],
+			frameRate: 16,
+			repeat: 0
+		});
+
+		this.anims.create
+		({
+			key: 'dive-0',
+			frames:
+			[
+				{ key: 'bird4dive' }
+			],
+			frameRate: 16,
+			repeat: 0
+		});
+
+		this.anims.create
+		({
+			key: 'cling-2',
+			frames:
+			[
+				{ key: 'bird1cling' }
+			],
+			frameRate: 16,
+			repeat: 0
+		});
+
+		this.anims.create
+		({
+			key: 'cling-1',
+			frames:
+			[
+				{ key: 'bird3cling' }
+			],
+			frameRate: 16,
+			repeat: 0
+		});
+
+		this.anims.create
+		({
+			key: 'cling-0',
+			frames:
+			[
+				{ key: 'bird4cling' }
+			],
+			frameRate: 16,
+			repeat: 0
+		});
+
+		this.anims.create
+		({
 			key: 'airborne',
+			frames:
+			[
+				{ key: 'bird1mid' }
+			],
+			frameRate: 16,
+			repeat: 0
+		});
+
+		this.anims.create
+		({
+			key: 'airborne-2',
+			frames: this.anims.generateFrameNumbers('flap-sprites', { frames: [ 1 ] }),
+			frameRate: 16,
+			repeat: 0
+		});
+
+		this.anims.create
+		({
+			key: 'airborne-1',
+			frames: this.anims.generateFrameNumbers('flap-sprites', { frames: [ 4 ] }),
+			frameRate: 16,
+			repeat: 0
+		});
+
+		this.anims.create
+		({
+			key: 'airborne-0',
+			frames: this.anims.generateFrameNumbers('flap-sprites', { frames: [ 7 ] }),
+			frameRate: 16,
+			repeat: 0
+		});
+
+		this.anims.create
+		({
+			key: 'cling',
 			frames:
 			[
 				{ key: 'bird1mid' }

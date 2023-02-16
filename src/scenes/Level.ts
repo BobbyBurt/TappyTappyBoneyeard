@@ -171,6 +171,39 @@ export default class Level extends Phaser.Scene {
 		winText.dropShadowY = 1;
 		uILayer.add(winText);
 
+		// enemiesLabelText
+		const enemiesLabelText = this.add.bitmapText(479, -72, "nokia", "Enemies \ndefeated:");
+		enemiesLabelText.setOrigin(1, 0);
+		enemiesLabelText.text = "Enemies \ndefeated:";
+		enemiesLabelText.fontSize = -8;
+		enemiesLabelText.align = 2;
+		enemiesLabelText.dropShadowY = 100;
+		enemiesLabelText.dropShadowAlpha = 1;
+		enemiesLabelText.dropShadowColor = 2236962;
+		uILayer.add(enemiesLabelText);
+
+		// enemiesText
+		const enemiesText = this.add.bitmapText(475, -58, "nokia", "5/6");
+		enemiesText.setOrigin(1, 0);
+		enemiesText.text = "5/6";
+		enemiesText.fontSize = -16;
+		enemiesText.align = 2;
+		enemiesText.dropShadowY = 100;
+		enemiesText.dropShadowAlpha = 1;
+		enemiesText.dropShadowColor = 2236962;
+		uILayer.add(enemiesText);
+
+		// chargeText
+		const chargeText = this.add.bitmapText(365, 8, "nokia", "Punch");
+		chargeText.setOrigin(1, 1);
+		chargeText.text = "Punch";
+		chargeText.fontSize = -16;
+		chargeText.align = 2;
+		chargeText.dropShadowY = -100;
+		chargeText.dropShadowAlpha = 1;
+		chargeText.dropShadowColor = 15081504;
+		uILayer.add(chargeText);
+
 		// endEgg
 		const endEgg = this.add.image(286, 143, "bird1egg") as Phaser.GameObjects.Image & { body: Phaser.Physics.Arcade.Body };
 		this.physics.add.existing(endEgg, false);
@@ -302,6 +335,27 @@ export default class Level extends Phaser.Scene {
 		winTextAlign.middle = true;
 		winTextAlign.center = true;
 
+		// enemiesLabelText (components)
+		const enemiesLabelTextAlign = new Align(enemiesLabelText);
+		enemiesLabelTextAlign.up = true;
+		enemiesLabelTextAlign.right = true;
+		enemiesLabelTextAlign.horizontalOffset = -5;
+		enemiesLabelTextAlign.verticalOffset = -95;
+
+		// enemiesText (components)
+		const enemiesTextAlign = new Align(enemiesText);
+		enemiesTextAlign.up = true;
+		enemiesTextAlign.right = true;
+		enemiesTextAlign.horizontalOffset = -5;
+		enemiesTextAlign.verticalOffset = -75;
+
+		// chargeText (components)
+		const chargeTextAlign = new Align(chargeText);
+		chargeTextAlign.down = true;
+		chargeTextAlign.right = true;
+		chargeTextAlign.horizontalOffset = -5;
+		chargeTextAlign.verticalOffset = 95;
+
 		this.bGLayer = bGLayer;
 		this.mainLayer = mainLayer;
 		this.player = player;
@@ -317,6 +371,8 @@ export default class Level extends Phaser.Scene {
 		this.mobileButtonUppercut = mobileButtonUppercut;
 		this.mobileButtonLevelSelect = mobileButtonLevelSelect;
 		this.winText = winText;
+		this.enemiesText = enemiesText;
+		this.chargeText = chargeText;
 		this.endEgg = endEgg;
 		this.public_list = public_list;
 		this.enemyList = enemyList;
@@ -343,6 +399,8 @@ export default class Level extends Phaser.Scene {
 	private mobileButtonUppercut!: Phaser.GameObjects.Rectangle;
 	private mobileButtonLevelSelect!: Phaser.GameObjects.Rectangle;
 	private winText!: Phaser.GameObjects.BitmapText;
+	private enemiesText!: Phaser.GameObjects.BitmapText;
+	private chargeText!: Phaser.GameObjects.BitmapText;
 	private endEgg!: Phaser.GameObjects.Image & { body: Phaser.Physics.Arcade.Body };
 	public public_list!: Array<any>;
 	private enemyList!: Array<any>;
@@ -536,10 +594,19 @@ export default class Level extends Phaser.Scene {
 			this.debugText.setText(`${this.player.stateController.currentState.name}`);
 			// this.debugText2.setText(`flap charge: ${this.player.flapCharge}`);
 			// this.debugText3.setText(`punch charge: ${this.player.punchCharged}`);	
-			this.debugText2.setText(`bombs: ${this.bombGroup.countActive()}`);
-			this.debugText3.setText(`punch charge: ${this.player.punchCharged}`);
+			this.debugText2.setText(`onWallBehind: ${this.player.onWallFacing(false)}`);
+			this.debugText3.setText(`onWallLeft: ${this.player.onWallLeft}`);
 		}
-		// this.debugText.setText(`${this.player.onFloor}`);
+
+		if (this.player.punchCharged)
+		{
+			this.chargeText.dropShadowColor = 714549;
+		}
+		else
+		{
+			this.chargeText.dropShadowColor = 15081504;
+		}
+			// TEMP: this shouldn't be checked each frame
 
 	// reset collision values to be overridden by callbacks
 		this.player.onFloor = false;
@@ -583,6 +650,8 @@ export default class Level extends Phaser.Scene {
 			}
 		});
 			// TODO: change this to bomb group
+
+		this.updateEnemiesUI();
 
 		this.gunFireCheck();
 	}
@@ -700,7 +769,10 @@ export default class Level extends Phaser.Scene {
 
 			this.sound.play('enemy-death');
 
-			this.enemiesDefeatedCheck();
+			// this.enemiesDefeatedCheck();
+
+			this.updateEnemiesUI();
+			this.animatedEnemiesUI();
 		}
 		else
 		{
@@ -1085,7 +1157,12 @@ export default class Level extends Phaser.Scene {
 		});
 	}
 
-	/** checks if all enemies are defeated and shows victory audio / visual */
+	/**
+	 * CURRENTLY UNUSED
+	 * 
+	 * checks if all enemies are defeated and shows victory audio / visual
+	 * @returns 
+	 */
 	enemiesDefeatedCheck()
 	{
 	// check
@@ -1104,6 +1181,41 @@ export default class Level extends Phaser.Scene {
 		}
 
 		// here is where the level end code would go
+	}
+
+	updateEnemiesUI(): void
+	{
+		let defeatedEnemyCount = 0;
+		this.enemyList.forEach((enemy) => 
+		{
+			let _enemy = enemy as EnemyPrefab;
+			if (_enemy.isFalling())
+			{
+				defeatedEnemyCount++;
+			}
+		});
+
+		this.enemiesText.setText(`${defeatedEnemyCount} / ${this.enemyList.length}`);
+
+		if (defeatedEnemyCount === this.enemyList.length)
+		{
+			this.enemiesText.dropShadowColor = 714549;
+		}
+	}
+
+	animatedEnemiesUI(): void
+	{
+		this.enemiesText.setPosition(this.enemiesText.x, this.enemiesText.y + 10)
+		this.tweens.add
+		({
+			targets: this.enemiesText,
+			duration: 500,
+			// hold: 1000,
+			// repeatDelay: 1000,
+			// repeat: -1,
+			ease: Phaser.Math.Easing.Circular.Out,
+			y: this.enemiesText.y - 10
+		});
 	}
 
 	levelEndFeedback()
@@ -1241,7 +1353,7 @@ export default class Level extends Phaser.Scene {
 		bomb: boolean, parasol: boolean): void
 	{
 		let newEnemy: EnemyPrefab;
-		
+
 		if (balloon)
 		{
 			newEnemy = new BalloonEnemy(this, x + 8, y - 8, gunDirection, parasol);
