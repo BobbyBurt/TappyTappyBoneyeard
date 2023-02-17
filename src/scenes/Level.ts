@@ -17,6 +17,7 @@ import BombPrefab from "~/prefabs/BombPrefab";
 import explosionPrefab from "~/prefabs/explosionPrefab";
 import CameraUtil from "~/components/CameraUtil";
 import TilemapUtil from "~/components/TilemapUtil";
+import VisionPoly from "~/components/VisionPoly";
 
 /* END-USER-IMPORTS */
 
@@ -194,12 +195,12 @@ export default class Level extends Phaser.Scene {
 		uILayer.add(enemiesText);
 
 		// chargeText
-		const chargeText = this.add.bitmapText(365, 8, "nokia", "Punch");
-		chargeText.setOrigin(1, 1);
+		const chargeText = this.add.bitmapText(336, -12, "nokia", "Punch");
+		chargeText.setOrigin(0.5, 0);
 		chargeText.text = "Punch";
 		chargeText.fontSize = -16;
 		chargeText.align = 2;
-		chargeText.dropShadowY = -100;
+		chargeText.dropShadowY = 100;
 		chargeText.dropShadowAlpha = 1;
 		chargeText.dropShadowColor = 15081504;
 		uILayer.add(chargeText);
@@ -351,10 +352,9 @@ export default class Level extends Phaser.Scene {
 
 		// chargeText (components)
 		const chargeTextAlign = new Align(chargeText);
-		chargeTextAlign.down = true;
-		chargeTextAlign.right = true;
-		chargeTextAlign.horizontalOffset = -5;
-		chargeTextAlign.verticalOffset = 95;
+		chargeTextAlign.up = true;
+		chargeTextAlign.center = true;
+		chargeTextAlign.verticalOffset = -95;
 
 		this.bGLayer = bGLayer;
 		this.mainLayer = mainLayer;
@@ -430,10 +430,21 @@ export default class Level extends Phaser.Scene {
 
 // debug
 	private debugWallDetectGraphics: Phaser.GameObjects.Graphics;
+	private debugVisionPolyGraphics: Phaser.GameObjects.Graphics;
 
 	public UICam: Phaser.Cameras.Scene2D.BaseCamera;
 
-	private music!: Phaser.Sound.BaseSound;
+	private music: Phaser.Sound.BaseSound;
+
+	/** Polygons used for enemies' player detection. */
+	private visionPolys: Array<VisionPoly>;
+
+	/** 
+	 * All objects in the elements layer in the tilemap.
+	 * 
+	 * Indexes correlate to the object's ID, so most of this array's indexes are empty.
+	 */
+	private mapElementList: Array<any>;
 
 	create()
 	{	
@@ -448,49 +459,64 @@ export default class Level extends Phaser.Scene {
 
 		this.tileMap = this.add.tilemap(this.registry.get('current-level'));
 		this.tileMap.addTilesetImage("tilleset", "tileset");
-		this.tileMap.addTilesetImage("hazard-tileset", "tileset-hazards");
+		// this.tileMap.addTilesetImage("hazard-tileset", "tileset-hazards");
 
 		this.tileLayer = this.tileMap.createLayer("Tile Layer 1", ["tilleset"], 0, 0);
 			// why is it misspelled 'tillset'?
 		this.mainLayer.add(this.tileLayer);
 
-		this.hazardTileLayer = this.tileMap.createLayer('Hazard Tile Layer', ['hazard-tileset'], 0, 0);
-		this.mainLayer.add(this.hazardTileLayer);
+		// this.hazardTileLayer = this.tileMap.createLayer('Hazard Tile Layer', ['hazard-tileset'], 0, 0);
+		// this.mainLayer.add(this.hazardTileLayer);
 
 		this.collidesWithBombList.push(this.player);
 		this.collidesWithBombList.push(this.tileLayer);
-		this.collidesWithBombList.push(this.hazardTileLayer);
+		// this.collidesWithBombList.push(this.hazardTileLayer);
 
 		this.tileLayer.setCollision([1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18,
 			19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36], true);
 
-		this.hazardTileLayer.setCollision([1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18,
-			19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36], true);
+		// this.hazardTileLayer.setCollision([1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18,
+		// 	19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36], true);
 
 		// playerTilemapCollider
 		this.physics.add.collider(this.player, this.tileLayer, this.playerTilemapCollide, undefined, this);
 
 		// playerHazardTilemapCollider
-		this.physics.add.collider(this.player, this.hazardTileLayer, this.playerHazardTilemapCollide, undefined, this);
+		// this.physics.add.collider(this.player, this.hazardTileLayer, this.playerHazardTilemapCollide, undefined, this);
 
 		// soldierTilemapCollide
 		this.physics.add.collider(this.enemyList, this.tileLayer);
 
 		// playerEnemyOverlap
-		this.physics.add.overlap(this.player, this.enemyList, this.playerEnemyOverlap, undefined, this);
+		this.physics.add.overlap
+			(this.player, this.enemyList, this.playerEnemyOverlap, undefined, this);
 
 		// bulletTilemapCollide
-		this.physics.add.collider(this.bulletList, this.tileLayer, this.bulletTilemapCollide, undefined, this);
+		this.physics.add.collider
+			(this.bulletList, this.tileLayer, this.bulletTilemapCollide, undefined, this);
 
 		// playerBulletOverlap
-		this.physics.add.overlap(this.bulletList, this.player, this.bulletPlayerCollide, undefined, this);
+		this.physics.add.overlap
+			(this.bulletList, this.player, this.bulletPlayerCollide, undefined, this);
 
 		// playerEndEggOverlap
-		this.physics.add.overlap(this.player, this.endEgg, this.playerEndEggOverlap, undefined, this);
+		this.physics.add.overlap
+			(this.player, this.endEgg, this.playerEndEggOverlap, undefined, this);
 
 		this.createCameras();
 
+		this.mapElementList = new Array(150);
+		/* TODO: make this array length dynamic to the highest element id in the map, as if there 
+		is an id greater than this array length then the game will crash.
+		*/
+		this.visionPolys = new Array(0);
+		// /* TODO: make this array length dynamic to the amount of vision rects that are in the 
+		// map, otherwise this acts as an arbitrary max which crashes the game if exceeded.
+		// */
+
 		this.createMapEnemies();
+
+		this.createMapVisionPolys();
 
 	// tilemap special elements
 		const startPoint = TilemapUtil.getObjectPosition('startPoint', this.tileMap);
@@ -595,7 +621,7 @@ export default class Level extends Phaser.Scene {
 			// this.debugText2.setText(`flap charge: ${this.player.flapCharge}`);
 			// this.debugText3.setText(`punch charge: ${this.player.punchCharged}`);	
 			this.debugText2.setText(`onWallBehind: ${this.player.onWallFacing(false)}`);
-			this.debugText3.setText(`onWallLeft: ${this.player.onWallLeft}`);
+			this.debugText3.setText(`player flip: ${this.player.flipX}`);
 		}
 
 		if (this.player.punchCharged)
@@ -613,8 +639,8 @@ export default class Level extends Phaser.Scene {
 
 	// player wall check
 		this.player.onWallLeft = 
-			(this.tileLayer.getTileAtWorldXY(this.player.body.x - 1, this.player.body.y + 9) != undefined 
-			|| this.tileLayer.getTileAtWorldXY(this.player.body.x - 1, this.player.body.y - 1) != undefined);
+			(this.tileLayer.getTileAtWorldXY(this.player.body.x - 2, this.player.body.y + 9) != undefined 
+			|| this.tileLayer.getTileAtWorldXY(this.player.body.x - 2, this.player.body.y - 1) != undefined);
 		this.player.onWallRight = 
 			(this.tileLayer.getTileAtWorldXY(this.player.body.x + 12, this.player.body.y + 9) != undefined
 			|| this.tileLayer.getTileAtWorldXY(this.player.body.x + 12, this.player.body.y - 1) != undefined);
@@ -622,10 +648,19 @@ export default class Level extends Phaser.Scene {
 				// should not count as wall.
 	// DEBUG: collision points visual
 		this.debugWallDetectGraphics.clear();
-		this.debugWallDetectGraphics.fillPoint(this.player.body.x - 1, this.player.body.y + 9);
-		this.debugWallDetectGraphics.fillPoint(this.player.body.x - 1, this.player.body.y - 1);
+		this.debugWallDetectGraphics.fillPoint(this.player.body.x - 2, this.player.body.y + 9);
+		this.debugWallDetectGraphics.fillPoint(this.player.body.x - 2, this.player.body.y - 1);
 		this.debugWallDetectGraphics.fillPoint(this.player.body.x + 12, this.player.body.y + 9);
 		this.debugWallDetectGraphics.fillPoint(this.player.body.x + 12, this.player.body.y - 1);
+
+	// Vision rect check
+	this.visionPolys.forEach((object, index) =>
+	{
+		if (Phaser.Geom.Polygon.ContainsPoint(object, new Phaser.Geom.Point(this.player.x, this.player.y)))
+		{
+			this.setGunFire(object.parentEnemy);
+		}
+	});
 
 	// out-of-bounds checks
 		if (this.player.y > this.bottomBoundary!)
@@ -653,7 +688,7 @@ export default class Level extends Phaser.Scene {
 
 		this.updateEnemiesUI();
 
-		this.gunFireCheck();
+		// this.gunFireCheck();
 	}
 
 	/** reloads the scene */
@@ -964,7 +999,9 @@ export default class Level extends Phaser.Scene {
 		});
 	}
 
-	/** checks line of sight for each active gun enemy and fires if player is detected */
+	/** 
+	 * DEPRECATED
+	 * checks line of sight for each active gun enemy and fires if player is detected */
 	gunFireCheck()
 	{
 		this.gunEnemyList.forEach((enemey) =>
@@ -1032,7 +1069,7 @@ export default class Level extends Phaser.Scene {
 					{
 						if (!_enemy.isFalling())
 						{
-							this.gunFire(_enemy);
+							this.fireGun(_enemy);
 						}
 					}});
 
@@ -1050,8 +1087,34 @@ export default class Level extends Phaser.Scene {
 		});
 	}
 
-	/** fires gun from any enemy */
-	gunFire(enemy: EnemyPrefab)
+	/**
+	 * starts timers for a gun spray.
+	 * 
+	 * Can be called anytime, as nothing will happen if the cooldown timer hasn't completed.
+	 * 
+	 * @param enemy to fire from
+	 */
+	setGunFire(enemy: EnemyPrefab)
+	{
+		if (enemy.gunSprayTimer.getProgress() == 1 && enemy.gunCoolDownTimer.getProgress() == 1)
+		{
+			enemy.gunSprayTimer = this.time.addEvent({ delay: 100, repeat: 10, callback: () =>
+			{
+				if (!enemy.isFalling())
+				{
+					this.fireGun(enemy);
+				}
+			}});
+
+			enemy.gunCoolDownTimer = this.time.addEvent({delay: 1500});
+		}
+	}
+
+	/**
+	 * fires bullet from any enemy
+	 * @param enemy to fire from
+	 */
+	fireGun(enemy: EnemyPrefab): void
 	{
 		let _newBullet = this.bulletGroup.get(enemy.x, enemy.y) as BulletPrefab;
 		if (_newBullet == undefined)
@@ -1102,7 +1165,10 @@ export default class Level extends Phaser.Scene {
 		_newBullet.body.setVelocity(velocity.x, velocity.y);
 	}
 
-	/** creates bullets from all enemies with a gun */
+	/**  
+	 * DEPRECATED
+	 * creates bullets from all enemies with a gun 
+	*/
 	enemyGunFire()
 	{
 		this.gunEnemyList.forEach((_enemy, _index) => 
@@ -1334,8 +1400,48 @@ export default class Level extends Phaser.Scene {
 
 			this.enemyList.push(_enemy);
 			_enemy.enemyListIndex = this.enemyList.length - 1;
+			this.mapElementList[object.id] = _enemy;
 			this.mainLayer.add(_enemy);
 			this.UICam.ignore(_enemy);
+		});
+	}
+
+	createMapVisionPolys()
+	{
+		let _mapObjects = this.tileMap.getObjectLayer('elements')
+		_mapObjects.objects.forEach((_object, index) =>
+		{
+			if (_object.name === 'enemyVision')
+			{
+				let object = _object as any;
+
+				const parentEnemy = this.mapElementList[object.properties[0].value];
+
+				const p0 = new Phaser.Geom.Point
+					((object.polygon[0].x + object.x), (object.polygon[0].y + object.y));
+				const p1 = new Phaser.Geom.Point
+					((object.polygon[1].x + object.x), (object.polygon[1].y + object.y));
+				const p2 = new Phaser.Geom.Point
+					((object.polygon[2].x + object.x), (object.polygon[2].y + object.y));
+				const p3 = new Phaser.Geom.Point
+					((object.polygon[3].x + object.x), (object.polygon[3].y + object.y));
+					/* Tiled polygons are relative / local points, which Phaser polygons are 
+					worldspace points. This converts the points.
+					*/
+					/* TODO: make this dynamic to support polygons of more than 2 points
+					*/
+				const visionPoly = new VisionPoly(parentEnemy, [p0, p1, p2, p3]);
+
+				this.visionPolys.push(visionPoly);
+				this.mapElementList[object.id] = visionPoly;
+
+				if (__DEV__)
+				{
+					this.debugVisionPolyGraphics = this.add.graphics();
+					this.debugVisionPolyGraphics.lineStyle(1, 0xff0000);
+					this.debugVisionPolyGraphics.strokePoints(visionPoly.points, true)
+				}
+			}
 		});
 	}
 

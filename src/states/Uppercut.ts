@@ -21,7 +21,7 @@ export default class Uppercut implements State {
 	
 	enter()
 	{
-		this.player.setTexture('bird1punch');
+		this.player.playAnimation('punch');
 		this.player.setRotation(this.player.flipX? -1.5 : 1.5);
 
 		this.player.setPosition(this.player.x, this.player.y - 5);

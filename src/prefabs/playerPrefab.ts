@@ -393,17 +393,25 @@ export default class playerPrefab extends Phaser.Physics.Arcade.Sprite {
 	/**
 	 * Plays animation correlated to flap state for applicable animations.
 	 * @param key 
+	 * @param queue wait until current animation is complete
 	 */
-	public playAnimation(key: string): void
+	public playAnimation(key: string, queue?: boolean): void
 	{
 		if (key === 'flap' || key === 'punch' || key === 'dive' || key === 'cling' || key === 'airborne')
 		{
-			this.play(key + '-' + this.flapCharge.toString());
+			key = key + '-' + this.flapCharge.toString();
+		}
+
+		if (queue)
+		{
+			this.playAfterRepeat(key);
 		}
 		else
 		{
 			this.play(key);
 		}
+
+		// LEFT: use playAfterRepeat() so airborne animation doesn't cancel flap
 	}
 
 	/**
@@ -623,17 +631,6 @@ export default class playerPrefab extends Phaser.Physics.Arcade.Sprite {
 		({
 			key: 'airborne-0',
 			frames: this.anims.generateFrameNumbers('flap-sprites', { frames: [ 7 ] }),
-			frameRate: 16,
-			repeat: 0
-		});
-
-		this.anims.create
-		({
-			key: 'cling',
-			frames:
-			[
-				{ key: 'bird1mid' }
-			],
 			frameRate: 16,
 			repeat: 0
 		});

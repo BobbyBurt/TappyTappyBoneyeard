@@ -468,19 +468,17 @@
                     "components": [
                         "Align"
                     ],
-                    "Align.down": true,
-                    "Align.right": true,
-                    "Align.horizontalOffset": -5,
-                    "Align.verticalOffset": 95,
-                    "x": 365,
-                    "y": 8,
-                    "originX": 1,
-                    "originY": 1,
+                    "Align.up": true,
+                    "Align.center": true,
+                    "Align.verticalOffset": -95,
+                    "x": 336,
+                    "y": -12,
+                    "originX": 0.5,
                     "text": "Punch",
                     "font": "nokia",
                     "align": 2,
                     "fontSize": -16,
-                    "dropShadowY": -100,
+                    "dropShadowY": 100,
                     "dropShadowAlpha": 1,
                     "dropShadowColor": "#e62020ff"
                 }

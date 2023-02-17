@@ -17,7 +17,7 @@ export default class Dive implements State {
 	
 	enter()
 	{
-		this.player.playAnimation('dive');
+		this.player.playAnimation('dive', false);
 
 		this.player.body.setVelocityY(250);
 	}

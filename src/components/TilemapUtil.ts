@@ -20,9 +20,4 @@ export default class TilemapUtil {
 
         return new Phaser.Math.Vector2(point.x!, point.y!)
     }
-
-    public test(level:Level)
-    {
-        
-    }
 }

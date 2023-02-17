@@ -35,7 +35,10 @@ export default class EnemyPrefab extends Phaser.GameObjects.Sprite {
 			loop: true
 		});
 
-		this.gunDirection = gunDirection;
+		if (gunDirection)
+		{
+			this.gunDirection! = gunDirection;
+		}
 		if (parasol)
 		{
 			this._hasParasol = true;
