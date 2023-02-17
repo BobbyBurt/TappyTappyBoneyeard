@@ -658,7 +658,21 @@ export default class Level extends Phaser.Scene {
 	{
 		if (Phaser.Geom.Polygon.ContainsPoint(object, new Phaser.Geom.Point(this.player.x, this.player.y)))
 		{
-			this.setGunFire(object.parentEnemy);
+			if (object.parentEnemy.gunDirection)
+			{
+				this.setGunFire(object.parentEnemy);
+			}
+			else if (object.parentEnemy.bombProp)
+			{
+				if (object.parentEnemy.bombCooldownTimer.getProgress() == 1)
+				{
+					this.setBomb(object.parentEnemy.x, object.parentEnemy.y, object.parentEnemy);
+					object.parentEnemy.bombCooldownTimer = this.time.addEvent({delay: 1000, callback: () =>
+					{
+						// We only need to check if this timer is done.
+					}});
+				}
+			}
 		}
 	});
 
@@ -677,10 +691,10 @@ export default class Level extends Phaser.Scene {
 			{
 				_member.disappear();
 				_member.setPosition(9999, -9999);
-				_member.enemy.bombDropTimer.destroy();
-				_member.enemy.bombDropTimer = this.time.addEvent({delay: 1000, callback: () =>
+				_member.enemy.bombCooldownTimer.destroy();
+				_member.enemy.bombCooldownTimer = this.time.addEvent({delay: 1000, callback: () =>
 				{
-					this.setBomb(_member.enemy.x, _member.enemy.y, _member.enemy);
+					// We only need to check if this timer is done.
 				}});
 			}
 		});
@@ -794,10 +808,9 @@ export default class Level extends Phaser.Scene {
 
 			_enemy.hit(this.player.body.velocity.x, this.player.body.velocity.y);
 
-			if (_enemy.bombDropTimer != undefined)
+			if (_enemy.bombCooldownTimer != undefined)
 			{
-				_enemy.bombDropTimer.destroy();
-				console.log('bomb drop timer (should) be gone');
+				_enemy.bombCooldownTimer.destroy();
 			}
 
 			this.player.punchCharged = true;
@@ -967,16 +980,15 @@ export default class Level extends Phaser.Scene {
 		}
 
 		let bombEnemy = bomb.enemy;
-			/* for whatever reason, bomb.enemy changes from this line to callback, so this is used 
-			as a consistent reference. */
+			/* For whatever reason, bomb.enemy changes from this line to callback, so this is used 
+			as a consistent reference.
+			Or it would be in the timer below, but I've since removed the callback.
+			*/
 
-		bomb.enemy.bombDropTimer.destroy();
-		bomb.enemy.bombDropTimer = this.time.addEvent({delay: 1000, callback: () =>
+		bomb.enemy.bombCooldownTimer.destroy();
+		bomb.enemy.bombCooldownTimer = this.time.addEvent({delay: 1000, callback: () =>
 		{
-			if (!bombEnemy.isFalling())
-			{
-				this.setBomb(bombEnemy.x, bombEnemy.y, bombEnemy);
-			}
+			// We only need to check if this timer is done.
 		}});
 	}
 
@@ -1390,9 +1402,10 @@ export default class Level extends Phaser.Scene {
 			if (_bomb)
 			{
 				this.bombEnemyList.push(_enemy);
-				_enemy.bombDropTimer = this.time.addEvent({delay: 1000, callback: () =>
+				_enemy.createBombProp();
+				_enemy.bombCooldownTimer = this.time.addEvent({delay: 1000, callback: () =>
 				{
-					this.setBomb(_enemy.x, _enemy.y, _enemy);
+					// We only need to check if this timer is done.
 				}});
 			}
 
@@ -1478,9 +1491,9 @@ export default class Level extends Phaser.Scene {
 		if (bomb)
 		{
 			this.bombEnemyList.push(newEnemy);
-			newEnemy.bombDropTimer = this.time.addEvent({delay: 1000, callback: () =>
+			newEnemy.bombCooldownTimer = this.time.addEvent({delay: 1000, callback: () =>
 			{
-				this.setBomb(x, y, newEnemy);
+					// We only need to check if this timer is done.
 			}});
 		}
 

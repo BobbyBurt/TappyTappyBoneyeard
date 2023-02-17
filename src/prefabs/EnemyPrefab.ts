@@ -60,8 +60,13 @@ export default class EnemyPrefab extends Phaser.GameObjects.Sprite {
 	private _hasParasol = false;
 	public get hasParasol() { return this._hasParasol }
 
-	public bombDropTimer!: Phaser.Time.TimerEvent;
-	public bomb!: Phaser.GameObjects.Image;
+	public bombCooldownTimer!: Phaser.Time.TimerEvent;
+	/** 
+	 * Can be used to check if this is a bomb enemy, as it will be defined. 
+	 * 
+	 * Can be used to check if bomb can be dropped, as this will be visible.
+	 * */
+	public bombProp!: Phaser.GameObjects.Image;
 
 	/** rotation applied to sprite when falling. */
 	private spin: number = 0;
@@ -116,6 +121,12 @@ export default class EnemyPrefab extends Phaser.GameObjects.Sprite {
 		{
 			this.parasol.rotation += this.spin * 3;
 		}
+
+		if (this.bombProp && this.spin === 0)
+		{
+			this.bombProp.setPosition(this.x, this.y + 10);
+		}
+		
 	}
 
 	private createGun()
@@ -174,6 +185,17 @@ export default class EnemyPrefab extends Phaser.GameObjects.Sprite {
 			// simply calling this.gun.body doesn't give me much to work with. There must be 
 			// a better way to do this
 		_parasolBody.setAllowGravity(false);
+	}
+
+	createBombProp()
+	{
+		this.bombProp = this.scene.add.image(this.x, this.y + 10, 'bomb');
+		this._scene.UICam.ignore(this.bombProp);
+		// this.bombProp.depth = this.depth - 1;
+
+		// TODO: make it move with enemy
+
+		// TODO: hide it when necessary
 	}
 
 	/** activate fall behaviour

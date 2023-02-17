@@ -166,6 +166,40 @@
                  "width":0,
                  "x":896,
                  "y":512
+                }, 
+                {
+                 "height":0,
+                 "id":84,
+                 "name":"enemyVision",
+                 "polygon":[
+                        {
+                         "x":0,
+                         "y":0
+                        }, 
+                        {
+                         "x":-16,
+                         "y":0
+                        }, 
+                        {
+                         "x":-48,
+                         "y":160
+                        }, 
+                        {
+                         "x":32,
+                         "y":160
+                        }],
+                 "properties":[
+                        {
+                         "name":"parentEnemy",
+                         "type":"object",
+                         "value":64
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":592,
+                 "y":528
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -174,7 +208,7 @@
          "y":0
         }],
  "nextlayerid":3,
- "nextobjectid":84,
+ "nextobjectid":85,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.7.1",
