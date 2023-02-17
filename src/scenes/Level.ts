@@ -590,6 +590,7 @@ export default class Level extends Phaser.Scene {
 
 	// debug wall detect visual
 		this.debugWallDetectGraphics = this.add.graphics({fillStyle: { color: 0x0000ff, alpha: (__DEV__? 1 : 0)}});
+		this.UICam.ignore(this.debugWallDetectGraphics);
 
 	// quick restart input
 		this.input.keyboard.on('keydown-R', () =>
@@ -1453,6 +1454,7 @@ export default class Level extends Phaser.Scene {
 					this.debugVisionPolyGraphics = this.add.graphics();
 					this.debugVisionPolyGraphics.lineStyle(1, 0xff0000);
 					this.debugVisionPolyGraphics.strokePoints(visionPoly.points, true)
+					this.UICam.ignore(this.debugVisionPolyGraphics);
 				}
 			}
 		});

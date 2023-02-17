@@ -227,6 +227,10 @@ export default class EnemyPrefab extends Phaser.GameObjects.Sprite {
 			_parasolBody.setAllowGravity(true);
 			_parasolBody.setVelocity(directionX * .8, -200)
 		}
+		if (this.bombProp)
+		{
+			this.bombProp.setVisible(false);
+		}
 	}
 
 	/** to be called upon scene reset, otherwise the update will still be called and likely 
