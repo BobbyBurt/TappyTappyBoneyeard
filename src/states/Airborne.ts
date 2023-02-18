@@ -25,7 +25,7 @@ export default class Airborne implements State {
 	
 	update()
 	{	
-		// this.player.setVelocityX((this.player.flipX ? ))
+		// this.player.setVelocityX((this.player.flipX ? this.player.moveSpeed : -this.player.moveSpeed));
 		
 		if (this.player.jumpInput == 'just-down')
 		{

@@ -2,11 +2,15 @@
 
 ## Version 8 - 
 
+This build moves the game towards autorun gameplay, and changing enemy weapon patterns to fit better with that gameplay.
+
 ### Changed
 
 - Level select menu has been changed to allow for any number of levels which can be added without adding UI elements.
 - Added goal egg to end of existing levels, edited level to accomodate and increase linearity.
 - Enemies' player detection is more advanced, using a polygon set up in the tilemap rather than a using a line set up in code.
+- Bombs now drop when player is detected rather than on a timer.
+- Player will hop over walls rather than having to punch to regain horizontal movement.
 
 ### Added
 

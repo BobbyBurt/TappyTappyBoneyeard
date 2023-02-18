@@ -621,8 +621,8 @@ export default class Level extends Phaser.Scene {
 			this.debugText.setText(`${this.player.stateController.currentState.name}`);
 			// this.debugText2.setText(`flap charge: ${this.player.flapCharge}`);
 			// this.debugText3.setText(`punch charge: ${this.player.punchCharged}`);	
-			this.debugText2.setText(`onWallBehind: ${this.player.onWallFacing(false)}`);
-			this.debugText3.setText(`player flip: ${this.player.flipX}`);
+			this.debugText2.setText(`player x: ${this.player.x}`);
+			this.debugText3.setText(`player vel x: ${this.player.body.velocity.x}`);
 		}
 
 		if (this.player.punchCharged)

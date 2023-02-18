@@ -58,6 +58,13 @@ export default class Cling implements State {
 		{
 			if (!this.player.onFloor)
 			{
+				if (this.player.body.velocity.y < 0 && this.player.body.velocity.x === 0)
+				{
+					this.player.flipX = !this.player.flipX;
+					this.player.setVelocityX
+						(this.player.flipX ? this.player.moveSpeed : -this.player.moveSpeed)
+				}
+
 				this.stateController.setState('airborne');
 			}
 		}
