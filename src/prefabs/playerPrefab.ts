@@ -114,6 +114,7 @@ export default class playerPrefab extends Phaser.Physics.Arcade.Sprite {
 	public onWallRight: boolean = false;
 
 	public moveSpeed = 120;
+		// I want to make the game faster, but increasing this causes the graphics to flicker
 	public jumpForce = 250;
 
 	public maxFlaps = 2;

@@ -38,12 +38,12 @@ export default class GroundCling implements State {
 		}
 		else if (this.player.punchLeftInput == 'just-down' && this.player.punchCharged)
 		{
-			this.player.flipX = false;
+			// this.player.flipX = false;
 			this.stateController.setState('punch');
 		}
 		else if (this.player.punchRightInput == 'just-down' && this.player.punchCharged)
 		{
-			this.player.flipX = true;
+			// this.player.flipX = true;
 			this.stateController.setState('punch');
 		}
 

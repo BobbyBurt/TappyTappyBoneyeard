@@ -21,7 +21,8 @@ This build moves the game towards autorun gameplay, and changing enemy weapon pa
 - Added UI showing punch charge.
 
 ### Removed
-### Fixed
+
+- Multi-directional punching. (Both punches buttons just punch forward)
 
 ## Version 7 - 2023-02-01
 
