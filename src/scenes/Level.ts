@@ -195,15 +195,26 @@ export default class Level extends Phaser.Scene {
 		uILayer.add(enemiesText);
 
 		// chargeText
-		const chargeText = this.add.bitmapText(336, -12, "nokia", "Punch");
-		chargeText.setOrigin(0.5, 0);
+		const chargeText = this.add.bitmapText(365, -2, "nokia", "Punch");
+		chargeText.setOrigin(1, 0.5);
 		chargeText.text = "Punch";
 		chargeText.fontSize = -16;
 		chargeText.align = 2;
-		chargeText.dropShadowY = 100;
+		chargeText.dropShadowX = -100;
 		chargeText.dropShadowAlpha = 1;
 		chargeText.dropShadowColor = 15081504;
 		uILayer.add(chargeText);
+
+		// scoreText
+		const scoreText = this.add.bitmapText(-39.30818271636963, 66.3349609375, "nokia", "12359135");
+		scoreText.setOrigin(0.5, 0);
+		scoreText.text = "12359135";
+		scoreText.fontSize = -16;
+		scoreText.align = 1;
+		scoreText.dropShadowY = 100;
+		scoreText.dropShadowAlpha = 1;
+		scoreText.dropShadowColor = 2236962;
+		uILayer.add(scoreText);
 
 		// endEgg
 		const endEgg = this.add.image(286, 143, "bird1egg") as Phaser.GameObjects.Image & { body: Phaser.Physics.Arcade.Body };
@@ -352,9 +363,15 @@ export default class Level extends Phaser.Scene {
 
 		// chargeText (components)
 		const chargeTextAlign = new Align(chargeText);
-		chargeTextAlign.up = true;
-		chargeTextAlign.center = true;
-		chargeTextAlign.verticalOffset = -95;
+		chargeTextAlign.middle = true;
+		chargeTextAlign.right = true;
+		chargeTextAlign.horizontalOffset = 95;
+
+		// scoreText (components)
+		const scoreTextAlign = new Align(scoreText);
+		scoreTextAlign.up = true;
+		scoreTextAlign.center = true;
+		scoreTextAlign.verticalOffset = -95;
 
 		this.bGLayer = bGLayer;
 		this.mainLayer = mainLayer;
@@ -373,6 +390,7 @@ export default class Level extends Phaser.Scene {
 		this.winText = winText;
 		this.enemiesText = enemiesText;
 		this.chargeText = chargeText;
+		this.scoreText = scoreText;
 		this.endEgg = endEgg;
 		this.public_list = public_list;
 		this.enemyList = enemyList;
@@ -401,6 +419,7 @@ export default class Level extends Phaser.Scene {
 	private winText!: Phaser.GameObjects.BitmapText;
 	private enemiesText!: Phaser.GameObjects.BitmapText;
 	private chargeText!: Phaser.GameObjects.BitmapText;
+	private scoreText!: Phaser.GameObjects.BitmapText;
 	private endEgg!: Phaser.GameObjects.Image & { body: Phaser.Physics.Arcade.Body };
 	public public_list!: Array<any>;
 	private enemyList!: Array<any>;
@@ -779,6 +798,8 @@ export default class Level extends Phaser.Scene {
 		{
 			this.player.onFloor = true;
 		}
+
+		let tilemap = _tilemap as Phaser.Tilemaps.Tilemap;
 	}
 
 	playerHazardTilemapCollide(_player:Phaser.Types.Physics.Arcade.GameObjectWithBody, _tilemap:any)

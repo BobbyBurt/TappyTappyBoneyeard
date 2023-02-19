@@ -468,19 +468,42 @@
                     "components": [
                         "Align"
                     ],
-                    "Align.up": true,
-                    "Align.center": true,
-                    "Align.verticalOffset": -95,
-                    "x": 336,
-                    "y": -12,
-                    "originX": 0.5,
+                    "Align.middle": true,
+                    "Align.right": true,
+                    "Align.horizontalOffset": 95,
+                    "x": 365,
+                    "y": -2,
+                    "originX": 1,
+                    "originY": 0.5,
                     "text": "Punch",
                     "font": "nokia",
                     "align": 2,
                     "fontSize": -16,
-                    "dropShadowY": 100,
+                    "dropShadowX": -100,
                     "dropShadowAlpha": 1,
                     "dropShadowColor": "#e62020ff"
+                },
+                {
+                    "type": "BitmapText",
+                    "id": "a4f1a2eb-96a5-4c16-90eb-4176122131d8",
+                    "label": "scoreText",
+                    "scope": "CLASS",
+                    "components": [
+                        "Align"
+                    ],
+                    "Align.up": true,
+                    "Align.center": true,
+                    "Align.verticalOffset": -95,
+                    "x": -39.30818271636963,
+                    "y": 66.3349609375,
+                    "originX": 0.5,
+                    "text": "12359135",
+                    "font": "nokia",
+                    "align": 1,
+                    "fontSize": -16,
+                    "dropShadowY": 100,
+                    "dropShadowAlpha": 1,
+                    "dropShadowColor": "#222222ff"
                 }
             ]
         },

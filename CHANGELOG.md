@@ -1,6 +1,19 @@
 # Changelog
 
-## Version 8 - 
+# Version 10 Alpha
+
+This build focuses on finalizing player control, movement and collision.
+
+# Version 9
+
+This build focuses on finalizing gameplay concepts and interactions.
+
+### Changed
+### Added
+### Removed
+### Fixed
+
+## Version 8 - 2023-02-17
 
 This build moves the game towards autorun gameplay, and changing enemy weapon patterns to fit better with that gameplay.
 
@@ -23,6 +36,10 @@ This build moves the game towards autorun gameplay, and changing enemy weapon pa
 ### Removed
 
 - Multi-directional punching. (Both punches buttons just punch forward)
+
+### Fixed
+
+- Debug graphics are now ignored by the UIcam.
 
 ## Version 7 - 2023-02-01
 
