@@ -17,6 +17,7 @@ import explosionPrefab from "~/prefabs/explosionPrefab";
 import CameraUtil from "~/components/CameraUtil";
 import TilemapUtil from "~/components/TilemapUtil";
 import VisionPoly from "~/components/VisionPoly";
+import PogoEnemy from "~/prefabs/PogoEnemy";
 
 /* END-USER-IMPORTS */
 
@@ -1463,6 +1464,12 @@ export default class Level extends Phaser.Scene {
 				_enemy = new BalloonEnemy
 					(this, object.x! + 8, object.y! - 8, _gunDirection, 
 						(object.type == 'balloon-parasol'));
+			}
+			else if (object.type == 'pogo' || object.type == 'pogo-parasol')
+			{
+				_enemy = new PogoEnemy
+					(this, object.x! + 8, object.y! - 8, _gunDirection, 
+						(object.type == 'pogo-parasol'));
 			}
 			else
 			{

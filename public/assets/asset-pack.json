@@ -244,6 +244,11 @@
                 "key": "parasol"
             },
             {
+                "url": "assets/pogo.png",
+                "type": "image",
+                "key": "pogo"
+            },
+            {
                 "url": [
                     "assets/sfx/Pogo stick.mp3"
                 ],

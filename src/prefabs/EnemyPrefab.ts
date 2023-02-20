@@ -73,6 +73,7 @@ export default class EnemyPrefab extends Phaser.GameObjects.Sprite {
 	/** rotation applied to sprite when falling. */
 	private spin: number = 0;
 	public isFalling() { return (this.spin != 0) }
+	public getSpin() { return this.spin }
 
 	/** for debugging */
 	public enemyListIndex = -1;
@@ -209,7 +210,7 @@ export default class EnemyPrefab extends Phaser.GameObjects.Sprite {
 	{
 		this.body.allowGravity = true;
 			// since floating enemies have gravity disabled
-		this.body.setVelocity(directionX, -150);
+		this.body.setVelocity(directionX, (directionY < -300 ? -300 : -150));
 		// this.body.checkCollision.none = true;
 		this.body.setAllowGravity(true);
 

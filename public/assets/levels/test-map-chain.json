@@ -73,7 +73,7 @@
                  "id":112,
                  "name":"",
                  "rotation":0,
-                 "type":"",
+                 "type":"pogo",
                  "visible":true,
                  "width":16,
                  "x":320,
@@ -85,11 +85,11 @@
                  "id":113,
                  "name":"",
                  "rotation":0,
-                 "type":"",
+                 "type":"pogo",
                  "visible":true,
                  "width":16,
                  "x":432,
-                 "y":384
+                 "y":352
                 }, 
                 {
                  "gid":37,
@@ -97,7 +97,7 @@
                  "id":114,
                  "name":"",
                  "rotation":0,
-                 "type":"",
+                 "type":"pogo-parasol",
                  "visible":true,
                  "width":16,
                  "x":736,
@@ -112,7 +112,7 @@
                  "type":"",
                  "visible":true,
                  "width":16,
-                 "x":800,
+                 "x":816,
                  "y":384
                 }, 
                 {

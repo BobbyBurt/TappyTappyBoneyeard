@@ -15,17 +15,19 @@ This build focuses on finalizing gameplay concepts and interactions.
 - Bomb's parent enemy is no longer immune to bomb.
 - Bomb prop appears / disappears to indicate when enemy is ready to drop.
 - Punching an enemy that's holding a bomb will cause the bomb to go flying.
+- Falling enemies can knock each other out.
 
 ### Added
 
 - Added background layer to tilemaps. Each existing level has been decorated to demonstrate.
 - More test maps.
-- Falling enemies can knock each other out.
+- Pogo enemy type
 
 ### Removed
 ### Fixed
 
 - Bombs don't appear from falling enemies. (refix)
+- Enemies don't sometimes float downward.
 
 ## Version 8 - 2023-02-17
 
