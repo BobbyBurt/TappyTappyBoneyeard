@@ -70,32 +70,32 @@
                 {
                  "gid":37,
                  "height":16,
-                 "id":112,
-                 "name":"",
-                 "rotation":0,
-                 "type":"pogo",
-                 "visible":true,
-                 "width":16,
-                 "x":320,
-                 "y":384
-                }, 
-                {
-                 "gid":37,
-                 "height":16,
                  "id":113,
                  "name":"",
+                 "properties":[
+                        {
+                         "name":"mine",
+                         "type":"bool",
+                         "value":true
+                        }],
                  "rotation":0,
-                 "type":"pogo",
+                 "type":"",
                  "visible":true,
                  "width":16,
                  "x":432,
-                 "y":352
+                 "y":384
                 }, 
                 {
                  "gid":37,
                  "height":16,
                  "id":114,
                  "name":"",
+                 "properties":[
+                        {
+                         "name":"mine",
+                         "type":"bool",
+                         "value":true
+                        }],
                  "rotation":0,
                  "type":"pogo-parasol",
                  "visible":true,
@@ -108,12 +108,18 @@
                  "height":16,
                  "id":115,
                  "name":"",
+                 "properties":[
+                        {
+                         "name":"mine",
+                         "type":"bool",
+                         "value":true
+                        }],
                  "rotation":0,
-                 "type":"",
+                 "type":"balloon-parasol",
                  "visible":true,
                  "width":16,
-                 "x":816,
-                 "y":384
+                 "x":832,
+                 "y":304
                 }, 
                 {
                  "gid":37,
@@ -138,6 +144,24 @@
                  "width":16,
                  "x":1216,
                  "y":384
+                }, 
+                {
+                 "gid":40,
+                 "height":16,
+                 "id":118,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"alwaysFire",
+                         "type":"bool",
+                         "value":true
+                        }],
+                 "rotation":0,
+                 "type":"pogo",
+                 "visible":true,
+                 "width":16,
+                 "x":336,
+                 "y":384
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -146,7 +170,7 @@
          "y":0
         }],
  "nextlayerid":4,
- "nextobjectid":118,
+ "nextobjectid":119,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.7.1",

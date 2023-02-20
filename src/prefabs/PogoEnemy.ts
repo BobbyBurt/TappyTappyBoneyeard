@@ -8,8 +8,8 @@ import EnemyPrefab from "./EnemyPrefab";
 
 export default class PogoEnemy extends EnemyPrefab {
 
-	constructor(scene: Phaser.Scene, x?: number, y?: number, gunDirection?: GunDirection, parasol?: boolean, texture?: string, frame?: number | string) {
-		super(scene, x ?? 0, y ?? 0, gunDirection, parasol, texture || "soldiermid", frame);
+	constructor(scene: Phaser.Scene, x?: number, y?: number, gunDirection?: GunDirection, parasol?: boolean, mine?: boolean, alwaysFire?: boolean, texture?: string, frame?: number | string) {
+		super(scene, x ?? 0, y ?? 0, gunDirection, parasol, mine, alwaysFire, texture || "soldiermid", frame);
 
 		/* START-USER-CTR-CODE */
 
@@ -46,9 +46,6 @@ export default class PogoEnemy extends EnemyPrefab {
 			[
 				{ key: 'soldierpogosquash' },
 				{ key: 'soldierpogomid' },
-				{ key: 'soldierpogostretch' },
-				{ key: 'soldierpogostretch' },
-				{ key: 'soldierpogostretch' },
 				{ key: 'soldierpogostretch' },
 				{ key: 'soldierpogostretch' },
 				{ key: 'soldierpogomid' },

@@ -12,7 +12,7 @@ export default interface EnemyPrefab {
 
 export default class EnemyPrefab extends Phaser.GameObjects.Sprite {
 
-	constructor(scene: Phaser.Scene, x?: number, y?: number, gunDirection?:GunDirection, parasol?: boolean, texture?: string, frame?: number | string) {
+	constructor(scene: Phaser.Scene, x?: number, y?: number, gunDirection?:GunDirection, parasol?: boolean, mine?: boolean, alwaysFire?: boolean, texture?: string, frame?: number | string) {
 		super(scene, x ?? 0, y ?? 0, texture || "soldiermid", frame);
 
 		scene.physics.add.existing(this, false);
@@ -45,6 +45,14 @@ export default class EnemyPrefab extends Phaser.GameObjects.Sprite {
 		{
 			this._hasParasol = true;
 		}
+		if (mine)
+		{
+			this.isMine = true;
+		}
+		if (alwaysFire)
+		{
+			this.alwaysFire = true;
+		}
 
 		/* END-USER-CTR-CODE */
 	}
@@ -56,11 +64,16 @@ export default class EnemyPrefab extends Phaser.GameObjects.Sprite {
 	/** is there an active timer event for the spray fire? */
 	public gunSprayTimer!: Phaser.Time.TimerEvent;
 	public gunCoolDownTimer!: Phaser.Time.TimerEvent;
+	public alwaysFire: boolean;
 
 	private _parasol!: Phaser.GameObjects.Image;
 	protected get parasol() { return this._parasol }
 	private _hasParasol = false;
 	public get hasParasol() { return this._hasParasol }
+
+	/** If true, enemy explodes on player contact even in attack states. */
+	public isMine: boolean = false;
+	private grenadeProp: Phaser.GameObjects.Image;
 
 	public bombCooldownTimer!: Phaser.Time.TimerEvent;
 	/** 
@@ -97,6 +110,17 @@ export default class EnemyPrefab extends Phaser.GameObjects.Sprite {
 		this.gunSprayTimer = this.scene.time.addEvent({delay: 1});
 		this.gunCoolDownTimer = this.scene.time.addEvent({delay: 1});
 
+		if (this.alwaysFire)
+		{
+			// const scene = this.scene as Level;
+			// scene.setGunFire(this, true);
+			this.scene.time.addEvent({ delay: 2, callback: () =>
+			{
+				const scene = this.scene as Level;
+				scene.setGunFire(this, true);
+			}});
+		}
+
 		if (this.gunDirection)
 		{
 			this.createGun();
@@ -105,6 +129,11 @@ export default class EnemyPrefab extends Phaser.GameObjects.Sprite {
 		if (this._hasParasol)
 		{
 			this.createParasol();
+		}
+
+		if (this.isMine)
+		{
+			this.createGrenade();
 		}
 	}
 
@@ -129,6 +158,16 @@ export default class EnemyPrefab extends Phaser.GameObjects.Sprite {
 		if (this.bombProp && this.spin === 0)
 		{
 			this.bombProp.setPosition(this.x, this.y + 10);
+		}
+
+		if (this.isMine)
+		{
+			this.grenadeProp.rotation += this.spin * 2;
+
+			if (!this.isFalling())
+			{
+				this.grenadeProp.setPosition(this.x + 5, this.y + 5);
+			}
 		}
 		
 	}
@@ -191,6 +230,16 @@ export default class EnemyPrefab extends Phaser.GameObjects.Sprite {
 		_parasolBody.setAllowGravity(false);
 	}
 
+	createGrenade()
+	{
+		this.grenadeProp = this.scene.add.image(this.x + 5, this.y + 5, 'grenade');
+		this._scene.UICam.ignore(this.grenadeProp);
+
+		this.scene.physics.add.existing(this.grenadeProp, false);
+		const grenadeBody = this.grenadeProp.body as Phaser.Physics.Arcade.Body;
+		grenadeBody.setAllowGravity(false);
+	}
+
 	createBombProp()
 	{
 		this.bombProp = this.scene.add.image(this.x, this.y + 10, 'bomb');
@@ -246,6 +295,12 @@ export default class EnemyPrefab extends Phaser.GameObjects.Sprite {
 				}
 				scene.setBomb(this.x, this.y, this, bombVelocity, true);
 			}
+		}
+		if(this.isMine)
+		{
+			const grenadeBody = this.grenadeProp.body as Phaser.Physics.Arcade.Body;
+			grenadeBody.setAllowGravity(true);
+			grenadeBody.setVelocity(directionX * 1.5 , -100)
 		}
 	}
 

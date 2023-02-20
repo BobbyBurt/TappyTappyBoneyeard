@@ -160,6 +160,24 @@
                  "width":0,
                  "x":576,
                  "y":384
+                }, 
+                {
+                 "gid":40,
+                 "height":16,
+                 "id":94,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"alwaysFire",
+                         "type":"bool",
+                         "value":true
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":16,
+                 "x":1088,
+                 "y":336
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -168,7 +186,7 @@
          "y":0
         }],
  "nextlayerid":4,
- "nextobjectid":94,
+ "nextobjectid":95,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.7.1",

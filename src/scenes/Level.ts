@@ -843,6 +843,12 @@ export default class Level extends Phaser.Scene {
 				}
 			}
 
+			if (_enemy.isMine)
+			{
+				this.explode(_enemy.x, _enemy.y);
+				return;
+			}
+
 			_enemy.hit(this.player.body.velocity.x, this.player.body.velocity.y);
 
 			if (_enemy.bombCooldownTimer != undefined)
@@ -858,6 +864,10 @@ export default class Level extends Phaser.Scene {
 
 			this.updateEnemiesUI();
 			this.animatedEnemiesUI();
+		}
+		else if (_enemy.isMine)
+		{
+			this.explode(_enemy.x, _enemy.y);
 		}
 		else
 		{
@@ -1069,6 +1079,31 @@ export default class Level extends Phaser.Scene {
 		}});
 	}
 
+
+	/**
+	 * explosion setup. Same as bombExplode() but without the bomb stuff.
+	 * @param x 
+	 * @param y 
+	 */
+	explode(x: number, y: number)
+	{	
+		let newExplosion = this.explosionGroup.get(x, y);
+		newExplosion.appear();
+		this.mainLayer.add(newExplosion);
+		this.UICam.ignore(newExplosion);
+			// TODO: this stuff should only be called if the object is being initialized
+
+		this.explosionCheck(x, y);
+
+	// explosion visual / audio
+		if (this.cameras.main.worldView.contains(x, y))
+		{
+			this.cameras.main.shake(200, 0.0005);
+		}
+
+		this.sound.play('explosion');
+	}
+
 	/** detects physics bodies within explosion range and impacts them appropriately */
 	explosionCheck(x: number, y: number)
 	{
@@ -1087,6 +1122,7 @@ export default class Level extends Phaser.Scene {
 			}
 		});
 	}
+		// TODO: make
 
 	/** 
 	 * DEPRECATED
@@ -1182,12 +1218,20 @@ export default class Level extends Phaser.Scene {
 	 * Can be called anytime, as nothing will happen if the cooldown timer hasn't completed.
 	 * 
 	 * @param enemy to fire from
+	 * @param constant 
 	 */
-	setGunFire(enemy: EnemyPrefab)
+	setGunFire(enemy: EnemyPrefab, constant?: boolean)
 	{
+		const bullets = (constant? -1 : 10);
+
+		if (constant)
+		{
+			console.log('hello??')
+		}
+		
 		if (enemy.gunSprayTimer.getProgress() == 1 && enemy.gunCoolDownTimer.getProgress() == 1)
 		{
-			enemy.gunSprayTimer = this.time.addEvent({ delay: 100, repeat: 10, callback: () =>
+			enemy.gunSprayTimer = this.time.addEvent({ delay: 100, repeat: bullets, callback: () =>
 			{
 				if (!enemy.isFalling())
 				{
@@ -1458,24 +1502,45 @@ export default class Level extends Phaser.Scene {
 				}
 			}
 
+			let mine = false;
+			try
+			{
+				if (object.properties[0].name === 'mine' || object.properties[1].name === 'mine')
+				{
+					mine = true;
+				}
+			}
+			catch (error) {}
+
+			let alwaysFire = false;
+			try
+			{
+				if (object.properties[0].name === 'alwaysFire' 
+					|| object.properties[1].name === 'alwaysFire')
+				{
+					alwaysFire = true;
+				}
+			}
+			catch (error) {}
+
 		// enemy type
 			if (object.type == 'balloon' || object.type == 'balloon-parasol')
 			{
 				_enemy = new BalloonEnemy
 					(this, object.x! + 8, object.y! - 8, _gunDirection, 
-						(object.type == 'balloon-parasol'));
+						(object.type == 'balloon-parasol'), mine, alwaysFire);
 			}
 			else if (object.type == 'pogo' || object.type == 'pogo-parasol')
 			{
 				_enemy = new PogoEnemy
 					(this, object.x! + 8, object.y! - 8, _gunDirection, 
-						(object.type == 'pogo-parasol'));
+						(object.type == 'pogo-parasol'), mine, alwaysFire);
 			}
 			else
 			{
 				_enemy = new GroundEnemy
 					(this, object.x! + 8, object.y! - 8, _gunDirection, 
-						(object.type == 'parasol'));
+						(object.type == 'parasol'), mine, alwaysFire);
 			}
 
 			if (_gunDirection !== undefined)

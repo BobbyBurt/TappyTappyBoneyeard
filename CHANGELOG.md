@@ -1,12 +1,16 @@
 # Changelog
 
-# Version 10 Alpha
+# Version 11 Alpha
 
-This build focuses on finalizing player control, movement and collision. Some levels will be created for demonstration
+This build focuses on demonstrating the primary gameplay loop
+
+# Version 10
+
+This build focuses on finalizing player control, movement and collision.
 
 # Version 9
 
-This build focuses on finalizing gameplay concepts and interactions.
+This build focuses on finalizing gameplay by adding elements and improving interactions.
 
 ### Changed
 
@@ -20,8 +24,10 @@ This build focuses on finalizing gameplay concepts and interactions.
 ### Added
 
 - Added background layer to tilemaps. Each existing level has been decorated to demonstrate.
-- More test maps.
-- Pogo enemy type
+- Created test maps.
+- Pogo enemy type.
+- Grenade enemy weapon - Contact with player triggers explosion even if player is in an attack state.
+- Enemies can be set to constantly fire.
 
 ### Removed
 ### Fixed

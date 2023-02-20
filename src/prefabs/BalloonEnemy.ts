@@ -9,8 +9,8 @@ import Level from "~/scenes/Level";
 
 export default class BalloonEnemy extends EnemyPrefab {
 
-	constructor(scene: Phaser.Scene, x?: number, y?: number, gunDirection?: GunDirection, parasol?: boolean, texture?: string, frame?: number | string) {
-		super(scene, x ?? 0, y ?? 0, gunDirection, parasol, texture || "soldiermid", frame);
+	constructor(scene: Phaser.Scene, x?: number, y?: number, gunDirection?: GunDirection, parasol?:  boolean, mine?: boolean, alwaysFire?: boolean, texture?: string, frame?: number | string) {
+		super(scene, x ?? 0, y ?? 0, gunDirection, parasol, mine, alwaysFire, texture || "soldiermid", frame);
 
 		/* START-USER-CTR-CODE */
 
