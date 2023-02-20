@@ -17,6 +17,8 @@ export default class EnemyPrefab extends Phaser.GameObjects.Sprite {
 
 		scene.physics.add.existing(this, false);
 		this.body.setSize(15, 20, false);
+		// this.body.setGravity(0, 0);
+		// this.body.setBounce(0, 1);
 
 		/* START-USER-CTR-CODE */
 
@@ -86,8 +88,9 @@ export default class EnemyPrefab extends Phaser.GameObjects.Sprite {
 	{	
 		this.setScale(1);
 		this.y -= 2;
-			// tilemap offset correction
-			// TODO: this sometimes doesn't work? enemy floats above ground
+		this.body.setAllowGravity(false);
+		this.body.setVelocityY(0);
+			// For some reason enemies sometimes float down if this isn't set.
 
 	// create timers and have their progress set to complete
 		this.gunSprayTimer = this.scene.time.addEvent({delay: 1});
@@ -207,7 +210,8 @@ export default class EnemyPrefab extends Phaser.GameObjects.Sprite {
 		this.body.allowGravity = true;
 			// since floating enemies have gravity disabled
 		this.body.setVelocity(directionX, -150);
-		this.body.checkCollision.none = true;
+		// this.body.checkCollision.none = true;
+		this.body.setAllowGravity(true);
 
 		this.stop();
 		this.setTexture('soldierfalling');
@@ -234,7 +238,7 @@ export default class EnemyPrefab extends Phaser.GameObjects.Sprite {
 				let scene = this.scene as Level
 				const bombVelocity = new Phaser.Math.Vector2
 					(scene.player.body.velocity.x * 1.3, (scene.player.body.velocity.y * 1.5) - 150);
-				if (bombVelocity.y < 200)
+				if (bombVelocity.y < -200)
 					// player is diving
 				{
 					bombVelocity.y = 200;

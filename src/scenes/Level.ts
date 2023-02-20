@@ -207,6 +207,7 @@ export default class Level extends Phaser.Scene {
 		// scoreText
 		const scoreText = this.add.bitmapText(-39.30818271636963, 66.3349609375, "nokia", "12359135");
 		scoreText.setOrigin(0.5, 0);
+		scoreText.visible = false;
 		scoreText.text = "12359135";
 		scoreText.fontSize = -16;
 		scoreText.align = 1;
@@ -505,7 +506,10 @@ export default class Level extends Phaser.Scene {
 		this.physics.add.collider(this.player, this.tileLayer, this.playerTilemapCollide, undefined, this);
 
 		// soldierTilemapCollide
-		this.physics.add.collider(this.enemyList, this.tileLayer);
+		// this.physics.add.collider(this.enemyList, this.tileLayer);
+
+		// soldierSoldierCollide
+		this.physics.add.collider(this.enemyList, this.enemyList, this.enemyEnemyCollide, undefined, this);
 
 		// playerEnemyOverlap
 		this.physics.add.overlap
@@ -544,6 +548,9 @@ export default class Level extends Phaser.Scene {
 		startPoint.y -= 8;
 		this.player.setPosition(startPoint.x, startPoint.y);
 		this.data.set('startPoint', startPoint);
+
+		this.cameras.main.setScroll(this.player.x, this.player.y);
+			// Apparently this doesn't help
 
 		const endEgg = TilemapUtil.getObjectPosition('endEgg', this.tileMap);
 		endEgg.x += 6;
@@ -816,10 +823,16 @@ export default class Level extends Phaser.Scene {
 	{
 		let _enemy = enemy as EnemyPrefab;
 
+		if (_enemy.isFalling())
+		{
+			return;
+		}
+
 		if (this.player.stateController.currentState.name == 'punch' 
 			|| this.player.stateController.currentState.name == 'dive'
 			|| this.player.stateController.currentState.name == 'uppercut')
 		{
+			
 			if (this.player.stateController.currentState.name == 'dive')
 			{
 				this.player.setVelocityY(-this.player.jumpForce);
@@ -848,6 +861,24 @@ export default class Level extends Phaser.Scene {
 		else
 		{
 			this.resetLevel();
+		}
+	}
+
+	enemyEnemyCollide(_enemy1: any, _enemy2: any)
+	{
+		let enemy1 = _enemy1 as EnemyPrefab;
+		let enemy2 = _enemy2 as EnemyPrefab;
+
+		if (!enemy1.isFalling())
+		{
+			enemy1.hit(enemy2.body.velocity.x, enemy2.body.velocity.y);
+			this.sound.play('enemy-death');
+		}
+
+		if (!enemy2.isFalling())
+		{
+			enemy2.hit(enemy1.body.velocity.x, enemy1.body.velocity.y);
+			this.sound.play('enemy-death');
 		}
 	}
 
@@ -1563,7 +1594,7 @@ export default class Level extends Phaser.Scene {
 	createCameras()
 	{
 		CameraUtil.configureMainCamera(this);
-		this.cameras.main.setScroll(this.player.x, this.player.y);
+		// this.cameras.main.setScroll(this.player.x, this.player.y);
 		this.cameras.main.startFollow(this.player, true, .1, .1);
 		this.cameras.main.setBounds(0, 0, this.tileLayer.width, this.tileLayer.height);
 		this.cameras.main.ignore(this.uILayer.getChildren());

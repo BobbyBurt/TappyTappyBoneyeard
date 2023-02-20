@@ -2,7 +2,7 @@
 
 # Version 10 Alpha
 
-This build focuses on finalizing player control, movement and collision.
+This build focuses on finalizing player control, movement and collision. Some levels will be created for demonstration
 
 # Version 9
 
@@ -19,11 +19,13 @@ This build focuses on finalizing gameplay concepts and interactions.
 ### Added
 
 - Added background layer to tilemaps. Each existing level has been decorated to demonstrate.
+- More test maps.
+- Falling enemies can knock each other out.
 
 ### Removed
 ### Fixed
 
-- Bombs don't appear from falling enemies
+- Bombs don't appear from falling enemies. (refix)
 
 ## Version 8 - 2023-02-17
 

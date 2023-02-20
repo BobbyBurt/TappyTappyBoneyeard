@@ -340,6 +340,11 @@
                 "key": "test-map-bomb-vision"
             },
             {
+                "url": "assets/levels/test-map-chain.json",
+                "type": "tilemapTiledJSON",
+                "key": "test-map-chain"
+            },
+            {
                 "url": "assets/tileset.png",
                 "type": "image",
                 "key": "tileset"
