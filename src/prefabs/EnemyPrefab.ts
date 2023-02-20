@@ -229,7 +229,18 @@ export default class EnemyPrefab extends Phaser.GameObjects.Sprite {
 		}
 		if (this.bombProp)
 		{
-			this.bombProp.setVisible(false);
+			if (this.bombProp.visible)
+			{
+				let scene = this.scene as Level
+				const bombVelocity = new Phaser.Math.Vector2
+					(scene.player.body.velocity.x * 1.3, (scene.player.body.velocity.y * 1.5) - 150);
+				if (bombVelocity.y < 200)
+					// player is diving
+				{
+					bombVelocity.y = 200;
+				}
+				scene.setBomb(this.x, this.y, this, bombVelocity, true);
+			}
 		}
 	}
 

@@ -7,6 +7,11 @@
                 "key": "balloon"
             },
             {
+                "url": "assets/tileset-bg.png",
+                "type": "image",
+                "key": "bg-tileset"
+            },
+            {
                 "url": [
                     "assets/sfx/bird drop.mp3"
                 ],
@@ -323,6 +328,16 @@
                 "url": "assets/levels/test-map-6.json",
                 "type": "tilemapTiledJSON",
                 "key": "test-map-6"
+            },
+            {
+                "url": "assets/levels/test-map-7.json",
+                "type": "tilemapTiledJSON",
+                "key": "test-map-7"
+            },
+            {
+                "url": "assets/levels/test-map-bomb-vision.json",
+                "type": "tilemapTiledJSON",
+                "key": "test-map-bomb-vision"
             },
             {
                 "url": "assets/tileset.png",

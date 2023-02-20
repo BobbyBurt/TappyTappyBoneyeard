@@ -1,4 +1,3 @@
-
 /* START OF COMPILED CODE */
 
 import Phaser from "phaser";
@@ -404,7 +403,7 @@ export default class Level extends Phaser.Scene {
 
 	private bGLayer!: Phaser.GameObjects.Layer;
 	public mainLayer!: Phaser.GameObjects.Layer;
-	private player!: playerPrefab;
+	public player!: playerPrefab;
 	public uILayer!: Phaser.GameObjects.Layer;
 	private buildText!: Phaser.GameObjects.BitmapText;
 	private debugText!: Phaser.GameObjects.BitmapText;
@@ -438,7 +437,7 @@ export default class Level extends Phaser.Scene {
 // tilemap
 	private tileMap: Phaser.Tilemaps.Tilemap;
 	private tileLayer: Phaser.Tilemaps.TilemapLayer;
-	private hazardTileLayer: Phaser.Tilemaps.TilemapLayer;
+	private bgTileLayer: Phaser.Tilemaps.TilemapLayer;
 	/** player is reset, objects are removed if below this Y coordinate. Set based on tilemap object */
 	private bottomBoundary: number;
 
@@ -478,18 +477,23 @@ export default class Level extends Phaser.Scene {
 
 		this.tileMap = this.add.tilemap(this.registry.get('current-level'));
 		this.tileMap.addTilesetImage("tilleset", "tileset");
-		// this.tileMap.addTilesetImage("hazard-tileset", "tileset-hazards");
+		this.tileMap.addTilesetImage("bg-tileset", "bg-tileset");
+
+		this.bgTileLayer = this.tileMap.createLayer('Tile Layer 2', ['bg-tileset'], 0, 0);
+		if (this.bgTileLayer)
+		{
+			this.bgTileLayer.depth = -10;
+			this.mainLayer.add(this.bgTileLayer);
+		}
 
 		this.tileLayer = this.tileMap.createLayer("Tile Layer 1", ["tilleset"], 0, 0);
 			// why is it misspelled 'tillset'?
 		this.mainLayer.add(this.tileLayer);
 
-		// this.hazardTileLayer = this.tileMap.createLayer('Hazard Tile Layer', ['hazard-tileset'], 0, 0);
 		// this.mainLayer.add(this.hazardTileLayer);
 
 		this.collidesWithBombList.push(this.player);
 		this.collidesWithBombList.push(this.tileLayer);
-		// this.collidesWithBombList.push(this.hazardTileLayer);
 
 		this.tileLayer.setCollision([1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18,
 			19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36], true);
@@ -499,9 +503,6 @@ export default class Level extends Phaser.Scene {
 
 		// playerTilemapCollider
 		this.physics.add.collider(this.player, this.tileLayer, this.playerTilemapCollide, undefined, this);
-
-		// playerHazardTilemapCollider
-		// this.physics.add.collider(this.player, this.hazardTileLayer, this.playerHazardTilemapCollide, undefined, this);
 
 		// soldierTilemapCollide
 		this.physics.add.collider(this.enemyList, this.tileLayer);
@@ -556,8 +557,8 @@ export default class Level extends Phaser.Scene {
 			// TODO: define max
 		// this.physics.add.collider
 		// 	(this.bombGroup, this.collidesWithBombList, this.bombCollide, undefined, this);
-		this.physics.add.overlap(this.bombGroup, this.player, this.bombPlayerCollide, undefined, this);
-		this.physics.add.overlap(this.bombGroup, this.enemyList, this.bombEnemyCollide, undefined, this);
+		this.physics.add.overlap(this.bombGroup, this.player, this.bombPlayerOverlap, undefined, this);
+		this.physics.add.overlap(this.bombGroup, this.enemyList, this.bombEnemyOverlap, undefined, this);
 		this.physics.add.collider(this.bombGroup, this.tileLayer, this.bombTilemapCollide, undefined, this);
 
 	// bullets
@@ -684,13 +685,10 @@ export default class Level extends Phaser.Scene {
 			}
 			else if (object.parentEnemy.bombProp)
 			{
-				if (object.parentEnemy.bombCooldownTimer.getProgress() == 1)
+				if (object.parentEnemy.bombCooldownTimer.getProgress() == 1 && !object.parentEnemy.isFalling())
 				{
 					this.setBomb(object.parentEnemy.x, object.parentEnemy.y, object.parentEnemy);
-					object.parentEnemy.bombCooldownTimer = this.time.addEvent({delay: 1000, callback: () =>
-					{
-						// We only need to check if this timer is done.
-					}});
+					object.parentEnemy.bombCooldownTimer.reset({});
 				}
 			}
 		}
@@ -714,7 +712,10 @@ export default class Level extends Phaser.Scene {
 				_member.enemy.bombCooldownTimer.destroy();
 				_member.enemy.bombCooldownTimer = this.time.addEvent({delay: 1000, callback: () =>
 				{
-					// We only need to check if this timer is done.
+					if (!_member.enemy.isFalling())
+					{
+						_member.enemy.bombProp.setVisible(true);
+					}
 				}});
 			}
 		});
@@ -850,10 +851,15 @@ export default class Level extends Phaser.Scene {
 		}
 	}
 
-	bombPlayerCollide(bomb: any, player: any)
+	bombPlayerOverlap(bomb: any, player: any)
 	{
 		let _bomb = bomb as BombPrefab;
 		let _player = bomb as playerPrefab;
+
+		if (_bomb.ignoreTimer.getProgress() < 1)
+		{
+			return;
+		}
 
 		if (this.player.stateController.currentState.name == 'punch' 
 		|| this.player.stateController.currentState.name == 'uppercut')
@@ -861,7 +867,7 @@ export default class Level extends Phaser.Scene {
 			this.setBombFuse(_bomb);
 			_bomb.setPosition(_bomb.x, _bomb.y -3);
 			_bomb.body.setVelocity(this.player.body.velocity.x * 1.3, (this.player.body.velocity.y * 1.5) - 150);
-			// _bomb.body.setVelocity(200, -200);
+			_bomb.punched = true;
 		}
 		else
 		{
@@ -870,16 +876,20 @@ export default class Level extends Phaser.Scene {
 		}
 	}
 
-	bombEnemyCollide(bomb: any, enemy: any)
+	bombEnemyOverlap(bomb: any, enemy: any)
 	{
 		let _bomb = bomb as BombPrefab;
 		let _enemy = enemy as EnemyPrefab;
 
-
-		if (_enemy == _bomb.enemy)
+		if (_bomb.ignoreTimer.getProgress() < 1)
 		{
 			return;
 		}
+
+		// if (_enemy == _bomb.enemy)
+		// {
+		// 	return;
+		// }
 
 		_bomb.fuseTimer.destroy();
 		this.bombExplode(bomb);
@@ -889,17 +899,11 @@ export default class Level extends Phaser.Scene {
 	{
 		let _bomb = bomb as BombPrefab;
 
-		// if (_bomb.body.touching.left || _bomb.body.touching.right || _bomb.body.touching.up)
-		// {
-		// 	this.bombExplode(_bomb);
-
-		// 	console.log('tilemap explode')
-
-		// 	return;
-		// }
-			/* yeah this don't work */
-
-		if (_bomb.fuseTimer.getProgress() == 1)
+		if (_bomb.punched)
+		{
+			this.bombExplode(_bomb);
+		}
+		else if (_bomb.fuseTimer.getProgress() == 1)
 		{
 			this.setBombFuse(_bomb);
 		}
@@ -940,12 +944,24 @@ export default class Level extends Phaser.Scene {
 	}
 
 	/** activates bomb in bombGroup pool */
-	setBomb(x: number, y: number, enemy: EnemyPrefab)
+	setBomb(x: number, y: number, enemy: EnemyPrefab, velocity?: Phaser.Math.Vector2, punched?: boolean)
 	{
-		let newBomb = this.bombGroup.get(x, y);
+		let newBomb = this.bombGroup.get(x, y) as BombPrefab;
 		newBomb.appear(enemy);
 		this.mainLayer.add(newBomb);
 		this.UICam.ignore(newBomb);
+
+		if (velocity)
+		{
+			newBomb.body.setVelocity(velocity.x, velocity.y);
+		}
+
+		if (punched)
+		{
+			newBomb.punched = punched;
+		}
+
+		enemy.bombProp.setVisible(false);
 
 		if (this.bombGroup.countActive() == this.bombGroup.maxSize)
 		{
@@ -976,7 +992,10 @@ export default class Level extends Phaser.Scene {
 		bomb.fuseTimer.destroy();
 		bomb.fuseTimer = this.time.addEvent({ delay: 1000, callback: () =>
 		{
-			this.bombExplode(bomb);
+			if (bomb.active)
+			{
+				this.bombExplode(bomb);
+			}
 		}});
 	}
 
@@ -997,9 +1016,10 @@ export default class Level extends Phaser.Scene {
 	// explosion visual / audio
 		if (this.cameras.main.worldView.contains(bomb.x, bomb.y))
 		{
-			this.sound.play('explosion');
 			this.cameras.main.shake(200, 0.0005);
 		}
+
+		this.sound.play('explosion');
 
 		let bombEnemy = bomb.enemy;
 			/* For whatever reason, bomb.enemy changes from this line to callback, so this is used 
@@ -1008,9 +1028,12 @@ export default class Level extends Phaser.Scene {
 			*/
 
 		bomb.enemy.bombCooldownTimer.destroy();
-		bomb.enemy.bombCooldownTimer = this.time.addEvent({delay: 1000, callback: () =>
+		bomb.enemy.bombCooldownTimer = this.time.addEvent({delay: 700, callback: () =>
 		{
-			// We only need to check if this timer is done.
+			if (!bomb.enemy.isFalling())
+			{
+				bomb.enemy.bombProp.setVisible(true);
+			}
 		}});
 	}
 
@@ -1427,7 +1450,10 @@ export default class Level extends Phaser.Scene {
 				_enemy.createBombProp();
 				_enemy.bombCooldownTimer = this.time.addEvent({delay: 1000, callback: () =>
 				{
-					// We only need to check if this timer is done.
+					if (!_enemy.isFalling())
+					{
+						_enemy.bombProp.setVisible(true);
+					}
 				}});
 			}
 
@@ -1516,7 +1542,10 @@ export default class Level extends Phaser.Scene {
 			this.bombEnemyList.push(newEnemy);
 			newEnemy.bombCooldownTimer = this.time.addEvent({delay: 1000, callback: () =>
 			{
-					// We only need to check if this timer is done.
+				if (!newEnemy.isFalling())
+				{
+					newEnemy.bombProp.setVisible(true);
+				}
 			}});
 		}
 

@@ -36,17 +36,24 @@ export default class BombPrefab extends Phaser.GameObjects.Image {
 
 	public fuseTimer!: Phaser.Time.TimerEvent;
 	public fuseVisualTimer!: Phaser.Time.TimerEvent;
+	/** A short timer activated on appear. When incomplete, bomb will ignore collisions. */
+	public ignoreTimer: Phaser.Time.TimerEvent;
 
 	/** reference to enemy that dropped this bomb */
 	public enemy!: EnemyPrefab;
+
+	/** If true, tilemap collisions trigger explosion. */
+	public punched: boolean;
 
 	/** asdf */
 	appear(enemy: EnemyPrefab): void
 	{
 		this.enemy = enemy;
+		this.punched = false;
 
 		this.fuseTimer = this.scene.time.addEvent({delay: 1})
 		this.fuseVisualTimer = this.scene.time.addEvent({delay: 1})
+		this.ignoreTimer = this.scene.time.addEvent({delay: 400});
 
 		this.setTexture('bomb');
 		this.clearTint();

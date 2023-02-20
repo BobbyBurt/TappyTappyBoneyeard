@@ -158,7 +158,7 @@
                         "y"
                     ],
                     "label": "player",
-                    "scope": "CLASS",
+                    "scope": "PUBLIC",
                     "components": [],
                     "x": 383,
                     "y": 203,

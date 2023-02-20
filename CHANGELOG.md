@@ -9,9 +9,21 @@ This build focuses on finalizing player control, movement and collision.
 This build focuses on finalizing gameplay concepts and interactions.
 
 ### Changed
+
+- Bomb enemies' vision polygon has been adjusted.
+- After being punched, bomb explode on impact with tilemap.
+- Bomb's parent enemy is no longer immune to bomb.
+- Bomb prop appears / disappears to indicate when enemy is ready to drop.
+- Punching an enemy that's holding a bomb will cause the bomb to go flying.
+
 ### Added
+
+- Added background layer to tilemaps. Each existing level has been decorated to demonstrate.
+
 ### Removed
 ### Fixed
+
+- Bombs don't appear from falling enemies
 
 ## Version 8 - 2023-02-17
 
