@@ -111,45 +111,37 @@ export default class Level extends Phaser.Scene {
 		debugText3.dropShadowY = 100;
 		uILayer.add(debugText3);
 
-		// mobileButtonPunchRight
-		const mobileButtonPunchRight = this.add.rectangle(71, -163, 100, 100);
-		mobileButtonPunchRight.setOrigin(1, 1);
-		mobileButtonPunchRight.alpha = 0.5;
-		mobileButtonPunchRight.isFilled = true;
-		mobileButtonPunchRight.fillColor = 8168429;
-		uILayer.add(mobileButtonPunchRight);
+		// mobileButtonDive
+		const mobileButtonDive = this.add.rectangle(71, -163, 150, 120);
+		mobileButtonDive.setOrigin(1, 1);
+		mobileButtonDive.alpha = 0.5;
+		mobileButtonDive.isFilled = true;
+		mobileButtonDive.fillColor = 8168429;
+		uILayer.add(mobileButtonDive);
 
 		// mobileButtonJump
-		const mobileButtonJump = this.add.rectangle(101, -273, 100, 100);
+		const mobileButtonJump = this.add.rectangle(101, -273, 150, 120);
 		mobileButtonJump.setOrigin(1, 1);
 		mobileButtonJump.alpha = 0.5;
 		mobileButtonJump.isFilled = true;
 		mobileButtonJump.fillColor = 8318332;
 		uILayer.add(mobileButtonJump);
 
-		// mobileButtonDive
-		const mobileButtonDive = this.add.rectangle(-304, -244, 100, 100);
-		mobileButtonDive.setOrigin(0, 1);
-		mobileButtonDive.alpha = 0.5;
-		mobileButtonDive.isFilled = true;
-		mobileButtonDive.fillColor = 15591036;
-		uILayer.add(mobileButtonDive);
-
-		// mobileButtonPunchLeft
-		const mobileButtonPunchLeft = this.add.rectangle(-305, -142, 100, 100);
-		mobileButtonPunchLeft.setOrigin(0, 1);
-		mobileButtonPunchLeft.alpha = 0.5;
-		mobileButtonPunchLeft.isFilled = true;
-		mobileButtonPunchLeft.fillColor = 15563900;
-		uILayer.add(mobileButtonPunchLeft);
-
 		// mobileButtonUppercut
-		const mobileButtonUppercut = this.add.rectangle(-302, -346, 100, 100);
+		const mobileButtonUppercut = this.add.rectangle(-304, -244, 150, 120);
 		mobileButtonUppercut.setOrigin(0, 1);
 		mobileButtonUppercut.alpha = 0.5;
 		mobileButtonUppercut.isFilled = true;
-		mobileButtonUppercut.fillColor = 15579772;
+		mobileButtonUppercut.fillColor = 15591036;
 		uILayer.add(mobileButtonUppercut);
+
+		// mobileButtonPunch
+		const mobileButtonPunch = this.add.rectangle(-305, -142, 150, 120);
+		mobileButtonPunch.setOrigin(0, 1);
+		mobileButtonPunch.alpha = 0.5;
+		mobileButtonPunch.isFilled = true;
+		mobileButtonPunch.fillColor = 15563900;
+		uILayer.add(mobileButtonPunch);
 
 		// mobileButtonLevelSelect
 		const mobileButtonLevelSelect = this.add.rectangle(103.45460510253906, -587.1264343261719, 75, 75);
@@ -297,44 +289,36 @@ export default class Level extends Phaser.Scene {
 		debugText3Align.horizontalOffset = 5;
 		debugText3Align.verticalOffset = -55;
 
-		// mobileButtonPunchRight (components)
-		const mobileButtonPunchRightAlign = new Align(mobileButtonPunchRight);
-		mobileButtonPunchRightAlign.down = true;
-		mobileButtonPunchRightAlign.right = true;
-		new MobileDependent(mobileButtonPunchRight);
-		const mobileButtonPunchRightMobileButton = new MobileButton(mobileButtonPunchRight);
-		mobileButtonPunchRightMobileButton.input = "jump";
+		// mobileButtonDive (components)
+		const mobileButtonDiveAlign = new Align(mobileButtonDive);
+		mobileButtonDiveAlign.down = true;
+		mobileButtonDiveAlign.right = true;
+		new MobileDependent(mobileButtonDive);
+		const mobileButtonDiveMobileButton = new MobileButton(mobileButtonDive);
+		mobileButtonDiveMobileButton.input = "jump";
 
 		// mobileButtonJump (components)
 		const mobileButtonJumpAlign = new Align(mobileButtonJump);
 		mobileButtonJumpAlign.down = true;
 		mobileButtonJumpAlign.right = true;
-		mobileButtonJumpAlign.verticalOffset = -100;
+		mobileButtonJumpAlign.verticalOffset = -140;
 		new MobileDependent(mobileButtonJump);
 		new MobileButton(mobileButtonJump);
-
-		// mobileButtonDive (components)
-		const mobileButtonDiveAlign = new Align(mobileButtonDive);
-		mobileButtonDiveAlign.down = true;
-		mobileButtonDiveAlign.left = true;
-		mobileButtonDiveAlign.verticalOffset = -100;
-		new MobileDependent(mobileButtonDive);
-		new MobileButton(mobileButtonDive);
-
-		// mobileButtonPunchLeft (components)
-		const mobileButtonPunchLeftAlign = new Align(mobileButtonPunchLeft);
-		mobileButtonPunchLeftAlign.down = true;
-		mobileButtonPunchLeftAlign.left = true;
-		new MobileDependent(mobileButtonPunchLeft);
-		new MobileButton(mobileButtonPunchLeft);
 
 		// mobileButtonUppercut (components)
 		const mobileButtonUppercutAlign = new Align(mobileButtonUppercut);
 		mobileButtonUppercutAlign.down = true;
 		mobileButtonUppercutAlign.left = true;
-		mobileButtonUppercutAlign.verticalOffset = -200;
+		mobileButtonUppercutAlign.verticalOffset = -140;
 		new MobileDependent(mobileButtonUppercut);
 		new MobileButton(mobileButtonUppercut);
+
+		// mobileButtonPunch (components)
+		const mobileButtonPunchAlign = new Align(mobileButtonPunch);
+		mobileButtonPunchAlign.down = true;
+		mobileButtonPunchAlign.left = true;
+		new MobileDependent(mobileButtonPunch);
+		new MobileButton(mobileButtonPunch);
 
 		// mobileButtonLevelSelect (components)
 		const mobileButtonLevelSelectAlign = new Align(mobileButtonLevelSelect);
@@ -375,6 +359,7 @@ export default class Level extends Phaser.Scene {
 		scoreTextAlign.verticalOffset = -95;
 
 		this.bGLayer = bGLayer;
+		this.parallax_Backing = parallax_Backing;
 		this.mainLayer = mainLayer;
 		this.player = player;
 		this.uILayer = uILayer;
@@ -382,11 +367,10 @@ export default class Level extends Phaser.Scene {
 		this.debugText = debugText;
 		this.debugText2 = debugText2;
 		this.debugText3 = debugText3;
-		this.mobileButtonPunchRight = mobileButtonPunchRight;
-		this.mobileButtonJump = mobileButtonJump;
 		this.mobileButtonDive = mobileButtonDive;
-		this.mobileButtonPunchLeft = mobileButtonPunchLeft;
+		this.mobileButtonJump = mobileButtonJump;
 		this.mobileButtonUppercut = mobileButtonUppercut;
+		this.mobileButtonPunch = mobileButtonPunch;
 		this.mobileButtonLevelSelect = mobileButtonLevelSelect;
 		this.winText = winText;
 		this.enemiesText = enemiesText;
@@ -404,6 +388,7 @@ export default class Level extends Phaser.Scene {
 	}
 
 	private bGLayer!: Phaser.GameObjects.Layer;
+	private parallax_Backing!: Phaser.GameObjects.Image;
 	public mainLayer!: Phaser.GameObjects.Layer;
 	public player!: playerPrefab;
 	public uILayer!: Phaser.GameObjects.Layer;
@@ -411,11 +396,10 @@ export default class Level extends Phaser.Scene {
 	private debugText!: Phaser.GameObjects.BitmapText;
 	private debugText2!: Phaser.GameObjects.BitmapText;
 	private debugText3!: Phaser.GameObjects.BitmapText;
-	private mobileButtonPunchRight!: Phaser.GameObjects.Rectangle;
-	private mobileButtonJump!: Phaser.GameObjects.Rectangle;
 	private mobileButtonDive!: Phaser.GameObjects.Rectangle;
-	private mobileButtonPunchLeft!: Phaser.GameObjects.Rectangle;
+	private mobileButtonJump!: Phaser.GameObjects.Rectangle;
 	private mobileButtonUppercut!: Phaser.GameObjects.Rectangle;
+	private mobileButtonPunch!: Phaser.GameObjects.Rectangle;
 	private mobileButtonLevelSelect!: Phaser.GameObjects.Rectangle;
 	private winText!: Phaser.GameObjects.BitmapText;
 	private enemiesText!: Phaser.GameObjects.BitmapText;
@@ -503,6 +487,8 @@ export default class Level extends Phaser.Scene {
 		// this.hazardTileLayer.setCollision([1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18,
 		// 	19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36], true);
 
+		this.player.createFist();
+
 		// playerTilemapCollider
 		this.physics.add.collider(this.player, this.tileLayer, this.playerTilemapCollide, undefined, this);
 
@@ -515,6 +501,10 @@ export default class Level extends Phaser.Scene {
 		// playerEnemyOverlap
 		this.physics.add.overlap
 			(this.player, this.enemyList, this.playerEnemyOverlap, undefined, this);
+
+		// playerEnemyOverlap
+		this.physics.add.overlap
+			(this.player.fist, this.enemyList, this.fistEnemyOverlap, undefined, this);
 
 		// bulletTilemapCollide
 		this.physics.add.collider
@@ -566,6 +556,7 @@ export default class Level extends Phaser.Scene {
 		// this.physics.add.collider
 		// 	(this.bombGroup, this.collidesWithBombList, this.bombCollide, undefined, this);
 		this.physics.add.overlap(this.bombGroup, this.player, this.bombPlayerOverlap, undefined, this);
+		this.physics.add.overlap(this.bombGroup, this.player.fist, this.bombFistOverlap, undefined, this);
 		this.physics.add.overlap(this.bombGroup, this.enemyList, this.bombEnemyOverlap, undefined, this);
 		this.physics.add.collider(this.bombGroup, this.tileLayer, this.bombTilemapCollide, undefined, this);
 
@@ -621,13 +612,13 @@ export default class Level extends Phaser.Scene {
 		this.UICam.ignore(this.debugWallDetectGraphics);
 
 	// quick restart input
-		this.input.keyboard.on('keydown-R', () =>
+		this.input.keyboard.on('keydown-S', () =>
 		{
 			this.resetLevel();
 		});
 
 	// level select input
-		this.input.keyboard.on('keydown-E', () =>
+		this.input.keyboard.on('keydown-A', () =>
 		{
 			this.LoadLevelSelect();
 		});
@@ -668,19 +659,19 @@ export default class Level extends Phaser.Scene {
 
 	// player wall check
 		this.player.onWallLeft = 
-			(this.tileLayer.getTileAtWorldXY(this.player.body.x - 2, this.player.body.y + 9) != undefined 
-			|| this.tileLayer.getTileAtWorldXY(this.player.body.x - 2, this.player.body.y - 1) != undefined);
+			(this.tileLayer.getTileAtWorldXY(this.player.body.x - 1, this.player.body.y + 9) != undefined 
+			|| this.tileLayer.getTileAtWorldXY(this.player.body.x - 1, this.player.body.y) != undefined);
 		this.player.onWallRight = 
 			(this.tileLayer.getTileAtWorldXY(this.player.body.x + 12, this.player.body.y + 9) != undefined
-			|| this.tileLayer.getTileAtWorldXY(this.player.body.x + 12, this.player.body.y - 1) != undefined);
+			|| this.tileLayer.getTileAtWorldXY(this.player.body.x + 12, this.player.body.y) != undefined);
 				// TODO: decorative tiles without collision, as defined at tileLayer.setCollision, 
 				// should not count as wall.
 	// DEBUG: collision points visual
 		this.debugWallDetectGraphics.clear();
-		this.debugWallDetectGraphics.fillPoint(this.player.body.x - 2, this.player.body.y + 9);
-		this.debugWallDetectGraphics.fillPoint(this.player.body.x - 2, this.player.body.y - 1);
+		this.debugWallDetectGraphics.fillPoint(this.player.body.x - 1, this.player.body.y + 9);
+		this.debugWallDetectGraphics.fillPoint(this.player.body.x - 1, this.player.body.y);
 		this.debugWallDetectGraphics.fillPoint(this.player.body.x + 12, this.player.body.y + 9);
-		this.debugWallDetectGraphics.fillPoint(this.player.body.x + 12, this.player.body.y - 1);
+		this.debugWallDetectGraphics.fillPoint(this.player.body.x + 12, this.player.body.y);
 
 	// Vision rect check
 	this.visionPolys.forEach((object, index) =>
@@ -829,19 +820,20 @@ export default class Level extends Phaser.Scene {
 			return;
 		}
 
-		if (this.player.stateController.currentState.name == 'punch' 
-			|| this.player.stateController.currentState.name == 'dive'
-			|| this.player.stateController.currentState.name == 'uppercut')
+		if (this.player.stateController.currentState.name == 'dive')
 		{
+		// velocity of knockback
+		
+			this.player.setVelocityY(-this.player.jumpForce);
 			
-			if (this.player.stateController.currentState.name == 'dive')
+			if (_enemy.hasParasol)
 			{
-				this.player.setVelocityY(-this.player.jumpForce);
-				if (_enemy.hasParasol)
-				{
-					return;
-				}
+				return;
 			}
+			
+			let velocity = new Phaser.Math.Vector2((this.player.flipX ? 120 : -120), this.player.body.velocity.y)
+			_enemy.hit(velocity.x, velocity.y);
+			this.sound.play('enemy-death');
 
 			if (_enemy.isMine)
 			{
@@ -849,16 +841,10 @@ export default class Level extends Phaser.Scene {
 				return;
 			}
 
-			_enemy.hit(this.player.body.velocity.x, this.player.body.velocity.y);
-
 			if (_enemy.bombCooldownTimer != undefined)
 			{
 				_enemy.bombCooldownTimer.destroy();
 			}
-
-			this.player.punchCharged = true;
-
-			this.sound.play('enemy-death');
 
 			// this.enemiesDefeatedCheck();
 
@@ -873,6 +859,41 @@ export default class Level extends Phaser.Scene {
 		{
 			this.resetLevel();
 		}
+	}
+
+	fistEnemyOverlap(_fist: any, _enemy: any)
+	{
+		if (!this.player.fist.active)
+		{
+			return;
+		}
+
+		if (_enemy.isFalling())
+		{
+			return;
+		}
+
+		const enemy = _enemy as EnemyPrefab;
+
+		// velocity of knockback
+		let velocity = new Phaser.Math.Vector2((this.player.flipX ? 300 : -300), this.player.body.velocity.y)
+		if (this.player.stateController.currentState.name == 'uppercut')
+		{
+			velocity.x = 0;
+		}	
+		if (_enemy.isMine)
+		{
+			this.explode(_enemy.x, _enemy.y);
+			return;
+		}
+
+		_enemy.hit(velocity.x, velocity.y);
+		this.sound.play('enemy-death');
+
+		// this.enemiesDefeatedCheck();
+
+		this.updateEnemiesUI();
+		this.animatedEnemiesUI();
 	}
 
 	enemyEnemyCollide(_enemy1: any, _enemy2: any)
@@ -903,19 +924,23 @@ export default class Level extends Phaser.Scene {
 			return;
 		}
 
-		if (this.player.stateController.currentState.name == 'punch' 
-		|| this.player.stateController.currentState.name == 'uppercut')
+		_bomb.fuseTimer.destroy();
+		this.bombExplode(_bomb);
+	}
+
+	bombFistOverlap(_bomb: any, _fistBody: any)
+	{
+		const bomb = _bomb as BombPrefab;
+
+		if (!this.player.fist.active)
 		{
-			this.setBombFuse(_bomb);
-			_bomb.setPosition(_bomb.x, _bomb.y -3);
-			_bomb.body.setVelocity(this.player.body.velocity.x * 1.3, (this.player.body.velocity.y * 1.5) - 150);
-			_bomb.punched = true;
+			return;
 		}
-		else
-		{
-			_bomb.fuseTimer.destroy();
-			this.bombExplode(_bomb);
-		}
+
+		this.setBombFuse(_bomb);
+		_bomb.setPosition(_bomb.x, _bomb.y -3);
+		_bomb.body.setVelocity(this.player.body.velocity.x * 1.3, (this.player.body.velocity.y * 1.5) - 150);
+		_bomb.punched = true;
 	}
 
 	bombEnemyOverlap(bomb: any, enemy: any)
@@ -1228,7 +1253,7 @@ export default class Level extends Phaser.Scene {
 		{
 			console.log('hello??')
 		}
-		
+
 		if (enemy.gunSprayTimer.getProgress() == 1 && enemy.gunCoolDownTimer.getProgress() == 1)
 		{
 			enemy.gunSprayTimer = this.time.addEvent({ delay: 100, repeat: bullets, callback: () =>
@@ -1505,7 +1530,8 @@ export default class Level extends Phaser.Scene {
 			let mine = false;
 			try
 			{
-				if (object.properties[0].name === 'mine' || object.properties[1].name === 'mine')
+				if ((object.properties[0].name === 'mine' && object.properties[0].value === true) 
+					|| (object.properties[1].name === 'mine' && object.properties[1].value === true))
 				{
 					mine = true;
 				}
@@ -1694,18 +1720,18 @@ export default class Level extends Phaser.Scene {
 		});
 
 	// punch
-		this.mobileButtonPunchLeft.setInteractive();
-		this.mobileButtonPunchLeft.on('pointerdown', () =>
+		this.mobileButtonPunch.setInteractive();
+		this.mobileButtonPunch.on('pointerdown', () =>
 		{
-			this.player.punchLeftMobileButton = true;
+			this.player.punchMobileButton = true;
 		});
-		this.mobileButtonPunchLeft.on('pointerup', () =>
+		this.mobileButtonPunch.on('pointerup', () =>
 		{
-			this.player.punchLeftMobileButton = false;
+			this.player.punchMobileButton = false;
 		});
-		this.mobileButtonPunchLeft.on('pointerout', () =>
+		this.mobileButtonPunch.on('pointerout', () =>
 		{
-			this.player.punchLeftMobileButton = false;
+			this.player.punchMobileButton = false;
 		});
 
 	// uppercut
@@ -1721,21 +1747,6 @@ export default class Level extends Phaser.Scene {
 		this.mobileButtonUppercut.on('pointerout', () =>
 		{
 			this.player.uppercutMobileButton = false;
-		});
-
-	// egg
-		this.mobileButtonPunchRight.setInteractive();
-		this.mobileButtonPunchRight.on('pointerdown', () =>
-		{
-			this.player.punchRightMobileButton = true;
-		});
-		this.mobileButtonPunchRight.on('pointerup', () =>
-		{
-			this.player.punchRightMobileButton = false;
-		});
-		this.mobileButtonPunchRight.on('pointerout', () =>
-		{
-			this.player.punchRightMobileButton = false;
 		});
 
 	// dive

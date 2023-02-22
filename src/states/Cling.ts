@@ -18,6 +18,8 @@ export default class Cling implements State {
 	enter()
 	{
 		this.player.playAnimation('cling');
+
+		// this.player.x = 
 	
 	// update sprite flip
 		if (this.player.onWallRight)
@@ -36,15 +38,14 @@ export default class Cling implements State {
 		{
 			this.wallJump();
 		}
-		else if (this.player.punchLeftInput == 'just-down' && this.player.punchCharged)
+		else if (this.player.punchInput == 'just-down' && this.player.punchCharged)
 		{
 			// this.player.flipX = false;
 			this.stateController.setState('punch');
 		}
-		else if (this.player.punchRightInput == 'just-down' && this.player.punchCharged)
+		else if (this.player.uppercutInput == 'just-down' && this.player.punchCharged)
 		{
-			// this.player.flipX = true;
-			this.stateController.setState('punch');
+			this.stateController.setState('uppercut');
 		}
 
 		if (this.player.onWallFacing(false))

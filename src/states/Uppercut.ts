@@ -21,8 +21,10 @@ export default class Uppercut implements State {
 	
 	enter()
 	{
-		this.player.playAnimation('punch');
-		this.player.setRotation(this.player.flipX? -1.5 : 1.5);
+		this.player.playAnimation('uppercut');
+		// this.player.setRotation(this.player.flipX? -1.5 : 1.5);
+
+		this.player.setFist(true, true);
 
 		this.player.setPosition(this.player.x, this.player.y - 5);
 
@@ -36,8 +38,9 @@ export default class Uppercut implements State {
 		{	
 			this.player.setVelocity(this.priorXVelocity, -200);
 			
-			this.player.setRotation(0);
+			// this.player.setRotation(0);
 			this.player.stateController.setState('airborne');
+			this.player.setFist(false, true);
 		}});
 	
 		this.player.scene.time.addEvent(this.timer);

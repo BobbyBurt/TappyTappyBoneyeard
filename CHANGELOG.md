@@ -2,7 +2,7 @@
 
 # Version 11 Alpha
 
-This build focuses on demonstrating the primary gameplay loop
+This build focuses on demonstrating the primary gameplay loop.
 
 # Version 10
 
@@ -34,6 +34,10 @@ This build focuses on finalizing gameplay by adding elements and improving inter
 
 - Bombs don't appear from falling enemies. (refix)
 - Enemies don't sometimes float downward.
+- Enemy knockback is now consistent.
+- Level select now shows correct name of initially selected level.
+- Hitting a ceiling while facing right no longer flips player and sets either state to cling for a frame.
+- Player physics body no longer offsets based on animation sprite size, fixing several collision issues.
 
 ## Version 8 - 2023-02-17
 

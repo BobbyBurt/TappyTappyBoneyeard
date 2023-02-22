@@ -2,6 +2,16 @@
     "section1": {
         "files": [
             {
+                "url": "assets/levels/3-direction-cover.json",
+                "type": "tilemapTiledJSON",
+                "key": "3-direction-cover"
+            },
+            {
+                "url": "assets/levels/airborne.json",
+                "type": "tilemapTiledJSON",
+                "key": "airborne"
+            },
+            {
                 "url": "assets/balloon.png",
                 "type": "image",
                 "key": "balloon"
@@ -55,6 +65,11 @@
                 "key": "bird1egg"
             },
             {
+                "url": "assets/bird1fist.png",
+                "type": "image",
+                "key": "bird2fist"
+            },
+            {
                 "url": "assets/bird1mid.png",
                 "type": "image",
                 "key": "bird1mid"
@@ -85,6 +100,11 @@
                 "key": "bird3dive"
             },
             {
+                "url": "assets/bird3fist.png",
+                "type": "image",
+                "key": "bird1fist"
+            },
+            {
                 "url": "assets/bird3punch.png",
                 "type": "image",
                 "key": "bird3punch"
@@ -98,6 +118,11 @@
                 "url": "assets/bird4dive.png",
                 "type": "image",
                 "key": "bird4dive"
+            },
+            {
+                "url": "assets/bird4fist.png",
+                "type": "image",
+                "key": "bird0fist"
             },
             {
                 "url": "assets/bird4punch.png",
@@ -123,6 +148,11 @@
                 "url": "assets/levels/charge.json",
                 "type": "tilemapTiledJSON",
                 "key": "charge"
+            },
+            {
+                "url": "assets/levels/dive.json",
+                "type": "tilemapTiledJSON",
+                "key": "dive"
             },
             {
                 "url": [
@@ -168,6 +198,11 @@
             {
                 "url": "assets/grenade.png",
                 "type": "image",
+                "key": "grenade"
+            },
+            {
+                "url": "assets/levels/grenade.json",
+                "type": "tilemapTiledJSON",
                 "key": "grenade"
             },
             {
@@ -249,8 +284,18 @@
                 "key": "parasol"
             },
             {
+                "url": "assets/levels/parasol.json",
+                "type": "tilemapTiledJSON",
+                "key": "parasol"
+            },
+            {
                 "url": "assets/pogo.png",
                 "type": "image",
+                "key": "pogo"
+            },
+            {
+                "url": "assets/levels/pogo.json",
+                "type": "tilemapTiledJSON",
                 "key": "pogo"
             },
             {
@@ -368,6 +413,11 @@
                 "url": "assets/tileset-hazards.png",
                 "type": "image",
                 "key": "tileset-hazards"
+            },
+            {
+                "url": "assets/levels/uppercut.json",
+                "type": "tilemapTiledJSON",
+                "key": "uppercut"
             },
             {
                 "url": [

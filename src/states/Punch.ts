@@ -22,11 +22,13 @@ export default class Punch implements State {
 		this.player.playAnimation('punch');
 		this.player.scene.sound.play('punch-swing')
 
-		this.player.setPosition(this.player.x + (this.player.flipX ? 5 : -5 ), this.player.y);
+		// this.player.setPosition(this.player.x + (this.player.flipX ? 5 : -5 ), this.player.y);
+
+		this.player.setFist(true, false);
 
 		this.player.punchCharged = false;
 		
-		this.timer = new Phaser.Time.TimerEvent({ delay: 150, loop: false, callback: () =>
+		this.timer = new Phaser.Time.TimerEvent({ delay: 170, loop: false, callback: () =>
 		{	
 			this.player.body.setVelocity
 				((this.player.flipX? this.player.moveSpeed : -this.player.moveSpeed), 0);
@@ -35,10 +37,12 @@ export default class Punch implements State {
 		// state transitions
 			if (this.player.onFloor)
 			{
+				this.player.setFist(false, false);
 				this.player.stateController.setState('running');
 			}
 			else
 			{
+				this.player.setFist(false, false);
 				this.player.stateController.setState('airborne');
 			}
 		}});
@@ -61,6 +65,7 @@ export default class Punch implements State {
 			{
 				this.player.body.setVelocity(0, 0);
 				this.player.body.allowGravity = true;
+				this.player.setFist(false, false);
 				this.stateController.setState('groundCling');
 				this.timer?.remove();
 				return;
@@ -69,12 +74,17 @@ export default class Punch implements State {
 			{
 				this.player.body.setVelocity(0, 0);
 				this.player.body.allowGravity = true;
+				this.player.setFist(false, false);
 				this.stateController.setState('cling');
 				this.timer?.remove();
 				return;
 			}
+
+		}
+		else
+		{
+			this.player.body.setVelocity((this.player.flipX? 300 : -300), 0);
 		}
 
-		this.player.body.setVelocity((this.player.flipX? 300 : -300), 0);
 	}
 }

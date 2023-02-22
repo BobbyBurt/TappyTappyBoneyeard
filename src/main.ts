@@ -8,7 +8,7 @@ window.addEventListener('load', function ()
 	{
 		title: 'Tappy Tappy Boneyard',
 		url: 'https://www.newgrounds.com/projects/games/1923225/preview',
-		version: '9',
+		version: '10',
 		
 	// visuals
 		type: Phaser.AUTO,
@@ -31,6 +31,7 @@ window.addEventListener('load', function ()
 			default: 'arcade',
 			arcade: {
 				// debug: true,
+				// tileBias: 8,
 				gravity: {
 					y: 500,
 					x: 0

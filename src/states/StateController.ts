@@ -7,15 +7,22 @@ import GroundCling from "./GroundCling";
 import Punch from "./Punch";
 import Dive from "./Dive";
 import Uppercut from "./Uppercut";
+import Level from "~/scenes/Level";
 
 export default class StateController
 {	
 	states:any;
 	public currentState:State;
 	// TODO: define type
+	private scene: Level;
+	private debugShowTransitionKey: Phaser.Input.Keyboard.Key;
 
-	constructor(_player:playerPrefab)
+	constructor(_player:playerPrefab, _scene: Level)
 	{
+		this.scene = _scene;
+
+		this.debugShowTransitionKey = this.scene.input.keyboard.addKey('C');
+
 		this.states =
 		{
 			running: new Running(_player, this),
@@ -39,7 +46,10 @@ export default class StateController
 
 	setState(name:playerStateName)
 	{
-		// console.log(`state transition: ${this.currentState.name} => ${name}`);
+		// if (this.debugShowTransitionKey.isDown)
+		// {
+			// console.log(`state transition: ${this.currentState.name} => ${name}`);
+		// }
 		
 		if (this.currentState === this.states[name])
 		{	

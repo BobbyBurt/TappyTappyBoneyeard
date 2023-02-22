@@ -28,7 +28,7 @@ export default class playerPrefab extends Phaser.Physics.Arcade.Sprite {
 
 		/* START-USER-CTR-CODE */
 
-		this.stateController = new StateController(this);
+		this.stateController = new StateController(this, this.scene as Level);
 		this.stateController.setState('running');
 
 		this.scene.events.once(Phaser.Scenes.Events.UPDATE, this.start, this);
@@ -62,49 +62,49 @@ export default class playerPrefab extends Phaser.Physics.Arcade.Sprite {
 	/** set based on key, gamepad or mobile input */
 	public punchInput: input = 'up';
 	private punchKey: Phaser.Input.Keyboard.Key 
-		= this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.E);
-	private punchButton: number = 2;
+		= this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.X);
+	private punchButton: number = 0;
 	public punchCharged: boolean = true;
 	public punchMobileButton: boolean = false;
 
-	/** set based on key, gamepad or mobile input */
-	public punchLeftInput: input = 'up';
-	private punchLeftKey: Phaser.Input.Keyboard.Key 
-		= this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
-	private punchLeftButton: number = 14;
-	public punchLeftCharged: boolean = true;
-	public punchLeftMobileButton: boolean = false;
+	// /** set based on key, gamepad or mobile input */
+	// public punchLeftInput: input = 'up';
+	// private punchLeftKey: Phaser.Input.Keyboard.Key 
+	// 	= this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
+	// private punchLeftButton: number = 14;
+	// public punchLeftCharged: boolean = true;
+	// public punchLeftMobileButton: boolean = false;
 
-	/** set based on key, gamepad or mobile input */
-	public punchRightInput: input = 'up';
-	private punchRightKey: Phaser.Input.Keyboard.Key 
-		= this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
-	private punchRightButton: number = 15;
-	public punchRightCharged: boolean = true;
-	public punchRightMobileButton: boolean = false;
+	// /** set based on key, gamepad or mobile input */
+	// public punchRightInput: input = 'up';
+	// private punchRightKey: Phaser.Input.Keyboard.Key 
+	// 	= this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
+	// private punchRightButton: number = 15;
+	// public punchRightCharged: boolean = true;
+	// public punchRightMobileButton: boolean = false;
 
 	/** set based on key, gamepad or mobile input */
 	public uppercutInput: input = 'up';
 	private uppercutKey: Phaser.Input.Keyboard.Key 
-		= this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
+		= this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Z);
 	private uppercutButton: number = 12;
 	public uppercutMobileButton: boolean = false;
 
 	/** set based on key, gamepad or mobile input */
 	public diveInput: input = 'up';
 	private diveKey: Phaser.Input.Keyboard.Key 
-		= this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
+		= this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.DOWN);
 	private diveButton: number = 13;
 	public diveMobileButton: boolean = false;
 
 	/** set based on key, gamepad or mobile input */
-	public eggInput: input = 'up';
-	private eggKey: Phaser.Input.Keyboard.Key 
-		= this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.E);
-	private eggButton: number = 0;
-	public eggMobileButton: boolean = false;
-	/** set by scene based on egg state, determines is player can drop egg */
-	public eggReady: boolean = true;
+	// public eggInput: input = 'up';
+	// private eggKey: Phaser.Input.Keyboard.Key 
+	// 	= this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.E);
+	// private eggButton: number = 0;
+	// public eggMobileButton: boolean = false;
+	// /** set by scene based on egg state, determines is player can drop egg */
+	// public eggReady: boolean = true;
 
 	/** updated by scene, used by states */
 	public onFloor: boolean = true;
@@ -120,6 +120,12 @@ export default class playerPrefab extends Phaser.Physics.Arcade.Sprite {
 	public maxFlaps = 2;
 	/** How many flaps can the player do? */
 	public flapCharge: number = this.maxFlaps;
+
+	public fist: Phaser.GameObjects.Image;
+	private fistoffset: Phaser.Math.Vector2;
+	private fistUppercutoffset: Phaser.Math.Vector2;
+
+	private levelScene: Level;
 
 	start()
 	{
@@ -146,6 +152,8 @@ export default class playerPrefab extends Phaser.Physics.Arcade.Sprite {
 		{
 			this.flapCharge = this.maxFlaps;
 		}
+
+		this.setFistPosition();
 
 		this.inputCheck();
 
@@ -181,79 +189,79 @@ export default class playerPrefab extends Phaser.Physics.Arcade.Sprite {
 		}
 
 	// punch
-		// if (this.gamepad?.isButtonDown(this.punchButton) 
-		// 	|| this.punchKey.isDown || this.punchMobileButton)
-		// {
-		// 	if (this.punchInput != 'just-down' && this.punchInput != 'down')
-		// 	{
-		// 		this.punchInput = 'just-down'
-		// 	}
-		// 	else
-		// 	{
-		// 		this.punchInput = 'down'
-		// 	}
-		// }
-		// else
-		// {
-		// 	if (this.punchInput != 'just-up' && this.punchInput != 'up')
-		// 	{
-		// 		this.punchInput = 'just-up'
-		// 	}
-		// 	else
-		// 	{
-		// 		this.punchInput = 'up'
-		// 	}
-		// }
-
-	// punch left
-		if (this.gamepad?.isButtonDown(this.punchLeftButton) 
-			|| this.punchLeftKey.isDown || this.punchLeftMobileButton)
+		if (this.gamepad?.isButtonDown(this.punchButton) 
+			|| this.punchKey.isDown || this.punchMobileButton)
 		{
-			if (this.punchLeftInput != 'just-down' && this.punchLeftInput != 'down')
+			if (this.punchInput != 'just-down' && this.punchInput != 'down')
 			{
-				this.punchLeftInput = 'just-down'
+				this.punchInput = 'just-down'
 			}
 			else
 			{
-				this.punchLeftInput = 'down'
+				this.punchInput = 'down'
 			}
 		}
 		else
 		{
-			if (this.punchLeftInput != 'just-up' && this.punchLeftInput != 'up')
+			if (this.punchInput != 'just-up' && this.punchInput != 'up')
 			{
-				this.punchLeftInput = 'just-up'
+				this.punchInput = 'just-up'
 			}
 			else
 			{
-				this.punchLeftInput = 'up'
+				this.punchInput = 'up'
 			}
 		}
 
-	// punch right
-		if (this.gamepad?.isButtonDown(this.punchRightButton) 
-			|| this.punchRightKey.isDown || this.punchRightMobileButton)
-		{
-			if (this.punchRightInput != 'just-down' && this.punchRightInput != 'down')
-			{
-				this.punchRightInput = 'just-down'
-			}
-			else
-			{
-				this.punchRightInput = 'down'
-			}
-		}
-		else
-		{
-			if (this.punchRightInput != 'just-up' && this.punchRightInput != 'up')
-			{
-				this.punchRightInput = 'just-up'
-			}
-			else
-			{
-				this.punchRightInput = 'up'
-			}
-		}
+	// // punch left
+	// 	if (this.gamepad?.isButtonDown(this.punchLeftButton) 
+	// 		|| this.punchLeftKey.isDown || this.punchLeftMobileButton)
+	// 	{
+	// 		if (this.punchLeftInput != 'just-down' && this.punchLeftInput != 'down')
+	// 		{
+	// 			this.punchLeftInput = 'just-down'
+	// 		}
+	// 		else
+	// 		{
+	// 			this.punchLeftInput = 'down'
+	// 		}
+	// 	}
+	// 	else
+	// 	{
+	// 		if (this.punchLeftInput != 'just-up' && this.punchLeftInput != 'up')
+	// 		{
+	// 			this.punchLeftInput = 'just-up'
+	// 		}
+	// 		else
+	// 		{
+	// 			this.punchLeftInput = 'up'
+	// 		}
+	// 	}
+
+	// // punch right
+	// 	if (this.gamepad?.isButtonDown(this.punchRightButton) 
+	// 		|| this.punchRightKey.isDown || this.punchRightMobileButton)
+	// 	{
+	// 		if (this.punchRightInput != 'just-down' && this.punchRightInput != 'down')
+	// 		{
+	// 			this.punchRightInput = 'just-down'
+	// 		}
+	// 		else
+	// 		{
+	// 			this.punchRightInput = 'down'
+	// 		}
+	// 	}
+	// 	else
+	// 	{
+	// 		if (this.punchRightInput != 'just-up' && this.punchRightInput != 'up')
+	// 		{
+	// 			this.punchRightInput = 'just-up'
+	// 		}
+	// 		else
+	// 		{
+	// 			this.punchRightInput = 'up'
+	// 		}
+	// 	}
 
 	// uppercut
 		if (this.gamepad?.isButtonDown(this.uppercutButton)
@@ -391,6 +399,56 @@ export default class playerPrefab extends Phaser.Physics.Arcade.Sprite {
 		}
 	}
 
+	public createFist():void
+	{
+		this.fistoffset = new Phaser.Math.Vector2(14, 4);
+		this.fistUppercutoffset = new Phaser.Math.Vector2(0, -10);
+		this.fist = this.scene.add.image(this.x, this.y, 'bird1fist');
+		// this.fist.setDepth(this.depth - 1);
+		this.setFist(false, false);
+		this.setFistPosition();
+		const level = this.scene as Level;
+		level.physics.add.existing(this.fist, false);
+		let fistBody = this.fist.body as Phaser.Physics.Arcade.Body;
+		fistBody.setAllowGravity(false);
+		fistBody.setVelocityY(0);
+		// level.UICam.ignore(this.fist);
+	}
+
+	private setFistPosition(): void
+	{
+		let offset = new Phaser.Math.Vector2
+			((this.flipX? this.fistoffset.x : -this.fistoffset.x), this.fistoffset.y);
+		if (this.stateController.currentState.name === 'uppercut')
+		{
+			offset.set(this.fistUppercutoffset.x, this.fistUppercutoffset.y);
+				// TODO: Add flipx ternary conditional if I set uppercut offset to anything other than 0.
+		}
+		let position = new Phaser.Math.Vector2((this.body.x + 6) + offset.x, this.body.y + offset.y);
+		
+		this.fist.flipX = this.flipX;
+		this.fist.setPosition(position.x, position.y);
+	}
+
+	public setFist(active: boolean, above: boolean)
+	{
+		this.fist.setActive(active);
+		this.fist.setVisible(active);
+
+		this.fist.setTexture('bird' + this.flapCharge + 'fist');
+		
+		if (above)
+		{
+			this.fist.setRotation(this.flipX? -1.5 : 1.5);
+		}
+		else
+		{
+			this.fist.setRotation(0);
+		}
+
+		this.setFistPosition();
+	}
+
 	/**
 	 * Plays animation correlated to flap state for applicable animations.
 	 * @param key 
@@ -398,7 +456,8 @@ export default class playerPrefab extends Phaser.Physics.Arcade.Sprite {
 	 */
 	public playAnimation(key: string, queue?: boolean): void
 	{
-		if (key === 'flap' || key === 'punch' || key === 'dive' || key === 'cling' || key === 'airborne')
+		if (key === 'flap' || key === 'punch' || key === 'dive' || key === 'cling' 
+			|| key === 'airborne' || key === 'uppercut')
 		{
 			key = key + '-' + this.flapCharge.toString();
 		}
@@ -507,19 +566,16 @@ export default class playerPrefab extends Phaser.Physics.Arcade.Sprite {
 			key: 'punch-2',
 			frames:
 			[
-				{ key: 'bird1punch' }
+				{ key: 'bird1squash' }
 			],
 			frameRate: 16,
-			repeat: 0
+			repeat: 0,
 		});
 
 		this.anims.create
 		({
 			key: 'punch-1',
-			frames:
-			[
-				{ key: 'bird3punch' }
-			],
+			frames: this.anims.generateFrameNumbers('flap-sprites', { frames: [ 3 ] }),
 			frameRate: 16,
 			repeat: 0
 		});
@@ -527,10 +583,34 @@ export default class playerPrefab extends Phaser.Physics.Arcade.Sprite {
 		this.anims.create
 		({
 			key: 'punch-0',
+			frames: this.anims.generateFrameNumbers('flap-sprites', { frames: [ 6 ] }),
+			frameRate: 16,
+			repeat: 0
+		});
+
+		this.anims.create
+		({
+			key: 'uppercut-2',
 			frames:
 			[
-				{ key: 'bird4punch' }
+				{ key: 'bird1stretch' }
 			],
+			frameRate: 16,
+			repeat: 0,
+		});
+
+		this.anims.create
+		({
+			key: 'uppercut-1',
+			frames: this.anims.generateFrameNumbers('flap-sprites', { frames: [ 5 ] }),
+			frameRate: 16,
+			repeat: 0
+		});
+
+		this.anims.create
+		({
+			key: 'uppercut-0',
+			frames: this.anims.generateFrameNumbers('flap-sprites', { frames: [ 8 ] }),
 			frameRate: 16,
 			repeat: 0
 		});

@@ -17,7 +17,6 @@ export default class Airborne implements State {
 	
 	enter()
 	{
-		
 		this.player.playAnimation('airborne', true);
 			// this should be the airborne animation, played on the condition that the jump or 
 			// flap animation is not playing. Not sure how to check current animation.
@@ -42,26 +41,21 @@ export default class Airborne implements State {
 		// 	this.stateController.setState('punch');
 		// }
 			// MARKED FOR DELETION
-		else if (this.player.punchLeftInput == 'just-down' && this.player.punchCharged)
+		else if (this.player.punchInput == 'just-down' && this.player.punchCharged)
 		{
 			// this.player.flipX = false;
-			this.stateController.setState('punch');
-		}
-		else if (this.player.punchRightInput == 'just-down' && this.player.punchCharged)
-		{
-			// this.player.flipX = true;
 			this.stateController.setState('punch');
 		}
 		else if (this.player.uppercutInput == 'just-down' && this.player.punchCharged)
 		{
 			this.stateController.setState('uppercut');
 		}
-		else if (this.player.eggInput == 'just-down' && this.player.eggReady)
-		{
-			this.player.scene.events.emit('egg-drop');
+		// else if (this.player.eggInput == 'just-down' && this.player.eggReady)
+		// {
+		// 	this.player.scene.events.emit('egg-drop');
 			
-			this.player.body.setVelocityY(-150);
-		}
+		// 	this.player.body.setVelocityY(-150);
+		// }
 		else if (this.player.diveInput == 'just-down')
 		{
 			this.stateController.setState('dive');
