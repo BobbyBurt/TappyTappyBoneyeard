@@ -625,9 +625,23 @@ export default class Level extends Phaser.Scene {
 			// TODO: define max
 
 	// music
-		if (this.music == undefined)	
+		if (this.music == undefined 
+			|| (this.music.key === 'main-game' && this.registry.get('current-level-index') < 3)
+			|| (this.music.key === 'tutorial' && this.registry.get('current-level-index') >= 3))
 		{
-			this.music = this.sound.add('main-game', {volume: .7});
+			if (this.music)
+			{
+				this.music.stop();
+			}
+
+			if (this.registry.get('current-level-index') < 3)
+			{
+				this.music = this.sound.add('tutorial', {volume: .7});
+			}
+			else
+			{
+				this.music = this.sound.add('main-game', {volume: .7});
+			}
 
 			if (__DEV__ && !this.registry.get('muted'))
 			{

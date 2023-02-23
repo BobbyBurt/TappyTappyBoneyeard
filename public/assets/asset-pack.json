@@ -420,6 +420,13 @@
                 "key": "tileset-hazards"
             },
             {
+                "url": [
+                    "assets/music/tutorial.mp3"
+                ],
+                "type": "audio",
+                "key": "tutorial"
+            },
+            {
                 "url": "assets/levels/uppercut.json",
                 "type": "tilemapTiledJSON",
                 "key": "uppercut"
