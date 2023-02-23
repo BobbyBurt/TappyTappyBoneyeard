@@ -30,7 +30,7 @@ window.addEventListener('load', function ()
 		physics: {
 			default: 'arcade',
 			arcade: {
-				// debug: true,
+				debug: true,
 				// tileBias: 8,
 				gravity: {
 					y: 500,

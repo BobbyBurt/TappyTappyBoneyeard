@@ -1,12 +1,8 @@
 # Changelog
 
-# Version 11 Alpha
+# Version 10 Alpha
 
-This build focuses on demonstrating the primary gameplay loop.
-
-# Version 10
-
-This build focuses on finalizing player control, movement and collision.
+This build focuses on finalizing player control, movement and collision. Additionally, I'm creating a series of new levels. These things are to make a good demonstration of the primary gameplay loop.
 
 # Version 9
 
@@ -20,6 +16,9 @@ This build focuses on finalizing gameplay by adding elements and improving inter
 - Bomb prop appears / disappears to indicate when enemy is ready to drop.
 - Punching an enemy that's holding a bomb will cause the bomb to go flying.
 - Falling enemies can knock each other out.
+- Player punch sprite has been separated into it's own image and hitbox, resulting in punch / uppercuts being easier / less risky.
+- Player punch & uppercut sprite has been changed and no longer rotates while in uppercut state.
+- Reduced balloon enemy float range for consistency sake.
 
 ### Added
 
@@ -28,6 +27,7 @@ This build focuses on finalizing gameplay by adding elements and improving inter
 - Pogo enemy type.
 - Grenade enemy weapon - Contact with player triggers explosion even if player is in an attack state.
 - Enemies can be set to constantly fire.
+- Created new levels.
 
 ### Removed
 ### Fixed

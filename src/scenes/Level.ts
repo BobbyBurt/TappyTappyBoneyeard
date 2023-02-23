@@ -892,6 +892,8 @@ export default class Level extends Phaser.Scene {
 
 		// this.enemiesDefeatedCheck();
 
+		this.player.punchCharged = true;
+
 		this.updateEnemiesUI();
 		this.animatedEnemiesUI();
 	}
@@ -1561,6 +1563,12 @@ export default class Level extends Phaser.Scene {
 				_enemy = new PogoEnemy
 					(this, object.x! + 8, object.y! - 8, _gunDirection, 
 						(object.type == 'pogo-parasol'), mine, alwaysFire);
+			}
+			else if (object.type == 'goal' || object.type == 'goal-parasol')
+			{
+				_enemy = new PogoEnemy
+					(this, object.x! + 8, object.y! - 8, _gunDirection, 
+						(object.type == 'goal-parasol'), mine, alwaysFire);
 			}
 			else
 			{
