@@ -91,6 +91,8 @@ export default class EnemyPrefab extends Phaser.GameObjects.Sprite {
 	/** for debugging */
 	public enemyListIndex = -1;
 
+	public isGoal = false;
+
 	public get _scene()
 	{
 		return this.scene as Level;

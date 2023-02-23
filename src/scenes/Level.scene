@@ -120,7 +120,7 @@
                     "texture": {
                         "key": "Parallax-Cityscape"
                     },
-                    "x": 357,
+                    "x": 357.0000305175781,
                     "y": 619,
                     "scaleX": 9.144642541425284,
                     "scaleY": 9.144642541425284,
@@ -378,6 +378,7 @@
                     ],
                     "Align.middle": true,
                     "Align.center": true,
+                    "Align.verticalOffset": -50,
                     "x": 435,
                     "y": 100,
                     "scaleX": 1.3,
@@ -426,10 +427,11 @@
                     "Align.up": true,
                     "Align.right": true,
                     "Align.horizontalOffset": -5,
-                    "Align.verticalOffset": -75,
+                    "Align.verticalOffset": -65,
                     "x": 475,
-                    "y": -58,
+                    "y": -48,
                     "originX": 1,
+                    "originY": 0.5,
                     "text": "5/6",
                     "font": "nokia",
                     "align": 2,
@@ -483,25 +485,53 @@
                     "dropShadowY": 100,
                     "dropShadowAlpha": 1,
                     "dropShadowColor": "#222222ff"
+                },
+                {
+                    "type": "BitmapText",
+                    "id": "c4f689ed-442e-45ea-8aff-118cbd8ce92f",
+                    "label": "comboText",
+                    "scope": "CLASS",
+                    "components": [
+                        "Align"
+                    ],
+                    "Align.middle": true,
+                    "Align.left": true,
+                    "Align.horizontalOffset": -85,
+                    "Align.verticalOffset": -30,
+                    "x": 702.6669311523438,
+                    "y": -48.28031539916992,
+                    "angle": -10,
+                    "originY": 0.5,
+                    "text": "3",
+                    "font": "nokia",
+                    "fontSize": -36,
+                    "dropShadowX": 100,
+                    "dropShadowAlpha": 1,
+                    "dropShadowColor": "#0AE735"
+                },
+                {
+                    "type": "BitmapText",
+                    "id": "b4969bda-7d3e-4178-aa32-2b9c2ab3d8b9",
+                    "label": "comboLabelText",
+                    "scope": "CLASS",
+                    "components": [
+                        "Align"
+                    ],
+                    "Align.middle": true,
+                    "Align.left": true,
+                    "Align.horizontalOffset": -90,
+                    "x": 681.6669311523438,
+                    "y": -67.28031921386719,
+                    "angle": -10,
+                    "originY": 0.5,
+                    "text": "COMBO!",
+                    "font": "nokia",
+                    "fontSize": -16,
+                    "dropShadowX": 100,
+                    "dropShadowAlpha": 1,
+                    "dropShadowColor": "#0AE735"
                 }
             ]
-        },
-        {
-            "type": "Image",
-            "id": "6c0a134c-830b-49d1-9f12-88ea71dda152",
-            "label": "endEgg",
-            "scope": "CLASS",
-            "components": [],
-            "texture": {
-                "key": "bird1egg"
-            },
-            "x": 286,
-            "y": 143,
-            "ArcadeComponent.active": true,
-            "moves": false,
-            "pushable": false,
-            "body.width": 11,
-            "body.height": 12
         }
     ],
     "plainObjects": [],

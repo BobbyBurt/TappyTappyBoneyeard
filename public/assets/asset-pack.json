@@ -50,6 +50,11 @@
                 "key": "bird-flap"
             },
             {
+                "url": "assets/bird4fist.png",
+                "type": "image",
+                "key": "bird0fist"
+            },
+            {
                 "url": "assets/bird1cling.png",
                 "type": "image",
                 "key": "bird1cling"
@@ -65,9 +70,9 @@
                 "key": "bird1egg"
             },
             {
-                "url": "assets/bird1fist.png",
+                "url": "assets/bird3fist.png",
                 "type": "image",
-                "key": "bird2fist"
+                "key": "bird1fist"
             },
             {
                 "url": "assets/bird1mid.png",
@@ -90,6 +95,11 @@
                 "key": "bird1stretch"
             },
             {
+                "url": "assets/bird1fist.png",
+                "type": "image",
+                "key": "bird2fist"
+            },
+            {
                 "url": "assets/bird3cling.png",
                 "type": "image",
                 "key": "bird3cling"
@@ -98,11 +108,6 @@
                 "url": "assets/bird3dive.png",
                 "type": "image",
                 "key": "bird3dive"
-            },
-            {
-                "url": "assets/bird3fist.png",
-                "type": "image",
-                "key": "bird1fist"
             },
             {
                 "url": "assets/bird3punch.png",
@@ -118,11 +123,6 @@
                 "url": "assets/bird4dive.png",
                 "type": "image",
                 "key": "bird4dive"
-            },
-            {
-                "url": "assets/bird4fist.png",
-                "type": "image",
-                "key": "bird0fist"
             },
             {
                 "url": "assets/bird4punch.png",
@@ -287,6 +287,11 @@
                 "url": "assets/levels/parasol.json",
                 "type": "tilemapTiledJSON",
                 "key": "parasol"
+            },
+            {
+                "url": "assets/plane.png",
+                "type": "image",
+                "key": "plane"
             },
             {
                 "url": "assets/pogo.png",

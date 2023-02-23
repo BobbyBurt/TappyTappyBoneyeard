@@ -62,7 +62,7 @@ export default class Level extends Phaser.Scene {
 		bGLayer.add(parallax_Cityscape_4);
 
 		// parallax_Cityscape_5
-		const parallax_Cityscape_5 = this.add.image(357, 619, "Parallax-Cityscape");
+		const parallax_Cityscape_5 = this.add.image(357.0000305175781, 619, "Parallax-Cityscape");
 		parallax_Cityscape_5.scaleX = 9.144642541425284;
 		parallax_Cityscape_5.scaleY = 9.144642541425284;
 		parallax_Cityscape_5.setOrigin(0.5, 0);
@@ -176,8 +176,8 @@ export default class Level extends Phaser.Scene {
 		uILayer.add(enemiesLabelText);
 
 		// enemiesText
-		const enemiesText = this.add.bitmapText(475, -58, "nokia", "5/6");
-		enemiesText.setOrigin(1, 0);
+		const enemiesText = this.add.bitmapText(475, -48, "nokia", "5/6");
+		enemiesText.setOrigin(1, 0.5);
 		enemiesText.text = "5/6";
 		enemiesText.fontSize = -16;
 		enemiesText.align = 2;
@@ -209,12 +209,27 @@ export default class Level extends Phaser.Scene {
 		scoreText.dropShadowColor = 2236962;
 		uILayer.add(scoreText);
 
-		// endEgg
-		const endEgg = this.add.image(286, 143, "bird1egg") as Phaser.GameObjects.Image & { body: Phaser.Physics.Arcade.Body };
-		this.physics.add.existing(endEgg, false);
-		endEgg.body.moves = false;
-		endEgg.body.pushable = false;
-		endEgg.body.setSize(11, 12, false);
+		// comboText
+		const comboText = this.add.bitmapText(702.6669311523438, -48.28031539916992, "nokia", "3");
+		comboText.angle = -10;
+		comboText.setOrigin(0, 0.5);
+		comboText.text = "3";
+		comboText.fontSize = -36;
+		comboText.dropShadowX = 100;
+		comboText.dropShadowAlpha = 1;
+		comboText.dropShadowColor = 714549;
+		uILayer.add(comboText);
+
+		// comboLabelText
+		const comboLabelText = this.add.bitmapText(681.6669311523438, -67.28031921386719, "nokia", "COMBO!");
+		comboLabelText.angle = -10;
+		comboLabelText.setOrigin(0, 0.5);
+		comboLabelText.text = "COMBO!";
+		comboLabelText.fontSize = -16;
+		comboLabelText.dropShadowX = 100;
+		comboLabelText.dropShadowAlpha = 1;
+		comboLabelText.dropShadowColor = 714549;
+		uILayer.add(comboLabelText);
 
 		// lists
 		const public_list: Array<any> = [];
@@ -331,6 +346,7 @@ export default class Level extends Phaser.Scene {
 		const winTextAlign = new Align(winText);
 		winTextAlign.middle = true;
 		winTextAlign.center = true;
+		winTextAlign.verticalOffset = -50;
 
 		// enemiesLabelText (components)
 		const enemiesLabelTextAlign = new Align(enemiesLabelText);
@@ -344,7 +360,7 @@ export default class Level extends Phaser.Scene {
 		enemiesTextAlign.up = true;
 		enemiesTextAlign.right = true;
 		enemiesTextAlign.horizontalOffset = -5;
-		enemiesTextAlign.verticalOffset = -75;
+		enemiesTextAlign.verticalOffset = -65;
 
 		// chargeText (components)
 		const chargeTextAlign = new Align(chargeText);
@@ -357,6 +373,19 @@ export default class Level extends Phaser.Scene {
 		scoreTextAlign.up = true;
 		scoreTextAlign.center = true;
 		scoreTextAlign.verticalOffset = -95;
+
+		// comboText (components)
+		const comboTextAlign = new Align(comboText);
+		comboTextAlign.middle = true;
+		comboTextAlign.left = true;
+		comboTextAlign.horizontalOffset = -85;
+		comboTextAlign.verticalOffset = -30;
+
+		// comboLabelText (components)
+		const comboLabelTextAlign = new Align(comboLabelText);
+		comboLabelTextAlign.middle = true;
+		comboLabelTextAlign.left = true;
+		comboLabelTextAlign.horizontalOffset = -90;
 
 		this.bGLayer = bGLayer;
 		this.parallax_Backing = parallax_Backing;
@@ -376,7 +405,8 @@ export default class Level extends Phaser.Scene {
 		this.enemiesText = enemiesText;
 		this.chargeText = chargeText;
 		this.scoreText = scoreText;
-		this.endEgg = endEgg;
+		this.comboText = comboText;
+		this.comboLabelText = comboLabelText;
 		this.public_list = public_list;
 		this.enemyList = enemyList;
 		this.collidesWithBombList = collidesWithBombList;
@@ -405,7 +435,8 @@ export default class Level extends Phaser.Scene {
 	private enemiesText!: Phaser.GameObjects.BitmapText;
 	private chargeText!: Phaser.GameObjects.BitmapText;
 	private scoreText!: Phaser.GameObjects.BitmapText;
-	private endEgg!: Phaser.GameObjects.Image & { body: Phaser.Physics.Arcade.Body };
+	private comboText!: Phaser.GameObjects.BitmapText;
+	private comboLabelText!: Phaser.GameObjects.BitmapText;
 	public public_list!: Array<any>;
 	private enemyList!: Array<any>;
 	private collidesWithBombList!: Array<any>;
@@ -418,7 +449,7 @@ export default class Level extends Phaser.Scene {
 // game state
 	/** used to make sure level restart is only called once */
 	private restarting = false;
-	private won = false;
+	private reachedGoal = false;
 
 // tilemap
 	private tileMap: Phaser.Tilemaps.Tilemap;
@@ -450,6 +481,13 @@ export default class Level extends Phaser.Scene {
 	 */
 	private mapElementList: Array<any>;
 
+	private plane: Phaser.GameObjects.Image;
+
+	private combo = 0;
+	private comboTextTween: Phaser.Tweens.Tween;
+
+	private enemiesUITween: Phaser.Tweens.Tween;
+
 	create()
 	{	
 		// super.create();
@@ -458,8 +496,8 @@ export default class Level extends Phaser.Scene {
 
 		this.createMobileButtons();
 
+		this.reachedGoal = false;
 		this.restarting = false;
-		this.won = false;
 
 		this.tileMap = this.add.tilemap(this.registry.get('current-level'));
 		this.tileMap.addTilesetImage("tilleset", "tileset");
@@ -515,8 +553,8 @@ export default class Level extends Phaser.Scene {
 			(this.bulletList, this.player, this.bulletPlayerCollide, undefined, this);
 
 		// playerEndEggOverlap
-		this.physics.add.overlap
-			(this.player, this.endEgg, this.playerEndEggOverlap, undefined, this);
+		// this.physics.add.overlap
+		// 	(this.player, this.endEgg, this.playerEndEggOverlap, undefined, this);
 
 		this.createCameras();
 
@@ -539,14 +577,15 @@ export default class Level extends Phaser.Scene {
 		startPoint.y -= 8;
 		this.player.setPosition(startPoint.x, startPoint.y);
 		this.data.set('startPoint', startPoint);
+		this.player.setFlipX(TilemapUtil.getObjectFlip('startPoint', this.tileMap));
 
 		this.cameras.main.setScroll(this.player.x, this.player.y);
 			// Apparently this doesn't help
 
-		const endEgg = TilemapUtil.getObjectPosition('endEgg', this.tileMap);
-		endEgg.x += 6;
-		endEgg.y -= 6;
-		this.endEgg.setPosition(endEgg.x, endEgg.y);
+		// const endEgg = TilemapUtil.getObjectPosition('endEgg', this.tileMap);
+		// endEgg.x += 6;
+		// endEgg.y -= 6;
+		// this.endEgg.setPosition(endEgg.x, endEgg.y);
 
 		this.bottomBoundary = TilemapUtil.getObjectPosition('resetY', this.tileMap).y
 
@@ -622,6 +661,8 @@ export default class Level extends Phaser.Scene {
 		{
 			this.LoadLevelSelect();
 		});
+
+		this.updateCombo();
 
 	// resize init
 		this.events.on('pre-resize', this.resize, this);
@@ -797,6 +838,9 @@ export default class Level extends Phaser.Scene {
 		if (_player.body.blocked.down)
 		{
 			this.player.onFloor = true;
+
+			this.combo = 0;
+			this.updateCombo();
 		}
 
 		let tilemap = _tilemap as Phaser.Tilemaps.Tilemap;
@@ -823,17 +867,24 @@ export default class Level extends Phaser.Scene {
 		if (this.player.stateController.currentState.name == 'dive')
 		{
 		// velocity of knockback
-		
+
 			this.player.setVelocityY(-this.player.jumpForce);
-			
+
 			if (_enemy.hasParasol)
 			{
 				return;
 			}
-			
-			let velocity = new Phaser.Math.Vector2((this.player.flipX ? 120 : -120), this.player.body.velocity.y)
+
+			// let velocity = new Phaser.Math.Vector2((this.player.flipX ? 120 : -120), this.player.body.velocity.y)
+			const velocity = this.getKnockbackVelocty(true);
 			_enemy.hit(velocity.x, velocity.y);
 			this.sound.play('enemy-death');
+
+			if (!this.player.onFloor)
+			{
+				this.combo++;
+				this.updateCombo();
+			}
 
 			if (_enemy.isMine)
 			{
@@ -850,6 +901,8 @@ export default class Level extends Phaser.Scene {
 
 			this.updateEnemiesUI();
 			this.animatedEnemiesUI();
+
+			this.goalEnemyCheck(_enemy);
 		}
 		else if (_enemy.isMine)
 		{
@@ -876,19 +929,26 @@ export default class Level extends Phaser.Scene {
 		const enemy = _enemy as EnemyPrefab;
 
 		// velocity of knockback
-		let velocity = new Phaser.Math.Vector2((this.player.flipX ? 300 : -300), this.player.body.velocity.y)
-		if (this.player.stateController.currentState.name == 'uppercut')
-		{
-			velocity.x = 0;
-		}	
-		if (_enemy.isMine)
-		{
-			this.explode(_enemy.x, _enemy.y);
-			return;
-		}
+		// let velocity = new Phaser.Math.Vector2((this.player.flipX ? 300 : -300), this.player.body.velocity.y)
+		// if (this.player.stateController.currentState.name == 'uppercut')
+		// {
+			// 	velocity.x = 0;
+			// }	
+			if (_enemy.isMine)
+			{
+				this.explode(_enemy.x, _enemy.y);
+				return;
+			}
 
+		const velocity = this.getKnockbackVelocty(true);
 		_enemy.hit(velocity.x, velocity.y);
 		this.sound.play('enemy-death');
+
+		if (!this.player.onFloor)
+		{
+			this.combo++;
+			this.updateCombo();
+		}
 
 		// this.enemiesDefeatedCheck();
 
@@ -896,6 +956,8 @@ export default class Level extends Phaser.Scene {
 
 		this.updateEnemiesUI();
 		this.animatedEnemiesUI();
+
+		this.goalEnemyCheck(_enemy);
 	}
 
 	enemyEnemyCollide(_enemy1: any, _enemy2: any)
@@ -907,12 +969,28 @@ export default class Level extends Phaser.Scene {
 		{
 			enemy1.hit(enemy2.body.velocity.x, enemy2.body.velocity.y);
 			this.sound.play('enemy-death');
+
+			if (!this.player.onFloor)
+			{
+				this.combo++;
+				this.updateCombo();
+			}
+
+			this.goalEnemyCheck(enemy1);
 		}
 
 		if (!enemy2.isFalling())
 		{
 			enemy2.hit(enemy1.body.velocity.x, enemy1.body.velocity.y);
 			this.sound.play('enemy-death');
+
+			if (!this.player.onFloor)
+			{
+				this.combo++;
+				this.updateCombo();
+			}
+
+			this.goalEnemyCheck(enemy2);
 		}
 	}
 
@@ -941,7 +1019,9 @@ export default class Level extends Phaser.Scene {
 
 		this.setBombFuse(_bomb);
 		_bomb.setPosition(_bomb.x, _bomb.y -3);
-		_bomb.body.setVelocity(this.player.body.velocity.x * 1.3, (this.player.body.velocity.y * 1.5) - 150);
+		const velocity = this.getKnockbackVelocty(false);
+		_bomb.body.setVelocity(velocity.x, velocity.y);
+		// _bomb.body.setVelocity(this.player.body.velocity.x * 1.3, (this.player.body.velocity.y * 1.5) - 150);
 		_bomb.punched = true;
 	}
 
@@ -1004,11 +1084,40 @@ export default class Level extends Phaser.Scene {
 
 	playerEndEggOverlap(_player: any, _endEgg: any)
 	{
-		if (!this.won)
+		if (!this.reachedGoal)
 		{
 			this.levelEndFeedback();
 
-			this.won = true;
+			this.reachedGoal = true;
+		}
+	}
+
+	updateCombo()
+	{
+		if (this.combo > 1)
+		{
+			this.comboText.setText(this.combo + '');
+			this.comboText.setVisible(true);
+			this.comboLabelText.setVisible(true);
+
+			if (this.comboTextTween)
+				this.comboTextTween.stop();
+			this.comboText.setScale(1.5);
+			this.comboTextTween = this.tweens.add
+			({
+				targets: this.comboText,
+				duration: 500,
+				// hold: 1000,
+				// repeatDelay: 1000,
+				// repeat: -1,
+				ease: Phaser.Math.Easing.Circular.Out,
+				scale: 1,
+			});
+		}
+		else
+		{
+			this.comboText.setVisible(false);
+			this.comboLabelText.setVisible(false);
 		}
 	}
 
@@ -1097,6 +1206,7 @@ export default class Level extends Phaser.Scene {
 			*/
 
 		bomb.enemy.bombCooldownTimer.destroy();
+		bomb.ignoreTimer.destroy();
 		bomb.enemy.bombCooldownTimer = this.time.addEvent({delay: 700, callback: () =>
 		{
 			if (!bomb.enemy.isFalling())
@@ -1384,6 +1494,50 @@ export default class Level extends Phaser.Scene {
 	}
 
 	/**
+	 * Recturns vector2 for knockback velocity based on player state.
+	 * @param enemy Velocity may be modified for other objects such as bombs.
+	 */
+	getKnockbackVelocty(enemy: boolean): Phaser.Math.Vector2
+	{
+		let velocity = new Phaser.Math.Vector2(0, 0);
+
+	// dive
+		if (this.player.stateController.currentState.name === 'dive')
+		{
+			velocity.set(100, -150);
+		}
+		else if (this.player.stateController.currentState.name === 'punch')
+		{
+			if (enemy)
+			{
+				velocity.set(300, -150);
+			}
+			else
+			{
+				velocity.set(400, -100);
+			}
+		}
+		else if (this.player.stateController.currentState.name == 'uppercut')
+		{
+			if (enemy)
+			{
+				velocity.set(0, -350);
+			}
+			else
+			{
+				velocity.set(0, -450);
+			}
+		}	
+
+		if (!this.player.flipX && velocity.x !== 0)
+		{
+			velocity.x = -velocity.x;
+		}
+
+		return velocity;
+	}
+
+	/**
 	 * CURRENTLY UNUSED
 	 * 
 	 * checks if all enemies are defeated and shows victory audio / visual
@@ -1409,6 +1563,21 @@ export default class Level extends Phaser.Scene {
 		// here is where the level end code would go
 	}
 
+	goalEnemyCheck(enemy: EnemyPrefab)
+	{
+		if (enemy.isGoal)
+		{
+			if (!this.reachedGoal)
+			{
+				this.reachedGoal = true;
+
+				this.levelEndFeedback();
+
+				this.player.putInPlane(this.plane.x, this.plane.y);
+			}
+		}
+	}
+
 	updateEnemiesUI(): void
 	{
 		let defeatedEnemyCount = 0;
@@ -1431,8 +1600,10 @@ export default class Level extends Phaser.Scene {
 
 	animatedEnemiesUI(): void
 	{
-		this.enemiesText.setPosition(this.enemiesText.x, this.enemiesText.y + 10)
-		this.tweens.add
+		if (this.enemiesUITween)
+			this.enemiesUITween.stop();
+		this.enemiesText.setScale(1.3);
+		this.enemiesUITween = this.tweens.add
 		({
 			targets: this.enemiesText,
 			duration: 500,
@@ -1440,7 +1611,8 @@ export default class Level extends Phaser.Scene {
 			// repeatDelay: 1000,
 			// repeat: -1,
 			ease: Phaser.Math.Easing.Circular.Out,
-			y: this.enemiesText.y - 10
+			scale: 1
+			// y: this.enemiesText.y - 10
 		});
 	}
 
@@ -1543,8 +1715,8 @@ export default class Level extends Phaser.Scene {
 			let alwaysFire = false;
 			try
 			{
-				if (object.properties[0].name === 'alwaysFire' 
-					|| object.properties[1].name === 'alwaysFire')
+				if ((object.properties[0].name === 'alwaysFire' && object.properties[0].value === true) 
+					|| (object.properties[1].name === 'alwaysFire' && object.properties[1].value === true))
 				{
 					alwaysFire = true;
 				}
@@ -1566,9 +1738,12 @@ export default class Level extends Phaser.Scene {
 			}
 			else if (object.type == 'goal' || object.type == 'goal-parasol')
 			{
-				_enemy = new PogoEnemy
+				_enemy = new GroundEnemy
 					(this, object.x! + 8, object.y! - 8, _gunDirection, 
 						(object.type == 'goal-parasol'), mine, alwaysFire);
+				_enemy.isGoal = true;
+
+				this.createPlane(object.x!, object.y!);
 			}
 			else
 			{
@@ -1602,6 +1777,12 @@ export default class Level extends Phaser.Scene {
 			this.mainLayer.add(_enemy);
 			this.UICam.ignore(_enemy);
 		});
+	}
+
+	createPlane(x: number, y: number)
+	{
+		this.plane = this.add.image(x + 7, y + 2, 'plane');
+		this.plane.flipX = true;
 	}
 
 	createMapVisionPolys()

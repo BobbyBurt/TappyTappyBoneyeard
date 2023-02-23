@@ -127,9 +127,11 @@ export default class playerPrefab extends Phaser.Physics.Arcade.Sprite {
 
 	private levelScene: Level;
 
+	public lockInput = false;
+
 	start()
 	{
-		this.flipX = true;
+		// this.flipX = true;
 
 		this.setName('player');
 
@@ -154,6 +156,11 @@ export default class playerPrefab extends Phaser.Physics.Arcade.Sprite {
 		}
 
 		this.setFistPosition();
+
+		if (this.lockInput)
+		{
+			return;
+		}
 
 		this.inputCheck();
 
@@ -366,6 +373,16 @@ export default class playerPrefab extends Phaser.Physics.Arcade.Sprite {
 		this.stateController.setState('running');
 		this.setVelocity(0, 0);
 		this.flipX = true;
+	}
+
+	putInPlane(x: number, y: number)
+	{
+		this.stateController.setState('inPlane');
+		this.setPosition(x, y - 9);
+		this.fist.setVisible(false);
+			// otherwise the fist is visibly detatched from the body
+
+		this.lockInput = true;
 	}
 
 	/**

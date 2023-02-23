@@ -20,4 +20,24 @@ export default class TilemapUtil {
 
         return new Phaser.Math.Vector2(point.x!, point.y!)
     }
+
+    /**
+     * Returns true if object is flipped
+     * @param tilemap 
+     * @returns 
+     */
+    public static getObjectFlip(objectName: string, tilemap:Phaser.Tilemaps.Tilemap): boolean
+    {
+        let flip = false;
+        const point = tilemap.findObject('elements', function (obj) 
+		{
+            const _obj = obj as any;
+			if(obj.name === objectName)
+            {
+                flip = _obj.flippedHorizontal.value;
+            }
+		});
+
+        return flip;
+    }
 }

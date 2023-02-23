@@ -4,6 +4,33 @@
 
 This build focuses on finalizing player control, movement and collision. Additionally, I'm creating a series of new levels. These things are to make a good demonstration of the primary gameplay loop.
 
+### Changed
+
+- Player punch sprite has been separated into it's own image and hitbox, resulting in punch / uppercuts being easier / less risky.
+- Player punch & uppercut sprite has been changed and no longer rotates while in uppercut state.
+- Reduced balloon enemy float range for consistency sake.
+- Changed nemies defeated UI tween to be more eye-catching.
+- Enemy & bomb knockback from attacks is now consistent instead of based on player velocity.
+- Horizontal flip can now be set on startPoint object in tilemap to change that of player.
+
+### Added
+
+- Created new levels.
+- Added plane end point, which is set to the position of an enemy. Player sits in the plane upon taking out the enemy.
+- Added combo system. Ui will display a combo when the player takes out two or more enemies while airborne.
+
+### Removed
+
+- End egg object.
+
+### Fixed
+
+- Level select now shows correct name of initially selected level.
+- Hitting a ceiling while facing right no longer flips player and sets either state to cling for a frame.
+- Player physics body no longer offsets based on animation sprite size, fixing several collision issues.
+
+
+
 # Version 9
 
 This build focuses on finalizing gameplay by adding elements and improving interactions.
@@ -16,9 +43,6 @@ This build focuses on finalizing gameplay by adding elements and improving inter
 - Bomb prop appears / disappears to indicate when enemy is ready to drop.
 - Punching an enemy that's holding a bomb will cause the bomb to go flying.
 - Falling enemies can knock each other out.
-- Player punch sprite has been separated into it's own image and hitbox, resulting in punch / uppercuts being easier / less risky.
-- Player punch & uppercut sprite has been changed and no longer rotates while in uppercut state.
-- Reduced balloon enemy float range for consistency sake.
 
 ### Added
 
@@ -27,17 +51,12 @@ This build focuses on finalizing gameplay by adding elements and improving inter
 - Pogo enemy type.
 - Grenade enemy weapon - Contact with player triggers explosion even if player is in an attack state.
 - Enemies can be set to constantly fire.
-- Created new levels.
 
-### Removed
 ### Fixed
 
 - Bombs don't appear from falling enemies. (refix)
 - Enemies don't sometimes float downward.
-- Enemy knockback is now consistent.
-- Level select now shows correct name of initially selected level.
-- Hitting a ceiling while facing right no longer flips player and sets either state to cling for a frame.
-- Player physics body no longer offsets based on animation sprite size, fixing several collision issues.
+- Enemy knockback is more consistent.
 
 ## Version 8 - 2023-02-17
 
