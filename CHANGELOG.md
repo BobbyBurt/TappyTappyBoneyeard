@@ -12,12 +12,14 @@ This build focuses on finalizing player control, movement and collision. Additio
 - Changed nemies defeated UI tween to be more eye-catching.
 - Enemy & bomb knockback from attacks is now consistent instead of based on player velocity.
 - Horizontal flip can now be set on startPoint object in tilemap to change that of player.
+- Punching bombs now charges your punch the same as enemies.
 
 ### Added
 
 - Created new levels.
 - Added plane end point, which is set to the position of an enemy. Player sits in the plane upon taking out the enemy.
 - Added combo system. Ui will display a combo when the player takes out two or more enemies while airborne.
+- Added a 'mute music' button.
 
 ### Removed
 

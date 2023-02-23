@@ -29,12 +29,12 @@ export default class TilemapUtil {
     public static getObjectFlip(objectName: string, tilemap:Phaser.Tilemaps.Tilemap): boolean
     {
         let flip = false;
-        const point = tilemap.findObject('elements', function (obj) 
+        tilemap.findObject('elements', function (obj) 
 		{
             const _obj = obj as any;
 			if(obj.name === objectName)
             {
-                flip = _obj.flippedHorizontal.value;
+                flip = _obj.flippedHorizontal;
             }
 		});
 

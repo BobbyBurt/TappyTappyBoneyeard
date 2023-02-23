@@ -429,7 +429,6 @@ export default class playerPrefab extends Phaser.Physics.Arcade.Sprite {
 		let fistBody = this.fist.body as Phaser.Physics.Arcade.Body;
 		fistBody.setAllowGravity(false);
 		fistBody.setVelocityY(0);
-		// level.UICam.ignore(this.fist);
 	}
 
 	private setFistPosition(): void

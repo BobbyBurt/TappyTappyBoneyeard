@@ -558,6 +558,8 @@ export default class Level extends Phaser.Scene {
 
 		this.createCameras();
 
+		this.UICam.ignore(this.player.fist);
+
 		this.mapElementList = new Array(150);
 		/* TODO: make this array length dynamic to the highest element id in the map, as if there 
 		is an id greater than this array length then the game will crash.
@@ -627,7 +629,7 @@ export default class Level extends Phaser.Scene {
 		{
 			this.music = this.sound.add('main-game', {volume: .7});
 
-			if (!__DEV__)
+			if (__DEV__ && !this.registry.get('muted'))
 			{
 				this.music.play({loop: true});
 			}
@@ -660,6 +662,21 @@ export default class Level extends Phaser.Scene {
 		this.input.keyboard.on('keydown-A', () =>
 		{
 			this.LoadLevelSelect();
+		});
+
+	// level select input
+		this.input.keyboard.on('keydown-M', () =>
+		{
+			if (this.registry.get('muted'))
+			{
+				this.music.play();
+				this.registry.set('muted', false );
+			}
+			else
+			{
+				this.music.stop();
+				this.registry.set('muted', true );
+			}
 		});
 
 		this.updateCombo();
@@ -1023,6 +1040,7 @@ export default class Level extends Phaser.Scene {
 		_bomb.body.setVelocity(velocity.x, velocity.y);
 		// _bomb.body.setVelocity(this.player.body.velocity.x * 1.3, (this.player.body.velocity.y * 1.5) - 150);
 		_bomb.punched = true;
+		this.player.punchCharged = true;
 	}
 
 	bombEnemyOverlap(bomb: any, enemy: any)
@@ -1250,7 +1268,13 @@ export default class Level extends Phaser.Scene {
 		{
 			if (_this.enemyList.includes(element.gameObject))
 			{
-				element.gameObject.hit(0, -400);
+				element.gameObject.hit(0, -350);
+
+				if (!_this.player.onFloor)
+				{
+					_this.combo++;
+					_this.updateCombo();
+				}
 			}
 			if (element.gameObject.name == 'player')
 			{
@@ -1782,6 +1806,8 @@ export default class Level extends Phaser.Scene {
 	createPlane(x: number, y: number)
 	{
 		this.plane = this.add.image(x + 7, y + 2, 'plane');
+		this.mainLayer.add(this.plane);
+		this.UICam.ignore(this.plane);
 		this.plane.flipX = true;
 	}
 
