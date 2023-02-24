@@ -141,7 +141,7 @@ export default class LevelSelect extends Phaser.Scene {
 
 	private UICam!: Phaser.Cameras.Scene2D.BaseCamera | any;
 
-	private levelsKey = ['intro', 'airborne', 'dive', 'uppercut', 'charge', 'grenade', 'parasol', 'pogo', 'test-map-chain', 'test-map-bomb-vision', 'level-2', 'level-3', 'level-4'];
+	private levelsKey = ['intro', 'airborne', 'dive', 'uppercut', 'charge', 'parasol', 'pogo', 'grenade', 'test-map-chain', 'test-map-bomb-vision', 'level-2', 'level-3', 'level-4'];
 
 	private gamepad:Phaser.Input.Gamepad.Gamepad | undefined;
 	private SelectKey!: Phaser.Input.Keyboard.Key;
@@ -160,8 +160,12 @@ export default class LevelSelect extends Phaser.Scene {
 		
 		this.createCameras();
 
-		this.selectedLevel = 0;
-		this.levelText.setText(this.levelsKey[0]);
+		if (this.registry.get('current-level-index'))
+		{
+			this.selectedLevel = this.registry.get('current-level-index');
+			console.log(this.selectedLevel);
+		}
+		this.levelText.setText(this.levelsKey[this.selectedLevel]);
 
 	// load level button event
 		this.levelBack.setInteractive();

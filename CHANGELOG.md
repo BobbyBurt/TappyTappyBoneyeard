@@ -7,12 +7,15 @@ This build focuses on finalizing player control, movement and collision. Additio
 ### Changed
 
 - Player punch sprite has been separated into it's own image and hitbox, resulting in punch / uppercuts being easier / less risky.
+- Changed keyboard, gamepad and touch input bindings.
 - Player punch & uppercut sprite has been changed and no longer rotates while in uppercut state.
 - Reduced balloon enemy float range for consistency sake.
 - Changed nemies defeated UI tween to be more eye-catching.
 - Enemy & bomb knockback from attacks is now consistent instead of based on player velocity.
 - Horizontal flip can now be set on startPoint object in tilemap to change that of player.
 - Punching bombs now charges your punch the same as enemies.
+- Increased bullet speed.
+- Level select now opens selected to the level you returned from.
 
 ### Added
 
@@ -20,6 +23,9 @@ This build focuses on finalizing player control, movement and collision. Additio
 - Added plane end point, which is set to the position of an enemy. Player sits in the plane upon taking out the enemy.
 - Added combo system. Ui will display a combo when the player takes out two or more enemies while airborne.
 - Added a 'mute music' button.
+- Added tutorial music to earlier levels.
+- Added environmental ambient sound.
+- Added combo hit sound that changes pitch & volume based on combo.
 
 ### Removed
 

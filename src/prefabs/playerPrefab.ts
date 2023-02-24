@@ -157,19 +157,36 @@ export default class playerPrefab extends Phaser.Physics.Arcade.Sprite {
 
 		this.setFistPosition();
 
-		if (this.lockInput)
-		{
-			return;
-		}
-
+		
 		this.inputCheck();
-
+		
 		this.stateController.update();
 	}
 
 	/** update input values based on key / gamepad / mobile button state */
 	inputCheck()
 	{
+	// restart
+		if (this.gamepad?.isButtonDown(9))
+		{
+			let _scene = this.scene as Level;
+
+			_scene.resetLevel();
+		}
+	
+	// level select
+		if (this.gamepad?.isButtonDown(8))
+		{
+			let _scene = this.scene as Level;
+
+			_scene.LoadLevelSelect();
+		}
+
+		if (this.lockInput)
+		{
+			return;
+		}
+
 	// jump
 		if (this.gamepad?.isButtonDown(this.jumpButton) 
 			|| this.jumpKey.isDown || this.jumpMobileButton)
@@ -318,22 +335,6 @@ export default class playerPrefab extends Phaser.Physics.Arcade.Sprite {
 			{
 				this.diveInput = 'up'
 			}
-		}
-
-	// restart
-		if (this.gamepad?.isButtonDown(9))
-		{
-			let _scene = this.scene as Level;
-
-			_scene.resetLevel();
-		}
-
-	// level select
-		if (this.gamepad?.isButtonDown(8))
-		{
-			let _scene = this.scene as Level;
-
-			_scene.LoadLevelSelect();
 		}
 
 	// egg

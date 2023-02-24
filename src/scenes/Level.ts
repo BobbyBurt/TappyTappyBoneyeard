@@ -470,6 +470,7 @@ export default class Level extends Phaser.Scene {
 	public UICam: Phaser.Cameras.Scene2D.BaseCamera;
 
 	private music: Phaser.Sound.BaseSound;
+	private environmentAudio: Phaser.Sound.BaseSound;
 
 	/** Polygons used for enemies' player detection. */
 	private visionPolys: Array<VisionPoly>;
@@ -659,8 +660,12 @@ export default class Level extends Phaser.Scene {
 		this.sound.add('reflect', {volume: 1});
 			// TODO: impliment explosion sound w/ spacial audio or something
 		this.sound.add('punch-swing', {volume: 1});
+		this.environmentAudio = this.sound.add('environment');
+		this.sound.add('combo-hit');
 
 		this.sound.play('reflect');
+
+		this.environmentAudio.play(undefined, {volume: 0.03, loop: true});
 
 	// debug wall detect visual
 		this.debugWallDetectGraphics = this.add.graphics({fillStyle: { color: 0x0000ff, alpha: (__DEV__? 1 : 0)}});
@@ -684,15 +689,18 @@ export default class Level extends Phaser.Scene {
 			if (this.registry.get('muted'))
 			{
 				this.music.play();
+				this.environmentAudio.play();
 				this.registry.set('muted', false );
 			}
 			else
 			{
 				this.music.stop();
+				this.environmentAudio.stop();
 				this.registry.set('muted', true );
 			}
 		});
 
+		this.combo = 0;
 		this.updateCombo();
 
 	// resize init
@@ -853,6 +861,8 @@ export default class Level extends Phaser.Scene {
 			let _enemy = enemy as EnemyPrefab;
 			_enemy.removeUpdateListener();
 		});
+
+		this.environmentAudio.stop();
 
 		this.scene.start('LevelSelect');
 	}
@@ -1145,6 +1155,9 @@ export default class Level extends Phaser.Scene {
 				ease: Phaser.Math.Easing.Circular.Out,
 				scale: 1,
 			});
+
+			this.sound.play('combo-hit', {volume: (((this.combo - 2) + 0) * 0.07) + 0.4, detune: (this.combo - 2) * 100});
+				// TODO: volume based on combo needs a max
 		}
 		else
 		{
@@ -1437,8 +1450,8 @@ export default class Level extends Phaser.Scene {
 			/* does this add existing bullets to the list, adding them infinitely? */
 			// TODO: these should be added once on object initialization, not recycle
 		let velocity = {x: 0, y: 0};
-		const _speed = 200;
-		const _speedHorizontal = 150;
+		const _speed = 300;
+		const _speedHorizontal = 250;
 		switch(enemy.gunDirection)
 		{
 			case 'up':
