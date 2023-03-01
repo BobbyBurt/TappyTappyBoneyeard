@@ -66,6 +66,7 @@ export default class playerPrefab extends Phaser.Physics.Arcade.Sprite {
 	private punchButton: number = 0;
 	public punchCharged: boolean = true;
 	public punchMobileButton: boolean = false;
+	public punchCooldownTimer: Phaser.Time.TimerEvent;
 
 	// /** set based on key, gamepad or mobile input */
 	// public punchLeftInput: input = 'up';
@@ -137,6 +138,8 @@ export default class playerPrefab extends Phaser.Physics.Arcade.Sprite {
 
 		this.createAnimations();
 		this.play('idle');
+
+		this.punchCooldownTimer = this.scene.time.addEvent({delay: 1});
 	}
 
 	update()
@@ -472,11 +475,31 @@ export default class playerPrefab extends Phaser.Physics.Arcade.Sprite {
 	 * @param queue wait until current animation is complete
 	 */
 	public playAnimation(key: string, queue?: boolean): void
-	{
+	{	
+		let flapChargeAnim = false;
+		let punchChargeAnim = false;
+
 		if (key === 'flap' || key === 'punch' || key === 'dive' || key === 'cling' 
-			|| key === 'airborne' || key === 'uppercut')
+			|| key === 'airborne' || key === 'uppercut' || key === 'run')
 		{
-			key = key + '-' + this.flapCharge.toString();
+			// key = key + '-' + this.flapCharge.toString();
+			flapChargeAnim = true;
+		}
+
+		if (!this.punchCharged && 
+			(key === 'flap' || key === 'airborne' || key === 'cling' || key === 'dive'))
+		{
+			// key = key + '-exhausted'
+			punchChargeAnim = true;
+		}
+
+		if (punchChargeAnim)
+		{
+			key += '-exhausted'
+		}
+		if (flapChargeAnim)
+		{
+			key += '-' + this.flapCharge.toString();
 		}
 
 		if (queue)
@@ -499,6 +522,28 @@ export default class playerPrefab extends Phaser.Physics.Arcade.Sprite {
 	{
 		this.anims.create
 		({
+			key: 'run-2',
+			frames: this.anims.generateFrameNumbers('bird1run', { frames: [ 0, 1, 1, 2, 3, 3, 4 ] }),
+			frameRate: 10,
+			repeat: -1
+		});
+		this.anims.create
+		({
+			key: 'run-1',
+			frames: this.anims.generateFrameNumbers('bird1run', { frames: [ 0, 1, 1, 2, 3, 3, 4 ] }),
+			frameRate: 10,
+			repeat: -1
+		});
+		this.anims.create
+		({
+			key: 'run-0',
+			frames: this.anims.generateFrameNumbers('bird1run', { frames: [ 0, 1, 1, 2, 3, 3, 4 ] }),
+			frameRate: 10,
+			repeat: -1
+		});
+
+		this.anims.create
+		({
 			key: 'flap-2',
 			frames:
 			[
@@ -518,11 +563,31 @@ export default class playerPrefab extends Phaser.Physics.Arcade.Sprite {
 			frameRate: 16,
 			repeat: 0
 		});
-
 		this.anims.create
 		({
 			key: 'flap-0',
 			frames: this.anims.generateFrameNumbers('flap-sprites', { frames: [ 6, 7, 8, 8 ] }),
+			frameRate: 16,
+			repeat: 0
+		});
+		this.anims.create
+		({
+			key: 'flap-exhausted-2',
+			frames: this.anims.generateFrameNumbers('flap-exhausted-sprites', { frames: [ 0, 1, 2, 2 ] }),
+			frameRate: 16,
+			repeat: 0
+		});
+		this.anims.create
+		({
+			key: 'flap-exhausted-1',
+			frames: this.anims.generateFrameNumbers('flap-exhausted-sprites', { frames: [ 3, 4, 5, 5 ] }),
+			frameRate: 16,
+			repeat: 0
+		});
+		this.anims.create
+		({
+			key: 'flap-exhausted-0',
+			frames: this.anims.generateFrameNumbers('flap-exhausted-sprites', { frames: [ 6, 7, 8, 8 ] }),
 			frameRate: 16,
 			repeat: 0
 		});
@@ -664,6 +729,38 @@ export default class playerPrefab extends Phaser.Physics.Arcade.Sprite {
 			frameRate: 16,
 			repeat: 0
 		});
+		this.anims.create
+		({
+			key: 'dive-exhausted-2',
+			frames:
+			[
+				{ key: 'bird1dive-exhausted' }
+			],
+			frameRate: 16,
+			repeat: 0
+		});
+
+		this.anims.create
+		({
+			key: 'dive-exhausted-1',
+			frames:
+			[
+				{ key: 'bird3dive-exhausted' }
+			],
+			frameRate: 16,
+			repeat: 0
+		});
+
+		this.anims.create
+		({
+			key: 'dive-exhausted-0',
+			frames:
+			[
+				{ key: 'bird4dive-exhausted' }
+			],
+			frameRate: 16,
+			repeat: 0
+		});
 
 		this.anims.create
 		({
@@ -690,6 +787,38 @@ export default class playerPrefab extends Phaser.Physics.Arcade.Sprite {
 		this.anims.create
 		({
 			key: 'cling-0',
+			frames:
+			[
+				{ key: 'bird4cling' }
+			],
+			frameRate: 16,
+			repeat: 0
+		});
+		this.anims.create
+		({
+			key: 'cling-exhausted-2',
+			frames:
+			[
+				{ key: 'bird1cling-exhausted' }
+			],
+			frameRate: 16,
+			repeat: 0
+		});
+
+		this.anims.create
+		({
+			key: 'cling-exhausted-1',
+			frames:
+			[
+				{ key: 'bird3cling-exhausted' }
+			],
+			frameRate: 16,
+			repeat: 0
+		});
+
+		this.anims.create
+		({
+			key: 'cling-exhausted-0',
 			frames:
 			[
 				{ key: 'bird4cling' }
@@ -729,6 +858,29 @@ export default class playerPrefab extends Phaser.Physics.Arcade.Sprite {
 		({
 			key: 'airborne-0',
 			frames: this.anims.generateFrameNumbers('flap-sprites', { frames: [ 7 ] }),
+			frameRate: 16,
+			repeat: 0
+		});
+		this.anims.create
+		({
+			key: 'airborne-exhausted-2',
+			frames: this.anims.generateFrameNumbers('flap-exhausted-sprites', { frames: [ 1 ] }),
+			frameRate: 16,
+			repeat: 0
+		});
+
+		this.anims.create
+		({
+			key: 'airborne-exhausted-1',
+			frames: this.anims.generateFrameNumbers('flap-exhausted-sprites', { frames: [ 4 ] }),
+			frameRate: 16,
+			repeat: 0
+		});
+
+		this.anims.create
+		({
+			key: 'airborne-exhausted-0',
+			frames: this.anims.generateFrameNumbers('flap-exhausted-sprites', { frames: [ 7 ] }),
 			frameRate: 16,
 			repeat: 0
 		});

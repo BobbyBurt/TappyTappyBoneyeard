@@ -209,12 +209,12 @@ export default class EnemyPrefab extends Phaser.GameObjects.Sprite {
 			}
 			case 'up':
 			{
-				this.gun.setAngle(90);
+				this.gun.setAngle(this.flipX? -90 : 90);
 				break;
 			}
 			case 'down':
 			{
-				this.gun.setAngle(-90);
+				this.gun.setAngle(this.flipX? 90 : -90);
 				break;
 			}
 		}

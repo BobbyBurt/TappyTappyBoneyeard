@@ -38,11 +38,13 @@ export default class Punch implements State {
 			if (this.player.onFloor)
 			{
 				this.player.setFist(false, false);
+				this.player.punchCooldownTimer = this.player.scene.time.addEvent({delay: 200});
 				this.player.stateController.setState('running');
 			}
 			else
 			{
 				this.player.setFist(false, false);
+				this.player.punchCooldownTimer = this.player.scene.time.addEvent({delay: 200});
 				this.player.stateController.setState('airborne');
 			}
 		}});
@@ -67,6 +69,7 @@ export default class Punch implements State {
 				this.player.body.allowGravity = true;
 				this.player.setFist(false, false);
 				this.stateController.setState('groundCling');
+				this.player.punchCooldownTimer = this.player.scene.time.addEvent({delay: 200});
 				this.timer?.remove();
 				return;
 			}
@@ -76,6 +79,7 @@ export default class Punch implements State {
 				this.player.body.allowGravity = true;
 				this.player.setFist(false, false);
 				this.stateController.setState('cling');
+				this.player.punchCooldownTimer = this.player.scene.time.addEvent({delay: 200});
 				this.timer?.remove();
 				return;
 			}

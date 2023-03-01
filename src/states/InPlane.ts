@@ -21,12 +21,10 @@ export default class InPlane implements State {
 		this.player.flipX = true;
 
 		this.player.body.setEnable(false);
-
-		console.log('plane');
 	}
 	
 	update()
 	{	
-		console.log('asdfasdf');
+		
 	}
 }

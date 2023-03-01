@@ -491,8 +491,6 @@ export default class Level extends Phaser.Scene {
 
 	create()
 	{	
-		// super.create();
-
 		this.editorCreate();
 
 		this.createMobileButtons();
@@ -575,7 +573,8 @@ export default class Level extends Phaser.Scene {
 		this.createMapVisionPolys();
 
 	// tilemap special elements
-		const startPoint = TilemapUtil.getObjectPosition('startPoint', this.tileMap);
+		console.log(TilemapUtil.getObjectPositionByGID(38, this.tileMap));
+		const startPoint = TilemapUtil.getObjectPositionByGID(38, this.tileMap);
 		startPoint.x += 8;
 		startPoint.y -= 8;
 		this.player.setPosition(startPoint.x, startPoint.y);
@@ -589,8 +588,6 @@ export default class Level extends Phaser.Scene {
 		// endEgg.x += 6;
 		// endEgg.y -= 6;
 		// this.endEgg.setPosition(endEgg.x, endEgg.y);
-
-		this.bottomBoundary = TilemapUtil.getObjectPosition('resetY', this.tileMap).y
 
 	// bombs
 		this.bombGroup = this.add.group({maxSize: 30, classType: BombPrefab});
@@ -627,8 +624,8 @@ export default class Level extends Phaser.Scene {
 
 	// music
 		if (this.music == undefined 
-			|| (this.music.key === 'main-game' && this.registry.get('current-level-index') < 3)
-			|| (this.music.key === 'tutorial' && this.registry.get('current-level-index') >= 3))
+			|| (this.music.key === 'main-game' && this.registry.get('current-level-index') < 4)
+			|| (this.music.key === 'tutorial' && this.registry.get('current-level-index') >= 4))
 		{
 			if (this.music)
 			{
@@ -644,7 +641,7 @@ export default class Level extends Phaser.Scene {
 				this.music = this.sound.add('main-game', {volume: .7});
 			}
 
-			if (__DEV__ && !this.registry.get('muted'))
+			if (!__DEV__ && !this.registry.get('muted'))
 			{
 				this.music.play({loop: true});
 			}
@@ -720,8 +717,8 @@ export default class Level extends Phaser.Scene {
 			this.debugText.setText(`${this.player.stateController.currentState.name}`);
 			// this.debugText2.setText(`flap charge: ${this.player.flapCharge}`);
 			// this.debugText3.setText(`punch charge: ${this.player.punchCharged}`);	
-			this.debugText2.setText(`player x: ${this.player.x}`);
-			this.debugText3.setText(`player vel x: ${this.player.body.velocity.x}`);
+			this.debugText2.setText(`zoom: ${this.cameras.main.zoom}`);
+			this.debugText3.setText(`scale: ${this.scale.width}, ${this.scale.height}}`);
 		}
 
 		if (this.player.punchCharged)
@@ -774,7 +771,7 @@ export default class Level extends Phaser.Scene {
 	});
 
 	// out-of-bounds checks
-		if (this.player.y > this.bottomBoundary!)
+		if (this.player.y > this.cameras.main.getBounds().bottom)
 		{
 			// this.player.reset();
 
@@ -783,8 +780,7 @@ export default class Level extends Phaser.Scene {
 		this.bombGroup.getChildren().forEach(member =>
 		{
 			let _member = member as BombPrefab;
-			if (_member.y > this.bottomBoundary!)
-				// why can't I access y just by member.y?
+			if (_member.y > this.cameras.main.getBounds().bottom)
 			{
 				_member.disappear();
 				_member.setPosition(9999, -9999);
@@ -1290,12 +1286,12 @@ export default class Level extends Phaser.Scene {
 	explosionCheck(x: number, y: number)
 	{
 		let _this = this;
-		this.physics.overlapCirc(x, y, 20, true, false).forEach(function (element: any)
+		this.physics.overlapCirc(x, y, 25, true, false).forEach(function (element: any)
 		// TODO: specify type annotation
 		{
 			if (_this.enemyList.includes(element.gameObject))
 			{
-				element.gameObject.hit(0, -350);
+				element.gameObject.hit(0, -250);
 
 				if (!_this.player.onFloor)
 				{
@@ -1414,7 +1410,7 @@ export default class Level extends Phaser.Scene {
 
 		if (constant)
 		{
-			console.log('hello??')
+			// console.log('hello??')
 		}
 
 		if (enemy.gunSprayTimer.getProgress() == 1 && enemy.gunCoolDownTimer.getProgress() == 1)
@@ -1702,131 +1698,81 @@ export default class Level extends Phaser.Scene {
 		let _mapObjects = this.tileMap.getObjectLayer('elements')
 		_mapObjects.objects.forEach((object, index) =>
 		{
-			let _enemy: any = null;
-			let _gunDirection: GunDirection;
-			let _bomb = false;
-
-		// determine weapon from tile gid
-			switch (object.gid)
+		// Return if this isn't the enemy tile
+			if (object.gid)
 			{
-				case 37:
-				{
-					_gunDirection = null;
-					break;
-				}
-				case 38:
-				{
-					_gunDirection = 'forward';
-					break;
-				}
-				case 39:
-				{
-					_gunDirection = 'upward';
-					break;
-				}
-				case 40:
-				{
-					_gunDirection = 'up';
-					break;
-				}
-				case 41:
-				{
-					_gunDirection = 'downward';
-					break;
-				}
-				case 42:
-				{
-					_gunDirection = 'down';
-					break;
-				}
-				case 48:
-				{
-					_gunDirection = null;
-					_bomb = true;
-					break;
-				}
-				default:
+				if (object.gid !== 37)
 				{
 					return;
-						// this isn't an enemy tile
 				}
 			}
+			else
+			{
+				return;
+			}
 
-			let mine = false;
-			try
-			{
-				if ((object.properties[0].name === 'mine' && object.properties[0].value === true) 
-					|| (object.properties[1].name === 'mine' && object.properties[1].value === true))
-				{
-					mine = true;
-				}
-			}
-			catch (error) {}
+		// Settings
+			let enemy: EnemyPrefab;
 
-			let alwaysFire = false;
-			try
-			{
-				if ((object.properties[0].name === 'alwaysFire' && object.properties[0].value === true) 
-					|| (object.properties[1].name === 'alwaysFire' && object.properties[1].value === true))
-				{
-					alwaysFire = true;
-				}
-			}
-			catch (error) {}
+			const balloon: boolean = object.properties[0].value;
+			const bomb: boolean = object.properties[1].value;
+			const goal: boolean = object.properties[2].value;
+			const gunDirection: GunDirection = object.properties[3].value;
+			const alwaysFire: boolean = (!object.properties[3].value);
+			const mine = object.properties[4].value;
+			const parasol: boolean = object.properties[5].value;
+			const pogo: boolean = object.properties[6].value;
+			// const vision: ? = object.properties[7].value;
 
-		// enemy type
-			if (object.type == 'balloon' || object.type == 'balloon-parasol')
+		// Enemy type
+			if (balloon)
 			{
-				_enemy = new BalloonEnemy
-					(this, object.x! + 8, object.y! - 8, _gunDirection, 
-						(object.type == 'balloon-parasol'), mine, alwaysFire);
+				enemy = new BalloonEnemy
+					(this, object.x! + 8, object.y! - 8, gunDirection, parasol, mine, alwaysFire);
 			}
-			else if (object.type == 'pogo' || object.type == 'pogo-parasol')
+			else if (pogo)
 			{
-				_enemy = new PogoEnemy
-					(this, object.x! + 8, object.y! - 8, _gunDirection, 
-						(object.type == 'pogo-parasol'), mine, alwaysFire);
+				enemy = new PogoEnemy
+					(this, object.x! + 8, object.y! - 8, gunDirection, parasol, mine, alwaysFire);
 			}
-			else if (object.type == 'goal' || object.type == 'goal-parasol')
+			else if (goal)
 			{
-				_enemy = new GroundEnemy
-					(this, object.x! + 8, object.y! - 8, _gunDirection, 
-						(object.type == 'goal-parasol'), mine, alwaysFire);
-				_enemy.isGoal = true;
+				enemy = new GroundEnemy
+					(this, object.x! + 8, object.y! - 8, gunDirection, parasol, mine, alwaysFire);
+				enemy.isGoal = true;
 
 				this.createPlane(object.x!, object.y!);
 			}
 			else
 			{
-				_enemy = new GroundEnemy
-					(this, object.x! + 8, object.y! - 8, _gunDirection, 
-						(object.type == 'parasol'), mine, alwaysFire);
+				enemy = new GroundEnemy
+					(this, object.x! + 8, object.y! - 8, gunDirection, parasol, mine, alwaysFire);
 			}
 
-			if (_gunDirection !== undefined)
+			if (gunDirection !== undefined)
 			{
-				this.gunEnemyList.push(_enemy);
+				this.gunEnemyList.push(enemy);
 			}
-			if (_bomb)
+			if (bomb)
 			{
-				this.bombEnemyList.push(_enemy);
-				_enemy.createBombProp();
-				_enemy.bombCooldownTimer = this.time.addEvent({delay: 1000, callback: () =>
+				this.bombEnemyList.push(enemy);
+				enemy.createBombProp();
+				enemy.bombCooldownTimer = this.time.addEvent({delay: 1000, callback: () =>
 				{
-					if (!_enemy.isFalling())
+					if (!enemy.isFalling())
 					{
-						_enemy.bombProp.setVisible(true);
+						enemy.bombProp.setVisible(true);
 					}
 				}});
 			}
 
-			_enemy.flipX = object.flippedHorizontal;
+			enemy.flipX = object.flippedHorizontal!;
 
-			this.enemyList.push(_enemy);
-			_enemy.enemyListIndex = this.enemyList.length - 1;
-			this.mapElementList[object.id] = _enemy;
-			this.mainLayer.add(_enemy);
-			this.UICam.ignore(_enemy);
+			this.enemyList.push(enemy);
+			enemy.enemyListIndex = this.enemyList.length - 1;
+			this.mapElementList[object.id] = enemy;
+			this.mainLayer.add(enemy);
+			this.UICam.ignore(enemy);
 		});
 	}
 
@@ -1843,7 +1789,7 @@ export default class Level extends Phaser.Scene {
 		let _mapObjects = this.tileMap.getObjectLayer('elements')
 		_mapObjects.objects.forEach((_object, index) =>
 		{
-			if (_object.name === 'enemyVision')
+			if (_object.polygon)
 			{
 				let object = _object as any;
 
@@ -1876,54 +1822,6 @@ export default class Level extends Phaser.Scene {
 				}
 			}
 		});
-	}
-
-	/**
-	 * Decoupled from createMapEnemies(). Currently unused.
-	 * @param x 
-	 * @param y 
-	 * @param flipX 
-	 * @param gunDirection 
-	 * @param balloon 
-	 * @param bomb 
-	 * @param parasol 
-	 */
-	public createEnemy(x: number, y: number, flipX: boolean, gunDirection: GunDirection, balloon: boolean, 
-		bomb: boolean, parasol: boolean): void
-	{
-		let newEnemy: EnemyPrefab;
-
-		if (balloon)
-		{
-			newEnemy = new BalloonEnemy(this, x + 8, y - 8, gunDirection, parasol);
-		}
-		else
-		{
-			newEnemy = new GroundEnemy(this, x + 8, y - 8, gunDirection, parasol);
-		}
-
-		newEnemy.flipX = flipX;
-
-		if (gunDirection !== null)
-		{
-			this.gunEnemyList.push(newEnemy);
-		}
-		if (bomb)
-		{
-			this.bombEnemyList.push(newEnemy);
-			newEnemy.bombCooldownTimer = this.time.addEvent({delay: 1000, callback: () =>
-			{
-				if (!newEnemy.isFalling())
-				{
-					newEnemy.bombProp.setVisible(true);
-				}
-			}});
-		}
-
-		this.enemyList.push(newEnemy);
-		newEnemy.enemyListIndex = this.enemyList.length - 1;
-		// this.mainLayer.add(newEnemy);
-		// this.UICam.ignore(newEnemy);
 	}
 
 	/**
@@ -2016,7 +1914,8 @@ export default class Level extends Phaser.Scene {
 
 	resize()
 	{
-
+		const _camera = this.UICam as any;
+		_camera.preRender(1);
 	}
 
 	/* END-USER-CODE */

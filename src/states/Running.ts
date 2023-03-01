@@ -17,7 +17,7 @@ export default class Running implements State {
 	
 	enter()
 	{
-		this.player.play('running');
+		this.player.playAnimation('run');
 	}
 	
 	update()
@@ -26,11 +26,13 @@ export default class Running implements State {
 		{
 			this.jump();
 		}
-		else if (this.player.punchInput == 'just-down' && this.player.punchCharged)
+		else if (this.player.punchInput == 'just-down' && this.player.punchCharged 
+			&& this.player.punchCooldownTimer.getProgress() === 1)
 		{
 			this.stateController.setState('punch');
 		}
-		else if (this.player.uppercutInput == 'just-down' && this.player.punchCharged)
+		else if (this.player.uppercutInput == 'just-down' && this.player.punchCharged 
+			&& this.player.punchCooldownTimer.getProgress() === 1)
 		{
 			this.stateController.setState('uppercut');
 		}

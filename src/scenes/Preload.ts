@@ -54,9 +54,12 @@ export default class Preload extends Phaser.Scene {
 
 		this.resize();
 
+		this.scale.autoRound = true;
+
 	// camera
 		this.cameras.main.setViewport(0, 0, this.scale.width, this.scale.height);
 		this.cameras.main.setBackgroundColor(0x242424);
+		this.cameras.main.setZoom(this.scale.width / 550)
 
 	// start input
 		window.addEventListener('touchstart', this.onPointer);

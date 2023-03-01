@@ -60,9 +60,19 @@
                 "key": "bird1cling"
             },
             {
+                "url": "assets/bird1cling-exhausted.png",
+                "type": "image",
+                "key": "bird1cling-exhausted"
+            },
+            {
                 "url": "assets/bird1dive.png",
                 "type": "image",
                 "key": "bird1dive"
+            },
+            {
+                "url": "assets/bird1dive-exhausted.png",
+                "type": "image",
+                "key": "bird1dive-exhausted"
             },
             {
                 "url": "assets/bird1egg.png",
@@ -85,6 +95,19 @@
                 "key": "bird1punch"
             },
             {
+                "url": "assets/bird1run.png",
+                "frameConfig": {
+                    "frameWidth": 18,
+                    "frameHeight": 18,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "bird1run"
+            },
+            {
                 "url": "assets/bird1squash.png",
                 "type": "image",
                 "key": "bird1squash"
@@ -105,9 +128,19 @@
                 "key": "bird3cling"
             },
             {
+                "url": "assets/bird3cling-exhausted.png",
+                "type": "image",
+                "key": "bird3cling-exhausted"
+            },
+            {
                 "url": "assets/bird3dive.png",
                 "type": "image",
                 "key": "bird3dive"
+            },
+            {
+                "url": "assets/bird3dive-exhausted.png",
+                "type": "image",
+                "key": "bird3dive-exhausted"
             },
             {
                 "url": "assets/bird3punch.png",
@@ -120,9 +153,19 @@
                 "key": "bird4cling"
             },
             {
+                "url": "assets/bird4cling-exhausted.png",
+                "type": "image",
+                "key": "bird4cling-exhausted"
+            },
+            {
                 "url": "assets/bird4dive.png",
                 "type": "image",
                 "key": "bird4dive"
+            },
+            {
+                "url": "assets/bird4dive-exhausted.png",
+                "type": "image",
+                "key": "bird4dive-exhausted"
             },
             {
                 "url": "assets/bird4punch.png",
@@ -195,6 +238,24 @@
                 ],
                 "type": "audio",
                 "key": "explosion"
+            },
+            {
+                "url": "assets/levels/rapidfire.json",
+                "type": "tilemapTiledJSON",
+                "key": "final"
+            },
+            {
+                "url": "assets/flap-exhausted-sprites.png",
+                "frameConfig": {
+                    "frameWidth": 18,
+                    "frameHeight": 18,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "flap-exhausted-sprites"
             },
             {
                 "url": "assets/flap-sprites.png",

@@ -15,7 +15,7 @@ export default class CameraUtil {
         : Phaser.Cameras.Scene2D.Camera
     {
     // basic adaptive zoom
-        const zoom = (scene.scale.width > 1000? 3 : 2);
+        const zoom = (scene.scale.height / 315);
         
         scene.cameras.main.setName('main');
 		scene.cameras.main.setZoom(zoom);
@@ -33,7 +33,7 @@ export default class CameraUtil {
     public static createUICamera(scene: Phaser.Scene): Phaser.Cameras.Scene2D.Camera
     {
     // basic adaptive zoom
-        const zoom = (scene.scale.width > 1000? 3 : 2);
+        const zoom = (scene.scale.width > 1000? 3 : 3);
 
         let camera = scene.cameras.add(0, 0, scene.scale.width, scene.scale.height);
 		camera.setName('UICam')

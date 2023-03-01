@@ -1,5 +1,27 @@
 # Changelog
 
+# Version 11 Alpha
+
+### Changed
+
+- ResetY object is no longer required / used for level bottom boundary, instead just using the bottom of the tilemap.
+- Enemy settings in the tilemap editor have been unified as custom properties.
+- VisionPoly no longer needs to be named such in the tilemap, as it's identified by being a polygon object.
+- Starting point no longer needs to be named such, as it's identified by GID.
+
+### Added
+
+- Added specific run animation sprites.
+- Added sprite variations to convey punch charge.
+
+### Removed
+
+### Fixed
+
+- Enabled scale autoRound. While playing in the full browser window, scrollbars will no longer appear.
+- UI no longer disappears or offsets on fullscreen or mobile orientation change.
+- For enemies flipped horizontally and with guns pointing up or down, gun sprite is now rotated in the proper direction.
+
 # Version 10 Alpha
 
 This build focuses on finalizing player control, movement and collision. Additionally, I'm creating a series of new levels. These things are to make a good demonstration of the primary gameplay loop.
@@ -16,6 +38,8 @@ This build focuses on finalizing player control, movement and collision. Additio
 - Punching bombs now charges your punch the same as enemies.
 - Increased bullet speed.
 - Level select now opens selected to the level you returned from.
+- Level select now displays the level number along with the level key.
+- Increased explosion impact distance to account for the fist hitbox allowing the player to take out mine enemies safely.
 
 ### Added
 

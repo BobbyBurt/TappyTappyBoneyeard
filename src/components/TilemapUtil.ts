@@ -21,6 +21,18 @@ export default class TilemapUtil {
         return new Phaser.Math.Vector2(point.x!, point.y!)
     }
 
+    public static getObjectPositionByGID(GID: number, tilemap:Phaser.Tilemaps.Tilemap): Phaser.Math.Vector2
+    {
+        const point = tilemap.findObject('elements', function (obj) 
+		{
+            const _obj = obj as any;
+            return _obj.gid === GID;
+		});
+			// TODO: I shouldn't have to name these anymore, since they have unique GIDs.
+
+        return new Phaser.Math.Vector2(point.x!, point.y!)
+    }
+
     /**
      * Returns true if object is flipped
      * @param tilemap 

@@ -8,7 +8,7 @@ window.addEventListener('load', function ()
 	{
 		title: 'Tappy Tappy Boneyard',
 		url: 'https://www.newgrounds.com/projects/games/1923225/preview',
-		version: '10 alpha',
+		version: '11 alpha',
 		
 	// visuals
 		type: Phaser.AUTO,
@@ -22,8 +22,11 @@ window.addEventListener('load', function ()
 			mode: Phaser.Scale.NONE,
 			width: window.innerWidth * window.devicePixelRatio,
         	height: window.innerHeight * window.devicePixelRatio,
-        	zoom: 1 / window.devicePixelRatio
+        	zoom: 1 / window.devicePixelRatio,
 				// TODO: specify max w/h
+			autoRound: true
+				// this removes the scrollbars while I'm testing in Chrome
+				// TODO: reconsider this before release
 		},
 
 	// physics
