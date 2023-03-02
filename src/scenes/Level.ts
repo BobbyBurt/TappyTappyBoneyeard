@@ -578,9 +578,9 @@ export default class Level extends Phaser.Scene {
 
 	// tilemap special elements
 		const startPoint = TilemapUtil.getObjectPositionByGID(38, this.tileMap);
-		startPoint.x += 8;
-		startPoint.y -= 8;
-		this.player.setPosition(startPoint.x, startPoint.y);
+		startPoint!.x += 8;
+		startPoint!.y -= 8;
+		this.player.setPosition(startPoint!.x, startPoint!.y);
 		this.data.set('startPoint', startPoint);
 		this.player.setFlipX(TilemapUtil.getObjectFlipByGID(38, this.tileMap));
 
@@ -591,6 +591,12 @@ export default class Level extends Phaser.Scene {
 		// endEgg.x += 6;
 		// endEgg.y -= 6;
 		// this.endEgg.setPosition(endEgg.x, endEgg.y);
+
+		const endPlane: Phaser.Math.Vector2 | null = TilemapUtil.getObjectPositionByGID(39, this.tileMap);
+		if (endPlane)
+		{
+			this.createPlane(endPlane!.x, endPlane.y);
+		}
 
 	// bombs
 		this.bombGroup = this.add.group({maxSize: 30, classType: BombPrefab});

@@ -21,7 +21,7 @@ export default class TilemapUtil {
         return new Phaser.Math.Vector2(point.x!, point.y!)
     }
 
-    public static getObjectPositionByGID(GID: number, tilemap:Phaser.Tilemaps.Tilemap): Phaser.Math.Vector2
+    public static getObjectPositionByGID(GID: number, tilemap:Phaser.Tilemaps.Tilemap): Phaser.Math.Vector2 | null
     {
         const point = tilemap.findObject('elements', function (obj) 
 		{
@@ -29,7 +29,14 @@ export default class TilemapUtil {
             return _obj.gid === GID;
 		});
 
-        return new Phaser.Math.Vector2(point.x!, point.y!)
+        if (point)
+        {
+            return new Phaser.Math.Vector2(point.x!, point.y!)
+        }
+        else
+        {
+            return null;
+        }
     }
 
     /**
