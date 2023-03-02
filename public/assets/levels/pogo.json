@@ -32,45 +32,9 @@
          "name":"elements",
          "objects":[
                 {
-                 "gid":2147483691,
-                 "height":16,
-                 "id":14,
-                 "name":"startPoint",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":16,
-                 "x":112,
-                 "y":656
-                }, 
-                {
-                 "gid":37,
-                 "height":16,
-                 "id":61,
-                 "name":"",
-                 "rotation":0,
-                 "type":"pogo-parasol",
-                 "visible":true,
-                 "width":16,
-                 "x":1024,
-                 "y":576
-                }, 
-                {
-                 "gid":38,
-                 "height":16,
-                 "id":63,
-                 "name":"",
-                 "rotation":0,
-                 "type":"balloon",
-                 "visible":true,
-                 "width":16,
-                 "x":736,
-                 "y":528
-                }, 
-                {
                  "height":0,
                  "id":64,
-                 "name":"enemyVision",
+                 "name":"",
                  "polygon":[
                         {
                          "x":0,
@@ -92,7 +56,7 @@
                         {
                          "name":"parentEnemy",
                          "type":"object",
-                         "value":63
+                         "value":81
                         }],
                  "rotation":0,
                  "type":"",
@@ -104,10 +68,46 @@
                 {
                  "gid":37,
                  "height":16,
-                 "id":65,
+                 "id":76,
                  "name":"",
+                 "properties":[
+                        {
+                         "name":"Balloon",
+                         "type":"bool",
+                         "value":false
+                        }, 
+                        {
+                         "name":"Bomb",
+                         "type":"bool",
+                         "value":false
+                        }, 
+                        {
+                         "name":"Goal",
+                         "type":"bool",
+                         "value":false
+                        }, 
+                        {
+                         "name":"Gun Direction",
+                         "type":"string",
+                         "value":""
+                        }, 
+                        {
+                         "name":"Mine",
+                         "type":"bool",
+                         "value":false
+                        }, 
+                        {
+                         "name":"Parasol",
+                         "type":"bool",
+                         "value":false
+                        }, 
+                        {
+                         "name":"Pogo",
+                         "type":"bool",
+                         "value":true
+                        }],
                  "rotation":0,
-                 "type":"pogo",
+                 "type":"",
                  "visible":true,
                  "width":16,
                  "x":304,
@@ -116,38 +116,206 @@
                 {
                  "gid":2147483685,
                  "height":16,
-                 "id":66,
+                 "id":77,
                  "name":"",
+                 "properties":[
+                        {
+                         "name":"Balloon",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
+                         "name":"Bomb",
+                         "type":"bool",
+                         "value":false
+                        }, 
+                        {
+                         "name":"Goal",
+                         "type":"bool",
+                         "value":false
+                        }, 
+                        {
+                         "name":"Gun Direction",
+                         "type":"string",
+                         "value":""
+                        }, 
+                        {
+                         "name":"Mine",
+                         "type":"bool",
+                         "value":false
+                        }, 
+                        {
+                         "name":"Parasol",
+                         "type":"bool",
+                         "value":false
+                        }, 
+                        {
+                         "name":"Pogo",
+                         "type":"bool",
+                         "value":false
+                        }],
                  "rotation":0,
-                 "type":"balloon",
+                 "type":"",
                  "visible":true,
                  "width":16,
                  "x":128,
                  "y":560
                 }, 
                 {
-                 "gid":37,
+                 "gid":2147483686,
                  "height":16,
-                 "id":69,
+                 "id":79,
                  "name":"",
-                 "rotation":0,
-                 "type":"goal",
-                 "visible":true,
-                 "width":16,
-                 "x":1136,
-                 "y":384
-                }, 
-                {
-                 "gid":44,
-                 "height":16,
-                 "id":75,
-                 "name":"resetY",
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":16,
-                 "x":128,
-                 "y":752
+                 "x":112,
+                 "y":656
+                }, 
+                {
+                 "gid":37,
+                 "height":16,
+                 "id":80,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"Balloon",
+                         "type":"bool",
+                         "value":false
+                        }, 
+                        {
+                         "name":"Bomb",
+                         "type":"bool",
+                         "value":false
+                        }, 
+                        {
+                         "name":"Goal",
+                         "type":"bool",
+                         "value":false
+                        }, 
+                        {
+                         "name":"Gun Direction",
+                         "type":"string",
+                         "value":""
+                        }, 
+                        {
+                         "name":"Mine",
+                         "type":"bool",
+                         "value":false
+                        }, 
+                        {
+                         "name":"Parasol",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
+                         "name":"Pogo",
+                         "type":"bool",
+                         "value":true
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":16,
+                 "x":1024,
+                 "y":576
+                }, 
+                {
+                 "gid":37,
+                 "height":16,
+                 "id":81,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"Balloon",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
+                         "name":"Bomb",
+                         "type":"bool",
+                         "value":false
+                        }, 
+                        {
+                         "name":"Goal",
+                         "type":"bool",
+                         "value":false
+                        }, 
+                        {
+                         "name":"Gun Direction",
+                         "type":"string",
+                         "value":"forward"
+                        }, 
+                        {
+                         "name":"Mine",
+                         "type":"bool",
+                         "value":false
+                        }, 
+                        {
+                         "name":"Parasol",
+                         "type":"bool",
+                         "value":false
+                        }, 
+                        {
+                         "name":"Pogo",
+                         "type":"bool",
+                         "value":false
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":16,
+                 "x":736,
+                 "y":528
+                }, 
+                {
+                 "gid":37,
+                 "height":16,
+                 "id":82,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"Balloon",
+                         "type":"bool",
+                         "value":false
+                        }, 
+                        {
+                         "name":"Bomb",
+                         "type":"bool",
+                         "value":false
+                        }, 
+                        {
+                         "name":"Goal",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
+                         "name":"Gun Direction",
+                         "type":"string",
+                         "value":""
+                        }, 
+                        {
+                         "name":"Mine",
+                         "type":"bool",
+                         "value":false
+                        }, 
+                        {
+                         "name":"Parasol",
+                         "type":"bool",
+                         "value":false
+                        }, 
+                        {
+                         "name":"Pogo",
+                         "type":"bool",
+                         "value":false
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":16,
+                 "x":1136,
+                 "y":384
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -156,7 +324,7 @@
          "y":0
         }],
  "nextlayerid":5,
- "nextobjectid":76,
+ "nextobjectid":83,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.7.1",

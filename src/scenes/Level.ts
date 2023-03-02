@@ -573,13 +573,12 @@ export default class Level extends Phaser.Scene {
 		this.createMapVisionPolys();
 
 	// tilemap special elements
-		console.log(TilemapUtil.getObjectPositionByGID(38, this.tileMap));
 		const startPoint = TilemapUtil.getObjectPositionByGID(38, this.tileMap);
 		startPoint.x += 8;
 		startPoint.y -= 8;
 		this.player.setPosition(startPoint.x, startPoint.y);
 		this.data.set('startPoint', startPoint);
-		this.player.setFlipX(TilemapUtil.getObjectFlip('startPoint', this.tileMap));
+		this.player.setFlipX(TilemapUtil.getObjectFlipByGID(38, this.tileMap));
 
 		this.cameras.main.setScroll(this.player.x, this.player.y);
 			// Apparently this doesn't help
@@ -1718,7 +1717,7 @@ export default class Level extends Phaser.Scene {
 			const bomb: boolean = object.properties[1].value;
 			const goal: boolean = object.properties[2].value;
 			const gunDirection: GunDirection = object.properties[3].value;
-			const alwaysFire: boolean = (!object.properties[3].value);
+			const alwaysFire: boolean = (object.properties[3].value);
 			const mine = object.properties[4].value;
 			const parasol: boolean = object.properties[5].value;
 			const pogo: boolean = object.properties[6].value;
@@ -1809,6 +1808,9 @@ export default class Level extends Phaser.Scene {
 					/* TODO: make this dynamic to support polygons of more than 2 points
 					*/
 				const visionPoly = new VisionPoly(parentEnemy, [p0, p1, p2, p3]);
+
+				const _parentEnemy = parentEnemy as EnemyPrefab;
+				_parentEnemy.alwaysFire = false;
 
 				this.visionPolys.push(visionPoly);
 				this.mapElementList[object.id] = visionPoly;

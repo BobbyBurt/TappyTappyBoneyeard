@@ -32,10 +32,10 @@
          "name":"elements",
          "objects":[
                 {
-                 "gid":2147483691,
+                 "gid":2147483686,
                  "height":16,
-                 "id":14,
-                 "name":"startPoint",
+                 "id":69,
+                 "name":"",
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -44,22 +44,46 @@
                  "y":880
                 }, 
                 {
-                 "gid":44,
-                 "height":16,
-                 "id":57,
-                 "name":"resetY",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":16,
-                 "x":416,
-                 "y":944
-                }, 
-                {
                  "gid":37,
                  "height":16,
-                 "id":58,
+                 "id":70,
                  "name":"",
+                 "properties":[
+                        {
+                         "name":"Balloon",
+                         "type":"bool",
+                         "value":false
+                        }, 
+                        {
+                         "name":"Bomb",
+                         "type":"bool",
+                         "value":false
+                        }, 
+                        {
+                         "name":"Goal",
+                         "type":"bool",
+                         "value":false
+                        }, 
+                        {
+                         "name":"Gun Direction",
+                         "type":"string",
+                         "value":""
+                        }, 
+                        {
+                         "name":"Mine",
+                         "type":"bool",
+                         "value":false
+                        }, 
+                        {
+                         "name":"Parasol",
+                         "type":"bool",
+                         "value":false
+                        }, 
+                        {
+                         "name":"Pogo",
+                         "type":"bool",
+                         "value":false
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -70,10 +94,46 @@
                 {
                  "gid":37,
                  "height":16,
-                 "id":68,
+                 "id":71,
                  "name":"",
+                 "properties":[
+                        {
+                         "name":"Balloon",
+                         "type":"bool",
+                         "value":false
+                        }, 
+                        {
+                         "name":"Bomb",
+                         "type":"bool",
+                         "value":false
+                        }, 
+                        {
+                         "name":"Goal",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
+                         "name":"Gun Direction",
+                         "type":"string",
+                         "value":""
+                        }, 
+                        {
+                         "name":"Mine",
+                         "type":"bool",
+                         "value":false
+                        }, 
+                        {
+                         "name":"Parasol",
+                         "type":"bool",
+                         "value":false
+                        }, 
+                        {
+                         "name":"Pogo",
+                         "type":"bool",
+                         "value":false
+                        }],
                  "rotation":0,
-                 "type":"goal",
+                 "type":"",
                  "visible":true,
                  "width":16,
                  "x":320,
@@ -86,7 +146,7 @@
          "y":0
         }],
  "nextlayerid":5,
- "nextobjectid":69,
+ "nextobjectid":72,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.7.1",
