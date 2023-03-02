@@ -138,6 +138,54 @@
                  "width":16,
                  "x":320,
                  "y":608
+                }, 
+                {
+                 "gid":37,
+                 "height":16,
+                 "id":72,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"Balloon",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
+                         "name":"Bomb",
+                         "type":"bool",
+                         "value":false
+                        }, 
+                        {
+                         "name":"Goal",
+                         "type":"bool",
+                         "value":false
+                        }, 
+                        {
+                         "name":"Gun Direction",
+                         "type":"string",
+                         "value":""
+                        }, 
+                        {
+                         "name":"Mine",
+                         "type":"bool",
+                         "value":false
+                        }, 
+                        {
+                         "name":"Parasol",
+                         "type":"bool",
+                         "value":false
+                        }, 
+                        {
+                         "name":"Pogo",
+                         "type":"bool",
+                         "value":false
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":16,
+                 "x":320,
+                 "y":672
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -146,7 +194,7 @@
          "y":0
         }],
  "nextlayerid":5,
- "nextobjectid":72,
+ "nextobjectid":73,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.7.1",

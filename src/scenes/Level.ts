@@ -483,6 +483,10 @@ export default class Level extends Phaser.Scene {
 	private mapElementList: Array<any>;
 
 	private plane: Phaser.GameObjects.Image;
+	private planeRect: Phaser.Geom.Rectangle;
+	private debugPlaneRectGraphics: Phaser.GameObjects.Graphics;
+	/** As it's found in enemyList. */
+	private goalEnemyIndex: number;
 
 	private combo = 0;
 	private comboTextTween: Phaser.Tweens.Tween;
@@ -752,7 +756,8 @@ export default class Level extends Phaser.Scene {
 	// Vision rect check
 	this.visionPolys.forEach((object, index) =>
 	{
-		if (Phaser.Geom.Polygon.ContainsPoint(object, new Phaser.Geom.Point(this.player.x, this.player.y)))
+		if (Phaser.Geom.Polygon.ContainsPoint
+			(object, new Phaser.Geom.Point(this.player.x, this.player.y)))
 		{
 			if (object.parentEnemy.gunDirection)
 			{
@@ -760,7 +765,8 @@ export default class Level extends Phaser.Scene {
 			}
 			else if (object.parentEnemy.bombProp)
 			{
-				if (object.parentEnemy.bombCooldownTimer.getProgress() == 1 && !object.parentEnemy.isFalling())
+				if (object.parentEnemy.bombCooldownTimer.getProgress() == 1 
+					&& !object.parentEnemy.isFalling())
 				{
 					this.setBomb(object.parentEnemy.x, object.parentEnemy.y, object.parentEnemy);
 					object.parentEnemy.bombCooldownTimer.reset({});
@@ -768,6 +774,20 @@ export default class Level extends Phaser.Scene {
 			}
 		}
 	});
+
+	// player-plane check
+		if (Phaser.Geom.Rectangle.ContainsPoint
+			(this.planeRect, new Phaser.Geom.Point(this.player.x, this.player.y)))
+		{
+			if (!this.reachedGoal)
+			{
+				this.reachedGoal = true;
+
+				this.levelEndFeedback();
+
+				this.player.putInPlane(this.plane.x, this.plane.y);
+			}	
+		}
 
 	// out-of-bounds checks
 		if (this.player.y > this.cameras.main.getBounds().bottom)
@@ -938,7 +958,7 @@ export default class Level extends Phaser.Scene {
 			this.updateEnemiesUI();
 			this.animatedEnemiesUI();
 
-			this.goalEnemyCheck(_enemy);
+			// this.goalEnemyCheck(_enemy);
 		}
 		else if (_enemy.isMine)
 		{
@@ -1012,7 +1032,7 @@ export default class Level extends Phaser.Scene {
 				this.updateCombo();
 			}
 
-			this.goalEnemyCheck(enemy1);
+			// this.goalEnemyCheck(enemy1);
 		}
 
 		if (!enemy2.isFalling())
@@ -1026,7 +1046,7 @@ export default class Level extends Phaser.Scene {
 				this.updateCombo();
 			}
 
-			this.goalEnemyCheck(enemy2);
+			// this.goalEnemyCheck(enemy2);
 		}
 	}
 
@@ -1609,6 +1629,7 @@ export default class Level extends Phaser.Scene {
 		// here is where the level end code would go
 	}
 
+	/** DEPRECATED */
 	goalEnemyCheck(enemy: EnemyPrefab)
 	{
 		if (enemy.isGoal)
@@ -1781,6 +1802,17 @@ export default class Level extends Phaser.Scene {
 		this.mainLayer.add(this.plane);
 		this.UICam.ignore(this.plane);
 		this.plane.flipX = true;
+
+		this.planeRect = new Phaser.Geom.Rectangle(x - 5, y - 15, this.plane.width, this.plane.height + 10);
+		
+		if (__DEV__)
+		{
+			this.debugPlaneRectGraphics = this.add.graphics();
+			this.debugPlaneRectGraphics.lineStyle(1, 0x00ff00);
+			this.debugPlaneRectGraphics.strokeRect
+				(this.planeRect.x, this.planeRect.y, this.planeRect.width, this.planeRect.height);
+			this.UICam.ignore(this.debugPlaneRectGraphics);
+		}
 	}
 
 	createMapVisionPolys()

@@ -9,6 +9,7 @@
 - VisionPoly no longer needs to be named such in the tilemap, as it's identified by being a polygon object.
 - Starting point no longer needs to be named such, as it's identified by GID.
 - Updated all level tilemaps to work with updated loading methods.
+- Level now ends when the player touches the plane, not when the enemy in the plane is taken out.
 
 ### Added
 
