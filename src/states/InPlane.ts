@@ -17,7 +17,7 @@ export default class InPlane implements State {
 	
 	enter()
 	{
-		this.player.play('running');
+		this.player.play('victory');
 		this.player.flipX = true;
 
 		this.player.body.setEnable(false);

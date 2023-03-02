@@ -118,6 +118,11 @@
                 "key": "bird1stretch"
             },
             {
+                "url": "assets/bird1victory.png",
+                "type": "image",
+                "key": "bird1victory"
+            },
+            {
                 "url": "assets/bird1fist.png",
                 "type": "image",
                 "key": "bird2fist"

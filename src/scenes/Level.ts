@@ -482,7 +482,7 @@ export default class Level extends Phaser.Scene {
 	 */
 	private mapElementList: Array<any>;
 
-	private plane: Phaser.GameObjects.Image;
+	public plane: Phaser.GameObjects.Image;
 	private planeRect: Phaser.Geom.Rectangle;
 	private debugPlaneRectGraphics: Phaser.GameObjects.Graphics;
 	/** As it's found in enemyList. */
@@ -1711,6 +1711,35 @@ export default class Level extends Phaser.Scene {
 			this.winText.setVisible(false);
 		}});
 
+	// Plane fly away tween
+		this.tweens.add
+		({
+			targets: this.plane,
+			duration: 4000,
+			hold: 1000,
+			// repeatDelay: 1000,
+			repeat: 0,
+			ease: Phaser.Math.Easing.Cubic.In,
+			y: this.plane.y - 300,
+			x: this.plane.x + 1000
+		});
+
+	// Getting into Plane bob tween
+		// this.tweens.add
+		// ({
+		// 	targets: this.plane,
+		// 	duration: 100,
+		// 	// repeatDelay: 1000,
+		// 	repeat: 0,
+		// 	yoyo: true,
+		// 	ease: Phaser.Math.Easing.Cubic.Out,
+		// 	y: this.plane.y + 10,
+		// });
+			// TODO: Turn off the regular looping tween before starting this one.
+			// TODO: Tweak this tween's timing and easing.
+
+		this.cameras.main.stopFollow();
+
 	// win audio
 		this.sound.play('victory');
 		this.music.pause();
@@ -1808,6 +1837,17 @@ export default class Level extends Phaser.Scene {
 		this.mainLayer.add(this.plane);
 		this.UICam.ignore(this.plane);
 		this.plane.flipX = true;
+
+		// this.tweens.add
+		// ({
+		// 	targets: this.plane,
+		// 	y: this.plane.y - 10,
+		// 	duration: 1000,
+		// 	ease: Phaser.Math.Easing.Quadratic.InOut,
+		// 	yoyo: true,
+		// 	repeat: -1
+		// });
+			// TODO: have plane enemy position reflect this.
 
 		this.planeRect = new Phaser.Geom.Rectangle(x - 5, y - 15, this.plane.width, this.plane.height + 10);
 		

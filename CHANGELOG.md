@@ -10,13 +10,15 @@
 - Starting point no longer needs to be named such, as it's identified by GID.
 - Updated all level tilemaps to work with updated loading methods.
 - Level now ends when the player touches the plane, not when the enemy in the plane is taken out.
+- Modified alpha level 1 to focus on jumping.
 
 ### Added
 
 - Added specific run animation sprites.
 - Added sprite variations to convey punch charge.
 - Added plane to the Tiled tileset, which adds a standalone goal plane for the first level.
-- Modified alpha level 1 to focus on jumping.
+- Added bird victory sprite.
+- Added level end animation in which the plane flies offscreen.
 
 ### Removed
 

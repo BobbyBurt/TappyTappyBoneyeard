@@ -132,6 +132,8 @@ export default class playerPrefab extends Phaser.Physics.Arcade.Sprite {
 
 	start()
 	{
+		this.levelScene = this.scene as Level;
+		
 		// this.flipX = true;
 
 		this.setName('player');
@@ -158,8 +160,12 @@ export default class playerPrefab extends Phaser.Physics.Arcade.Sprite {
 			this.flapCharge = this.maxFlaps;
 		}
 
-		this.setFistPosition();
+		if (this.stateController.currentState.name === 'inPlane')
+		{
+			this.setPosition(this.levelScene.plane.x, this.levelScene.plane.y - 9);
+		}
 
+		this.setFistPosition();
 		
 		this.inputCheck();
 		
@@ -881,6 +887,17 @@ export default class playerPrefab extends Phaser.Physics.Arcade.Sprite {
 		({
 			key: 'airborne-exhausted-0',
 			frames: this.anims.generateFrameNumbers('flap-exhausted-sprites', { frames: [ 7 ] }),
+			frameRate: 16,
+			repeat: 0
+		});
+
+		this.anims.create
+		({
+			key: 'victory',
+			frames:
+			[
+				{ key: 'bird1victory' }
+			],
 			frameRate: 16,
 			repeat: 0
 		});
