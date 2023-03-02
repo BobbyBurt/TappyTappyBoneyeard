@@ -29,7 +29,6 @@ export default class playerPrefab extends Phaser.Physics.Arcade.Sprite {
 		/* START-USER-CTR-CODE */
 
 		this.stateController = new StateController(this, this.scene as Level);
-		this.stateController.setState('running');
 
 		this.scene.events.once(Phaser.Scenes.Events.UPDATE, this.start, this);
 		this.scene.events.on(Phaser.Scenes.Events.UPDATE, this.update, this);
@@ -134,14 +133,15 @@ export default class playerPrefab extends Phaser.Physics.Arcade.Sprite {
 	{
 		this.levelScene = this.scene as Level;
 		
-		// this.flipX = true;
 
 		this.setName('player');
 
 		this.createAnimations();
-		this.play('idle');
 
 		this.punchCooldownTimer = this.scene.time.addEvent({delay: 1});
+
+		this.body.setVelocity((this.flipX? this.moveSpeed : -this.moveSpeed), 0);
+		this.stateController.setState('running');
 	}
 
 	update()

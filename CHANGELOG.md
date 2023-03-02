@@ -11,6 +11,7 @@
 - Updated all level tilemaps to work with updated loading methods.
 - Level now ends when the player touches the plane, not when the enemy in the plane is taken out.
 - Modified alpha level 1 to focus on jumping.
+- Player now moves automatically when the level starts.
 
 ### Added
 
