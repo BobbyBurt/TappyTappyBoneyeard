@@ -301,6 +301,11 @@
                 "key": "intro"
             },
             {
+                "url": "assets/levels/jump.json",
+                "type": "tilemapTiledJSON",
+                "key": "jump"
+            },
+            {
                 "url": "assets/levels/level-2.json",
                 "type": "tilemapTiledJSON",
                 "key": "level-2"

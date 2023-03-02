@@ -16,6 +16,7 @@
 - Added specific run animation sprites.
 - Added sprite variations to convey punch charge.
 - Added plane to the Tiled tileset, which adds a standalone goal plane for the first level.
+- Modified alpha level 1 to focus on jumping.
 
 ### Removed
 
