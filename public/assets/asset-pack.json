@@ -210,6 +210,11 @@
                 "key": "dive"
             },
             {
+                "url": "assets/levels/dive-tec.json",
+                "type": "tilemapTiledJSON",
+                "key": "dive-tec"
+            },
+            {
                 "url": [
                     "assets/sfx/egg drop.mp3"
                 ],

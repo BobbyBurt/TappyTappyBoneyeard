@@ -12,6 +12,7 @@
 - Level now ends when the player touches the plane, not when the enemy in the plane is taken out.
 - Modified alpha level 1 to focus on jumping.
 - Player now moves automatically when the level starts.
+- Diving into an enemy now sets the player's state to airborne, allowing them to use any other move.
 
 ### Added
 

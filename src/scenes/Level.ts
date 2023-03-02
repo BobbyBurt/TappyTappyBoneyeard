@@ -726,7 +726,7 @@ export default class Level extends Phaser.Scene {
 			this.debugText.setText(`${this.player.stateController.currentState.name}`);
 			// this.debugText2.setText(`flap charge: ${this.player.flapCharge}`);
 			// this.debugText3.setText(`punch charge: ${this.player.punchCharged}`);	
-			this.debugText2.setText(`zoom: ${this.cameras.main.zoom}`);
+			this.debugText2.setText(`player flipx: ${this.player.flipX}`);
 			this.debugText3.setText(`scale: ${this.scale.width}, ${this.scale.height}}`);
 		}
 
@@ -931,7 +931,6 @@ export default class Level extends Phaser.Scene {
 		// velocity of knockback
 
 			this.player.setVelocityY(-this.player.jumpForce);
-			this.player.stateController.setState('airborne');
 
 			if (_enemy.hasParasol)
 			{
@@ -966,6 +965,8 @@ export default class Level extends Phaser.Scene {
 			this.animatedEnemiesUI();
 
 			// this.goalEnemyCheck(_enemy);
+
+			this.player.stateController.setState('airborne');
 		}
 		else if (_enemy.isMine)
 		{
@@ -1850,7 +1851,7 @@ export default class Level extends Phaser.Scene {
 		// });
 			// TODO: have plane enemy position reflect this.
 
-		this.planeRect = new Phaser.Geom.Rectangle(x - 5, y - 25, this.plane.width, this.plane.height + 20);
+		this.planeRect = new Phaser.Geom.Rectangle(x - 5, y - 30, this.plane.width, this.plane.height + 25);
 		
 		if (__DEV__)
 		{
