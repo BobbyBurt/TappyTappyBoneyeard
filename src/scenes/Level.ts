@@ -631,7 +631,11 @@ export default class Level extends Phaser.Scene {
 		this.createMapVisionPolys();
 
 	// tilemap special elements
-		const startPoint = TilemapUtil.getObjectPositionByGID(38, this.tileMap);
+		let startPoint = TilemapUtil.getObjectPositionByGID(38, this.tileMap);
+		if (startPoint === null)
+		{
+			startPoint = new Phaser.Math.Vector2(0, 0);
+		}
 		startPoint!.x += 8;
 		startPoint!.y -= 8;
 		this.player.setPosition(startPoint!.x, startPoint!.y);
