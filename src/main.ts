@@ -28,6 +28,11 @@ window.addEventListener('load', function ()
 				// this removes the scrollbars while I'm testing in Chrome
 				// TODO: reconsider this before release
 		},
+		// scale: {
+		// 	mode: Phaser.Scale.CENTER_BOTH,
+		// 	width: 960,
+		// 	height: 540
+		// },
 
 	// physics
 		physics: {
@@ -62,7 +67,7 @@ class Boot extends Phaser.Scene
 
 	create()
 	{
-		window.addEventListener('resize', this.resize.bind(this));
+		// window.addEventListener('resize', this.resize.bind(this));
 	}
 
 	/**

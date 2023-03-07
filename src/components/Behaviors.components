@@ -15,7 +15,7 @@
         {
             "name": "Align",
             "baseClass": "UserComponent",
-            "gameObjectType": "Phaser.GameObjects.Text | Phaser.GameObjects.Image | Phaser.GameObjects.BitmapText | Phaser.GameObjects.Sprite | Phaser.GameObjects.Rectangle",
+            "gameObjectType": "any",
             "properties": [
                 {
                     "name": "up",

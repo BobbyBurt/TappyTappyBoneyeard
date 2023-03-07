@@ -15,7 +15,8 @@ export default class CameraUtil {
         : Phaser.Cameras.Scene2D.Camera
     {
     // basic adaptive zoom
-        const zoom = (scene.scale.height / 315);
+        // const zoom = (scene.scale.height / 315);
+        const zoom = (scene.scale.width > 1000? 3 : 2);
         
         scene.cameras.main.setName('main');
 		scene.cameras.main.setZoom(zoom);

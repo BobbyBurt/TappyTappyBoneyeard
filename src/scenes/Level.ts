@@ -231,6 +231,43 @@ export default class Level extends Phaser.Scene {
 		comboLabelText.dropShadowColor = 714549;
 		uILayer.add(comboLabelText);
 
+		// tutorialContainer
+		const tutorialContainer = this.add.container(0, 0);
+		uILayer.add(tutorialContainer);
+
+		// tutorialBox
+		const tutorialBox = this.add.rectangle(-67, 0, 128, 128);
+		tutorialBox.scaleX = 1.058479675439337;
+		tutorialBox.scaleY = 1.7592511549632417;
+		tutorialBox.isFilled = true;
+		tutorialBox.fillColor = 5675510;
+		tutorialContainer.add(tutorialBox);
+
+		// tutorialText
+		const tutorialText = this.add.bitmapText(-67, 17, "nokia", "Welcome to life, Bird Tapper! Before you can take on the violet army, lets brush up on the basics.\n\nYou can jump with <input>. You'll move forward automatically, but you can change direction from walls. While against one, try jumping against it and jumping again to perform a wall jump.");
+		tutorialText.setOrigin(0.5, 0.5);
+		tutorialText.text = "Welcome to life, Bird Tapper! Before you can take on the violet army, lets brush up on the basics.\n\nYou can jump with <input>. You'll move forward automatically, but you can change direction from walls. While against one, try jumping against it and jumping again to perform a wall jump.";
+		tutorialText.fontSize = -8;
+		tutorialText.maxWidth = 120;
+		tutorialText.dropShadowAlpha = 0;
+		tutorialContainer.add(tutorialText);
+
+		// tutorialText2
+		const tutorialText2 = this.add.bitmapText(-67, 15, "nokia", "");
+		tutorialText2.setOrigin(0.5, 0.5);
+		tutorialText2.fontSize = -8;
+		tutorialText2.maxWidth = 120;
+		tutorialText2.dropShadowAlpha = 0;
+		tutorialContainer.add(tutorialText2);
+
+		// parasol
+		const parasol = this.add.image(-86, -84, "parasol");
+		tutorialContainer.add(parasol);
+
+		// parasol_1
+		const parasol_1 = this.add.image(-53, -85, "parasol");
+		tutorialContainer.add(parasol_1);
+
 		// lists
 		const public_list: Array<any> = [];
 		const enemyList: Array<any> = [];
@@ -387,6 +424,11 @@ export default class Level extends Phaser.Scene {
 		comboLabelTextAlign.left = true;
 		comboLabelTextAlign.horizontalOffset = -90;
 
+		// tutorialContainer (components)
+		const tutorialContainerAlign = new Align(tutorialContainer);
+		tutorialContainerAlign.middle = true;
+		tutorialContainerAlign.right = true;
+
 		this.bGLayer = bGLayer;
 		this.parallax_Backing = parallax_Backing;
 		this.mainLayer = mainLayer;
@@ -407,6 +449,10 @@ export default class Level extends Phaser.Scene {
 		this.scoreText = scoreText;
 		this.comboText = comboText;
 		this.comboLabelText = comboLabelText;
+		this.tutorialContainer = tutorialContainer;
+		this.tutorialBox = tutorialBox;
+		this.tutorialText = tutorialText;
+		this.tutorialText2 = tutorialText2;
 		this.public_list = public_list;
 		this.enemyList = enemyList;
 		this.collidesWithBombList = collidesWithBombList;
@@ -437,6 +483,10 @@ export default class Level extends Phaser.Scene {
 	private scoreText!: Phaser.GameObjects.BitmapText;
 	private comboText!: Phaser.GameObjects.BitmapText;
 	private comboLabelText!: Phaser.GameObjects.BitmapText;
+	private tutorialContainer!: Phaser.GameObjects.Container;
+	private tutorialBox!: Phaser.GameObjects.Rectangle;
+	private tutorialText!: Phaser.GameObjects.BitmapText;
+	private tutorialText2!: Phaser.GameObjects.BitmapText;
 	public public_list!: Array<any>;
 	private enemyList!: Array<any>;
 	private collidesWithBombList!: Array<any>;
@@ -493,6 +543,8 @@ export default class Level extends Phaser.Scene {
 
 	private enemiesUITween: Phaser.Tweens.Tween;
 
+	private cameraFollow: Phaser.Math.Vector2;
+
 	create()
 	{	
 		this.editorCreate();
@@ -501,6 +553,8 @@ export default class Level extends Phaser.Scene {
 
 		this.reachedGoal = false;
 		this.restarting = false;
+
+		this.cameraFollow = new Phaser.Math.Vector2(this.player.x, this.player.y);
 
 		this.tileMap = this.add.tilemap(this.registry.get('current-level'));
 		this.tileMap.addTilesetImage("tilleset", "tileset");
@@ -709,6 +763,8 @@ export default class Level extends Phaser.Scene {
 		this.combo = 0;
 		this.updateCombo();
 
+		this.setTutorialUI(true, this.registry.get('current-level-index'));
+
 	// resize init
 		this.events.on('pre-resize', this.resize, this);
 		this.resize();
@@ -782,17 +838,20 @@ export default class Level extends Phaser.Scene {
 	});
 
 	// player-plane check
-		if (Phaser.Geom.Rectangle.ContainsPoint
-			(this.planeRect, new Phaser.Geom.Point(this.player.x, this.player.y)))
+		if (this.planeRect)
 		{
-			if (!this.reachedGoal)
+			if (Phaser.Geom.Rectangle.ContainsPoint
+				(this.planeRect, new Phaser.Geom.Point(this.player.x, this.player.y)))
 			{
-				this.reachedGoal = true;
+				if (!this.reachedGoal)
+				{
+					this.reachedGoal = true;
 
-				this.levelEndFeedback();
+					this.levelEndFeedback();
 
-				this.player.putInPlane(this.plane.x, this.plane.y);
-			}	
+					this.player.putInPlane(this.plane.x, this.plane.y);
+				}	
+			}
 		}
 
 	// out-of-bounds checks
@@ -824,6 +883,8 @@ export default class Level extends Phaser.Scene {
 		this.updateEnemiesUI();
 
 		// this.gunFireCheck();
+
+		this.cameraFollow.set(this.player.body.x + 50, this.player.body.y);
 	}
 
 	/** reloads the scene */
@@ -1747,6 +1808,58 @@ export default class Level extends Phaser.Scene {
 		this.music.pause();
 	}
 
+	/**
+	 * 
+	 * @param show 
+	 * @param level 
+	 */
+	setTutorialUI(show: boolean, level: number)
+	{
+		if (!show)
+		{
+			return;
+		}
+
+		let tutorialString = ''
+
+		switch(level)
+		{
+			case 0:
+				tutorialString = "Welcome to life, Bird Tapper! Before you can take on the violet army, lets brush up on the basics.\n\nYou can jump with <input>. You'll move forward automatically, but you can change direction from walls. While against one, try jumping against it and jumping again to perform a wall jump."
+				break;
+			case 1:
+				tutorialString = "Have you tried using your wings yet? Use <input> while midair to flap and gain some more height.\n\nYour tiny wings only have the strength to do this twice, and you'll get more and more pale as you become weaker."
+				break;
+			case 2:
+				tutorialString = "Soldiers are dangerous, so it's time to attack! Hit <input> to punch forward with a burst of speed.\n\nDo this in front of an enemy to take them out with your fist. Punches are also an easy way to launch yourself from a wall."
+				break;
+			case 4:
+				tutorialString = "OK, time to dive. Use <input> to boost yourself downwards. If you hit an enemy, you'll take them out!\n\nDiving also aids your mobility, helping you control / time your landings."
+				break;
+			case 6:
+				tutorialString = "When punching forward isn't enough, hit 'em with an uppercut!\n\nUse <input> to launch upward and take out the enemies above you."
+				break;
+			case 7:
+				tutorialString = "Punches and uppercuts take a lot out of you...\n\nLanding on ground is one way to recharge, but you'll also automatically regain charge if you take out an enemy with your attack!"
+				break;
+			case 8:
+				tutorialString = "Each enemy you take out will add to your combo as long as you're airborne.\n\nTry to figure out ways to build that combo!"
+				break;
+			// case 9:
+			// 	tutorialString = "Good hustle out there! Time to test your skills."
+			// 	break;
+		}
+
+		if (!show || tutorialString === '')
+		{
+			this.tutorialContainer.setVisible(false);
+		}
+		else
+		{
+			this.tutorialContainer.setVisible(true);
+			this.tutorialText.setText(tutorialString);
+		}
+	}
 
 	/** iterates through everything in the 'elements' object layer of the map and creates enemies 
 	 * based on their GID. */
@@ -1852,7 +1965,7 @@ export default class Level extends Phaser.Scene {
 			// TODO: have plane enemy position reflect this.
 
 		this.planeRect = new Phaser.Geom.Rectangle(x - 5, y - 30, this.plane.width, this.plane.height + 25);
-		
+
 		if (__DEV__)
 		{
 			this.debugPlaneRectGraphics = this.add.graphics();
@@ -1915,8 +2028,9 @@ export default class Level extends Phaser.Scene {
 	{
 		CameraUtil.configureMainCamera(this);
 		// this.cameras.main.setScroll(this.player.x, this.player.y);
-		this.cameras.main.startFollow(this.player, true, .1, .1);
-		this.cameras.main.setBounds(0, 0, this.tileLayer.width, this.tileLayer.height);
+		this.cameras.main.startFollow(this.cameraFollow, true, .1, .1);
+		// this.cameras.main.setBounds(0, 0, this.tileLayer.width, this.tileLayer.height);
+		this.cameras.main.setBounds(-1000, -1000, this.tileLayer.width + 2000, this.tileLayer.height + 1000);
 		this.cameras.main.ignore(this.uILayer.getChildren());
 
 		this.UICam = CameraUtil.createUICamera(this);

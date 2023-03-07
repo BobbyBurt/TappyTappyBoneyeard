@@ -4,13 +4,12 @@
 /* START OF COMPILED CODE */
 
 import UserComponent from "./UserComponent";
-import Phaser from "phaser";
 /* START-USER-IMPORTS */
 /* END-USER-IMPORTS */
 
 export default class Align extends UserComponent {
 
-	constructor(gameObject: Phaser.GameObjects.Text | Phaser.GameObjects.Image | Phaser.GameObjects.BitmapText | Phaser.GameObjects.Sprite | Phaser.GameObjects.Rectangle) {
+	constructor(gameObject: any) {
 		super(gameObject);
 
 		this.gameObject = gameObject;
@@ -23,11 +22,11 @@ export default class Align extends UserComponent {
 		/* END-USER-CTR-CODE */
 	}
 
-	static getComponent(gameObject: Phaser.GameObjects.Text | Phaser.GameObjects.Image | Phaser.GameObjects.BitmapText | Phaser.GameObjects.Sprite | Phaser.GameObjects.Rectangle): Align {
+	static getComponent(gameObject: any): Align {
 		return (gameObject as any)["__Align"];
 	}
 
-	private gameObject: Phaser.GameObjects.Text | Phaser.GameObjects.Image | Phaser.GameObjects.BitmapText | Phaser.GameObjects.Sprite | Phaser.GameObjects.Rectangle;
+	private gameObject: any;
 	public up: boolean = false;
 	public middle: boolean = false;
 	public down: boolean = false;

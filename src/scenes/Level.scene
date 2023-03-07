@@ -530,6 +530,88 @@
                     "dropShadowX": 100,
                     "dropShadowAlpha": 1,
                     "dropShadowColor": "#0AE735"
+                },
+                {
+                    "type": "Container",
+                    "id": "5ec9dcad-5028-4952-8dc1-fb0639456a64",
+                    "label": "tutorialContainer",
+                    "scope": "CLASS",
+                    "components": [
+                        "Align"
+                    ],
+                    "Align.middle": true,
+                    "Align.right": true,
+                    "list": [
+                        {
+                            "type": "Rectangle",
+                            "id": "bedeb852-1574-4488-968a-8ffb40fc1b11",
+                            "label": "tutorialBox",
+                            "scope": "CLASS",
+                            "components": [],
+                            "x": -67,
+                            "scaleX": 1.058479675439337,
+                            "scaleY": 1.7592511549632417,
+                            "isFilled": true,
+                            "fillColor": "#5699F6",
+                            "width": 128,
+                            "height": 128
+                        },
+                        {
+                            "type": "BitmapText",
+                            "id": "b2c12e29-b60f-4a60-be1a-1a0db50b29ae",
+                            "label": "tutorialText",
+                            "scope": "CLASS",
+                            "components": [],
+                            "x": -67,
+                            "y": 17,
+                            "originX": 0.5,
+                            "originY": 0.5,
+                            "text": "Welcome to life, Bird Tapper! Before you can take on the violet army, lets brush up on the basics.\n\nYou can jump with <input>. You'll move forward automatically, but you can change direction from walls. While against one, try jumping against it and jumping again to perform a wall jump.",
+                            "font": "nokia",
+                            "fontSize": -8,
+                            "maxWidth": 120,
+                            "dropShadowAlpha": 0,
+                            "dropShadowColor": "#000000ff"
+                        },
+                        {
+                            "type": "BitmapText",
+                            "id": "16edd9bf-08a9-4266-af56-225e837a9922",
+                            "label": "tutorialText2",
+                            "scope": "CLASS",
+                            "components": [],
+                            "x": -67,
+                            "y": 15,
+                            "originX": 0.5,
+                            "originY": 0.5,
+                            "font": "nokia",
+                            "fontSize": -8,
+                            "maxWidth": 120,
+                            "dropShadowAlpha": 0,
+                            "dropShadowColor": "#000000ff"
+                        },
+                        {
+                            "type": "Image",
+                            "id": "d30304e5-9cf9-4c7e-ab9e-6153eadc6e2c",
+                            "label": "parasol",
+                            "components": [],
+                            "texture": {
+                                "key": "parasol"
+                            },
+                            "x": -86,
+                            "y": -84
+                        },
+                        {
+                            "type": "Image",
+                            "id": "b01496fa-adf2-4cab-a4dc-b1bc03f84139",
+                            "label": "parasol_1",
+                            "components": [],
+                            "texture": {
+                                "key": "parasol"
+                            },
+                            "x": -53,
+                            "y": -85
+                        }
+                    ]
                 }
             ]
         }

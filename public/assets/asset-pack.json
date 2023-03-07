@@ -2,11 +2,6 @@
     "section1": {
         "files": [
             {
-                "url": "assets/levels/3-direction-cover.json",
-                "type": "tilemapTiledJSON",
-                "key": "3-direction-cover"
-            },
-            {
                 "url": "assets/levels/airborne.json",
                 "type": "tilemapTiledJSON",
                 "key": "airborne"
@@ -255,6 +250,11 @@
                 "key": "final"
             },
             {
+                "url": "assets/levels/flap.json",
+                "type": "tilemapTiledJSON",
+                "key": "flap"
+            },
+            {
                 "url": "assets/flap-exhausted-sprites.png",
                 "frameConfig": {
                     "frameWidth": 18,
@@ -316,36 +316,11 @@
                 "key": "jump"
             },
             {
-                "url": "assets/levels/level-2.json",
-                "type": "tilemapTiledJSON",
-                "key": "level-2"
-            },
-            {
-                "url": "assets/levels/level-3.json",
-                "type": "tilemapTiledJSON",
-                "key": "level-3"
-            },
-            {
-                "url": "assets/levels/level-4.json",
-                "type": "tilemapTiledJSON",
-                "key": "level-4"
-            },
-            {
                 "url": [
                     "assets/music/main-game.mp3"
                 ],
                 "type": "audio",
                 "key": "main-game"
-            },
-            {
-                "url": "assets/levels/map-1.json",
-                "type": "tilemapTiledJSON",
-                "key": "map-1"
-            },
-            {
-                "url": "assets/levels/map-2.json",
-                "type": "tilemapTiledJSON",
-                "key": "map-2"
             },
             {
                 "textureURL": "assets/nokia.png",
@@ -399,6 +374,11 @@
                 ],
                 "type": "audio",
                 "key": "pogo-stick"
+            },
+            {
+                "url": "assets/levels/punch.json",
+                "type": "tilemapTiledJSON",
+                "key": "punch"
             },
             {
                 "url": [
@@ -455,36 +435,6 @@
                 "key": "soldierstretch"
             },
             {
-                "url": "assets/test-map-2.json",
-                "type": "tilemapTiledJSON",
-                "key": "test-map-2"
-            },
-            {
-                "url": "assets/test-map-3.json",
-                "type": "tilemapTiledJSON",
-                "key": "test-map-3"
-            },
-            {
-                "url": "assets/test-map-4.json",
-                "type": "tilemapTiledJSON",
-                "key": "test-map-4"
-            },
-            {
-                "url": "assets/test-map-5.json",
-                "type": "tilemapTiledJSON",
-                "key": "test-map-5"
-            },
-            {
-                "url": "assets/levels/test-map-6.json",
-                "type": "tilemapTiledJSON",
-                "key": "test-map-6"
-            },
-            {
-                "url": "assets/levels/test-map-7.json",
-                "type": "tilemapTiledJSON",
-                "key": "test-map-7"
-            },
-            {
                 "url": "assets/levels/test-map-bomb-vision.json",
                 "type": "tilemapTiledJSON",
                 "key": "test-map-bomb-vision"
@@ -503,11 +453,6 @@
                 "url": "assets/levels/tileset.png",
                 "type": "image",
                 "key": "tileset_1"
-            },
-            {
-                "url": "assets/tileset-hazards.png",
-                "type": "image",
-                "key": "tileset-hazards"
             },
             {
                 "url": [
