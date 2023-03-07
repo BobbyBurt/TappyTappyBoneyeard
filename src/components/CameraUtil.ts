@@ -11,18 +11,40 @@ export default class CameraUtil {
      * @param camera 
      * @param scene 
      */
-    public static configureMainCamera(scene: Phaser.Scene)
-        : Phaser.Cameras.Scene2D.Camera
+    public static configureMainCamera(scene: Phaser.Scene): Phaser.Cameras.Scene2D.Camera
     {
-    // basic adaptive zoom
-        // const zoom = (scene.scale.height / 315);
-        const zoom = (scene.scale.width > 1000? 3 : 2);
+        const zoom = this.getAdaptiveZoom(scene);
         
         scene.cameras.main.setName('main');
 		scene.cameras.main.setZoom(zoom);
         scene.cameras.main.fadeIn(200, 255, 255, 255);
 
         return scene.cameras.main;
+    }
+
+    /**
+     * 
+     * @param scene 
+     * @returns 
+     */
+    public static getAdaptiveZoom(scene: Phaser.Scene): number
+    {
+        let zoom = ((scene.scale.width > 1400 && scene.scale.height > 700) ? 3 : 2);
+
+        if (scene.scale.zoom <= 0.5)
+        {
+            zoom++;
+        }
+
+        return zoom;
+
+        // const zoom = (scene.scale.height / 315);
+            // this can create jagged pixel alignment. But not always.
+    }
+
+    public static scaleTest(scene: Phaser.Scene): number
+    {
+        return (scene.scale.width * scene.scale.zoom)
     }
 
     /**
@@ -33,8 +55,7 @@ export default class CameraUtil {
      */
     public static createUICamera(scene: Phaser.Scene): Phaser.Cameras.Scene2D.Camera
     {
-    // basic adaptive zoom
-        const zoom = (scene.scale.width > 1000? 3 : 3);
+        const zoom = this.getAdaptiveZoom(scene);
 
         let camera = scene.cameras.add(0, 0, scene.scale.width, scene.scale.height);
 		camera.setName('UICam')

@@ -4,7 +4,7 @@ import Preload from './scenes/Preload';
 
 window.addEventListener('load', function ()
 {
-	var game = new Phaser.Game(
+	var game = new Phaser.Game( 
 	{
 		title: 'Tappy Tappy Boneyard',
 		url: 'https://www.newgrounds.com/projects/games/1923225/preview',
@@ -67,7 +67,7 @@ class Boot extends Phaser.Scene
 
 	create()
 	{
-		// window.addEventListener('resize', this.resize.bind(this));
+		window.addEventListener('resize', this.resize.bind(this));
 	}
 
 	/**

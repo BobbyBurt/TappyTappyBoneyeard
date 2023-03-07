@@ -189,6 +189,7 @@ export default class Level extends Phaser.Scene {
 		// chargeText
 		const chargeText = this.add.bitmapText(365, -2, "nokia", "Punch");
 		chargeText.setOrigin(1, 0.5);
+		chargeText.visible = false;
 		chargeText.text = "Punch";
 		chargeText.fontSize = -16;
 		chargeText.align = 2;
@@ -233,18 +234,18 @@ export default class Level extends Phaser.Scene {
 
 		// tutorialContainer
 		const tutorialContainer = this.add.container(0, 0);
+		tutorialContainer.visible = false;
 		uILayer.add(tutorialContainer);
 
 		// tutorialBox
-		const tutorialBox = this.add.rectangle(-67, 0, 128, 128);
-		tutorialBox.scaleX = 1.058479675439337;
-		tutorialBox.scaleY = 1.7592511549632417;
+		const tutorialBox = this.add.rectangle(0, 0, 150, 230);
+		tutorialBox.scaleY = 1.0527259860642193;
 		tutorialBox.isFilled = true;
 		tutorialBox.fillColor = 5675510;
 		tutorialContainer.add(tutorialBox);
 
 		// tutorialText
-		const tutorialText = this.add.bitmapText(-67, 17, "nokia", "Welcome to life, Bird Tapper! Before you can take on the violet army, lets brush up on the basics.\n\nYou can jump with <input>. You'll move forward automatically, but you can change direction from walls. While against one, try jumping against it and jumping again to perform a wall jump.");
+		const tutorialText = this.add.bitmapText(0, -32, "nokia", "Welcome to life, Bird Tapper! Before you can take on the violet army, lets brush up on the basics.\n\nYou can jump with <input>. You'll move forward automatically, but you can change direction from walls. While against one, try jumping against it and jumping again to perform a wall jump.");
 		tutorialText.setOrigin(0.5, 0.5);
 		tutorialText.text = "Welcome to life, Bird Tapper! Before you can take on the violet army, lets brush up on the basics.\n\nYou can jump with <input>. You'll move forward automatically, but you can change direction from walls. While against one, try jumping against it and jumping again to perform a wall jump.";
 		tutorialText.fontSize = -8;
@@ -252,20 +253,21 @@ export default class Level extends Phaser.Scene {
 		tutorialText.dropShadowAlpha = 0;
 		tutorialContainer.add(tutorialText);
 
-		// tutorialText2
-		const tutorialText2 = this.add.bitmapText(-67, 15, "nokia", "");
-		tutorialText2.setOrigin(0.5, 0.5);
-		tutorialText2.fontSize = -8;
-		tutorialText2.maxWidth = 120;
-		tutorialText2.dropShadowAlpha = 0;
-		tutorialContainer.add(tutorialText2);
+		// tutorialCloseText
+		const tutorialCloseText = this.add.bitmapText(0, 102, "nokia", "- TAP TO CONTINUE -");
+		tutorialCloseText.setOrigin(0.5, 0.5);
+		tutorialCloseText.text = "- TAP TO CONTINUE -";
+		tutorialCloseText.fontSize = -8;
+		tutorialCloseText.maxWidth = 120;
+		tutorialCloseText.dropShadowAlpha = 0;
+		tutorialContainer.add(tutorialCloseText);
 
 		// parasol
-		const parasol = this.add.image(-86, -84, "parasol");
+		const parasol = this.add.image(-18, 70, "parasol");
 		tutorialContainer.add(parasol);
 
 		// parasol_1
-		const parasol_1 = this.add.image(-53, -85, "parasol");
+		const parasol_1 = this.add.image(19, 69, "parasol");
 		tutorialContainer.add(parasol_1);
 
 		// lists
@@ -275,6 +277,7 @@ export default class Level extends Phaser.Scene {
 		const gunEnemyList: Array<any> = [];
 		const bombEnemyList: Array<any> = [];
 		const bulletList: Array<any> = [];
+		const hiddenByTutorialList = [enemiesLabelText, enemiesText];
 
 		// parallax_Backing (components)
 		new ScrollFactor(parallax_Backing);
@@ -428,6 +431,10 @@ export default class Level extends Phaser.Scene {
 		const tutorialContainerAlign = new Align(tutorialContainer);
 		tutorialContainerAlign.middle = true;
 		tutorialContainerAlign.right = true;
+		tutorialContainerAlign.horizontalOffset = -75;
+
+		// tutorialCloseText (components)
+		new MobileDependent(tutorialCloseText);
 
 		this.bGLayer = bGLayer;
 		this.parallax_Backing = parallax_Backing;
@@ -452,13 +459,14 @@ export default class Level extends Phaser.Scene {
 		this.tutorialContainer = tutorialContainer;
 		this.tutorialBox = tutorialBox;
 		this.tutorialText = tutorialText;
-		this.tutorialText2 = tutorialText2;
+		this.tutorialCloseText = tutorialCloseText;
 		this.public_list = public_list;
 		this.enemyList = enemyList;
 		this.collidesWithBombList = collidesWithBombList;
 		this.gunEnemyList = gunEnemyList;
 		this.bombEnemyList = bombEnemyList;
 		this.bulletList = bulletList;
+		this.hiddenByTutorialList = hiddenByTutorialList;
 
 		this.events.emit("scene-awake");
 	}
@@ -486,13 +494,14 @@ export default class Level extends Phaser.Scene {
 	private tutorialContainer!: Phaser.GameObjects.Container;
 	private tutorialBox!: Phaser.GameObjects.Rectangle;
 	private tutorialText!: Phaser.GameObjects.BitmapText;
-	private tutorialText2!: Phaser.GameObjects.BitmapText;
+	private tutorialCloseText!: Phaser.GameObjects.BitmapText;
 	public public_list!: Array<any>;
 	private enemyList!: Array<any>;
 	private collidesWithBombList!: Array<any>;
 	private gunEnemyList!: Array<any>;
 	private bombEnemyList!: Array<any>;
 	private bulletList!: Array<any>;
+	private hiddenByTutorialList!: Phaser.GameObjects.BitmapText[];
 
 	/* START-USER-CODE */
 
@@ -706,6 +715,7 @@ export default class Level extends Phaser.Scene {
 			else
 			{
 				this.music = this.sound.add('main-game', {volume: .7});
+				console.log('added main game music');
 			}
 
 			if (!__DEV__ && !this.registry.get('muted'))
@@ -767,7 +777,10 @@ export default class Level extends Phaser.Scene {
 		this.combo = 0;
 		this.updateCombo();
 
-		this.setTutorialUI(true, this.registry.get('current-level-index'));
+		if (!this.registry.get('seen-tutorial-level-' + this.registry.get('current-level-index')))
+		{
+			this.setTutorialUI(true, this.registry.get('mobile'), this.registry.get('current-level-index'));
+		}
 
 	// resize init
 		this.events.on('pre-resize', this.resize, this);
@@ -786,7 +799,7 @@ export default class Level extends Phaser.Scene {
 			this.debugText.setText(`${this.player.stateController.currentState.name}`);
 			// this.debugText2.setText(`flap charge: ${this.player.flapCharge}`);
 			// this.debugText3.setText(`punch charge: ${this.player.punchCharged}`);	
-			this.debugText2.setText(`player flipx: ${this.player.flipX}`);
+			this.debugText2.setText(`main cam zoom: ${this.cameras.main.zoom}, scale zoom: ${this.scale.zoom}, scale test: ${CameraUtil.scaleTest(this)}`);
 			this.debugText3.setText(`scale: ${this.scale.width}, ${this.scale.height}}`);
 		}
 
@@ -888,7 +901,11 @@ export default class Level extends Phaser.Scene {
 
 		// this.gunFireCheck();
 
-		this.cameraFollow.set(this.player.body.x + 50, this.player.body.y);
+		this.cameraFollow.set(this.player.body.x, this.player.body.y);
+		if (this.tutorialContainer.visible && !this.registry.get('mobile'))
+		{
+			this.cameraFollow.x += (this.tutorialBox.width / 2);
+		}
 	}
 
 	/** reloads the scene */
@@ -1805,6 +1822,8 @@ export default class Level extends Phaser.Scene {
 			// TODO: Turn off the regular looping tween before starting this one.
 			// TODO: Tweak this tween's timing and easing.
 
+		this.setTutorialUI(false, false, 0);
+
 		this.cameras.main.stopFollow();
 
 	// win audio
@@ -1817,13 +1836,8 @@ export default class Level extends Phaser.Scene {
 	 * @param show 
 	 * @param level 
 	 */
-	setTutorialUI(show: boolean, level: number)
+	setTutorialUI(show: boolean, mobile: boolean, level: number,)
 	{
-		if (!show)
-		{
-			return;
-		}
-
 		let tutorialString = ''
 
 		switch(level)
@@ -1854,14 +1868,47 @@ export default class Level extends Phaser.Scene {
 			// 	break;
 		}
 
+		this.registry.set('seen-tutorial-level-' + this.registry.get('current-level-index'), true);
+			/*  This is set even if no tutorial is present, allowing this function to be skipped
+			 	next time.
+			 */
+
 		if (!show || tutorialString === '')
 		{
 			this.tutorialContainer.setVisible(false);
+			this.hiddenByTutorialList.forEach((element) => {
+				element.setVisible(true);
+			});
+			return;
 		}
 		else
 		{
 			this.tutorialContainer.setVisible(true);
 			this.tutorialText.setText(tutorialString);
+			this.hiddenByTutorialList.forEach((element) => {
+				element.setVisible(false);
+			});
+		}
+
+		if (mobile)
+		{
+			// this.tutorialText.setMaxWidth(200);
+			// this.tutorialBox.width = 250;
+			// this.tutorialBox.setX(0);
+			console.log(Align.getComponent(this.tutorialContainer));
+			Align.getComponent(this.tutorialContainer).right = false;
+			Align.getComponent(this.tutorialContainer).center = true;
+			Align.getComponent(this.tutorialContainer).horizontalOffset = 0;
+
+			this.player.lockInput = true;
+
+			this.tutorialBox.setInteractive();
+			this.tutorialBox.on('pointerdown', () =>
+			{
+				this.setTutorialUI(false, true, 0);
+				this.player.lockInput = false;
+				this.player.startMoving();
+			});
 		}
 	}
 
@@ -2114,6 +2161,9 @@ export default class Level extends Phaser.Scene {
 
 	resize()
 	{
+		this.cameras.main.setZoom(CameraUtil.getAdaptiveZoom(this));
+		this.UICam.setZoom(CameraUtil.getAdaptiveZoom(this));
+
 		const _camera = this.UICam as any;
 		_camera.preRender(1);
 	}

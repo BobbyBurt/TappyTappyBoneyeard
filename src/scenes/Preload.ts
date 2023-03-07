@@ -5,6 +5,7 @@
 
 import Phaser from "phaser";
 import PreloadText from "../components/PreloadText";
+import CameraUtil from "~/components/CameraUtil";
 /* START-USER-IMPORTS */
 /* END-USER-IMPORTS */
 
@@ -59,7 +60,7 @@ export default class Preload extends Phaser.Scene {
 	// camera
 		this.cameras.main.setViewport(0, 0, this.scale.width, this.scale.height);
 		this.cameras.main.setBackgroundColor(0x242424);
-		this.cameras.main.setZoom(this.scale.width / 550)
+		this.cameras.main.setZoom(CameraUtil.getAdaptiveZoom(this))
 
 	// start input
 		window.addEventListener('touchstart', this.onPointer);

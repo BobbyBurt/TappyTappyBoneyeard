@@ -197,6 +197,26 @@
                     "type": {
                         "id": "boolean"
                     }
+                },
+                {
+                    "name": "visibleIfMobile",
+                    "label": "Visible if Mobile",
+                    "tooltip": "set visible when mobile",
+                    "defValue": true,
+                    "customDefinition": false,
+                    "type": {
+                        "id": "boolean"
+                    }
+                },
+                {
+                    "name": "ignoreVisibility",
+                    "label": "Ignore Visibility",
+                    "tooltip": "Does not set visible",
+                    "defValue": false,
+                    "customDefinition": false,
+                    "type": {
+                        "id": "boolean"
+                    }
                 }
             ]
         },

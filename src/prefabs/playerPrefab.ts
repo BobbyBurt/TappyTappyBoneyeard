@@ -140,7 +140,10 @@ export default class playerPrefab extends Phaser.Physics.Arcade.Sprite {
 
 		this.punchCooldownTimer = this.scene.time.addEvent({delay: 1});
 
-		this.body.setVelocity((this.flipX? this.moveSpeed : -this.moveSpeed), 0);
+		if (!this.lockInput)
+		{
+			this.startMoving();
+		}
 		this.stateController.setState('running');
 	}
 
@@ -383,6 +386,11 @@ export default class playerPrefab extends Phaser.Physics.Arcade.Sprite {
 		this.stateController.setState('running');
 		this.setVelocity(0, 0);
 		this.flipX = true;
+	}
+
+	public startMoving()
+	{
+		this.body.setVelocity((this.flipX? this.moveSpeed : -this.moveSpeed), 0);
 	}
 
 	putInPlane(x: number, y: number)

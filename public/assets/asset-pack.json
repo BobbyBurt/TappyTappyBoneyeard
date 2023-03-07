@@ -323,12 +323,6 @@
                 "key": "main-game"
             },
             {
-                "textureURL": "assets/nokia.png",
-                "fontDataURL": "assets/nokia.xml",
-                "type": "bitmapFont",
-                "key": "nokia"
-            },
-            {
                 "url": "assets/Parallax-Backing.png",
                 "type": "image",
                 "key": "Parallax-Backing"

@@ -455,6 +455,7 @@
                     "y": -2,
                     "originX": 1,
                     "originY": 0.5,
+                    "visible": false,
                     "text": "Punch",
                     "font": "nokia",
                     "align": 2,
@@ -541,6 +542,8 @@
                     ],
                     "Align.middle": true,
                     "Align.right": true,
+                    "Align.horizontalOffset": -75,
+                    "visible": false,
                     "list": [
                         {
                             "type": "Rectangle",
@@ -548,13 +551,11 @@
                             "label": "tutorialBox",
                             "scope": "CLASS",
                             "components": [],
-                            "x": -67,
-                            "scaleX": 1.058479675439337,
-                            "scaleY": 1.7592511549632417,
+                            "scaleY": 1.0527259860642193,
                             "isFilled": true,
                             "fillColor": "#5699F6",
-                            "width": 128,
-                            "height": 128
+                            "width": 150,
+                            "height": 230
                         },
                         {
                             "type": "BitmapText",
@@ -562,8 +563,7 @@
                             "label": "tutorialText",
                             "scope": "CLASS",
                             "components": [],
-                            "x": -67,
-                            "y": 17,
+                            "y": -32,
                             "originX": 0.5,
                             "originY": 0.5,
                             "text": "Welcome to life, Bird Tapper! Before you can take on the violet army, lets brush up on the basics.\n\nYou can jump with <input>. You'll move forward automatically, but you can change direction from walls. While against one, try jumping against it and jumping again to perform a wall jump.",
@@ -576,13 +576,15 @@
                         {
                             "type": "BitmapText",
                             "id": "16edd9bf-08a9-4266-af56-225e837a9922",
-                            "label": "tutorialText2",
+                            "label": "tutorialCloseText",
                             "scope": "CLASS",
-                            "components": [],
-                            "x": -67,
-                            "y": 15,
+                            "components": [
+                                "MobileDependent"
+                            ],
+                            "y": 102,
                             "originX": 0.5,
                             "originY": 0.5,
+                            "text": "- TAP TO CONTINUE -",
                             "font": "nokia",
                             "fontSize": -8,
                             "maxWidth": 120,
@@ -597,8 +599,8 @@
                             "texture": {
                                 "key": "parasol"
                             },
-                            "x": -86,
-                            "y": -84
+                            "x": -18,
+                            "y": 70
                         },
                         {
                             "type": "Image",
@@ -608,8 +610,8 @@
                             "texture": {
                                 "key": "parasol"
                             },
-                            "x": -53,
-                            "y": -85
+                            "x": 19,
+                            "y": 69
                         }
                     ]
                 }
@@ -648,6 +650,14 @@
         {
             "id": "7bec6967-43c2-43fc-817f-8681120d3a19",
             "label": "bulletList"
+        },
+        {
+            "id": "6687710c-c79a-4f96-8538-015c43e9bebf",
+            "label": "hiddenByTutorialList",
+            "objectIds": [
+                "15be839a-2ff8-401a-91bc-3229b1eef38c",
+                "11a56797-10b8-41ca-a8b8-fb05b9ac81c6"
+            ]
         }
     ]
 }

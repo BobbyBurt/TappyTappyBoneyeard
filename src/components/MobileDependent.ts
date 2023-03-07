@@ -27,21 +27,31 @@ export default class MobileDependent extends UserComponent {
 
 	private gameObject: Phaser.GameObjects.Text | Phaser.GameObjects.Image | Phaser.GameObjects.BitmapText | Phaser.GameObjects.Sprite | Phaser.GameObjects.Rectangle;
 	public activeIfMobile: boolean = true;
+	public visibleIfMobile: boolean = true;
+	public ignoreVisibility: boolean = false;
 
 	/* START-USER-CODE */
 
 	start()
 	{
-		let active = this.scene.registry.get('mobile')
+		let active = this.scene.registry.get('mobile');
+		let visible = this.scene.registry.get('mobile');
 		if (!this.activeIfMobile)
 		{
 			active = !active;
+		}
+		if (!this.visibleIfMobile)
+		{
+			visible = !visible;
 		}
 			// TODO: there has to be a way to use expressions or whatever to make this without if 
 			// statements
 
 		this.gameObject.setActive(active);
-		this.gameObject.setVisible(active);
+		if (!this.ignoreVisibility)
+		{
+			this.gameObject.setVisible(visible);
+		}
 	}
 
 	/* END-USER-CODE */
