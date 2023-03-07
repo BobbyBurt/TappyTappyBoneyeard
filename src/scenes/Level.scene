@@ -590,28 +590,6 @@
                             "maxWidth": 120,
                             "dropShadowAlpha": 0,
                             "dropShadowColor": "#000000ff"
-                        },
-                        {
-                            "type": "Image",
-                            "id": "d30304e5-9cf9-4c7e-ab9e-6153eadc6e2c",
-                            "label": "parasol",
-                            "components": [],
-                            "texture": {
-                                "key": "parasol"
-                            },
-                            "x": -18,
-                            "y": 70
-                        },
-                        {
-                            "type": "Image",
-                            "id": "b01496fa-adf2-4cab-a4dc-b1bc03f84139",
-                            "label": "parasol_1",
-                            "components": [],
-                            "texture": {
-                                "key": "parasol"
-                            },
-                            "x": 19,
-                            "y": 69
                         }
                     ]
                 }

@@ -15,6 +15,7 @@
 - Diving into an enemy now sets the player's state to airborne, allowing them to use any other move.
 - No starting point object in the tilemap will no longer result in a crash.
 - Adaptive zoom takes height and scale zoom (which depends on device / PPI) into account. Resolution threshold & zoom level has been tweaked.
+- Adaptive zoom is applied during gameplay when the screen is resized.
 
 ### Added
 

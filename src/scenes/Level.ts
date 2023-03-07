@@ -262,14 +262,6 @@ export default class Level extends Phaser.Scene {
 		tutorialCloseText.dropShadowAlpha = 0;
 		tutorialContainer.add(tutorialCloseText);
 
-		// parasol
-		const parasol = this.add.image(-18, 70, "parasol");
-		tutorialContainer.add(parasol);
-
-		// parasol_1
-		const parasol_1 = this.add.image(19, 69, "parasol");
-		tutorialContainer.add(parasol_1);
-
 		// lists
 		const public_list: Array<any> = [];
 		const enemyList: Array<any> = [];
@@ -862,11 +854,25 @@ export default class Level extends Phaser.Scene {
 			{
 				if (!this.reachedGoal)
 				{
-					this.reachedGoal = true;
+					if (this.enemyList[this.goalEnemyIndex])
+					{
+						if (this.enemyList[this.goalEnemyIndex].isFalling())
+						{
+							this.reachedGoal = true;
 
-					this.levelEndFeedback();
+							this.levelEndFeedback();
+		
+							this.player.putInPlane(this.plane.x, this.plane.y);
+						}
+					}
+					else
+					{
+						this.reachedGoal = true;
 
-					this.player.putInPlane(this.plane.x, this.plane.y);
+						this.levelEndFeedback();
+	
+						this.player.putInPlane(this.plane.x, this.plane.y);
+					}
 				}	
 			}
 		}
@@ -1961,6 +1967,7 @@ export default class Level extends Phaser.Scene {
 				enemy = new GroundEnemy
 					(this, object.x! + 8, object.y! - 8, gunDirection, parasol, mine, alwaysFire);
 				enemy.isGoal = true;
+				this.goalEnemyIndex = this.enemyList.length;
 
 				this.createPlane(object.x!, object.y!);
 			}
@@ -2080,8 +2087,7 @@ export default class Level extends Phaser.Scene {
 		CameraUtil.configureMainCamera(this);
 		// this.cameras.main.setScroll(this.player.x, this.player.y);
 		this.cameras.main.startFollow(this.cameraFollow, true, .1, .1);
-		// this.cameras.main.setBounds(0, 0, this.tileLayer.width, this.tileLayer.height);
-		this.cameras.main.setBounds(-1000, -1000, this.tileLayer.width + 2000, this.tileLayer.height + 1000);
+		this.cameras.main.setBounds(0, 0, this.tileLayer.width, this.tileLayer.height);
 		this.cameras.main.ignore(this.uILayer.getChildren());
 
 		this.UICam = CameraUtil.createUICamera(this);
