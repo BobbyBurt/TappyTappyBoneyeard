@@ -533,6 +533,26 @@
                     "dropShadowColor": "#0AE735"
                 },
                 {
+                    "type": "BitmapText",
+                    "id": "216c6818-40bb-465c-9c4d-0a2f9d4110dd",
+                    "label": "timerText",
+                    "scope": "CLASS",
+                    "components": [
+                        "Align"
+                    ],
+                    "Align.up": true,
+                    "Align.center": true,
+                    "Align.verticalOffset": -95,
+                    "x": -158.61434936523438,
+                    "y": 53.32390213012695,
+                    "text": "12:04",
+                    "font": "nokia",
+                    "fontSize": -16,
+                    "dropShadowY": 100,
+                    "dropShadowAlpha": 1,
+                    "dropShadowColor": "#222222ff"
+                },
+                {
                     "type": "Container",
                     "id": "5ec9dcad-5028-4952-8dc1-fb0639456a64",
                     "label": "tutorialContainer",

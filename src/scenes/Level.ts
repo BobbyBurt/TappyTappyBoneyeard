@@ -232,6 +232,15 @@ export default class Level extends Phaser.Scene {
 		comboLabelText.dropShadowColor = 714549;
 		uILayer.add(comboLabelText);
 
+		// timerText
+		const timerText = this.add.bitmapText(-158.61434936523438, 53.32390213012695, "nokia", "12:04");
+		timerText.text = "12:04";
+		timerText.fontSize = -16;
+		timerText.dropShadowY = 100;
+		timerText.dropShadowAlpha = 1;
+		timerText.dropShadowColor = 2236962;
+		uILayer.add(timerText);
+
 		// tutorialContainer
 		const tutorialContainer = this.add.container(0, 0);
 		tutorialContainer.visible = false;
@@ -419,6 +428,12 @@ export default class Level extends Phaser.Scene {
 		comboLabelTextAlign.left = true;
 		comboLabelTextAlign.horizontalOffset = -90;
 
+		// timerText (components)
+		const timerTextAlign = new Align(timerText);
+		timerTextAlign.up = true;
+		timerTextAlign.center = true;
+		timerTextAlign.verticalOffset = -95;
+
 		// tutorialContainer (components)
 		const tutorialContainerAlign = new Align(tutorialContainer);
 		tutorialContainerAlign.middle = true;
@@ -448,6 +463,7 @@ export default class Level extends Phaser.Scene {
 		this.scoreText = scoreText;
 		this.comboText = comboText;
 		this.comboLabelText = comboLabelText;
+		this.timerText = timerText;
 		this.tutorialContainer = tutorialContainer;
 		this.tutorialBox = tutorialBox;
 		this.tutorialText = tutorialText;
@@ -483,6 +499,7 @@ export default class Level extends Phaser.Scene {
 	private scoreText!: Phaser.GameObjects.BitmapText;
 	private comboText!: Phaser.GameObjects.BitmapText;
 	private comboLabelText!: Phaser.GameObjects.BitmapText;
+	private timerText!: Phaser.GameObjects.BitmapText;
 	private tutorialContainer!: Phaser.GameObjects.Container;
 	private tutorialBox!: Phaser.GameObjects.Rectangle;
 	private tutorialText!: Phaser.GameObjects.BitmapText;
@@ -541,6 +558,8 @@ export default class Level extends Phaser.Scene {
 
 	private combo = 0;
 	private comboTextTween: Phaser.Tweens.Tween;
+
+	private levelTimer: Phaser.Time.TimerEvent;
 
 	private enemiesUITween: Phaser.Tweens.Tween;
 
@@ -769,6 +788,14 @@ export default class Level extends Phaser.Scene {
 		this.combo = 0;
 		this.updateCombo();
 
+		this.levelTimer = this.time.addEvent({ delay: 40000, callback: () =>
+		{
+			if (!this.reachedGoal)
+			{
+				this.resetLevel();
+			}
+		}});
+
 		if (!this.registry.get('seen-tutorial-level-' + this.registry.get('current-level-index')))
 		{
 			this.setTutorialUI(true, this.registry.get('mobile'), this.registry.get('current-level-index'));
@@ -794,6 +821,12 @@ export default class Level extends Phaser.Scene {
 			this.debugText2.setText(`main cam zoom: ${this.cameras.main.zoom}, scale zoom: ${this.scale.zoom}, scale test: ${CameraUtil.scaleTest(this)}`);
 			this.debugText3.setText(`scale: ${this.scale.width}, ${this.scale.height}}`);
 		}
+
+		const milliseconds = Math.floor(this.levelTimer.getRemaining());
+		const seconds = milliseconds * 0.001;
+		const secondsString = seconds.toString();
+		console.log(secondsString.lastIndexOf('.'));
+		this.timerText.setText(secondsString.replace('.', ':').slice(0, (secondsString.lastIndexOf('.') + 3)));
 
 		if (this.player.punchCharged)
 		{
@@ -861,7 +894,7 @@ export default class Level extends Phaser.Scene {
 							this.reachedGoal = true;
 
 							this.levelEndFeedback();
-		
+
 							this.player.putInPlane(this.plane.x, this.plane.y);
 						}
 					}
@@ -870,7 +903,7 @@ export default class Level extends Phaser.Scene {
 						this.reachedGoal = true;
 
 						this.levelEndFeedback();
-	
+
 						this.player.putInPlane(this.plane.x, this.plane.y);
 					}
 				}	

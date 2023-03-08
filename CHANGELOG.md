@@ -26,6 +26,7 @@
 - Added level end animation in which the plane flies offscreen.
 - Decorated the first several levels according to a new design language / set of rules.
 - Implmented tutorial UI, wrote lesson text.
+- Added level timer.
 
 ### Removed
 
