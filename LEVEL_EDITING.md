@@ -1,13 +1,11 @@
 ### Tappy Tappy Boneyard
 # Level Editing guide - WIP
 
-The following is a guide to creating levels for Tappy Tappy Boneyard. First is a practical guide on the techincal steps, then is a list of level design tips.
-
-Note that the level creation process was not intended to be used externally; It isn't foolproof. **Carefully follow bold instructions or else the game may crash.** Several aspects of the level creation process are inconsistent or inconvinent.
-
-**Names of objects and custom properties are case-sensitive.**
+The following is a guide to creating levels for Tappy Tappy Boneyard. Custom level creation & loading is not an officially supported feature, but it's possible through the same process that the official levels were made by. **Carefully follow bold instructions to avoid game errors or crashes.**
 
 For setup, make sure you download / clone this repository. The `Levels` folder in the project's root contains all the game's levels and test maps. Make sure you download and familiarize yourself with the Tiled level editor.
+
+In the Levels folder, you'll find a .tmx file for each official level. These are Tiled project files which are set up a certain way. To create a new level, copy template.tmx and open it.
 
 Each TTB level tilemap has three layers: `elements`, `Tile Layer 1` and `Tile Layer 2`. **Do not rename these layers.** 
 
@@ -17,15 +15,14 @@ Each TTB level tilemap has three layers: `elements`, `Tile Layer 1` and `Tile La
 
 `elements` contains the enemies as well as other markers. They will be explored in the next section
 
+
+
 ## Enemies
 
-From the main tileset, select a tile representing an enemy and place it into the `elements` layer. Which tile you select determines the enemy's weapon and it's angle, if applicable. Use the `Flipping` > `Horizontal` object property to set it's facing direction, and that of the gun if applicable.
-
-### Balloon
-### Parasol
-### Pogo
-### Grenade
-### Goal
+Each enemy is an object of the soldier tile with custom properties to set it's weapon / type. **Do not add or remove any of these properties.** To setup enemies, copy & paste an existing instance of the enemy object into place and set it's properties.
+- Use the `Flipping` > `Horizontal` object property to set it's facing direction
+- Use the Goal custom object property to set this enemy as the level's end goal plane
+- Use the GunDirection custom object property to "Up" Upward "Forward" "Downward and down. Leave this blank for the enemy to have no gun. 
 
 ## Enemy vision polygon
 
