@@ -178,6 +178,11 @@
                 "key": "bomb"
             },
             {
+                "url": "assets/levels/bomb-intro.json",
+                "type": "tilemapTiledJSON",
+                "key": "bomb-intro"
+            },
+            {
                 "url": "assets/levels/bombs.json",
                 "type": "tilemapTiledJSON",
                 "key": "bombs"
@@ -191,6 +196,11 @@
                 "url": "assets/levels/charge.json",
                 "type": "tilemapTiledJSON",
                 "key": "charge"
+            },
+            {
+                "url": "assets/levels/combo.json",
+                "type": "tilemapTiledJSON",
+                "key": "combo"
             },
             {
                 "url": [

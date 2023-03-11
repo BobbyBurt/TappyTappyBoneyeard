@@ -108,6 +108,8 @@ export default class Preload extends Phaser.Scene {
 	 */
 	start()
 	{
+		
+		
 		window.removeEventListener('touchstart', this.onPointer);
 		window.removeEventListener('click', this.onPointer);
 

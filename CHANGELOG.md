@@ -2,6 +2,8 @@
 
 # Version 11 Alpha
 
+This build has my third attempt at a tutorial, but first try at something full and shippable. I've improved the level creation process into something more foolproof.
+
 ### Changed
 
 - ResetY object is no longer required / used for level bottom boundary, instead just using the bottom of the tilemap.
@@ -27,8 +29,7 @@
 - Decorated the first several levels according to a new design language / set of rules.
 - Implmented tutorial UI, wrote lesson text.
 - Added level timer.
-
-### Removed
+- Added score popups which appear when taking out an enemy.
 
 ### Fixed
 

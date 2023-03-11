@@ -18,6 +18,7 @@ import CameraUtil from "~/components/CameraUtil";
 import TilemapUtil from "~/components/TilemapUtil";
 import VisionPoly from "~/components/VisionPoly";
 import PogoEnemy from "~/prefabs/PogoEnemy";
+import ScorePopup from "~/prefabs/scorePopup";
 
 /* END-USER-IMPORTS */
 
@@ -565,6 +566,9 @@ export default class Level extends Phaser.Scene {
 
 	private cameraFollow: Phaser.Math.Vector2;
 
+	private scorePopupGroup: Phaser.GameObjects.Group;
+	private levelScore: number;
+
 	create()
 	{	
 		this.editorCreate();
@@ -709,6 +713,9 @@ export default class Level extends Phaser.Scene {
 		this.explosionGroup = this.add.group({maxSize: 30, classType: explosionPrefab})
 			// TODO: define max
 
+	// score popup
+		this.scorePopupGroup = this.add.group({maxSize: 10, classType: ScorePopup})
+
 	// music
 		if (this.music == undefined 
 			|| (this.music.key === 'main-game' && this.registry.get('current-level-index') < 4)
@@ -722,6 +729,7 @@ export default class Level extends Phaser.Scene {
 			if (this.registry.get('current-level-index') < 3)
 			{
 				this.music = this.sound.add('tutorial', {volume: .7});
+				console.log('added tutorial music');
 			}
 			else
 			{
@@ -751,6 +759,7 @@ export default class Level extends Phaser.Scene {
 		this.sound.play('reflect');
 
 		this.environmentAudio.play(undefined, {volume: 0.03, loop: true});
+		console.log('added environmental audio');
 
 	// debug wall detect visual
 		this.debugWallDetectGraphics = this.add.graphics({fillStyle: { color: 0x0000ff, alpha: (__DEV__? 1 : 0)}});
@@ -788,7 +797,7 @@ export default class Level extends Phaser.Scene {
 		this.combo = 0;
 		this.updateCombo();
 
-		this.levelTimer = this.time.addEvent({ delay: 40000, callback: () =>
+		this.levelTimer = this.time.addEvent({ delay: 30000, callback: () =>
 		{
 			if (!this.reachedGoal)
 			{
@@ -825,7 +834,6 @@ export default class Level extends Phaser.Scene {
 		const milliseconds = Math.floor(this.levelTimer.getRemaining());
 		const seconds = milliseconds * 0.001;
 		const secondsString = seconds.toString();
-		console.log(secondsString.lastIndexOf('.'));
 		this.timerText.setText(secondsString.replace('.', ':').slice(0, (secondsString.lastIndexOf('.') + 3)));
 
 		if (this.player.punchCharged)
@@ -1069,6 +1077,8 @@ export default class Level extends Phaser.Scene {
 				this.updateCombo();
 			}
 
+			this.addEnemyScore();
+
 			if (_enemy.isMine)
 			{
 				this.explode(_enemy.x, _enemy.y);
@@ -1135,6 +1145,8 @@ export default class Level extends Phaser.Scene {
 			this.updateCombo();
 		}
 
+		this.addEnemyScore();
+
 		// this.enemiesDefeatedCheck();
 
 		this.player.punchCharged = true;
@@ -1161,6 +1173,8 @@ export default class Level extends Phaser.Scene {
 				this.updateCombo();
 			}
 
+			this.addEnemyScore();
+
 			// this.goalEnemyCheck(enemy1);
 		}
 
@@ -1174,6 +1188,8 @@ export default class Level extends Phaser.Scene {
 				this.combo++;
 				this.updateCombo();
 			}
+
+			this.addEnemyScore();
 
 			// this.goalEnemyCheck(enemy2);
 		}
@@ -1276,6 +1292,18 @@ export default class Level extends Phaser.Scene {
 
 			this.reachedGoal = true;
 		}
+	}
+
+	/**
+	 * Must be called after updateCombo()
+	 */
+	addEnemyScore()
+	{
+		let scoreToAdd = 200 * this.combo;
+		this.levelScore += scoreToAdd;
+
+		const scorePopup = this.scorePopupGroup.get(this.player.x, this.player.y - 1020);
+		scorePopup.appear(scoreToAdd);
 	}
 
 	updateCombo()
@@ -1865,6 +1893,12 @@ export default class Level extends Phaser.Scene {
 
 		this.cameras.main.stopFollow();
 
+		this.levelTimer.paused = true;
+		this.time.addEvent({ delay: 200, repeat: -1, callback: () =>
+		{
+			this.timerText.setVisible(!this.timerText.visible);
+		}});
+
 	// win audio
 		this.sound.play('victory');
 		this.music.pause();
@@ -1900,7 +1934,7 @@ export default class Level extends Phaser.Scene {
 				tutorialString = "Punches and uppercuts take a lot out of you...\n\nLanding on ground is one way to recharge, but you'll also automatically regain charge if you take out an enemy with your attack!"
 				break;
 			case 8:
-				tutorialString = "Each enemy you take out will add to your combo as long as you're airborne.\n\nTry to figure out ways to build that combo!"
+				tutorialString = "Each enemy you take out will add to your combo as long as you're not grounded.\n\nTry to figure out ways to build that combo!"
 				break;
 			// case 9:
 			// 	tutorialString = "Good hustle out there! Time to test your skills."
