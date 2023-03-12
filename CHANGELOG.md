@@ -1,6 +1,18 @@
 # Changelog
 
-# Version 11 Alpha
+# Version 12 Alpha
+
+These are internal changes as part of a refactor.
+
+### Changed
+
+- Better music handling
+
+### Added
+### Removed
+### Fixed
+
+# Version 11 Alpha - 2023-03-11
 
 This build has my third attempt at a tutorial, but first try at something full and shippable. I've improved the level creation process into something more foolproof.
 

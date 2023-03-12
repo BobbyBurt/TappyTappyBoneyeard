@@ -19,6 +19,7 @@ import TilemapUtil from "~/components/TilemapUtil";
 import VisionPoly from "~/components/VisionPoly";
 import PogoEnemy from "~/prefabs/PogoEnemy";
 import ScorePopup from "~/prefabs/scorePopup";
+import SoundManager from "~/components/SoundManager";
 
 /* END-USER-IMPORTS */
 
@@ -520,6 +521,16 @@ export default class Level extends Phaser.Scene {
 	private restarting = false;
 	private reachedGoal = false;
 
+// sounds
+	private flapSound: Phaser.Sound.BaseSound;
+	private enemyDeathSound: Phaser.Sound.BaseSound;
+	private explosionSound: Phaser.Sound.BaseSound;
+	private playerDeathSound: Phaser.Sound.BaseSound;
+	private victorySound: Phaser.Sound.BaseSound;
+	private reflectSound: Phaser.Sound.BaseSound;
+	private punchSound: Phaser.Sound.BaseSound;
+	private comboHitSound: Phaser.Sound.BaseSound;
+
 // tilemap
 	private tileMap: Phaser.Tilemaps.Tilemap;
 	private tileLayer: Phaser.Tilemaps.TilemapLayer;
@@ -650,6 +661,8 @@ export default class Level extends Phaser.Scene {
 		// map, otherwise this acts as an arbitrary max which crashes the game if exceeded.
 		// */
 
+		console.log('BRK');
+
 		this.createMapEnemies();
 
 		this.createMapVisionPolys();
@@ -716,53 +729,42 @@ export default class Level extends Phaser.Scene {
 	// score popup
 		this.scorePopupGroup = this.add.group({maxSize: 10, classType: ScorePopup})
 
-	// music
-		if (this.music == undefined 
-			|| (this.music.key === 'main-game' && this.registry.get('current-level-index') < 4)
-			|| (this.music.key === 'tutorial' && this.registry.get('current-level-index') >= 4))
-		{
-			if (this.music)
-			{
-				this.music.stop();
-			}
+	// music - DEPRECATED - Marked for deletion.
+		// if (this.music == undefined 
+		// 	|| (this.music.key === 'main-game' && this.registry.get('current-level-index') < 4)
+		// 	|| (this.music.key === 'tutorial' && this.registry.get('current-level-index') >= 4))
+		// {
+		// 	if (this.music)
+		// 	{
+		// 		this.music.stop();
+		// 	}
 
-			if (this.registry.get('current-level-index') < 3)
-			{
-				this.music = this.sound.add('tutorial', {volume: .7});
-				console.log('added tutorial music');
-			}
-			else
-			{
-				this.music = this.sound.add('main-game', {volume: .7});
-				console.log('added main game music');
-			}
+		// 	if (this.registry.get('current-level-index') < 3)
+		// 	{
+		// 		this.music = this.sound.add('tutorial', {volume: .7});
+		// 		console.log('added tutorial music');
+		// 	}
+		// 	else
+		// 	{
+		// 		this.music = this.sound.add('main-game', {volume: .7});
+		// 		console.log('added main game music');
+		// 	}
 
-			if (!__DEV__ && !this.registry.get('muted'))
-			{
-				this.music.play({loop: true});
-			}
-		}
-		this.music.resume();
+		// 	if (!__DEV__ && !this.registry.get('muted'))
+		// 	{
+		// 		this.music.play({loop: true});
+		// 	}
 
-	// SFX
-		this.sound.add('bird-flap', {volume: 1});
-		this.sound.add('enemy-death', {volume: 1});
-		this.sound.add('explosion', {volume: .7});
-		this.sound.add('bird-die', {volume: 1});
-		this.sound.add('victory', {volume: 1});
-		this.sound.add('reflect', {volume: 1});
-			// TODO: impliment explosion sound w/ spacial audio or something
-		this.sound.add('punch-swing', {volume: 1});
-		this.environmentAudio = this.sound.add('environment');
-		this.sound.add('combo-hit');
-
+		this.music = SoundManager.setLevelMusic(this.music, this.registry.get('current-level-index'), this);
+		console.log(this.music);
+		this.addSounds();
 		this.sound.play('reflect');
 
-		this.environmentAudio.play(undefined, {volume: 0.03, loop: true});
-		console.log('added environmental audio');
+		// this.environmentAudio.play(undefined, {volume: 0.03, loop: true});
 
 	// debug wall detect visual
-		this.debugWallDetectGraphics = this.add.graphics({fillStyle: { color: 0x0000ff, alpha: (__DEV__? 1 : 0)}});
+		this.debugWallDetectGraphics = this.add.graphics
+			({fillStyle: { color: 0x0000ff, alpha: (__DEV__? 1 : 0)}});
 		this.UICam.ignore(this.debugWallDetectGraphics);
 
 	// quick restart input
@@ -1012,7 +1014,7 @@ export default class Level extends Phaser.Scene {
 			_enemy.removeUpdateListener();
 		});
 
-		this.environmentAudio.stop();
+		// this.environmentAudio.stop();
 
 		this.scene.start('LevelSelect');
 	}
@@ -2066,9 +2068,16 @@ export default class Level extends Phaser.Scene {
 			this.enemyList.push(enemy);
 			enemy.enemyListIndex = this.enemyList.length - 1;
 			this.mapElementList[object.id] = enemy;
-			this.mainLayer.add(enemy);
-			this.UICam.ignore(enemy);
+			// this.mainLayer.add(enemy);
+			// this.UICam.ignore(enemy);
+			this.addToMainLayer(enemy);
 		});
+	}
+
+	addToMainLayer(object: Phaser.GameObjects.GameObject)
+	{
+		this.mainLayer.add(object);
+		this.UICam.ignore(object);
 	}
 
 	createPlane(x: number, y: number)
@@ -2142,6 +2151,21 @@ export default class Level extends Phaser.Scene {
 				}
 			}
 		});
+	}
+
+	/**
+	 * Initializes sound variables with set volumes
+	 */
+	addSounds()
+	{
+		this.flapSound 			= this.sound.add('bird-flap', {volume: 1});
+		this.enemyDeathSound 	= this.sound.add('enemy-death', {volume: 1});
+		this.explosionSound 	= this.sound.add('explosion', {volume: .7});
+		this.playerDeathSound 	= this.sound.add('bird-die', {volume: 1});
+		this.victorySound 		= this.sound.add('victory', {volume: 1});
+		this.reflectSound 		= this.sound.add('reflect', {volume: 1});
+		this.punchSound 		= this.sound.add('punch-swing', {volume: 1});
+		this.comboHitSound 		= this.sound.add('combo-hit');
 	}
 
 	/**
