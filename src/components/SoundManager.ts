@@ -3,7 +3,7 @@ import Level from "~/scenes/Level";
 
 export default class SoundManager {
 
-    private static playInDevMode = false;
+    private static playMusicInDevMode = false;
 
 	private static tracksKey = ['tutorial', 'main-game', 'tutorial']
 		// TODO: Replace this with 3rd track key
@@ -45,7 +45,7 @@ export default class SoundManager {
 	// Add, Play, Return
 		musicBS = levelScene.sound.add(trackToPlayKey, 
 			{ volume: this.tracksVolume[this.tracksKey.indexOf(trackToPlayKey)]})
-		if (!(__DEV__ && !this.playInDevMode) && !levelScene.registry.get('muted'))
+		if (!(__DEV__ && !this.playMusicInDevMode) && !levelScene.registry.get('muted'))
 		{
 			musicBS.play({loop: true});
 		}

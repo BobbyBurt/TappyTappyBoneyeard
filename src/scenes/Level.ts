@@ -23,9 +23,11 @@ import SoundManager from "~/components/SoundManager";
 
 /* END-USER-IMPORTS */
 
-export default class Level extends Phaser.Scene {
+export default class Level extends Phaser.Scene
+{
 
-	constructor() {
+	constructor()
+	{
 		super("Level");
 
 		/* START-USER-CTR-CODE */
@@ -33,7 +35,8 @@ export default class Level extends Phaser.Scene {
 		/* END-USER-CTR-CODE */
 	}
 
-	editorCreate(): void {
+	editorCreate(): void
+	{
 
 		// BGLayer
 		const bGLayer = this.add.layer();
@@ -516,12 +519,12 @@ export default class Level extends Phaser.Scene {
 
 	/* START-USER-CODE */
 
-// game state
+	// game state
 	/** used to make sure level restart is only called once */
 	private restarting = false;
 	private reachedGoal = false;
 
-// sounds
+	// sounds
 	private flapSound: Phaser.Sound.BaseSound;
 	private enemyDeathSound: Phaser.Sound.BaseSound;
 	private explosionSound: Phaser.Sound.BaseSound;
@@ -531,19 +534,19 @@ export default class Level extends Phaser.Scene {
 	private punchSound: Phaser.Sound.BaseSound;
 	private comboHitSound: Phaser.Sound.BaseSound;
 
-// tilemap
+	// tilemap
 	private tileMap: Phaser.Tilemaps.Tilemap;
 	private tileLayer: Phaser.Tilemaps.TilemapLayer;
 	private bgTileLayer: Phaser.Tilemaps.TilemapLayer;
 	/** player is reset, objects are removed if below this Y coordinate. Set based on tilemap object */
 	private bottomBoundary: number;
 
-// object groups
+	// object groups
 	private bombGroup: Phaser.GameObjects.Group;
 	private explosionGroup: Phaser.GameObjects.Group;
 	private bulletGroup: Phaser.GameObjects.Group;
 
-// debug
+	// debug
 	private debugWallDetectGraphics: Phaser.GameObjects.Graphics;
 	private debugVisionPolyGraphics: Phaser.GameObjects.Graphics;
 
@@ -581,7 +584,7 @@ export default class Level extends Phaser.Scene {
 	private levelScore: number;
 
 	create()
-	{	
+	{
 		this.editorCreate();
 
 		this.createMobileButtons();
@@ -603,7 +606,7 @@ export default class Level extends Phaser.Scene {
 		}
 
 		this.tileLayer = this.tileMap.createLayer("Tile Layer 1", ["tilleset"], 0, 0);
-			// why is it misspelled 'tillset'?
+		// why is it misspelled 'tillset'?
 		this.mainLayer.add(this.tileLayer);
 
 		// this.mainLayer.add(this.hazardTileLayer);
@@ -661,13 +664,11 @@ export default class Level extends Phaser.Scene {
 		// map, otherwise this acts as an arbitrary max which crashes the game if exceeded.
 		// */
 
-		console.log('BRK');
-
 		this.createMapEnemies();
 
 		this.createMapVisionPolys();
 
-	// tilemap special elements
+		// tilemap special elements
 		let startPoint = TilemapUtil.getObjectPositionByGID(38, this.tileMap);
 		if (startPoint === null)
 		{
@@ -680,7 +681,7 @@ export default class Level extends Phaser.Scene {
 		this.player.setFlipX(TilemapUtil.getObjectFlipByGID(38, this.tileMap));
 
 		this.cameras.main.setScroll(this.player.x, this.player.y);
-			// Apparently this doesn't help
+		// Apparently this doesn't help
 
 		// const endEgg = TilemapUtil.getObjectPosition('endEgg', this.tileMap);
 		// endEgg.x += 6;
@@ -693,9 +694,9 @@ export default class Level extends Phaser.Scene {
 			this.createPlane(endPlane!.x, endPlane.y);
 		}
 
-	// bombs
-		this.bombGroup = this.add.group({maxSize: 30, classType: BombPrefab});
-			// TODO: define max
+		// bombs
+		this.bombGroup = this.add.group({ maxSize: 30, classType: BombPrefab });
+		// TODO: define max
 		// this.physics.add.collider
 		// 	(this.bombGroup, this.collidesWithBombList, this.bombCollide, undefined, this);
 		this.physics.add.overlap(this.bombGroup, this.player, this.bombPlayerOverlap, undefined, this);
@@ -703,33 +704,33 @@ export default class Level extends Phaser.Scene {
 		this.physics.add.overlap(this.bombGroup, this.enemyList, this.bombEnemyOverlap, undefined, this);
 		this.physics.add.collider(this.bombGroup, this.tileLayer, this.bombTilemapCollide, undefined, this);
 
-	// bullets
-		this.bulletGroup = this.add.group({maxSize: 100, classType: BulletPrefab})
-			// TODO: define justifies max size
+		// bullets
+		this.bulletGroup = this.add.group({ maxSize: 100, classType: BulletPrefab })
+		// TODO: define justifies max size
 		// for (let i = 0; i < 100; i++)
 		// {
-			// let _newBullet = this.bulletGroup.get(i, i);
-			// this.mainLayer.add(_newBullet);
-			// this.bulletList.push(_newBullet);
-			// console.log(i);
-			// this.bulletGroup.getChildren()[i].setActive(false)
+		// let _newBullet = this.bulletGroup.get(i, i);
+		// this.mainLayer.add(_newBullet);
+		// this.bulletList.push(_newBullet);
+		// console.log(i);
+		// this.bulletGroup.getChildren()[i].setActive(false)
 		// }
 		// this.time.addEvent({delay: 3000, callback: this.enemyGunFire, callbackScope: this, loop: true})
 
-	// balloon physics
+		// balloon physics
 		// let _balloonEnemy = this.balloonEnemyList[0] as BalloonEnemy;
 		// let _balloon = _balloonEnemy.balloon;
 		// console.log(_balloon);
 		// this.physics.add.overlap(_balloon, this.player, this.balloonHit)
 
-	// explosions
-		this.explosionGroup = this.add.group({maxSize: 30, classType: explosionPrefab})
-			// TODO: define max
+		// explosions
+		this.explosionGroup = this.add.group({ maxSize: 30, classType: explosionPrefab })
+		// TODO: define max
 
-	// score popup
-		this.scorePopupGroup = this.add.group({maxSize: 10, classType: ScorePopup})
+		// score popup
+		this.scorePopupGroup = this.add.group({ maxSize: 10, classType: ScorePopup })
 
-	// music - DEPRECATED - Marked for deletion.
+		// music - DEPRECATED - Marked for deletion.
 		// if (this.music == undefined 
 		// 	|| (this.music.key === 'main-game' && this.registry.get('current-level-index') < 4)
 		// 	|| (this.music.key === 'tutorial' && this.registry.get('current-level-index') >= 4))
@@ -751,76 +752,91 @@ export default class Level extends Phaser.Scene {
 		// 	}
 
 		// 	if (!__DEV__ && !this.registry.get('muted'))
-		// 	{
+		// 	{F
 		// 		this.music.play({loop: true});
 		// 	}
 
 		this.music = SoundManager.setLevelMusic(this.music, this.registry.get('current-level-index'), this);
-		console.log(this.music);
 		this.addSounds();
-		this.sound.play('reflect');
+		this.reflectSound.play();
 
 		// this.environmentAudio.play(undefined, {volume: 0.03, loop: true});
 
-	// debug wall detect visual
+		// debug wall detect visual
 		this.debugWallDetectGraphics = this.add.graphics
-			({fillStyle: { color: 0x0000ff, alpha: (__DEV__? 1 : 0)}});
+			({ fillStyle: { color: 0x0000ff, alpha: (__DEV__ ? 1 : 0) } });
 		this.UICam.ignore(this.debugWallDetectGraphics);
 
-	// quick restart input
+		// quick restart input
 		this.input.keyboard.on('keydown-S', () =>
 		{
 			this.resetLevel();
 		});
 
-	// level select input
+		// level select input
 		this.input.keyboard.on('keydown-A', () =>
 		{
 			this.LoadLevelSelect();
 		});
 
-	// level select input
+		// level select input
 		this.input.keyboard.on('keydown-M', () =>
 		{
 			if (this.registry.get('muted'))
 			{
 				this.music.play();
 				this.environmentAudio.play();
-				this.registry.set('muted', false );
+				this.registry.set('muted', false);
 			}
 			else
 			{
 				this.music.stop();
 				this.environmentAudio.stop();
-				this.registry.set('muted', true );
+				this.registry.set('muted', true);
 			}
 		});
 
 		this.combo = 0;
 		this.updateCombo();
 
-		this.levelTimer = this.time.addEvent({ delay: 30000, callback: () =>
-		{
-			if (!this.reachedGoal)
+		this.levelTimer = this.time.addEvent({
+			delay: 5000, callback: () =>
 			{
-				this.resetLevel();
+				if (!this.reachedGoal)
+				{
+					this.resetLevel();
+				}
 			}
-		}});
+		});
 
 		if (!this.registry.get('seen-tutorial-level-' + this.registry.get('current-level-index')))
 		{
 			this.setTutorialUI(true, this.registry.get('mobile'), this.registry.get('current-level-index'));
 		}
 
-	// resize init
+		this.game.events.on(Phaser.Core.Events.BLUR, () =>
+		{
+			console.debug('blur');
+
+			this.scene.pause();
+		})
+
+		this.game.events.on(Phaser.Core.Events.FOCUS, () =>
+		{
+			console.debug('focus');
+
+			this.scene.resume();
+		})
+
+		// resize init
 		this.events.on('pre-resize', this.resize, this);
 		this.resize();
 
 		this.buildText.setText('Tappy Tappy Boneyard v' + this.game.config.gameVersion);
 	}
 
-	update(time:number, delta: number): void
-	{	
+	update(time: number, delta: number): void
+	{
 		super.update(time, delta);
 
 		// this.debugText.setText(`${this.player.stateController.currentState.name}`);
@@ -830,7 +846,7 @@ export default class Level extends Phaser.Scene {
 			// this.debugText2.setText(`flap charge: ${this.player.flapCharge}`);
 			// this.debugText3.setText(`punch charge: ${this.player.punchCharged}`);	
 			this.debugText2.setText(`main cam zoom: ${this.cameras.main.zoom}, scale zoom: ${this.scale.zoom}, scale test: ${CameraUtil.scaleTest(this)}`);
-			this.debugText3.setText(`scale: ${this.scale.width}, ${this.scale.height}}`);
+			this.debugText3.setText(`debug3`);
 		}
 
 		const milliseconds = Math.floor(this.levelTimer.getRemaining());
@@ -846,50 +862,50 @@ export default class Level extends Phaser.Scene {
 		{
 			this.chargeText.dropShadowColor = 15081504;
 		}
-			// TEMP: this shouldn't be checked each frame
+		// TEMP: this shouldn't be checked each frame
 
-	// reset collision values to be overridden by callbacks
+		// reset collision values to be overridden by callbacks
 		this.player.onFloor = false;
 
-	// player wall check
-		this.player.onWallLeft = 
-			(this.tileLayer.getTileAtWorldXY(this.player.body.x - 1, this.player.body.y + 9) != undefined 
-			|| this.tileLayer.getTileAtWorldXY(this.player.body.x - 1, this.player.body.y) != undefined);
-		this.player.onWallRight = 
+		// player wall check
+		this.player.onWallLeft =
+			(this.tileLayer.getTileAtWorldXY(this.player.body.x - 1, this.player.body.y + 9) != undefined
+				|| this.tileLayer.getTileAtWorldXY(this.player.body.x - 1, this.player.body.y) != undefined);
+		this.player.onWallRight =
 			(this.tileLayer.getTileAtWorldXY(this.player.body.x + 12, this.player.body.y + 9) != undefined
-			|| this.tileLayer.getTileAtWorldXY(this.player.body.x + 12, this.player.body.y) != undefined);
-				// TODO: decorative tiles without collision, as defined at tileLayer.setCollision, 
-				// should not count as wall.
-	// DEBUG: collision points visual
+				|| this.tileLayer.getTileAtWorldXY(this.player.body.x + 12, this.player.body.y) != undefined);
+		// TODO: decorative tiles without collision, as defined at tileLayer.setCollision, 
+		// should not count as wall.
+		// DEBUG: collision points visual
 		this.debugWallDetectGraphics.clear();
 		this.debugWallDetectGraphics.fillPoint(this.player.body.x - 1, this.player.body.y + 9);
 		this.debugWallDetectGraphics.fillPoint(this.player.body.x - 1, this.player.body.y);
 		this.debugWallDetectGraphics.fillPoint(this.player.body.x + 12, this.player.body.y + 9);
 		this.debugWallDetectGraphics.fillPoint(this.player.body.x + 12, this.player.body.y);
 
-	// Vision rect check
-	this.visionPolys.forEach((object, index) =>
-	{
-		if (Phaser.Geom.Polygon.ContainsPoint
-			(object, new Phaser.Geom.Point(this.player.x, this.player.y)))
+		// Vision rect check
+		this.visionPolys.forEach((object, index) =>
 		{
-			if (object.parentEnemy.gunDirection)
+			if (Phaser.Geom.Polygon.ContainsPoint
+				(object, new Phaser.Geom.Point(this.player.x, this.player.y)))
 			{
-				this.setGunFire(object.parentEnemy);
-			}
-			else if (object.parentEnemy.bombProp)
-			{
-				if (object.parentEnemy.bombCooldownTimer.getProgress() == 1 
-					&& !object.parentEnemy.isFalling())
+				if (object.parentEnemy.gunDirection)
 				{
-					this.setBomb(object.parentEnemy.x, object.parentEnemy.y, object.parentEnemy);
-					object.parentEnemy.bombCooldownTimer.reset({});
+					this.setGunFire(object.parentEnemy);
+				}
+				else if (object.parentEnemy.bombProp)
+				{
+					if (object.parentEnemy.bombCooldownTimer.getProgress() == 1
+						&& !object.parentEnemy.isFalling())
+					{
+						this.setBomb(object.parentEnemy.x, object.parentEnemy.y, object.parentEnemy);
+						object.parentEnemy.bombCooldownTimer.reset({});
+					}
 				}
 			}
-		}
-	});
+		});
 
-	// player-plane check
+		// player-plane check
 		if (this.planeRect)
 		{
 			if (Phaser.Geom.Rectangle.ContainsPoint
@@ -916,11 +932,11 @@ export default class Level extends Phaser.Scene {
 
 						this.player.putInPlane(this.plane.x, this.plane.y);
 					}
-				}	
+				}
 			}
 		}
 
-	// out-of-bounds checks
+		// out-of-bounds checks
 		if (this.player.y > this.cameras.main.getBounds().bottom)
 		{
 			// this.player.reset();
@@ -935,16 +951,18 @@ export default class Level extends Phaser.Scene {
 				_member.disappear();
 				_member.setPosition(9999, -9999);
 				_member.enemy.bombCooldownTimer.destroy();
-				_member.enemy.bombCooldownTimer = this.time.addEvent({delay: 1000, callback: () =>
-				{
-					if (!_member.enemy.isFalling())
+				_member.enemy.bombCooldownTimer = this.time.addEvent({
+					delay: 1000, callback: () =>
 					{
-						_member.enemy.bombProp.setVisible(true);
+						if (!_member.enemy.isFalling())
+						{
+							_member.enemy.bombProp.setVisible(true);
+						}
 					}
-				}});
+				});
 			}
 		});
-			// TODO: change this to bomb group
+		// TODO: change this to bomb group
 
 		this.updateEnemiesUI();
 
@@ -960,7 +978,7 @@ export default class Level extends Phaser.Scene {
 	/** reloads the scene */
 	resetLevel()
 	{
-	// this function should only happen once
+		// this function should only happen once
 		if (!this.restarting)
 		{
 			this.restarting = true;
@@ -970,12 +988,7 @@ export default class Level extends Phaser.Scene {
 			return;
 		}
 
-	// OLD
-		// this.player.reset();
-
-		// this.sound.play('bird-die');
-
-	// remove update listeners to avoid crash
+		// remove update listeners to avoid crash
 		this.events.off(Phaser.Scenes.Events.UPDATE);
 		this.player.removeUpdateListener();
 		this.enemyList.forEach((enemy) =>
@@ -990,7 +1003,7 @@ export default class Level extends Phaser.Scene {
 	/** stops this scene, shutting down update listeners, and starts level select scene */
 	LoadLevelSelect()
 	{
-	// this function should only happen once
+		// this function should only happen once
 		if (!this.restarting)
 		{
 			this.restarting = true;
@@ -1000,12 +1013,7 @@ export default class Level extends Phaser.Scene {
 			return;
 		}
 
-	// OLD
-		// this.player.reset();
-
-		// this.sound.play('bird-die');
-
-	// remove update listeners to avoid crash
+		// remove update listeners to avoid crash
 		this.events.off(Phaser.Scenes.Events.UPDATE);
 		this.player.removeUpdateListener();
 		this.enemyList.forEach((enemy) =>
@@ -1024,9 +1032,9 @@ export default class Level extends Phaser.Scene {
 	 * 
 	 * sets Player.onFloor
 	 */
-	playerTilemapCollide(_player:Phaser.Types.Physics.Arcade.GameObjectWithBody, _tilemap:any)
-		// TODO: specify type annotation. Call back gives 
-		// Phaser.Types.Physics.Arcade.GameObjectWithBody, but onFloor() is a member
+	playerTilemapCollide(_player: Phaser.Types.Physics.Arcade.GameObjectWithBody, _tilemap: any)
+	// TODO: specify type annotation. Call back gives 
+	// Phaser.Types.Physics.Arcade.GameObjectWithBody, but onFloor() is a member
 	{
 		if (_player.body.blocked.down)
 		{
@@ -1039,16 +1047,16 @@ export default class Level extends Phaser.Scene {
 		let tilemap = _tilemap as Phaser.Tilemaps.Tilemap;
 	}
 
-	playerHazardTilemapCollide(_player:Phaser.Types.Physics.Arcade.GameObjectWithBody, _tilemap:any)
+	playerHazardTilemapCollide(_player: Phaser.Types.Physics.Arcade.GameObjectWithBody, _tilemap: any)
 	{
 		// this.resetLevel();
 
 		console.log('overlapping. for some reason?')
 	}
 
-	playerEnemyOverlap(player:Phaser.Types.Physics.Arcade.GameObjectWithBody, 
-		enemy:Phaser.Types.Physics.Arcade.GameObjectWithBody)
-		// TODO: specify type annotation
+	playerEnemyOverlap(player: Phaser.Types.Physics.Arcade.GameObjectWithBody,
+		enemy: Phaser.Types.Physics.Arcade.GameObjectWithBody)
+	// TODO: specify type annotation
 	{
 		let _enemy = enemy as EnemyPrefab;
 
@@ -1059,7 +1067,7 @@ export default class Level extends Phaser.Scene {
 
 		if (this.player.stateController.currentState.name == 'dive')
 		{
-		// velocity of knockback
+			// velocity of knockback
 
 			this.player.setVelocityY(-this.player.jumpForce);
 
@@ -1071,7 +1079,7 @@ export default class Level extends Phaser.Scene {
 			// let velocity = new Phaser.Math.Vector2((this.player.flipX ? 120 : -120), this.player.body.velocity.y)
 			const velocity = this.getKnockbackVelocty(true);
 			_enemy.hit(velocity.x, velocity.y);
-			this.sound.play('enemy-death');
+			this.enemyDeathSound.play();
 
 			if (!this.player.onFloor)
 			{
@@ -1129,17 +1137,17 @@ export default class Level extends Phaser.Scene {
 		// let velocity = new Phaser.Math.Vector2((this.player.flipX ? 300 : -300), this.player.body.velocity.y)
 		// if (this.player.stateController.currentState.name == 'uppercut')
 		// {
-			// 	velocity.x = 0;
-			// }	
-			if (_enemy.isMine)
-			{
-				this.explode(_enemy.x, _enemy.y);
-				return;
-			}
+		// 	velocity.x = 0;
+		// }	
+		if (_enemy.isMine)
+		{
+			this.explode(_enemy.x, _enemy.y);
+			return;
+		}
 
 		const velocity = this.getKnockbackVelocty(true);
 		_enemy.hit(velocity.x, velocity.y);
-		this.sound.play('enemy-death');
+		this.enemyDeathSound.play();
 
 		if (!this.player.onFloor)
 		{
@@ -1167,7 +1175,7 @@ export default class Level extends Phaser.Scene {
 		if (!enemy1.isFalling())
 		{
 			enemy1.hit(enemy2.body.velocity.x, enemy2.body.velocity.y);
-			this.sound.play('enemy-death');
+			this.enemyDeathSound.play();
 
 			if (!this.player.onFloor)
 			{
@@ -1183,7 +1191,7 @@ export default class Level extends Phaser.Scene {
 		if (!enemy2.isFalling())
 		{
 			enemy2.hit(enemy1.body.velocity.x, enemy1.body.velocity.y);
-			this.sound.play('enemy-death');
+			this.enemyDeathSound.play();
 
 			if (!this.player.onFloor)
 			{
@@ -1221,7 +1229,7 @@ export default class Level extends Phaser.Scene {
 		}
 
 		this.setBombFuse(_bomb);
-		_bomb.setPosition(_bomb.x, _bomb.y -3);
+		_bomb.setPosition(_bomb.x, _bomb.y - 3);
 		const velocity = this.getKnockbackVelocty(false);
 		_bomb.body.setVelocity(velocity.x, velocity.y);
 		// _bomb.body.setVelocity(this.player.body.velocity.x * 1.3, (this.player.body.velocity.y * 1.5) - 150);
@@ -1263,7 +1271,7 @@ export default class Level extends Phaser.Scene {
 	}
 
 	/** egg collision callback */
-	bombCollide(bomb:any, _collidedWith:any)
+	bombCollide(bomb: any, _collidedWith: any)
 	{
 		let _bomb = bomb as BombPrefab;
 
@@ -1271,12 +1279,12 @@ export default class Level extends Phaser.Scene {
 	}
 
 	/** TEST */
-	balloonPlayerCollide(_balloon:any, _player:any)
+	balloonPlayerCollide(_balloon: any, _player: any)
 	{
 		console.log('balloon hit');
 	}
 
-	bulletPlayerCollide(_bullet:any, _player:any)
+	bulletPlayerCollide(_bullet: any, _player: any)
 	{
 		this.resetLevel();
 	}
@@ -1320,18 +1328,18 @@ export default class Level extends Phaser.Scene {
 				this.comboTextTween.stop();
 			this.comboText.setScale(1.5);
 			this.comboTextTween = this.tweens.add
-			({
-				targets: this.comboText,
-				duration: 500,
-				// hold: 1000,
-				// repeatDelay: 1000,
-				// repeat: -1,
-				ease: Phaser.Math.Easing.Circular.Out,
-				scale: 1,
-			});
+				({
+					targets: this.comboText,
+					duration: 500,
+					// hold: 1000,
+					// repeatDelay: 1000,
+					// repeat: -1,
+					ease: Phaser.Math.Easing.Circular.Out,
+					scale: 1,
+				});
 
-			this.sound.play('combo-hit', {volume: (((this.combo - 2) + 0) * 0.07) + 0.4, detune: (this.combo - 2) * 100});
-				// TODO: volume based on combo needs a max
+			this.comboHitSound.play({ volume: (((this.combo - 2) + 0) * 0.07) + 0.4, detune: (this.combo - 2) * 100 });
+			// TODO: volume based on combo needs a max
 		}
 		else
 		{
@@ -1364,41 +1372,45 @@ export default class Level extends Phaser.Scene {
 		{
 			this.bombGroup.getFirstAlive()?.setActive(false);
 			this.bombGroup.shuffle();
-				// TODO: figure out what exactly shuffle() does. Worked for me before
+			// TODO: figure out what exactly shuffle() does. Worked for me before
 		}
 	}
 
 	/** starts or restarts bomb fuse timer & visual */
 	setBombFuse(bomb: BombPrefab)
 	{
-	// fuse visual blink
+		// fuse visual blink
 		bomb.fuseVisualTimer.destroy();
-		bomb.fuseVisualTimer = this.time.addEvent({ delay: 100, loop: true, callback: () =>
-		{
-			if (bomb.isTinted)
+		bomb.fuseVisualTimer = this.time.addEvent({
+			delay: 100, loop: true, callback: () =>
 			{
-				bomb.clearTint();
+				if (bomb.isTinted)
+				{
+					bomb.clearTint();
+				}
+				else
+				{
+					bomb.setTintFill(0xffffff);
+				}
 			}
-			else
-			{
-				bomb.setTintFill(0xffffff);
-			}
-		}});
+		});
 
-	// explosion delay
+		// explosion delay
 		bomb.fuseTimer.destroy();
-		bomb.fuseTimer = this.time.addEvent({ delay: 1000, callback: () =>
-		{
-			if (bomb.active)
+		bomb.fuseTimer = this.time.addEvent({
+			delay: 1000, callback: () =>
 			{
-				this.bombExplode(bomb);
+				if (bomb.active)
+				{
+					this.bombExplode(bomb);
+				}
 			}
-		}});
+		});
 	}
 
 	/** bomb behaviour, explosion setup */
 	bombExplode(bomb: BombPrefab)
-	{	
+	{
 		bomb.disappear();
 		bomb.fuseVisualTimer.paused = true;
 
@@ -1406,33 +1418,35 @@ export default class Level extends Phaser.Scene {
 		newExplosion.appear();
 		this.mainLayer.add(newExplosion);
 		this.UICam.ignore(newExplosion);
-			// TODO: this stuff should only be called if the object is being initialized
+		// TODO: this stuff should only be called if the object is being initialized
 
 		this.explosionCheck(bomb.x, bomb.y);
 
-	// explosion visual / audio
+		// explosion visual / audio
 		if (this.cameras.main.worldView.contains(bomb.x, bomb.y))
 		{
 			this.cameras.main.shake(200, 0.0005);
 		}
 
-		this.sound.play('explosion');
+		this.explosionSound.play();
 
 		let bombEnemy = bomb.enemy;
-			/* For whatever reason, bomb.enemy changes from this line to callback, so this is used 
-			as a consistent reference.
-			Or it would be in the timer below, but I've since removed the callback.
-			*/
+		/* For whatever reason, bomb.enemy changes from this line to callback, so this is used 
+		as a consistent reference.
+		Or it would be in the timer below, but I've since removed the callback.
+		*/
 
 		bomb.enemy.bombCooldownTimer.destroy();
 		bomb.ignoreTimer.destroy();
-		bomb.enemy.bombCooldownTimer = this.time.addEvent({delay: 700, callback: () =>
-		{
-			if (!bomb.enemy.isFalling())
+		bomb.enemy.bombCooldownTimer = this.time.addEvent({
+			delay: 700, callback: () =>
 			{
-				bomb.enemy.bombProp.setVisible(true);
+				if (!bomb.enemy.isFalling())
+				{
+					bomb.enemy.bombProp.setVisible(true);
+				}
 			}
-		}});
+		});
 	}
 
 
@@ -1442,22 +1456,23 @@ export default class Level extends Phaser.Scene {
 	 * @param y 
 	 */
 	explode(x: number, y: number)
-	{	
+	{
 		let newExplosion = this.explosionGroup.get(x, y);
 		newExplosion.appear();
 		this.mainLayer.add(newExplosion);
 		this.UICam.ignore(newExplosion);
-			// TODO: this stuff should only be called if the object is being initialized
+		// TODO: this stuff should only be called if the object is being initialized
 
 		this.explosionCheck(x, y);
 
-	// explosion visual / audio
+		// explosion visual / audio
 		if (this.cameras.main.worldView.contains(x, y))
 		{
 			this.cameras.main.shake(200, 0.0005);
 		}
 
 		this.sound.play('explosion');
+		this.explosionSound.play();
 	}
 
 	/** detects physics bodies within explosion range and impacts them appropriately */
@@ -1484,7 +1499,7 @@ export default class Level extends Phaser.Scene {
 			}
 		});
 	}
-		// TODO: make
+	// TODO: make
 
 	/** 
 	 * DEPRECATED
@@ -1500,67 +1515,69 @@ export default class Level extends Phaser.Scene {
 				return;
 			}
 
-		// setup line
+			// setup line
 			let lineOfSight = new Phaser.Geom.Line(0, 0, 0, 0);
 			let lineLength = 300;
 			switch (_enemy.gunDirection)
 			{
 				case 'up':
-				{
-					lineOfSight.setTo
-						(_enemy.x + 7.5, _enemy.y + 10, _enemy.x + 7.5, (_enemy.y + 10) - lineLength,);
-					break;
-				}
+					{
+						lineOfSight.setTo
+							(_enemy.x + 7.5, _enemy.y + 10, _enemy.x + 7.5, (_enemy.y + 10) - lineLength,);
+						break;
+					}
 				case 'upward':
-				{
-					lineOfSight.setTo
-						(_enemy.x + 7.5, _enemy.y + 10, 
-						_enemy.x + (_enemy.flipX? lineLength : -lineLength ), 
-						(_enemy.y + 10) - lineLength,);
-					break;
-				}
+					{
+						lineOfSight.setTo
+							(_enemy.x + 7.5, _enemy.y + 10,
+								_enemy.x + (_enemy.flipX ? lineLength : -lineLength),
+								(_enemy.y + 10) - lineLength,);
+						break;
+					}
 				case 'forward':
-				{
-					lineOfSight.setTo
-						(_enemy.x + 7.5, _enemy.y + 10, 
-						_enemy.x + (_enemy.flipX? lineLength : -lineLength ), _enemy.y + 10,);
-					break;
-				}
+					{
+						lineOfSight.setTo
+							(_enemy.x + 7.5, _enemy.y + 10,
+								_enemy.x + (_enemy.flipX ? lineLength : -lineLength), _enemy.y + 10,);
+						break;
+					}
 				case 'downward':
-				{
-					lineOfSight.setTo
-						(_enemy.x + 7.5, _enemy.y + 10, 
-						_enemy.x + (_enemy.flipX? lineLength : -lineLength ), 
-						(_enemy.y + 10) + lineLength,);
-					break;
-				}
+					{
+						lineOfSight.setTo
+							(_enemy.x + 7.5, _enemy.y + 10,
+								_enemy.x + (_enemy.flipX ? lineLength : -lineLength),
+								(_enemy.y + 10) + lineLength,);
+						break;
+					}
 				case 'down':
-				{
-					lineOfSight.setTo
-						(_enemy.x + 7.5, _enemy.y + 10, _enemy.x + 7.5, (_enemy.y + 10) + lineLength,);
-					break;
-				}
+					{
+						lineOfSight.setTo
+							(_enemy.x + 7.5, _enemy.y + 10, _enemy.x + 7.5, (_enemy.y + 10) + lineLength,);
+						break;
+					}
 			}
-				/* setting up a new line on each frame is not efficient, but it's dynamic for 
-				moving enemies which could have a greater presence later for all i know. */
+			/* setting up a new line on each frame is not efficient, but it's dynamic for 
+			moving enemies which could have a greater presence later for all i know. */
 
 			if (Phaser.Geom.Intersects.LineToRectangle
 				(lineOfSight, new Phaser.Geom.Rectangle
-				(this.player.x, this.player.y, this.player.width, this.player.height)))
+					(this.player.x, this.player.y, this.player.width, this.player.height)))
 			{
 				// this.gunFire(_enemy);
 
 				if (_enemy.gunSprayTimer.getProgress() == 1 && _enemy.gunCoolDownTimer.getProgress() == 1)
 				{
-					_enemy.gunSprayTimer = this.time.addEvent({ delay: 100, repeat: 10, callback: () =>
-					{
-						if (!_enemy.isFalling())
+					_enemy.gunSprayTimer = this.time.addEvent({
+						delay: 100, repeat: 10, callback: () =>
 						{
-							this.fireGun(_enemy);
+							if (!_enemy.isFalling())
+							{
+								this.fireGun(_enemy);
+							}
 						}
-					}});
+					});
 
-					_enemy.gunCoolDownTimer = this.time.addEvent({delay: 1500});
+					_enemy.gunCoolDownTimer = this.time.addEvent({ delay: 1500 });
 				}
 			}
 			else
@@ -1584,7 +1601,7 @@ export default class Level extends Phaser.Scene {
 	 */
 	setGunFire(enemy: EnemyPrefab, constant?: boolean)
 	{
-		const bullets = (constant? -1 : 10);
+		const bullets = (constant ? -1 : 10);
 
 		if (constant)
 		{
@@ -1593,15 +1610,17 @@ export default class Level extends Phaser.Scene {
 
 		if (enemy.gunSprayTimer.getProgress() == 1 && enemy.gunCoolDownTimer.getProgress() == 1)
 		{
-			enemy.gunSprayTimer = this.time.addEvent({ delay: 100, repeat: bullets, callback: () =>
-			{
-				if (!enemy.isFalling())
+			enemy.gunSprayTimer = this.time.addEvent({
+				delay: 100, repeat: bullets, callback: () =>
 				{
-					this.fireGun(enemy);
+					if (!enemy.isFalling())
+					{
+						this.fireGun(enemy);
+					}
 				}
-			}});
+			});
 
-			enemy.gunCoolDownTimer = this.time.addEvent({delay: 1500});
+			enemy.gunCoolDownTimer = this.time.addEvent({ delay: 1500 });
 		}
 	}
 
@@ -1621,40 +1640,44 @@ export default class Level extends Phaser.Scene {
 		this.mainLayer.add(_newBullet);
 		this.bulletList.push(_newBullet);
 		this.UICam.ignore(_newBullet);
-			/* does this add existing bullets to the list, adding them infinitely? */
-			// TODO: these should be added once on object initialization, not recycle
-		let velocity = {x: 0, y: 0};
+		/* does this add existing bullets to the list, adding them infinitely? */
+		// TODO: these should be added once on object initialization, not recycle
+		let velocity = { x: 0, y: 0 };
 		const _speed = 300;
 		const _speedHorizontal = 250;
-		switch(enemy.gunDirection)
+		switch (enemy.gunDirection)
 		{
 			case 'up':
-			{
-				velocity = {x: 0, y: -_speed};
-				break;
-			}
+				{
+					velocity = { x: 0, y: -_speed };
+					break;
+				}
 			case 'down':
-			{
-				velocity = {x: 0, y: _speed};
-				break;
-			}
+				{
+					velocity = { x: 0, y: _speed };
+					break;
+				}
 			case 'downward':
-			{
-				velocity = {x: (enemy.flipX? _speedHorizontal : -_speedHorizontal),
-					y: _speedHorizontal};
-				break;
-			}
+				{
+					velocity = {
+						x: (enemy.flipX ? _speedHorizontal : -_speedHorizontal),
+						y: _speedHorizontal
+					};
+					break;
+				}
 			case 'upward':
-			{
-				velocity = {x: (enemy.flipX? _speedHorizontal : -_speedHorizontal), 
-					y: -_speedHorizontal};
-				break;
-			}
+				{
+					velocity = {
+						x: (enemy.flipX ? _speedHorizontal : -_speedHorizontal),
+						y: -_speedHorizontal
+					};
+					break;
+				}
 			case 'forward':
-			{
-				velocity = {x: (enemy.flipX? _speed : -_speed), y: 0};
-				break;
-			}
+				{
+					velocity = { x: (enemy.flipX ? _speed : -_speed), y: 0 };
+					break;
+				}
 		}
 
 		_newBullet.body.setVelocity(velocity.x, velocity.y);
@@ -1683,36 +1706,36 @@ export default class Level extends Phaser.Scene {
 			this.mainLayer.add(_newBullet);
 			this.bulletList.push(_newBullet);
 			this.UICam.ignore(_newBullet);
-				/* does this add existing bullets to the list, adding them infinitely? */
-				// TODO: these should be added once on object initialization, not recycle
-			let velocity = {x: 0, y: 0};
-			switch(enemy.gunDirection)
+			/* does this add existing bullets to the list, adding them infinitely? */
+			// TODO: these should be added once on object initialization, not recycle
+			let velocity = { x: 0, y: 0 };
+			switch (enemy.gunDirection)
 			{
 				case 'up':
-				{
-					velocity = {x: 0, y: -30};
-					break;
-				}
+					{
+						velocity = { x: 0, y: -30 };
+						break;
+					}
 				case 'down':
-				{
-					velocity = {x: 0, y: 30};
-					break;
-				}
+					{
+						velocity = { x: 0, y: 30 };
+						break;
+					}
 				case 'downward':
-				{
-					velocity = {x: (enemy.flipX? 15 : -15), y: 15};
-					break;
-				}
+					{
+						velocity = { x: (enemy.flipX ? 15 : -15), y: 15 };
+						break;
+					}
 				case 'upward':
-				{
-					velocity = {x: (enemy.flipX? 15 : -15), y: -15};
-					break;
-				}
+					{
+						velocity = { x: (enemy.flipX ? 15 : -15), y: -15 };
+						break;
+					}
 				case 'forward':
-				{
-					velocity = {x: (enemy.flipX? 30 : -30), y: 0};
-					break;
-				}
+					{
+						velocity = { x: (enemy.flipX ? 30 : -30), y: 0 };
+						break;
+					}
 			}
 			_newBullet.body.setVelocity(velocity.x, velocity.y);
 		});
@@ -1726,7 +1749,7 @@ export default class Level extends Phaser.Scene {
 	{
 		let velocity = new Phaser.Math.Vector2(0, 0);
 
-	// dive
+		// dive
 		if (this.player.stateController.currentState.name === 'dive')
 		{
 			velocity.set(100, -150);
@@ -1752,7 +1775,7 @@ export default class Level extends Phaser.Scene {
 			{
 				velocity.set(0, -450);
 			}
-		}	
+		}
 
 		if (!this.player.flipX && velocity.x !== 0)
 		{
@@ -1770,7 +1793,7 @@ export default class Level extends Phaser.Scene {
 	 */
 	enemiesDefeatedCheck()
 	{
-	// check
+		// check
 		let _anyEnemies = false;
 		this.enemyList.forEach((enemy) => 
 		{
@@ -1830,54 +1853,56 @@ export default class Level extends Phaser.Scene {
 			this.enemiesUITween.stop();
 		this.enemiesText.setScale(1.3);
 		this.enemiesUITween = this.tweens.add
-		({
-			targets: this.enemiesText,
-			duration: 500,
-			// hold: 1000,
-			// repeatDelay: 1000,
-			// repeat: -1,
-			ease: Phaser.Math.Easing.Circular.Out,
-			scale: 1
-			// y: this.enemiesText.y - 10
-		});
+			({
+				targets: this.enemiesText,
+				duration: 500,
+				// hold: 1000,
+				// repeatDelay: 1000,
+				// repeat: -1,
+				ease: Phaser.Math.Easing.Circular.Out,
+				scale: 1
+				// y: this.enemiesText.y - 10
+			});
 	}
 
 	levelEndFeedback()
 	{
-	// win text visual
+		// win text visual
 		this.winText.setVisible(true);
 		this.tweens.add
-		({
-			targets: this.winText,
-			duration: 1000,
-			yoyo: true,
-			// hold: 1000,
-			// repeatDelay: 1000,
-			repeat: -1,
-			ease: Phaser.Math.Easing.Sine.In,
-			scaleY: 1.3,
-			scaleX: 1,
-			angle: 30
+			({
+				targets: this.winText,
+				duration: 1000,
+				yoyo: true,
+				// hold: 1000,
+				// repeatDelay: 1000,
+				repeat: -1,
+				ease: Phaser.Math.Easing.Sine.In,
+				scaleY: 1.3,
+				scaleX: 1,
+				angle: 30
+			});
+		this.time.addEvent({
+			delay: 5000, callback: () => 
+			{
+				this.winText.setVisible(false);
+			}
 		});
-		this.time.addEvent({ delay: 5000, callback: () => 
-		{
-			this.winText.setVisible(false);
-		}});
 
-	// Plane fly away tween
+		// Plane fly away tween
 		this.tweens.add
-		({
-			targets: this.plane,
-			duration: 4000,
-			hold: 1000,
-			// repeatDelay: 1000,
-			repeat: 0,
-			ease: Phaser.Math.Easing.Cubic.In,
-			y: this.plane.y - 300,
-			x: this.plane.x + 1000
-		});
+			({
+				targets: this.plane,
+				duration: 4000,
+				hold: 1000,
+				// repeatDelay: 1000,
+				repeat: 0,
+				ease: Phaser.Math.Easing.Cubic.In,
+				y: this.plane.y - 300,
+				x: this.plane.x + 1000
+			});
 
-	// Getting into Plane bob tween
+		// Getting into Plane bob tween
 		// this.tweens.add
 		// ({
 		// 	targets: this.plane,
@@ -1888,21 +1913,24 @@ export default class Level extends Phaser.Scene {
 		// 	ease: Phaser.Math.Easing.Cubic.Out,
 		// 	y: this.plane.y + 10,
 		// });
-			// TODO: Turn off the regular looping tween before starting this one.
-			// TODO: Tweak this tween's timing and easing.
+		// TODO: Turn off the regular looping tween before starting this one.
+		// TODO: Tweak this tween's timing and easing.
 
 		this.setTutorialUI(false, false, 0);
 
 		this.cameras.main.stopFollow();
 
 		this.levelTimer.paused = true;
-		this.time.addEvent({ delay: 200, repeat: -1, callback: () =>
-		{
-			this.timerText.setVisible(!this.timerText.visible);
-		}});
+		this.time.addEvent({
+			delay: 200, repeat: -1, callback: () =>
+			{
+				this.timerText.setVisible(!this.timerText.visible);
+			}
+		});
 
-	// win audio
+		// win audio
 		this.sound.play('victory');
+		this.victorySound.play();
 		this.music.pause();
 	}
 
@@ -1915,7 +1943,7 @@ export default class Level extends Phaser.Scene {
 	{
 		let tutorialString = ''
 
-		switch(level)
+		switch (level)
 		{
 			case 0:
 				tutorialString = "Welcome to life, Bird Tapper! Before you can take on the violet army, lets brush up on the basics.\n\nYou can jump with <input>. You'll move forward automatically, but you can change direction from walls. While against one, try jumping against it and jumping again to perform a wall jump."
@@ -1944,14 +1972,15 @@ export default class Level extends Phaser.Scene {
 		}
 
 		this.registry.set('seen-tutorial-level-' + this.registry.get('current-level-index'), true);
-			/*  This is set even if no tutorial is present, allowing this function to be skipped
-			 	next time.
-			 */
+		/*  This is set even if no tutorial is present, allowing this function to be skipped
+			  next time.
+		 */
 
 		if (!show || tutorialString === '')
 		{
 			this.tutorialContainer.setVisible(false);
-			this.hiddenByTutorialList.forEach((element) => {
+			this.hiddenByTutorialList.forEach((element) =>
+			{
 				element.setVisible(true);
 			});
 			return;
@@ -1960,7 +1989,8 @@ export default class Level extends Phaser.Scene {
 		{
 			this.tutorialContainer.setVisible(true);
 			this.tutorialText.setText(tutorialString);
-			this.hiddenByTutorialList.forEach((element) => {
+			this.hiddenByTutorialList.forEach((element) =>
+			{
 				element.setVisible(false);
 			});
 		}
@@ -1994,7 +2024,7 @@ export default class Level extends Phaser.Scene {
 		let _mapObjects = this.tileMap.getObjectLayer('elements')
 		_mapObjects.objects.forEach((object, index) =>
 		{
-		// Return if this isn't the enemy tile
+			// Return if this isn't the enemy tile
 			if (object.gid)
 			{
 				if (object.gid !== 37)
@@ -2007,7 +2037,7 @@ export default class Level extends Phaser.Scene {
 				return;
 			}
 
-		// Settings
+			// Settings
 			let enemy: EnemyPrefab;
 
 			const balloon: boolean = object.properties[0].value;
@@ -2020,7 +2050,7 @@ export default class Level extends Phaser.Scene {
 			const pogo: boolean = object.properties[6].value;
 			// const vision: ? = object.properties[7].value;
 
-		// Enemy type
+			// Enemy type
 			if (balloon)
 			{
 				enemy = new BalloonEnemy
@@ -2054,13 +2084,15 @@ export default class Level extends Phaser.Scene {
 			{
 				this.bombEnemyList.push(enemy);
 				enemy.createBombProp();
-				enemy.bombCooldownTimer = this.time.addEvent({delay: 1000, callback: () =>
-				{
-					if (!enemy.isFalling())
+				enemy.bombCooldownTimer = this.time.addEvent({
+					delay: 1000, callback: () =>
 					{
-						enemy.bombProp.setVisible(true);
+						if (!enemy.isFalling())
+						{
+							enemy.bombProp.setVisible(true);
+						}
 					}
-				}});
+				});
 			}
 
 			enemy.flipX = object.flippedHorizontal!;
@@ -2096,7 +2128,7 @@ export default class Level extends Phaser.Scene {
 		// 	yoyo: true,
 		// 	repeat: -1
 		// });
-			// TODO: have plane enemy position reflect this.
+		// TODO: have plane enemy position reflect this.
 
 		this.planeRect = new Phaser.Geom.Rectangle(x - 5, y - 30, this.plane.width, this.plane.height + 25);
 
@@ -2129,11 +2161,11 @@ export default class Level extends Phaser.Scene {
 					((object.polygon[2].x + object.x), (object.polygon[2].y + object.y));
 				const p3 = new Phaser.Geom.Point
 					((object.polygon[3].x + object.x), (object.polygon[3].y + object.y));
-					/* Tiled polygons are relative / local points, which Phaser polygons are 
-					worldspace points. This converts the points.
-					*/
-					/* TODO: make this dynamic to support polygons of more than 2 points
-					*/
+				/* Tiled polygons are relative / local points, which Phaser polygons are 
+				worldspace points. This converts the points.
+				*/
+				/* TODO: make this dynamic to support polygons of more than 2 points
+				*/
 				const visionPoly = new VisionPoly(parentEnemy, [p0, p1, p2, p3]);
 
 				const _parentEnemy = parentEnemy as EnemyPrefab;
@@ -2158,14 +2190,16 @@ export default class Level extends Phaser.Scene {
 	 */
 	addSounds()
 	{
-		this.flapSound 			= this.sound.add('bird-flap', {volume: 1});
-		this.enemyDeathSound 	= this.sound.add('enemy-death', {volume: 1});
-		this.explosionSound 	= this.sound.add('explosion', {volume: .7});
-		this.playerDeathSound 	= this.sound.add('bird-die', {volume: 1});
-		this.victorySound 		= this.sound.add('victory', {volume: 1});
-		this.reflectSound 		= this.sound.add('reflect', {volume: 1});
-		this.punchSound 		= this.sound.add('punch-swing', {volume: 1});
-		this.comboHitSound 		= this.sound.add('combo-hit');
+		this.flapSound = this.sound.add('bird-flap', { volume: 1 });
+		this.enemyDeathSound = this.sound.add('enemy-death', { volume: 1 });
+		this.explosionSound = this.sound.add('explosion', { volume: .7 });
+		this.playerDeathSound = this.sound.add('bird-die', { volume: 1 });
+		this.victorySound = this.sound.add('victory', { volume: 1 });
+		this.reflectSound = this.sound.add('reflect', { volume: .6 });
+		this.punchSound = this.sound.add('punch-swing', { volume: 1 });
+		this.comboHitSound = this.sound.add('combo-hit');
+
+		this.flapSound.play();
 	}
 
 	/**
@@ -2188,7 +2222,7 @@ export default class Level extends Phaser.Scene {
 
 	createMobileButtons()
 	{
-	// jump
+		// jump
 		this.mobileButtonJump.setInteractive();
 		this.mobileButtonJump.on('pointerdown', () =>
 		{
@@ -2203,7 +2237,7 @@ export default class Level extends Phaser.Scene {
 			this.player.jumpMobileButton = false;
 		});
 
-	// punch
+		// punch
 		this.mobileButtonPunch.setInteractive();
 		this.mobileButtonPunch.on('pointerdown', () =>
 		{
@@ -2218,7 +2252,7 @@ export default class Level extends Phaser.Scene {
 			this.player.punchMobileButton = false;
 		});
 
-	// uppercut
+		// uppercut
 		this.mobileButtonUppercut.setInteractive();
 		this.mobileButtonUppercut.on('pointerdown', () =>
 		{
@@ -2233,7 +2267,7 @@ export default class Level extends Phaser.Scene {
 			this.player.uppercutMobileButton = false;
 		});
 
-	// dive
+		// dive
 		this.mobileButtonDive.setInteractive();
 		this.mobileButtonDive.on('pointerdown', () =>
 		{
@@ -2248,7 +2282,7 @@ export default class Level extends Phaser.Scene {
 			this.player.diveMobileButton = false;
 		});
 
-	// level select
+		// level select
 		this.mobileButtonLevelSelect.setInteractive();
 		this.mobileButtonLevelSelect.on('pointerdown', () =>
 		{

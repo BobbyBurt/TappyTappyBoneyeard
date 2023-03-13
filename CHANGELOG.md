@@ -6,11 +6,13 @@ These are internal changes as part of a refactor.
 
 ### Changed
 
-- Better music handling
+- Better music handling.
 
 ### Added
 ### Removed
 ### Fixed
+
+- Sounds now use their assigned volume.
 
 # Version 11 Alpha - 2023-03-11
 

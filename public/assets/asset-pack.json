@@ -377,7 +377,7 @@
                     "assets/sfx/Pogo stick.mp3"
                 ],
                 "type": "audio",
-                "key": "pogo-stick"
+                "key": "Pogo stick"
             },
             {
                 "url": "assets/levels/punch.json",
