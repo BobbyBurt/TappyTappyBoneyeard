@@ -596,6 +596,8 @@ export default class Level extends Phaser.Scene {
 		this.uiScene = this.scene.get('LevelUI') as LevelUI;
 		this.uiScene.events.on('created', () =>
 		{
+			this.updateEnemiesUI(true);
+
 			if (this.registry.get('mobile'))
 			{
 				this.bindMobileButtons();
@@ -960,8 +962,6 @@ export default class Level extends Phaser.Scene {
 		});
 		// TODO: change this to bomb group
 
-		this.updateEnemiesUI();
-
 		// this.gunFireCheck();
 
 		this.cameraFollow.set(this.player.body.x, this.player.body.y);
@@ -1105,8 +1105,7 @@ export default class Level extends Phaser.Scene {
 
 			// this.enemiesDefeatedCheck();
 
-			this.updateEnemiesUI();
-			this.animatedEnemiesUI();
+			this.updateEnemiesUI(false);
 
 			// this.goalEnemyCheck(_enemy);
 
@@ -1164,8 +1163,7 @@ export default class Level extends Phaser.Scene {
 
 		this.player.punchCharged = true;
 
-		this.updateEnemiesUI();
-		this.animatedEnemiesUI();
+		this.updateEnemiesUI(false);
 
 		this.goalEnemyCheck(_enemy);
 	}
@@ -1809,7 +1807,11 @@ export default class Level extends Phaser.Scene {
 		}
 	}
 
-	updateEnemiesUI(): void
+	/**
+	 * 
+	 * @param initialize skips animation
+	 */
+	updateEnemiesUI(initialize: boolean): void
 	{
 		let defeatedEnemyCount = 0;
 		this.enemyList.forEach((enemy) => 
@@ -1822,24 +1824,11 @@ export default class Level extends Phaser.Scene {
 		});
 
 		this.uiScene.setEnemiesText(defeatedEnemyCount, this.enemyList.length)
-	}
 
-	animatedEnemiesUI(): void
-	{
-		if (this.enemiesUITween)
-			this.enemiesUITween.stop();
-		this.uiScene.enemiesText.setScale(1.3);
-		this.enemiesUITween = this.tweens.add
-			({
-				targets: this.uiScene.enemiesText,
-				duration: 500,
-				// hold: 1000,
-				// repeatDelay: 1000,
-				// repeat: -1,
-				ease: Phaser.Math.Easing.Circular.Out,
-				scale: 1
-				// y: this.enemiesText.y - 10
-			});
+		if (!initialize)
+		{
+			this.uiScene.animateEnemiesText();
+		}
 	}
 
 	levelEndFeedback()

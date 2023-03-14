@@ -371,6 +371,7 @@ export default class LevelUI extends Phaser.Scene {
 	/* START-USER-CODE */
 
 	private comboTextTween: Phaser.Tweens.Tween;
+	private enemiesTextTween: Phaser.Tweens.Tween;
 
 	protected create() {
 
@@ -431,15 +432,31 @@ export default class LevelUI extends Phaser.Scene {
 		}
 	}
 
-	setEnemiesText(defeated: number, total: number): void
+	public setEnemiesText(defeated: number, total: number): void
 	{
-
 		this.enemiesText.setText(`${defeated} / ${total}`);
 
 		if (defeated === total)
 		{
 			this.enemiesText.dropShadowColor = 714549;
 		}
+	}
+
+	public animateEnemiesText(): void
+	{
+		if (this.enemiesTextTween)
+		{
+			this.enemiesTextTween.stop();
+		}
+		this.enemiesText.setScale(1.3);
+		this.enemiesTextTween = this.tweens.add
+		({
+			targets: this.enemiesText,
+			duration: 500,
+			ease: Phaser.Math.Easing.Circular.Out,
+			scale: 1
+		});
+		console.debug(this.enemiesTextTween)
 	}
 
 	private setupCamera()
