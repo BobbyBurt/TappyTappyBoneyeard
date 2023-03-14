@@ -186,8 +186,6 @@ export default class Level extends Phaser.Scene {
 	private debugWallDetectGraphics: Phaser.GameObjects.Graphics;
 	private debugVisionPolyGraphics: Phaser.GameObjects.Graphics;
 
-	public UICam: Phaser.Cameras.Scene2D.BaseCamera;
-
 	private music: Phaser.Sound.BaseSound;
 	private environmentAudio: Phaser.Sound.BaseSound;
 
@@ -307,9 +305,11 @@ export default class Level extends Phaser.Scene {
 		// this.physics.add.overlap
 		// 	(this.player, this.endEgg, this.playerEndEggOverlap, undefined, this);
 
-		this.createCameras();
-
-		this.UICam.ignore(this.player.fist);
+	// camera
+		CameraUtil.configureMainCamera(this);
+		// this.cameras.main.setScroll(this.player.x, this.player.y);
+		this.cameras.main.startFollow(this.cameraFollow, true, .1, .1);
+		this.cameras.main.setBounds(0, 0, this.tileLayer.width, this.tileLayer.height);
 
 		this.mapElementList = new Array(150);
 		/* TODO: make this array length dynamic to the highest element id in the map, as if there 
@@ -421,7 +421,6 @@ export default class Level extends Phaser.Scene {
 		// debug wall detect visual
 		this.debugWallDetectGraphics = this.add.graphics
 			({ fillStyle: { color: 0x0000ff, alpha: (__DEV__ ? 1 : 0) } });
-		this.UICam.ignore(this.debugWallDetectGraphics);
 
 		// quick restart input
 		this.input.keyboard.on('keydown-S', () =>
@@ -961,12 +960,12 @@ export default class Level extends Phaser.Scene {
 	}
 
 	/** activates bomb in bombGroup pool */
-	setBomb(x: number, y: number, enemy: EnemyPrefab, velocity?: Phaser.Math.Vector2, punched?: boolean)
+	setBomb(x: number, y: number, enemy: EnemyPrefab, velocity?: Phaser.Math.Vector2, 
+		punched?: boolean)
 	{
 		let newBomb = this.bombGroup.get(x, y) as BombPrefab;
 		newBomb.appear(enemy);
 		this.mainLayer.add(newBomb);
-		this.UICam.ignore(newBomb);
 
 		if (velocity)
 		{
@@ -1029,7 +1028,6 @@ export default class Level extends Phaser.Scene {
 		let newExplosion = this.explosionGroup.get(bomb.x, bomb.y);
 		newExplosion.appear();
 		this.mainLayer.add(newExplosion);
-		this.UICam.ignore(newExplosion);
 		// TODO: this stuff should only be called if the object is being initialized
 
 		this.explosionCheck(bomb.x, bomb.y);
@@ -1071,7 +1069,6 @@ export default class Level extends Phaser.Scene {
 		let newExplosion = this.explosionGroup.get(x, y);
 		newExplosion.appear();
 		this.mainLayer.add(newExplosion);
-		this.UICam.ignore(newExplosion);
 		// TODO: this stuff should only be called if the object is being initialized
 
 		this.explosionCheck(x, y);
@@ -1250,7 +1247,6 @@ export default class Level extends Phaser.Scene {
 		_newBullet.appear();
 		this.mainLayer.add(_newBullet);
 		this.bulletList.push(_newBullet);
-		this.UICam.ignore(_newBullet);
 		/* does this add existing bullets to the list, adding them infinitely? */
 		// TODO: these should be added once on object initialization, not recycle
 		let velocity = { x: 0, y: 0 };
@@ -1316,7 +1312,6 @@ export default class Level extends Phaser.Scene {
 			_newBullet.appear();
 			this.mainLayer.add(_newBullet);
 			this.bulletList.push(_newBullet);
-			this.UICam.ignore(_newBullet);
 			/* does this add existing bullets to the list, adding them infinitely? */
 			// TODO: these should be added once on object initialization, not recycle
 			let velocity = { x: 0, y: 0 };
@@ -1601,7 +1596,6 @@ export default class Level extends Phaser.Scene {
 			this.debugPlaneRectGraphics.lineStyle(1, 0x00ff00);
 			this.debugPlaneRectGraphics.strokeRect
 				(this.planeRect.x, this.planeRect.y, this.planeRect.width, this.planeRect.height);
-			this.UICam.ignore(this.debugPlaneRectGraphics);
 		}
 	}
 
@@ -1642,7 +1636,6 @@ export default class Level extends Phaser.Scene {
 					this.debugVisionPolyGraphics = this.add.graphics();
 					this.debugVisionPolyGraphics.lineStyle(1, 0xff0000);
 					this.debugVisionPolyGraphics.strokePoints(visionPoly.points, true)
-					this.UICam.ignore(this.debugVisionPolyGraphics);
 				}
 			}
 		});
@@ -1677,11 +1670,6 @@ export default class Level extends Phaser.Scene {
 		this.cameras.main.startFollow(this.cameraFollow, true, .1, .1);
 		this.cameras.main.setBounds(0, 0, this.tileLayer.width, this.tileLayer.height);
 		// this.cameras.main.ignore(this.uILayer.getChildren());
-
-		this.UICam = CameraUtil.createUICamera(this);
-		this.UICam.ignore(this.mainLayer.getChildren());
-		this.UICam.ignore(this.bGLayer.getChildren());
-		this.UICam.setVisible(false);
 	}
 
 	bindMobileButtons()
@@ -1820,10 +1808,10 @@ export default class Level extends Phaser.Scene {
 	resize()
 	{
 		this.cameras.main.setZoom(CameraUtil.getAdaptiveZoom(this));
-		this.UICam.setZoom(CameraUtil.getAdaptiveZoom(this));
 
-		const _camera = this.UICam as any;
-		_camera.preRender(1);
+		// const _camera = this.cameras.main as any;
+		// _camera.preRender(1);
+			// this scene's objects shouldn't need align component
 	}
 
 	/* END-USER-CODE */

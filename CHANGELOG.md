@@ -11,6 +11,9 @@ These are internal changes as part of a refactor.
 
 ### Added
 ### Removed
+
+- Finally got rid of the Level's UICam.
+
 ### Fixed
 
 - Sounds now use their assigned volume.
