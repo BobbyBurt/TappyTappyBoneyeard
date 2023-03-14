@@ -1,0 +1,351 @@
+{
+    "id": "13aaa00d-86fd-4482-a4e6-71926079760f",
+    "sceneType": "SCENE",
+    "settings": {
+        "exportClass": true,
+        "autoImport": true,
+        "preloadPackFiles": [],
+        "createMethodName": "editorCreate",
+        "sceneKey": "LevelUI",
+        "compilerOutputLanguage": "TYPE_SCRIPT",
+        "borderWidth": 0,
+        "borderHeight": 0
+    },
+    "displayList": [
+        {
+            "type": "Container",
+            "id": "55c7007c-09ce-4496-ae56-49d5c08253b4",
+            "label": "tutorialContainer",
+            "scope": "PUBLIC",
+            "components": [
+                "Align"
+            ],
+            "Align.middle": true,
+            "Align.right": true,
+            "Align.horizontalOffset": -75,
+            "x": 383,
+            "y": 207,
+            "visible": false,
+            "list": [
+                {
+                    "type": "Rectangle",
+                    "id": "a32d9655-1177-45da-a9cf-d95e74e92049",
+                    "label": "tutorialBox",
+                    "scope": "CLASS",
+                    "components": [],
+                    "scaleY": 1.0527259860642193,
+                    "isFilled": true,
+                    "fillColor": "#5699F6",
+                    "width": 150,
+                    "height": 230
+                },
+                {
+                    "type": "BitmapText",
+                    "id": "1c0a373b-d34e-49cf-8094-c4b6c8e0b76c",
+                    "label": "tutorialText",
+                    "scope": "CLASS",
+                    "components": [],
+                    "y": -32,
+                    "originX": 0.5,
+                    "originY": 0.5,
+                    "text": "Welcome to life, Bird Tapper! Before you can take on the violet army, lets brush up on the basics.\n\nYou can jump with <input>. You'll move forward automatically, but you can change direction from walls. While against one, try jumping against it and jumping again to perform a wall jump.",
+                    "font": "nokia",
+                    "fontSize": -8,
+                    "maxWidth": 120,
+                    "dropShadowAlpha": 0,
+                    "dropShadowColor": "#000000ff"
+                },
+                {
+                    "type": "BitmapText",
+                    "id": "642aa679-fdfd-4bd8-8ca4-e0d82d06b6a9",
+                    "label": "tutorialCloseText",
+                    "scope": "CLASS",
+                    "components": [
+                        "MobileDependent"
+                    ],
+                    "y": 102,
+                    "originX": 0.5,
+                    "originY": 0.5,
+                    "text": "- TAP TO CONTINUE -",
+                    "font": "nokia",
+                    "fontSize": -8,
+                    "maxWidth": 120,
+                    "dropShadowAlpha": 0,
+                    "dropShadowColor": "#000000ff"
+                }
+            ]
+        },
+        {
+            "type": "BitmapText",
+            "id": "4636bd62-3c18-425e-b9a9-5a75cbf44007",
+            "label": "timerText",
+            "scope": "PUBLIC",
+            "components": [
+                "Align"
+            ],
+            "Align.up": true,
+            "Align.center": true,
+            "Align.verticalOffset": -95,
+            "x": 323.3856506347656,
+            "y": 857.450366973877,
+            "text": "12:04",
+            "font": "nokia",
+            "fontSize": -16,
+            "dropShadowY": 100,
+            "dropShadowAlpha": 1,
+            "dropShadowColor": "#222222ff"
+        },
+        {
+            "type": "BitmapText",
+            "id": "ab10a486-5a3e-41e1-b57b-6c0bd11579aa",
+            "label": "comboLabelText",
+            "scope": "PUBLIC",
+            "components": [
+                "Align"
+            ],
+            "Align.middle": true,
+            "Align.left": true,
+            "Align.horizontalOffset": -90,
+            "x": 1163.6669311523438,
+            "y": 736.8461456298828,
+            "angle": -10,
+            "originY": 0.5,
+            "text": "COMBO!",
+            "font": "nokia",
+            "fontSize": -16,
+            "dropShadowX": 100,
+            "dropShadowAlpha": 1,
+            "dropShadowColor": "#0AE735"
+        },
+        {
+            "type": "BitmapText",
+            "id": "810e45c2-1e62-4dd1-a0e3-f3388c521ad0",
+            "label": "comboText",
+            "scope": "PUBLIC",
+            "components": [
+                "Align"
+            ],
+            "Align.middle": true,
+            "Align.left": true,
+            "Align.horizontalOffset": -85,
+            "Align.verticalOffset": -30,
+            "x": 1184.6669311523438,
+            "y": 755.8461494445801,
+            "angle": -10,
+            "originY": 0.5,
+            "text": "3",
+            "font": "nokia",
+            "fontSize": -36,
+            "dropShadowX": 100,
+            "dropShadowAlpha": 1,
+            "dropShadowColor": "#0AE735"
+        },
+        {
+            "type": "BitmapText",
+            "id": "e8bb6dbb-d4cb-4c1b-a829-603b39dbd6ac",
+            "label": "scoreText",
+            "scope": "PUBLIC",
+            "components": [
+                "Align"
+            ],
+            "Align.up": true,
+            "Align.center": true,
+            "Align.verticalOffset": -95,
+            "x": 442.6918182373047,
+            "y": 870.46142578125,
+            "originX": 0.5,
+            "visible": false,
+            "text": "12359135",
+            "font": "nokia",
+            "align": 1,
+            "fontSize": -16,
+            "dropShadowY": 100,
+            "dropShadowAlpha": 1,
+            "dropShadowColor": "#222222ff"
+        },
+        {
+            "type": "BitmapText",
+            "id": "a6ae92fa-db27-4940-a3d2-2887455b8a25",
+            "label": "chargeText",
+            "scope": "PUBLIC",
+            "components": [
+                "Align"
+            ],
+            "Align.middle": true,
+            "Align.right": true,
+            "Align.horizontalOffset": 95,
+            "x": 847,
+            "y": 802.12646484375,
+            "originX": 1,
+            "originY": 0.5,
+            "visible": false,
+            "text": "Punch",
+            "font": "nokia",
+            "align": 2,
+            "fontSize": -16,
+            "dropShadowX": -100,
+            "dropShadowAlpha": 1,
+            "dropShadowColor": "#e62020ff"
+        },
+        {
+            "type": "BitmapText",
+            "id": "3f3957ff-d03c-4674-a0bc-b8a1cee4747b",
+            "label": "enemiesText",
+            "scope": "PUBLIC",
+            "components": [
+                "Align"
+            ],
+            "Align.up": true,
+            "Align.right": true,
+            "Align.horizontalOffset": -5,
+            "Align.verticalOffset": -65,
+            "x": 957,
+            "y": 756.12646484375,
+            "originX": 1,
+            "originY": 0.5,
+            "text": "5/6",
+            "font": "nokia",
+            "align": 2,
+            "fontSize": -16,
+            "dropShadowY": 100,
+            "dropShadowAlpha": 1,
+            "dropShadowColor": "#222222ff"
+        },
+        {
+            "type": "BitmapText",
+            "id": "f8730d23-254e-4596-9d10-921f1e4fc22f",
+            "label": "enemiesLabelText",
+            "scope": "PUBLIC",
+            "components": [
+                "Align"
+            ],
+            "Align.up": true,
+            "Align.right": true,
+            "Align.horizontalOffset": -5,
+            "Align.verticalOffset": -95,
+            "x": 961,
+            "y": 732.12646484375,
+            "originX": 1,
+            "text": "Enemies \ndefeated:",
+            "font": "nokia",
+            "align": 2,
+            "fontSize": -8,
+            "dropShadowY": 100,
+            "dropShadowAlpha": 1,
+            "dropShadowColor": "#222222ff"
+        },
+        {
+            "type": "BitmapText",
+            "id": "bf01bf5b-8eea-409d-afd0-f455e6d6dd75",
+            "label": "winText",
+            "scope": "PUBLIC",
+            "components": [
+                "Align"
+            ],
+            "Align.middle": true,
+            "Align.center": true,
+            "Align.verticalOffset": -50,
+            "x": 917,
+            "y": 904.12646484375,
+            "scaleX": 1.3,
+            "angle": -30,
+            "originX": 0.5,
+            "originY": 0.5,
+            "visible": false,
+            "text": "Level Complete!!!",
+            "font": "nokia",
+            "align": 1,
+            "fontSize": -16,
+            "dropShadowX": 1,
+            "dropShadowY": 1,
+            "dropShadowColor": "#000000ff"
+        },
+        {
+            "type": "BitmapText",
+            "id": "b909a010-19e2-4e96-a5ad-81f6829dd0b9",
+            "label": "debugText3",
+            "scope": "PUBLIC",
+            "components": [
+                "Align"
+            ],
+            "Align.up": true,
+            "Align.left": true,
+            "Align.horizontalOffset": 5,
+            "Align.verticalOffset": -55,
+            "x": 473,
+            "y": 856.12646484375,
+            "originY": 1,
+            "font": "nokia",
+            "fontSize": -8,
+            "dropShadowY": 100,
+            "dropShadowColor": "#000000ff"
+        },
+        {
+            "type": "BitmapText",
+            "id": "50d38e82-1b32-4b7d-b822-eb39c3471d3f",
+            "label": "debugText2",
+            "scope": "PUBLIC",
+            "components": [
+                "Align"
+            ],
+            "Align.up": true,
+            "Align.left": true,
+            "Align.horizontalOffset": 5,
+            "Align.verticalOffset": -65,
+            "x": 472,
+            "y": 842.12646484375,
+            "originY": 1,
+            "font": "nokia",
+            "fontSize": -8,
+            "dropShadowY": 100,
+            "dropShadowColor": "#000000ff"
+        },
+        {
+            "type": "BitmapText",
+            "id": "1a46f7c4-2251-42d9-9e92-e41763c628ea",
+            "label": "debugText",
+            "scope": "PUBLIC",
+            "components": [
+                "Align"
+            ],
+            "Align.up": true,
+            "Align.left": true,
+            "Align.horizontalOffset": 5,
+            "Align.verticalOffset": -75,
+            "x": 473,
+            "y": 870.12646484375,
+            "originY": 1,
+            "font": "nokia",
+            "fontSize": -8,
+            "dropShadowY": 100,
+            "dropShadowColor": "#000000ff"
+        },
+        {
+            "type": "BitmapText",
+            "id": "383f3620-7491-4fed-b3cd-78ff2f4abbf6",
+            "label": "buildText",
+            "scope": "PUBLIC",
+            "components": [
+                "Align"
+            ],
+            "Align.up": true,
+            "Align.left": true,
+            "Align.horizontalOffset": 5,
+            "Align.verticalOffset": -95,
+            "x": 485,
+            "y": 800.12646484375,
+            "text": "Tappy Tappy Boneyard\nv2",
+            "font": "nokia",
+            "fontSize": -8,
+            "dropShadowY": 100,
+            "dropShadowColor": "#000000ff"
+        }
+    ],
+    "plainObjects": [],
+    "meta": {
+        "app": "Phaser Editor 2D - Scene Editor",
+        "url": "https://phasereditor2d.com",
+        "contentType": "phasereditor2d.core.scene.SceneContentType",
+        "version": 3
+    }
+}

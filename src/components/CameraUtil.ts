@@ -48,6 +48,8 @@ export default class CameraUtil {
     }
 
     /**
+     * TO BE DEPRECATED
+     * 
      * Create UI camerea, set name and zoom.
      * 
      * Also prerenders so resize functions can have accurate

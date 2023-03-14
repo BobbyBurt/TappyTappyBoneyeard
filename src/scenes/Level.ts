@@ -20,14 +20,13 @@ import VisionPoly from "~/components/VisionPoly";
 import PogoEnemy from "~/prefabs/PogoEnemy";
 import ScorePopup from "~/prefabs/scorePopup";
 import SoundManager from "~/components/SoundManager";
+import LevelUI from "./LevelUI";
 
 /* END-USER-IMPORTS */
 
-export default class Level extends Phaser.Scene
-{
+export default class Level extends Phaser.Scene {
 
-	constructor()
-	{
+	constructor() {
 		super("Level");
 
 		/* START-USER-CTR-CODE */
@@ -35,8 +34,7 @@ export default class Level extends Phaser.Scene
 		/* END-USER-CTR-CODE */
 	}
 
-	editorCreate(): void
-	{
+	editorCreate(): void {
 
 		// BGLayer
 		const bGLayer = this.add.layer();
@@ -161,7 +159,6 @@ export default class Level extends Phaser.Scene
 		winText.scaleX = 1.3;
 		winText.angle = -30;
 		winText.setOrigin(0.5, 0.5);
-		winText.visible = false;
 		winText.text = "Level Complete!!!";
 		winText.fontSize = -16;
 		winText.align = 1;
@@ -194,7 +191,6 @@ export default class Level extends Phaser.Scene
 		// chargeText
 		const chargeText = this.add.bitmapText(365, -2, "nokia", "Punch");
 		chargeText.setOrigin(1, 0.5);
-		chargeText.visible = false;
 		chargeText.text = "Punch";
 		chargeText.fontSize = -16;
 		chargeText.align = 2;
@@ -206,7 +202,6 @@ export default class Level extends Phaser.Scene
 		// scoreText
 		const scoreText = this.add.bitmapText(-39.30818271636963, 66.3349609375, "nokia", "12359135");
 		scoreText.setOrigin(0.5, 0);
-		scoreText.visible = false;
 		scoreText.text = "12359135";
 		scoreText.fontSize = -16;
 		scoreText.align = 1;
@@ -583,16 +578,29 @@ export default class Level extends Phaser.Scene
 	private scorePopupGroup: Phaser.GameObjects.Group;
 	private levelScore: number;
 
+	private uiScene: LevelUI;
+
 	create()
 	{
 		this.editorCreate();
 
-		this.createMobileButtons();
-
 		this.reachedGoal = false;
 		this.restarting = false;
+		
+		this.combo = 0;
 
 		this.cameraFollow = new Phaser.Math.Vector2(this.player.x, this.player.y);
+
+	// UI
+		this.scene.launch('LevelUI');
+		this.uiScene = this.scene.get('LevelUI') as LevelUI;
+		this.uiScene.events.on('created', () =>
+		{
+			if (this.registry.get('mobile'))
+			{
+				this.bindMobileButtons();
+			}
+		});
 
 		this.tileMap = this.add.tilemap(this.registry.get('current-level'));
 		this.tileMap.addTilesetImage("tilleset", "tileset");
@@ -796,11 +804,8 @@ export default class Level extends Phaser.Scene
 			}
 		});
 
-		this.combo = 0;
-		this.updateCombo();
-
 		this.levelTimer = this.time.addEvent({
-			delay: 5000, callback: () =>
+			delay: 30000, callback: () =>
 			{
 				if (!this.reachedGoal)
 				{
@@ -831,28 +836,19 @@ export default class Level extends Phaser.Scene
 		// resize init
 		this.events.on('pre-resize', this.resize, this);
 		this.resize();
-
-		this.buildText.setText('Tappy Tappy Boneyard v' + this.game.config.gameVersion);
 	}
 
 	update(time: number, delta: number): void
 	{
-		super.update(time, delta);
-
-		// this.debugText.setText(`${this.player.stateController.currentState.name}`);
 		if (__DEV__)
 		{
-			this.debugText.setText(`${this.player.stateController.currentState.name}`);
-			// this.debugText2.setText(`flap charge: ${this.player.flapCharge}`);
-			// this.debugText3.setText(`punch charge: ${this.player.punchCharged}`);	
-			this.debugText2.setText(`main cam zoom: ${this.cameras.main.zoom}, scale zoom: ${this.scale.zoom}, scale test: ${CameraUtil.scaleTest(this)}`);
-			this.debugText3.setText(`debug3`);
+			this.setDebugUI();
 		}
 
 		const milliseconds = Math.floor(this.levelTimer.getRemaining());
 		const seconds = milliseconds * 0.001;
 		const secondsString = seconds.toString();
-		this.timerText.setText(secondsString.replace('.', ':').slice(0, (secondsString.lastIndexOf('.') + 3)));
+		this.uiScene.timerText.setText(secondsString.replace('.', ':').slice(0, (secondsString.lastIndexOf('.') + 3)));
 
 		if (this.player.punchCharged)
 		{
@@ -975,6 +971,11 @@ export default class Level extends Phaser.Scene
 		}
 	}
 
+	destory()
+	{
+		// TODO
+	}
+
 	/** reloads the scene */
 	resetLevel()
 	{
@@ -997,6 +998,7 @@ export default class Level extends Phaser.Scene
 			_enemy.removeUpdateListener();
 		});
 
+		this.scene.stop('LevelUI')
 		this.scene.restart();
 	}
 
@@ -1024,6 +1026,7 @@ export default class Level extends Phaser.Scene
 
 		// this.environmentAudio.stop();
 
+		this.scene.stop('LevelUI');
 		this.scene.start('LevelSelect');
 	}
 
@@ -1320,31 +1323,11 @@ export default class Level extends Phaser.Scene
 	{
 		if (this.combo > 1)
 		{
-			this.comboText.setText(this.combo + '');
-			this.comboText.setVisible(true);
-			this.comboLabelText.setVisible(true);
-
-			if (this.comboTextTween)
-				this.comboTextTween.stop();
-			this.comboText.setScale(1.5);
-			this.comboTextTween = this.tweens.add
-				({
-					targets: this.comboText,
-					duration: 500,
-					// hold: 1000,
-					// repeatDelay: 1000,
-					// repeat: -1,
-					ease: Phaser.Math.Easing.Circular.Out,
-					scale: 1,
-				});
-
-			this.comboHitSound.play({ volume: (((this.combo - 2) + 0) * 0.07) + 0.4, detune: (this.combo - 2) * 100 });
-			// TODO: volume based on combo needs a max
+			this.uiScene.showComboUI(this.combo)
 		}
 		else
 		{
-			this.comboText.setVisible(false);
-			this.comboLabelText.setVisible(false);
+			this.uiScene.hideComboUI();
 		}
 	}
 
@@ -1448,7 +1431,6 @@ export default class Level extends Phaser.Scene
 			}
 		});
 	}
-
 
 	/**
 	 * explosion setup. Same as bombExplode() but without the bomb stuff.
@@ -1839,11 +1821,11 @@ export default class Level extends Phaser.Scene
 			}
 		});
 
-		this.enemiesText.setText(`${defeatedEnemyCount} / ${this.enemyList.length}`);
+		this.uiScene.enemiesText.setText(`${defeatedEnemyCount} / ${this.enemyList.length}`);
 
 		if (defeatedEnemyCount === this.enemyList.length)
 		{
-			this.enemiesText.dropShadowColor = 714549;
+			this.uiScene.enemiesText.dropShadowColor = 714549;
 		}
 	}
 
@@ -1851,10 +1833,10 @@ export default class Level extends Phaser.Scene
 	{
 		if (this.enemiesUITween)
 			this.enemiesUITween.stop();
-		this.enemiesText.setScale(1.3);
+		this.uiScene.enemiesText.setScale(1.3);
 		this.enemiesUITween = this.tweens.add
 			({
-				targets: this.enemiesText,
+				targets: this.uiScene.enemiesText,
 				duration: 500,
 				// hold: 1000,
 				// repeatDelay: 1000,
@@ -1924,7 +1906,7 @@ export default class Level extends Phaser.Scene
 		this.time.addEvent({
 			delay: 200, repeat: -1, callback: () =>
 			{
-				this.timerText.setVisible(!this.timerText.visible);
+				this.uiScene.timerText.setVisible(!this.uiScene.timerText.visible);
 			}
 		});
 
@@ -2102,21 +2084,14 @@ export default class Level extends Phaser.Scene
 			this.mapElementList[object.id] = enemy;
 			// this.mainLayer.add(enemy);
 			// this.UICam.ignore(enemy);
-			this.addToMainLayer(enemy);
+			// this.addToMainLayer(enemy);
 		});
-	}
-
-	addToMainLayer(object: Phaser.GameObjects.GameObject)
-	{
-		this.mainLayer.add(object);
-		this.UICam.ignore(object);
 	}
 
 	createPlane(x: number, y: number)
 	{
 		this.plane = this.add.image(x + 7, y + 2, 'plane');
-		this.mainLayer.add(this.plane);
-		this.UICam.ignore(this.plane);
+		// this.addToMainLayer(this.plane);
 		this.plane.flipX = true;
 
 		// this.tweens.add
@@ -2218,76 +2193,87 @@ export default class Level extends Phaser.Scene
 		this.UICam = CameraUtil.createUICamera(this);
 		this.UICam.ignore(this.mainLayer.getChildren());
 		this.UICam.ignore(this.bGLayer.getChildren());
+		this.UICam.setVisible(false);
 	}
 
-	createMobileButtons()
+	bindMobileButtons()
 	{
 		// jump
-		this.mobileButtonJump.setInteractive();
-		this.mobileButtonJump.on('pointerdown', () =>
+		this.uiScene.mobileButtonJump.setInteractive();
+		this.uiScene.mobileButtonJump.on('pointerdown', () =>
 		{
 			this.player.jumpMobileButton = true;
 		});
-		this.mobileButtonJump.on('pointerup', () =>
+		this.uiScene.mobileButtonJump.on('pointerup', () =>
 		{
 			this.player.jumpMobileButton = false;
 		});
-		this.mobileButtonJump.on('pointerout', () =>
+		this.uiScene.mobileButtonJump.on('pointerout', () =>
 		{
 			this.player.jumpMobileButton = false;
 		});
 
 		// punch
-		this.mobileButtonPunch.setInteractive();
-		this.mobileButtonPunch.on('pointerdown', () =>
+		this.uiScene.mobileButtonPunch.setInteractive();
+		this.uiScene.mobileButtonPunch.on('pointerdown', () =>
 		{
 			this.player.punchMobileButton = true;
 		});
-		this.mobileButtonPunch.on('pointerup', () =>
+		this.uiScene.mobileButtonPunch.on('pointerup', () =>
 		{
 			this.player.punchMobileButton = false;
 		});
-		this.mobileButtonPunch.on('pointerout', () =>
+		this.uiScene.mobileButtonPunch.on('pointerout', () =>
 		{
 			this.player.punchMobileButton = false;
 		});
 
 		// uppercut
-		this.mobileButtonUppercut.setInteractive();
-		this.mobileButtonUppercut.on('pointerdown', () =>
+		this.uiScene.mobileButtonUppercut.setInteractive();
+		this.uiScene.mobileButtonUppercut.on('pointerdown', () =>
 		{
 			this.player.uppercutMobileButton = true;
 		});
-		this.mobileButtonUppercut.on('pointerup', () =>
+		this.uiScene.mobileButtonUppercut.on('pointerup', () =>
 		{
 			this.player.uppercutMobileButton = false;
 		});
-		this.mobileButtonUppercut.on('pointerout', () =>
+		this.uiScene.mobileButtonUppercut.on('pointerout', () =>
 		{
 			this.player.uppercutMobileButton = false;
 		});
 
 		// dive
-		this.mobileButtonDive.setInteractive();
-		this.mobileButtonDive.on('pointerdown', () =>
+		this.uiScene.mobileButtonDive.setInteractive();
+		this.uiScene.mobileButtonDive.on('pointerdown', () =>
 		{
 			this.player.diveMobileButton = true;
 		});
-		this.mobileButtonDive.on('pointerup', () =>
+		this.uiScene.mobileButtonDive.on('pointerup', () =>
 		{
 			this.player.diveMobileButton = false;
 		});
-		this.mobileButtonDive.on('pointerout', () =>
+		this.uiScene.mobileButtonDive.on('pointerout', () =>
 		{
 			this.player.diveMobileButton = false;
 		});
 
 		// level select
-		this.mobileButtonLevelSelect.setInteractive();
-		this.mobileButtonLevelSelect.on('pointerdown', () =>
+		this.uiScene.mobileButtonLevelSelect.setInteractive();
+		this.uiScene.mobileButtonLevelSelect.on('pointerdown', () =>
 		{
 			this.LoadLevelSelect();
 		});
+	}
+
+	setDebugUI()
+	{
+		if (this.uiScene.scene.isActive())
+		{
+			this.uiScene.setDebugText(0, `${this.player.stateController.currentState.name}`);
+			this.uiScene.setDebugText(1, ``);
+			this.uiScene.setDebugText(2, ``);
+		}
 	}
 
 	resize()

@@ -7,6 +7,7 @@ These are internal changes as part of a refactor.
 ### Changed
 
 - Better music handling.
+- All gameplay UI has been decoupled to a seperate overlapping scene.
 
 ### Added
 ### Removed
