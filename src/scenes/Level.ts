@@ -1821,12 +1821,7 @@ export default class Level extends Phaser.Scene {
 			}
 		});
 
-		this.uiScene.enemiesText.setText(`${defeatedEnemyCount} / ${this.enemyList.length}`);
-
-		if (defeatedEnemyCount === this.enemyList.length)
-		{
-			this.uiScene.enemiesText.dropShadowColor = 714549;
-		}
+		this.uiScene.setEnemiesText(defeatedEnemyCount, this.enemyList.length)
 	}
 
 	animatedEnemiesUI(): void

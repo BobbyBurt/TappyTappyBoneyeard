@@ -431,6 +431,17 @@ export default class LevelUI extends Phaser.Scene {
 		}
 	}
 
+	setEnemiesText(defeated: number, total: number): void
+	{
+
+		this.enemiesText.setText(`${defeated} / ${total}`);
+
+		if (defeated === total)
+		{
+			this.enemiesText.dropShadowColor = 714549;
+		}
+	}
+
 	private setupCamera()
 	{
 		this.cameras.main.setName('UICam');
