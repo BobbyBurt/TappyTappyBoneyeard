@@ -414,6 +414,30 @@ export default class LevelUI extends Phaser.Scene {
 		*/
 	}
 
+	public showLevelCompleteText()
+	{
+		this.winText.setVisible(true);
+		this.tweens.add
+		({
+			targets: this.winText,
+			duration: 1000,
+			yoyo: true,
+			// hold: 1000,
+			// repeatDelay: 1000,
+			repeat: -1,
+			ease: Phaser.Math.Easing.Sine.In,
+			scaleY: 1.3,
+			scaleX: 1,
+			angle: 30
+		});
+		this.time.addEvent({
+			delay: 5000, callback: () => 
+			{
+				this.winText.setVisible(false);
+			}
+		});
+	}
+
 	public setDebugText(slot: 0 | 1 | 2, text: string)
 	{
 		switch (slot)

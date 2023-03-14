@@ -1833,27 +1833,7 @@ export default class Level extends Phaser.Scene {
 
 	levelEndFeedback()
 	{
-		// win text visual
-		this.winText.setVisible(true);
-		this.tweens.add
-			({
-				targets: this.winText,
-				duration: 1000,
-				yoyo: true,
-				// hold: 1000,
-				// repeatDelay: 1000,
-				repeat: -1,
-				ease: Phaser.Math.Easing.Sine.In,
-				scaleY: 1.3,
-				scaleX: 1,
-				angle: 30
-			});
-		this.time.addEvent({
-			delay: 5000, callback: () => 
-			{
-				this.winText.setVisible(false);
-			}
-		});
+		this.uiScene.showLevelCompleteText();
 
 		// Plane fly away tween
 		this.tweens.add
