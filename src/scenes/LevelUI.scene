@@ -13,69 +13,6 @@
     },
     "displayList": [
         {
-            "type": "Container",
-            "id": "55c7007c-09ce-4496-ae56-49d5c08253b4",
-            "label": "tutorialContainer",
-            "scope": "PUBLIC",
-            "components": [
-                "Align"
-            ],
-            "Align.middle": true,
-            "Align.right": true,
-            "Align.horizontalOffset": -75,
-            "x": 383,
-            "y": 207,
-            "visible": false,
-            "list": [
-                {
-                    "type": "Rectangle",
-                    "id": "a32d9655-1177-45da-a9cf-d95e74e92049",
-                    "label": "tutorialBox",
-                    "scope": "CLASS",
-                    "components": [],
-                    "scaleY": 1.0527259860642193,
-                    "isFilled": true,
-                    "fillColor": "#5699F6",
-                    "width": 150,
-                    "height": 230
-                },
-                {
-                    "type": "BitmapText",
-                    "id": "1c0a373b-d34e-49cf-8094-c4b6c8e0b76c",
-                    "label": "tutorialText",
-                    "scope": "CLASS",
-                    "components": [],
-                    "y": -32,
-                    "originX": 0.5,
-                    "originY": 0.5,
-                    "text": "Welcome to life, Bird Tapper! Before you can take on the violet army, lets brush up on the basics.\n\nYou can jump with <input>. You'll move forward automatically, but you can change direction from walls. While against one, try jumping against it and jumping again to perform a wall jump.",
-                    "font": "nokia",
-                    "fontSize": -8,
-                    "maxWidth": 120,
-                    "dropShadowAlpha": 0,
-                    "dropShadowColor": "#000000ff"
-                },
-                {
-                    "type": "BitmapText",
-                    "id": "642aa679-fdfd-4bd8-8ca4-e0d82d06b6a9",
-                    "label": "tutorialCloseText",
-                    "scope": "CLASS",
-                    "components": [
-                        "MobileDependent"
-                    ],
-                    "y": 102,
-                    "originX": 0.5,
-                    "originY": 0.5,
-                    "text": "- TAP TO CONTINUE -",
-                    "font": "nokia",
-                    "fontSize": -8,
-                    "maxWidth": 120,
-                    "dropShadowAlpha": 0,
-                    "dropShadowColor": "#000000ff"
-                }
-            ]
-        },
-        {
             "type": "BitmapText",
             "id": "4636bd62-3c18-425e-b9a9-5a75cbf44007",
             "label": "timerText",
@@ -162,30 +99,6 @@
             "dropShadowY": 100,
             "dropShadowAlpha": 1,
             "dropShadowColor": "#222222ff"
-        },
-        {
-            "type": "BitmapText",
-            "id": "a6ae92fa-db27-4940-a3d2-2887455b8a25",
-            "label": "chargeText",
-            "scope": "PUBLIC",
-            "components": [
-                "Align"
-            ],
-            "Align.middle": true,
-            "Align.right": true,
-            "Align.horizontalOffset": 95,
-            "x": 847,
-            "y": 802.12646484375,
-            "originX": 1,
-            "originY": 0.5,
-            "visible": false,
-            "text": "Punch",
-            "font": "nokia",
-            "align": 2,
-            "fontSize": -16,
-            "dropShadowX": -100,
-            "dropShadowAlpha": 1,
-            "dropShadowColor": "#e62020ff"
         },
         {
             "type": "BitmapText",
@@ -339,6 +252,182 @@
             "fontSize": -8,
             "dropShadowY": 100,
             "dropShadowColor": "#000000ff"
+        },
+        {
+            "type": "Rectangle",
+            "id": "10f42622-8644-4a7c-8f34-1a1a037d1be3",
+            "label": "mobileButtonDive",
+            "scope": "PUBLIC",
+            "components": [
+                "Align",
+                "MobileDependent",
+                "MobileButton"
+            ],
+            "Align.down": true,
+            "Align.right": true,
+            "MobileButton.input": "jump",
+            "x": 713.4493914309744,
+            "y": 1060.0118990523656,
+            "originX": 1,
+            "originY": 1,
+            "alpha": 0.5,
+            "isFilled": true,
+            "fillColor": "#7ca3ed",
+            "width": 150,
+            "height": 120
+        },
+        {
+            "type": "Rectangle",
+            "id": "80881e54-33ad-4096-8ed5-03e85927ae51",
+            "label": "mobileButtonLevelSelect",
+            "scope": "PUBLIC",
+            "components": [
+                "Align",
+                "MobileDependent",
+                "MobileButton"
+            ],
+            "Align.up": true,
+            "Align.right": true,
+            "x": 745.9039965335135,
+            "y": 635.8854342086155,
+            "originX": 1,
+            "originY": 0,
+            "alpha": 0.5,
+            "isFilled": true,
+            "fillColor": "#ce7ced",
+            "width": 75,
+            "height": 75
+        },
+        {
+            "type": "Rectangle",
+            "id": "927778af-8880-446d-a10d-308c0409e71e",
+            "label": "mobileButtonPunch",
+            "scope": "PUBLIC",
+            "components": [
+                "Align",
+                "MobileDependent",
+                "MobileButton"
+            ],
+            "Align.down": true,
+            "Align.left": true,
+            "x": 337.44939143097434,
+            "y": 1081.0118990523656,
+            "originX": 0,
+            "originY": 1,
+            "alpha": 0.5,
+            "isFilled": true,
+            "fillColor": "#ed7c7c",
+            "width": 150,
+            "height": 120
+        },
+        {
+            "type": "Rectangle",
+            "id": "4b8c9e8d-625f-422c-b538-fbc46b29507a",
+            "label": "mobileButtonUppercut",
+            "scope": "PUBLIC",
+            "components": [
+                "Align",
+                "MobileDependent",
+                "MobileButton"
+            ],
+            "Align.down": true,
+            "Align.left": true,
+            "Align.verticalOffset": -140,
+            "x": 338.44939143097434,
+            "y": 979.0118990523655,
+            "originX": 0,
+            "originY": 1,
+            "alpha": 0.5,
+            "isFilled": true,
+            "fillColor": "#ede67c",
+            "width": 150,
+            "height": 120
+        },
+        {
+            "type": "Rectangle",
+            "id": "cbf0aeee-7ffa-4f45-9b56-f2b19212bd97",
+            "label": "mobileButtonJump",
+            "scope": "PUBLIC",
+            "components": [
+                "Align",
+                "MobileDependent",
+                "MobileButton"
+            ],
+            "Align.down": true,
+            "Align.right": true,
+            "Align.verticalOffset": -140,
+            "x": 743.4493914309744,
+            "y": 950.0118990523655,
+            "originX": 1,
+            "originY": 1,
+            "alpha": 0.5,
+            "isFilled": true,
+            "fillColor": "#7eed7c",
+            "width": 150,
+            "height": 120
+        },
+        {
+            "type": "Container",
+            "id": "55c7007c-09ce-4496-ae56-49d5c08253b4",
+            "label": "tutorialContainer",
+            "scope": "PUBLIC",
+            "components": [
+                "Align"
+            ],
+            "Align.middle": true,
+            "Align.right": true,
+            "Align.horizontalOffset": -75,
+            "x": 383,
+            "y": 207,
+            "visible": false,
+            "list": [
+                {
+                    "type": "Rectangle",
+                    "id": "a32d9655-1177-45da-a9cf-d95e74e92049",
+                    "label": "tutorialBox",
+                    "scope": "PUBLIC",
+                    "components": [],
+                    "scaleY": 1.0527259860642193,
+                    "isFilled": true,
+                    "fillColor": "#5699F6",
+                    "width": 150,
+                    "height": 230
+                },
+                {
+                    "type": "BitmapText",
+                    "id": "1c0a373b-d34e-49cf-8094-c4b6c8e0b76c",
+                    "label": "tutorialText",
+                    "scope": "PUBLIC",
+                    "components": [],
+                    "y": -32,
+                    "originX": 0.5,
+                    "originY": 0.5,
+                    "text": "Welcome to life, Bird Tapper! Before you can take on the violet army, lets brush up on the basics.\n\nYou can jump with <input>. You'll move forward automatically, but you can change direction from walls. While against one, try jumping against it and jumping again to perform a wall jump.",
+                    "font": "nokia",
+                    "fontSize": -8,
+                    "maxWidth": 120,
+                    "dropShadowAlpha": 0,
+                    "dropShadowColor": "#000000ff"
+                },
+                {
+                    "type": "BitmapText",
+                    "id": "642aa679-fdfd-4bd8-8ca4-e0d82d06b6a9",
+                    "label": "tutorialCloseText",
+                    "scope": "PUBLIC",
+                    "components": [
+                        "MobileDependent"
+                    ],
+                    "y": 102,
+                    "originX": 0.5,
+                    "originY": 0.5,
+                    "text": "- TAP TO CONTINUE -",
+                    "font": "nokia",
+                    "fontSize": -8,
+                    "maxWidth": 120,
+                    "dropShadowAlpha": 0,
+                    "dropShadowColor": "#000000ff"
+                }
+            ]
         }
     ],
     "plainObjects": [],

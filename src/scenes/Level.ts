@@ -3,9 +3,6 @@
 import Phaser from "phaser";
 import ScrollFactor from "../components/ScrollFactor";
 import playerPrefab from "../prefabs/playerPrefab";
-import Align from "../components/Align";
-import MobileDependent from "../components/MobileDependent";
-import MobileButton from "../components/MobileButton";
 /* START-USER-IMPORTS */
 
 import BalloonEnemy from "~/prefabs/BalloonEnemy";
@@ -83,194 +80,6 @@ export default class Level extends Phaser.Scene {
 		const player = new playerPrefab(this, 383, 203);
 		mainLayer.add(player);
 
-		// UILayer
-		const uILayer = this.add.layer();
-
-		// buildText
-		const buildText = this.add.bitmapText(3, -4, "nokia", "Tappy Tappy Boneyard\nv2");
-		buildText.text = "Tappy Tappy Boneyard\nv2";
-		buildText.fontSize = -8;
-		buildText.dropShadowY = 100;
-		uILayer.add(buildText);
-
-		// debugText
-		const debugText = this.add.bitmapText(-9, 66, "nokia", "");
-		debugText.setOrigin(0, 1);
-		debugText.fontSize = -8;
-		debugText.dropShadowY = 100;
-		uILayer.add(debugText);
-
-		// debugText2
-		const debugText2 = this.add.bitmapText(-10, 38, "nokia", "");
-		debugText2.setOrigin(0, 1);
-		debugText2.fontSize = -8;
-		debugText2.dropShadowY = 100;
-		uILayer.add(debugText2);
-
-		// debugText3
-		const debugText3 = this.add.bitmapText(-9, 52, "nokia", "");
-		debugText3.setOrigin(0, 1);
-		debugText3.fontSize = -8;
-		debugText3.dropShadowY = 100;
-		uILayer.add(debugText3);
-
-		// mobileButtonDive
-		const mobileButtonDive = this.add.rectangle(71, -163, 150, 120);
-		mobileButtonDive.setOrigin(1, 1);
-		mobileButtonDive.alpha = 0.5;
-		mobileButtonDive.isFilled = true;
-		mobileButtonDive.fillColor = 8168429;
-		uILayer.add(mobileButtonDive);
-
-		// mobileButtonJump
-		const mobileButtonJump = this.add.rectangle(101, -273, 150, 120);
-		mobileButtonJump.setOrigin(1, 1);
-		mobileButtonJump.alpha = 0.5;
-		mobileButtonJump.isFilled = true;
-		mobileButtonJump.fillColor = 8318332;
-		uILayer.add(mobileButtonJump);
-
-		// mobileButtonUppercut
-		const mobileButtonUppercut = this.add.rectangle(-304, -244, 150, 120);
-		mobileButtonUppercut.setOrigin(0, 1);
-		mobileButtonUppercut.alpha = 0.5;
-		mobileButtonUppercut.isFilled = true;
-		mobileButtonUppercut.fillColor = 15591036;
-		uILayer.add(mobileButtonUppercut);
-
-		// mobileButtonPunch
-		const mobileButtonPunch = this.add.rectangle(-305, -142, 150, 120);
-		mobileButtonPunch.setOrigin(0, 1);
-		mobileButtonPunch.alpha = 0.5;
-		mobileButtonPunch.isFilled = true;
-		mobileButtonPunch.fillColor = 15563900;
-		uILayer.add(mobileButtonPunch);
-
-		// mobileButtonLevelSelect
-		const mobileButtonLevelSelect = this.add.rectangle(103.45460510253906, -587.1264343261719, 75, 75);
-		mobileButtonLevelSelect.setOrigin(1, 0);
-		mobileButtonLevelSelect.alpha = 0.5;
-		mobileButtonLevelSelect.isFilled = true;
-		mobileButtonLevelSelect.fillColor = 13532397;
-		uILayer.add(mobileButtonLevelSelect);
-
-		// winText
-		const winText = this.add.bitmapText(435, 100, "nokia", "Level Complete!!!");
-		winText.scaleX = 1.3;
-		winText.angle = -30;
-		winText.setOrigin(0.5, 0.5);
-		winText.text = "Level Complete!!!";
-		winText.fontSize = -16;
-		winText.align = 1;
-		winText.dropShadowX = 1;
-		winText.dropShadowY = 1;
-		uILayer.add(winText);
-
-		// enemiesLabelText
-		const enemiesLabelText = this.add.bitmapText(479, -72, "nokia", "Enemies \ndefeated:");
-		enemiesLabelText.setOrigin(1, 0);
-		enemiesLabelText.text = "Enemies \ndefeated:";
-		enemiesLabelText.fontSize = -8;
-		enemiesLabelText.align = 2;
-		enemiesLabelText.dropShadowY = 100;
-		enemiesLabelText.dropShadowAlpha = 1;
-		enemiesLabelText.dropShadowColor = 2236962;
-		uILayer.add(enemiesLabelText);
-
-		// enemiesText
-		const enemiesText = this.add.bitmapText(475, -48, "nokia", "5/6");
-		enemiesText.setOrigin(1, 0.5);
-		enemiesText.text = "5/6";
-		enemiesText.fontSize = -16;
-		enemiesText.align = 2;
-		enemiesText.dropShadowY = 100;
-		enemiesText.dropShadowAlpha = 1;
-		enemiesText.dropShadowColor = 2236962;
-		uILayer.add(enemiesText);
-
-		// chargeText
-		const chargeText = this.add.bitmapText(365, -2, "nokia", "Punch");
-		chargeText.setOrigin(1, 0.5);
-		chargeText.text = "Punch";
-		chargeText.fontSize = -16;
-		chargeText.align = 2;
-		chargeText.dropShadowX = -100;
-		chargeText.dropShadowAlpha = 1;
-		chargeText.dropShadowColor = 15081504;
-		uILayer.add(chargeText);
-
-		// scoreText
-		const scoreText = this.add.bitmapText(-39.30818271636963, 66.3349609375, "nokia", "12359135");
-		scoreText.setOrigin(0.5, 0);
-		scoreText.text = "12359135";
-		scoreText.fontSize = -16;
-		scoreText.align = 1;
-		scoreText.dropShadowY = 100;
-		scoreText.dropShadowAlpha = 1;
-		scoreText.dropShadowColor = 2236962;
-		uILayer.add(scoreText);
-
-		// comboText
-		const comboText = this.add.bitmapText(702.6669311523438, -48.28031539916992, "nokia", "3");
-		comboText.angle = -10;
-		comboText.setOrigin(0, 0.5);
-		comboText.text = "3";
-		comboText.fontSize = -36;
-		comboText.dropShadowX = 100;
-		comboText.dropShadowAlpha = 1;
-		comboText.dropShadowColor = 714549;
-		uILayer.add(comboText);
-
-		// comboLabelText
-		const comboLabelText = this.add.bitmapText(681.6669311523438, -67.28031921386719, "nokia", "COMBO!");
-		comboLabelText.angle = -10;
-		comboLabelText.setOrigin(0, 0.5);
-		comboLabelText.text = "COMBO!";
-		comboLabelText.fontSize = -16;
-		comboLabelText.dropShadowX = 100;
-		comboLabelText.dropShadowAlpha = 1;
-		comboLabelText.dropShadowColor = 714549;
-		uILayer.add(comboLabelText);
-
-		// timerText
-		const timerText = this.add.bitmapText(-158.61434936523438, 53.32390213012695, "nokia", "12:04");
-		timerText.text = "12:04";
-		timerText.fontSize = -16;
-		timerText.dropShadowY = 100;
-		timerText.dropShadowAlpha = 1;
-		timerText.dropShadowColor = 2236962;
-		uILayer.add(timerText);
-
-		// tutorialContainer
-		const tutorialContainer = this.add.container(0, 0);
-		tutorialContainer.visible = false;
-		uILayer.add(tutorialContainer);
-
-		// tutorialBox
-		const tutorialBox = this.add.rectangle(0, 0, 150, 230);
-		tutorialBox.scaleY = 1.0527259860642193;
-		tutorialBox.isFilled = true;
-		tutorialBox.fillColor = 5675510;
-		tutorialContainer.add(tutorialBox);
-
-		// tutorialText
-		const tutorialText = this.add.bitmapText(0, -32, "nokia", "Welcome to life, Bird Tapper! Before you can take on the violet army, lets brush up on the basics.\n\nYou can jump with <input>. You'll move forward automatically, but you can change direction from walls. While against one, try jumping against it and jumping again to perform a wall jump.");
-		tutorialText.setOrigin(0.5, 0.5);
-		tutorialText.text = "Welcome to life, Bird Tapper! Before you can take on the violet army, lets brush up on the basics.\n\nYou can jump with <input>. You'll move forward automatically, but you can change direction from walls. While against one, try jumping against it and jumping again to perform a wall jump.";
-		tutorialText.fontSize = -8;
-		tutorialText.maxWidth = 120;
-		tutorialText.dropShadowAlpha = 0;
-		tutorialContainer.add(tutorialText);
-
-		// tutorialCloseText
-		const tutorialCloseText = this.add.bitmapText(0, 102, "nokia", "- TAP TO CONTINUE -");
-		tutorialCloseText.setOrigin(0.5, 0.5);
-		tutorialCloseText.text = "- TAP TO CONTINUE -";
-		tutorialCloseText.fontSize = -8;
-		tutorialCloseText.maxWidth = 120;
-		tutorialCloseText.dropShadowAlpha = 0;
-		tutorialContainer.add(tutorialCloseText);
-
 		// lists
 		const public_list: Array<any> = [];
 		const enemyList: Array<any> = [];
@@ -278,7 +87,7 @@ export default class Level extends Phaser.Scene {
 		const gunEnemyList: Array<any> = [];
 		const bombEnemyList: Array<any> = [];
 		const bulletList: Array<any> = [];
-		const hiddenByTutorialList = [enemiesLabelText, enemiesText];
+		const hiddenByTutorialList: Array<any> = [];
 
 		// parallax_Backing (components)
 		new ScrollFactor(parallax_Backing);
@@ -317,157 +126,10 @@ export default class Level extends Phaser.Scene {
 		parallax_Cityscape_6ScrollFactor.factorX = 0.2;
 		parallax_Cityscape_6ScrollFactor.factorY = 0.1;
 
-		// buildText (components)
-		const buildTextAlign = new Align(buildText);
-		buildTextAlign.up = true;
-		buildTextAlign.left = true;
-		buildTextAlign.horizontalOffset = 5;
-		buildTextAlign.verticalOffset = -95;
-
-		// debugText (components)
-		const debugTextAlign = new Align(debugText);
-		debugTextAlign.up = true;
-		debugTextAlign.left = true;
-		debugTextAlign.horizontalOffset = 5;
-		debugTextAlign.verticalOffset = -75;
-
-		// debugText2 (components)
-		const debugText2Align = new Align(debugText2);
-		debugText2Align.up = true;
-		debugText2Align.left = true;
-		debugText2Align.horizontalOffset = 5;
-		debugText2Align.verticalOffset = -65;
-
-		// debugText3 (components)
-		const debugText3Align = new Align(debugText3);
-		debugText3Align.up = true;
-		debugText3Align.left = true;
-		debugText3Align.horizontalOffset = 5;
-		debugText3Align.verticalOffset = -55;
-
-		// mobileButtonDive (components)
-		const mobileButtonDiveAlign = new Align(mobileButtonDive);
-		mobileButtonDiveAlign.down = true;
-		mobileButtonDiveAlign.right = true;
-		new MobileDependent(mobileButtonDive);
-		const mobileButtonDiveMobileButton = new MobileButton(mobileButtonDive);
-		mobileButtonDiveMobileButton.input = "jump";
-
-		// mobileButtonJump (components)
-		const mobileButtonJumpAlign = new Align(mobileButtonJump);
-		mobileButtonJumpAlign.down = true;
-		mobileButtonJumpAlign.right = true;
-		mobileButtonJumpAlign.verticalOffset = -140;
-		new MobileDependent(mobileButtonJump);
-		new MobileButton(mobileButtonJump);
-
-		// mobileButtonUppercut (components)
-		const mobileButtonUppercutAlign = new Align(mobileButtonUppercut);
-		mobileButtonUppercutAlign.down = true;
-		mobileButtonUppercutAlign.left = true;
-		mobileButtonUppercutAlign.verticalOffset = -140;
-		new MobileDependent(mobileButtonUppercut);
-		new MobileButton(mobileButtonUppercut);
-
-		// mobileButtonPunch (components)
-		const mobileButtonPunchAlign = new Align(mobileButtonPunch);
-		mobileButtonPunchAlign.down = true;
-		mobileButtonPunchAlign.left = true;
-		new MobileDependent(mobileButtonPunch);
-		new MobileButton(mobileButtonPunch);
-
-		// mobileButtonLevelSelect (components)
-		const mobileButtonLevelSelectAlign = new Align(mobileButtonLevelSelect);
-		mobileButtonLevelSelectAlign.up = true;
-		mobileButtonLevelSelectAlign.right = true;
-		new MobileDependent(mobileButtonLevelSelect);
-		new MobileButton(mobileButtonLevelSelect);
-
-		// winText (components)
-		const winTextAlign = new Align(winText);
-		winTextAlign.middle = true;
-		winTextAlign.center = true;
-		winTextAlign.verticalOffset = -50;
-
-		// enemiesLabelText (components)
-		const enemiesLabelTextAlign = new Align(enemiesLabelText);
-		enemiesLabelTextAlign.up = true;
-		enemiesLabelTextAlign.right = true;
-		enemiesLabelTextAlign.horizontalOffset = -5;
-		enemiesLabelTextAlign.verticalOffset = -95;
-
-		// enemiesText (components)
-		const enemiesTextAlign = new Align(enemiesText);
-		enemiesTextAlign.up = true;
-		enemiesTextAlign.right = true;
-		enemiesTextAlign.horizontalOffset = -5;
-		enemiesTextAlign.verticalOffset = -65;
-
-		// chargeText (components)
-		const chargeTextAlign = new Align(chargeText);
-		chargeTextAlign.middle = true;
-		chargeTextAlign.right = true;
-		chargeTextAlign.horizontalOffset = 95;
-
-		// scoreText (components)
-		const scoreTextAlign = new Align(scoreText);
-		scoreTextAlign.up = true;
-		scoreTextAlign.center = true;
-		scoreTextAlign.verticalOffset = -95;
-
-		// comboText (components)
-		const comboTextAlign = new Align(comboText);
-		comboTextAlign.middle = true;
-		comboTextAlign.left = true;
-		comboTextAlign.horizontalOffset = -85;
-		comboTextAlign.verticalOffset = -30;
-
-		// comboLabelText (components)
-		const comboLabelTextAlign = new Align(comboLabelText);
-		comboLabelTextAlign.middle = true;
-		comboLabelTextAlign.left = true;
-		comboLabelTextAlign.horizontalOffset = -90;
-
-		// timerText (components)
-		const timerTextAlign = new Align(timerText);
-		timerTextAlign.up = true;
-		timerTextAlign.center = true;
-		timerTextAlign.verticalOffset = -95;
-
-		// tutorialContainer (components)
-		const tutorialContainerAlign = new Align(tutorialContainer);
-		tutorialContainerAlign.middle = true;
-		tutorialContainerAlign.right = true;
-		tutorialContainerAlign.horizontalOffset = -75;
-
-		// tutorialCloseText (components)
-		new MobileDependent(tutorialCloseText);
-
 		this.bGLayer = bGLayer;
 		this.parallax_Backing = parallax_Backing;
 		this.mainLayer = mainLayer;
 		this.player = player;
-		this.uILayer = uILayer;
-		this.buildText = buildText;
-		this.debugText = debugText;
-		this.debugText2 = debugText2;
-		this.debugText3 = debugText3;
-		this.mobileButtonDive = mobileButtonDive;
-		this.mobileButtonJump = mobileButtonJump;
-		this.mobileButtonUppercut = mobileButtonUppercut;
-		this.mobileButtonPunch = mobileButtonPunch;
-		this.mobileButtonLevelSelect = mobileButtonLevelSelect;
-		this.winText = winText;
-		this.enemiesText = enemiesText;
-		this.chargeText = chargeText;
-		this.scoreText = scoreText;
-		this.comboText = comboText;
-		this.comboLabelText = comboLabelText;
-		this.timerText = timerText;
-		this.tutorialContainer = tutorialContainer;
-		this.tutorialBox = tutorialBox;
-		this.tutorialText = tutorialText;
-		this.tutorialCloseText = tutorialCloseText;
 		this.public_list = public_list;
 		this.enemyList = enemyList;
 		this.collidesWithBombList = collidesWithBombList;
@@ -483,34 +145,13 @@ export default class Level extends Phaser.Scene {
 	private parallax_Backing!: Phaser.GameObjects.Image;
 	public mainLayer!: Phaser.GameObjects.Layer;
 	public player!: playerPrefab;
-	public uILayer!: Phaser.GameObjects.Layer;
-	private buildText!: Phaser.GameObjects.BitmapText;
-	private debugText!: Phaser.GameObjects.BitmapText;
-	private debugText2!: Phaser.GameObjects.BitmapText;
-	private debugText3!: Phaser.GameObjects.BitmapText;
-	private mobileButtonDive!: Phaser.GameObjects.Rectangle;
-	private mobileButtonJump!: Phaser.GameObjects.Rectangle;
-	private mobileButtonUppercut!: Phaser.GameObjects.Rectangle;
-	private mobileButtonPunch!: Phaser.GameObjects.Rectangle;
-	private mobileButtonLevelSelect!: Phaser.GameObjects.Rectangle;
-	private winText!: Phaser.GameObjects.BitmapText;
-	private enemiesText!: Phaser.GameObjects.BitmapText;
-	private chargeText!: Phaser.GameObjects.BitmapText;
-	private scoreText!: Phaser.GameObjects.BitmapText;
-	private comboText!: Phaser.GameObjects.BitmapText;
-	private comboLabelText!: Phaser.GameObjects.BitmapText;
-	private timerText!: Phaser.GameObjects.BitmapText;
-	private tutorialContainer!: Phaser.GameObjects.Container;
-	private tutorialBox!: Phaser.GameObjects.Rectangle;
-	private tutorialText!: Phaser.GameObjects.BitmapText;
-	private tutorialCloseText!: Phaser.GameObjects.BitmapText;
 	public public_list!: Array<any>;
 	private enemyList!: Array<any>;
 	private collidesWithBombList!: Array<any>;
 	private gunEnemyList!: Array<any>;
 	private bombEnemyList!: Array<any>;
 	private bulletList!: Array<any>;
-	private hiddenByTutorialList!: Phaser.GameObjects.BitmapText[];
+	private hiddenByTutorialList!: Array<any>;
 
 	/* START-USER-CODE */
 
@@ -586,7 +227,7 @@ export default class Level extends Phaser.Scene {
 
 		this.reachedGoal = false;
 		this.restarting = false;
-		
+
 		this.combo = 0;
 
 		this.cameraFollow = new Phaser.Math.Vector2(this.player.x, this.player.y);
@@ -597,7 +238,7 @@ export default class Level extends Phaser.Scene {
 		this.uiScene.events.on('created', () =>
 		{
 			this.updateEnemiesUI(true);
-			
+
 			if (!this.registry.get('seen-tutorial-level-' + this.registry.get('current-level-index')))
 			{
 				this.setTutorialUI(true, this.registry.get('mobile'), this.registry.get('current-level-index'));
@@ -852,16 +493,6 @@ export default class Level extends Phaser.Scene {
 		const secondsString = seconds.toString();
 		this.uiScene.timerText.setText(secondsString.replace('.', ':').slice(0, (secondsString.lastIndexOf('.') + 3)));
 
-		if (this.player.punchCharged)
-		{
-			this.chargeText.dropShadowColor = 714549;
-		}
-		else
-		{
-			this.chargeText.dropShadowColor = 15081504;
-		}
-		// TEMP: this shouldn't be checked each frame
-
 		// reset collision values to be overridden by callbacks
 		this.player.onFloor = false;
 
@@ -965,9 +596,9 @@ export default class Level extends Phaser.Scene {
 		// this.gunFireCheck();
 
 		this.cameraFollow.set(this.player.body.x, this.player.body.y);
-		if (this.tutorialContainer.visible && !this.registry.get('mobile'))
+		if (this.uiScene.tutorialContainer.visible && !this.registry.get('mobile'))
 		{
-			this.cameraFollow.x += (this.tutorialBox.width / 2);
+			this.cameraFollow.x += (this.uiScene.tutorialBox.width / 2);
 		}
 	}
 
@@ -1807,30 +1438,6 @@ export default class Level extends Phaser.Scene {
 		}
 	}
 
-	/**
-	 * 
-	 * @param initialize skips animation
-	 */
-	updateEnemiesUI(initialize: boolean): void
-	{
-		let defeatedEnemyCount = 0;
-		this.enemyList.forEach((enemy) => 
-		{
-			let _enemy = enemy as EnemyPrefab;
-			if (_enemy.isFalling())
-			{
-				defeatedEnemyCount++;
-			}
-		});
-
-		this.uiScene.setEnemiesText(defeatedEnemyCount, this.enemyList.length)
-
-		if (!initialize)
-		{
-			this.uiScene.animateEnemiesText();
-		}
-	}
-
 	levelEndFeedback()
 	{
 		this.uiScene.showLevelCompleteText();
@@ -1878,35 +1485,6 @@ export default class Level extends Phaser.Scene {
 		this.sound.play('victory');
 		this.victorySound.play();
 		this.music.pause();
-	}
-
-	/**
-	 * 
-	 * @param show 
-	 * @param level 
-	 */
-	setTutorialUI(show: boolean, mobile: boolean, level: number,)
-	{
-		if (show)
-		{
-			this.uiScene.showTutorialUI(level)
-		}
-		else
-		{
-			this.uiScene.hideTutorialUI();
-		}
-
-		this.registry.set('seen-tutorial-level-' + this.registry.get('current-level-index'), true);
-		/*  This is set even if no tutorial is present, allowing this function to be skipped
-			  next time.
-		 */
-
-		if (mobile)
-		{
-			// this.player.lockInput = true;
-
-			// TODO: pause scene
-		}
 	}
 
 	/** iterates through everything in the 'elements' object layer of the map and creates enemies 
@@ -2098,7 +1676,7 @@ export default class Level extends Phaser.Scene {
 		// this.cameras.main.setScroll(this.player.x, this.player.y);
 		this.cameras.main.startFollow(this.cameraFollow, true, .1, .1);
 		this.cameras.main.setBounds(0, 0, this.tileLayer.width, this.tileLayer.height);
-		this.cameras.main.ignore(this.uILayer.getChildren());
+		// this.cameras.main.ignore(this.uILayer.getChildren());
 
 		this.UICam = CameraUtil.createUICamera(this);
 		this.UICam.ignore(this.mainLayer.getChildren());
@@ -2174,6 +1752,59 @@ export default class Level extends Phaser.Scene {
 		{
 			this.LoadLevelSelect();
 		});
+	}
+
+	/**
+	 * 
+	 * @param show 
+	 * @param level 
+	 */
+	setTutorialUI(show: boolean, mobile: boolean, level: number,)
+	{
+		if (show)
+		{
+			this.uiScene.showTutorialUI(level)
+		}
+		else
+		{
+			this.uiScene.hideTutorialUI();
+		}
+
+		this.registry.set('seen-tutorial-level-' + this.registry.get('current-level-index'), true);
+		/*  This is set even if no tutorial is present, allowing this function to be skipped
+			  next time.
+		 */
+
+		if (mobile)
+		{
+			// this.player.lockInput = true;
+
+			// TODO: pause scene
+		}
+	}
+
+	/**
+	 * 
+	 * @param initialize skips animation
+	 */
+	updateEnemiesUI(initialize: boolean): void
+	{
+		let defeatedEnemyCount = 0;
+		this.enemyList.forEach((enemy) => 
+		{
+			let _enemy = enemy as EnemyPrefab;
+			if (_enemy.isFalling())
+			{
+				defeatedEnemyCount++;
+			}
+		});
+
+		this.uiScene.setEnemiesText(defeatedEnemyCount, this.enemyList.length)
+
+		if (!initialize)
+		{
+			this.uiScene.animateEnemiesText();
+		}
 	}
 
 	setDebugUI()

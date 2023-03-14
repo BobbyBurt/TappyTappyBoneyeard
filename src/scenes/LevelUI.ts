@@ -25,35 +25,6 @@ export default class LevelUI extends Phaser.Scene {
 
 	editorCreate(): void {
 
-		// tutorialContainer
-		const tutorialContainer = this.add.container(383, 207);
-		tutorialContainer.visible = false;
-
-		// tutorialBox
-		const tutorialBox = this.add.rectangle(0, 0, 150, 230);
-		tutorialBox.scaleY = 1.0527259860642193;
-		tutorialBox.isFilled = true;
-		tutorialBox.fillColor = 5675510;
-		tutorialContainer.add(tutorialBox);
-
-		// tutorialText
-		const tutorialText = this.add.bitmapText(0, -32, "nokia", "Welcome to life, Bird Tapper! Before you can take on the violet army, lets brush up on the basics.\n\nYou can jump with <input>. You'll move forward automatically, but you can change direction from walls. While against one, try jumping against it and jumping again to perform a wall jump.");
-		tutorialText.setOrigin(0.5, 0.5);
-		tutorialText.text = "Welcome to life, Bird Tapper! Before you can take on the violet army, lets brush up on the basics.\n\nYou can jump with <input>. You'll move forward automatically, but you can change direction from walls. While against one, try jumping against it and jumping again to perform a wall jump.";
-		tutorialText.fontSize = -8;
-		tutorialText.maxWidth = 120;
-		tutorialText.dropShadowAlpha = 0;
-		tutorialContainer.add(tutorialText);
-
-		// tutorialCloseText
-		const tutorialCloseText = this.add.bitmapText(0, 102, "nokia", "- TAP TO CONTINUE -");
-		tutorialCloseText.setOrigin(0.5, 0.5);
-		tutorialCloseText.text = "- TAP TO CONTINUE -";
-		tutorialCloseText.fontSize = -8;
-		tutorialCloseText.maxWidth = 120;
-		tutorialCloseText.dropShadowAlpha = 0;
-		tutorialContainer.add(tutorialCloseText);
-
 		// timerText
 		const timerText = this.add.bitmapText(323.3856506347656, 857.450366973877, "nokia", "12:04");
 		timerText.text = "12:04";
@@ -93,17 +64,6 @@ export default class LevelUI extends Phaser.Scene {
 		scoreText.dropShadowAlpha = 1;
 		scoreText.dropShadowColor = 2236962;
 
-		// chargeText
-		const chargeText = this.add.bitmapText(847, 802.12646484375, "nokia", "Punch");
-		chargeText.setOrigin(1, 0.5);
-		chargeText.visible = false;
-		chargeText.text = "Punch";
-		chargeText.fontSize = -16;
-		chargeText.align = 2;
-		chargeText.dropShadowX = -100;
-		chargeText.dropShadowAlpha = 1;
-		chargeText.dropShadowColor = 15081504;
-
 		// enemiesText
 		const enemiesText = this.add.bitmapText(957, 756.12646484375, "nokia", "5/6");
 		enemiesText.setOrigin(1, 0.5);
@@ -136,41 +96,6 @@ export default class LevelUI extends Phaser.Scene {
 		winText.dropShadowX = 1;
 		winText.dropShadowY = 1;
 
-		// mobileButtonLevelSelect
-		const mobileButtonLevelSelect = this.add.rectangle(585.4546051025391, 217, 75, 75);
-		mobileButtonLevelSelect.setOrigin(1, 0);
-		mobileButtonLevelSelect.alpha = 0.5;
-		mobileButtonLevelSelect.isFilled = true;
-		mobileButtonLevelSelect.fillColor = 13532397;
-
-		// mobileButtonPunch
-		const mobileButtonPunch = this.add.rectangle(177, 662.12646484375, 150, 120);
-		mobileButtonPunch.setOrigin(0, 1);
-		mobileButtonPunch.alpha = 0.5;
-		mobileButtonPunch.isFilled = true;
-		mobileButtonPunch.fillColor = 15563900;
-
-		// mobileButtonUppercut
-		const mobileButtonUppercut = this.add.rectangle(178, 560.12646484375, 150, 120);
-		mobileButtonUppercut.setOrigin(0, 1);
-		mobileButtonUppercut.alpha = 0.5;
-		mobileButtonUppercut.isFilled = true;
-		mobileButtonUppercut.fillColor = 15591036;
-
-		// mobileButtonJump
-		const mobileButtonJump = this.add.rectangle(583, 531.12646484375, 150, 120);
-		mobileButtonJump.setOrigin(1, 1);
-		mobileButtonJump.alpha = 0.5;
-		mobileButtonJump.isFilled = true;
-		mobileButtonJump.fillColor = 8318332;
-
-		// mobileButtonDive
-		const mobileButtonDive = this.add.rectangle(553, 641.12646484375, 150, 120);
-		mobileButtonDive.setOrigin(1, 1);
-		mobileButtonDive.alpha = 0.5;
-		mobileButtonDive.isFilled = true;
-		mobileButtonDive.fillColor = 8168429;
-
 		// debugText3
 		const debugText3 = this.add.bitmapText(473, 856.12646484375, "nokia", "");
 		debugText3.setOrigin(0, 1);
@@ -195,14 +120,69 @@ export default class LevelUI extends Phaser.Scene {
 		buildText.fontSize = -8;
 		buildText.dropShadowY = 100;
 
-		// tutorialContainer (components)
-		const tutorialContainerAlign = new Align(tutorialContainer);
-		tutorialContainerAlign.middle = true;
-		tutorialContainerAlign.right = true;
-		tutorialContainerAlign.horizontalOffset = -75;
+		// mobileButtonDive
+		const mobileButtonDive = this.add.rectangle(713.4493914309744, 1060.0118990523656, 150, 120);
+		mobileButtonDive.setOrigin(1, 1);
+		mobileButtonDive.alpha = 0.5;
+		mobileButtonDive.isFilled = true;
+		mobileButtonDive.fillColor = 8168429;
 
-		// tutorialCloseText (components)
-		new MobileDependent(tutorialCloseText);
+		// mobileButtonLevelSelect
+		const mobileButtonLevelSelect = this.add.rectangle(745.9039965335135, 635.8854342086155, 75, 75);
+		mobileButtonLevelSelect.setOrigin(1, 0);
+		mobileButtonLevelSelect.alpha = 0.5;
+		mobileButtonLevelSelect.isFilled = true;
+		mobileButtonLevelSelect.fillColor = 13532397;
+
+		// mobileButtonPunch
+		const mobileButtonPunch = this.add.rectangle(337.44939143097434, 1081.0118990523656, 150, 120);
+		mobileButtonPunch.setOrigin(0, 1);
+		mobileButtonPunch.alpha = 0.5;
+		mobileButtonPunch.isFilled = true;
+		mobileButtonPunch.fillColor = 15563900;
+
+		// mobileButtonUppercut
+		const mobileButtonUppercut = this.add.rectangle(338.44939143097434, 979.0118990523655, 150, 120);
+		mobileButtonUppercut.setOrigin(0, 1);
+		mobileButtonUppercut.alpha = 0.5;
+		mobileButtonUppercut.isFilled = true;
+		mobileButtonUppercut.fillColor = 15591036;
+
+		// mobileButtonJump
+		const mobileButtonJump = this.add.rectangle(743.4493914309744, 950.0118990523655, 150, 120);
+		mobileButtonJump.setOrigin(1, 1);
+		mobileButtonJump.alpha = 0.5;
+		mobileButtonJump.isFilled = true;
+		mobileButtonJump.fillColor = 8318332;
+
+		// tutorialContainer
+		const tutorialContainer = this.add.container(383, 207);
+		tutorialContainer.visible = false;
+
+		// tutorialBox
+		const tutorialBox = this.add.rectangle(0, 0, 150, 230);
+		tutorialBox.scaleY = 1.0527259860642193;
+		tutorialBox.isFilled = true;
+		tutorialBox.fillColor = 5675510;
+		tutorialContainer.add(tutorialBox);
+
+		// tutorialText
+		const tutorialText = this.add.bitmapText(0, -32, "nokia", "Welcome to life, Bird Tapper! Before you can take on the violet army, lets brush up on the basics.\n\nYou can jump with <input>. You'll move forward automatically, but you can change direction from walls. While against one, try jumping against it and jumping again to perform a wall jump.");
+		tutorialText.setOrigin(0.5, 0.5);
+		tutorialText.text = "Welcome to life, Bird Tapper! Before you can take on the violet army, lets brush up on the basics.\n\nYou can jump with <input>. You'll move forward automatically, but you can change direction from walls. While against one, try jumping against it and jumping again to perform a wall jump.";
+		tutorialText.fontSize = -8;
+		tutorialText.maxWidth = 120;
+		tutorialText.dropShadowAlpha = 0;
+		tutorialContainer.add(tutorialText);
+
+		// tutorialCloseText
+		const tutorialCloseText = this.add.bitmapText(0, 102, "nokia", "- TAP TO CONTINUE -");
+		tutorialCloseText.setOrigin(0.5, 0.5);
+		tutorialCloseText.text = "- TAP TO CONTINUE -";
+		tutorialCloseText.fontSize = -8;
+		tutorialCloseText.maxWidth = 120;
+		tutorialCloseText.dropShadowAlpha = 0;
+		tutorialContainer.add(tutorialCloseText);
 
 		// timerText (components)
 		const timerTextAlign = new Align(timerText);
@@ -229,12 +209,6 @@ export default class LevelUI extends Phaser.Scene {
 		scoreTextAlign.center = true;
 		scoreTextAlign.verticalOffset = -95;
 
-		// chargeText (components)
-		const chargeTextAlign = new Align(chargeText);
-		chargeTextAlign.middle = true;
-		chargeTextAlign.right = true;
-		chargeTextAlign.horizontalOffset = 95;
-
 		// enemiesText (components)
 		const enemiesTextAlign = new Align(enemiesText);
 		enemiesTextAlign.up = true;
@@ -254,6 +228,42 @@ export default class LevelUI extends Phaser.Scene {
 		winTextAlign.middle = true;
 		winTextAlign.center = true;
 		winTextAlign.verticalOffset = -50;
+
+		// debugText3 (components)
+		const debugText3Align = new Align(debugText3);
+		debugText3Align.up = true;
+		debugText3Align.left = true;
+		debugText3Align.horizontalOffset = 5;
+		debugText3Align.verticalOffset = -55;
+
+		// debugText2 (components)
+		const debugText2Align = new Align(debugText2);
+		debugText2Align.up = true;
+		debugText2Align.left = true;
+		debugText2Align.horizontalOffset = 5;
+		debugText2Align.verticalOffset = -65;
+
+		// debugText (components)
+		const debugTextAlign = new Align(debugText);
+		debugTextAlign.up = true;
+		debugTextAlign.left = true;
+		debugTextAlign.horizontalOffset = 5;
+		debugTextAlign.verticalOffset = -75;
+
+		// buildText (components)
+		const buildTextAlign = new Align(buildText);
+		buildTextAlign.up = true;
+		buildTextAlign.left = true;
+		buildTextAlign.horizontalOffset = 5;
+		buildTextAlign.verticalOffset = -95;
+
+		// mobileButtonDive (components)
+		const mobileButtonDiveAlign = new Align(mobileButtonDive);
+		mobileButtonDiveAlign.down = true;
+		mobileButtonDiveAlign.right = true;
+		new MobileDependent(mobileButtonDive);
+		const mobileButtonDiveMobileButton = new MobileButton(mobileButtonDive);
+		mobileButtonDiveMobileButton.input = "jump";
 
 		// mobileButtonLevelSelect (components)
 		const mobileButtonLevelSelectAlign = new Align(mobileButtonLevelSelect);
@@ -285,88 +295,59 @@ export default class LevelUI extends Phaser.Scene {
 		new MobileDependent(mobileButtonJump);
 		new MobileButton(mobileButtonJump);
 
-		// mobileButtonDive (components)
-		const mobileButtonDiveAlign = new Align(mobileButtonDive);
-		mobileButtonDiveAlign.down = true;
-		mobileButtonDiveAlign.right = true;
-		new MobileDependent(mobileButtonDive);
-		const mobileButtonDiveMobileButton = new MobileButton(mobileButtonDive);
-		mobileButtonDiveMobileButton.input = "jump";
+		// tutorialContainer (components)
+		const tutorialContainerAlign = new Align(tutorialContainer);
+		tutorialContainerAlign.middle = true;
+		tutorialContainerAlign.right = true;
+		tutorialContainerAlign.horizontalOffset = -75;
 
-		// debugText3 (components)
-		const debugText3Align = new Align(debugText3);
-		debugText3Align.up = true;
-		debugText3Align.left = true;
-		debugText3Align.horizontalOffset = 5;
-		debugText3Align.verticalOffset = -55;
+		// tutorialCloseText (components)
+		new MobileDependent(tutorialCloseText);
 
-		// debugText2 (components)
-		const debugText2Align = new Align(debugText2);
-		debugText2Align.up = true;
-		debugText2Align.left = true;
-		debugText2Align.horizontalOffset = 5;
-		debugText2Align.verticalOffset = -65;
-
-		// debugText (components)
-		const debugTextAlign = new Align(debugText);
-		debugTextAlign.up = true;
-		debugTextAlign.left = true;
-		debugTextAlign.horizontalOffset = 5;
-		debugTextAlign.verticalOffset = -75;
-
-		// buildText (components)
-		const buildTextAlign = new Align(buildText);
-		buildTextAlign.up = true;
-		buildTextAlign.left = true;
-		buildTextAlign.horizontalOffset = 5;
-		buildTextAlign.verticalOffset = -95;
-
-		this.tutorialContainer = tutorialContainer;
-		this.tutorialBox = tutorialBox;
-		this.tutorialText = tutorialText;
-		this.tutorialCloseText = tutorialCloseText;
 		this.timerText = timerText;
 		this.comboLabelText = comboLabelText;
 		this.comboText = comboText;
 		this.scoreText = scoreText;
-		this.chargeText = chargeText;
 		this.enemiesText = enemiesText;
 		this.enemiesLabelText = enemiesLabelText;
 		this.winText = winText;
-		this.mobileButtonLevelSelect = mobileButtonLevelSelect;
-		this.mobileButtonPunch = mobileButtonPunch;
-		this.mobileButtonUppercut = mobileButtonUppercut;
-		this.mobileButtonJump = mobileButtonJump;
-		this.mobileButtonDive = mobileButtonDive;
 		this.debugText3 = debugText3;
 		this.debugText2 = debugText2;
 		this.debugText = debugText;
 		this.buildText = buildText;
+		this.mobileButtonDive = mobileButtonDive;
+		this.mobileButtonLevelSelect = mobileButtonLevelSelect;
+		this.mobileButtonPunch = mobileButtonPunch;
+		this.mobileButtonUppercut = mobileButtonUppercut;
+		this.mobileButtonJump = mobileButtonJump;
+		this.tutorialContainer = tutorialContainer;
+		this.tutorialBox = tutorialBox;
+		this.tutorialText = tutorialText;
+		this.tutorialCloseText = tutorialCloseText;
 
 		this.events.emit("scene-awake");
 	}
 
-	public tutorialContainer!: Phaser.GameObjects.Container;
-	private tutorialBox!: Phaser.GameObjects.Rectangle;
-	private tutorialText!: Phaser.GameObjects.BitmapText;
-	private tutorialCloseText!: Phaser.GameObjects.BitmapText;
 	public timerText!: Phaser.GameObjects.BitmapText;
 	public comboLabelText!: Phaser.GameObjects.BitmapText;
 	public comboText!: Phaser.GameObjects.BitmapText;
 	public scoreText!: Phaser.GameObjects.BitmapText;
-	public chargeText!: Phaser.GameObjects.BitmapText;
 	public enemiesText!: Phaser.GameObjects.BitmapText;
 	public enemiesLabelText!: Phaser.GameObjects.BitmapText;
 	public winText!: Phaser.GameObjects.BitmapText;
-	public mobileButtonLevelSelect!: Phaser.GameObjects.Rectangle;
-	public mobileButtonPunch!: Phaser.GameObjects.Rectangle;
-	public mobileButtonUppercut!: Phaser.GameObjects.Rectangle;
-	public mobileButtonJump!: Phaser.GameObjects.Rectangle;
-	public mobileButtonDive!: Phaser.GameObjects.Rectangle;
 	public debugText3!: Phaser.GameObjects.BitmapText;
 	public debugText2!: Phaser.GameObjects.BitmapText;
 	public debugText!: Phaser.GameObjects.BitmapText;
 	public buildText!: Phaser.GameObjects.BitmapText;
+	public mobileButtonDive!: Phaser.GameObjects.Rectangle;
+	public mobileButtonLevelSelect!: Phaser.GameObjects.Rectangle;
+	public mobileButtonPunch!: Phaser.GameObjects.Rectangle;
+	public mobileButtonUppercut!: Phaser.GameObjects.Rectangle;
+	public mobileButtonJump!: Phaser.GameObjects.Rectangle;
+	public tutorialContainer!: Phaser.GameObjects.Container;
+	public tutorialBox!: Phaser.GameObjects.Rectangle;
+	public tutorialText!: Phaser.GameObjects.BitmapText;
+	public tutorialCloseText!: Phaser.GameObjects.BitmapText;
 
 	/* START-USER-CODE */
 
@@ -510,7 +491,7 @@ export default class LevelUI extends Phaser.Scene {
 			Align.getComponent(this.tutorialContainer).right = false;
 			Align.getComponent(this.tutorialContainer).center = true;
 			Align.getComponent(this.tutorialContainer).horizontalOffset = 0;
-	
+
 			this.tutorialBox.setInteractive();
 			this.tutorialBox.on('pointerdown', () =>
 			{
