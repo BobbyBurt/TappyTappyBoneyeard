@@ -597,6 +597,11 @@ export default class Level extends Phaser.Scene {
 		this.uiScene.events.on('created', () =>
 		{
 			this.updateEnemiesUI(true);
+			
+			if (!this.registry.get('seen-tutorial-level-' + this.registry.get('current-level-index')))
+			{
+				this.setTutorialUI(true, this.registry.get('mobile'), this.registry.get('current-level-index'));
+			}
 
 			if (this.registry.get('mobile'))
 			{
@@ -815,11 +820,6 @@ export default class Level extends Phaser.Scene {
 				}
 			}
 		});
-
-		if (!this.registry.get('seen-tutorial-level-' + this.registry.get('current-level-index')))
-		{
-			this.setTutorialUI(true, this.registry.get('mobile'), this.registry.get('current-level-index'));
-		}
 
 		this.game.events.on(Phaser.Core.Events.BLUR, () =>
 		{
@@ -1887,34 +1887,13 @@ export default class Level extends Phaser.Scene {
 	 */
 	setTutorialUI(show: boolean, mobile: boolean, level: number,)
 	{
-		let tutorialString = ''
-
-		switch (level)
+		if (show)
 		{
-			case 0:
-				tutorialString = "Welcome to life, Bird Tapper! Before you can take on the violet army, lets brush up on the basics.\n\nYou can jump with <input>. You'll move forward automatically, but you can change direction from walls. While against one, try jumping against it and jumping again to perform a wall jump."
-				break;
-			case 1:
-				tutorialString = "Have you tried using your wings yet? Use <input> while midair to flap and gain some more height.\n\nYour tiny wings only have the strength to do this twice, and you'll get more and more pale as you become weaker."
-				break;
-			case 2:
-				tutorialString = "Soldiers are dangerous, so it's time to attack! Hit <input> to punch forward with a burst of speed.\n\nDo this in front of an enemy to take them out with your fist. Punches are also an easy way to launch yourself from a wall."
-				break;
-			case 4:
-				tutorialString = "OK, time to dive. Use <input> to boost yourself downwards. If you hit an enemy, you'll take them out!\n\nDiving also aids your mobility, helping you control / time your landings."
-				break;
-			case 6:
-				tutorialString = "When punching forward isn't enough, hit 'em with an uppercut!\n\nUse <input> to launch upward and take out the enemies above you."
-				break;
-			case 7:
-				tutorialString = "Punches and uppercuts take a lot out of you...\n\nLanding on ground is one way to recharge, but you'll also automatically regain charge if you take out an enemy with your attack!"
-				break;
-			case 8:
-				tutorialString = "Each enemy you take out will add to your combo as long as you're not grounded.\n\nTry to figure out ways to build that combo!"
-				break;
-			// case 9:
-			// 	tutorialString = "Good hustle out there! Time to test your skills."
-			// 	break;
+			this.uiScene.showTutorialUI(level)
+		}
+		else
+		{
+			this.uiScene.hideTutorialUI();
 		}
 
 		this.registry.set('seen-tutorial-level-' + this.registry.get('current-level-index'), true);
@@ -1922,44 +1901,11 @@ export default class Level extends Phaser.Scene {
 			  next time.
 		 */
 
-		if (!show || tutorialString === '')
-		{
-			this.tutorialContainer.setVisible(false);
-			this.hiddenByTutorialList.forEach((element) =>
-			{
-				element.setVisible(true);
-			});
-			return;
-		}
-		else
-		{
-			this.tutorialContainer.setVisible(true);
-			this.tutorialText.setText(tutorialString);
-			this.hiddenByTutorialList.forEach((element) =>
-			{
-				element.setVisible(false);
-			});
-		}
-
 		if (mobile)
 		{
-			// this.tutorialText.setMaxWidth(200);
-			// this.tutorialBox.width = 250;
-			// this.tutorialBox.setX(0);
-			console.log(Align.getComponent(this.tutorialContainer));
-			Align.getComponent(this.tutorialContainer).right = false;
-			Align.getComponent(this.tutorialContainer).center = true;
-			Align.getComponent(this.tutorialContainer).horizontalOffset = 0;
+			// this.player.lockInput = true;
 
-			this.player.lockInput = true;
-
-			this.tutorialBox.setInteractive();
-			this.tutorialBox.on('pointerdown', () =>
-			{
-				this.setTutorialUI(false, true, 0);
-				this.player.lockInput = false;
-				this.player.startMoving();
-			});
+			// TODO: pause scene
 		}
 	}
 
