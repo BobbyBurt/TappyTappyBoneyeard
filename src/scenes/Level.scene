@@ -187,10 +187,6 @@
             "label": "enemyList"
         },
         {
-            "id": "4e0108a5-e4fe-408d-8b3f-26e132d30002",
-            "label": "collidesWithBombList"
-        },
-        {
             "id": "3f521e89-f910-4cc1-ac5c-90d1d3fdb117",
             "label": "gunEnemyList"
         },

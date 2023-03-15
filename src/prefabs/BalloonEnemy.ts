@@ -36,8 +36,9 @@ export default class BalloonEnemy extends EnemyPrefab {
 
 	// create balloon
 		this.balloon = this.scene.add.image(this.x, this.y - 30, 'balloon');
-		this._scene.UICam.ignore(this.balloon);
 		this.scene.physics.add.existing(this.balloon);
+		this._scene.mainLayer.add(this.balloon);
+		this.balloon.setDepth(-11);
 		let _balloonBody = this.balloon.body as Phaser.Physics.Arcade.Body;
 		_balloonBody.setAllowGravity(false);
 		_balloonBody.setGravityY(-550);

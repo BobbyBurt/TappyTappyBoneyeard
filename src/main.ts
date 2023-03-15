@@ -1,6 +1,7 @@
 import Level from './scenes/Level';
 import LevelSelect from './scenes/LevelSelect';
 import LevelUI from './scenes/LevelUI';
+import Pause from './scenes/Pause';
 import Preload from './scenes/Preload';
 
 window.addEventListener('load', function ()
@@ -54,6 +55,7 @@ window.addEventListener('load', function ()
 	game.scene.add("LevelSelect", LevelSelect);
 	game.scene.add("Boot", Boot, true);
 	game.scene.add("LevelUI", LevelUI);
+	game.scene.add("Pause", Pause);
 });
 
 class Boot extends Phaser.Scene

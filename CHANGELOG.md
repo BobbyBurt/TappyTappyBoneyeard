@@ -8,8 +8,12 @@ These are internal changes as part of a refactor.
 
 - Better music handling.
 - All gameplay UI has been decoupled to a seperate overlapping scene.
+- Better-defined depth sorting of graphics
 
 ### Added
+
+- Adde pause functionality which happens automatically when the window loses focus.
+
 ### Removed
 
 - Finally got rid of the Level's UICam.

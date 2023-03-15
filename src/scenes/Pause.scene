@@ -1,0 +1,45 @@
+{
+    "id": "45609935-3fae-4885-91e6-350cb54a9dcb",
+    "sceneType": "SCENE",
+    "settings": {
+        "exportClass": true,
+        "autoImport": true,
+        "preloadPackFiles": [],
+        "createMethodName": "editorCreate",
+        "sceneKey": "Pause",
+        "compilerOutputLanguage": "TYPE_SCRIPT",
+        "borderWidth": 0,
+        "borderHeight": 0
+    },
+    "displayList": [
+        {
+            "type": "BitmapText",
+            "id": "1ec6071b-3d34-434b-8b79-86b91d7a0147",
+            "label": "PauseText",
+            "scope": "PUBLIC",
+            "components": [
+                "Align"
+            ],
+            "Align.middle": true,
+            "Align.center": true,
+            "x": 35,
+            "y": 10,
+            "originX": 0.5,
+            "originY": 0.5,
+            "text": "Paused",
+            "font": "nokia",
+            "fontSize": -16,
+            "dropShadowX": -1,
+            "dropShadowY": 1,
+            "dropShadowAlpha": 1,
+            "dropShadowColor": "#000000ff"
+        }
+    ],
+    "plainObjects": [],
+    "meta": {
+        "app": "Phaser Editor 2D - Scene Editor",
+        "url": "https://phasereditor2d.com",
+        "contentType": "phasereditor2d.core.scene.SceneContentType",
+        "version": 3
+    }
+}

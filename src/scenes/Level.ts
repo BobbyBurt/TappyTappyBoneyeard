@@ -83,7 +83,6 @@ export default class Level extends Phaser.Scene {
 		// lists
 		const public_list: Array<any> = [];
 		const enemyList: Array<any> = [];
-		const collidesWithBombList: Array<any> = [];
 		const gunEnemyList: Array<any> = [];
 		const bombEnemyList: Array<any> = [];
 		const bulletList: Array<any> = [];
@@ -132,7 +131,6 @@ export default class Level extends Phaser.Scene {
 		this.player = player;
 		this.public_list = public_list;
 		this.enemyList = enemyList;
-		this.collidesWithBombList = collidesWithBombList;
 		this.gunEnemyList = gunEnemyList;
 		this.bombEnemyList = bombEnemyList;
 		this.bulletList = bulletList;
@@ -147,7 +145,6 @@ export default class Level extends Phaser.Scene {
 	public player!: playerPrefab;
 	public public_list!: Array<any>;
 	private enemyList!: Array<any>;
-	private collidesWithBombList!: Array<any>;
 	private gunEnemyList!: Array<any>;
 	private bombEnemyList!: Array<any>;
 	private bulletList!: Array<any>;
@@ -155,12 +152,12 @@ export default class Level extends Phaser.Scene {
 
 	/* START-USER-CODE */
 
-	// game state
+// game state
 	/** used to make sure level restart is only called once */
 	private restarting = false;
 	private reachedGoal = false;
 
-	// sounds
+// sounds
 	private flapSound: Phaser.Sound.BaseSound;
 	private enemyDeathSound: Phaser.Sound.BaseSound;
 	private explosionSound: Phaser.Sound.BaseSound;
@@ -170,52 +167,48 @@ export default class Level extends Phaser.Scene {
 	private punchSound: Phaser.Sound.BaseSound;
 	private comboHitSound: Phaser.Sound.BaseSound;
 
-	// tilemap
-	private tileMap: Phaser.Tilemaps.Tilemap;
-	private tileLayer: Phaser.Tilemaps.TilemapLayer;
-	private bgTileLayer: Phaser.Tilemaps.TilemapLayer;
-	/** player is reset, objects are removed if below this Y coordinate. Set based on tilemap object */
-	private bottomBoundary: number;
-
-	// object groups
-	private bombGroup: Phaser.GameObjects.Group;
-	private explosionGroup: Phaser.GameObjects.Group;
-	private bulletGroup: Phaser.GameObjects.Group;
-
-	// debug
-	private debugWallDetectGraphics: Phaser.GameObjects.Graphics;
-	private debugVisionPolyGraphics: Phaser.GameObjects.Graphics;
-
 	private music: Phaser.Sound.BaseSound;
 	private environmentAudio: Phaser.Sound.BaseSound;
 
+// tilemap
+	private tileMap: Phaser.Tilemaps.Tilemap;
+	private tileLayer: Phaser.Tilemaps.TilemapLayer;
+	private bgTileLayer: Phaser.Tilemaps.TilemapLayer;
+
+// object groups / arrays
+	private bombGroup: Phaser.GameObjects.Group;
+	private explosionGroup: Phaser.GameObjects.Group;
+	private bulletGroup: Phaser.GameObjects.Group;
 	/** Polygons used for enemies' player detection. */
 	private visionPolys: Array<VisionPoly>;
 
+// debug
+	private debugWallDetectGraphics: Phaser.GameObjects.Graphics;
+	private debugVisionPolyGraphics: Phaser.GameObjects.Graphics;
+	private debugPlaneRectGraphics: Phaser.GameObjects.Graphics;
+
+// plane
+	public plane: Phaser.GameObjects.Image;
+	private planeRect: Phaser.Geom.Rectangle;
+	/** As it's found in enemyList. */
+
+// enemy ref
 	/** 
 	 * All objects in the elements layer in the tilemap.
 	 * 
 	 * Indexes correlate to the object's ID, so most of this array's indexes are empty.
 	 */
 	private mapElementList: Array<any>;
-
-	public plane: Phaser.GameObjects.Image;
-	private planeRect: Phaser.Geom.Rectangle;
-	private debugPlaneRectGraphics: Phaser.GameObjects.Graphics;
-	/** As it's found in enemyList. */
 	private goalEnemyIndex: number;
 
+// arcade
 	private combo = 0;
 	private comboTextTween: Phaser.Tweens.Tween;
-
-	private levelTimer: Phaser.Time.TimerEvent;
-
-	private enemiesUITween: Phaser.Tweens.Tween;
-
-	private cameraFollow: Phaser.Math.Vector2;
-
 	private scorePopupGroup: Phaser.GameObjects.Group;
 	private levelScore: number;
+	private levelTimer: Phaser.Time.TimerEvent;
+
+	private cameraFollow: Phaser.Math.Vector2;
 
 	private uiScene: LevelUI;
 
@@ -223,64 +216,52 @@ export default class Level extends Phaser.Scene {
 	{
 		this.editorCreate();
 
+	// reset properties
 		this.reachedGoal = false;
 		this.restarting = false;
-
 		this.combo = 0;
-
 		this.cameraFollow = new Phaser.Math.Vector2(this.player.x, this.player.y);
 
 	// UI
-		this.scene.launch('LevelUI');
 		this.uiScene = this.scene.get('LevelUI') as LevelUI;
-		this.uiScene.events.on('created', () =>
+		this.updateEnemiesUI(true);
+		if (!this.registry.get('seen-tutorial-level-' + this.registry.get('current-level-index')))
 		{
-			this.updateEnemiesUI(true);
+			this.setTutorialUI(true, this.registry.get('mobile'), this.registry.get('current-level-index'));
+		}
+		if (this.registry.get('mobile'))
+		{
+			this.bindMobileButtons();
+		}
 
-			if (!this.registry.get('seen-tutorial-level-' + this.registry.get('current-level-index')))
-			{
-				this.setTutorialUI(true, this.registry.get('mobile'), this.registry.get('current-level-index'));
-			}
-
-			if (this.registry.get('mobile'))
-			{
-				this.bindMobileButtons();
-			}
-		});
-
+	// tilemap
 		this.tileMap = this.add.tilemap(this.registry.get('current-level'));
 		this.tileMap.addTilesetImage("tilleset", "tileset");
 		this.tileMap.addTilesetImage("bg-tileset", "bg-tileset");
+
+		this.tileLayer = this.tileMap.createLayer("Tile Layer 1", ["tilleset"], 0, 0);
+		// why is it misspelled 'tillset'?
+		this.mainLayer.add(this.tileLayer);
+		this.tileLayer.setDepth(10)
 
 		this.bgTileLayer = this.tileMap.createLayer('Tile Layer 2', ['bg-tileset'], 0, 0);
 		if (this.bgTileLayer)
 		{
 			this.bgTileLayer.depth = -10;
-			this.mainLayer.add(this.bgTileLayer);
+			this.bGLayer.add(this.bgTileLayer);
+			this.bgTileLayer.setDepth(10);
 		}
 
-		this.tileLayer = this.tileMap.createLayer("Tile Layer 1", ["tilleset"], 0, 0);
-		// why is it misspelled 'tillset'?
-		this.mainLayer.add(this.tileLayer);
-
-		// this.mainLayer.add(this.hazardTileLayer);
-
-		this.collidesWithBombList.push(this.player);
-		this.collidesWithBombList.push(this.tileLayer);
 
 		this.tileLayer.setCollision([1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18,
 			19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36], true);
 
-		// this.hazardTileLayer.setCollision([1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18,
-		// 	19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36], true);
-
 		this.player.createFist();
+		this.mainLayer.add(this.player.fist);
 
+	// physics callbacks
 		// playerTilemapCollider
 		this.physics.add.collider(this.player, this.tileLayer, this.playerTilemapCollide, undefined, this);
-
-		// soldierTilemapCollide
-		// this.physics.add.collider(this.enemyList, this.tileLayer);
 
 		// soldierSoldierCollide
 		this.physics.add.collider(this.enemyList, this.enemyList, this.enemyEnemyCollide, undefined, this);
@@ -301,16 +282,13 @@ export default class Level extends Phaser.Scene {
 		this.physics.add.overlap
 			(this.bulletList, this.player, this.bulletPlayerCollide, undefined, this);
 
-		// playerEndEggOverlap
-		// this.physics.add.overlap
-		// 	(this.player, this.endEgg, this.playerEndEggOverlap, undefined, this);
-
 	// camera
 		CameraUtil.configureMainCamera(this);
 		// this.cameras.main.setScroll(this.player.x, this.player.y);
 		this.cameras.main.startFollow(this.cameraFollow, true, .1, .1);
 		this.cameras.main.setBounds(0, 0, this.tileLayer.width, this.tileLayer.height);
 
+	// enemies
 		this.mapElementList = new Array(150);
 		/* TODO: make this array length dynamic to the highest element id in the map, as if there 
 		is an id greater than this array length then the game will crash.
@@ -319,12 +297,10 @@ export default class Level extends Phaser.Scene {
 		// /* TODO: make this array length dynamic to the amount of vision rects that are in the 
 		// map, otherwise this acts as an arbitrary max which crashes the game if exceeded.
 		// */
-
 		this.createMapEnemies();
-
 		this.createMapVisionPolys();
 
-		// tilemap special elements
+	// tilemap special elements
 		let startPoint = TilemapUtil.getObjectPositionByGID(38, this.tileMap);
 		if (startPoint === null)
 		{
@@ -336,89 +312,33 @@ export default class Level extends Phaser.Scene {
 		this.data.set('startPoint', startPoint);
 		this.player.setFlipX(TilemapUtil.getObjectFlipByGID(38, this.tileMap));
 
-		this.cameras.main.setScroll(this.player.x, this.player.y);
-		// Apparently this doesn't help
-
-		// const endEgg = TilemapUtil.getObjectPosition('endEgg', this.tileMap);
-		// endEgg.x += 6;
-		// endEgg.y -= 6;
-		// this.endEgg.setPosition(endEgg.x, endEgg.y);
-
 		const endPlane: Phaser.Math.Vector2 | null = TilemapUtil.getObjectPositionByGID(39, this.tileMap);
 		if (endPlane)
 		{
 			this.createPlane(endPlane!.x, endPlane.y);
 		}
 
-		// bombs
+	// object groups
 		this.bombGroup = this.add.group({ maxSize: 30, classType: BombPrefab });
 		// TODO: define max
-		// this.physics.add.collider
-		// 	(this.bombGroup, this.collidesWithBombList, this.bombCollide, undefined, this);
 		this.physics.add.overlap(this.bombGroup, this.player, this.bombPlayerOverlap, undefined, this);
 		this.physics.add.overlap(this.bombGroup, this.player.fist, this.bombFistOverlap, undefined, this);
 		this.physics.add.overlap(this.bombGroup, this.enemyList, this.bombEnemyOverlap, undefined, this);
 		this.physics.add.collider(this.bombGroup, this.tileLayer, this.bombTilemapCollide, undefined, this);
 
-		// bullets
 		this.bulletGroup = this.add.group({ maxSize: 100, classType: BulletPrefab })
-		// TODO: define justifies max size
-		// for (let i = 0; i < 100; i++)
-		// {
-		// let _newBullet = this.bulletGroup.get(i, i);
-		// this.mainLayer.add(_newBullet);
-		// this.bulletList.push(_newBullet);
-		// console.log(i);
-		// this.bulletGroup.getChildren()[i].setActive(false)
-		// }
-		// this.time.addEvent({delay: 3000, callback: this.enemyGunFire, callbackScope: this, loop: true})
 
-		// balloon physics
-		// let _balloonEnemy = this.balloonEnemyList[0] as BalloonEnemy;
-		// let _balloon = _balloonEnemy.balloon;
-		// console.log(_balloon);
-		// this.physics.add.overlap(_balloon, this.player, this.balloonHit)
-
-		// explosions
 		this.explosionGroup = this.add.group({ maxSize: 30, classType: explosionPrefab })
 		// TODO: define max
 
-		// score popup
 		this.scorePopupGroup = this.add.group({ maxSize: 10, classType: ScorePopup })
-
-		// music - DEPRECATED - Marked for deletion.
-		// if (this.music == undefined 
-		// 	|| (this.music.key === 'main-game' && this.registry.get('current-level-index') < 4)
-		// 	|| (this.music.key === 'tutorial' && this.registry.get('current-level-index') >= 4))
-		// {
-		// 	if (this.music)
-		// 	{
-		// 		this.music.stop();
-		// 	}
-
-		// 	if (this.registry.get('current-level-index') < 3)
-		// 	{
-		// 		this.music = this.sound.add('tutorial', {volume: .7});
-		// 		console.log('added tutorial music');
-		// 	}
-		// 	else
-		// 	{
-		// 		this.music = this.sound.add('main-game', {volume: .7});
-		// 		console.log('added main game music');
-		// 	}
-
-		// 	if (!__DEV__ && !this.registry.get('muted'))
-		// 	{F
-		// 		this.music.play({loop: true});
-		// 	}
 
 		this.music = SoundManager.setLevelMusic(this.music, this.registry.get('current-level-index'), this);
 		this.addSounds();
 		this.reflectSound.play();
-
 		// this.environmentAudio.play(undefined, {volume: 0.03, loop: true});
 
-		// debug wall detect visual
+	// debug wall detect visual
 		this.debugWallDetectGraphics = this.add.graphics
 			({ fillStyle: { color: 0x0000ff, alpha: (__DEV__ ? 1 : 0) } });
 
@@ -450,7 +370,9 @@ export default class Level extends Phaser.Scene {
 				this.registry.set('muted', true);
 			}
 		});
+			// TODO: this should be it's own seperate class somehow
 
+	// level timer
 		this.levelTimer = this.time.addEvent({
 			delay: 30000, callback: () =>
 			{
@@ -461,21 +383,11 @@ export default class Level extends Phaser.Scene {
 			}
 		});
 
-		this.game.events.on(Phaser.Core.Events.BLUR, () =>
-		{
-			console.debug('blur');
+	// window focus
+		this.game.events.on(Phaser.Core.Events.BLUR, this.pause, this);
+		this.game.events.on(Phaser.Core.Events.FOCUS, this.unpause, this)
 
-			this.scene.pause();
-		})
-
-		this.game.events.on(Phaser.Core.Events.FOCUS, () =>
-		{
-			console.debug('focus');
-
-			this.scene.resume();
-		})
-
-		// resize init
+	// resize init
 		this.events.on('pre-resize', this.resize, this);
 		this.resize();
 	}
@@ -601,9 +513,20 @@ export default class Level extends Phaser.Scene {
 		}
 	}
 
-	destory()
+	/**
+	 * removes all listeners
+	 */
+	destroyScene()
 	{
-		// TODO
+		this.events.off(Phaser.Scenes.Events.UPDATE);
+		this.player.removeUpdateListener();
+		this.enemyList.forEach((enemy) =>
+		{
+			let _enemy = enemy as EnemyPrefab;
+			_enemy.removeUpdateListener();
+		});
+
+		this.scene.stop('LevelUI');
 	}
 
 	/** reloads the scene */
@@ -619,16 +542,7 @@ export default class Level extends Phaser.Scene {
 			return;
 		}
 
-		// remove update listeners to avoid crash
-		this.events.off(Phaser.Scenes.Events.UPDATE);
-		this.player.removeUpdateListener();
-		this.enemyList.forEach((enemy) =>
-		{
-			let _enemy = enemy as EnemyPrefab;
-			_enemy.removeUpdateListener();
-		});
-
-		this.scene.stop('LevelUI')
+		this.destroyScene();
 		this.scene.restart();
 	}
 
@@ -645,18 +559,7 @@ export default class Level extends Phaser.Scene {
 			return;
 		}
 
-		// remove update listeners to avoid crash
-		this.events.off(Phaser.Scenes.Events.UPDATE);
-		this.player.removeUpdateListener();
-		this.enemyList.forEach((enemy) =>
-		{
-			let _enemy = enemy as EnemyPrefab;
-			_enemy.removeUpdateListener();
-		});
-
-		// this.environmentAudio.stop();
-
-		this.scene.stop('LevelUI');
+		this.destroyScene();
 		this.scene.start('LevelSelect');
 	}
 
@@ -901,20 +804,6 @@ export default class Level extends Phaser.Scene {
 		}
 	}
 
-	/** egg collision callback */
-	bombCollide(bomb: any, _collidedWith: any)
-	{
-		let _bomb = bomb as BombPrefab;
-
-		// player is included in the bomb collision list, but egg - player should be ignored
-	}
-
-	/** TEST */
-	balloonPlayerCollide(_balloon: any, _player: any)
-	{
-		console.log('balloon hit');
-	}
-
 	bulletPlayerCollide(_bullet: any, _player: any)
 	{
 		this.resetLevel();
@@ -944,6 +833,8 @@ export default class Level extends Phaser.Scene {
 		this.levelScore += scoreToAdd;
 
 		const scorePopup = this.scorePopupGroup.get(this.player.x, this.player.y - 1020);
+		this.mainLayer.add(scorePopup);
+		scorePopup.setDepth(20);
 		scorePopup.appear(scoreToAdd);
 	}
 
@@ -966,6 +857,7 @@ export default class Level extends Phaser.Scene {
 		let newBomb = this.bombGroup.get(x, y) as BombPrefab;
 		newBomb.appear(enemy);
 		this.mainLayer.add(newBomb);
+		newBomb.setDepth(-9);
 
 		if (velocity)
 		{
@@ -1069,6 +961,7 @@ export default class Level extends Phaser.Scene {
 		let newExplosion = this.explosionGroup.get(x, y);
 		newExplosion.appear();
 		this.mainLayer.add(newExplosion);
+		newExplosion.setDepth(15);
 		// TODO: this stuff should only be called if the object is being initialized
 
 		this.explosionCheck(x, y);
@@ -1246,6 +1139,7 @@ export default class Level extends Phaser.Scene {
 		}
 		_newBullet.appear();
 		this.mainLayer.add(_newBullet);
+		_newBullet.setDepth(3);
 		this.bulletList.push(_newBullet);
 		/* does this add existing bullets to the list, adding them infinitely? */
 		// TODO: these should be added once on object initialization, not recycle
@@ -1417,7 +1311,6 @@ export default class Level extends Phaser.Scene {
 		// here is where the level end code would go
 	}
 
-	/** DEPRECATED */
 	goalEnemyCheck(enemy: EnemyPrefab)
 	{
 		if (enemy.isGoal)
@@ -1565,16 +1458,16 @@ export default class Level extends Phaser.Scene {
 			this.enemyList.push(enemy);
 			enemy.enemyListIndex = this.enemyList.length - 1;
 			this.mapElementList[object.id] = enemy;
-			// this.mainLayer.add(enemy);
-			// this.UICam.ignore(enemy);
-			// this.addToMainLayer(enemy);
+			this.mainLayer.add(enemy);
+			enemy.setDepth(-10);
 		});
 	}
 
 	createPlane(x: number, y: number)
 	{
 		this.plane = this.add.image(x + 7, y + 2, 'plane');
-		// this.addToMainLayer(this.plane);
+		this.mainLayer.add(this.plane);
+		this.plane.setDepth(15);
 		this.plane.flipX = true;
 
 		// this.tweens.add
@@ -1654,8 +1547,6 @@ export default class Level extends Phaser.Scene {
 		this.reflectSound = this.sound.add('reflect', { volume: .6 });
 		this.punchSound = this.sound.add('punch-swing', { volume: 1 });
 		this.comboHitSound = this.sound.add('combo-hit');
-
-		this.flapSound.play();
 	}
 
 	/**
@@ -1740,6 +1631,18 @@ export default class Level extends Phaser.Scene {
 		{
 			this.LoadLevelSelect();
 		});
+	}
+
+	pause()
+	{
+		this.scene.pause();
+		this.scene.launch('Pause');
+	}
+
+	unpause()
+	{
+		this.scene.resume();
+		this.scene.stop('Pause');
 	}
 
 	/**

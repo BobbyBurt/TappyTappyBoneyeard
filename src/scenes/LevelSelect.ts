@@ -245,6 +245,7 @@ export default class LevelSelect extends Phaser.Scene {
 	{
 		this.registry.set('current-level-index', this.selectedLevel)
 		this.scene.stop(this);
+		this.scene.launch('LevelUI');
 		this.scene.launch('Level');
 	}
 

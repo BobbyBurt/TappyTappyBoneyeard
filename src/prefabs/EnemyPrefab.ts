@@ -178,7 +178,8 @@ export default class EnemyPrefab extends Phaser.GameObjects.Sprite {
 	{
 		this.gun = this.scene.add.image(this.x, this.y, 'gun');
 		this.scene.physics.add.existing(this.gun, false);
-		this._scene.UICam.ignore(this.gun);
+		this._scene.mainLayer.add(this.gun);
+		this.gun.setDepth(-9);
 		let _gunBody = this.gun.body as Phaser.Physics.Arcade.Body;
 			// simply calling this.gun.body doesn't give me much to work with. There must be 
 			// a better way to do this
@@ -225,7 +226,8 @@ export default class EnemyPrefab extends Phaser.GameObjects.Sprite {
 		this._parasol = this.scene.add.image(this.x, this.y - 15, 'parasol');
 		// this.parasol.setDepth(this.depth - 1);
 		this.scene.physics.add.existing(this.parasol, false);
-		this._scene.UICam.ignore(this.parasol);
+		this._scene.mainLayer.add(this._parasol);
+		this._parasol.setDepth(-11)
 		let _parasolBody = this.parasol.body as Phaser.Physics.Arcade.Body;
 			// simply calling this.gun.body doesn't give me much to work with. There must be 
 			// a better way to do this
@@ -235,9 +237,9 @@ export default class EnemyPrefab extends Phaser.GameObjects.Sprite {
 	createGrenade()
 	{
 		this.grenadeProp = this.scene.add.image(this.x + 5, this.y + 5, 'grenade');
-		this._scene.UICam.ignore(this.grenadeProp);
-
 		this.scene.physics.add.existing(this.grenadeProp, false);
+		this._scene.mainLayer.add(this.grenadeProp);
+		this.grenadeProp.setDepth(-8);
 		const grenadeBody = this.grenadeProp.body as Phaser.Physics.Arcade.Body;
 		grenadeBody.setAllowGravity(false);
 	}
@@ -245,12 +247,8 @@ export default class EnemyPrefab extends Phaser.GameObjects.Sprite {
 	createBombProp()
 	{
 		this.bombProp = this.scene.add.image(this.x, this.y + 10, 'bomb');
-		this._scene.UICam.ignore(this.bombProp);
-		// this.bombProp.depth = this.depth - 1;
-
-		// TODO: make it move with enemy
-
-		// TODO: hide it when necessary
+		this._scene.mainLayer.add(this.bombProp);
+		this.bombProp.setDepth(-7);
 	}
 
 	/** activate fall behaviour
