@@ -1,6 +1,6 @@
 /* START OF COMPILED CODE */
 
-import Phaser from "phaser";
+import Phaser, { Sound } from "phaser";
 import ScrollFactor from "../components/ScrollFactor";
 import playerPrefab from "../prefabs/playerPrefab";
 /* START-USER-IMPORTS */
@@ -157,16 +157,7 @@ export default class Level extends Phaser.Scene {
 	private restarting = false;
 	private reachedGoal = false;
 
-// sounds
-	private flapSound: Phaser.Sound.BaseSound;
-	private enemyDeathSound: Phaser.Sound.BaseSound;
-	private explosionSound: Phaser.Sound.BaseSound;
-	private playerDeathSound: Phaser.Sound.BaseSound;
-	private victorySound: Phaser.Sound.BaseSound;
-	private reflectSound: Phaser.Sound.BaseSound;
-	private punchSound: Phaser.Sound.BaseSound;
-	private comboHitSound: Phaser.Sound.BaseSound;
-
+// audio
 	private music: Phaser.Sound.BaseSound;
 	private environmentAudio: Phaser.Sound.BaseSound;
 
@@ -233,6 +224,8 @@ export default class Level extends Phaser.Scene {
 		{
 			this.bindMobileButtons();
 		}
+
+		this.player.setDepth(-20)
 
 	// tilemap
 		this.tileMap = this.add.tilemap(this.registry.get('current-level'));
@@ -335,7 +328,7 @@ export default class Level extends Phaser.Scene {
 
 		this.music = SoundManager.setLevelMusic(this.music, this.registry.get('current-level-index'), this);
 		this.addSounds();
-		this.reflectSound.play();
+		SoundManager.play('reflect', this);
 		// this.environmentAudio.play(undefined, {volume: 0.03, loop: true});
 
 	// debug wall detect visual
@@ -428,22 +421,8 @@ export default class Level extends Phaser.Scene {
 		}
 		this.bombGroup.getChildren().forEach(member =>
 		{
-			let _member = member as BombPrefab;
-			if (_member.y > this.cameras.main.getBounds().bottom)
-			{
-				_member.disappear();
-				_member.setPosition(9999, -9999);
-				_member.enemy.bombCooldownTimer.destroy();
-				_member.enemy.bombCooldownTimer = this.time.addEvent({
-					delay: 1000, callback: () =>
-					{
-						if (!_member.enemy.isFalling())
-						{
-							_member.enemy.bombProp.setVisible(true);
-						}
-					}
-				});
-			}
+			const _member = member as BombPrefab;
+			this.resetBomb(_member);
 		});
 
 	// update camera follow
@@ -466,8 +445,6 @@ export default class Level extends Phaser.Scene {
 			let _enemy = enemy as EnemyPrefab;
 			_enemy.removeUpdateListener();
 		});
-
-		this.scene.stop('LevelUI');
 	}
 
 	/** reloads the scene */
@@ -484,6 +461,7 @@ export default class Level extends Phaser.Scene {
 		}
 
 		this.destroyScene();
+		this.uiScene.scene.restart();
 		this.scene.restart();
 	}
 
@@ -501,6 +479,7 @@ export default class Level extends Phaser.Scene {
 		}
 
 		this.destroyScene();
+		this.uiScene.scene.stop();
 		this.scene.start('LevelSelect');
 	}
 
@@ -588,6 +567,12 @@ export default class Level extends Phaser.Scene {
 		}
 
 		const enemy = _enemy as EnemyPrefab;
+
+		this.scene.pause();
+		this.uiScene.time.addEvent({delay: 75, callback: () =>
+		{
+			this.scene.resume();
+		}});
 
 		this.takeoutEnemy(_enemy);
 	}
@@ -686,7 +671,14 @@ export default class Level extends Phaser.Scene {
 		_bullet.disappear();
 	}
 
-	
+	/**
+	 * Set enemy to falling state and set velocity. 
+	 * 
+	 * Update UI & score.
+	 * @param enemy 
+	 * @param overrideVelocity if undefined, getKnockBackvelocity will be used.
+	 * @returns 
+	 */
 	takeoutEnemy(enemy: EnemyPrefab, overrideVelocity?: Phaser.Math.Vector2)
 	{
 		let velocity = overrideVelocity;
@@ -695,7 +687,8 @@ export default class Level extends Phaser.Scene {
 			velocity = this.getKnockbackVelocty(true);
 		}
 		enemy.hit(velocity.x, velocity.y);
-		this.enemyDeathSound.play();
+		// this.enemyDeathSound.play();
+		SoundManager.play('enemy-death', this);
 
 		if (!this.player.onFloor)
 		{
@@ -781,24 +774,29 @@ export default class Level extends Phaser.Scene {
 		}
 	}
 
+	resetBomb(bomb: BombPrefab)
+	{
+		bomb.disappear();
+		bomb.setPosition(9999, -9999);
+		
+		bomb.enemy.bombCooldownTimer.destroy();
+		bomb.ignoreTimer.destroy();
+		bomb.enemy.bombCooldownTimer = this.time.addEvent({
+			delay: 700, callback: () =>
+			{
+				if (!bomb.enemy.isFalling())
+				{
+					bomb.enemy.bombProp.setVisible(true);
+				}
+			}
+		});	
+	}
+
 	/** starts or restarts bomb fuse timer & visual */
 	setBombFuse(bomb: BombPrefab)
 	{
 		// fuse visual blink
-		bomb.fuseVisualTimer.destroy();
-		bomb.fuseVisualTimer = this.time.addEvent({
-			delay: 100, loop: true, callback: () =>
-			{
-				if (bomb.isTinted)
-				{
-					bomb.clearTint();
-				}
-				else
-				{
-					bomb.setTintFill(0xffffff);
-				}
-			}
-		});
+		bomb.setBombFuse();
 
 		// explosion delay
 		bomb.fuseTimer.destroy();
@@ -832,25 +830,9 @@ export default class Level extends Phaser.Scene {
 			this.cameras.main.shake(200, 0.0005);
 		}
 
-		this.explosionSound.play();
+		SoundManager.play('explosion', this);
 
-		let bombEnemy = bomb.enemy;
-		/* For whatever reason, bomb.enemy changes from this line to callback, so this is used 
-		as a consistent reference.
-		Or it would be in the timer below, but I've since removed the callback.
-		*/
-
-		bomb.enemy.bombCooldownTimer.destroy();
-		bomb.ignoreTimer.destroy();
-		bomb.enemy.bombCooldownTimer = this.time.addEvent({
-			delay: 700, callback: () =>
-			{
-				if (!bomb.enemy.isFalling())
-				{
-					bomb.enemy.bombProp.setVisible(true);
-				}
-			}
-		});
+		this.resetBomb(bomb);
 	}
 
 	/**
@@ -874,8 +856,7 @@ export default class Level extends Phaser.Scene {
 			this.cameras.main.shake(200, 0.0005);
 		}
 
-		this.sound.play('explosion');
-		this.explosionSound.play();
+		SoundManager.play('explosion', this);
 	}
 
 	/** detects physics bodies within explosion range and impacts them appropriately */
@@ -903,96 +884,6 @@ export default class Level extends Phaser.Scene {
 		});
 	}
 	// TODO: make
-
-	/** 
-	 * DEPRECATED
-	 * checks line of sight for each active gun enemy and fires if player is detected */
-	gunFireCheck()
-	{
-		this.gunEnemyList.forEach((enemey) =>
-		{
-			let _enemy = enemey as EnemyPrefab;
-
-			if (_enemy.isFalling())
-			{
-				return;
-			}
-
-			// setup line
-			let lineOfSight = new Phaser.Geom.Line(0, 0, 0, 0);
-			let lineLength = 300;
-			switch (_enemy.gunDirection)
-			{
-				case 'up':
-					{
-						lineOfSight.setTo
-							(_enemy.x + 7.5, _enemy.y + 10, _enemy.x + 7.5, (_enemy.y + 10) - lineLength,);
-						break;
-					}
-				case 'upward':
-					{
-						lineOfSight.setTo
-							(_enemy.x + 7.5, _enemy.y + 10,
-								_enemy.x + (_enemy.flipX ? lineLength : -lineLength),
-								(_enemy.y + 10) - lineLength,);
-						break;
-					}
-				case 'forward':
-					{
-						lineOfSight.setTo
-							(_enemy.x + 7.5, _enemy.y + 10,
-								_enemy.x + (_enemy.flipX ? lineLength : -lineLength), _enemy.y + 10,);
-						break;
-					}
-				case 'downward':
-					{
-						lineOfSight.setTo
-							(_enemy.x + 7.5, _enemy.y + 10,
-								_enemy.x + (_enemy.flipX ? lineLength : -lineLength),
-								(_enemy.y + 10) + lineLength,);
-						break;
-					}
-				case 'down':
-					{
-						lineOfSight.setTo
-							(_enemy.x + 7.5, _enemy.y + 10, _enemy.x + 7.5, (_enemy.y + 10) + lineLength,);
-						break;
-					}
-			}
-			/* setting up a new line on each frame is not efficient, but it's dynamic for 
-			moving enemies which could have a greater presence later for all i know. */
-
-			if (Phaser.Geom.Intersects.LineToRectangle
-				(lineOfSight, new Phaser.Geom.Rectangle
-					(this.player.x, this.player.y, this.player.width, this.player.height)))
-			{
-				// this.gunFire(_enemy);
-
-				if (_enemy.gunSprayTimer.getProgress() == 1 && _enemy.gunCoolDownTimer.getProgress() == 1)
-				{
-					_enemy.gunSprayTimer = this.time.addEvent({
-						delay: 100, repeat: 10, callback: () =>
-						{
-							if (!_enemy.isFalling())
-							{
-								this.fireGun(_enemy);
-							}
-						}
-					});
-
-					_enemy.gunCoolDownTimer = this.time.addEvent({ delay: 1500 });
-				}
-			}
-			else
-			{
-
-			}
-
-			/* TODO: this is a quick solution which isn't efficient and doesn't account tile tiles
-			being in the way. There's a raycaster plugin which is probably the best option for a 
-			more permenent solution. */
-		});
-	}
 
 	/**
 	 * starts timers for a gun spray.
@@ -1084,63 +975,6 @@ export default class Level extends Phaser.Scene {
 		}
 
 		_newBullet.body.setVelocity(velocity.x, velocity.y);
-	}
-
-	/**  
-	 * DEPRECATED
-	 * creates bullets from all enemies with a gun 
-	*/
-	enemyGunFire()
-	{
-		this.gunEnemyList.forEach((_enemy, _index) => 
-		{
-			let enemy = _enemy as EnemyPrefab;
-			if (enemy.isFalling())
-			{
-				return;
-			}
-			let _newBullet = this.bulletGroup.get(enemy.x, enemy.y) as BulletPrefab;
-			if (_newBullet == undefined)
-			{
-				console.log('out of bullets')
-				return;
-			}
-			_newBullet.appear();
-			this.mainLayer.add(_newBullet);
-			this.bulletList.push(_newBullet);
-			/* does this add existing bullets to the list, adding them infinitely? */
-			// TODO: these should be added once on object initialization, not recycle
-			let velocity = { x: 0, y: 0 };
-			switch (enemy.gunDirection)
-			{
-				case 'up':
-					{
-						velocity = { x: 0, y: -30 };
-						break;
-					}
-				case 'down':
-					{
-						velocity = { x: 0, y: 30 };
-						break;
-					}
-				case 'downward':
-					{
-						velocity = { x: (enemy.flipX ? 15 : -15), y: 15 };
-						break;
-					}
-				case 'upward':
-					{
-						velocity = { x: (enemy.flipX ? 15 : -15), y: -15 };
-						break;
-					}
-				case 'forward':
-					{
-						velocity = { x: (enemy.flipX ? 30 : -30), y: 0 };
-						break;
-					}
-			}
-			_newBullet.body.setVelocity(velocity.x, velocity.y);
-		});
 	}
 
 	/**
@@ -1271,9 +1105,7 @@ export default class Level extends Phaser.Scene {
 			}
 		});
 
-		// win audio
-		this.sound.play('victory');
-		this.victorySound.play();
+		SoundManager.play('victory', this);
 		this.music.pause();
 	}
 
@@ -1496,14 +1328,14 @@ export default class Level extends Phaser.Scene {
 	 */
 	addSounds()
 	{
-		this.flapSound = this.sound.add('bird-flap', { volume: 1 });
-		this.enemyDeathSound = this.sound.add('enemy-death', { volume: 1 });
-		this.explosionSound = this.sound.add('explosion', { volume: .7 });
-		this.playerDeathSound = this.sound.add('bird-die', { volume: 1 });
-		this.victorySound = this.sound.add('victory', { volume: 1 });
-		this.reflectSound = this.sound.add('reflect', { volume: .6 });
-		this.punchSound = this.sound.add('punch-swing', { volume: 1 });
-		this.comboHitSound = this.sound.add('combo-hit');
+		this.sound.add('bird-flap');
+		this.sound.add('enemy-death');
+		this.sound.add('explosion');
+		this.sound.add('bird-die');
+		this.sound.add('victory');
+		this.sound.add('reflect');
+		this.sound.add('punch-swing');
+		this.sound.add('combo-hit');
 	}
 
 	/**

@@ -5,10 +5,23 @@ export default class SoundManager {
 
     private static playMusicInDevMode = false;
 
+// music tracks
 	private static tracksKey = ['tutorial', 'main-game', 'tutorial']
 		// TODO: Replace this with 3rd track key
 	private static tracksFirstLevel = [0, 10, 25]
 	private static tracksVolume = [.7, .7, .7]
+
+// sounds
+	private static soundsVolume = new Map<string, number>([
+		['victory', 1],
+		['combo-hit', 1],
+		['reflect', .6],
+		['bird-flap', 1],
+		['bird-die', 1],
+		['enemy-death', 1],
+		['explosion', .7],
+		['punch-swing', 1]
+	]);
 
 	/**
 	 * Returns instance of BaseSound with level music that's updated if necessary.
@@ -18,7 +31,7 @@ export default class SoundManager {
 	 * @returns 
 	 */
 	public static setLevelMusic
-		(musicBS: Phaser.Sound.BaseSound, levelIndex: number, levelScene: Level,): Phaser.Sound.BaseSound
+		(musicBS: Phaser.Sound.BaseSound, levelIndex: number, levelScene: Level): Phaser.Sound.BaseSound
 	{
 	// Which track
 		let trackToPlayKey = this.tracksKey[0];
@@ -50,5 +63,35 @@ export default class SoundManager {
 			musicBS.play({loop: true});
 		}
 		return musicBS;
+	}
+
+	/**
+	 * 
+	 * @param key 
+	 * @param scene 
+	 * @param overrideVolume If not provided, the pre-set volume for this key will be used if it exists.
+	 */
+	public static play(key: string, scene: Phaser.Scene, overrideVolume?: number)
+	{
+	// determine volume
+		let volume = 0;
+		if (overrideVolume != null)
+		{
+			volume = overrideVolume;
+		}
+		else
+		{
+			const soundVolume = this.soundsVolume.get(key)
+			if (soundVolume != null)
+			{
+				volume = soundVolume
+			}
+			else
+			{
+				volume = 1;
+			}
+		}
+
+		scene.sound.play(key, {volume: volume})
 	}
 }

@@ -61,6 +61,7 @@ export default class BombPrefab extends Phaser.GameObjects.Image {
 		this.setActive(true);
 		this.setVisible(true);
 		this.body.setEnable(true);
+		this.body.setAllowGravity(true);
 		// this.body.reset(this.x, this.y);
 	}
 
@@ -70,7 +71,27 @@ export default class BombPrefab extends Phaser.GameObjects.Image {
 		this.setActive(false);
 		this.setVisible(false);
 		this.body.setEnable(false);
+		this.body.setAllowGravity(false);
 		this.body.setVelocity(0, 0);
+	}
+
+	public setBombFuse()
+	{
+		this.fuseVisualTimer.destroy();
+		this.fuseVisualTimer = this.scene.time.addEvent
+		({
+			delay: 100, loop: true, callback: () =>
+			{
+				if (this.isTinted)
+				{
+					this.clearTint();
+				}
+				else
+				{
+					this.setTintFill(0xffffff);
+				}
+			}
+		});
 	}
 
 	/* END-USER-CODE */

@@ -441,6 +441,8 @@ export default class LevelUI extends Phaser.Scene {
 
 	public setEnemiesText(defeated: number, total: number): void
 	{
+		let BRK;
+		
 		this.enemiesText.setText(`${defeated} / ${total}`);
 
 		if (defeated === total)
