@@ -399,84 +399,27 @@ export default class Level extends Phaser.Scene {
 			this.setDebugUI();
 		}
 
-		const milliseconds = Math.floor(this.levelTimer.getRemaining());
-		const seconds = milliseconds * 0.001;
-		const secondsString = seconds.toString();
-		this.uiScene.timerText.setText(secondsString.replace('.', ':').slice(0, (secondsString.lastIndexOf('.') + 3)));
+		this.uiScene.setTimer(this.levelTimer.getRemaining());
 
 		// reset collision values to be overridden by callbacks
 		this.player.onFloor = false;
 
-		// player wall check
-		this.player.onWallLeft =
-			(this.tileLayer.getTileAtWorldXY(this.player.body.x - 1, this.player.body.y + 9) != undefined
-				|| this.tileLayer.getTileAtWorldXY(this.player.body.x - 1, this.player.body.y) != undefined);
-		this.player.onWallRight =
-			(this.tileLayer.getTileAtWorldXY(this.player.body.x + 12, this.player.body.y + 9) != undefined
-				|| this.tileLayer.getTileAtWorldXY(this.player.body.x + 12, this.player.body.y) != undefined);
-		// TODO: decorative tiles without collision, as defined at tileLayer.setCollision, 
-		// should not count as wall.
-		// DEBUG: collision points visual
-		this.debugWallDetectGraphics.clear();
-		this.debugWallDetectGraphics.fillPoint(this.player.body.x - 1, this.player.body.y + 9);
-		this.debugWallDetectGraphics.fillPoint(this.player.body.x - 1, this.player.body.y);
-		this.debugWallDetectGraphics.fillPoint(this.player.body.x + 12, this.player.body.y + 9);
-		this.debugWallDetectGraphics.fillPoint(this.player.body.x + 12, this.player.body.y);
-
-		// Vision rect check
-		this.visionPolys.forEach((object, index) =>
+		this.playerWallCheck();
+		
+		if (__DEV__)
 		{
-			if (Phaser.Geom.Polygon.ContainsPoint
-				(object, new Phaser.Geom.Point(this.player.x, this.player.y)))
-			{
-				if (object.parentEnemy.gunDirection)
-				{
-					this.setGunFire(object.parentEnemy);
-				}
-				else if (object.parentEnemy.bombProp)
-				{
-					if (object.parentEnemy.bombCooldownTimer.getProgress() == 1
-						&& !object.parentEnemy.isFalling())
-					{
-						this.setBomb(object.parentEnemy.x, object.parentEnemy.y, object.parentEnemy);
-						object.parentEnemy.bombCooldownTimer.reset({});
-					}
-				}
-			}
-		});
+			this.updateDebugWallDetect();
+		}
+
+		this.checkVisionPolys();
 
 		// player-plane check
 		if (this.planeRect)
 		{
-			if (Phaser.Geom.Rectangle.ContainsPoint
-				(this.planeRect, new Phaser.Geom.Point(this.player.x, this.player.y)))
-			{
-				if (!this.reachedGoal)
-				{
-					if (this.enemyList[this.goalEnemyIndex])
-					{
-						if (this.enemyList[this.goalEnemyIndex].isFalling())
-						{
-							this.reachedGoal = true;
-
-							this.levelEndFeedback();
-
-							this.player.putInPlane(this.plane.x, this.plane.y);
-						}
-					}
-					else
-					{
-						this.reachedGoal = true;
-
-						this.levelEndFeedback();
-
-						this.player.putInPlane(this.plane.x, this.plane.y);
-					}
-				}
-			}
+			this.planeCheck();
 		}
 
-		// out-of-bounds checks
+	// out-of-bounds checks
 		if (this.player.y > this.cameras.main.getBounds().bottom)
 		{
 			// this.player.reset();
@@ -502,10 +445,8 @@ export default class Level extends Phaser.Scene {
 				});
 			}
 		});
-		// TODO: change this to bomb group
 
-		// this.gunFireCheck();
-
+	// update camera follow
 		this.cameraFollow.set(this.player.body.x, this.player.body.y);
 		if (this.uiScene.tutorialContainer.visible && !this.registry.get('mobile'))
 		{
@@ -563,14 +504,31 @@ export default class Level extends Phaser.Scene {
 		this.scene.start('LevelSelect');
 	}
 
+	/** Checks for tiles and updates player onWallLeft/Right  */
+	playerWallCheck()
+	{
+		const x = this.player.body.x;
+		const y = this.player.body.y;
+
+		this.player.onWallLeft = 
+			(this.tileLayer.getTileAtWorldXY
+				(x - 1, y + 9) != undefined 
+			|| this.tileLayer.getTileAtWorldXY
+				(x - 1, y) != undefined);
+
+		this.player.onWallRight = 
+			(this.tileLayer.getTileAtWorldXY
+				(x + 12, y + 9) != undefined 
+			|| this.tileLayer.getTileAtWorldXY
+				(x + 12, y) != undefined);
+	}
+
 	/**
 	 * physics callback on every frame that the player and tilemap are touching.
 	 * 
 	 * sets Player.onFloor
 	 */
 	playerTilemapCollide(_player: Phaser.Types.Physics.Arcade.GameObjectWithBody, _tilemap: any)
-	// TODO: specify type annotation. Call back gives 
-	// Phaser.Types.Physics.Arcade.GameObjectWithBody, but onFloor() is a member
 	{
 		if (_player.body.blocked.down)
 		{
@@ -579,15 +537,6 @@ export default class Level extends Phaser.Scene {
 			this.combo = 0;
 			this.updateCombo();
 		}
-
-		let tilemap = _tilemap as Phaser.Tilemaps.Tilemap;
-	}
-
-	playerHazardTilemapCollide(_player: Phaser.Types.Physics.Arcade.GameObjectWithBody, _tilemap: any)
-	{
-		// this.resetLevel();
-
-		console.log('overlapping. for some reason?')
 	}
 
 	playerEnemyOverlap(player: Phaser.Types.Physics.Arcade.GameObjectWithBody,
@@ -1492,6 +1441,37 @@ export default class Level extends Phaser.Scene {
 		}
 	}
 
+	/** Checks if the player is overlapping plane and if an enemy is in it. If so, triggers level end */
+	planeCheck()
+	{
+		if (Phaser.Geom.Rectangle.ContainsPoint
+			(this.planeRect, new Phaser.Geom.Point(this.player.x, this.player.y)))
+		{
+			if (!this.reachedGoal)
+			{
+				if (this.enemyList[this.goalEnemyIndex])
+				{
+					if (this.enemyList[this.goalEnemyIndex].isFalling())
+					{
+						this.reachedGoal = true;
+
+						this.levelEndFeedback();
+
+						this.player.putInPlane(this.plane.x, this.plane.y);
+					}
+				}
+				else
+				{
+					this.reachedGoal = true;
+
+					this.levelEndFeedback();
+
+					this.player.putInPlane(this.plane.x, this.plane.y);
+				}
+			}
+		}
+	}
+
 	createMapVisionPolys()
 	{
 		let _mapObjects = this.tileMap.getObjectLayer('elements')
@@ -1529,6 +1509,30 @@ export default class Level extends Phaser.Scene {
 					this.debugVisionPolyGraphics = this.add.graphics();
 					this.debugVisionPolyGraphics.lineStyle(1, 0xff0000);
 					this.debugVisionPolyGraphics.strokePoints(visionPoly.points, true)
+				}
+			}
+		});
+	}
+
+	checkVisionPolys()
+	{
+		this.visionPolys.forEach((object, index) =>
+		{
+			if (Phaser.Geom.Polygon.ContainsPoint
+				(object, new Phaser.Geom.Point(this.player.x, this.player.y)))
+			{
+				if (object.parentEnemy.gunDirection)
+				{
+					this.setGunFire(object.parentEnemy);
+				}
+				else if (object.parentEnemy.bombProp)
+				{
+					if (object.parentEnemy.bombCooldownTimer.getProgress() == 1
+						&& !object.parentEnemy.isFalling())
+					{
+						this.setBomb(object.parentEnemy.x, object.parentEnemy.y, object.parentEnemy);
+						object.parentEnemy.bombCooldownTimer.reset({});
+					}
 				}
 			}
 		});
@@ -1706,6 +1710,18 @@ export default class Level extends Phaser.Scene {
 			this.uiScene.setDebugText(1, ``);
 			this.uiScene.setDebugText(2, ``);
 		}
+	}
+
+	updateDebugWallDetect()
+	{
+		const x = this.player.body.x;
+		const y = this.player.body.y;
+
+		this.debugWallDetectGraphics.clear();
+		this.debugWallDetectGraphics.fillPoint(x - 1, y + 9);
+		this.debugWallDetectGraphics.fillPoint(x - 1, y);
+		this.debugWallDetectGraphics.fillPoint(x + 12, y + 9);
+		this.debugWallDetectGraphics.fillPoint(x + 12, y);
 	}
 
 	resize()

@@ -37,6 +37,7 @@ export default class LevelUI extends Phaser.Scene {
 		const comboLabelText = this.add.bitmapText(1163.6669311523438, 736.8461456298828, "nokia", "COMBO!");
 		comboLabelText.angle = -10;
 		comboLabelText.setOrigin(0, 0.5);
+		comboLabelText.visible = false;
 		comboLabelText.text = "COMBO!";
 		comboLabelText.fontSize = -16;
 		comboLabelText.dropShadowX = 100;
@@ -47,6 +48,7 @@ export default class LevelUI extends Phaser.Scene {
 		const comboText = this.add.bitmapText(1184.6669311523438, 755.8461494445801, "nokia", "3");
 		comboText.angle = -10;
 		comboText.setOrigin(0, 0.5);
+		comboText.visible = false;
 		comboText.text = "3";
 		comboText.fontSize = -36;
 		comboText.dropShadowX = 100;
@@ -445,6 +447,14 @@ export default class LevelUI extends Phaser.Scene {
 		{
 			this.enemiesText.dropShadowColor = 714549;
 		}
+	}
+
+	public setTimer(timeRemaining: number)
+	{
+		const milliseconds = Math.floor(timeRemaining);
+		const seconds = milliseconds * 0.001;
+		const secondsString = seconds.toString();
+		this.timerText.setText(secondsString.replace('.', ':').slice(0, (secondsString.lastIndexOf('.') + 3)));
 	}
 
 	public showTutorialUI(level: number)
