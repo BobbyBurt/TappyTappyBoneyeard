@@ -40,7 +40,6 @@ export default class ScorePopup extends Phaser.GameObjects.BitmapText {
 
 	private tweenCompleteCallback(tween:Phaser.Tweens.Tween, targets: Array<any>)
 	{
-		console.log(targets);
 		targets[0].setVisible(false);
 		targets[0].setActive(false);
 	}

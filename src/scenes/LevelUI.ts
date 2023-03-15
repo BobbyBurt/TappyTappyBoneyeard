@@ -529,7 +529,6 @@ export default class LevelUI extends Phaser.Scene {
 			ease: Phaser.Math.Easing.Circular.Out,
 			scale: 1
 		});
-		console.debug(this.enemiesTextTween)
 	}
 
 	private setupCamera()

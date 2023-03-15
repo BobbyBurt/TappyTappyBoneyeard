@@ -242,7 +242,7 @@ export default class Level extends Phaser.Scene {
 		this.tileLayer = this.tileMap.createLayer("Tile Layer 1", ["tilleset"], 0, 0);
 		// why is it misspelled 'tillset'?
 		this.mainLayer.add(this.tileLayer);
-		this.tileLayer.setDepth(10)
+		this.tileLayer.setDepth(-15)
 
 		this.bgTileLayer = this.tileMap.createLayer('Tile Layer 2', ['bg-tileset'], 0, 0);
 		if (this.bgTileLayer)
@@ -561,35 +561,7 @@ export default class Level extends Phaser.Scene {
 				return;
 			}
 
-			// let velocity = new Phaser.Math.Vector2((this.player.flipX ? 120 : -120), this.player.body.velocity.y)
-			const velocity = this.getKnockbackVelocty(true);
-			_enemy.hit(velocity.x, velocity.y);
-			this.enemyDeathSound.play();
-
-			if (!this.player.onFloor)
-			{
-				this.combo++;
-				this.updateCombo();
-			}
-
-			this.addEnemyScore();
-
-			if (_enemy.isMine)
-			{
-				this.explode(_enemy.x, _enemy.y);
-				return;
-			}
-
-			if (_enemy.bombCooldownTimer != undefined)
-			{
-				_enemy.bombCooldownTimer.destroy();
-			}
-
-			// this.enemiesDefeatedCheck();
-
-			this.updateEnemiesUI(false);
-
-			// this.goalEnemyCheck(_enemy);
+			this.takeoutEnemy(_enemy);
 
 			this.player.stateController.setState('airborne');
 		}
@@ -617,37 +589,7 @@ export default class Level extends Phaser.Scene {
 
 		const enemy = _enemy as EnemyPrefab;
 
-		// velocity of knockback
-		// let velocity = new Phaser.Math.Vector2((this.player.flipX ? 300 : -300), this.player.body.velocity.y)
-		// if (this.player.stateController.currentState.name == 'uppercut')
-		// {
-		// 	velocity.x = 0;
-		// }	
-		if (_enemy.isMine)
-		{
-			this.explode(_enemy.x, _enemy.y);
-			return;
-		}
-
-		const velocity = this.getKnockbackVelocty(true);
-		_enemy.hit(velocity.x, velocity.y);
-		this.enemyDeathSound.play();
-
-		if (!this.player.onFloor)
-		{
-			this.combo++;
-			this.updateCombo();
-		}
-
-		this.addEnemyScore();
-
-		// this.enemiesDefeatedCheck();
-
-		this.player.punchCharged = true;
-
-		this.updateEnemiesUI(false);
-
-		this.goalEnemyCheck(_enemy);
+		this.takeoutEnemy(_enemy);
 	}
 
 	enemyEnemyCollide(_enemy1: any, _enemy2: any)
@@ -658,33 +600,14 @@ export default class Level extends Phaser.Scene {
 		if (!enemy1.isFalling())
 		{
 			enemy1.hit(enemy2.body.velocity.x, enemy2.body.velocity.y);
-			this.enemyDeathSound.play();
-
-			if (!this.player.onFloor)
-			{
-				this.combo++;
-				this.updateCombo();
-			}
-
-			this.addEnemyScore();
-
-			// this.goalEnemyCheck(enemy1);
+			this.takeoutEnemy(enemy1, new Phaser.Math.Vector2
+				(enemy2.body.velocity.x, enemy2.body.velocity.y))
 		}
 
 		if (!enemy2.isFalling())
 		{
-			enemy2.hit(enemy1.body.velocity.x, enemy1.body.velocity.y);
-			this.enemyDeathSound.play();
-
-			if (!this.player.onFloor)
-			{
-				this.combo++;
-				this.updateCombo();
-			}
-
-			this.addEnemyScore();
-
-			// this.goalEnemyCheck(enemy2);
+			this.takeoutEnemy(enemy2, new Phaser.Math.Vector2
+				(enemy1.body.velocity.x, enemy1.body.velocity.y));
 		}
 	}
 
@@ -763,13 +686,43 @@ export default class Level extends Phaser.Scene {
 		_bullet.disappear();
 	}
 
-	playerEndEggOverlap(_player: any, _endEgg: any)
+	
+	takeoutEnemy(enemy: EnemyPrefab, overrideVelocity?: Phaser.Math.Vector2)
 	{
-		if (!this.reachedGoal)
+		let velocity = overrideVelocity;
+		if (!velocity)
 		{
-			this.levelEndFeedback();
+			velocity = this.getKnockbackVelocty(true);
+		}
+		enemy.hit(velocity.x, velocity.y);
+		this.enemyDeathSound.play();
 
-			this.reachedGoal = true;
+		if (!this.player.onFloor)
+		{
+			this.combo++;
+			this.updateCombo();
+		}
+
+		this.addEnemyScore();
+
+		if (enemy.isMine)
+		{
+			this.explode(enemy.x, enemy.y);
+			return;
+		}
+
+		if (enemy.bombCooldownTimer != undefined)
+		{
+			enemy.bombCooldownTimer.destroy();
+		}
+
+		// this.enemiesDefeatedCheck();
+
+		this.updateEnemiesUI(false);
+
+		if (this.player.stateController.currentState.name !== 'dive')
+		{
+			this.goalEnemyCheck(enemy);
 		}
 	}
 
