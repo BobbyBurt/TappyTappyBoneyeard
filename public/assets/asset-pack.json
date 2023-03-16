@@ -316,6 +316,16 @@
                 "key": "gunfire"
             },
             {
+                "url": "assets/hit-effect-diagonal.png",
+                "type": "image",
+                "key": "hit-effect-diagonal"
+            },
+            {
+                "url": "assets/hit-effect-horizontal.png",
+                "type": "image",
+                "key": "hit-effect-horizontal"
+            },
+            {
                 "url": "assets/levels/intro.json",
                 "type": "tilemapTiledJSON",
                 "key": "intro"
@@ -397,6 +407,29 @@
                 ],
                 "type": "audio",
                 "key": "reflect"
+            },
+            {
+                "url": "assets/soldier-blood.png",
+                "frameConfig": {
+                    "frameWidth": 32,
+                    "frameHeight": 32,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "soldier-blood"
+            },
+            {
+                "url": "assets/soldier-blood-1.png",
+                "type": "image",
+                "key": "soldier-blood-1"
+            },
+            {
+                "url": "assets/soldier-blood-2.png",
+                "type": "image",
+                "key": "soldier-blood-2"
             },
             {
                 "url": "assets/soldierfalling.png",

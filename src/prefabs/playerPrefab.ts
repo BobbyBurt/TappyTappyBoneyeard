@@ -116,7 +116,15 @@ export default class playerPrefab extends Phaser.Physics.Arcade.Sprite {
 	public moveSpeed = 120;
 		// I want to make the game faster, but increasing this causes the graphics to flicker
 	public jumpForce = 250;
+	
+	public punchSpeed = 300;
+	/** effected by hitting targets */
+	public variablePunchSpeed = 0;
 
+	public uppercutSpeed = 325;
+	public reducedUppercutSpeed = 200;
+	public variableUppercutSpeed = 325;
+	
 	public maxFlaps = 2;
 	/** How many flaps can the player do? */
 	public flapCharge: number = this.maxFlaps;

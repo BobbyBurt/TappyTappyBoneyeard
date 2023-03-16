@@ -10,5 +10,7 @@ declare global
 
     type GunDirection = null | 'up' | 'upward' | 'forward' | 'downward' | 'down';
 
+    type EnemyHitCause = undefined | 'dive' | 'punch' | 'uppercut' | 'explosion' | 'chain';
+
     var __DEV__: boolean;
 }

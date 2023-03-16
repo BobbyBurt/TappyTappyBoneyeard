@@ -21,6 +21,8 @@ export default class Uppercut implements State {
 	
 	enter()
 	{
+		this.player.variableUppercutSpeed = this.player.uppercutSpeed;
+		
 		this.player.playAnimation('uppercut');
 		// this.player.setRotation(this.player.flipX? -1.5 : 1.5);
 
@@ -58,6 +60,6 @@ export default class Uppercut implements State {
 		// }
 			// as velocity x is now set to 0, this transition is no longer possible
 
-		this.player.body.setVelocity(0, -325);
+		this.player.body.setVelocity(0, -this.player.variableUppercutSpeed);
 	}
 }

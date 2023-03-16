@@ -20,14 +20,16 @@ export default class Punch implements State {
 	enter()
 	{
 		this.player.playAnimation('punch');
-		this.player.scene.sound.play('punch-swing')
+		this.player.scene.sound.play('punch-swing');
+
+		this.player.variablePunchSpeed = this.player.punchSpeed;
 
 		// this.player.setPosition(this.player.x + (this.player.flipX ? 5 : -5 ), this.player.y);
 
 		this.player.setFist(true, false);
 
 		this.player.punchCharged = false;
-		
+
 		this.timer = new Phaser.Time.TimerEvent({ delay: 170, loop: false, callback: () =>
 		{	
 			this.player.body.setVelocity
@@ -87,7 +89,8 @@ export default class Punch implements State {
 		}
 		else
 		{
-			this.player.body.setVelocity((this.player.flipX? 300 : -300), 0);
+			this.player.body.setVelocity((this.player.flipX? 
+				this.player.variablePunchSpeed : -this.player.variablePunchSpeed), 0);
 		}
 
 	}

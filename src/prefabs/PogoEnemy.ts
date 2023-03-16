@@ -57,8 +57,9 @@ export default class PogoEnemy extends EnemyPrefab {
 
 	// create balloon
 		this.pogoProp = this.scene.add.image(this.x, this.y - 30, 'pogo');
-		this._scene.UICam.ignore(this.pogoProp);
 		this.scene.physics.add.existing(this.pogoProp);
+		this._scene.mainLayer.add(this.pogoProp);
+		this.pogoProp.setDepth(-12);
 		this.pogoProp.setVisible(false);
 		let _pogoBody = this.pogoProp.body as Phaser.Physics.Arcade.Body;
 		_pogoBody.setAllowGravity(false);

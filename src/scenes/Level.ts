@@ -173,6 +173,16 @@ export default class Level extends Phaser.Scene {
 	/** Polygons used for enemies' player detection. */
 	private visionPolys: Array<VisionPoly>;
 
+// particles
+	private enemyBloodEmitterManager: Phaser.GameObjects.Particles.ParticleEmitterManager;
+	private enemyBloodEmitter: Phaser.GameObjects.Particles.ParticleEmitter;
+	private enemyBloodEmitterManager2: Phaser.GameObjects.Particles.ParticleEmitterManager;
+	private enemyBloodEmitter2: Phaser.GameObjects.Particles.ParticleEmitter;
+
+// hit effect
+	private hitEffectHorizontal: Phaser.GameObjects.Image;
+	private hitEffectDiagonal: Phaser.GameObjects.Image;
+
 // debug
 	private debugWallDetectGraphics: Phaser.GameObjects.Graphics;
 	private debugVisionPolyGraphics: Phaser.GameObjects.Graphics;
@@ -293,6 +303,18 @@ export default class Level extends Phaser.Scene {
 		this.createMapEnemies();
 		this.createMapVisionPolys();
 
+	// hit effects
+		this.hitEffectHorizontal = this.add.image(0, 0, 'hit-effect-horizontal');
+		this.hitEffectDiagonal = this.add.image(0, 0, 'hit-effect-diagonal');
+		this.hitEffectHorizontal.setScale(2);
+		this.hitEffectDiagonal.setScale(2);
+		this.mainLayer.add(this.hitEffectHorizontal);
+		this.mainLayer.add(this.hitEffectDiagonal);
+		this.hitEffectHorizontal.setDepth(-30);
+		this.hitEffectDiagonal.setDepth(-30);
+		this.hitEffectHorizontal.setVisible(false);
+		this.hitEffectDiagonal.setVisible(false);
+
 	// tilemap special elements
 		let startPoint = TilemapUtil.getObjectPositionByGID(38, this.tileMap);
 		if (startPoint === null)
@@ -365,6 +387,15 @@ export default class Level extends Phaser.Scene {
 		});
 			// TODO: this should be it's own seperate class somehow
 
+	// DEBUG: console clear key
+		if (__DEV__)
+		{
+			this.input.keyboard.on('keydown-C', () =>
+			{
+				console.clear();
+			});
+		}
+
 	// level timer
 		this.levelTimer = this.time.addEvent({
 			delay: 30000, callback: () =>
@@ -379,6 +410,18 @@ export default class Level extends Phaser.Scene {
 	// window focus
 		this.game.events.on(Phaser.Core.Events.BLUR, this.pause, this);
 		this.game.events.on(Phaser.Core.Events.FOCUS, this.unpause, this)
+
+
+	// particles
+		this.enemyBloodEmitterManager = this.add.particles('soldier-blood-1')
+		this.mainLayer.add(this.enemyBloodEmitterManager);
+		this.enemyBloodEmitterManager.setDepth(-13);
+		this.enemyBloodEmitter = this.enemyBloodEmitterManager.createEmitter({ on: false });
+
+		this.enemyBloodEmitterManager2 = this.add.particles('soldier-blood-2')
+		this.mainLayer.add(this.enemyBloodEmitterManager2);
+		this.enemyBloodEmitterManager2.setDepth(-13);
+		this.enemyBloodEmitter2 = this.enemyBloodEmitterManager2.createEmitter({ on: false });
 
 	// resize init
 		this.events.on('pre-resize', this.resize, this);
@@ -438,6 +481,12 @@ export default class Level extends Phaser.Scene {
 	 */
 	destroyScene()
 	{
+		this.scene.resume();
+			// in case hitstop is also active
+		
+		this.game.events.off(Phaser.Core.Events.BLUR, this.pause, this);
+		this.game.events.off(Phaser.Core.Events.FOCUS, this.unpause, this)
+
 		this.events.off(Phaser.Scenes.Events.UPDATE);
 		this.player.removeUpdateListener();
 		this.enemyList.forEach((enemy) =>
@@ -450,6 +499,8 @@ export default class Level extends Phaser.Scene {
 	/** reloads the scene */
 	resetLevel()
 	{
+		console.debug('reset level');
+		
 		// this function should only happen once
 		if (!this.restarting)
 		{
@@ -540,7 +591,7 @@ export default class Level extends Phaser.Scene {
 				return;
 			}
 
-			this.takeoutEnemy(_enemy);
+			this.takeoutEnemy(_enemy, 'dive');
 
 			this.player.stateController.setState('airborne');
 		}
@@ -568,13 +619,14 @@ export default class Level extends Phaser.Scene {
 
 		const enemy = _enemy as EnemyPrefab;
 
-		this.scene.pause();
-		this.uiScene.time.addEvent({delay: 75, callback: () =>
-		{
-			this.scene.resume();
-		}});
+		this.takeoutEnemy(_enemy, 
+			(this.player.stateController.currentState.name === 'punch'? 'punch' : 'uppercut'));
+			// TODO: this isn't foolproof. Not sure how to recreate it, but sometimes it passes uppercut during a punch.
 
-		this.takeoutEnemy(_enemy);
+		this.player.punchCharged = true;
+
+		this.player.variablePunchSpeed = this.player.moveSpeed;
+		this.player.variableUppercutSpeed = this.player.reducedUppercutSpeed;
 	}
 
 	enemyEnemyCollide(_enemy1: any, _enemy2: any)
@@ -585,13 +637,13 @@ export default class Level extends Phaser.Scene {
 		if (!enemy1.isFalling())
 		{
 			enemy1.hit(enemy2.body.velocity.x, enemy2.body.velocity.y);
-			this.takeoutEnemy(enemy1, new Phaser.Math.Vector2
+			this.takeoutEnemy(enemy1, 'chain', new Phaser.Math.Vector2
 				(enemy2.body.velocity.x, enemy2.body.velocity.y))
 		}
 
 		if (!enemy2.isFalling())
 		{
-			this.takeoutEnemy(enemy2, new Phaser.Math.Vector2
+			this.takeoutEnemy(enemy2, 'chain', new Phaser.Math.Vector2
 				(enemy1.body.velocity.x, enemy1.body.velocity.y));
 		}
 	}
@@ -621,11 +673,13 @@ export default class Level extends Phaser.Scene {
 
 		this.setBombFuse(_bomb);
 		_bomb.setPosition(_bomb.x, _bomb.y - 3);
-		const velocity = this.getKnockbackVelocty(false);
+		const velocity = this.getKnockbackVelocty(false, 'punch');
 		_bomb.body.setVelocity(velocity.x, velocity.y);
 		// _bomb.body.setVelocity(this.player.body.velocity.x * 1.3, (this.player.body.velocity.y * 1.5) - 150);
 		_bomb.punched = true;
+
 		this.player.punchCharged = true;
+		this.player.punchSpeed = this.player.moveSpeed;
 	}
 
 	bombEnemyOverlap(bomb: any, enemy: any)
@@ -672,23 +726,32 @@ export default class Level extends Phaser.Scene {
 	}
 
 	/**
-	 * Set enemy to falling state and set velocity. 
+	 * Set enemy to falling state, set velocity, set particles.
 	 * 
 	 * Update UI & score.
 	 * @param enemy 
-	 * @param overrideVelocity if undefined, getKnockBackvelocity will be used.
+	 * @param cause
+	 * @param overrideVelocity if not provided, pre-set values from getKnockBackvelocity will be used based on cause
 	 * @returns 
 	 */
-	takeoutEnemy(enemy: EnemyPrefab, overrideVelocity?: Phaser.Math.Vector2)
+	takeoutEnemy(enemy: EnemyPrefab, cause: EnemyHitCause, overrideVelocity?: Phaser.Math.Vector2)
 	{
 		let velocity = overrideVelocity;
 		if (!velocity)
 		{
-			velocity = this.getKnockbackVelocty(true);
+			velocity = this.getKnockbackVelocty(true, cause);
 		}
 		enemy.hit(velocity.x, velocity.y);
 		// this.enemyDeathSound.play();
 		SoundManager.play('enemy-death', this);
+
+		this.createEnemyBloodParticles(enemy, cause, velocity);
+
+		if (cause === 'dive' || cause === 'punch' || cause === 'uppercut')
+		{
+			this.setHitEffectImage(true, enemy, cause, (velocity.x > 0))
+			this.hitStop();
+		}
 
 		if (!this.player.onFloor)
 		{
@@ -978,19 +1041,19 @@ export default class Level extends Phaser.Scene {
 	}
 
 	/**
-	 * Recturns vector2 for knockback velocity based on player state.
+	 * Recturns vector2 for pre-set knockback velocity based on cause of knockback
 	 * @param enemy Velocity may be modified for other objects such as bombs.
 	 */
-	getKnockbackVelocty(enemy: boolean): Phaser.Math.Vector2
+	getKnockbackVelocty(enemy: boolean, cause?: EnemyHitCause): Phaser.Math.Vector2
 	{
 		let velocity = new Phaser.Math.Vector2(0, 0);
 
 		// dive
-		if (this.player.stateController.currentState.name === 'dive')
+		if (cause === 'dive')
 		{
 			velocity.set(100, -150);
 		}
-		else if (this.player.stateController.currentState.name === 'punch')
+		else if (cause === 'punch')
 		{
 			if (enemy)
 			{
@@ -1001,7 +1064,7 @@ export default class Level extends Phaser.Scene {
 				velocity.set(400, -100);
 			}
 		}
-		else if (this.player.stateController.currentState.name == 'uppercut')
+		else if (cause === 'uppercut')
 		{
 			if (enemy)
 			{
@@ -1012,6 +1075,17 @@ export default class Level extends Phaser.Scene {
 				velocity.set(0, -450);
 			}
 		}
+		else if (cause === 'explosion')
+		{
+			if (enemy)
+			{
+				velocity.set(0, -150);
+			}
+			else
+			{
+				velocity.set(0, -250);
+			}
+		}
 
 		if (!this.player.flipX && velocity.x !== 0)
 		{
@@ -1019,6 +1093,63 @@ export default class Level extends Phaser.Scene {
 		}
 
 		return velocity;
+	}
+
+	/**
+	 * 
+	 * @param enemy Origin point
+	 * @param cause Determines which pre-set config parameters are used.
+	 * @param velocity Used if cause is 'chain` to determine angle
+	 * @returns 
+	 */
+	createEnemyBloodParticles(enemy:EnemyPrefab, cause: EnemyHitCause, velocity: Phaser.Math.Vector2)
+	{
+		let angle = 0;
+
+		switch(cause)
+		{
+			case 'punch':
+				angle = (velocity.x <-15 ? 195 : 0);
+				break;
+
+			case 'uppercut':
+				angle = 270;
+				break;
+
+			case 'dive':
+				angle = (velocity.x > 0 ? 60 : 120)
+				break;
+					// TODO: change speed
+
+			default:
+				angle = velocity.angle() * (180/Math.PI);
+				break;
+		}
+		console.debug(`blood particles - angle: ${angle}`)
+		
+		this.enemyBloodEmitter = this.enemyBloodEmitterManager.createEmitter
+		({
+			lifespan: 3000,
+			speed: { min: 300, max: 400 },
+			angle: { min: angle - 4, max: angle + 4 },
+			// alpha: { start: 1, end: 0 },
+			scale: { start: 1, end: 0 },
+			gravityY: 200,
+			quantity: 100,
+			on: false
+		});
+		this.enemyBloodEmitter2 = this.enemyBloodEmitterManager2.createEmitter
+		({
+			lifespan: 2000,
+			speed: { min: 200, max: 700 },
+			angle: { min: angle - 2, max: angle + 2 },
+			// alpha: { start: 1, end: 0 },
+			scale: { start: 1, end: 0 },
+			gravityY: 200,
+			on: false
+		});
+		this.enemyBloodEmitter.explode(10, enemy.x, enemy.y);
+		this.enemyBloodEmitter2.explode(25, enemy.x, enemy.y);
 	}
 
 	/**
@@ -1436,6 +1567,55 @@ export default class Level extends Phaser.Scene {
 
 	/**
 	 * 
+	 * @param value visible or not?
+	 * @param enemy for position. Unecessary if value = false.
+	 * @param cause for position & angle. Unecessary if value = false.
+	 * @param right for position & angle. Unecessary if value = false.
+	 */
+	setHitEffectImage(value: boolean, enemy?: EnemyPrefab, cause?: EnemyHitCause, right?: boolean)
+	{
+		if (!value)
+		{
+			this.hitEffectHorizontal.setVisible(false);
+			this.hitEffectDiagonal.setVisible(false);
+			return;
+		}
+		
+		if (cause === 'punch')
+		{
+			this.hitEffectHorizontal.setAngle((right ? 0 : 180));
+			this.hitEffectHorizontal.setPosition(enemy!.x + (right ? 35 : -35 ), enemy!.y);
+			this.hitEffectHorizontal.setVisible(true);
+		}
+	}
+
+	hitStop()
+	{
+		return;
+
+		if (this.restarting)
+		{
+			return;
+		}
+		
+		console.debug('hitStop - start');
+
+		// TODO: have this not conflict with blur pause
+		this.scene.pause();
+		
+		// TODO: Can I rely on uiScene time? Is this a bad hack?
+		this.uiScene.time.addEvent({delay: 50, callback: () =>
+		{
+			this.scene.resume();
+
+			this.setHitEffectImage(false);
+
+			console.debug('hitStop - end');
+		}});
+	}
+
+	/**
+	 * 
 	 * @param show 
 	 * @param level 
 	 */
@@ -1492,7 +1672,7 @@ export default class Level extends Phaser.Scene {
 		if (this.uiScene.scene.isActive())
 		{
 			this.uiScene.setDebugText(0, `${this.player.stateController.currentState.name}`);
-			this.uiScene.setDebugText(1, ``);
+			this.uiScene.setDebugText(1, `variable uppercut: ${this.player.variableUppercutSpeed}, ${this.player.uppercutSpeed}`);
 			this.uiScene.setDebugText(2, ``);
 		}
 	}

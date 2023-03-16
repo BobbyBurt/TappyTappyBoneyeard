@@ -2,17 +2,20 @@
 
 # Version 12 Alpha
 
-These are internal changes as part of a refactor.
+This version started with a code refactor, so some of these changes, as well as others not stated here, are internal.
 
 ### Changed
 
 - Better music handling.
 - All gameplay UI has been decoupled to a seperate overlapping scene.
-- Better-defined depth sorting of graphics
+- Better-defined depth sorting of graphics.
+- Punch & uppercut speed is reduced to run move speed after hitting something.
 
 ### Added
 
-- Adde pause functionality which happens automatically when the window loses focus.
+- Added pause functionality which happens automatically when the window loses focus.
+- Added hitstop when hitting enemies
+- Added enemy hit particles
 
 ### Removed
 
