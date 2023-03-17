@@ -154,16 +154,14 @@ export default class LevelUI extends Phaser.Scene {
 		// mobileButtonUppercut
 		const mobileButtonUppercut = this.add.rectangle(338.44939143097434, 979.0118990523655, 150, 120);
 		mobileButtonUppercut.setOrigin(0, 1);
-		mobileButtonUppercut.alpha = 0.5;
 		mobileButtonUppercut.isFilled = true;
-		mobileButtonUppercut.fillColor = 15591036;
+		mobileButtonUppercut.fillColor = 16444161;
 
 		// mobileButtonJump
 		const mobileButtonJump = this.add.rectangle(743.4493914309744, 950.0118990523655, 150, 120);
 		mobileButtonJump.setOrigin(1, 1);
-		mobileButtonJump.alpha = 0.5;
 		mobileButtonJump.isFilled = true;
-		mobileButtonJump.fillColor = 8318332;
+		mobileButtonJump.fillColor = 981514;
 
 		// tutorialContainer
 		const tutorialContainer = this.add.container(383, 207);

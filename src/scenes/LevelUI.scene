@@ -361,9 +361,8 @@
             "y": 979.0118990523655,
             "originX": 0,
             "originY": 1,
-            "alpha": 0.5,
             "isFilled": true,
-            "fillColor": "#ede67c",
+            "fillColor": "#faeb01",
             "width": 150,
             "height": 120
         },
@@ -384,9 +383,8 @@
             "y": 950.0118990523655,
             "originX": 1,
             "originY": 1,
-            "alpha": 0.5,
             "isFilled": true,
-            "fillColor": "#7eed7c",
+            "fillColor": "#0efa0a",
             "width": 150,
             "height": 120
         },

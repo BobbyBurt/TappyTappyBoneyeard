@@ -11,6 +11,8 @@ This version started with a code refactor, so some of these changes, as well as 
 - Better-defined depth sorting of graphics.
 - Punch & uppercut speed is reduced to run move speed after hitting something.
 - Moved debug text to the bottom left.
+- Increased player sprite size to 20x20.
+- Debug wall detect graphic now changes colour based on onWall state.
 
 ### Added
 
@@ -28,6 +30,7 @@ This version started with a code refactor, so some of these changes, as well as 
 ### Fixed
 
 - Sounds now use their assigned volume.
+- Adjusted player physics body to appear more symmetric.
 
 # Version 11 Alpha - 2023-03-11
 

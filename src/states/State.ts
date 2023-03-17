@@ -2,7 +2,7 @@ import playerPrefab from "~/prefabs/playerPrefab";
 
 export default interface State
 {
-	name:String;
+	name:playerStateName;
 	player:playerPrefab;
 	enter: () => void;
 	update: () => void;

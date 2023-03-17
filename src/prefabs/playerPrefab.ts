@@ -142,11 +142,6 @@ export default class playerPrefab extends Phaser.Physics.Arcade.Sprite {
 	{
 		this.levelScene = this.scene as Level;
 
-		this.debugWallDetectGraphics = this.levelScene.add.graphics({ 
-			fillStyle: { color: 0x00ffff, alpha: (__DEV__ ? 1 : 0) } 
-		});
-		this.debugWallDetectGraphics.setDepth(100);
-
 		this.setName('player');
 
 		if (this.debugImage && __DEV__)
@@ -165,12 +160,20 @@ export default class playerPrefab extends Phaser.Physics.Arcade.Sprite {
 			this.startMoving();
 		}
 		this.stateController.setState('running');
+
+		this.debugWallDetectGraphics = this.levelScene.add.graphics({ 
+			fillStyle: { color: 0x00ffff, alpha: (__DEV__ ? 1 : 0) } 
+		});
+		this.debugWallDetectGraphics.setDepth(100);
 	}
 
 	update()
 	{	
 		this.wallDetect();
-		this.updateWallDetectDebug();
+		if (__DEV__)
+		{
+			this.updateWallDetectDebug();
+		}
 	
 		// punch charge
 		if (this.onFloor && !this.punchCharged 
@@ -971,8 +974,12 @@ export default class playerPrefab extends Phaser.Physics.Arcade.Sprite {
 		const rightOffset = this.rightWallChecksOffset;
 
 		this.debugWallDetectGraphics.clear();
+
+		this.debugWallDetectGraphics.fillStyle(this.onWallLeft? 981514 : 16444161);
 		this.debugWallDetectGraphics.fillPoint(x + leftOffset[0].x, y + leftOffset[0].y);
 		this.debugWallDetectGraphics.fillPoint(x + leftOffset[1].x, y + leftOffset[1].y);
+
+		this.debugWallDetectGraphics.fillStyle(this.onWallRight? 981514 : 16444161);
 		this.debugWallDetectGraphics.fillPoint(x + rightOffset[0].x, y + rightOffset[0].y);
 		this.debugWallDetectGraphics.fillPoint(x + rightOffset[1].x, y + rightOffset[1].y);
 	}
