@@ -19,6 +19,8 @@ export default class Punch implements State {
 	
 	enter()
 	{
+		this.player.scene.game.events.emit('punch');
+
 		this.player.playAnimation('punch');
 		this.player.scene.sound.play('punch-swing');
 

@@ -25,8 +25,13 @@ export default class LevelUI extends Phaser.Scene {
 
 	editorCreate(): void {
 
+		// TimerBox
+		const timerBox = this.add.rectangle(348, 961, 80, 23);
+		timerBox.setOrigin(0.5, 0);
+		timerBox.isFilled = true;
+
 		// timerText
-		const timerText = this.add.bitmapText(323.3856506347656, 857.450366973877, "nokia", "12:04");
+		const timerText = this.add.bitmapText(323.3856506347656, 857.4503784179688, "nokia", "12:04");
 		timerText.text = "12:04";
 		timerText.fontSize = -16;
 		timerText.dropShadowY = 100;
@@ -69,6 +74,7 @@ export default class LevelUI extends Phaser.Scene {
 		// enemiesText
 		const enemiesText = this.add.bitmapText(957, 756.12646484375, "nokia", "5/6");
 		enemiesText.setOrigin(1, 0.5);
+		enemiesText.visible = false;
 		enemiesText.text = "5/6";
 		enemiesText.fontSize = -16;
 		enemiesText.align = 2;
@@ -79,6 +85,7 @@ export default class LevelUI extends Phaser.Scene {
 		// enemiesLabelText
 		const enemiesLabelText = this.add.bitmapText(961, 732.12646484375, "nokia", "Enemies \ndefeated:");
 		enemiesLabelText.setOrigin(1, 0);
+		enemiesLabelText.visible = false;
 		enemiesLabelText.text = "Enemies \ndefeated:";
 		enemiesLabelText.fontSize = -8;
 		enemiesLabelText.align = 2;
@@ -102,25 +109,26 @@ export default class LevelUI extends Phaser.Scene {
 		const debugText3 = this.add.bitmapText(473, 856.12646484375, "nokia", "");
 		debugText3.setOrigin(0, 1);
 		debugText3.fontSize = -8;
-		debugText3.dropShadowY = 100;
+		debugText3.dropShadowY = -100;
 
 		// debugText2
 		const debugText2 = this.add.bitmapText(472, 842.12646484375, "nokia", "");
 		debugText2.setOrigin(0, 1);
 		debugText2.fontSize = -8;
-		debugText2.dropShadowY = 100;
+		debugText2.dropShadowY = -100;
 
 		// debugText
 		const debugText = this.add.bitmapText(473, 870.12646484375, "nokia", "");
 		debugText.setOrigin(0, 1);
 		debugText.fontSize = -8;
-		debugText.dropShadowY = 100;
+		debugText.dropShadowY = -100;
 
 		// buildText
-		const buildText = this.add.bitmapText(485, 800.12646484375, "nokia", "Tappy Tappy Boneyard\nv2");
-		buildText.text = "Tappy Tappy Boneyard\nv2";
+		const buildText = this.add.bitmapText(485, 820.12646484375, "nokia", "Tappy Tappy Boneyard v2");
+		buildText.setOrigin(0, 1);
+		buildText.text = "Tappy Tappy Boneyard v2";
 		buildText.fontSize = -8;
-		buildText.dropShadowY = 100;
+		buildText.dropShadowY = -100;
 
 		// mobileButtonDive
 		const mobileButtonDive = this.add.rectangle(713.4493914309744, 1060.0118990523656, 150, 120);
@@ -186,11 +194,32 @@ export default class LevelUI extends Phaser.Scene {
 		tutorialCloseText.dropShadowAlpha = 0;
 		tutorialContainer.add(tutorialCloseText);
 
+		// punchChargeEmpty
+		const punchChargeEmpty = this.add.image(322, 694, "bird0fist");
+		punchChargeEmpty.scaleX = 2;
+		punchChargeEmpty.scaleY = 2;
+		punchChargeEmpty.angle = 90;
+		punchChargeEmpty.setOrigin(0, 1);
+
+		// punchChargeFull
+		const punchChargeFull = this.add.image(335, 682, "bird2fist");
+		punchChargeFull.scaleX = 2;
+		punchChargeFull.scaleY = 2;
+		punchChargeFull.angle = 90;
+		punchChargeFull.setOrigin(0, 1);
+
+		// timerBox (components)
+		const timerBoxAlign = new Align(timerBox);
+		timerBoxAlign.up = true;
+		timerBoxAlign.center = true;
+		timerBoxAlign.verticalOffset = 7;
+
 		// timerText (components)
 		const timerTextAlign = new Align(timerText);
 		timerTextAlign.up = true;
 		timerTextAlign.center = true;
-		timerTextAlign.verticalOffset = -95;
+		timerTextAlign.horizontalOffset = -25;
+		timerTextAlign.verticalOffset = -90;
 
 		// comboLabelText (components)
 		const comboLabelTextAlign = new Align(comboLabelText);
@@ -233,31 +262,31 @@ export default class LevelUI extends Phaser.Scene {
 
 		// debugText3 (components)
 		const debugText3Align = new Align(debugText3);
-		debugText3Align.up = true;
+		debugText3Align.down = true;
 		debugText3Align.left = true;
 		debugText3Align.horizontalOffset = 5;
-		debugText3Align.verticalOffset = -55;
+		debugText3Align.verticalOffset = 55;
 
 		// debugText2 (components)
 		const debugText2Align = new Align(debugText2);
-		debugText2Align.up = true;
+		debugText2Align.down = true;
 		debugText2Align.left = true;
 		debugText2Align.horizontalOffset = 5;
-		debugText2Align.verticalOffset = -65;
+		debugText2Align.verticalOffset = 65;
 
 		// debugText (components)
 		const debugTextAlign = new Align(debugText);
-		debugTextAlign.up = true;
+		debugTextAlign.down = true;
 		debugTextAlign.left = true;
 		debugTextAlign.horizontalOffset = 5;
-		debugTextAlign.verticalOffset = -75;
+		debugTextAlign.verticalOffset = 75;
 
 		// buildText (components)
 		const buildTextAlign = new Align(buildText);
-		buildTextAlign.up = true;
+		buildTextAlign.down = true;
 		buildTextAlign.left = true;
 		buildTextAlign.horizontalOffset = 5;
-		buildTextAlign.verticalOffset = -95;
+		buildTextAlign.verticalOffset = 95;
 
 		// mobileButtonDive (components)
 		const mobileButtonDiveAlign = new Align(mobileButtonDive);
@@ -306,6 +335,20 @@ export default class LevelUI extends Phaser.Scene {
 		// tutorialCloseText (components)
 		new MobileDependent(tutorialCloseText);
 
+		// punchChargeEmpty (components)
+		const punchChargeEmptyAlign = new Align(punchChargeEmpty);
+		punchChargeEmptyAlign.up = true;
+		punchChargeEmptyAlign.left = true;
+		punchChargeEmptyAlign.horizontalOffset = 10;
+		punchChargeEmptyAlign.verticalOffset = 10;
+
+		// punchChargeFull (components)
+		const punchChargeFullAlign = new Align(punchChargeFull);
+		punchChargeFullAlign.up = true;
+		punchChargeFullAlign.left = true;
+		punchChargeFullAlign.horizontalOffset = 10;
+		punchChargeFullAlign.verticalOffset = 10;
+
 		this.timerText = timerText;
 		this.comboLabelText = comboLabelText;
 		this.comboText = comboText;
@@ -326,6 +369,7 @@ export default class LevelUI extends Phaser.Scene {
 		this.tutorialBox = tutorialBox;
 		this.tutorialText = tutorialText;
 		this.tutorialCloseText = tutorialCloseText;
+		this.punchChargeFull = punchChargeFull;
 
 		this.events.emit("scene-awake");
 	}
@@ -350,11 +394,13 @@ export default class LevelUI extends Phaser.Scene {
 	public tutorialBox!: Phaser.GameObjects.Rectangle;
 	public tutorialText!: Phaser.GameObjects.BitmapText;
 	public tutorialCloseText!: Phaser.GameObjects.BitmapText;
+	private punchChargeFull!: Phaser.GameObjects.Image;
 
 	/* START-USER-CODE */
 
 	private comboTextTween: Phaser.Tweens.Tween;
 	private enemiesTextTween: Phaser.Tweens.Tween;
+	private punchChargeTween: Phaser.Tweens.Tween
 
 	protected create() {
 
@@ -364,7 +410,15 @@ export default class LevelUI extends Phaser.Scene {
 
 		this.buildText.setText('Tappy Tappy Boneyard v' + this.game.config.gameVersion);
 
-		this.events.emit('created');
+		this.game.events.on('uppercut', () => 
+		{
+			console.log('uppercut');
+			this.setPunchCharge(false);
+		});
+		this.game.events.on('punch', () => 
+		{
+			this.setPunchCharge(false);
+		});
 	}
 
 	public showComboUI(combo: number)
@@ -442,13 +496,25 @@ export default class LevelUI extends Phaser.Scene {
 	public setEnemiesText(defeated: number, total: number): void
 	{
 		let BRK;
-		
+
 		this.enemiesText.setText(`${defeated} / ${total}`);
 
 		if (defeated === total)
 		{
 			this.enemiesText.dropShadowColor = 714549;
 		}
+	}
+
+	public setPunchCharge(value: boolean)
+	{
+		this.punchChargeTween = this.tweens.add
+		({
+			duration: 500,
+			ease: Phaser.Math.Easing.Quintic.Out,
+			targets: this.punchChargeFull,
+			alpha: (value? 1 : 0),
+			// scale: (value? 1 : .7)
+		});
 	}
 
 	public setTimer(timeRemaining: number)
@@ -461,6 +527,8 @@ export default class LevelUI extends Phaser.Scene {
 
 	public showTutorialUI(level: number)
 	{
+		console.debug(this.timerText.x, this.timerText.y)
+
 		let tutorialString = ''
 
 		switch (level)

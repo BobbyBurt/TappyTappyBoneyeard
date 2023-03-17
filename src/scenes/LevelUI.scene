@@ -13,6 +13,24 @@
     },
     "displayList": [
         {
+            "type": "Rectangle",
+            "id": "9d657a45-fb09-47f3-94bc-a510f3dea163",
+            "label": "TimerBox",
+            "components": [
+                "Align"
+            ],
+            "Align.up": true,
+            "Align.center": true,
+            "Align.verticalOffset": 7,
+            "x": 348,
+            "y": 961,
+            "originY": 0,
+            "isFilled": true,
+            "fillColor": "#ffffff",
+            "width": 80,
+            "height": 23
+        },
+        {
             "type": "BitmapText",
             "id": "4636bd62-3c18-425e-b9a9-5a75cbf44007",
             "label": "timerText",
@@ -22,9 +40,10 @@
             ],
             "Align.up": true,
             "Align.center": true,
-            "Align.verticalOffset": -95,
+            "Align.horizontalOffset": -25,
+            "Align.verticalOffset": -90,
             "x": 323.3856506347656,
-            "y": 857.450366973877,
+            "y": 857.4503784179688,
             "text": "12:04",
             "font": "nokia",
             "fontSize": -16,
@@ -118,6 +137,7 @@
             "y": 756.12646484375,
             "originX": 1,
             "originY": 0.5,
+            "visible": false,
             "text": "5/6",
             "font": "nokia",
             "align": 2,
@@ -141,6 +161,7 @@
             "x": 961,
             "y": 732.12646484375,
             "originX": 1,
+            "visible": false,
             "text": "Enemies \ndefeated:",
             "font": "nokia",
             "align": 2,
@@ -183,16 +204,16 @@
             "components": [
                 "Align"
             ],
-            "Align.up": true,
+            "Align.down": true,
             "Align.left": true,
             "Align.horizontalOffset": 5,
-            "Align.verticalOffset": -55,
+            "Align.verticalOffset": 55,
             "x": 473,
             "y": 856.12646484375,
             "originY": 1,
             "font": "nokia",
             "fontSize": -8,
-            "dropShadowY": 100,
+            "dropShadowY": -100,
             "dropShadowColor": "#000000ff"
         },
         {
@@ -203,16 +224,16 @@
             "components": [
                 "Align"
             ],
-            "Align.up": true,
+            "Align.down": true,
             "Align.left": true,
             "Align.horizontalOffset": 5,
-            "Align.verticalOffset": -65,
+            "Align.verticalOffset": 65,
             "x": 472,
             "y": 842.12646484375,
             "originY": 1,
             "font": "nokia",
             "fontSize": -8,
-            "dropShadowY": 100,
+            "dropShadowY": -100,
             "dropShadowColor": "#000000ff"
         },
         {
@@ -223,16 +244,16 @@
             "components": [
                 "Align"
             ],
-            "Align.up": true,
+            "Align.down": true,
             "Align.left": true,
             "Align.horizontalOffset": 5,
-            "Align.verticalOffset": -75,
+            "Align.verticalOffset": 75,
             "x": 473,
             "y": 870.12646484375,
             "originY": 1,
             "font": "nokia",
             "fontSize": -8,
-            "dropShadowY": 100,
+            "dropShadowY": -100,
             "dropShadowColor": "#000000ff"
         },
         {
@@ -243,16 +264,17 @@
             "components": [
                 "Align"
             ],
-            "Align.up": true,
+            "Align.down": true,
             "Align.left": true,
             "Align.horizontalOffset": 5,
-            "Align.verticalOffset": -95,
+            "Align.verticalOffset": 95,
             "x": 485,
-            "y": 800.12646484375,
-            "text": "Tappy Tappy Boneyard\nv2",
+            "y": 820.12646484375,
+            "originY": 1,
+            "text": "Tappy Tappy Boneyard v2",
             "font": "nokia",
             "fontSize": -8,
-            "dropShadowY": 100,
+            "dropShadowY": -100,
             "dropShadowColor": "#000000ff"
         },
         {
@@ -430,6 +452,51 @@
                     "dropShadowColor": "#000000ff"
                 }
             ]
+        },
+        {
+            "type": "Image",
+            "id": "3a2174d9-359d-4500-8bb5-3579ea8acaef",
+            "label": "punchChargeEmpty",
+            "components": [
+                "Align"
+            ],
+            "Align.up": true,
+            "Align.left": true,
+            "Align.horizontalOffset": 10,
+            "Align.verticalOffset": 10,
+            "texture": {
+                "key": "bird0fist"
+            },
+            "x": 322,
+            "y": 694,
+            "scaleX": 2,
+            "scaleY": 2,
+            "angle": 90,
+            "originX": 0,
+            "originY": 1
+        },
+        {
+            "type": "Image",
+            "id": "fb13c31c-10cf-47f2-bf5b-300ff7b40d75",
+            "label": "punchChargeFull",
+            "scope": "CLASS",
+            "components": [
+                "Align"
+            ],
+            "Align.up": true,
+            "Align.left": true,
+            "Align.horizontalOffset": 10,
+            "Align.verticalOffset": 10,
+            "texture": {
+                "key": "bird2fist"
+            },
+            "x": 335,
+            "y": 682,
+            "scaleX": 2,
+            "scaleY": 2,
+            "angle": 90,
+            "originX": 0,
+            "originY": 1
         }
     ],
     "plainObjects": [],

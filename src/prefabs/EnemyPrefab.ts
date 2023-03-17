@@ -84,7 +84,7 @@ export default class EnemyPrefab extends Phaser.GameObjects.Sprite {
 	public bombProp!: Phaser.GameObjects.Image;
 
 	/** rotation applied to sprite when falling. */
-	private spin: number = 0;
+	public spin: number = 0;
 	public isFalling() { return (this.spin != 0) }
 	public getSpin() { return this.spin }
 

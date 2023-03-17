@@ -3,9 +3,9 @@ type input = 'down' | 'up' | 'just-down' | 'just-up';
 /* START OF COMPILED CODE */
 
 import Phaser from "phaser";
-import Level from "~/scenes/Level";
 /* START-USER-IMPORTS */
 
+import Level from "~/scenes/Level";
 import StateController from "~/states/StateController";
 
 /* END-USER-IMPORTS */
@@ -19,12 +19,13 @@ export default class playerPrefab extends Phaser.Physics.Arcade.Sprite {
 
 	constructor(scene: Phaser.Scene, x?: number, y?: number, texture?: string, frame?: number | string) {
 		super(scene, x ?? 0, y ?? 0, texture || "bird1mid", frame);
+
 		scene.physics.add.existing(this, false);
 		this.body.gravity.y = 100;
 		this.body.friction.x = 0;
 		this.body.allowRotation = false;
 		this.body.setOffset(3, 6);
-		this.body.setSize(12, 12, false);
+		this.body.setSize(14, 9, false);
 
 		/* START-USER-CTR-CODE */
 
@@ -51,12 +52,23 @@ export default class playerPrefab extends Phaser.Physics.Arcade.Sprite {
 
 	private gamepad:Phaser.Input.Gamepad.Gamepad | undefined;
 
+// jump
+
 	/** set based on key, gamepad or mobile input */
 	public jumpInput: input = 'up';
 	private jumpKey: Phaser.Input.Keyboard.Key 
 	= this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP);
 	private jumpButton: number = 1;
 	public jumpMobileButton: boolean = false;
+
+	/** applies to flaps */
+	public jumpForce = 250;
+
+	public maxFlaps = 2;
+	/** How many flaps can the player do? */
+	public flapCharge: number = this.maxFlaps;
+
+// punch
 
 	/** set based on key, gamepad or mobile input */
 	public punchInput: input = 'up';
@@ -66,22 +78,12 @@ export default class playerPrefab extends Phaser.Physics.Arcade.Sprite {
 	public punchCharged: boolean = true;
 	public punchMobileButton: boolean = false;
 	public punchCooldownTimer: Phaser.Time.TimerEvent;
+	
+	public punchSpeed = 300;
+	/** effected by hitting targets */
+	public variablePunchSpeed = 0;
 
-	// /** set based on key, gamepad or mobile input */
-	// public punchLeftInput: input = 'up';
-	// private punchLeftKey: Phaser.Input.Keyboard.Key 
-	// 	= this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
-	// private punchLeftButton: number = 14;
-	// public punchLeftCharged: boolean = true;
-	// public punchLeftMobileButton: boolean = false;
-
-	// /** set based on key, gamepad or mobile input */
-	// public punchRightInput: input = 'up';
-	// private punchRightKey: Phaser.Input.Keyboard.Key 
-	// 	= this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
-	// private punchRightButton: number = 15;
-	// public punchRightCharged: boolean = true;
-	// public punchRightMobileButton: boolean = false;
+// uppercut
 
 	/** set based on key, gamepad or mobile input */
 	public uppercutInput: input = 'up';
@@ -90,6 +92,12 @@ export default class playerPrefab extends Phaser.Physics.Arcade.Sprite {
 	private uppercutButton: number = 12;
 	public uppercutMobileButton: boolean = false;
 
+	public uppercutSpeed = 325;
+	public reducedUppercutSpeed = 200;
+	public variableUppercutSpeed = 325;
+
+// dive
+
 	/** set based on key, gamepad or mobile input */
 	public diveInput: input = 'up';
 	private diveKey: Phaser.Input.Keyboard.Key 
@@ -97,14 +105,7 @@ export default class playerPrefab extends Phaser.Physics.Arcade.Sprite {
 	private diveButton: number = 13;
 	public diveMobileButton: boolean = false;
 
-	/** set based on key, gamepad or mobile input */
-	// public eggInput: input = 'up';
-	// private eggKey: Phaser.Input.Keyboard.Key 
-	// 	= this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.E);
-	// private eggButton: number = 0;
-	// public eggMobileButton: boolean = false;
-	// /** set by scene based on egg state, determines is player can drop egg */
-	// public eggReady: boolean = true;
+// collision
 
 	/** updated by scene, used by states */
 	public onFloor: boolean = true;
@@ -113,38 +114,49 @@ export default class playerPrefab extends Phaser.Physics.Arcade.Sprite {
 	/** updated by scene, used by states */
 	public onWallRight: boolean = false;
 
+	/** Offset from player.body position. Array of two vector2s for top and bottom check. */
+	public leftWallChecksOffset = [ new Phaser.Math.Vector2(-1, 8), new Phaser.Math.Vector2(-1, 1) ];
+	/** Offset from player.body position. Array of two vector2s for top and bottom check. */
+	public rightWallChecksOffset = [ new Phaser.Math.Vector2(14, 8), new Phaser.Math.Vector2(14, 1) ];
+
+	private debugWallDetectGraphics: Phaser.GameObjects.Graphics;
+
 	public moveSpeed = 120;
 		// I want to make the game faster, but increasing this causes the graphics to flicker
-	public jumpForce = 250;
-	
-	public punchSpeed = 300;
-	/** effected by hitting targets */
-	public variablePunchSpeed = 0;
 
-	public uppercutSpeed = 325;
-	public reducedUppercutSpeed = 200;
-	public variableUppercutSpeed = 325;
-	
-	public maxFlaps = 2;
-	/** How many flaps can the player do? */
-	public flapCharge: number = this.maxFlaps;
+// fist
 
 	public fist: Phaser.GameObjects.Image;
 	private fistoffset: Phaser.Math.Vector2;
 	private fistUppercutoffset: Phaser.Math.Vector2;
 
+// other
+
 	private levelScene: Level;
 
 	public lockInput = false;
 
+	private debugImage = true;
+
 	start()
 	{
 		this.levelScene = this.scene as Level;
-		
+
+		this.debugWallDetectGraphics = this.levelScene.add.graphics({ 
+			fillStyle: { color: 0x00ffff, alpha: (__DEV__ ? 1 : 0) } 
+		});
+		this.debugWallDetectGraphics.setDepth(100);
 
 		this.setName('player');
 
-		this.createAnimations();
+		if (this.debugImage && __DEV__)
+		{
+			this.setTexture('20-test');
+		}
+		else
+		{
+			this.createAnimations();
+		}
 
 		this.punchCooldownTimer = this.scene.time.addEvent({delay: 1});
 
@@ -157,7 +169,10 @@ export default class playerPrefab extends Phaser.Physics.Arcade.Sprite {
 
 	update()
 	{	
-	// punch charge
+		this.wallDetect();
+		this.updateWallDetectDebug();
+	
+		// punch charge
 		if (this.onFloor && !this.punchCharged 
 			&& this.stateController.currentState.name != 'punch' 
 			&& this.stateController.currentState.name != 'uppercut')
@@ -177,9 +192,9 @@ export default class playerPrefab extends Phaser.Physics.Arcade.Sprite {
 		}
 
 		this.setFistPosition();
-		
+
 		this.inputCheck();
-		
+
 		this.stateController.update();
 	}
 
@@ -193,7 +208,7 @@ export default class playerPrefab extends Phaser.Physics.Arcade.Sprite {
 
 			_scene.resetLevel();
 		}
-	
+
 	// level select
 		if (this.gamepad?.isButtonDown(8))
 		{
@@ -467,7 +482,7 @@ export default class playerPrefab extends Phaser.Physics.Arcade.Sprite {
 				// TODO: Add flipx ternary conditional if I set uppercut offset to anything other than 0.
 		}
 		let position = new Phaser.Math.Vector2((this.body.x + 6) + offset.x, this.body.y + offset.y);
-		
+
 		this.fist.flipX = this.flipX;
 		this.fist.setPosition(position.x, position.y);
 	}
@@ -478,7 +493,7 @@ export default class playerPrefab extends Phaser.Physics.Arcade.Sprite {
 		this.fist.setVisible(active);
 
 		this.fist.setTexture('bird' + this.flapCharge + 'fist');
-		
+
 		if (above)
 		{
 			this.fist.setRotation(this.flipX? -1.5 : 1.5);
@@ -498,6 +513,11 @@ export default class playerPrefab extends Phaser.Physics.Arcade.Sprite {
 	 */
 	public playAnimation(key: string, queue?: boolean): void
 	{	
+		if (this.debugImage && __DEV__)
+		{
+			return;
+		}
+
 		let flapChargeAnim = false;
 		let punchChargeAnim = false;
 
@@ -917,6 +937,44 @@ export default class playerPrefab extends Phaser.Physics.Arcade.Sprite {
 			frameRate: 16,
 			repeat: 0
 		});
+	}
+
+	/**
+	 * Checks for tiles in Level on either side of the player, updates onWall properties.
+	 */
+	private wallDetect()
+	{
+		const x = this.body.x;
+		const y = this.body.y;
+		const leftOffset = this.leftWallChecksOffset;
+		const rightOffset = this.rightWallChecksOffset;
+
+		this.onWallLeft = 
+			(this.levelScene.tileLayer.getTileAtWorldXY(
+				x + leftOffset[0].x, y + leftOffset[0].y) != undefined 
+			|| this.levelScene.tileLayer.getTileAtWorldXY(
+				x + leftOffset[1].x, y + leftOffset[1].y) != undefined);
+
+		this.onWallRight = 
+			(this.levelScene.tileLayer.getTileAtWorldXY(
+				x + rightOffset[0].x, y + rightOffset[0].y) != undefined 
+			|| this.levelScene.tileLayer.getTileAtWorldXY(
+				x + rightOffset[1].x, y + rightOffset[1].y) != undefined);
+	}
+
+	/** Updates graphics based on current player position. */
+	private updateWallDetectDebug()
+	{
+		const x = this.body.x;
+		const y = this.body.y;
+		const leftOffset = this.leftWallChecksOffset;
+		const rightOffset = this.rightWallChecksOffset;
+
+		this.debugWallDetectGraphics.clear();
+		this.debugWallDetectGraphics.fillPoint(x + leftOffset[0].x, y + leftOffset[0].y);
+		this.debugWallDetectGraphics.fillPoint(x + leftOffset[1].x, y + leftOffset[1].y);
+		this.debugWallDetectGraphics.fillPoint(x + rightOffset[0].x, y + rightOffset[0].y);
+		this.debugWallDetectGraphics.fillPoint(x + rightOffset[1].x, y + rightOffset[1].y);
 	}
 
 	/** to be called upon scene reset, otherwise the update will still be called and likely 

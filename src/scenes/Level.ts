@@ -163,7 +163,7 @@ export default class Level extends Phaser.Scene {
 
 // tilemap
 	private tileMap: Phaser.Tilemaps.Tilemap;
-	private tileLayer: Phaser.Tilemaps.TilemapLayer;
+	public tileLayer: Phaser.Tilemaps.TilemapLayer;
 	private bgTileLayer: Phaser.Tilemaps.TilemapLayer;
 
 // object groups / arrays
@@ -184,7 +184,6 @@ export default class Level extends Phaser.Scene {
 	private hitEffectDiagonal: Phaser.GameObjects.Image;
 
 // debug
-	private debugWallDetectGraphics: Phaser.GameObjects.Graphics;
 	private debugVisionPolyGraphics: Phaser.GameObjects.Graphics;
 	private debugPlaneRectGraphics: Phaser.GameObjects.Graphics;
 
@@ -304,8 +303,8 @@ export default class Level extends Phaser.Scene {
 		this.createMapVisionPolys();
 
 	// hit effects
-		this.hitEffectHorizontal = this.add.image(0, 0, 'hit-effect-horizontal');
-		this.hitEffectDiagonal = this.add.image(0, 0, 'hit-effect-diagonal');
+		this.hitEffectHorizontal = this.uiScene.add.image(0, 0, 'hit-effect-horizontal');
+		this.hitEffectDiagonal = this.uiScene.add.image(0, 0, 'hit-effect-diagonal');
 		this.hitEffectHorizontal.setScale(2);
 		this.hitEffectDiagonal.setScale(2);
 		this.mainLayer.add(this.hitEffectHorizontal);
@@ -353,10 +352,6 @@ export default class Level extends Phaser.Scene {
 		SoundManager.play('reflect', this);
 		// this.environmentAudio.play(undefined, {volume: 0.03, loop: true});
 
-	// debug wall detect visual
-		this.debugWallDetectGraphics = this.add.graphics
-			({ fillStyle: { color: 0x0000ff, alpha: (__DEV__ ? 1 : 0) } });
-
 		// quick restart input
 		this.input.keyboard.on('keydown-S', () =>
 		{
@@ -400,7 +395,7 @@ export default class Level extends Phaser.Scene {
 		this.levelTimer = this.time.addEvent({
 			delay: 30000, callback: () =>
 			{
-				if (!this.reachedGoal)
+				if (!this.reachedGoal && !__DEV__)
 				{
 					this.resetLevel();
 				}
@@ -439,8 +434,6 @@ export default class Level extends Phaser.Scene {
 
 		// reset collision values to be overridden by callbacks
 		this.player.onFloor = false;
-
-		this.playerWallCheck();
 		
 		if (__DEV__)
 		{
@@ -534,23 +527,21 @@ export default class Level extends Phaser.Scene {
 		this.scene.start('LevelSelect');
 	}
 
-	/** Checks for tiles and updates player onWallLeft/Right  */
+	/** DEPRECATED - Checks for tiles and updates player onWallLeft/Right  */
 	playerWallCheck()
 	{
 		const x = this.player.body.x;
 		const y = this.player.body.y;
+		const leftOffset = this.player.leftWallChecksOffset;
+		const rightOffset = this.player.rightWallChecksOffset;
 
 		this.player.onWallLeft = 
-			(this.tileLayer.getTileAtWorldXY
-				(x - 1, y + 9) != undefined 
-			|| this.tileLayer.getTileAtWorldXY
-				(x - 1, y) != undefined);
+			(this.tileLayer.getTileAtWorldXY(x + leftOffset[0].x, y + leftOffset[0].y) != undefined 
+			|| this.tileLayer.getTileAtWorldXY(x + leftOffset[1].x, y + leftOffset[1].y) != undefined);
 
 		this.player.onWallRight = 
-			(this.tileLayer.getTileAtWorldXY
-				(x + 12, y + 9) != undefined 
-			|| this.tileLayer.getTileAtWorldXY
-				(x + 12, y) != undefined);
+			(this.tileLayer.getTileAtWorldXY(x + rightOffset[0].x, y + rightOffset[0].y) != undefined 
+			|| this.tileLayer.getTileAtWorldXY(x + rightOffset[1].x, y + rightOffset[1].y) != undefined);
 	}
 
 	/**
@@ -563,6 +554,8 @@ export default class Level extends Phaser.Scene {
 		if (_player.body.blocked.down)
 		{
 			this.player.onFloor = true;
+
+			this.uiScene.setPunchCharge(true);
 
 			this.combo = 0;
 			this.updateCombo();
@@ -624,6 +617,7 @@ export default class Level extends Phaser.Scene {
 			// TODO: this isn't foolproof. Not sure how to recreate it, but sometimes it passes uppercut during a punch.
 
 		this.player.punchCharged = true;
+		this.uiScene.setPunchCharge(true);
 
 		this.player.variablePunchSpeed = this.player.moveSpeed;
 		this.player.variableUppercutSpeed = this.player.reducedUppercutSpeed;
@@ -742,14 +736,12 @@ export default class Level extends Phaser.Scene {
 			velocity = this.getKnockbackVelocty(true, cause);
 		}
 		enemy.hit(velocity.x, velocity.y);
-		// this.enemyDeathSound.play();
 		SoundManager.play('enemy-death', this);
 
 		this.createEnemyBloodParticles(enemy, cause, velocity);
 
 		if (cause === 'dive' || cause === 'punch' || cause === 'uppercut')
 		{
-			this.setHitEffectImage(true, enemy, cause, (velocity.x > 0))
 			this.hitStop();
 		}
 
@@ -1565,34 +1557,8 @@ export default class Level extends Phaser.Scene {
 		this.scene.stop('Pause');
 	}
 
-	/**
-	 * 
-	 * @param value visible or not?
-	 * @param enemy for position. Unecessary if value = false.
-	 * @param cause for position & angle. Unecessary if value = false.
-	 * @param right for position & angle. Unecessary if value = false.
-	 */
-	setHitEffectImage(value: boolean, enemy?: EnemyPrefab, cause?: EnemyHitCause, right?: boolean)
-	{
-		if (!value)
-		{
-			this.hitEffectHorizontal.setVisible(false);
-			this.hitEffectDiagonal.setVisible(false);
-			return;
-		}
-		
-		if (cause === 'punch')
-		{
-			this.hitEffectHorizontal.setAngle((right ? 0 : 180));
-			this.hitEffectHorizontal.setPosition(enemy!.x + (right ? 35 : -35 ), enemy!.y);
-			this.hitEffectHorizontal.setVisible(true);
-		}
-	}
-
 	hitStop()
 	{
-		return;
-
 		if (this.restarting)
 		{
 			return;
@@ -1607,8 +1573,6 @@ export default class Level extends Phaser.Scene {
 		this.uiScene.time.addEvent({delay: 50, callback: () =>
 		{
 			this.scene.resume();
-
-			this.setHitEffectImage(false);
 
 			console.debug('hitStop - end');
 		}});
@@ -1672,21 +1636,25 @@ export default class Level extends Phaser.Scene {
 		if (this.uiScene.scene.isActive())
 		{
 			this.uiScene.setDebugText(0, `${this.player.stateController.currentState.name}`);
-			this.uiScene.setDebugText(1, `variable uppercut: ${this.player.variableUppercutSpeed}, ${this.player.uppercutSpeed}`);
-			this.uiScene.setDebugText(2, ``);
+			this.uiScene.setDebugText(1, `on wall left : ${this.player.onWallLeft}`);
+			this.uiScene.setDebugText(2, `on wall right: ${this.player.onWallRight}`);
 		}
 	}
 
+
+	/** DEPRECATED */
 	updateDebugWallDetect()
 	{
-		const x = this.player.body.x;
-		const y = this.player.body.y;
+		// const x = this.player.body.x;
+		// const y = this.player.body.y;
+		// const leftOffset = this.player.leftWallChecksOffset;
+		// const rightOffset = this.player.rightWallChecksOffset;
 
-		this.debugWallDetectGraphics.clear();
-		this.debugWallDetectGraphics.fillPoint(x - 1, y + 9);
-		this.debugWallDetectGraphics.fillPoint(x - 1, y);
-		this.debugWallDetectGraphics.fillPoint(x + 12, y + 9);
-		this.debugWallDetectGraphics.fillPoint(x + 12, y);
+		// this.debugWallDetectGraphics.clear();
+		// this.debugWallDetectGraphics.fillPoint(x + leftOffset[0].x, y + leftOffset[0].y);
+		// this.debugWallDetectGraphics.fillPoint(x + leftOffset[1].x, y + leftOffset[1].y);
+		// this.debugWallDetectGraphics.fillPoint(x + rightOffset[0].x, y + rightOffset[0].y);
+		// this.debugWallDetectGraphics.fillPoint(x + rightOffset[1].x, y + rightOffset[1].y);
 	}
 
 	resize()

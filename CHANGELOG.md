@@ -10,16 +10,20 @@ This version started with a code refactor, so some of these changes, as well as 
 - All gameplay UI has been decoupled to a seperate overlapping scene.
 - Better-defined depth sorting of graphics.
 - Punch & uppercut speed is reduced to run move speed after hitting something.
+- Moved debug text to the bottom left.
 
 ### Added
 
 - Added pause functionality which happens automatically when the window loses focus.
-- Added hitstop when hitting enemies
-- Added enemy hit particles
+- Added hitstop when hitting enemies.
+- Added enemy hit particles.
+- Added updated punch charge UI.
+- Improved level timer UI.
 
 ### Removed
 
 - Finally got rid of the Level's UICam.
+- Hid enemies defeated UI
 
 ### Fixed
 

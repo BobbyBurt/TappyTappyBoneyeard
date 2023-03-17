@@ -41,7 +41,7 @@ window.addEventListener('load', function ()
 			default: 'arcade',
 			arcade: {
 				// debug: true,
-				// tileBias: 8,
+				tileBias: 16,
 				gravity: {
 					y: 500,
 					x: 0

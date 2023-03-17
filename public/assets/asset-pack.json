@@ -2,6 +2,11 @@
     "section1": {
         "files": [
             {
+                "url": "assets/20-test.png",
+                "type": "image",
+                "key": "20-test"
+            },
+            {
                 "url": "assets/levels/airborne.json",
                 "type": "tilemapTiledJSON",
                 "key": "airborne"
@@ -470,6 +475,25 @@
                 "url": "assets/soldierstretch.png",
                 "type": "image",
                 "key": "soldierstretch"
+            },
+            {
+                "url": "assets/tapper.png",
+                "frameConfig": {
+                    "frameWidth": 32,
+                    "frameHeight": 32,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "tapper"
+            },
+            {
+                "type": "multiatlas",
+                "url": "assets/tapper.json",
+                "path": "assets",
+                "key": "tapper-atlas"
             },
             {
                 "url": "assets/levels/test-map-bomb-vision.json",
