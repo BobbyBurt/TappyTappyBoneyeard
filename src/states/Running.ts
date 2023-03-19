@@ -47,6 +47,7 @@ export default class Running implements State {
 			else
 			{
 				this.stateController.setState('airborne');
+				this.player.stop();
 			}
 		}
 		if (this.player.onWallFacing(true))
@@ -65,7 +66,8 @@ export default class Running implements State {
 	{
 		this.player.setVelocityY(-this.player.jumpForce);
 
-		this.player.play('jump');
+		this.player.playAnimation('jump');
+		this.stateController.setState('airborne');
 		this.player.scene.sound.play('bird-flap');
 	}
 }

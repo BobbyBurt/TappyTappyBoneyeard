@@ -13,6 +13,8 @@ This version started with a code refactor, so some of these changes, as well as 
 - Moved debug text to the bottom left.
 - Increased player sprite size to 20x20.
 - Debug wall detect graphic now changes colour based on onWall state.
+- Player sprites are all now contained within one spritesheet and atlas.
+- Made player physics body size / offset adjustments.
 
 ### Added
 
@@ -25,12 +27,13 @@ This version started with a code refactor, so some of these changes, as well as 
 ### Removed
 
 - Finally got rid of the Level's UICam.
-- Hid enemies defeated UI
+- Hid enemies defeated UI.
+- Removed exhausted sprites which had conveyed punch charge.
 
 ### Fixed
 
 - Sounds now use their assigned volume.
-- Adjusted player physics body to appear more symmetric.
+- Adjusted player physics body to appear more symmetric and not have areas which are overlapped by level tiles.
 
 # Version 11 Alpha - 2023-03-11
 

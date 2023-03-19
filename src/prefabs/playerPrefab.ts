@@ -25,7 +25,7 @@ export default class playerPrefab extends Phaser.Physics.Arcade.Sprite {
 		this.body.friction.x = 0;
 		this.body.allowRotation = false;
 		this.body.setOffset(3, 6);
-		this.body.setSize(14, 9, false);
+		this.body.setSize(14, 12, false);
 
 		/* START-USER-CTR-CODE */
 
@@ -49,8 +49,17 @@ export default class playerPrefab extends Phaser.Physics.Arcade.Sprite {
 	/* START-USER-CODE */
 
 	stateController: StateController;
+	private levelScene: Level;
+
+	public lockInput = false;
 
 	private gamepad:Phaser.Input.Gamepad.Gamepad | undefined;
+
+	public moveSpeed = 120;
+	// I want to make the game faster, but increasing this causes the graphics to flicker
+
+	/** Replaces sprite & animations with debug sprite in dev mode. */
+	private debugImage = false;
 
 // jump
 
@@ -78,7 +87,7 @@ export default class playerPrefab extends Phaser.Physics.Arcade.Sprite {
 	public punchCharged: boolean = true;
 	public punchMobileButton: boolean = false;
 	public punchCooldownTimer: Phaser.Time.TimerEvent;
-	
+
 	public punchSpeed = 300;
 	/** effected by hitting targets */
 	public variablePunchSpeed = 0;
@@ -121,22 +130,11 @@ export default class playerPrefab extends Phaser.Physics.Arcade.Sprite {
 
 	private debugWallDetectGraphics: Phaser.GameObjects.Graphics;
 
-	public moveSpeed = 120;
-		// I want to make the game faster, but increasing this causes the graphics to flicker
-
 // fist
 
 	public fist: Phaser.GameObjects.Image;
 	private fistoffset: Phaser.Math.Vector2;
 	private fistUppercutoffset: Phaser.Math.Vector2;
-
-// other
-
-	private levelScene: Level;
-
-	public lockInput = false;
-
-	private debugImage = true;
 
 	start()
 	{
@@ -174,7 +172,7 @@ export default class playerPrefab extends Phaser.Physics.Arcade.Sprite {
 		{
 			this.updateWallDetectDebug();
 		}
-	
+
 		// punch charge
 		if (this.onFloor && !this.punchCharged 
 			&& this.stateController.currentState.name != 'punch' 
@@ -527,24 +525,14 @@ export default class playerPrefab extends Phaser.Physics.Arcade.Sprite {
 		if (key === 'flap' || key === 'punch' || key === 'dive' || key === 'cling' 
 			|| key === 'airborne' || key === 'uppercut' || key === 'run')
 		{
-			// key = key + '-' + this.flapCharge.toString();
-			flapChargeAnim = true;
-		}
-
-		if (!this.punchCharged && 
-			(key === 'flap' || key === 'airborne' || key === 'cling' || key === 'dive'))
-		{
-			// key = key + '-exhausted'
-			punchChargeAnim = true;
-		}
-
-		if (punchChargeAnim)
-		{
-			key += '-exhausted'
-		}
-		if (flapChargeAnim)
-		{
-			key += '-' + this.flapCharge.toString();
+			if (this.flapCharge === 1)
+			{
+				key = key + '-tired';
+			}
+			else if (this.flapCharge === 0)
+			{
+				key = key + '-very-tired';
+			}
 		}
 
 		if (queue)
@@ -559,11 +547,122 @@ export default class playerPrefab extends Phaser.Physics.Arcade.Sprite {
 		// LEFT: use playAfterRepeat() so airborne animation doesn't cancel flap
 	}
 
+	private createAnimations()
+	{
+	// airborne
+		this.anims.create({key: 'airborne', repeat: -1,
+			frames: this.anims.generateFrameNames('tapper-atlas', 
+			{ prefix: 'airborne/', zeroPad: 2, end: 0 })});
+
+		this.anims.create({key: 'airborne-tired', repeat: -1,
+			frames: this.anims.generateFrameNames('tapper-atlas', 
+			{ prefix: 'airborne-tired/', zeroPad: 2, end: 0 })});
+
+		this.anims.create({key: 'airborne-very-tired', repeat: -1,
+			frames: this.anims.generateFrameNames('tapper-atlas', 
+			{ prefix: 'airborne-very-tired/', zeroPad: 2, end: 0 })});
+
+	// blush flap
+		this.anims.create({key: 'blush-flap', repeat: 0,
+			frames: this.anims.generateFrameNames('tapper-atlas', 
+			{ prefix: 'blush-flap/', zeroPad: 2, end: 5 })});
+
+		this.anims.create({key: 'blush-flap-tired', repeat: 0,
+			frames: this.anims.generateFrameNames('tapper-atlas', 
+			{ prefix: 'blush-flap-tired/', zeroPad: 2, end: 5 })});
+
+		this.anims.create({key: 'blush-flap-very-tired', repeat: 0,
+			frames: this.anims.generateFrameNames('tapper-atlas', 
+			{ prefix: 'blush-flap-very-tired/', zeroPad: 2, end: 5 })});
+
+	// cling
+		this.anims.create({key: 'cling', repeat: -1,
+			frames: this.anims.generateFrameNames('tapper-atlas', 
+			{ prefix: 'cling/', zeroPad: 2, end: 0 })});
+
+		this.anims.create({key: 'cling-tired', repeat: -1,
+			frames: this.anims.generateFrameNames('tapper-atlas', 
+			{ prefix: 'cling-tired/', zeroPad: 2, end: 0 })});
+
+		this.anims.create({key: 'cling-very-tired', repeat: -1,
+			frames: this.anims.generateFrameNames('tapper-atlas', 
+			{ prefix: 'cling-very-tired/', zeroPad: 2, end: 0 })});
+
+	// dive
+		this.anims.create({key: 'dive', repeat: -1,
+			frames: this.anims.generateFrameNames('tapper-atlas', 
+			{ prefix: 'dive/', zeroPad: 2, end: 0 })});
+
+		this.anims.create({key: 'dive-tired', repeat: -1,
+			frames: this.anims.generateFrameNames('tapper-atlas', 
+			{ prefix: 'dive-tired/', zeroPad: 2, end: 0 })});
+
+		this.anims.create({key: 'dive-very-tired', repeat: -1,
+			frames: this.anims.generateFrameNames('tapper-atlas', 
+			{ prefix: 'dive-very-tired/', zeroPad: 2, end: 0 })});
+
+	// flap
+		this.anims.create({key: 'flap', repeat: 0,
+			frames: this.anims.generateFrameNames('tapper-atlas', 
+			{ prefix: 'flap/', zeroPad: 2, end: 5 })});
+
+		this.anims.create({key: 'flap-tired', repeat: 0,
+			frames: this.anims.generateFrameNames('tapper-atlas', 
+			{ prefix: 'flap-tired/', zeroPad: 2, end: 5 })});
+
+		this.anims.create({key: 'flap-very-tired', repeat: 0,
+			frames: this.anims.generateFrameNames('tapper-atlas', 
+			{ prefix: 'flap-very-tired/', zeroPad: 2, end: 5 })});
+
+	// jump
+		this.anims.create({key: 'jump', repeat: 0,
+			frames: this.anims.generateFrameNames('tapper-atlas', 
+			{ prefix: 'jump/', zeroPad: 2, end: 4 })});
+
+	// punch
+		this.anims.create({key: 'punch', repeat: 0,
+			frames: this.anims.generateFrameNames('tapper-atlas', 
+			{ prefix: 'punch/', zeroPad: 2, end: 0 })});
+
+		this.anims.create({key: 'punch-tired', repeat: 0,
+			frames: this.anims.generateFrameNames('tapper-atlas', 
+			{ prefix: 'punch-tired/', zeroPad: 2, end: 0 })});
+
+		this.anims.create({key: 'punch-very-tired', repeat: 0,
+			frames: this.anims.generateFrameNames('tapper-atlas', 
+			{ prefix: 'punch-very-tired/', zeroPad: 2, end: 0 })});
+
+	// run
+		this.anims.create({key: 'run', repeat: -1,
+			frames: this.anims.generateFrameNames('tapper-atlas', 
+			{ prefix: 'run/', zeroPad: 2, end: 11 })});
+
+	// uppercut
+		this.anims.create({key: 'uppercut', repeat: 0,
+			frames: this.anims.generateFrameNames('tapper-atlas', 
+			{ prefix: 'uppercut/', zeroPad: 2, end: 0 })});
+
+		this.anims.create({key: 'uppercut-tired', repeat: 0,
+			frames: this.anims.generateFrameNames('tapper-atlas', 
+			{ prefix: 'uppercut-tired/', zeroPad: 2, end: 0 })});
+
+		this.anims.create({key: 'uppercut-very-tired', repeat: 0,
+			frames: this.anims.generateFrameNames('tapper-atlas', 
+			{ prefix: 'uppercut-very-tired/', zeroPad: 2, end: 0 })});
+
+	// victory
+		this.anims.create({key: 'victory', repeat: 0,
+			frames: this.anims.generateFrameNames('tapper-atlas', 
+			{ prefix: 'victory/', zeroPad: 2, end: 0 })});
+	}
+
 	/**
+	 * DEPRECATED
+	 * 
 	 * Called on create(). Keys with versions correlating to flap state have the flap state number 
 	 * postfix.
 	 */
-	private createAnimations()
+	private createAnimations2()
 	{
 		this.anims.create
 		({

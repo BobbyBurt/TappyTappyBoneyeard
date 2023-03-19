@@ -1461,20 +1461,6 @@ export default class Level extends Phaser.Scene {
 		this.sound.add('combo-hit');
 	}
 
-	/**
-	 * initialize main & UI cameras.
-	 * 
-	 * scene is seperated into two layers, each camera ignoring the other layer.
-	 */
-	createCameras()
-	{
-		CameraUtil.configureMainCamera(this);
-		// this.cameras.main.setScroll(this.player.x, this.player.y);
-		this.cameras.main.startFollow(this.cameraFollow, true, .1, .1);
-		this.cameras.main.setBounds(0, 0, this.tileLayer.width, this.tileLayer.height);
-		// this.cameras.main.ignore(this.uILayer.getChildren());
-	}
-
 	bindMobileButtons()
 	{
 		// jump
@@ -1636,8 +1622,8 @@ export default class Level extends Phaser.Scene {
 		if (this.uiScene.scene.isActive())
 		{
 			this.uiScene.setDebugText(0, `${this.player.stateController.currentState.name}`);
-			this.uiScene.setDebugText(1, `on wall left : ${this.player.onWallLeft}`);
-			this.uiScene.setDebugText(2, `on wall right: ${this.player.onWallRight}`);
+			this.uiScene.setDebugText(1, `player vel x : ${this.player.body.velocity.x}`);
+			this.uiScene.setDebugText(2, `player vel y : ${this.player.body.velocity.y}`);
 		}
 	}
 
