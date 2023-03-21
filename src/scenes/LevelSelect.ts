@@ -8,6 +8,7 @@ import Align from "../components/Align";
 /* START-USER-IMPORTS */
 
 import CameraUtil from "~/components/CameraUtil";
+import InputManager from "~/components/InputManager";
 
 /* END-USER-IMPORTS */
 
@@ -194,6 +195,9 @@ export default class LevelSelect extends Phaser.Scene {
 			(pad:Phaser.Input.Gamepad.Gamepad, button:Phaser.Input.Gamepad.Button, index:number)
 			{
 				_this.gamepad = pad;
+
+				InputManager.inputMode = 1;
+					// TEMP: For playtesting. A final solution needs to update input mode at any time.
 			});
 
 		this.SelectKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);

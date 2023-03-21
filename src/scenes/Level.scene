@@ -162,9 +162,7 @@
                     "scope": "PUBLIC",
                     "components": [],
                     "x": 383,
-                    "y": 203,
-                    "nestedPrefabs": [],
-                    "list": []
+                    "y": 203
                 }
             ]
         }

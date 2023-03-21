@@ -33,6 +33,16 @@
             "dropShadowY": 1,
             "dropShadowAlpha": 1,
             "dropShadowColor": "#000000ff"
+        },
+        {
+            "type": "Rectangle",
+            "id": "c58aab3d-dcbd-40cf-8533-54b8745b69ee",
+            "label": "rectangle_1",
+            "components": [],
+            "alpha": 0.2,
+            "isFilled": true,
+            "width": 9999,
+            "height": 9999
         }
     ],
     "plainObjects": [],

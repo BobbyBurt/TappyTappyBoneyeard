@@ -1,6 +1,6 @@
 /* START OF COMPILED CODE */
 
-import Phaser, { Sound } from "phaser";
+import Phaser from "phaser";
 import ScrollFactor from "../components/ScrollFactor";
 import playerPrefab from "../prefabs/playerPrefab";
 /* START-USER-IMPORTS */
@@ -18,6 +18,7 @@ import PogoEnemy from "~/prefabs/PogoEnemy";
 import ScorePopup from "~/prefabs/scorePopup";
 import SoundManager from "~/components/SoundManager";
 import LevelUI from "./LevelUI";
+import tutorialManager from "~/components/tutorialManager";
 
 /* END-USER-IMPORTS */
 
@@ -156,6 +157,7 @@ export default class Level extends Phaser.Scene {
 	/** used to make sure level restart is only called once */
 	private restarting = false;
 	private reachedGoal = false;
+	private currentLevelIndex: number;
 
 // audio
 	private music: Phaser.Sound.BaseSound;
@@ -178,10 +180,6 @@ export default class Level extends Phaser.Scene {
 	private enemyBloodEmitter: Phaser.GameObjects.Particles.ParticleEmitter;
 	private enemyBloodEmitterManager2: Phaser.GameObjects.Particles.ParticleEmitterManager;
 	private enemyBloodEmitter2: Phaser.GameObjects.Particles.ParticleEmitter;
-
-// hit effect
-	private hitEffectHorizontal: Phaser.GameObjects.Image;
-	private hitEffectDiagonal: Phaser.GameObjects.Image;
 
 // debug
 	private debugVisionPolyGraphics: Phaser.GameObjects.Graphics;
@@ -208,6 +206,11 @@ export default class Level extends Phaser.Scene {
 	private levelScore: number;
 	private levelTimer: Phaser.Time.TimerEvent;
 
+// pause
+	private hitStopPause = false;
+	/** Player / blur initiated pause */
+	private manualPause = false;
+
 	private cameraFollow: Phaser.Math.Vector2;
 
 	private uiScene: LevelUI;
@@ -221,14 +224,12 @@ export default class Level extends Phaser.Scene {
 		this.restarting = false;
 		this.combo = 0;
 		this.cameraFollow = new Phaser.Math.Vector2(this.player.x, this.player.y);
+		this.currentLevelIndex = this.registry.get('current-level-index');
 
 	// UI
 		this.uiScene = this.scene.get('LevelUI') as LevelUI;
 		this.updateEnemiesUI(true);
-		if (!this.registry.get('seen-tutorial-level-' + this.registry.get('current-level-index')))
-		{
-			this.setTutorialUI(true, this.registry.get('mobile'), this.registry.get('current-level-index'));
-		}
+		this.setTutorialUI(true, true);
 		if (this.registry.get('mobile'))
 		{
 			this.bindMobileButtons();
@@ -302,18 +303,6 @@ export default class Level extends Phaser.Scene {
 		this.createMapEnemies();
 		this.createMapVisionPolys();
 
-	// hit effects
-		this.hitEffectHorizontal = this.uiScene.add.image(0, 0, 'hit-effect-horizontal');
-		this.hitEffectDiagonal = this.uiScene.add.image(0, 0, 'hit-effect-diagonal');
-		this.hitEffectHorizontal.setScale(2);
-		this.hitEffectDiagonal.setScale(2);
-		this.mainLayer.add(this.hitEffectHorizontal);
-		this.mainLayer.add(this.hitEffectDiagonal);
-		this.hitEffectHorizontal.setDepth(-30);
-		this.hitEffectDiagonal.setDepth(-30);
-		this.hitEffectHorizontal.setVisible(false);
-		this.hitEffectDiagonal.setVisible(false);
-
 	// tilemap special elements
 		let startPoint = TilemapUtil.getObjectPositionByGID(38, this.tileMap);
 		if (startPoint === null)
@@ -362,6 +351,12 @@ export default class Level extends Phaser.Scene {
 		this.input.keyboard.on('keydown-A', () =>
 		{
 			this.LoadLevelSelect();
+		});
+
+		// level select input
+		this.input.keyboard.on('keydown-SPACE', () =>
+		{
+			this.setTutorialUI(!this.uiScene.tutorialVisible, false);
 		});
 
 		// level select input
@@ -434,7 +429,7 @@ export default class Level extends Phaser.Scene {
 
 		// reset collision values to be overridden by callbacks
 		this.player.onFloor = false;
-		
+
 		if (__DEV__)
 		{
 			this.updateDebugWallDetect();
@@ -476,7 +471,7 @@ export default class Level extends Phaser.Scene {
 	{
 		this.scene.resume();
 			// in case hitstop is also active
-		
+
 		this.game.events.off(Phaser.Core.Events.BLUR, this.pause, this);
 		this.game.events.off(Phaser.Core.Events.FOCUS, this.unpause, this)
 
@@ -493,7 +488,7 @@ export default class Level extends Phaser.Scene {
 	resetLevel()
 	{
 		console.debug('reset level');
-		
+
 		// this function should only happen once
 		if (!this.restarting)
 		{
@@ -833,7 +828,7 @@ export default class Level extends Phaser.Scene {
 	{
 		bomb.disappear();
 		bomb.setPosition(9999, -9999);
-		
+
 		bomb.enemy.bombCooldownTimer.destroy();
 		bomb.ignoreTimer.destroy();
 		bomb.enemy.bombCooldownTimer = this.time.addEvent({
@@ -1118,7 +1113,7 @@ export default class Level extends Phaser.Scene {
 				break;
 		}
 		console.debug(`blood particles - angle: ${angle}`)
-		
+
 		this.enemyBloodEmitter = this.enemyBloodEmitterManager.createEmitter
 		({
 			lifespan: 3000,
@@ -1216,8 +1211,6 @@ export default class Level extends Phaser.Scene {
 		// TODO: Turn off the regular looping tween before starting this one.
 		// TODO: Tweak this tween's timing and easing.
 
-		this.setTutorialUI(false, false, 0);
-
 		this.cameras.main.stopFollow();
 
 		this.levelTimer.paused = true;
@@ -1227,6 +1220,8 @@ export default class Level extends Phaser.Scene {
 				this.uiScene.timerText.setVisible(!this.uiScene.timerText.visible);
 			}
 		});
+
+		this.registry.set('completed-level-' + this.registry.get('current-level-index'), true);
 
 		SoundManager.play('victory', this);
 		this.music.pause();
@@ -1531,65 +1526,83 @@ export default class Level extends Phaser.Scene {
 		});
 	}
 
+	/** Window focus event handler */
 	pause()
 	{
 		this.scene.pause();
 		this.scene.launch('Pause');
+		this.manualPause = true;
 	}
 
+	/** Window focus event handler */
 	unpause()
 	{
 		this.scene.resume();
 		this.scene.stop('Pause');
+		this.manualPause = false;
 	}
 
 	hitStop()
 	{
-		if (this.restarting)
+		if (this.restarting || this.scene.isPaused())
 		{
 			return;
 		}
-		
+
 		console.debug('hitStop - start');
 
 		// TODO: have this not conflict with blur pause
 		this.scene.pause();
-		
+		this.hitStopPause = true;
+
 		// TODO: Can I rely on uiScene time? Is this a bad hack?
 		this.uiScene.time.addEvent({delay: 50, callback: () =>
 		{
-			this.scene.resume();
+			if (this.manualPause)
+			{
+				return;
+			}
 
 			console.debug('hitStop - end');
+
+			this.scene.resume();
+			this.hitStopPause = false;
 		}});
 	}
 
 	/**
+	 * Calls UI scene to show or hide tutorial.
 	 * 
+	 * Will check if tutorial it's necessary based on level, it's completion & dev override.
 	 * @param show 
-	 * @param level 
+	 * @param initial If this is upon scene setup, will be instant rather than tweened animation.
 	 */
-	setTutorialUI(show: boolean, mobile: boolean, level: number,)
+	setTutorialUI(show: boolean, initial: boolean)
 	{
-		if (show)
+		if (show && !tutorialManager.doTutorialInDevMode)
 		{
-			this.uiScene.showTutorialUI(level)
-		}
-		else
-		{
-			this.uiScene.hideTutorialUI();
+			show = false;
 		}
 
-		this.registry.set('seen-tutorial-level-' + this.registry.get('current-level-index'), true);
-		/*  This is set even if no tutorial is present, allowing this function to be skipped
-			  next time.
-		 */
-
-		if (mobile)
+		if (!show)
 		{
-			// this.player.lockInput = true;
+			this.uiScene.setTutorialUI(false, initial);
 
-			// TODO: pause scene
+			return;
+		}
+
+		let tutorialNecessary = (this.currentLevelIndex < 10);
+			// hardcoded: change this if tutorial level count changes
+
+		if (this.registry.get('completed-level-' + this.currentLevelIndex)
+		|| !tutorialManager.getTutorialText(this.currentLevelIndex))
+		{
+			tutorialNecessary = false;
+		}
+
+		if (tutorialNecessary)
+		{
+			this.uiScene.setTutorialUI(true, initial, this.currentLevelIndex);
 		}
 	}
 

@@ -13,6 +13,96 @@
     },
     "displayList": [
         {
+            "type": "Container",
+            "id": "55c7007c-09ce-4496-ae56-49d5c08253b4",
+            "label": "tutorialContainer",
+            "scope": "PUBLIC",
+            "components": [
+                "Align"
+            ],
+            "Align.middle": true,
+            "Align.center": true,
+            "visible": false,
+            "list": [
+                {
+                    "type": "Container",
+                    "id": "438748ec-06e4-4f5c-a14e-deaa14216cdf",
+                    "label": "tutorialOffsetContainer",
+                    "scope": "CLASS",
+                    "components": [],
+                    "list": [
+                        {
+                            "type": "Rectangle",
+                            "id": "a32d9655-1177-45da-a9cf-d95e74e92049",
+                            "label": "tutorialBox",
+                            "scope": "PUBLIC",
+                            "components": [],
+                            "y": 2,
+                            "scaleX": 1.2139552314624713,
+                            "scaleY": 0.9107966439058469,
+                            "isFilled": true,
+                            "fillColor": "#DB7884",
+                            "width": 150,
+                            "height": 230
+                        },
+                        {
+                            "type": "BitmapText",
+                            "id": "1c0a373b-d34e-49cf-8094-c4b6c8e0b76c",
+                            "label": "tutorialText",
+                            "scope": "PUBLIC",
+                            "components": [],
+                            "y": -24,
+                            "originX": 0.5,
+                            "originY": 0.5,
+                            "text": "Welcome to life, Bird Tapper! lets brush up on the basics.\n\nYou can jump with <input>. You'll move forward automatically, but you can change direction from walls. While against one, try jumping against it and jumping again to perform a wall jump.",
+                            "font": "nokia",
+                            "fontSize": -8,
+                            "maxWidth": 150,
+                            "dropShadowAlpha": 0,
+                            "dropShadowColor": "#000000ff"
+                        },
+                        {
+                            "type": "BitmapText",
+                            "id": "642aa679-fdfd-4bd8-8ca4-e0d82d06b6a9",
+                            "label": "tutorialCloseText",
+                            "scope": "PUBLIC",
+                            "components": [],
+                            "y": 93,
+                            "originX": 0.5,
+                            "originY": 0.5,
+                            "text": "- TAP TO CONTINUE -",
+                            "font": "nokia",
+                            "fontSize": -8,
+                            "maxWidth": 150,
+                            "dropShadowAlpha": 0,
+                            "dropShadowColor": "#000000ff"
+                        },
+                        {
+                            "type": "Image",
+                            "id": "c670603f-abe5-4975-8d26-c3baebe8243f",
+                            "label": "tutorial_ipad",
+                            "components": [],
+                            "texture": {
+                                "key": "tutorial-ipad"
+                            }
+                        },
+                        {
+                            "type": "Image",
+                            "id": "99499f7e-6938-46cd-b515-c8c975028daa",
+                            "label": "inputHint",
+                            "scope": "CLASS",
+                            "components": [],
+                            "texture": {
+                                "key": "soldierpogosquash"
+                            },
+                            "y": 59,
+                            "visible": false
+                        }
+                    ]
+                }
+            ]
+        },
+        {
             "type": "Rectangle",
             "id": "9d657a45-fb09-47f3-94bc-a510f3dea163",
             "label": "TimerBox",
@@ -361,8 +451,9 @@
             "y": 979.0118990523655,
             "originX": 0,
             "originY": 1,
+            "alpha": 0.5,
             "isFilled": true,
-            "fillColor": "#faeb01",
+            "fillColor": "#f4eb63",
             "width": 150,
             "height": 120
         },
@@ -383,73 +474,11 @@
             "y": 950.0118990523655,
             "originX": 1,
             "originY": 1,
+            "alpha": 0.5,
             "isFilled": true,
-            "fillColor": "#0efa0a",
+            "fillColor": "#86f884",
             "width": 150,
             "height": 120
-        },
-        {
-            "type": "Container",
-            "id": "55c7007c-09ce-4496-ae56-49d5c08253b4",
-            "label": "tutorialContainer",
-            "scope": "PUBLIC",
-            "components": [
-                "Align"
-            ],
-            "Align.middle": true,
-            "Align.right": true,
-            "Align.horizontalOffset": -75,
-            "x": 383,
-            "y": 207,
-            "visible": false,
-            "list": [
-                {
-                    "type": "Rectangle",
-                    "id": "a32d9655-1177-45da-a9cf-d95e74e92049",
-                    "label": "tutorialBox",
-                    "scope": "PUBLIC",
-                    "components": [],
-                    "scaleY": 1.0527259860642193,
-                    "isFilled": true,
-                    "fillColor": "#5699F6",
-                    "width": 150,
-                    "height": 230
-                },
-                {
-                    "type": "BitmapText",
-                    "id": "1c0a373b-d34e-49cf-8094-c4b6c8e0b76c",
-                    "label": "tutorialText",
-                    "scope": "PUBLIC",
-                    "components": [],
-                    "y": -32,
-                    "originX": 0.5,
-                    "originY": 0.5,
-                    "text": "Welcome to life, Bird Tapper! Before you can take on the violet army, lets brush up on the basics.\n\nYou can jump with <input>. You'll move forward automatically, but you can change direction from walls. While against one, try jumping against it and jumping again to perform a wall jump.",
-                    "font": "nokia",
-                    "fontSize": -8,
-                    "maxWidth": 120,
-                    "dropShadowAlpha": 0,
-                    "dropShadowColor": "#000000ff"
-                },
-                {
-                    "type": "BitmapText",
-                    "id": "642aa679-fdfd-4bd8-8ca4-e0d82d06b6a9",
-                    "label": "tutorialCloseText",
-                    "scope": "PUBLIC",
-                    "components": [
-                        "MobileDependent"
-                    ],
-                    "y": 102,
-                    "originX": 0.5,
-                    "originY": 0.5,
-                    "text": "- TAP TO CONTINUE -",
-                    "font": "nokia",
-                    "fontSize": -8,
-                    "maxWidth": 120,
-                    "dropShadowAlpha": 0,
-                    "dropShadowColor": "#000000ff"
-                }
-            ]
         },
         {
             "type": "Image",
@@ -495,6 +524,23 @@
             "angle": 90,
             "originX": 0,
             "originY": 1
+        },
+        {
+            "type": "Image",
+            "id": "0f58fed6-f3c3-41eb-bca8-1dc03c94aa8c",
+            "label": "fullscreenTestButton",
+            "scope": "CLASS",
+            "components": [
+                "Align"
+            ],
+            "Align.middle": true,
+            "Align.left": true,
+            "Align.horizontalOffset": -10,
+            "texture": {
+                "key": "20-test"
+            },
+            "x": 518,
+            "y": 631
         }
     ],
     "plainObjects": [],

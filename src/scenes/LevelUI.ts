@@ -10,6 +10,8 @@ import MobileButton from "../components/MobileButton";
 /* START-USER-IMPORTS */
 
 import CameraUtil from "~/components/CameraUtil";
+import InputManager from "~/components/InputManager";
+import tutorialManager from "~/components/tutorialManager";
 
 /* END-USER-IMPORTS */
 
@@ -24,6 +26,49 @@ export default class LevelUI extends Phaser.Scene {
 	}
 
 	editorCreate(): void {
+
+		// tutorialContainer
+		const tutorialContainer = this.add.container(0, 0);
+		tutorialContainer.visible = false;
+
+		// tutorialOffsetContainer
+		const tutorialOffsetContainer = this.add.container(0, 0);
+		tutorialContainer.add(tutorialOffsetContainer);
+
+		// tutorialBox
+		const tutorialBox = this.add.rectangle(0, 2, 150, 230);
+		tutorialBox.scaleX = 1.2139552314624713;
+		tutorialBox.scaleY = 0.9107966439058469;
+		tutorialBox.isFilled = true;
+		tutorialBox.fillColor = 14383236;
+		tutorialOffsetContainer.add(tutorialBox);
+
+		// tutorialText
+		const tutorialText = this.add.bitmapText(0, -24, "nokia", "Welcome to life, Bird Tapper! lets brush up on the basics.\n\nYou can jump with <input>. You'll move forward automatically, but you can change direction from walls. While against one, try jumping against it and jumping again to perform a wall jump.");
+		tutorialText.setOrigin(0.5, 0.5);
+		tutorialText.text = "Welcome to life, Bird Tapper! lets brush up on the basics.\n\nYou can jump with <input>. You'll move forward automatically, but you can change direction from walls. While against one, try jumping against it and jumping again to perform a wall jump.";
+		tutorialText.fontSize = -8;
+		tutorialText.maxWidth = 150;
+		tutorialText.dropShadowAlpha = 0;
+		tutorialOffsetContainer.add(tutorialText);
+
+		// tutorialCloseText
+		const tutorialCloseText = this.add.bitmapText(0, 93, "nokia", "- TAP TO CONTINUE -");
+		tutorialCloseText.setOrigin(0.5, 0.5);
+		tutorialCloseText.text = "- TAP TO CONTINUE -";
+		tutorialCloseText.fontSize = -8;
+		tutorialCloseText.maxWidth = 150;
+		tutorialCloseText.dropShadowAlpha = 0;
+		tutorialOffsetContainer.add(tutorialCloseText);
+
+		// tutorial_ipad
+		const tutorial_ipad = this.add.image(0, 0, "tutorial-ipad");
+		tutorialOffsetContainer.add(tutorial_ipad);
+
+		// inputHint
+		const inputHint = this.add.image(0, 59, "soldierpogosquash");
+		inputHint.visible = false;
+		tutorialOffsetContainer.add(inputHint);
 
 		// TimerBox
 		const timerBox = this.add.rectangle(348, 961, 80, 23);
@@ -154,43 +199,16 @@ export default class LevelUI extends Phaser.Scene {
 		// mobileButtonUppercut
 		const mobileButtonUppercut = this.add.rectangle(338.44939143097434, 979.0118990523655, 150, 120);
 		mobileButtonUppercut.setOrigin(0, 1);
+		mobileButtonUppercut.alpha = 0.5;
 		mobileButtonUppercut.isFilled = true;
-		mobileButtonUppercut.fillColor = 16444161;
+		mobileButtonUppercut.fillColor = 16051043;
 
 		// mobileButtonJump
 		const mobileButtonJump = this.add.rectangle(743.4493914309744, 950.0118990523655, 150, 120);
 		mobileButtonJump.setOrigin(1, 1);
+		mobileButtonJump.alpha = 0.5;
 		mobileButtonJump.isFilled = true;
-		mobileButtonJump.fillColor = 981514;
-
-		// tutorialContainer
-		const tutorialContainer = this.add.container(383, 207);
-		tutorialContainer.visible = false;
-
-		// tutorialBox
-		const tutorialBox = this.add.rectangle(0, 0, 150, 230);
-		tutorialBox.scaleY = 1.0527259860642193;
-		tutorialBox.isFilled = true;
-		tutorialBox.fillColor = 5675510;
-		tutorialContainer.add(tutorialBox);
-
-		// tutorialText
-		const tutorialText = this.add.bitmapText(0, -32, "nokia", "Welcome to life, Bird Tapper! Before you can take on the violet army, lets brush up on the basics.\n\nYou can jump with <input>. You'll move forward automatically, but you can change direction from walls. While against one, try jumping against it and jumping again to perform a wall jump.");
-		tutorialText.setOrigin(0.5, 0.5);
-		tutorialText.text = "Welcome to life, Bird Tapper! Before you can take on the violet army, lets brush up on the basics.\n\nYou can jump with <input>. You'll move forward automatically, but you can change direction from walls. While against one, try jumping against it and jumping again to perform a wall jump.";
-		tutorialText.fontSize = -8;
-		tutorialText.maxWidth = 120;
-		tutorialText.dropShadowAlpha = 0;
-		tutorialContainer.add(tutorialText);
-
-		// tutorialCloseText
-		const tutorialCloseText = this.add.bitmapText(0, 102, "nokia", "- TAP TO CONTINUE -");
-		tutorialCloseText.setOrigin(0.5, 0.5);
-		tutorialCloseText.text = "- TAP TO CONTINUE -";
-		tutorialCloseText.fontSize = -8;
-		tutorialCloseText.maxWidth = 120;
-		tutorialCloseText.dropShadowAlpha = 0;
-		tutorialContainer.add(tutorialCloseText);
+		mobileButtonJump.fillColor = 8845444;
 
 		// punchChargeEmpty
 		const punchChargeEmpty = this.add.image(322, 694, "bird0fist");
@@ -205,6 +223,14 @@ export default class LevelUI extends Phaser.Scene {
 		punchChargeFull.scaleY = 2;
 		punchChargeFull.angle = 90;
 		punchChargeFull.setOrigin(0, 1);
+
+		// fullscreenTestButton
+		const fullscreenTestButton = this.add.image(518, 631, "20-test");
+
+		// tutorialContainer (components)
+		const tutorialContainerAlign = new Align(tutorialContainer);
+		tutorialContainerAlign.middle = true;
+		tutorialContainerAlign.center = true;
 
 		// timerBox (components)
 		const timerBoxAlign = new Align(timerBox);
@@ -324,15 +350,6 @@ export default class LevelUI extends Phaser.Scene {
 		new MobileDependent(mobileButtonJump);
 		new MobileButton(mobileButtonJump);
 
-		// tutorialContainer (components)
-		const tutorialContainerAlign = new Align(tutorialContainer);
-		tutorialContainerAlign.middle = true;
-		tutorialContainerAlign.right = true;
-		tutorialContainerAlign.horizontalOffset = -75;
-
-		// tutorialCloseText (components)
-		new MobileDependent(tutorialCloseText);
-
 		// punchChargeEmpty (components)
 		const punchChargeEmptyAlign = new Align(punchChargeEmpty);
 		punchChargeEmptyAlign.up = true;
@@ -347,6 +364,18 @@ export default class LevelUI extends Phaser.Scene {
 		punchChargeFullAlign.horizontalOffset = 10;
 		punchChargeFullAlign.verticalOffset = 10;
 
+		// fullscreenTestButton (components)
+		const fullscreenTestButtonAlign = new Align(fullscreenTestButton);
+		fullscreenTestButtonAlign.middle = true;
+		fullscreenTestButtonAlign.left = true;
+		fullscreenTestButtonAlign.horizontalOffset = -10;
+
+		this.tutorialContainer = tutorialContainer;
+		this.tutorialOffsetContainer = tutorialOffsetContainer;
+		this.tutorialBox = tutorialBox;
+		this.tutorialText = tutorialText;
+		this.tutorialCloseText = tutorialCloseText;
+		this.inputHint = inputHint;
 		this.timerText = timerText;
 		this.comboLabelText = comboLabelText;
 		this.comboText = comboText;
@@ -363,15 +392,18 @@ export default class LevelUI extends Phaser.Scene {
 		this.mobileButtonPunch = mobileButtonPunch;
 		this.mobileButtonUppercut = mobileButtonUppercut;
 		this.mobileButtonJump = mobileButtonJump;
-		this.tutorialContainer = tutorialContainer;
-		this.tutorialBox = tutorialBox;
-		this.tutorialText = tutorialText;
-		this.tutorialCloseText = tutorialCloseText;
 		this.punchChargeFull = punchChargeFull;
+		this.fullscreenTestButton = fullscreenTestButton;
 
 		this.events.emit("scene-awake");
 	}
 
+	public tutorialContainer!: Phaser.GameObjects.Container;
+	private tutorialOffsetContainer!: Phaser.GameObjects.Container;
+	public tutorialBox!: Phaser.GameObjects.Rectangle;
+	public tutorialText!: Phaser.GameObjects.BitmapText;
+	public tutorialCloseText!: Phaser.GameObjects.BitmapText;
+	private inputHint!: Phaser.GameObjects.Image;
 	public timerText!: Phaser.GameObjects.BitmapText;
 	public comboLabelText!: Phaser.GameObjects.BitmapText;
 	public comboText!: Phaser.GameObjects.BitmapText;
@@ -388,17 +420,17 @@ export default class LevelUI extends Phaser.Scene {
 	public mobileButtonPunch!: Phaser.GameObjects.Rectangle;
 	public mobileButtonUppercut!: Phaser.GameObjects.Rectangle;
 	public mobileButtonJump!: Phaser.GameObjects.Rectangle;
-	public tutorialContainer!: Phaser.GameObjects.Container;
-	public tutorialBox!: Phaser.GameObjects.Rectangle;
-	public tutorialText!: Phaser.GameObjects.BitmapText;
-	public tutorialCloseText!: Phaser.GameObjects.BitmapText;
 	private punchChargeFull!: Phaser.GameObjects.Image;
+	private fullscreenTestButton!: Phaser.GameObjects.Image;
 
 	/* START-USER-CODE */
 
 	private comboTextTween: Phaser.Tweens.Tween;
 	private enemiesTextTween: Phaser.Tweens.Tween;
-	private punchChargeTween: Phaser.Tweens.Tween
+	private punchChargeTween: Phaser.Tweens.Tween;
+
+	public tutorialVisible = false;
+	private tutorialOffsetTween: Phaser.Tweens.Tween;
 
 	protected create() {
 
@@ -416,6 +448,22 @@ export default class LevelUI extends Phaser.Scene {
 		this.game.events.on('punch', () => 
 		{
 			this.setPunchCharge(false);
+		});
+
+	// fullscreen test
+
+		this.fullscreenTestButton.setInteractive();
+		this.fullscreenTestButton.on('pointerdown', () =>
+		{
+			if (!this.scale.isFullscreen)
+			{
+				this.scale.startFullscreen()
+			}
+			else
+			{
+				this.scale.stopFullscreen();
+			}
+			// TODO: figure out how to force resize
 		});
 	}
 
@@ -523,64 +571,98 @@ export default class LevelUI extends Phaser.Scene {
 		this.timerText.setText(secondsString.replace('.', ':').slice(0, (secondsString.lastIndexOf('.') + 3)));
 	}
 
-	public showTutorialUI(level: number)
+	/**
+	 * 
+	 * @param show or hide.
+	 * @param initial If this is upon scene setup, will be instant rather than tweened animation.
+	 * @param level Only necessary if `show` & `initial`.
+	 * @returns 
+	 */
+	public setTutorialUI(show: boolean, initial: boolean, level?: number)
 	{
-		console.debug(this.timerText.x, this.timerText.y)
-
-		let tutorialString = ''
-
-		switch (level)
+		if (this.tutorialOffsetTween)
 		{
-			case 0:
-				tutorialString = "Welcome to life, Bird Tapper! Before you can take on the violet army, lets brush up on the basics.\n\nYou can jump with <input>. You'll move forward automatically, but you can change direction from walls. While against one, try jumping against it and jumping again to perform a wall jump."
-				break;
-			case 1:
-				tutorialString = "Have you tried using your wings yet? Use <input> while midair to flap and gain some more height.\n\nYour tiny wings only have the strength to do this twice, and you'll get more and more pale as you become weaker."
-				break;
-			case 2:
-				tutorialString = "Soldiers are dangerous, so it's time to attack! Hit <input> to punch forward with a burst of speed.\n\nDo this in front of an enemy to take them out with your fist. Punches are also an easy way to launch yourself from a wall."
-				break;
-			case 4:
-				tutorialString = "OK, time to dive. Use <input> to boost yourself downwards. If you hit an enemy, you'll take them out!\n\nDiving also aids your mobility, helping you control / time your landings."
-				break;
-			case 6:
-				tutorialString = "When punching forward isn't enough, hit 'em with an uppercut!\n\nUse <input> to launch upward and take out the enemies above you."
-				break;
-			case 7:
-				tutorialString = "Punches and uppercuts take a lot out of you...\n\nLanding on ground is one way to recharge, but you'll also automatically regain charge if you take out an enemy with your attack!"
-				break;
-			case 8:
-				tutorialString = "Each enemy you take out will add to your combo as long as you're not grounded.\n\nTry to figure out ways to build that combo!"
-				break;
-			// case 9:
-			// 	tutorialString = "Good hustle out there! Time to test your skills."
-			// 	break;
+			if (!initial && this.tutorialOffsetTween.progress < 1)
+			{
+				return;
+			}
 		}
 
-		this.tutorialContainer.setVisible(true);
-		this.tutorialText.setText(tutorialString);
-
-		if (this.registry.get('mobile'))
+	// hide
+		if (!show)
 		{
-			// this.tutorialText.setMaxWidth(200);
-			// this.tutorialBox.width = 250;
-			// this.tutorialBox.setX(0);
-			console.log(Align.getComponent(this.tutorialContainer));
-			Align.getComponent(this.tutorialContainer).right = false;
-			Align.getComponent(this.tutorialContainer).center = true;
-			Align.getComponent(this.tutorialContainer).horizontalOffset = 0;
+			if (!this.tutorialVisible)
+			{
+				return;
+			}
 
-			this.tutorialBox.setInteractive();
+			if (!initial)
+			{
+				this.setTutorialTween(false);		
+			}
+			else
+			{
+				this.tutorialOffsetContainer.setY((this.cameras.main.worldView.height / 2) + 106);
+			}
+
+			this.tutorialVisible = false;
+
+			return;
+		}
+
+	// show
+
+		if (this.tutorialVisible)
+		{
+			return;
+		}
+
+		if (initial)
+		{
+			this.tutorialText.setText(tutorialManager.getTutorialText(level!)!);
+			this.tutorialCloseText.setText
+				(`- ${InputManager.getTutoiralDismissInputName().toUpperCase()} TO DISMISS -`);
+			this.tutorialContainer.setVisible(true);
+
+			// TODO: set input hint
+
+			this.tutorialBox.setInteractive()
+				// TODO: Hitbox needs to match texture's odd shape, not include the transparent areas.
+				// Currently it seems like it doesn't include the tab.
 			this.tutorialBox.on('pointerdown', () =>
 			{
-				// TODO: unpause level scene
+				let BRK;
+				if (this.tutorialVisible)
+				{
+					this.setTutorialUI(false, false);
+				}
+				else
+				{
+					this.setTutorialUI(true, false);
+				}
 			});
+
+			this.tutorialOffsetContainer.setY(0);
 		}
+		else
+		{
+			this.setTutorialTween(true);
+		}
+
+		this.tutorialVisible = true;
 	}
 
-	public hideTutorialUI()
+	private setTutorialTween(appear: boolean)
 	{
-		this.tutorialContainer.setVisible(false);
+		const toY = (appear ? 0 : (this.cameras.main.worldView.height / 2) + 106);
+
+		this.tutorialOffsetTween = this.tweens.add(
+		{
+			targets: this.tutorialOffsetContainer,
+			y: toY,
+			duration: 1000,
+			ease: Phaser.Math.Easing.Quadratic.Out
+		});
 	}
 
 	public animateEnemiesText(): void
@@ -615,6 +697,12 @@ export default class LevelUI extends Phaser.Scene {
 
 		const _camera = this.cameras.main as any;
 		_camera.preRender(1);
+
+		if (!this.tutorialVisible)
+		{
+			this.tutorialOffsetTween.stop();
+			this.tutorialOffsetContainer.setY((this.cameras.main.worldView.height / 2) + 106);
+		}
 	}
 
 	/* END-USER-CODE */

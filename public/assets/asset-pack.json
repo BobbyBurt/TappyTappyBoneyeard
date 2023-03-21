@@ -523,6 +523,11 @@
                 "key": "tutorial"
             },
             {
+                "url": "assets/tutorial-ipad.png",
+                "type": "image",
+                "key": "tutorial-ipad"
+            },
+            {
                 "url": "assets/levels/uppercut.json",
                 "type": "tilemapTiledJSON",
                 "key": "uppercut"

@@ -31,6 +31,11 @@ export default class Pause extends Phaser.Scene {
 		pauseText.dropShadowY = 1;
 		pauseText.dropShadowAlpha = 1;
 
+		// rectangle_1
+		const rectangle_1 = this.add.rectangle(0, 0, 9999, 9999);
+		rectangle_1.alpha = 0.2;
+		rectangle_1.isFilled = true;
+
 		// pauseText (components)
 		const pauseTextAlign = new Align(pauseText);
 		pauseTextAlign.middle = true;
