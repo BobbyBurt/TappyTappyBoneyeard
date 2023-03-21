@@ -36,10 +36,28 @@
             "texture": {
                 "key": "logo"
             },
-            "x": 43,
+            "x": 35,
             "y": -94,
             "scaleX": 3.09831503427523,
             "scaleY": 3.09831503427523
+        },
+        {
+            "type": "BitmapText",
+            "id": "8f4f6ce3-ab8e-48d0-99ed-bb8962af82dc",
+            "label": "fileText",
+            "scope": "CLASS",
+            "components": [],
+            "x": -154,
+            "y": 212,
+            "alpha": 0.3,
+            "alphaTopLeft": 0.3,
+            "alphaTopRight": 0.3,
+            "alphaBottomLeft": 0.3,
+            "alphaBottomRight": 0.3,
+            "text": "New BitmapText",
+            "font": "nokia",
+            "fontSize": -8,
+            "maxWidth": 200
         }
     ],
     "plainObjects": [],

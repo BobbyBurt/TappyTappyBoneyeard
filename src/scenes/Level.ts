@@ -211,6 +211,7 @@ export default class Level extends Phaser.Scene {
 	private hitStopPause = false;
 	/** Player / blur initiated pause */
 	private manualPause = false;
+	private tutorialPuase = false;
 
 	private cameraFollow: Phaser.Math.Vector2;
 
@@ -230,7 +231,10 @@ export default class Level extends Phaser.Scene {
 	// UI
 		this.uiScene = this.scene.get('LevelUI') as LevelUI;
 		this.updateEnemiesUI(true);
-		this.setTutorialUI(true, true);
+		this.time.addEvent({ delay: 300, callback: () => 
+		{
+			this.setTutorialUI(true, true);
+		}});
 		if (this.registry.get('mobile'))
 		{
 			this.bindMobileButtons();
@@ -354,12 +358,22 @@ export default class Level extends Phaser.Scene {
 			this.LoadLevelSelect();
 		});
 
+	// set active inputMode
+		this.input.keyboard.on('keydown', ()=>
+		{
+			InputManager.activeInputMode = 'keyboard';
+		});
+		this.input.gamepad.on('down', () =>
+		{
+			InputManager.activeInputMode = 'gamepad';
+		});
+
 	// tutorial show / hide
-		this.input.keyboard.on('keydown-' + InputManager.getInput('tutorial-toggle', 'keyboard') , () =>
+		this.uiScene.input.keyboard.on('keydown-' + InputManager.getInput('tutorial-toggle', 'keyboard') , () =>
 		{
 			this.setTutorialUI(!this.uiScene.tutorialVisible, false);
 		});
-		this.input.gamepad.on('down', 
+		this.uiScene.input.gamepad.on('down', 
 			(pad:Phaser.Input.Gamepad.Gamepad, button:Phaser.Input.Gamepad.Button, index:number) =>
 		{
 			if (button.index == InputManager.getInput('tutorial-toggle', 'gamepad'))
@@ -1555,6 +1569,11 @@ export default class Level extends Phaser.Scene {
 	 * 	Used as window focus event handler */
 	pause()
 	{
+		if (this.uiScene.tutorialVisible)
+		{
+			return;
+		}
+
 		this.scene.pause();
 		this.scene.launch('Pause');
 		this.manualPause = true;
@@ -1565,6 +1584,11 @@ export default class Level extends Phaser.Scene {
 	 * 	Used as window focus event handler */
 	unpause()
 	{
+		if (this.uiScene.tutorialVisible)
+		{
+			return;
+		}
+
 		this.scene.resume();
 		this.scene.stop('Pause');
 		this.manualPause = false;
@@ -1623,6 +1647,25 @@ export default class Level extends Phaser.Scene {
 	 */
 	setTutorialUI(show: boolean, initial: boolean)
 	{
+	// redndancy check
+		if ((show && this.uiScene.tutorialVisible) || (!show && !this.uiScene.tutorialVisible))
+		{
+			return;
+		}
+
+		if (this.scene.isPaused() && show)
+		{
+			return;
+		}
+		
+		if (this.uiScene.tutorialOffsetTween)
+		{
+			if (this.uiScene.tutorialOffsetTween.progress < 1)
+			{
+				return;
+			}
+		}
+		
 		if (show && !tutorialManager.doTutorialInDevMode)
 		{
 			show = false;
@@ -1630,7 +1673,9 @@ export default class Level extends Phaser.Scene {
 
 		if (!show)
 		{
-			this.uiScene.setTutorialUI(false, initial);
+			this.uiScene.setTutorialUI(false, true);
+
+			this.scene.resume();
 
 			return;
 		}
@@ -1646,7 +1691,11 @@ export default class Level extends Phaser.Scene {
 
 		if (tutorialNecessary)
 		{
-			this.uiScene.setTutorialUI(true, initial, this.currentLevelIndex);
+			this.uiScene.setTutorialUI(true, true, this.currentLevelIndex);
+
+			let BRK;
+
+			this.scene.pause();
 		}
 	}
 

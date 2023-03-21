@@ -25,7 +25,8 @@ This version started with a code refactor, so some of these changes, as well as 
 - Added updated punch charge UI.
 - Improved level timer UI.
 - Added tutorial popup frame.
-- Added InputManager class with functions providing names and bindings.
+- Added InputManager class with functions providing names and bindings. The active input mode will be detected, and relevant input names will be used when instructing the player.
+- Loading screen now shows each asset key as it's loaded, because it looks cool.
 
 ### Removed
 

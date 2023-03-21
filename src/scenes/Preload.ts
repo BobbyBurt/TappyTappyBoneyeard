@@ -5,8 +5,11 @@
 
 import Phaser from "phaser";
 import PreloadText from "../components/PreloadText";
-import CameraUtil from "~/components/CameraUtil";
 /* START-USER-IMPORTS */
+
+import CameraUtil from "~/components/CameraUtil";
+import InputManager from "~/components/InputManager";
+
 /* END-USER-IMPORTS */
 
 export default class Preload extends Phaser.Scene {
@@ -33,15 +36,30 @@ export default class Preload extends Phaser.Scene {
 		progress.setStyle({ "fontFamily": "nokia cellphone fc small", "fontSize": "30px" });
 
 		// logo
-		const logo = this.add.image(43, -94, "logo");
+		const logo = this.add.image(35, -94, "logo");
 		logo.scaleX = 3.09831503427523;
 		logo.scaleY = 3.09831503427523;
+
+		// fileText
+		const fileText = this.add.bitmapText(-154, 212, "nokia", "New BitmapText");
+		fileText.alpha = 0.3;
+		fileText.alphaTopLeft = 0.3;
+		fileText.alphaTopRight = 0.3;
+		fileText.alphaBottomLeft = 0.3;
+		fileText.alphaBottomRight = 0.3;
+		fileText.text = "New BitmapText";
+		fileText.fontSize = -8;
+		fileText.maxWidth = 200;
 
 		// progress (components)
 		new PreloadText(progress);
 
+		this.fileText = fileText;
+
 		this.events.emit("scene-awake");
 	}
+
+	private fileText!: Phaser.GameObjects.BitmapText;
 
 	/* START-USER-CODE */
 
@@ -78,6 +96,12 @@ export default class Preload extends Phaser.Scene {
 					// mobile detection will not run if enabled
 			}
 		});
+
+		this.load.on('filecomplete', (key: string, type: string, data: any) =>
+		{
+			this.fileText.setText(this.fileText.text + `\nloaded: ${key}`)
+			this.fileText.setY(this.fileText.y - 10)
+		});
 	}
 
 	/** 
@@ -91,6 +115,7 @@ export default class Preload extends Phaser.Scene {
 		if (event.type == 'touchstart')
 		{
 			this.registry.set('mobile', true);
+			InputManager.activeInputMode = 'touch';
 		}
 		else if (event.type == 'click')
 		{
@@ -108,8 +133,8 @@ export default class Preload extends Phaser.Scene {
 	 */
 	start()
 	{
-		
-		
+
+
 		window.removeEventListener('touchstart', this.onPointer);
 		window.removeEventListener('click', this.onPointer);
 

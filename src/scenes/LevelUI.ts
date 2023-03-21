@@ -12,6 +12,7 @@ import MobileButton from "../components/MobileButton";
 import CameraUtil from "~/components/CameraUtil";
 import InputManager from "~/components/InputManager";
 import tutorialManager from "~/components/tutorialManager";
+import Level from "./Level";
 
 /* END-USER-IMPORTS */
 
@@ -44,9 +45,8 @@ export default class LevelUI extends Phaser.Scene {
 		tutorialOffsetContainer.add(tutorialBox);
 
 		// tutorialText
-		const tutorialText = this.add.bitmapText(0, -24, "nokia", "Welcome to life, Bird Tapper! lets brush up on the basics.\n\nYou can jump with <input>. You'll move forward automatically, but you can change direction from walls. While against one, try jumping against it and jumping again to perform a wall jump.");
+		const tutorialText = this.add.bitmapText(0, -24, "nokia", "");
 		tutorialText.setOrigin(0.5, 0.5);
-		tutorialText.text = "Welcome to life, Bird Tapper! lets brush up on the basics.\n\nYou can jump with <input>. You'll move forward automatically, but you can change direction from walls. While against one, try jumping against it and jumping again to perform a wall jump.";
 		tutorialText.fontSize = -8;
 		tutorialText.maxWidth = 150;
 		tutorialText.dropShadowAlpha = 0;
@@ -197,7 +197,7 @@ export default class LevelUI extends Phaser.Scene {
 		mobileButtonPunch.fillColor = 15563900;
 
 		// mobileButtonUppercut
-		const mobileButtonUppercut = this.add.rectangle(338.44939143097434, 979.0118990523655, 150, 120);
+		const mobileButtonUppercut = this.add.rectangle(359, 967, 150, 120);
 		mobileButtonUppercut.setOrigin(0, 1);
 		mobileButtonUppercut.alpha = 0.5;
 		mobileButtonUppercut.isFilled = true;
@@ -430,7 +430,9 @@ export default class LevelUI extends Phaser.Scene {
 	private punchChargeTween: Phaser.Tweens.Tween;
 
 	public tutorialVisible = false;
-	private tutorialOffsetTween: Phaser.Tweens.Tween;
+	public tutorialOffsetTween: Phaser.Tweens.Tween;
+
+	private levelScene: Level;
 
 	protected create() {
 
@@ -438,7 +440,12 @@ export default class LevelUI extends Phaser.Scene {
 
 		this.setupCamera();
 
+		this.levelScene = this.scene.get('Level') as Level;
+
 		this.buildText.setText('Tappy Tappy Boneyard v' + this.game.config.gameVersion);
+
+		this.tutorialOffsetContainer.setY((this.cameras.main.worldView.height / 2) + 106);
+		this.tutorialVisible = false;
 
 		this.game.events.on('uppercut', () => 
 		{
@@ -574,15 +581,15 @@ export default class LevelUI extends Phaser.Scene {
 	/**
 	 * 
 	 * @param show or hide.
-	 * @param initial If this is upon scene setup, will be instant rather than tweened animation.
+	 * @param tween If `false`, UI will appear instantly
 	 * @param level Only necessary if `show` & `initial`.
 	 * @returns 
 	 */
-	public setTutorialUI(show: boolean, initial: boolean, level?: number)
+	public setTutorialUI(show: boolean, tween: boolean, level?: number)
 	{
 		if (this.tutorialOffsetTween)
 		{
-			if (!initial && this.tutorialOffsetTween.progress < 1)
+			if (this.tutorialOffsetTween.progress < 1)
 			{
 				return;
 			}
@@ -596,7 +603,7 @@ export default class LevelUI extends Phaser.Scene {
 				return;
 			}
 
-			if (!initial)
+			if (tween)
 			{
 				this.setTutorialTween(false);		
 			}
@@ -617,7 +624,7 @@ export default class LevelUI extends Phaser.Scene {
 			return;
 		}
 
-		if (initial)
+		if (this.tutorialText.text === '')
 		{
 			this.tutorialText.setText(tutorialManager.getTutorialText(level!)!);
 			this.tutorialCloseText.setText
@@ -630,24 +637,20 @@ export default class LevelUI extends Phaser.Scene {
 				// TODO: Hitbox needs to match texture's odd shape, not include the transparent areas.
 				// Currently it seems like it doesn't include the tab.
 			this.tutorialBox.on('pointerdown', () =>
-			{
-				let BRK;
-				if (this.tutorialVisible)
-				{
-					this.setTutorialUI(false, false);
-				}
-				else
-				{
-					this.setTutorialUI(true, false);
-				}
+			{	
+				this.levelScene.setTutorialUI(!this.tutorialVisible, false);
 			});
-
-			this.tutorialOffsetContainer.setY(0);
 		}
-		else
+
+		if (tween)
 		{
 			this.setTutorialTween(true);
 		}
+		else
+		{
+			this.tutorialOffsetContainer.setY(0);
+		}
+		
 
 		this.tutorialVisible = true;
 	}
@@ -660,8 +663,8 @@ export default class LevelUI extends Phaser.Scene {
 		{
 			targets: this.tutorialOffsetContainer,
 			y: toY,
-			duration: 1000,
-			ease: Phaser.Math.Easing.Quadratic.Out
+			duration: (appear ? 1000 : 700),
+			ease: Phaser.Math.Easing.Cubic.Out
 		});
 	}
 
