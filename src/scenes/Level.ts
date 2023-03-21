@@ -1,6 +1,6 @@
 /* START OF COMPILED CODE */
 
-import Phaser from "phaser";
+import Phaser, { Input } from "phaser";
 import ScrollFactor from "../components/ScrollFactor";
 import playerPrefab from "../prefabs/playerPrefab";
 /* START-USER-IMPORTS */
@@ -19,6 +19,7 @@ import ScorePopup from "~/prefabs/scorePopup";
 import SoundManager from "~/components/SoundManager";
 import LevelUI from "./LevelUI";
 import tutorialManager from "~/components/tutorialManager";
+import InputManager from "~/components/InputManager";
 
 /* END-USER-IMPORTS */
 
@@ -353,10 +354,18 @@ export default class Level extends Phaser.Scene {
 			this.LoadLevelSelect();
 		});
 
-		// level select input
-		this.input.keyboard.on('keydown-SPACE', () =>
+	// tutorial show / hide
+		this.input.keyboard.on('keydown-' + InputManager.getInput('tutorial-toggle', 'keyboard') , () =>
 		{
 			this.setTutorialUI(!this.uiScene.tutorialVisible, false);
+		});
+		this.input.gamepad.on('down', 
+			(pad:Phaser.Input.Gamepad.Gamepad, button:Phaser.Input.Gamepad.Button, index:number) =>
+		{
+			if (button.index == InputManager.getInput('tutorial-toggle', 'gamepad'))
+			{
+				this.setTutorialUI(!this.uiScene.tutorialVisible, false);
+			}
 		});
 
 		// level select input
@@ -375,7 +384,7 @@ export default class Level extends Phaser.Scene {
 				this.registry.set('muted', true);
 			}
 		});
-			// TODO: this should be it's own seperate class somehow
+			// TEMP: this will eventually be replaced with a menu option.
 
 	// DEBUG: console clear key
 		if (__DEV__)
@@ -397,9 +406,24 @@ export default class Level extends Phaser.Scene {
 			}
 		});
 
-	// window focus
+	// pause
 		this.game.events.on(Phaser.Core.Events.BLUR, this.pause, this);
-		this.game.events.on(Phaser.Core.Events.FOCUS, this.unpause, this)
+		if (__DEV__)
+		{
+			this.game.events.on(Phaser.Core.Events.FOCUS, this.unpause, this);
+		}
+		this.uiScene.input.gamepad.on('down', 
+			(pad:Phaser.Input.Gamepad.Gamepad, button:Phaser.Input.Gamepad.Button, index:number) =>
+		{
+			if (button.index === InputManager.getInput('pause', 'gamepad'))
+			{
+				this.toggleManualPause();
+			}
+		});
+		this.uiScene.input.keyboard.on('keydown-' + InputManager.getInput('pause', 'keyboard'), () =>
+		{
+			this.toggleManualPause();
+		});
 
 
 	// particles
@@ -1526,7 +1550,9 @@ export default class Level extends Phaser.Scene {
 		});
 	}
 
-	/** Window focus event handler */
+	/** Uncontional manual pause.
+	 * 
+	 * 	Used as window focus event handler */
 	pause()
 	{
 		this.scene.pause();
@@ -1534,12 +1560,30 @@ export default class Level extends Phaser.Scene {
 		this.manualPause = true;
 	}
 
-	/** Window focus event handler */
+	/** Uncontional manual unpause.
+	 * 
+	 * 	Used as window focus event handler */
 	unpause()
 	{
 		this.scene.resume();
 		this.scene.stop('Pause');
 		this.manualPause = false;
+	}
+
+	/** User controled pause function.
+	 * 
+	 * 	Pause is conditional to game state.
+	 */
+	toggleManualPause()
+	{
+		if (this.manualPause)
+		{
+			this.unpause();
+		}
+		else
+		{
+			this.pause();
+		}
 	}
 
 	hitStop()

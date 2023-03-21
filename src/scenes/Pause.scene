@@ -13,6 +13,39 @@
     },
     "displayList": [
         {
+            "type": "Rectangle",
+            "id": "c58aab3d-dcbd-40cf-8533-54b8745b69ee",
+            "label": "rectangle_1",
+            "components": [],
+            "y": 1,
+            "alpha": 0.5,
+            "isFilled": true,
+            "fillColor": "#DB7884",
+            "width": 9999,
+            "height": 9999
+        },
+        {
+            "type": "BitmapText",
+            "id": "013d2681-7828-4164-862e-3396a9a8efca",
+            "label": "inputText",
+            "scope": "CLASS",
+            "components": [
+                "Align"
+            ],
+            "Align.middle": true,
+            "Align.center": true,
+            "Align.verticalOffset": 10,
+            "x": 29,
+            "y": 2,
+            "originX": 0.5,
+            "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec rutrum, dolor ac egestas tincidunt, felis magna vehicula nunc, quis lobortis erat arcu vel odio. Vestibulum vestibulum ultrices quam,",
+            "font": "nokia",
+            "fontSize": -8,
+            "maxWidth": 120,
+            "dropShadowAlpha": 1,
+            "dropShadowColor": "#000000ff"
+        },
+        {
             "type": "BitmapText",
             "id": "1ec6071b-3d34-434b-8b79-86b91d7a0147",
             "label": "PauseText",
@@ -22,6 +55,7 @@
             ],
             "Align.middle": true,
             "Align.center": true,
+            "Align.verticalOffset": -10,
             "x": 35,
             "y": 10,
             "originX": 0.5,
@@ -29,20 +63,10 @@
             "text": "Paused",
             "font": "nokia",
             "fontSize": -16,
-            "dropShadowX": -1,
-            "dropShadowY": 1,
+            "dropShadowX": -2,
+            "dropShadowY": 2,
             "dropShadowAlpha": 1,
             "dropShadowColor": "#000000ff"
-        },
-        {
-            "type": "Rectangle",
-            "id": "c58aab3d-dcbd-40cf-8533-54b8745b69ee",
-            "label": "rectangle_1",
-            "components": [],
-            "alpha": 0.2,
-            "isFilled": true,
-            "width": 9999,
-            "height": 9999
         }
     ],
     "plainObjects": [],

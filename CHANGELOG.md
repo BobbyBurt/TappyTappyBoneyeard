@@ -15,14 +15,17 @@ This version started with a code refactor, so some of these changes, as well as 
 - Debug wall detect graphic now changes colour based on onWall state.
 - Player sprites are all now contained within one spritesheet and atlas.
 - Made player physics body size / offset adjustments.
+- Overhauled tutorial UI functionality to be better and more consistent across mobile & desktop.
 
 ### Added
 
-- Added pause functionality which happens automatically when the window loses focus.
+- Added pause functionality which happens automatically when the window loses focus, or on user input.
 - Added hitstop when hitting enemies.
 - Added enemy hit particles.
 - Added updated punch charge UI.
 - Improved level timer UI.
+- Added tutorial popup frame.
+- Added InputManager class with functions providing names and bindings.
 
 ### Removed
 

@@ -196,7 +196,7 @@ export default class LevelSelect extends Phaser.Scene {
 			{
 				_this.gamepad = pad;
 
-				InputManager.inputMode = 1;
+				InputManager.activeInputMode = 'gamepad';
 					// TEMP: For playtesting. A final solution needs to update input mode at any time.
 			});
 

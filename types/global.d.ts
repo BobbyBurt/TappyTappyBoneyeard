@@ -12,5 +12,7 @@ declare global
 
     type EnemyHitCause = undefined | 'dive' | 'punch' | 'uppercut' | 'explosion' | 'chain';
 
+    type inputMode = 'keyboard' | 'gamepad' | 'touch';
+
     var __DEV__: boolean;
 }

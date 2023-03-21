@@ -1,110 +1,249 @@
+
+type outPutName = 'jump' | 'punch' | 'uppercut' | 'dive' 
+	| 'tutorial-toggle' | 'pause' 
+	| 'menu-up' | 'menu-down' | 'menu-left' | 'menu-right' | 'menu-confirm' | 'menu-back';
+
+interface outputTest
+{
+	names: string;
+}
+
 export default class InputManager {
-	
-	/** 0 = keyboard, 1 = gamepad, 2 = mobile */
-	public static inputMode: 0 | 1 | 2 = 0;
 
-	public gamepad: Phaser.Input.Gamepad.Gamepad | undefined;
-	
-	private static jumpInputName = 
-	[
-		'up arrow key' ,
-		`right button`,
-		'green button'
-	];
+	/** Input mode currently in use. */
+	public static activeInputMode: inputMode = 'keyboard';
 
-	public static getJumpInputName(): string
+	private static inputNames = new Map<outPutName, Array<string | null>>
+	([
+		['jump', 
+		[
+			'up arrow key',
+			`right button`,
+			'green button'
+		]],
+		['punch',
+		[
+			'X key',
+			`down button`,
+			'red button'
+		]],
+		['uppercut',
+		[
+			'Z key',
+			`D-pad up`,
+			'yellow button'
+		]],
+		['dive',
+		[
+			'down arrow key',
+			`D-pad down`,
+			'blue button'
+		]],
+		['punch',
+		[
+			'X key',
+			`down button`,
+			'red button'
+		]],
+		['tutorial-toggle',
+		[
+			'space key' ,
+			`up button`,
+			'tap'
+		]],
+		['pause',
+		[
+			'P key',
+			`start button`,
+			'top right button'
+		]],
+		['menu-up',
+		[
+			'up arrow key',
+			`D-pad up`,
+			null
+		]],
+		['menu-down',
+		[
+			'down arrow key',
+			`D-pad down`,
+			null
+		]],
+		['menu-left',
+		[
+			'left arrow key',
+			`D-pad left`,
+			null
+		]],
+		['menu-right',
+		[
+			'right arrow key',
+			`D-pad right`,
+			null
+		]],
+		['menu-confirm',
+		[
+			'X key',
+			`right button`,
+			'tap'
+		]],
+		['menu-back',
+		[
+			'Z key',
+			`left button`,
+			'back button'
+		]]
+	]);
+
+	// TODO: fill these in as they become needed.
+	private static inputs = new Map<outPutName, Array<string | number | null>>
+	([
+		['jump', 
+		[
+			'up arrow key',
+			`right button`,
+			'green button'
+		]],
+		['punch',
+		[
+			'X key',
+			`down button`,
+			'red button'
+		]],
+		['uppercut',
+		[
+			'Z key',
+			`D-pad up`,
+			'yellow button'
+		]],
+		['dive',
+		[
+			'down arrow key',
+			`D-pad down`,
+			'blue button'
+		]],
+		['punch',
+		[
+			'X key',
+			`down button`,
+			'red button'
+		]],
+		['tutorial-toggle',
+		[
+			'SPACE' ,
+			3,
+			null
+		]],
+		['pause',
+		[
+			'P',
+			9,
+			'top right button'
+		]],
+		['menu-up',
+		[
+			'up arrow key',
+			`D-pad up`,
+			null
+		]],
+		['menu-down',
+		[
+			'down arrow key',
+			`D-pad down`,
+			null
+		]],
+		['menu-left',
+		[
+			'left arrow key',
+			`D-pad left`,
+			null
+		]],
+		['menu-right',
+		[
+			'right arrow key',
+			`D-pad right`,
+			null
+		]],
+		['menu-confirm',
+		[
+			'X key',
+			`right button`,
+			'tap'
+		]],
+		['menu-back',
+		[
+			'Z key',
+			`left button`,
+			'back button'
+		]]
+	]);
+
+	private static inputModeToNumber(inputMode: inputMode): number
 	{
-		return this.jumpInputName[this.inputMode];
-	}
-
-	/** 0 = keyboard, 1 = gamepad, 2 = mobile */
-	private static jumpInputHintKey = 
-	[
-		'bg-tileset',
-		'bg-tileset',
-		'bg-tileset'
-	];
-
-	/** 0 = keyboard, 1 = gamepad, 2 = mobile */
-	private static punchInputName = 
-	[
-		'X key' ,
-		`down button`,
-		'red button'
-	];
-
-	public static getPunchInputName(): string
-	{
-		return this.punchInputName[this.inputMode];
-	}
-
-	/** 0 = keyboard, 1 = gamepad, 2 = mobile */
-	private static punchInputHintKey = 
-	[
-		'tileset',
-		'tileset',
-		'tileset'
-	];
-
-	/** 0 = keyboard, 1 = gamepad, 2 = mobile */
-	private static uppercutInputName = 
-	[
-		'Z key' ,
-		`D-pad up`,
-		'yellow button'
-	];
-
-	public static getUppercutInputName(): string
-	{
-		return this.uppercutInputName[this.inputMode];
-	}
-
-	/** 0 = keyboard, 1 = gamepad, 2 = mobile */
-	private static diveInputName = 
-	[
-		'down arrow key' ,
-		`D-pad down`,
-		'blue button'
-	];
-
-	public static getDiveInputName(): string
-	{
-		return this.diveInputName[this.inputMode];
-	}
-
-	/** 0 = keyboard, 1 = gamepad, 2 = mobile */
-	private static tutorialDismissInputName = 
-	[
-		'space key' ,
-		`up button`,
-		'tap'
-	];
-
-	public static getTutoiralDismissInputName(): string
-	{
-		return this.tutorialDismissInputName[this.inputMode];
-	}
-
-	setupGamepad(scene: Phaser.Scene)
-	{
-		const _this = this;
-		scene.input.gamepad.on('down', function 
-		(pad:Phaser.Input.Gamepad.Gamepad, button:Phaser.Input.Gamepad.Button, index:number)
+		switch(inputMode)
 		{
-			console.debug('gamepad set');
-
-			_this.gamepad = pad;
-
-			InputManager.inputMode = 1;
-				// TEMP: For playtesting. A final solution needs to update input mode at any time.
-
-				// _this.gamepad?.on
-		});
-
+			case 'gamepad':
+				return 1;
+			case 'touch':
+				return 2;
+			default:
+				return 0;
+		}
 	}
 
-	gamepadEventHandler()
+	/**
+	 * 
+	 * @param outputName
+	 * @param inputMode If `null`, `currentInputMode` will be used.
+	 * @returns Input name which can be used to instruct the player.
+	 */
+	public static getInputName(outputName: outPutName, inputMode?: inputMode): string | null
 	{
+		if (inputMode == null)
+		{
+			inputMode = this.activeInputMode;
+		}
+		const inputModeNumber = this.inputModeToNumber(inputMode);
 
+		return this.inputNames.get(outputName)![inputModeNumber];
+	}
+
+	/**
+	 * 
+	 * @param outputName
+	 * @param inputMode If `null`, `currentInputMode` will be used.
+	 * @returns Input `string` which can be postfixed to an event name.
+	 */
+	public static getInput(outputName: outPutName, inputMode?: inputMode): string | number | null
+	{
+		if (inputMode == null)
+		{
+			inputMode = this.activeInputMode;
+		}
+		const inputModeNumber = this.inputModeToNumber(inputMode);
+
+		return this.inputs.get(outputName)![inputModeNumber];
+	}
+
+	/**
+	 * 
+	 * @param outputName
+	 * @param inputMode If `null`, `currentInputMode` will be used.
+	 * @returns key for hint image
+	 */
+	public static getInputHintKey(outputName: outPutName, inputMode?: inputMode): string | null
+	{
+		return 'asdf';
+	}
+
+	/**
+	 * 
+	 * @param outputName
+	 * @param inputMode If `null`, `currentInputMode` will be used.
+	 * @returns Input name which can be postfixed to an event name.
+	 */
+	public static setInputName(outputName: outPutName, inputMode?: inputMode): void
+	{
+		// TODO
 	}
 }

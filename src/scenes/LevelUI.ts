@@ -621,7 +621,7 @@ export default class LevelUI extends Phaser.Scene {
 		{
 			this.tutorialText.setText(tutorialManager.getTutorialText(level!)!);
 			this.tutorialCloseText.setText
-				(`- ${InputManager.getTutoiralDismissInputName().toUpperCase()} TO DISMISS -`);
+				(`- ${InputManager.getInputName('tutorial-toggle')?.toString().toUpperCase()} TO DISMISS -`);
 			this.tutorialContainer.setVisible(true);
 
 			// TODO: set input hint
