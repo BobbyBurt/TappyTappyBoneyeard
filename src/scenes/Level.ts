@@ -532,7 +532,7 @@ export default class Level extends Phaser.Scene {
 			this.setDebugUI();
 		}
 
-		if (this.levelTimer)
+		if (this.levelTimer && this.player.started)
 		{
 			this.uiScene.setTimer(this.levelTimer.getRemaining());
 		}

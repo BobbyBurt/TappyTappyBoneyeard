@@ -23,7 +23,7 @@ export default class Uppercut implements State {
 	{
 		this.player.scene.game.events.emit('uppercut');
 
-		this.player.scene.game.events.emit('player-start');
+		this.player.scene.events.emit('player-start');
 		this.player.started = true;
 		
 		this.player.variableUppercutSpeed = this.player.uppercutSpeed;

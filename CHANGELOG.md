@@ -18,6 +18,7 @@ This version focuses on additions & improvements to gameplay UI among other addi
 - Overhauled tutorial UI functionality to be better and more consistent across mobile & desktop.
 - Quick restart / level select shortcuts are now exclusive to dev mode & keyboard input.
 - Replaced grenade sprite with a mask, more clearly defining enemies which explode on impact.
+- Player & timer are still until player jumps, uppercuts or punches.
 
 ### Added
 

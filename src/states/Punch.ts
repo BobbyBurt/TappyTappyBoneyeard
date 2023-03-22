@@ -21,7 +21,7 @@ export default class Punch implements State {
 	{
 		this.player.scene.game.events.emit('punch');
 		
-		this.player.scene.game.events.emit('player-start');
+		this.player.scene.events.emit('player-start');
 		this.player.started = true;
 
 		this.player.playAnimation('punch');
