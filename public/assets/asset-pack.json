@@ -533,6 +533,11 @@
                 "key": "tutorial"
             },
             {
+                "url": "assets/levels/tutorial-finale.json",
+                "type": "tilemapTiledJSON",
+                "key": "tutorial-finale"
+            },
+            {
                 "url": "assets/tutorial-ipad.png",
                 "type": "image",
                 "key": "tutorial-ipad"

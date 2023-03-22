@@ -909,10 +909,10 @@ export default class Level extends Phaser.Scene {
 
 		this.updateEnemiesUI(false);
 
-		if (this.player.stateController.currentState.name !== 'dive')
-		{
-			this.goalEnemyCheck(enemy);
-		}
+		// if (this.player.stateController.currentState.name !== 'dive')
+		// {
+		// 	this.goalEnemyCheck(enemy);
+		// }
 	}
 
 	/**
@@ -1324,6 +1324,7 @@ export default class Level extends Phaser.Scene {
 
 	goalEnemyCheck(enemy: EnemyPrefab)
 	{
+
 		if (enemy.isGoal)
 		{
 			if (!this.reachedGoal)

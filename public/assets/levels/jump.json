@@ -40,8 +40,8 @@
                  "type":"",
                  "visible":true,
                  "width":16,
-                 "x":272,
-                 "y":816
+                 "x":224,
+                 "y":832
                 }, 
                 {
                  "gid":39,
@@ -71,7 +71,7 @@
         {
          "columns":6,
          "firstgid":1,
-         "image":"..\/..\/..\/..\/levels\/tileset.png",
+         "image":"..\/..\/..\/..\/levels\/tutorial\/tileset.png",
          "imageheight":128,
          "imagewidth":96,
          "margin":0,
@@ -144,7 +144,7 @@
         {
          "columns":6,
          "firstgid":49,
-         "image":"..\/..\/..\/..\/levels\/tileset-bg.png",
+         "image":"..\/..\/..\/..\/levels\/tutorial\/tileset-bg.png",
          "imageheight":96,
          "imagewidth":96,
          "margin":0,

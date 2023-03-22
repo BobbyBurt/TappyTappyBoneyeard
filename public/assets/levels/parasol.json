@@ -134,55 +134,7 @@
                  "y":672
                 }, 
                 {
-                 "gid":2147483685,
-                 "height":16,
-                 "id":76,
-                 "name":"",
-                 "properties":[
-                        {
-                         "name":"Balloon",
-                         "type":"bool",
-                         "value":false
-                        }, 
-                        {
-                         "name":"Bomb",
-                         "type":"bool",
-                         "value":false
-                        }, 
-                        {
-                         "name":"Goal",
-                         "type":"bool",
-                         "value":false
-                        }, 
-                        {
-                         "name":"Gun Direction",
-                         "type":"string",
-                         "value":""
-                        }, 
-                        {
-                         "name":"Mine",
-                         "type":"bool",
-                         "value":false
-                        }, 
-                        {
-                         "name":"Parasol",
-                         "type":"bool",
-                         "value":false
-                        }, 
-                        {
-                         "name":"Pogo",
-                         "type":"bool",
-                         "value":false
-                        }],
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":16,
-                 "x":608,
-                 "y":672
-                }, 
-                {
-                 "gid":2147483686,
+                 "gid":38,
                  "height":16,
                  "id":77,
                  "name":"",
@@ -190,7 +142,7 @@
                  "type":"",
                  "visible":true,
                  "width":16,
-                 "x":560,
+                 "x":624,
                  "y":672
                 }, 
                 {
