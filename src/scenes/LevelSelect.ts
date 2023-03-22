@@ -142,7 +142,7 @@ export default class LevelSelect extends Phaser.Scene {
 
 	private UICam!: Phaser.Cameras.Scene2D.BaseCamera | any;
 
-	private levelsKey = ['jump', 'flap', 'punch', 'airborne', 'dive', 'gunfire', 'uppercut', 'charge', 'combo', 'dive-tec', 'intro', 'parasol', 'pogo', 'grenade', 'final'];
+	public static levelsKey = ['jump', 'flap', 'punch', 'airborne', 'dive', 'gunfire', 'uppercut', 'charge', 'combo', 'bomb-intro', 'dive-tec', 'intro', 'parasol', 'pogo', 'grenade', 'final'];
 
 	private gamepad:Phaser.Input.Gamepad.Gamepad | undefined;
 	private SelectKey!: Phaser.Input.Keyboard.Key;
@@ -167,13 +167,13 @@ export default class LevelSelect extends Phaser.Scene {
 			// console.log(this.selectedLevel);
 		}
 		this.levelText.setText
-			('Level ' + (this.selectedLevel + 1) + ' - ' + this.levelsKey[this.selectedLevel]);
+			('Level ' + (this.selectedLevel + 1) + ' - ' + LevelSelect.levelsKey[this.selectedLevel]);
 
 	// load level button event
 		this.levelBack.setInteractive();
 		this.levelBack.on('pointerdown', () =>
 		{
-			this.registry.set('current-level', this.levelsKey[this.selectedLevel]);
+			this.registry.set('current-level', LevelSelect.levelsKey[this.selectedLevel]);
 			this.loadLevel();
 		});
 
@@ -208,7 +208,7 @@ export default class LevelSelect extends Phaser.Scene {
 	{
 		if (this.gamepad?.isButtonDown(9) || this.StartKey.isDown)
 		{
-			this.registry.set('current-level', this.levelsKey[this.selectedLevel]);
+			this.registry.set('current-level', LevelSelect.levelsKey[this.selectedLevel]);
 			this.loadLevel();
 		}
 
@@ -231,18 +231,18 @@ export default class LevelSelect extends Phaser.Scene {
 		this.selectedLevel += (direction == 'up' ? -1 : 1);
 
 	// wrap variable to levelsKey array length
-		if (this.selectedLevel == this.levelsKey.length)
+		if (this.selectedLevel == LevelSelect.levelsKey.length)
 		{
 			this.selectedLevel = 0;
 		}
 		else if (this.selectedLevel == -1)
 		{
-			this.selectedLevel = this.levelsKey.length - 1;
+			this.selectedLevel = LevelSelect.levelsKey.length - 1;
 		}
 
 	// update visual
 		this.levelText.setText
-			('Level ' + (this.selectedLevel + 1) + ' - ' + this.levelsKey[this.selectedLevel]);
+			('Level ' + (this.selectedLevel + 1) + ' - ' + LevelSelect.levelsKey[this.selectedLevel]);
 	}
 
 	loadLevel()

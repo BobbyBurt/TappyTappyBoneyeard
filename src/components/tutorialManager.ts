@@ -41,7 +41,7 @@ export default class tutorialManager {
 				`Each enemy you take out will add to your combo as long as you're not grounded.\n\nTry to figure out ways to build that combo!`,
 
 			// level 10
-				`Good hustle out there! Time to test your skills.\n\nThis concludes the tutorial. Break a leg out there!`
+				// `Good hustle out there! Time to test your skills.\n\nThis concludes the tutorial. Break a leg out there!`
 		]
 
 		return texts[levelIndex];

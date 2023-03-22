@@ -166,14 +166,14 @@ export default class InputManager {
 		]],
 		['menu-confirm',
 		[
-			'X key',
-			`right button`,
+			'X',
+			1,
 			'tap'
 		]],
 		['menu-back',
 		[
-			'Z key',
-			`left button`,
+			'Z',
+			2,
 			'back button'
 		]]
 	]);

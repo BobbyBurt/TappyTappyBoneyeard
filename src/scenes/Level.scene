@@ -182,7 +182,8 @@
         },
         {
             "id": "ba8a8f59-dac4-499f-af01-63a37964e5ba",
-            "label": "enemyList"
+            "label": "enemyList",
+            "scope": "PUBLIC"
         },
         {
             "id": "3f521e89-f910-4cc1-ac5c-90d1d3fdb117",

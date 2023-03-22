@@ -437,6 +437,11 @@
                 "key": "soldier-blood-2"
             },
             {
+                "url": "assets/soldier-marked.png",
+                "type": "image",
+                "key": "soldier-marked"
+            },
+            {
                 "url": "assets/soldierfalling.png",
                 "type": "image",
                 "key": "soldierfalling"

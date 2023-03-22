@@ -1,6 +1,6 @@
 /* START OF COMPILED CODE */
 
-import Phaser, { Input } from "phaser";
+import Phaser from "phaser";
 import ScrollFactor from "../components/ScrollFactor";
 import playerPrefab from "../prefabs/playerPrefab";
 /* START-USER-IMPORTS */
@@ -20,6 +20,7 @@ import SoundManager from "~/components/SoundManager";
 import LevelUI from "./LevelUI";
 import tutorialManager from "~/components/tutorialManager";
 import InputManager from "~/components/InputManager";
+import LevelSelect from "./LevelSelect";
 
 /* END-USER-IMPORTS */
 
@@ -146,7 +147,7 @@ export default class Level extends Phaser.Scene {
 	public mainLayer!: Phaser.GameObjects.Layer;
 	public player!: playerPrefab;
 	public public_list!: Array<any>;
-	private enemyList!: Array<any>;
+	public enemyList!: Array<any>;
 	private gunEnemyList!: Array<any>;
 	private bombEnemyList!: Array<any>;
 	private bulletList!: Array<any>;
@@ -199,9 +200,11 @@ export default class Level extends Phaser.Scene {
 	 */
 	private mapElementList: Array<any>;
 	private goalEnemyIndex: number;
+	public enemiesDefeated = 0;
 
 // arcade
 	private combo = 0;
+	public highestCombo = 0;
 	private comboTextTween: Phaser.Tweens.Tween;
 	private scorePopupGroup: Phaser.GameObjects.Group;
 	private levelScore: number;
@@ -225,6 +228,7 @@ export default class Level extends Phaser.Scene {
 		this.reachedGoal = false;
 		this.restarting = false;
 		this.combo = 0;
+		this.highestCombo = 0;
 		this.cameraFollow = new Phaser.Math.Vector2(this.player.x, this.player.y);
 		this.currentLevelIndex = this.registry.get('current-level-index');
 
@@ -346,18 +350,6 @@ export default class Level extends Phaser.Scene {
 		SoundManager.play('reflect', this);
 		// this.environmentAudio.play(undefined, {volume: 0.03, loop: true});
 
-		// quick restart input
-		this.input.keyboard.on('keydown-S', () =>
-		{
-			this.resetLevel();
-		});
-
-		// level select input
-		this.input.keyboard.on('keydown-A', () =>
-		{
-			this.LoadLevelSelect();
-		});
-
 	// set active inputMode
 		this.input.keyboard.on('keydown', ()=>
 		{
@@ -366,6 +358,81 @@ export default class Level extends Phaser.Scene {
 		this.input.gamepad.on('down', () =>
 		{
 			InputManager.activeInputMode = 'gamepad';
+		});
+
+	// DEV - quick restart & exit
+		if (__DEV__)
+		{
+			this.input.keyboard.on('keydown-S', () =>
+			{
+				this.resetLevel();
+			});
+
+			// level select input
+			this.input.keyboard.on('keydown-A', () =>
+			{
+				this.LoadLevelSelect();
+			});
+		}
+
+	// summary continue
+		this.uiScene.input.keyboard.on('keydown-' + InputManager.getInput('menu-confirm', 'keyboard') , () =>
+		{
+			if (this.uiScene.summaryVisible)
+			{
+				this.LoadNextLevel();
+			}
+		});
+		this.uiScene.input.gamepad.on('down', 
+			(pad:Phaser.Input.Gamepad.Gamepad, button:Phaser.Input.Gamepad.Button, index:number) =>
+		{
+			if (button.index == InputManager.getInput('menu-confirm', 'gamepad'))
+			{
+				if (this.uiScene.summaryVisible)
+				{
+					this.LoadNextLevel();
+				}
+			}
+		});
+
+	// pause / summary exit
+		this.uiScene.input.keyboard.on('keydown-' + InputManager.getInput('menu-back', 'keyboard') , () =>
+		{
+			if (this.manualPause || this.uiScene.summaryVisible)
+			{
+				this.LoadLevelSelect();
+			}
+		});
+		this.uiScene.input.gamepad.on('down', 
+			(pad:Phaser.Input.Gamepad.Gamepad, button:Phaser.Input.Gamepad.Button, index:number) =>
+		{
+			if (button.index == InputManager.getInput('menu-back', 'gamepad'))
+			{
+				if (this.manualPause || this.uiScene.summaryVisible)
+				{
+					this.LoadLevelSelect();
+				}
+			}
+		});
+
+	// pause restart
+		this.uiScene.input.keyboard.on('keydown-' + InputManager.getInput('menu-confirm', 'keyboard') , () =>
+		{
+			if (this.manualPause)
+			{
+				this.resetLevel();
+			}
+		});
+		this.uiScene.input.gamepad.on('down', 
+			(pad:Phaser.Input.Gamepad.Gamepad, button:Phaser.Input.Gamepad.Button, index:number) =>
+		{
+			if (button.index == InputManager.getInput('menu-confirm', 'gamepad'))
+			{
+				if (this.manualPause)
+				{
+					this.resetLevel();
+				}
+			}
 		});
 
 	// tutorial show / hide
@@ -382,7 +449,26 @@ export default class Level extends Phaser.Scene {
 			}
 		});
 
-		// level select input
+	// pause
+		this.game.events.on(Phaser.Core.Events.BLUR, this.pause, this);
+		if (__DEV__)
+		{
+			this.game.events.on(Phaser.Core.Events.FOCUS, this.unpause, this);
+		}
+		this.uiScene.input.gamepad.on('down', 
+			(pad:Phaser.Input.Gamepad.Gamepad, button:Phaser.Input.Gamepad.Button, index:number) =>
+		{
+			if (button.index === InputManager.getInput('pause', 'gamepad'))
+			{
+				this.toggleManualPause();
+			}
+		});
+		this.uiScene.input.keyboard.on('keydown-' + InputManager.getInput('pause', 'keyboard'), () =>
+		{
+			this.toggleManualPause();
+		});
+
+	// mute
 		this.input.keyboard.on('keydown-M', () =>
 		{
 			if (this.registry.get('muted'))
@@ -419,26 +505,6 @@ export default class Level extends Phaser.Scene {
 				}
 			}
 		});
-
-	// pause
-		this.game.events.on(Phaser.Core.Events.BLUR, this.pause, this);
-		if (__DEV__)
-		{
-			this.game.events.on(Phaser.Core.Events.FOCUS, this.unpause, this);
-		}
-		this.uiScene.input.gamepad.on('down', 
-			(pad:Phaser.Input.Gamepad.Gamepad, button:Phaser.Input.Gamepad.Button, index:number) =>
-		{
-			if (button.index === InputManager.getInput('pause', 'gamepad'))
-			{
-				this.toggleManualPause();
-			}
-		});
-		this.uiScene.input.keyboard.on('keydown-' + InputManager.getInput('pause', 'keyboard'), () =>
-		{
-			this.toggleManualPause();
-		});
-
 
 	// particles
 		this.enemyBloodEmitterManager = this.add.particles('soldier-blood-1')
@@ -537,8 +603,13 @@ export default class Level extends Phaser.Scene {
 			return;
 		}
 
+		// set level played
+		this.registry.set('level-played-' + this.currentLevelIndex, true)
+
 		this.destroyScene();
 		this.uiScene.scene.restart();
+		this.scene.get('Pause').scene.stop();
+		this.manualPause = false;
 		this.scene.restart();
 	}
 
@@ -555,9 +626,40 @@ export default class Level extends Phaser.Scene {
 			return;
 		}
 
+		// set level played
+		this.registry.set('level-played-' + this.currentLevelIndex, true)
+
 		this.destroyScene();
 		this.uiScene.scene.stop();
+		this.scene.get('Pause').scene.stop();
+		this.manualPause = false;
 		this.scene.start('LevelSelect');
+	}
+
+	/** stops this scene, shutting down update listeners, and starts level select scene */
+	LoadNextLevel()
+	{
+		// this function should only happen once
+		if (!this.restarting)
+		{
+			this.restarting = true;
+		}
+		else 
+		{
+			return;
+		}
+
+		// set level played
+		this.registry.set('level-played-' + this.currentLevelIndex, true)
+
+		this.destroyScene();
+		this.uiScene.scene.restart();
+		this.scene.get('Pause').scene.stop();
+		this.manualPause = false;
+		this.registry.set('current-level-index', this.currentLevelIndex + 1);
+			// TODO: add wrap!
+		this.registry.set('current-level', LevelSelect.levelsKey[this.registry.get('current-level-index')]);
+		this.scene.start('Level');
 	}
 
 	/** DEPRECATED - Checks for tiles and updates player onWallLeft/Right  */
@@ -823,6 +925,11 @@ export default class Level extends Phaser.Scene {
 
 	updateCombo()
 	{
+		if (this.combo > this.highestCombo)
+		{
+			this.highestCombo = this.combo;
+		}
+
 		if (this.combo > 1)
 		{
 			this.uiScene.showComboUI(this.combo)
@@ -1130,11 +1237,14 @@ export default class Level extends Phaser.Scene {
 	createEnemyBloodParticles(enemy:EnemyPrefab, cause: EnemyHitCause, velocity: Phaser.Math.Vector2)
 	{
 		let angle = 0;
+		let speedMin = 300;
+		let speedMax = 400;
+		let spread = 4;
 
 		switch(cause)
 		{
 			case 'punch':
-				angle = (velocity.x <-15 ? 195 : 0);
+				angle = (velocity.x <-15 ? 190 : -10	);
 				break;
 
 			case 'uppercut':
@@ -1143,6 +1253,9 @@ export default class Level extends Phaser.Scene {
 
 			case 'dive':
 				angle = (velocity.x > 0 ? 60 : 120)
+				speedMin = 200;
+				speedMax = 300;
+				spread = 10;
 				break;
 					// TODO: change speed
 
@@ -1155,8 +1268,8 @@ export default class Level extends Phaser.Scene {
 		this.enemyBloodEmitter = this.enemyBloodEmitterManager.createEmitter
 		({
 			lifespan: 3000,
-			speed: { min: 300, max: 400 },
-			angle: { min: angle - 4, max: angle + 4 },
+			speed: { min: speedMin, max: speedMax },
+			angle: { min: angle - spread, max: angle + spread },
 			// alpha: { start: 1, end: 0 },
 			scale: { start: 1, end: 0 },
 			gravityY: 200,
@@ -1220,7 +1333,8 @@ export default class Level extends Phaser.Scene {
 
 	levelEndFeedback()
 	{
-		this.uiScene.showLevelCompleteText();
+		// this.uiScene.showLevelCompleteText();
+		this.uiScene.showSummaryUI();
 
 		// Plane fly away tween
 		this.tweens.add
@@ -1569,7 +1683,7 @@ export default class Level extends Phaser.Scene {
 	 * 	Used as window focus event handler */
 	pause()
 	{
-		if (this.uiScene.tutorialVisible)
+		if (this.uiScene.tutorialVisible || this.uiScene.summaryVisible)
 		{
 			return;
 		}
@@ -1584,7 +1698,7 @@ export default class Level extends Phaser.Scene {
 	 * 	Used as window focus event handler */
 	unpause()
 	{
-		if (this.uiScene.tutorialVisible)
+		if (this.uiScene.tutorialVisible || this.uiScene.summaryVisible)
 		{
 			return;
 		}
@@ -1657,7 +1771,12 @@ export default class Level extends Phaser.Scene {
 		{
 			return;
 		}
-		
+
+		if (this.uiScene.summaryVisible)
+		{
+			return;
+		}
+
 		if (this.uiScene.tutorialOffsetTween)
 		{
 			if (this.uiScene.tutorialOffsetTween.progress < 1)
@@ -1665,7 +1784,7 @@ export default class Level extends Phaser.Scene {
 				return;
 			}
 		}
-		
+
 		if (show && !tutorialManager.doTutorialInDevMode)
 		{
 			show = false;
@@ -1683,19 +1802,20 @@ export default class Level extends Phaser.Scene {
 		let tutorialNecessary = (this.currentLevelIndex < 10);
 			// hardcoded: change this if tutorial level count changes
 
-		if (this.registry.get('completed-level-' + this.currentLevelIndex)
-		|| !tutorialManager.getTutorialText(this.currentLevelIndex))
+
+		if (tutorialManager.getTutorialText(this.currentLevelIndex))
 		{
-			tutorialNecessary = false;
-		}
+			if (this.registry.get('level-played-' + this.currentLevelIndex) && initial)
+			{
+				this.uiScene.setTutorialUI(false, false, this.currentLevelIndex);
+			}
+			else
+			{
+				this.uiScene.setTutorialUI(true, true, this.currentLevelIndex);
 
-		if (tutorialNecessary)
-		{
-			this.uiScene.setTutorialUI(true, true, this.currentLevelIndex);
+				this.scene.pause();
+			}
 
-			let BRK;
-
-			this.scene.pause();
 		}
 	}
 
@@ -1717,6 +1837,8 @@ export default class Level extends Phaser.Scene {
 
 		this.uiScene.setEnemiesText(defeatedEnemyCount, this.enemyList.length)
 
+		this.enemiesDefeated = defeatedEnemyCount;
+
 		if (!initialize)
 		{
 			this.uiScene.animateEnemiesText();
@@ -1727,9 +1849,10 @@ export default class Level extends Phaser.Scene {
 	{
 		if (this.uiScene.scene.isActive())
 		{
-			this.uiScene.setDebugText(0, `${this.player.stateController.currentState.name}`);
-			this.uiScene.setDebugText(1, `player vel x : ${this.player.body.velocity.x}`);
-			this.uiScene.setDebugText(2, `player vel y : ${this.player.body.velocity.y}`);
+			// this.uiScene.setDebugText(0, `${this.player.stateController.currentState.name}`);
+			this.uiScene.setDebugText(0, `level completed: ${this.registry.get('completed-level-' + this.currentLevelIndex)}`);
+			this.uiScene.setDebugText(1, `manual pause : ${this.manualPause}`);
+			this.uiScene.setDebugText(2, `tutorial visible : ${this.uiScene.tutorialVisible}`);
 		}
 	}
 

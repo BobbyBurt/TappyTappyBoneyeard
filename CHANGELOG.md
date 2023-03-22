@@ -16,6 +16,7 @@ This version started with a code refactor, so some of these changes, as well as 
 - Player sprites are all now contained within one spritesheet and atlas.
 - Made player physics body size / offset adjustments.
 - Overhauled tutorial UI functionality to be better and more consistent across mobile & desktop.
+- Quick restart / level select shortcuts are now exclusive to dev mode & keyboard input.
 
 ### Added
 
@@ -27,6 +28,7 @@ This version started with a code refactor, so some of these changes, as well as 
 - Added tutorial popup frame.
 - Added InputManager class with functions providing names and bindings. The active input mode will be detected, and relevant input names will be used when instructing the player.
 - Loading screen now shows each asset key as it's loaded, because it looks cool.
+- Added post-level summary screen.
 
 ### Removed
 

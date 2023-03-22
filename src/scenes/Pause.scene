@@ -18,11 +18,29 @@
             "label": "rectangle_1",
             "components": [],
             "y": 1,
-            "alpha": 0.5,
+            "alpha": 0.3,
             "isFilled": true,
             "fillColor": "#DB7884",
             "width": 9999,
             "height": 9999
+        },
+        {
+            "type": "Rectangle",
+            "id": "0fa2f49e-8e20-4a51-924a-719ca3750fe8",
+            "label": "UIBox",
+            "components": [
+                "Align"
+            ],
+            "Align.middle": true,
+            "Align.center": true,
+            "x": 4,
+            "y": 26,
+            "scaleX": 1.015952972315307,
+            "scaleY": 0.8351918848448167,
+            "isFilled": true,
+            "fillColor": "#DB7884",
+            "width": 128,
+            "height": 128
         },
         {
             "type": "BitmapText",
@@ -34,7 +52,6 @@
             ],
             "Align.middle": true,
             "Align.center": true,
-            "Align.verticalOffset": 10,
             "x": 29,
             "y": 2,
             "originX": 0.5,
@@ -55,7 +72,7 @@
             ],
             "Align.middle": true,
             "Align.center": true,
-            "Align.verticalOffset": -10,
+            "Align.verticalOffset": -20,
             "x": 35,
             "y": 10,
             "originX": 0.5,

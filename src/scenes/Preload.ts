@@ -99,7 +99,7 @@ export default class Preload extends Phaser.Scene {
 
 		this.load.on('filecomplete', (key: string, type: string, data: any) =>
 		{
-			this.fileText.setText(this.fileText.text + `\nloaded: ${key}`)
+			this.fileText.setText(this.fileText.text + `\nloaded: ${key} ${type}`)
 			this.fileText.setY(this.fileText.y - 10)
 		});
 	}

@@ -202,22 +202,6 @@ export default class playerPrefab extends Phaser.Physics.Arcade.Sprite {
 	/** update input values based on key / gamepad / mobile button state */
 	inputCheck()
 	{
-	// restart
-		if (this.gamepad?.isButtonDown(9))
-		{
-			let _scene = this.scene as Level;
-
-			_scene.resetLevel();
-		}
-
-	// level select
-		if (this.gamepad?.isButtonDown(8))
-		{
-			let _scene = this.scene as Level;
-
-			_scene.LoadLevelSelect();
-		}
-
 		if (this.lockInput)
 		{
 			return;

@@ -13,6 +13,45 @@
     },
     "displayList": [
         {
+            "type": "Rectangle",
+            "id": "9d657a45-fb09-47f3-94bc-a510f3dea163",
+            "label": "TimerBox",
+            "components": [
+                "Align"
+            ],
+            "Align.up": true,
+            "Align.center": true,
+            "Align.verticalOffset": 7,
+            "x": 348,
+            "y": 961,
+            "originY": 0,
+            "isFilled": true,
+            "fillColor": "#ffffff",
+            "width": 80,
+            "height": 23
+        },
+        {
+            "type": "BitmapText",
+            "id": "4636bd62-3c18-425e-b9a9-5a75cbf44007",
+            "label": "timerText",
+            "scope": "PUBLIC",
+            "components": [
+                "Align"
+            ],
+            "Align.up": true,
+            "Align.center": true,
+            "Align.horizontalOffset": -25,
+            "Align.verticalOffset": -90,
+            "x": 323.3856506347656,
+            "y": 857.4503784179688,
+            "text": "12:04",
+            "font": "nokia",
+            "fontSize": -16,
+            "dropShadowY": 100,
+            "dropShadowAlpha": 1,
+            "dropShadowColor": "#222222ff"
+        },
+        {
             "type": "Container",
             "id": "55c7007c-09ce-4496-ae56-49d5c08253b4",
             "label": "tutorialContainer",
@@ -100,45 +139,6 @@
                     ]
                 }
             ]
-        },
-        {
-            "type": "Rectangle",
-            "id": "9d657a45-fb09-47f3-94bc-a510f3dea163",
-            "label": "TimerBox",
-            "components": [
-                "Align"
-            ],
-            "Align.up": true,
-            "Align.center": true,
-            "Align.verticalOffset": 7,
-            "x": 348,
-            "y": 961,
-            "originY": 0,
-            "isFilled": true,
-            "fillColor": "#ffffff",
-            "width": 80,
-            "height": 23
-        },
-        {
-            "type": "BitmapText",
-            "id": "4636bd62-3c18-425e-b9a9-5a75cbf44007",
-            "label": "timerText",
-            "scope": "PUBLIC",
-            "components": [
-                "Align"
-            ],
-            "Align.up": true,
-            "Align.center": true,
-            "Align.horizontalOffset": -25,
-            "Align.verticalOffset": -90,
-            "x": 323.3856506347656,
-            "y": 857.4503784179688,
-            "text": "12:04",
-            "font": "nokia",
-            "fontSize": -16,
-            "dropShadowY": 100,
-            "dropShadowAlpha": 1,
-            "dropShadowColor": "#222222ff"
         },
         {
             "type": "BitmapText",
@@ -391,28 +391,6 @@
         },
         {
             "type": "Rectangle",
-            "id": "80881e54-33ad-4096-8ed5-03e85927ae51",
-            "label": "mobileButtonLevelSelect",
-            "scope": "PUBLIC",
-            "components": [
-                "Align",
-                "MobileDependent",
-                "MobileButton"
-            ],
-            "Align.up": true,
-            "Align.right": true,
-            "x": 745.9039965335135,
-            "y": 635.8854342086155,
-            "originX": 1,
-            "originY": 0,
-            "alpha": 0.5,
-            "isFilled": true,
-            "fillColor": "#ce7ced",
-            "width": 75,
-            "height": 75
-        },
-        {
-            "type": "Rectangle",
             "id": "927778af-8880-446d-a10d-308c0409e71e",
             "label": "mobileButtonPunch",
             "scope": "PUBLIC",
@@ -480,6 +458,28 @@
             "height": 120
         },
         {
+            "type": "Rectangle",
+            "id": "80881e54-33ad-4096-8ed5-03e85927ae51",
+            "label": "mobileButtonLevelSelect",
+            "scope": "PUBLIC",
+            "components": [
+                "Align",
+                "MobileDependent",
+                "MobileButton"
+            ],
+            "Align.up": true,
+            "Align.right": true,
+            "x": 745.9039965335135,
+            "y": 635.8854342086155,
+            "originX": 1,
+            "originY": 0,
+            "alpha": 0.5,
+            "isFilled": true,
+            "fillColor": "#ce7ced",
+            "width": 75,
+            "height": 75
+        },
+        {
             "type": "Image",
             "id": "3a2174d9-359d-4500-8bb5-3579ea8acaef",
             "label": "punchChargeEmpty",
@@ -540,6 +540,200 @@
             },
             "x": 518,
             "y": 631
+        },
+        {
+            "type": "Container",
+            "id": "4d45b9de-23ee-412c-8b40-2b55c6b7aa5e",
+            "label": "summaryContainer",
+            "scope": "CLASS",
+            "components": [
+                "Align"
+            ],
+            "Align.middle": true,
+            "Align.center": true,
+            "visible": false,
+            "list": [
+                {
+                    "type": "Rectangle",
+                    "id": "bee02086-d306-4c9f-b562-a73b3b7cad2b",
+                    "label": "SummaryBox",
+                    "components": [],
+                    "y": 15,
+                    "alpha": 0.5,
+                    "isFilled": true,
+                    "fillColor": "#DB7884",
+                    "width": 200,
+                    "height": 150
+                },
+                {
+                    "type": "BitmapText",
+                    "id": "63e2a642-e314-47e1-8050-f80ae3111adf",
+                    "label": "highestComboLabel",
+                    "scope": "CLASS",
+                    "components": [],
+                    "x": -70,
+                    "y": 10,
+                    "visible": false,
+                    "text": "HIGHEST COMBO:",
+                    "font": "nokia",
+                    "fontSize": -8
+                },
+                {
+                    "type": "BitmapText",
+                    "id": "5c137e6c-d0d1-4c9f-8339-4102e957c09b",
+                    "label": "highestCombo",
+                    "scope": "CLASS",
+                    "components": [],
+                    "x": 15,
+                    "y": 6,
+                    "visible": false,
+                    "text": "6",
+                    "font": "nokia",
+                    "fontSize": -16,
+                    "dropShadowY": 2,
+                    "dropShadowAlpha": 1,
+                    "dropShadowColor": "#0AE735"
+                },
+                {
+                    "type": "Image",
+                    "id": "6445237a-47f1-4f2f-85c8-d8e3ed9bccd0",
+                    "label": "soldiermid_0",
+                    "scope": "CLASS",
+                    "components": [],
+                    "texture": {
+                        "key": "soldiermid"
+                    },
+                    "x": -66,
+                    "y": -32,
+                    "flipX": true,
+                    "visible": false
+                },
+                {
+                    "type": "Image",
+                    "id": "1218b737-4a72-4f41-8d2e-f6ab034a8815",
+                    "label": "soldiermid_1",
+                    "scope": "CLASS",
+                    "components": [],
+                    "texture": {
+                        "key": "soldiermid"
+                    },
+                    "x": -49,
+                    "y": -20,
+                    "flipX": true,
+                    "visible": false
+                },
+                {
+                    "type": "Image",
+                    "id": "d1302e02-09fa-4c4f-a593-ac1f042dcdf5",
+                    "label": "soldiermid_2",
+                    "scope": "CLASS",
+                    "components": [],
+                    "texture": {
+                        "key": "soldiermid"
+                    },
+                    "x": -31,
+                    "y": -32,
+                    "flipX": true,
+                    "visible": false
+                },
+                {
+                    "type": "Image",
+                    "id": "49fb8630-de07-4a74-8695-93eddf39a48d",
+                    "label": "soldiermid_3",
+                    "scope": "CLASS",
+                    "components": [],
+                    "texture": {
+                        "key": "soldiermid"
+                    },
+                    "x": -14,
+                    "y": -20,
+                    "flipX": true,
+                    "visible": false
+                },
+                {
+                    "type": "Image",
+                    "id": "9eb235d4-975d-4f8b-85e2-e8e439700a73",
+                    "label": "soldiermid_4",
+                    "scope": "CLASS",
+                    "components": [],
+                    "texture": {
+                        "key": "soldiermid"
+                    },
+                    "x": 4,
+                    "y": -32,
+                    "flipX": true,
+                    "visible": false
+                },
+                {
+                    "type": "Image",
+                    "id": "1c77b988-3622-4c52-9372-224374cae0de",
+                    "label": "soldiermid_5",
+                    "scope": "CLASS",
+                    "components": [],
+                    "texture": {
+                        "key": "soldiermid"
+                    },
+                    "x": 21,
+                    "y": -20,
+                    "flipX": true,
+                    "visible": false
+                },
+                {
+                    "type": "Image",
+                    "id": "969bc786-4cfc-41b9-b23e-bfa02f72740a",
+                    "label": "soldiermid_6",
+                    "scope": "CLASS",
+                    "components": [],
+                    "texture": {
+                        "key": "soldiermid"
+                    },
+                    "x": 39,
+                    "y": -32,
+                    "flipX": true,
+                    "visible": false
+                },
+                {
+                    "type": "Image",
+                    "id": "c4caf446-06d3-4b3c-87c9-5ed23ad53dcc",
+                    "label": "soldiermid_7",
+                    "scope": "CLASS",
+                    "components": [],
+                    "texture": {
+                        "key": "soldiermid"
+                    },
+                    "x": 56,
+                    "y": -20,
+                    "flipX": true,
+                    "visible": false
+                },
+                {
+                    "type": "Image",
+                    "id": "4e7cc091-f3c0-4854-bdac-95702c4a75b0",
+                    "label": "soldiermid_8",
+                    "scope": "CLASS",
+                    "components": [],
+                    "texture": {
+                        "key": "soldiermid"
+                    },
+                    "x": 74,
+                    "y": -32,
+                    "flipX": true,
+                    "visible": false
+                },
+                {
+                    "type": "BitmapText",
+                    "id": "84433689-6cbf-4643-87ec-28574996e666",
+                    "label": "postSummaryInstructions",
+                    "scope": "CLASS",
+                    "components": [],
+                    "x": -67,
+                    "y": 49,
+                    "visible": false,
+                    "text": "use <input> to continue.\nuse <input> to retry.\nuse <input> to exit.",
+                    "font": "nokia",
+                    "fontSize": -8
+                }
+            ]
         }
     ],
     "plainObjects": [],

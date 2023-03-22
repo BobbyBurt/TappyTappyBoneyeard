@@ -3,7 +3,7 @@ import Level from "~/scenes/Level";
 
 export default class SoundManager {
 
-    private static playMusicInDevMode = false;
+    private static playMusicInDevMode = true;
 
 // music tracks
 	private static tracksKey = ['tutorial', 'main-game', 'tutorial']
