@@ -218,7 +218,7 @@ export default class LevelUI extends Phaser.Scene {
 		punchChargeEmpty.setOrigin(0, 1);
 
 		// punchChargeFull
-		const punchChargeFull = this.add.image(335, 682, "bird2fist");
+		const punchChargeFull = this.add.image(349, 682, "bird2fist");
 		punchChargeFull.scaleX = 2;
 		punchChargeFull.scaleY = 2;
 		punchChargeFull.angle = 90;
@@ -486,6 +486,7 @@ export default class LevelUI extends Phaser.Scene {
 		this.mobileButtonUppercut = mobileButtonUppercut;
 		this.mobileButtonJump = mobileButtonJump;
 		this.mobileButtonLevelSelect = mobileButtonLevelSelect;
+		this.punchChargeEmpty = punchChargeEmpty;
 		this.punchChargeFull = punchChargeFull;
 		this.fullscreenTestButton = fullscreenTestButton;
 		this.summaryContainer = summaryContainer;
@@ -527,6 +528,7 @@ export default class LevelUI extends Phaser.Scene {
 	public mobileButtonUppercut!: Phaser.GameObjects.Rectangle;
 	public mobileButtonJump!: Phaser.GameObjects.Rectangle;
 	public mobileButtonLevelSelect!: Phaser.GameObjects.Rectangle;
+	private punchChargeEmpty!: Phaser.GameObjects.Image;
 	private punchChargeFull!: Phaser.GameObjects.Image;
 	private fullscreenTestButton!: Phaser.GameObjects.Image;
 	private summaryContainer!: Phaser.GameObjects.Container;
@@ -549,6 +551,7 @@ export default class LevelUI extends Phaser.Scene {
 	private comboTextTween: Phaser.Tweens.Tween;
 	private enemiesTextTween: Phaser.Tweens.Tween;
 	private punchChargeTween: Phaser.Tweens.Tween;
+	private punchChargeTween2: Phaser.Tweens.Tween;
 
 // tutorial
 	public tutorialVisible = false;
@@ -695,11 +698,17 @@ export default class LevelUI extends Phaser.Scene {
 	{
 		this.punchChargeTween = this.tweens.add
 		({
-			duration: 500,
+			targets: [this.punchChargeFull, this.punchChargeEmpty],
+			duration: 300,
 			ease: Phaser.Math.Easing.Quintic.Out,
+			scale: (value? 2 : 1)
+		});
+		this.punchChargeTween = this.tweens.add
+		({
 			targets: this.punchChargeFull,
+			duration: 300,
+			ease: Phaser.Math.Easing.Quintic.Out,
 			alpha: (value? 1 : 0),
-			// scale: (value? 1 : .7)
 		});
 	}
 

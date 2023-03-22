@@ -483,6 +483,7 @@
             "type": "Image",
             "id": "3a2174d9-359d-4500-8bb5-3579ea8acaef",
             "label": "punchChargeEmpty",
+            "scope": "CLASS",
             "components": [
                 "Align"
             ],
@@ -516,7 +517,7 @@
             "texture": {
                 "key": "bird2fist"
             },
-            "x": 335,
+            "x": 349,
             "y": 682,
             "scaleX": 2,
             "scaleY": 2,

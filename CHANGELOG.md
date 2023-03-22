@@ -15,10 +15,10 @@ This version focuses on additions & improvements to gameplay UI among other addi
 - Debug wall detect graphic now changes colour based on onWall state.
 - Player sprites are all now contained within one spritesheet and atlas.
 - Made player physics body size / offset adjustments.
-- Overhauled tutorial UI functionality to be better and more consistent across mobile & desktop.
+- Overhauled tutorial UI functionality to be better and more consistent across mobile & desktop. Tutorial levesl have been updated to remove right-space which was added to account for previous tutorial UI offset.
 - Quick restart / level select shortcuts are now exclusive to dev mode & keyboard input.
 - Replaced grenade sprite with a mask, more clearly defining enemies which explode on impact.
-- Player & timer are still until player jumps, uppercuts or punches.
+- Player & timer are still until player jumps, uppercuts or punches. Tutorial levels have been updated to account for this.
 
 ### Added
 
