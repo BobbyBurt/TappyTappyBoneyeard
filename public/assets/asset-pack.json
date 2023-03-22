@@ -188,6 +188,11 @@
                 "key": "bomb-intro"
             },
             {
+                "url": "assets/bomb-mask.png",
+                "type": "image",
+                "key": "bomb-mask"
+            },
+            {
                 "url": "assets/levels/bombs.json",
                 "type": "tilemapTiledJSON",
                 "key": "bombs"

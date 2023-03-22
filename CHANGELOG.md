@@ -2,7 +2,7 @@
 
 # Version 12 Alpha
 
-This version started with a code refactor, so some of these changes, as well as others not stated here, are internal.
+This version focuses on additions & improvements to gameplay UI among other additions and improvements. Many internal changes and additions have been made as part of a code refactor, resulting in better player sprite loading, better sound handling, consistent & dynamic input handling, etc.
 
 ### Changed
 
@@ -17,6 +17,7 @@ This version started with a code refactor, so some of these changes, as well as 
 - Made player physics body size / offset adjustments.
 - Overhauled tutorial UI functionality to be better and more consistent across mobile & desktop.
 - Quick restart / level select shortcuts are now exclusive to dev mode & keyboard input.
+- Replaced grenade sprite with a mask, more clearly defining enemies which explode on impact.
 
 ### Added
 

@@ -168,7 +168,8 @@ export default class EnemyPrefab extends Phaser.GameObjects.Sprite {
 
 			if (!this.isFalling())
 			{
-				this.grenadeProp.setPosition(this.x + 5, this.y + 5);
+				this.grenadeProp.setPosition(this.x, this.y - 4);
+					// TODO: move with idle animation
 			}
 		}
 		
@@ -236,7 +237,8 @@ export default class EnemyPrefab extends Phaser.GameObjects.Sprite {
 
 	createGrenade()
 	{
-		this.grenadeProp = this.scene.add.image(this.x + 5, this.y + 5, 'grenade');
+		this.grenadeProp = this.scene.add.image(this.x, this.y, 'bomb-mask');
+		this.grenadeProp.setFlipX(this.flipX);
 		this.scene.physics.add.existing(this.grenadeProp, false);
 		this._scene.mainLayer.add(this.grenadeProp);
 		this.grenadeProp.setDepth(-8);
