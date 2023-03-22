@@ -331,8 +331,7 @@ export default class Level extends Phaser.Scene {
 		}
 
 	// object groups
-		this.bombGroup = this.add.group({ maxSize: 30, classType: BombPrefab });
-		// TODO: define max
+		this.bombGroup = this.add.group({ maxSize: 10, classType: BombPrefab });
 		this.physics.add.overlap(this.bombGroup, this.player, this.bombPlayerOverlap, undefined, this);
 		this.physics.add.overlap(this.bombGroup, this.player.fist, this.bombFistOverlap, undefined, this);
 		this.physics.add.overlap(this.bombGroup, this.enemyList, this.bombEnemyOverlap, undefined, this);
@@ -563,7 +562,7 @@ export default class Level extends Phaser.Scene {
 		this.bombGroup.getChildren().forEach(member =>
 		{
 			const _member = member as BombPrefab;
-			this.resetBomb(_member);
+			// _member.reset();
 		});
 
 	// update camera follow
@@ -806,15 +805,12 @@ export default class Level extends Phaser.Scene {
 			return;
 		}
 
-		this.setBombFuse(_bomb);
+		_bomb.setBombFuse();
 		_bomb.setPosition(_bomb.x, _bomb.y - 3);
-		const velocity = this.getKnockbackVelocty(false, 'punch');
+		const velocity = this.getKnockbackVelocty(false, (this.player.stateController.currentState.name === 'punch' ? 'punch' : 'uppercut'));
 		_bomb.body.setVelocity(velocity.x, velocity.y);
 		// _bomb.body.setVelocity(this.player.body.velocity.x * 1.3, (this.player.body.velocity.y * 1.5) - 150);
 		_bomb.punched = true;
-
-		this.player.punchCharged = true;
-		this.player.punchSpeed = this.player.moveSpeed;
 	}
 
 	bombEnemyOverlap(bomb: any, enemy: any)
@@ -846,7 +842,7 @@ export default class Level extends Phaser.Scene {
 		}
 		else if (_bomb.fuseTimer.getProgress() == 1)
 		{
-			this.setBombFuse(_bomb);
+			_bomb.setBombFuse();
 		}
 	}
 
@@ -975,24 +971,6 @@ export default class Level extends Phaser.Scene {
 		}
 	}
 
-	resetBomb(bomb: BombPrefab)
-	{
-		bomb.disappear();
-		bomb.setPosition(9999, -9999);
-
-		bomb.enemy.bombCooldownTimer.destroy();
-		bomb.ignoreTimer.destroy();
-		bomb.enemy.bombCooldownTimer = this.time.addEvent({
-			delay: 700, callback: () =>
-			{
-				if (!bomb.enemy.isFalling())
-				{
-					bomb.enemy.bombProp.setVisible(true);
-				}
-			}
-		});	
-	}
-
 	/** starts or restarts bomb fuse timer & visual */
 	setBombFuse(bomb: BombPrefab)
 	{
@@ -1013,10 +991,11 @@ export default class Level extends Phaser.Scene {
 	}
 
 	/** bomb behaviour, explosion setup */
-	bombExplode(bomb: BombPrefab)
+	public bombExplode(bomb: BombPrefab)
 	{
 		bomb.disappear();
 		bomb.fuseVisualTimer.paused = true;
+		bomb.fuseTimer.paused = true;
 
 		let newExplosion = this.explosionGroup.get(bomb.x, bomb.y);
 		newExplosion.appear();
@@ -1033,7 +1012,7 @@ export default class Level extends Phaser.Scene {
 
 		SoundManager.play('explosion', this);
 
-		this.resetBomb(bomb);
+		bomb.reset();
 	}
 
 	/**
@@ -1042,7 +1021,7 @@ export default class Level extends Phaser.Scene {
 	 * @param y 
 	 */
 	explode(x: number, y: number)
-	{
+	{	
 		let newExplosion = this.explosionGroup.get(x, y);
 		newExplosion.appear();
 		this.mainLayer.add(newExplosion);
@@ -1589,9 +1568,11 @@ export default class Level extends Phaser.Scene {
 				}
 				else if (object.parentEnemy.bombProp)
 				{
-					if (object.parentEnemy.bombCooldownTimer.getProgress() == 1
+					if (object.parentEnemy.bombCooldownTimer.getProgress() === 1
 						&& !object.parentEnemy.isFalling())
 					{
+						let brk;
+
 						this.setBomb(object.parentEnemy.x, object.parentEnemy.y, object.parentEnemy);
 						object.parentEnemy.bombCooldownTimer.reset({});
 					}

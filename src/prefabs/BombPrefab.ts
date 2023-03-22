@@ -7,6 +7,7 @@ import Phaser from "phaser";
 /* START-USER-IMPORTS */
 
 import EnemyPrefab from "./EnemyPrefab";
+import Level from "~/scenes/Level";
 
 /* END-USER-IMPORTS */
 
@@ -75,6 +76,32 @@ export default class BombPrefab extends Phaser.GameObjects.Image {
 		this.body.setVelocity(0, 0);
 	}
 
+	public reset()
+	{
+		this.disappear();
+		this.setPosition(9999, -9999);
+		this.ignoreTimer.destroy();
+		this.setCooldown();
+	}
+
+	/**
+	 * Cooldown time between explosion and new bomb being ready.
+	 */
+	private setCooldown()
+	{
+		this.enemy.bombCooldownTimer.destroy();
+
+		this.enemy.bombCooldownTimer = this.scene.time.addEvent({
+			delay: 700, callback: () =>
+			{
+				if (!this.enemy.isFalling())
+				{
+					this.enemy.bombProp.setVisible(true);
+				}
+			}
+		});
+	}
+
 	public setBombFuse()
 	{
 		this.fuseVisualTimer.destroy();
@@ -89,6 +116,19 @@ export default class BombPrefab extends Phaser.GameObjects.Image {
 				else
 				{
 					this.setTintFill(0xffffff);
+				}
+			}
+		});
+
+	// explosion delay
+		this.fuseTimer.destroy();
+		this.fuseTimer = this.scene.time.addEvent({
+			delay: 1000, callback: () =>
+			{
+				if (this.active)
+				{
+					const _level = this.scene as Level;
+					_level.bombExplode(this);
 				}
 			}
 		});

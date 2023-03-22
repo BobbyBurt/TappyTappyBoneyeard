@@ -42,6 +42,7 @@ This version focuses on additions & improvements to gameplay UI among other addi
 
 - Sounds now use their assigned volume.
 - Adjusted player physics body to appear more symmetric and not have areas which are overlapped by level tiles.
+- Fixed bombs several issues with bombs.
 
 # Version 11 Alpha - 2023-03-11
 
