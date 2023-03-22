@@ -405,6 +405,8 @@ export default class playerPrefab extends Phaser.Physics.Arcade.Sprite {
 		this.body.setVelocityX((this.flipX? this.moveSpeed : -this.moveSpeed));
 
 		this.started = true;
+
+		this.scene.events.emit('player-start');
 	}
 
 	putInPlane(x: number, y: number)

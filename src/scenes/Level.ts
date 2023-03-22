@@ -496,14 +496,17 @@ export default class Level extends Phaser.Scene {
 		}
 
 	// level timer
-		this.levelTimer = this.time.addEvent({
-			delay: 30000, callback: () =>
-			{
-				if (!this.reachedGoal && !__DEV__)
+		this.events.once('player-start', () =>	
+		{
+			this.levelTimer = this.time.addEvent({
+				delay: 30000, callback: () =>
 				{
-					this.resetLevel();
+					if (!this.reachedGoal && !__DEV__)
+					{
+						this.resetLevel();
+					}
 				}
-			}
+			});
 		});
 
 	// particles
@@ -529,7 +532,10 @@ export default class Level extends Phaser.Scene {
 			this.setDebugUI();
 		}
 
-		this.uiScene.setTimer(this.levelTimer.getRemaining());
+		if (this.levelTimer)
+		{
+			this.uiScene.setTimer(this.levelTimer.getRemaining());
+		}
 
 		// reset collision values to be overridden by callbacks
 		this.player.onFloor = false;

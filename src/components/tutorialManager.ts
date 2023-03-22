@@ -14,7 +14,7 @@ export default class tutorialManager {
 		let texts =
 		[
 			// level 1
-				`Welcome to life, Bird Tapper! Let's brush up on the basics.\n\nYou can jump with the ${InputManager.getInputName('jump')}. You'll move forward automatically, but you can change direction from walls. While against one, try jumping against it and jumping again to perform a wall jump.`,
+				`Welcome to life, Bird Tapper! You can jump with the ${InputManager.getInputName('jump')}. You'll start to move forward automatically.\n\nYou can change direction from walls; While against one, try jumping against it and jumping again to perform a wall jump.`,
 			
 			// level 2
 				`Have you tried using your wings yet? Use the ${InputManager.getInputName('jump')} while midair to flap and gain some more height.\n\nYour tiny wings only have the strength to do this twice, and you'll get more and more pale as you become weaker.`,

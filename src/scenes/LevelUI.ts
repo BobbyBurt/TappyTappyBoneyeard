@@ -34,8 +34,8 @@ export default class LevelUI extends Phaser.Scene {
 		timerBox.isFilled = true;
 
 		// timerText
-		const timerText = this.add.bitmapText(323.3856506347656, 857.4503784179688, "nokia", "12:04");
-		timerText.text = "12:04";
+		const timerText = this.add.bitmapText(323.3856506347656, 857.4503784179688, "nokia", "30:00");
+		timerText.text = "30:00";
 		timerText.fontSize = -16;
 		timerText.dropShadowY = 100;
 		timerText.dropShadowAlpha = 1;
@@ -571,6 +571,8 @@ export default class LevelUI extends Phaser.Scene {
 		this.summaryVisible = false;
 
 		this.buildText.setText('Tappy Tappy Boneyard v' + this.game.config.gameVersion);
+
+		this.timerText.setText('30:00');
 
 		this.tutorialOffsetContainer.setY((this.cameras.main.worldView.height / 2) + 106);
 		this.tutorialVisible = false;
