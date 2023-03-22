@@ -61,6 +61,9 @@ export default class playerPrefab extends Phaser.Physics.Arcade.Sprite {
 	/** Replaces sprite & animations with debug sprite in dev mode. */
 	private debugImage = false;
 
+	/** `false` until player jumps & starts moving. */
+	public started = false;
+
 // jump
 
 	/** set based on key, gamepad or mobile input */
@@ -153,10 +156,11 @@ export default class playerPrefab extends Phaser.Physics.Arcade.Sprite {
 
 		this.punchCooldownTimer = this.scene.time.addEvent({delay: 1});
 
-		if (!this.lockInput)
-		{
-			this.startMoving();
-		}
+		// if (!this.lockInput)
+		// {
+		// 	this.startMoving();
+		// }
+		this.started = false;
 		this.stateController.setState('running');
 
 		this.debugWallDetectGraphics = this.levelScene.add.graphics({ 
@@ -398,7 +402,9 @@ export default class playerPrefab extends Phaser.Physics.Arcade.Sprite {
 
 	public startMoving()
 	{
-		this.body.setVelocity((this.flipX? this.moveSpeed : -this.moveSpeed), 0);
+		this.body.setVelocityX((this.flipX? this.moveSpeed : -this.moveSpeed));
+
+		this.started = true;
 	}
 
 	putInPlane(x: number, y: number)
@@ -602,6 +608,12 @@ export default class playerPrefab extends Phaser.Physics.Arcade.Sprite {
 		this.anims.create({key: 'jump', repeat: 0,
 			frames: this.anims.generateFrameNames('tapper-atlas', 
 			{ prefix: 'jump/', zeroPad: 2, end: 4 })});
+
+	// jump
+		this.anims.create({key: 'idle', repeat: -1,
+			frames: this.anims.generateFrameNames('tapper-atlas', 
+			{ prefix: 'run/', zeroPad: 2, start: 3, end: 3 })});
+				// TODO: add idle animation to sprite folder
 
 	// punch
 		this.anims.create({key: 'punch', repeat: 0,

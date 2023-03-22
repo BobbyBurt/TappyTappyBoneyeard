@@ -17,7 +17,14 @@ export default class Running implements State {
 	
 	enter()
 	{
-		this.player.playAnimation('run');
+		if (this.player.body.velocity.x === 0)
+		{
+			this.player.playAnimation('idle');
+		}
+		else
+		{
+			this.player.playAnimation('run');
+		}
 	}
 	
 	update()
@@ -69,6 +76,11 @@ export default class Running implements State {
 		this.player.playAnimation('jump');
 		this.stateController.setState('airborne');
 		this.player.scene.sound.play('bird-flap');
+
+		if (!this.player.started)
+		{
+			this.player.startMoving();
+		}
 	}
 }
 
