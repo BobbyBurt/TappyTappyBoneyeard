@@ -9,7 +9,6 @@ This version focuses on additions & improvements to gameplay UI among other addi
 - Better music handling.
 - All gameplay UI has been decoupled to a seperate overlapping scene.
 - Better-defined depth sorting of graphics.
-- Punch & uppercut speed is reduced to run move speed after hitting something.
 - Moved debug text to the bottom left.
 - Increased player sprite size to 20x20.
 - Debug wall detect graphic now changes colour based on onWall state.
@@ -19,6 +18,8 @@ This version focuses on additions & improvements to gameplay UI among other addi
 - Quick restart / level select shortcuts are now exclusive to dev mode & keyboard input.
 - Replaced grenade sprite with a mask, more clearly defining enemies which explode on impact.
 - Player & timer are still until player jumps, uppercuts or punches. Tutorial levels have been updated to account for this.
+- Level select now only shows level name in dev mode.
+- Level select input has been changed for consistency & convenience, using new InputManager.
 
 ### Added
 

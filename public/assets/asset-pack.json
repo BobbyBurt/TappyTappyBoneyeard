@@ -188,6 +188,11 @@
                 "key": "bomb-intro"
             },
             {
+                "url": "assets/levels/bomb-launch.json",
+                "type": "tilemapTiledJSON",
+                "key": "bomb-launch"
+            },
+            {
                 "url": "assets/bomb-mask.png",
                 "type": "image",
                 "key": "bomb-mask"
@@ -351,6 +356,11 @@
                 ],
                 "type": "audio",
                 "key": "main-game"
+            },
+            {
+                "url": "assets/levels/multipath.json",
+                "type": "tilemapTiledJSON",
+                "key": "multipath"
             },
             {
                 "url": "assets/Parallax-Backing.png",

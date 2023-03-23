@@ -526,6 +526,8 @@ export default class Level extends Phaser.Scene {
 
 	update(time: number, delta: number): void
 	{
+		let FRAME_BRK;
+
 		if (__DEV__)
 		{
 			this.setDebugUI();
@@ -644,6 +646,13 @@ export default class Level extends Phaser.Scene {
 	/** stops this scene, shutting down update listeners, and starts level select scene */
 	LoadNextLevel()
 	{
+		let nextLevelIndex = this.currentLevelIndex + 1;		
+		if (nextLevelIndex === LevelSelect.levelsKey.length)
+		{
+			this.LoadLevelSelect();
+			return;
+		}
+
 		// this function should only happen once
 		if (!this.restarting)
 		{
@@ -661,9 +670,9 @@ export default class Level extends Phaser.Scene {
 		this.uiScene.scene.restart();
 		this.scene.get('Pause').scene.stop();
 		this.manualPause = false;
-		this.registry.set('current-level-index', this.currentLevelIndex + 1);
+		this.registry.set('current-level-index', nextLevelIndex);
 			// TODO: add wrap!
-		this.registry.set('current-level', LevelSelect.levelsKey[this.registry.get('current-level-index')]);
+		this.registry.set('current-level', LevelSelect.levelsKey[nextLevelIndex]);
 		this.scene.start('Level');
 	}
 
@@ -759,8 +768,9 @@ export default class Level extends Phaser.Scene {
 		this.player.punchCharged = true;
 		this.uiScene.setPunchCharge(true);
 
-		this.player.variablePunchSpeed = this.player.moveSpeed;
-		this.player.variableUppercutSpeed = this.player.reducedUppercutSpeed;
+		// this.player.variablePunchSpeed = this.player.moveSpeed;
+		// this.player.variableUppercutSpeed = this.player.reducedUppercutSpeed;
+			// TODO: remove all hit slowdown code.
 	}
 
 	enemyEnemyCollide(_enemy1: any, _enemy2: any)
@@ -818,10 +828,14 @@ export default class Level extends Phaser.Scene {
 		let _bomb = bomb as BombPrefab;
 		let _enemy = enemy as EnemyPrefab;
 
-		if (_bomb.ignoreTimer.getProgress() < 1)
+		if (_bomb.ignoreTimer.getProgress() < 1 && _bomb.enemy.enemyListIndex == _enemy.enemyListIndex && !_bomb.punched)
 		{
+			console.debug('Bomb-enemy overlap has been ignored');
 			return;
 		}
+
+
+		// TODO: this doesn't explode..
 
 		// if (_enemy == _bomb.enemy)
 		// {
@@ -919,10 +933,10 @@ export default class Level extends Phaser.Scene {
 		let scoreToAdd = 200 * this.combo;
 		this.levelScore += scoreToAdd;
 
-		const scorePopup = this.scorePopupGroup.get(this.player.x, this.player.y - 1020);
-		this.mainLayer.add(scorePopup);
-		scorePopup.setDepth(20);
-		scorePopup.appear(scoreToAdd);
+		// const scorePopup = this.scorePopupGroup.get(this.player.x, this.player.y - 1020);
+		// this.mainLayer.add(scorePopup);
+		// scorePopup.setDepth(20);
+		// scorePopup.appear(scoreToAdd);
 	}
 
 	updateCombo()

@@ -2,7 +2,7 @@ import InputManager from "./InputManager";
 
 export default class tutorialManager {
 
-    public static doTutorialInDevMode = true;
+    public static doTutorialInDevMode = false;
 
 	/** index correlates to level index. Levels without tutorials are null or beyond the array's 
 	 * 	length. 

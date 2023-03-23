@@ -142,25 +142,25 @@ export default class InputManager {
 		]],
 		['menu-up',
 		[
-			'up arrow key',
+			'UP',
 			`D-pad up`,
 			null
 		]],
 		['menu-down',
 		[
-			'down arrow key',
+			'DOWN',
 			`D-pad down`,
 			null
 		]],
 		['menu-left',
 		[
-			'left arrow key',
+			'LEFT',
 			`D-pad left`,
 			null
 		]],
 		['menu-right',
 		[
-			'right arrow key',
+			'RIGHT',
 			`D-pad right`,
 			null
 		]],

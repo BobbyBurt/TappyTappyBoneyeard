@@ -142,7 +142,7 @@ export default class LevelSelect extends Phaser.Scene {
 
 	private UICam!: Phaser.Cameras.Scene2D.BaseCamera | any;
 
-	public static levelsKey = ['jump', 'flap', 'punch', 'airborne', 'dive', 'gunfire', 'uppercut', 'charge', 'combo', 'tutorial-finale', 'bomb-intro', 'dive-tec', 'intro', 'parasol', 'pogo', 'grenade', 'final'];
+	public static levelsKey = ['jump', 'flap', 'punch', 'airborne', 'dive', 'gunfire', 'uppercut', 'charge', 'combo', 'tutorial-finale', 'bomb-intro', 'multipath', 'bomb-launch', 'parasol', 'dive-tec', 'pogo', 'grenade'];
 
 	private gamepad:Phaser.Input.Gamepad.Gamepad | undefined;
 	private SelectKey!: Phaser.Input.Keyboard.Key;
@@ -158,77 +158,105 @@ export default class LevelSelect extends Phaser.Scene {
 	create() {
 
 		this.editorCreate();
-		
 		this.createCameras();
 
+	// use previously selected level
 		if (this.registry.get('current-level-index'))
 		{
 			this.selectedLevel = this.registry.get('current-level-index');
-			// console.log(this.selectedLevel);
 		}
-		this.levelText.setText
-			('Level ' + (this.selectedLevel + 1) + ' - ' + LevelSelect.levelsKey[this.selectedLevel]);
+		this.setSelectedLevel('neutral');
 
-	// load level button event
+	// load level: pointer, key, button
 		this.levelBack.setInteractive();
 		this.levelBack.on('pointerdown', () =>
 		{
-			this.registry.set('current-level', LevelSelect.levelsKey[this.selectedLevel]);
 			this.loadLevel();
 		});
+		this.input.keyboard.on('keydown-' + InputManager.getInput('menu-confirm', 'keyboard') , () =>
+		{
+			this.loadLevel();
+		});
+		this.input.gamepad.on('down', 
+			(pad:Phaser.Input.Gamepad.Gamepad, button:Phaser.Input.Gamepad.Button, index:number) =>
+		{
+			if (button.index == InputManager.getInput('menu-confirm', 'gamepad'))
+			{
+				this.loadLevel();
+			}
+		});
 
-	// up & down button events
+	// navigation: pointer, key, button
 		this.upBack.setInteractive();
 		this.upBack.on('pointerdown', () =>
 		{
 			this.setSelectedLevel('up');
-		});
+		});		
 		this.downBack.setInteractive();
 		this.downBack.on('pointerdown', () =>
 		{
 			this.setSelectedLevel('down');
 		});
-
-		let _this = this;
-
-		this.input.gamepad.on('down', function 
-			(pad:Phaser.Input.Gamepad.Gamepad, button:Phaser.Input.Gamepad.Button, index:number)
+		this.input.keyboard.on('keydown-' + InputManager.getInput('menu-up', 'keyboard') , () =>
+		{
+			this.setSelectedLevel('up');
+		});
+		this.input.keyboard.on('keydown-' + InputManager.getInput('menu-down', 'keyboard') , () =>
+		{
+			this.setSelectedLevel('down');
+		});
+		this.input.gamepad.on('down', 
+			(pad:Phaser.Input.Gamepad.Gamepad, button:Phaser.Input.Gamepad.Button, index:number) =>
+		{
+			if (button.index == InputManager.getInput('menu-up', 'gamepad'))
 			{
-				_this.gamepad = pad;
-
-				InputManager.activeInputMode = 'gamepad';
-					// TEMP: For playtesting. A final solution needs to update input mode at any time.
-			});
-
-		this.SelectKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
-		this.StartKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
+				this.setSelectedLevel('up');
+			}
+		});
+		this.input.gamepad.on('down', 
+			(pad:Phaser.Input.Gamepad.Gamepad, button:Phaser.Input.Gamepad.Button, index:number) =>
+		{
+			if (button.index == InputManager.getInput('menu-down', 'gamepad'))
+			{
+				this.setSelectedLevel('down');
+			}
+		});
 	}
 
 	update(time: number, delta: number): void
 	{
-		if (this.gamepad?.isButtonDown(9) || this.StartKey.isDown)
-		{
-			this.registry.set('current-level', LevelSelect.levelsKey[this.selectedLevel]);
-			this.loadLevel();
-		}
+		// if (this.gamepad?.isButtonDown(9) || this.StartKey.isDown)
+		// {
+		// 	this.registry.set('current-level', LevelSelect.levelsKey[this.selectedLevel]);
+		// 	this.loadLevel();
+		// }
 
-		if ((this.gamepad?.isButtonDown(8) || this.SelectKey.isDown) && !this.gamepadSelectorDown)
-		{
-			this.gamepadSelectorDown = true;
+		// if ((this.gamepad?.isButtonDown(8) || this.SelectKey.isDown) && !this.gamepadSelectorDown)
+		// {
+		// 	this.gamepadSelectorDown = true;
 
-			this.setSelectedLevel('down');
-		}
-		if (!this.gamepad?.isButtonDown(8) && !this.SelectKey.isDown)
-		{
-			this.gamepadSelectorDown = false;
-		}
+		// 	this.setSelectedLevel('down');
+		// }
+		// if (!this.gamepad?.isButtonDown(8) && !this.SelectKey.isDown)
+		// {
+		// 	this.gamepadSelectorDown = false;
+		// }
 
 	}
 
 	/** Also updates visual. */
-	setSelectedLevel(direction: 'up' | 'down')
+	setSelectedLevel(direction: 'up' | 'neutral' | 'down')
 	{
-		this.selectedLevel += (direction == 'up' ? -1 : 1);
+		let indexChange = 0
+		if (direction === 'up')
+		{
+			indexChange = 1;
+		}
+		else if (direction === 'down')
+		{
+			indexChange = -1;
+		}
+		this.selectedLevel += indexChange;
 
 	// wrap variable to levelsKey array length
 		if (this.selectedLevel == LevelSelect.levelsKey.length)
@@ -240,13 +268,14 @@ export default class LevelSelect extends Phaser.Scene {
 			this.selectedLevel = LevelSelect.levelsKey.length - 1;
 		}
 
-	// update visual
-		this.levelText.setText
-			('Level ' + (this.selectedLevel + 1) + ' - ' + LevelSelect.levelsKey[this.selectedLevel]);
+	// update text
+		this.levelText.setText('Level ' + (this.selectedLevel + 1) 
+			+ ' - ' + (__DEV__ ? LevelSelect.levelsKey[this.selectedLevel] : ''));
 	}
 
 	loadLevel()
 	{
+		this.registry.set('current-level', LevelSelect.levelsKey[this.selectedLevel]);
 		this.registry.set('current-level-index', this.selectedLevel)
 		this.scene.stop(this);
 		this.scene.launch('LevelUI');
