@@ -142,7 +142,7 @@ export default class LevelSelect extends Phaser.Scene {
 
 	private UICam!: Phaser.Cameras.Scene2D.BaseCamera | any;
 
-	public static levelsKey = ['jump', 'flap', 'punch', 'airborne', 'dive', 'gunfire', 'uppercut', 'charge', 'combo', 'tutorial-finale', 'bomb-intro', 'multipath', 'bomb-launch', 'parasol', 'dive-tec', 'pogo', 'grenade'];
+	public static levelsKey = ['jump', 'flap', 'punch', 'airborne', 'dive', 'gunfire', 'uppercut', 'charge', 'combo', 'tutorial-finale', 'bomb-intro', 'multipath', 'bomb-launch', 'dive-tec', 'parasol', 'pogo', 'grenade'];
 
 	private gamepad:Phaser.Input.Gamepad.Gamepad | undefined;
 	private SelectKey!: Phaser.Input.Keyboard.Key;

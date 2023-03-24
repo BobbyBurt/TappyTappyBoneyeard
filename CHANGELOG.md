@@ -20,6 +20,7 @@ This version focuses on additions & improvements to gameplay UI among other addi
 - Player & timer are still until player jumps, uppercuts or punches. Tutorial levels have been updated to account for this.
 - Level select now only shows level name in dev mode.
 - Level select input has been changed for consistency & convenience, using new InputManager.
+- Tweaked design of some levels.
 
 ### Added
 
@@ -27,11 +28,12 @@ This version focuses on additions & improvements to gameplay UI among other addi
 - Added hitstop when hitting enemies.
 - Added enemy hit particles.
 - Added updated punch charge UI.
-- Improved level timer UI.
+- Added / improved level timer UI.
 - Added tutorial popup frame.
 - Added InputManager class with functions providing names and bindings. The active input mode will be detected, and relevant input names will be used when instructing the player.
 - Loading screen now shows each asset key as it's loaded, because it looks cool.
 - Added post-level summary screen.
+- Added a new level.
 
 ### Removed
 

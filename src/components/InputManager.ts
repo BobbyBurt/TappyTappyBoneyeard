@@ -101,31 +101,31 @@ export default class InputManager {
 		['jump', 
 		[
 			'up arrow key',
-			`right button`,
+			1,
 			'green button'
 		]],
 		['punch',
 		[
 			'X key',
-			`down button`,
+			0,
 			'red button'
 		]],
 		['uppercut',
 		[
 			'Z key',
-			`D-pad up`,
+			12,
 			'yellow button'
 		]],
 		['dive',
 		[
 			'down arrow key',
-			`D-pad down`,
+			13,
 			'blue button'
 		]],
 		['punch',
 		[
 			'X key',
-			`down button`,
+			0,
 			'red button'
 		]],
 		['tutorial-toggle',
@@ -143,25 +143,25 @@ export default class InputManager {
 		['menu-up',
 		[
 			'UP',
-			`D-pad up`,
+			12,
 			null
 		]],
 		['menu-down',
 		[
 			'DOWN',
-			`D-pad down`,
+			13,
 			null
 		]],
 		['menu-left',
 		[
 			'LEFT',
-			`D-pad left`,
+			14,
 			null
 		]],
 		['menu-right',
 		[
 			'RIGHT',
-			`D-pad right`,
+			15,
 			null
 		]],
 		['menu-confirm',

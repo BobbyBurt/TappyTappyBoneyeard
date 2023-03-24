@@ -794,6 +794,8 @@ export default class Level extends Phaser.Scene {
 
 	bombPlayerOverlap(bomb: any, player: any)
 	{
+		console.debug('bomb player collide');
+
 		let _bomb = bomb as BombPrefab;
 		let _player = bomb as playerPrefab;
 
@@ -825,17 +827,19 @@ export default class Level extends Phaser.Scene {
 
 	bombEnemyOverlap(bomb: any, enemy: any)
 	{
+		console.debug('bomb enemy overlap');
+		
 		let _bomb = bomb as BombPrefab;
 		let _enemy = enemy as EnemyPrefab;
 
-		if (_bomb.ignoreTimer.getProgress() < 1 && _bomb.enemy.enemyListIndex == _enemy.enemyListIndex && !_bomb.punched)
+		if (_bomb.ignoreTimer.getProgress() < 1 && _bomb.enemy.enemyListIndex == _enemy.enemyListIndex)
 		{
 			console.debug('Bomb-enemy overlap has been ignored');
 			return;
 		}
 
 
-		// TODO: this doesn't explode..
+		console.log('bomb enemy overlap - explode! punched: ' + _bomb.punched);
 
 		// if (_enemy == _bomb.enemy)
 		// {
@@ -1854,7 +1858,7 @@ export default class Level extends Phaser.Scene {
 			// this.uiScene.setDebugText(0, `${this.player.stateController.currentState.name}`);
 			this.uiScene.setDebugText(0, `level completed: ${this.registry.get('completed-level-' + this.currentLevelIndex)}`);
 			this.uiScene.setDebugText(1, `manual pause : ${this.manualPause}`);
-			this.uiScene.setDebugText(2, `tutorial visible : ${this.uiScene.tutorialVisible}`);
+			this.uiScene.setDebugText(2, `punch input : ${this.player.punchInput}`);
 		}
 	}
 

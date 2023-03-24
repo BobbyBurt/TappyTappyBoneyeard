@@ -2,7 +2,8 @@ import InputManager from "./InputManager";
 
 export default class tutorialManager {
 
-    public static doTutorialInDevMode = false;
+    public static doTutorialInDevMode = true;
+		// TODO: this seems to disable tutorial outside of dev mode too..
 
 	/** index correlates to level index. Levels without tutorials are null or beyond the array's 
 	 * 	length. 
