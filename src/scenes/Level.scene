@@ -47,7 +47,8 @@
                         "key": "Parallax-Cityscape"
                     },
                     "x": 480,
-                    "y": 552
+                    "y": 552,
+                    "visible": false
                 },
                 {
                     "type": "Image",
@@ -62,7 +63,8 @@
                         "key": "Parallax-Cityscape"
                     },
                     "x": 160,
-                    "y": 552
+                    "y": 552,
+                    "visible": false
                 },
                 {
                     "type": "Image",
@@ -77,7 +79,8 @@
                         "key": "Parallax-Cityscape"
                     },
                     "x": 800,
-                    "y": 552
+                    "y": 552,
+                    "visible": false
                 },
                 {
                     "type": "Image",
@@ -92,7 +95,8 @@
                         "key": "Parallax-Cityscape"
                     },
                     "x": -160,
-                    "y": 552
+                    "y": 552,
+                    "visible": false
                 },
                 {
                     "type": "Image",
@@ -107,7 +111,8 @@
                         "key": "Parallax-Cityscape"
                     },
                     "x": 1119,
-                    "y": 552
+                    "y": 552,
+                    "visible": false
                 },
                 {
                     "type": "Image",
@@ -125,7 +130,8 @@
                     "scaleX": 9.144642541425284,
                     "scaleY": 9.144642541425284,
                     "originY": 0,
-                    "flipY": true
+                    "flipY": true,
+                    "visible": false
                 },
                 {
                     "type": "Image",
@@ -140,7 +146,131 @@
                         "key": "Parallax-Cityscape"
                     },
                     "x": 1439,
-                    "y": 552
+                    "y": 552,
+                    "visible": false
+                },
+                {
+                    "type": "Image",
+                    "id": "61e235f4-a67e-46bb-a9b7-59a2a6d12787",
+                    "label": "parallax_Cityscape_7",
+                    "components": [
+                        "ScrollFactor"
+                    ],
+                    "ScrollFactor.factorX": 0.2,
+                    "ScrollFactor.factorY": 0.1,
+                    "texture": {
+                        "key": "Parallax-Forest"
+                    },
+                    "x": -181,
+                    "y": 530
+                },
+                {
+                    "type": "Image",
+                    "id": "80ec5715-bc88-4b31-9636-5b48ba29a6d3",
+                    "label": "parallax_Cityscape_8",
+                    "components": [
+                        "ScrollFactor"
+                    ],
+                    "ScrollFactor.factorX": 0.2,
+                    "ScrollFactor.factorY": 0.1,
+                    "texture": {
+                        "key": "Parallax-Forest"
+                    },
+                    "x": 94,
+                    "y": 530
+                },
+                {
+                    "type": "Image",
+                    "id": "2f6e11bd-9b44-4afe-a2d6-950d7f9edfcd",
+                    "label": "parallax_Cityscape_9",
+                    "components": [
+                        "ScrollFactor"
+                    ],
+                    "ScrollFactor.factorX": 0.2,
+                    "ScrollFactor.factorY": 0.1,
+                    "texture": {
+                        "key": "Parallax-Forest"
+                    },
+                    "x": 370,
+                    "y": 530
+                },
+                {
+                    "type": "Image",
+                    "id": "6579eb63-007b-4465-9ce1-c5b20ec60d27",
+                    "label": "parallax_Cityscape_10",
+                    "components": [
+                        "ScrollFactor"
+                    ],
+                    "ScrollFactor.factorX": 0.2,
+                    "ScrollFactor.factorY": 0.1,
+                    "texture": {
+                        "key": "Parallax-Forest"
+                    },
+                    "x": 645,
+                    "y": 530
+                },
+                {
+                    "type": "Image",
+                    "id": "67aee074-b665-4d54-934b-a645db745a80",
+                    "label": "parallax_Cityscape_11",
+                    "components": [
+                        "ScrollFactor"
+                    ],
+                    "ScrollFactor.factorX": 0.2,
+                    "ScrollFactor.factorY": 0.1,
+                    "texture": {
+                        "key": "Parallax-Forest"
+                    },
+                    "x": 921,
+                    "y": 530
+                },
+                {
+                    "type": "Image",
+                    "id": "88bf8d24-9bf8-494e-b340-b297630a707e",
+                    "label": "parallax_Cityscape_12",
+                    "components": [
+                        "ScrollFactor"
+                    ],
+                    "ScrollFactor.factorX": 0.2,
+                    "ScrollFactor.factorY": 0.1,
+                    "texture": {
+                        "key": "Parallax-Forest"
+                    },
+                    "x": 1197,
+                    "y": 530
+                },
+                {
+                    "type": "Image",
+                    "id": "c867b173-b985-445d-98e2-9986be7875ef",
+                    "label": "parallax_Cityscape_13",
+                    "components": [
+                        "ScrollFactor"
+                    ],
+                    "ScrollFactor.factorX": 0.2,
+                    "ScrollFactor.factorY": 0.1,
+                    "texture": {
+                        "key": "Parallax-Forest"
+                    },
+                    "x": 1472,
+                    "y": 530
+                },
+                {
+                    "type": "Image",
+                    "id": "501a6414-6dd3-4cfd-93a4-d400d6155d4b",
+                    "label": "parallax_Cityscape_14",
+                    "components": [
+                        "ScrollFactor"
+                    ],
+                    "ScrollFactor.factorY": 0.1,
+                    "texture": {
+                        "key": "Parallax-Forest"
+                    },
+                    "x": 422,
+                    "y": 570,
+                    "scaleX": 9.144642541425284,
+                    "scaleY": 9.144642541425284,
+                    "originY": 0,
+                    "flipY": true
                 }
             ]
         },

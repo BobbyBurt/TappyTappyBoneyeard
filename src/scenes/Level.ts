@@ -21,6 +21,7 @@ import LevelUI from "./LevelUI";
 import tutorialManager from "~/components/tutorialManager";
 import InputManager from "~/components/InputManager";
 import LevelSelect from "./LevelSelect";
+import MinePrefab from "~/prefabs/MinePrefab";
 
 /* END-USER-IMPORTS */
 
@@ -46,22 +47,27 @@ export default class Level extends Phaser.Scene {
 
 		// parallax_Cityscape
 		const parallax_Cityscape = this.add.image(480, 552, "Parallax-Cityscape");
+		parallax_Cityscape.visible = false;
 		bGLayer.add(parallax_Cityscape);
 
 		// parallax_Cityscape_1
 		const parallax_Cityscape_1 = this.add.image(160, 552, "Parallax-Cityscape");
+		parallax_Cityscape_1.visible = false;
 		bGLayer.add(parallax_Cityscape_1);
 
 		// parallax_Cityscape_2
 		const parallax_Cityscape_2 = this.add.image(800, 552, "Parallax-Cityscape");
+		parallax_Cityscape_2.visible = false;
 		bGLayer.add(parallax_Cityscape_2);
 
 		// parallax_Cityscape_3
 		const parallax_Cityscape_3 = this.add.image(-160, 552, "Parallax-Cityscape");
+		parallax_Cityscape_3.visible = false;
 		bGLayer.add(parallax_Cityscape_3);
 
 		// parallax_Cityscape_4
 		const parallax_Cityscape_4 = this.add.image(1119, 552, "Parallax-Cityscape");
+		parallax_Cityscape_4.visible = false;
 		bGLayer.add(parallax_Cityscape_4);
 
 		// parallax_Cityscape_5
@@ -70,11 +76,49 @@ export default class Level extends Phaser.Scene {
 		parallax_Cityscape_5.scaleY = 9.144642541425284;
 		parallax_Cityscape_5.setOrigin(0.5, 0);
 		parallax_Cityscape_5.flipY = true;
+		parallax_Cityscape_5.visible = false;
 		bGLayer.add(parallax_Cityscape_5);
 
 		// parallax_Cityscape_6
 		const parallax_Cityscape_6 = this.add.image(1439, 552, "Parallax-Cityscape");
+		parallax_Cityscape_6.visible = false;
 		bGLayer.add(parallax_Cityscape_6);
+
+		// parallax_Cityscape_7
+		const parallax_Cityscape_7 = this.add.image(-181, 530, "Parallax-Forest");
+		bGLayer.add(parallax_Cityscape_7);
+
+		// parallax_Cityscape_8
+		const parallax_Cityscape_8 = this.add.image(94, 530, "Parallax-Forest");
+		bGLayer.add(parallax_Cityscape_8);
+
+		// parallax_Cityscape_9
+		const parallax_Cityscape_9 = this.add.image(370, 530, "Parallax-Forest");
+		bGLayer.add(parallax_Cityscape_9);
+
+		// parallax_Cityscape_10
+		const parallax_Cityscape_10 = this.add.image(645, 530, "Parallax-Forest");
+		bGLayer.add(parallax_Cityscape_10);
+
+		// parallax_Cityscape_11
+		const parallax_Cityscape_11 = this.add.image(921, 530, "Parallax-Forest");
+		bGLayer.add(parallax_Cityscape_11);
+
+		// parallax_Cityscape_12
+		const parallax_Cityscape_12 = this.add.image(1197, 530, "Parallax-Forest");
+		bGLayer.add(parallax_Cityscape_12);
+
+		// parallax_Cityscape_13
+		const parallax_Cityscape_13 = this.add.image(1472, 530, "Parallax-Forest");
+		bGLayer.add(parallax_Cityscape_13);
+
+		// parallax_Cityscape_14
+		const parallax_Cityscape_14 = this.add.image(422, 570, "Parallax-Forest");
+		parallax_Cityscape_14.scaleX = 9.144642541425284;
+		parallax_Cityscape_14.scaleY = 9.144642541425284;
+		parallax_Cityscape_14.setOrigin(0.5, 0);
+		parallax_Cityscape_14.flipY = true;
+		bGLayer.add(parallax_Cityscape_14);
 
 		// mainLayer
 		const mainLayer = this.add.layer();
@@ -128,6 +172,45 @@ export default class Level extends Phaser.Scene {
 		parallax_Cityscape_6ScrollFactor.factorX = 0.2;
 		parallax_Cityscape_6ScrollFactor.factorY = 0.1;
 
+		// parallax_Cityscape_7 (components)
+		const parallax_Cityscape_7ScrollFactor = new ScrollFactor(parallax_Cityscape_7);
+		parallax_Cityscape_7ScrollFactor.factorX = 0.2;
+		parallax_Cityscape_7ScrollFactor.factorY = 0.1;
+
+		// parallax_Cityscape_8 (components)
+		const parallax_Cityscape_8ScrollFactor = new ScrollFactor(parallax_Cityscape_8);
+		parallax_Cityscape_8ScrollFactor.factorX = 0.2;
+		parallax_Cityscape_8ScrollFactor.factorY = 0.1;
+
+		// parallax_Cityscape_9 (components)
+		const parallax_Cityscape_9ScrollFactor = new ScrollFactor(parallax_Cityscape_9);
+		parallax_Cityscape_9ScrollFactor.factorX = 0.2;
+		parallax_Cityscape_9ScrollFactor.factorY = 0.1;
+
+		// parallax_Cityscape_10 (components)
+		const parallax_Cityscape_10ScrollFactor = new ScrollFactor(parallax_Cityscape_10);
+		parallax_Cityscape_10ScrollFactor.factorX = 0.2;
+		parallax_Cityscape_10ScrollFactor.factorY = 0.1;
+
+		// parallax_Cityscape_11 (components)
+		const parallax_Cityscape_11ScrollFactor = new ScrollFactor(parallax_Cityscape_11);
+		parallax_Cityscape_11ScrollFactor.factorX = 0.2;
+		parallax_Cityscape_11ScrollFactor.factorY = 0.1;
+
+		// parallax_Cityscape_12 (components)
+		const parallax_Cityscape_12ScrollFactor = new ScrollFactor(parallax_Cityscape_12);
+		parallax_Cityscape_12ScrollFactor.factorX = 0.2;
+		parallax_Cityscape_12ScrollFactor.factorY = 0.1;
+
+		// parallax_Cityscape_13 (components)
+		const parallax_Cityscape_13ScrollFactor = new ScrollFactor(parallax_Cityscape_13);
+		parallax_Cityscape_13ScrollFactor.factorX = 0.2;
+		parallax_Cityscape_13ScrollFactor.factorY = 0.1;
+
+		// parallax_Cityscape_14 (components)
+		const parallax_Cityscape_14ScrollFactor = new ScrollFactor(parallax_Cityscape_14);
+		parallax_Cityscape_14ScrollFactor.factorY = 0.1;
+
 		this.bGLayer = bGLayer;
 		this.parallax_Backing = parallax_Backing;
 		this.mainLayer = mainLayer;
@@ -174,6 +257,7 @@ export default class Level extends Phaser.Scene {
 	private bombGroup: Phaser.GameObjects.Group;
 	private explosionGroup: Phaser.GameObjects.Group;
 	private bulletGroup: Phaser.GameObjects.Group;
+	private mineList: Array<MinePrefab>;
 	/** Polygons used for enemies' player detection. */
 	private visionPolys: Array<VisionPoly>;
 
@@ -271,6 +355,10 @@ export default class Level extends Phaser.Scene {
 		this.player.createFist();
 		this.mainLayer.add(this.player.fist);
 
+	//mines
+		this.mineList = new Array<MinePrefab>();
+		this.createMines();
+
 	// physics callbacks
 		// playerTilemapCollider
 		this.physics.add.collider(this.player, this.tileLayer, this.playerTilemapCollide, undefined, this);
@@ -293,6 +381,10 @@ export default class Level extends Phaser.Scene {
 		// playerBulletOverlap
 		this.physics.add.overlap
 			(this.bulletList, this.player, this.bulletPlayerCollide, undefined, this);
+
+		// playerMineOverlap
+		this.physics.add.overlap
+			(this.player, this.mineList, this.playerMineOverlap, undefined, this);
 
 	// camera
 		CameraUtil.configureMainCamera(this);
@@ -828,7 +920,7 @@ export default class Level extends Phaser.Scene {
 	bombEnemyOverlap(bomb: any, enemy: any)
 	{
 		console.debug('bomb enemy overlap');
-		
+
 		let _bomb = bomb as BombPrefab;
 		let _enemy = enemy as EnemyPrefab;
 
@@ -848,6 +940,11 @@ export default class Level extends Phaser.Scene {
 
 		_bomb.fuseTimer.destroy();
 		this.bombExplode(bomb);
+	}
+
+	playerMineOverlap(player: any, mine: any)
+	{
+		this.resetLevel();
 	}
 
 	bombTilemapCollide(bomb: any, tileLayer: any)
@@ -952,7 +1049,9 @@ export default class Level extends Phaser.Scene {
 
 		if (this.combo > 1)
 		{
-			this.uiScene.showComboUI(this.combo)
+			this.uiScene.showComboUI(this.combo);
+			SoundManager.play('combo-hit', this, .7);
+
 		}
 		else
 		{
@@ -1468,6 +1567,32 @@ export default class Level extends Phaser.Scene {
 			this.mapElementList[object.id] = enemy;
 			this.mainLayer.add(enemy);
 			enemy.setDepth(-10);
+		});
+	}
+
+	createMines()
+	{
+		let _mapObjects = this.tileMap.getObjectLayer('elements')
+		_mapObjects.objects.forEach((object, index) =>
+		{
+			// Return if this isn't the mine tile
+			if (object.gid)
+			{
+				if (object.gid !== 41)
+				{
+					return;
+				}
+			}
+			else
+			{
+				return;
+			}
+
+			let mine: MinePrefab;
+			mine = new MinePrefab(this, object.x! + 8, object.y! - 8, 'bomb-mask');
+			this.mineList.push(mine);
+			this.mainLayer.add(mine);
+			mine.setDepth(5);
 		});
 	}
 

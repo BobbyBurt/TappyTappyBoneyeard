@@ -29,7 +29,7 @@ export default class BombPrefab extends Phaser.GameObjects.Image {
 		this.body.setSize(14, 18, false);
 
 		/* START-USER-CTR-CODE */
-		// Write your code here.
+
 		/* END-USER-CTR-CODE */
 	}
 

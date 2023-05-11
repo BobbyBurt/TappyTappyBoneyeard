@@ -9,6 +9,7 @@ import Align from "../components/Align";
 
 import CameraUtil from "~/components/CameraUtil";
 import InputManager from "~/components/InputManager";
+import NGIOPlugin from "~/plugins/NGIOPlugin";
 
 /* END-USER-IMPORTS */
 
@@ -142,7 +143,11 @@ export default class LevelSelect extends Phaser.Scene {
 
 	private UICam!: Phaser.Cameras.Scene2D.BaseCamera | any;
 
-	public static levelsKey = ['jump', 'flap', 'punch', 'airborne', 'dive', 'gunfire', 'uppercut', 'charge', 'combo', 'tutorial-finale', 'bomb-intro', 'multipath', 'bomb-launch', 'dive-tec', 'parasol', 'pogo', 'grenade'];
+	public static levelsKey = 
+		// ['jump', 'flap', 'punch', 'airborne', 'dive', 'gunfire', 'uppercut', 'charge', 'combo', 'tutorial-finale', 
+		// 'bomb-intro', 'bomb-uppercut', 'mine-intro', 'cool-combo', 'bomb-launch', 'dive-tec', 'parasol', 'pogo', 'grenade'];
+		['jump', 'flap', 'punch', 'airborne', 'dive', 'gunfire', 'uppercut', 'charge', 'combo', 'tutorial-finale', 
+		'bomb-intro', 'cool-combo', 'bomb-uppercut', 'parasol', 'pogo', 'grenade'];
 
 	private gamepad:Phaser.Input.Gamepad.Gamepad | undefined;
 	private SelectKey!: Phaser.Input.Keyboard.Key;
@@ -154,8 +159,13 @@ export default class LevelSelect extends Phaser.Scene {
 	/** used to only call functionality on down */
 	private gamepadSelectorDown = false;
 
+	private NGIOPlugin:NGIOPlugin;
 
 	create() {
+
+	// plugin test
+
+		this.NGIOPlugin = this.plugins.get('NGIO-plugin', true) as NGIOPlugin;
 
 		this.editorCreate();
 		this.createCameras();

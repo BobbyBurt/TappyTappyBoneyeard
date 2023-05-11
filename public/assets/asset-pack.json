@@ -198,6 +198,11 @@
                 "key": "bomb-mask"
             },
             {
+                "url": "assets/levels/bomb-uppercut.json",
+                "type": "tilemapTiledJSON",
+                "key": "bomb-uppercut"
+            },
+            {
                 "url": "assets/levels/bombs.json",
                 "type": "tilemapTiledJSON",
                 "key": "bombs"
@@ -223,6 +228,11 @@
                 ],
                 "type": "audio",
                 "key": "combo-hit"
+            },
+            {
+                "url": "assets/levels/cool-combo.json",
+                "type": "tilemapTiledJSON",
+                "key": "cool-combo"
             },
             {
                 "url": "assets/levels/dive.json",
@@ -356,6 +366,11 @@
                 ],
                 "type": "audio",
                 "key": "main-game"
+            },
+            {
+                "url": "assets/levels/mine-intro.json",
+                "type": "tilemapTiledJSON",
+                "key": "mine-intro"
             },
             {
                 "url": "assets/levels/multipath.json",

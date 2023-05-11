@@ -3,6 +3,8 @@ import LevelSelect from './scenes/LevelSelect';
 import LevelUI from './scenes/LevelUI';
 import Pause from './scenes/Pause';
 import Preload from './scenes/Preload';
+import NGIOPlugin from 'plugins/NGIOPlugin'
+
 
 window.addEventListener('load', function ()
 {
@@ -47,6 +49,26 @@ window.addEventListener('load', function ()
 					x: 0
 				}
 			}
+		},
+
+		plugins:
+		{
+			global:
+			[
+				{
+					key: 'NGIO-plugin', 
+					plugin: NGIOPlugin, 
+					start: true
+				}
+			],
+			scene:
+			[
+				// {
+				// 	key: 'scene-plugin-test',
+				// 	plugin: ScenePluginTest,
+				// 	mapping: 'scenePluginMap'
+				// }
+			]
 		}
 	});
 	
