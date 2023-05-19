@@ -235,6 +235,9 @@ export default class LevelSelect extends Phaser.Scene {
 
 	update(time: number, delta: number): void
 	{
+	// NGIO test
+		this.NGIOPlugin.update(this.levelText);
+
 		// if (this.gamepad?.isButtonDown(9) || this.StartKey.isDown)
 		// {
 		// 	this.registry.set('current-level', LevelSelect.levelsKey[this.selectedLevel]);
