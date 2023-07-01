@@ -183,6 +183,11 @@
                 "key": "bomb"
             },
             {
+                "url": "assets/levels/bomb-holder.json",
+                "type": "tilemapTiledJSON",
+                "key": "bomb-holder"
+            },
+            {
                 "url": "assets/levels/bomb-intro.json",
                 "type": "tilemapTiledJSON",
                 "key": "bomb-intro"
@@ -196,6 +201,11 @@
                 "url": "assets/bomb-mask.png",
                 "type": "image",
                 "key": "bomb-mask"
+            },
+            {
+                "url": "assets/levels/bomb-punch.json",
+                "type": "tilemapTiledJSON",
+                "key": "bomb-punch"
             },
             {
                 "url": "assets/levels/bomb-uppercut.json",
@@ -213,9 +223,19 @@
                 "key": "bullet"
             },
             {
+                "url": "assets/levels/bullet-ceiling.json",
+                "type": "tilemapTiledJSON",
+                "key": "bullet-ceiling"
+            },
+            {
                 "url": "assets/levels/charge.json",
                 "type": "tilemapTiledJSON",
                 "key": "charge"
+            },
+            {
+                "url": "assets/levels/climb.json",
+                "type": "tilemapTiledJSON",
+                "key": "climb"
             },
             {
                 "url": "assets/levels/combo.json",
@@ -373,6 +393,11 @@
                 "key": "mine-intro"
             },
             {
+                "url": "assets/levels/mine-wall.json",
+                "type": "tilemapTiledJSON",
+                "key": "mine-wall"
+            },
+            {
                 "url": "assets/levels/multipath.json",
                 "type": "tilemapTiledJSON",
                 "key": "multipath"
@@ -423,6 +448,26 @@
                 ],
                 "type": "audio",
                 "key": "Pogo stick"
+            },
+            {
+                "url": "assets/levels/pogo-challenge.json",
+                "type": "tilemapTiledJSON",
+                "key": "pogo-challenge"
+            },
+            {
+                "url": "assets/levels/pogo-ideas.json",
+                "type": "tilemapTiledJSON",
+                "key": "pogo-ideas"
+            },
+            {
+                "url": "assets/levels/pogo-intro.json",
+                "type": "tilemapTiledJSON",
+                "key": "pogo-intro"
+            },
+            {
+                "url": "assets/levels/pogo-mines.json",
+                "type": "tilemapTiledJSON",
+                "key": "pogo-mines"
             },
             {
                 "url": "assets/levels/punch.json",

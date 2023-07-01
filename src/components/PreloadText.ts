@@ -16,8 +16,15 @@ export default class PreloadText extends UserComponent {
 		/* START-USER-CTR-CODE */
 
 		this.scene.load.on(Phaser.Loader.Events.PROGRESS, (p:number) => {
-
-			this.gameObject.text = Math.floor(p * 100) + "%";
+			
+			if (p === 1)
+			{
+				this.gameObject.text = "Click / tap to start";
+			}
+			else 
+			{
+				this.gameObject.text = Math.floor(p * 100) + "%";
+			}
 		});
 
 		/* END-USER-CTR-CODE */

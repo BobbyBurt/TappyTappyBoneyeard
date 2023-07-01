@@ -2,7 +2,7 @@ import InputManager from "./InputManager";
 
 export default class tutorialManager {
 
-    public static doTutorialInDevMode = true;
+    public static doTutorialInDevMode = false;
 		// TODO: this seems to disable tutorial outside of dev mode too..
 
 	/** index correlates to level index. Levels without tutorials are null or beyond the array's 
@@ -36,7 +36,7 @@ export default class tutorialManager {
 				`When punching forward isn't enough, hit 'em with an uppercut!\n\nUse the ${InputManager.getInputName('uppercut')} to launch upward and take out the enemies above you.`,
 
 			// level 8
-				`Punches and uppercuts take a lot out of you...\n\nLanding on ground is one way to recharge, but you'll also automatically regain charge if you take out an enemy with your attack!`,
+				`Punches and uppercuts take a lot out of you... This is indicated by the icon in the top left.\n\nLanding on ground is one way to recharge, but you'll also automatically regain charge if you take out an enemy with your attack!`,
 				
 			// level 9
 				`Each enemy you take out will add to your combo as long as you're not grounded.\n\nTry to figure out ways to build that combo!`,

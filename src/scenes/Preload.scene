@@ -10,7 +10,9 @@
         ],
         "createMethodName": "editorCreate",
         "sceneKey": "Preload",
-        "compilerOutputLanguage": "TYPE_SCRIPT"
+        "compilerOutputLanguage": "TYPE_SCRIPT",
+        "borderWidth": 960,
+        "borderHeight": 540
     },
     "displayList": [
         {
@@ -20,26 +22,12 @@
             "components": [
                 "PreloadText"
             ],
-            "x": 48,
-            "y": 55,
+            "x": 480,
+            "y": 270,
             "originX": 0.5,
             "originY": 0.5,
             "text": "0%",
-            "fontFamily": "nokia cellphone fc small",
-            "fontSize": "30px"
-        },
-        {
-            "type": "Image",
-            "id": "8e10acf3-b18b-4fe0-a4ea-cada93cd5b65",
-            "label": "logo",
-            "components": [],
-            "texture": {
-                "key": "logo"
-            },
-            "x": 35,
-            "y": -94,
-            "scaleX": 3.09831503427523,
-            "scaleY": 3.09831503427523
+            "fontFamily": "nokia cellphone fc small"
         },
         {
             "type": "BitmapText",
@@ -47,17 +35,30 @@
             "label": "fileText",
             "scope": "CLASS",
             "components": [],
-            "x": -154,
-            "y": 212,
-            "alpha": 0.3,
-            "alphaTopLeft": 0.3,
-            "alphaTopRight": 0.3,
-            "alphaBottomLeft": 0.3,
-            "alphaBottomRight": 0.3,
+            "x": 369,
+            "y": 324,
+            "alpha": 0.2,
+            "alphaTopLeft": 0.2,
+            "alphaTopRight": 0.2,
+            "alphaBottomLeft": 0.2,
+            "alphaBottomRight": 0.2,
             "text": "New BitmapText",
             "font": "nokia",
             "fontSize": -8,
             "maxWidth": 200
+        },
+        {
+            "type": "Text",
+            "id": "4328f21b-07e1-4f13-abb7-8f792f3223c6",
+            "label": "progress_1",
+            "components": [],
+            "x": 480,
+            "y": 293.79905369327156,
+            "originX": 0.5,
+            "originY": 0.5,
+            "text": "(Game does not officially support mobile or gamepads yet)",
+            "fontFamily": "nokia cellphone fc small",
+            "fontSize": "8px"
         }
     ],
     "plainObjects": [],

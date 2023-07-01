@@ -72,12 +72,14 @@ export default class BalloonEnemy extends EnemyPrefab {
 	{
 		if (!super.isFalling())
 		{
-			this.y = this.originalPos.y + this.floatYTween.getValue();
-			this.balloon.setY((this.originalPos.y - 30) + this.floatYTween.getValue());
-			if (super.hasParasol)
-			{
-				super.parasol.setY((this.originalPos.y - 15) + this.floatYTween.getValue());
-			}
+			/* This is disabled so that chains are consistent. What I should do is have the enemy move to it's origin on hit.
+			*/
+			// this.y = this.originalPos.y + this.floatYTween.getValue();
+			// this.balloon.setY((this.originalPos.y - 30) + this.floatYTween.getValue());
+			// if (super.hasParasol)
+			// {
+			// 	super.parasol.setY((this.originalPos.y - 15) + this.floatYTween.getValue());
+			// }
 		}
 		else
 		{

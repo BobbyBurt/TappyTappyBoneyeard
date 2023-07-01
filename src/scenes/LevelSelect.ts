@@ -4,12 +4,13 @@
 /* START OF COMPILED CODE */
 
 import Phaser from "phaser";
-import Align from "../components/Align";
 /* START-USER-IMPORTS */
 
 import CameraUtil from "~/components/CameraUtil";
 import InputManager from "~/components/InputManager";
 import NGIOPlugin from "~/plugins/NGIOPlugin";
+import { levelScoreMilestones } from "~/components/LevelScores";
+import SoundManager from "~/components/SoundManager";
 
 /* END-USER-IMPORTS */
 
@@ -34,109 +35,178 @@ export default class LevelSelect extends Phaser.Scene {
 
 	editorCreate(): void {
 
+		// back
+		const back = this.add.rectangle(480, 270, 960, 540);
+		back.isFilled = true;
+		back.fillColor = 14383236;
+
 		// mainLayer
 		const mainLayer = this.add.layer();
 
 		// uiLayer
 		const uiLayer = this.add.layer();
 
+		// levelSelectContainer
+		const levelSelectContainer = this.add.container(0, 0);
+		levelSelectContainer.visible = false;
+
 		// levelBack
-		const levelBack = this.add.rectangle(0, 0, 150, 40);
+		const levelBack = this.add.rectangle(480, 290, 150, 40);
 		levelBack.isFilled = true;
 		levelBack.fillColor = 2697513;
-		uiLayer.add(levelBack);
+		levelSelectContainer.add(levelBack);
 
 		// levelText
-		const levelText = this.add.bitmapText(0, 0, "nokia", "intro\n");
+		const levelText = this.add.bitmapText(480, 290, "nokia", "intro\n");
 		levelText.setOrigin(0.5, 0.5);
 		levelText.text = "intro\n";
 		levelText.fontSize = -8;
 		levelText.align = 1;
-		uiLayer.add(levelText);
+		levelSelectContainer.add(levelText);
 
 		// downBack
-		const downBack = this.add.rectangle(-3, 48, 100, 40);
+		const downBack = this.add.rectangle(480, 344, 100, 40);
 		downBack.isFilled = true;
 		downBack.fillColor = 2697513;
-		uiLayer.add(downBack);
+		levelSelectContainer.add(downBack);
 
 		// downText
-		const downText = this.add.bitmapText(6, 48, "nokia", "v\n");
+		const downText = this.add.bitmapText(480, 344, "nokia", "v\n");
 		downText.setOrigin(0.5, 0.5);
 		downText.text = "v\n";
 		downText.fontSize = -16;
 		downText.align = 1;
-		uiLayer.add(downText);
+		levelSelectContainer.add(downText);
 
 		// upBack
-		const upBack = this.add.rectangle(3, 96, 100, 40);
+		const upBack = this.add.rectangle(480, 236, 100, 40);
 		upBack.isFilled = true;
 		upBack.fillColor = 2697513;
-		uiLayer.add(upBack);
+		levelSelectContainer.add(upBack);
 
 		// upText
-		const upText = this.add.bitmapText(7, 91, "nokia", "v");
+		const upText = this.add.bitmapText(480, 236, "nokia", "v");
 		upText.angle = -180;
 		upText.setOrigin(0.5, 0.5);
 		upText.text = "v";
 		upText.fontSize = -16;
 		upText.align = 1;
-		uiLayer.add(upText);
+		levelSelectContainer.add(upText);
+
+		// titleText
+		const titleText = this.add.bitmapText(480, 176, "nokia", "Level Select\n");
+		titleText.setOrigin(0.5, 0.5);
+		titleText.text = "Level Select\n";
+		titleText.fontSize = -16;
+		titleText.align = 1;
+		levelSelectContainer.add(titleText);
+
+		// backBack
+		const backBack = this.add.rectangle(356, 179, 50, 30);
+		backBack.isFilled = true;
+		backBack.fillColor = 2697513;
+		levelSelectContainer.add(backBack);
+
+		// backText
+		const backText = this.add.bitmapText(356, 179, "nokia", "back");
+		backText.setOrigin(0.5, 0.5);
+		backText.text = "back";
+		backText.fontSize = -8;
+		backText.align = 1;
+		levelSelectContainer.add(backText);
+
+		// levelInfoText
+		const levelInfoText = this.add.bitmapText(580, 269, "nokia", "\n");
+		levelInfoText.text = "\n";
+		levelInfoText.fontSize = -8;
+		levelSelectContainer.add(levelInfoText);
+
+		// mainMenuContainer
+		const mainMenuContainer = this.add.container(0, 0);
+
+		// arcadeBack
+		const arcadeBack = this.add.rectangle(480, 267, 150, 40);
+		arcadeBack.isFilled = true;
+		arcadeBack.fillColor = 2697513;
+		mainMenuContainer.add(arcadeBack);
+
+		// arcadeText
+		const arcadeText = this.add.bitmapText(480, 267, "nokia", "Arcade Mode\n");
+		arcadeText.setOrigin(0.5, 0.5);
+		arcadeText.text = "Arcade Mode\n";
+		arcadeText.fontSize = -8;
+		arcadeText.align = 1;
+		mainMenuContainer.add(arcadeText);
+
+		// levelSelectBack
+		const levelSelectBack = this.add.rectangle(480, 331, 150, 40);
+		levelSelectBack.scaleX = 0.8172138893396567;
+		levelSelectBack.isFilled = true;
+		levelSelectBack.fillColor = 2697513;
+		mainMenuContainer.add(levelSelectBack);
+
+		// levelSelectText
+		const levelSelectText = this.add.bitmapText(480, 331, "nokia", "Level Select");
+		levelSelectText.setOrigin(0.5, 0.5);
+		levelSelectText.text = "Level Select";
+		levelSelectText.fontSize = -8;
+		levelSelectText.align = 1;
+		mainMenuContainer.add(levelSelectText);
+
+		// logo
+		const logo = this.add.image(480, 193, "logo");
+		mainMenuContainer.add(logo);
+
+		// highScoreText
+		const highScoreText = this.add.bitmapText(570, 247, "nokia", "Arcade Mode\n");
+		highScoreText.text = "Arcade Mode\n";
+		highScoreText.fontSize = -8;
+		mainMenuContainer.add(highScoreText);
 
 		// lists
 		const levelBackList = [levelBack, downBack, upBack];
 
-		// levelBack (components)
-		const levelBackAlign = new Align(levelBack);
-		levelBackAlign.middle = true;
-		levelBackAlign.center = true;
-
-		// levelText (components)
-		const levelTextAlign = new Align(levelText);
-		levelTextAlign.middle = true;
-		levelTextAlign.center = true;
-
-		// downBack (components)
-		const downBackAlign = new Align(downBack);
-		downBackAlign.middle = true;
-		downBackAlign.center = true;
-		downBackAlign.verticalOffset = 50;
-
-		// downText (components)
-		const downTextAlign = new Align(downText);
-		downTextAlign.middle = true;
-		downTextAlign.center = true;
-		downTextAlign.verticalOffset = 50;
-
-		// upBack (components)
-		const upBackAlign = new Align(upBack);
-		upBackAlign.middle = true;
-		upBackAlign.center = true;
-		upBackAlign.verticalOffset = -50;
-
-		// upText (components)
-		const upTextAlign = new Align(upText);
-		upTextAlign.middle = true;
-		upTextAlign.center = true;
-		upTextAlign.verticalOffset = -50;
-
+		this.back = back;
 		this.mainLayer = mainLayer;
 		this.uiLayer = uiLayer;
+		this.levelSelectContainer = levelSelectContainer;
 		this.levelBack = levelBack;
 		this.levelText = levelText;
 		this.downBack = downBack;
 		this.upBack = upBack;
+		this.titleText = titleText;
+		this.backBack = backBack;
+		this.backText = backText;
+		this.levelInfoText = levelInfoText;
+		this.mainMenuContainer = mainMenuContainer;
+		this.arcadeBack = arcadeBack;
+		this.arcadeText = arcadeText;
+		this.levelSelectBack = levelSelectBack;
+		this.levelSelectText = levelSelectText;
+		this.highScoreText = highScoreText;
 		this.levelBackList = levelBackList;
 
 		this.events.emit("scene-awake");
 	}
 
+	private back!: Phaser.GameObjects.Rectangle;
 	private mainLayer!: Phaser.GameObjects.Layer;
 	private uiLayer!: Phaser.GameObjects.Layer;
+	private levelSelectContainer!: Phaser.GameObjects.Container;
 	private levelBack!: Phaser.GameObjects.Rectangle;
 	private levelText!: Phaser.GameObjects.BitmapText;
 	private downBack!: Phaser.GameObjects.Rectangle;
 	private upBack!: Phaser.GameObjects.Rectangle;
+	private titleText!: Phaser.GameObjects.BitmapText;
+	private backBack!: Phaser.GameObjects.Rectangle;
+	private backText!: Phaser.GameObjects.BitmapText;
+	private levelInfoText!: Phaser.GameObjects.BitmapText;
+	private mainMenuContainer!: Phaser.GameObjects.Container;
+	private arcadeBack!: Phaser.GameObjects.Rectangle;
+	private arcadeText!: Phaser.GameObjects.BitmapText;
+	private levelSelectBack!: Phaser.GameObjects.Rectangle;
+	private levelSelectText!: Phaser.GameObjects.BitmapText;
+	private highScoreText!: Phaser.GameObjects.BitmapText;
 	private levelBackList!: Phaser.GameObjects.Rectangle[];
 
 	/* START-USER-CODE */
@@ -144,10 +214,13 @@ export default class LevelSelect extends Phaser.Scene {
 	private UICam!: Phaser.Cameras.Scene2D.BaseCamera | any;
 
 	public static levelsKey = 
-		// ['jump', 'flap', 'punch', 'airborne', 'dive', 'gunfire', 'uppercut', 'charge', 'combo', 'tutorial-finale', 
-		// 'bomb-intro', 'bomb-uppercut', 'mine-intro', 'cool-combo', 'bomb-launch', 'dive-tec', 'parasol', 'pogo', 'grenade'];
-		['jump', 'flap', 'punch', 'airborne', 'dive', 'gunfire', 'uppercut', 'charge', 'combo', 'tutorial-finale', 
-		'bomb-intro', 'cool-combo', 'bomb-uppercut', 'parasol', 'pogo', 'grenade'];
+		[ 'bullet-ceiling',
+		'jump', 'flap', 'punch', 'airborne', 'dive', 'gunfire', 'uppercut', 'charge', 'combo', 'tutorial-finale', 
+		'bomb-intro', 'bomb-holder', 'bomb-punch', 'bomb-uppercut', 
+		'mine-intro', 'bullet-ceiling', 
+		'parasol', 
+		'pogo-intro', 'pogo-ideas', 'pogo-challenge', 
+		'grenade'];
 
 	private gamepad:Phaser.Input.Gamepad.Gamepad | undefined;
 	private SelectKey!: Phaser.Input.Keyboard.Key;
@@ -165,10 +238,50 @@ export default class LevelSelect extends Phaser.Scene {
 
 	// plugin test
 
-		this.NGIOPlugin = this.plugins.get('NGIO-plugin', true) as NGIOPlugin;
+		// this.NGIOPlugin = this.plugins.get('NGIO-plugin', true) as NGIOPlugin;
 
 		this.editorCreate();
 		this.createCameras();
+
+	// show level select in DEV
+		if (__DEV__)
+		{
+			this.registry.set('game-mode', 'level');
+			this.mainMenuContainer.setVisible(false);
+			this.levelSelectContainer.setVisible(true);
+		}
+
+	// arcade mode
+		this.arcadeBack.setInteractive();
+		this.arcadeBack.on('pointerdown', () =>
+		{
+			this.registry.set('game-mode', 'arcade');
+			this.selectedLevel = 0;
+			this.loadLevel();
+		});
+
+	// level select
+		this.levelSelectBack.setInteractive()
+		this.levelSelectBack.on('pointerdown', () =>
+		{
+			this.registry.set('game-mode', 'level');
+			this.mainMenuContainer.setVisible(false);
+			this.levelSelectContainer.setVisible(true);
+		});
+
+	// level select back
+		this.backBack.setInteractive();
+		this.backBack.on('pointerdown', () =>
+		{
+			this.mainMenuContainer.setVisible(true);
+			this.levelSelectContainer.setVisible(false);
+		});
+
+		if (this.registry.get('game-mode') === 'level')
+		{
+			this.mainMenuContainer.setVisible(false);
+			this.levelSelectContainer.setVisible(true);
+		}
 
 	// use previously selected level
 		if (this.registry.get('current-level-index'))
@@ -236,7 +349,7 @@ export default class LevelSelect extends Phaser.Scene {
 	update(time: number, delta: number): void
 	{
 	// NGIO test
-		this.NGIOPlugin.update(this.levelText);
+		// this.NGIOPlugin.update(this.levelText);
 
 		// if (this.gamepad?.isButtonDown(9) || this.StartKey.isDown)
 		// {
@@ -283,11 +396,61 @@ export default class LevelSelect extends Phaser.Scene {
 
 	// update text
 		this.levelText.setText('Level ' + (this.selectedLevel + 1) 
-			+ ' - ' + (__DEV__ ? LevelSelect.levelsKey[this.selectedLevel] : ''));
+			+ (__DEV__ ? `- ${LevelSelect.levelsKey[this.selectedLevel]}` : ''));
+
+		let score = this.game.registry.get
+		(
+			`top-score: ${LevelSelect.levelsKey[this.selectedLevel]}`
+		);
+
+		let awardString: 'none' | 'Bronze' | 'Silver' | 'Gold' = 'none';
+		let awardColour = 0;
+
+		let milestones = levelScoreMilestones.get
+		(LevelSelect.levelsKey[this.selectedLevel]) as Array<number>;
+		if (milestones === undefined)
+		{
+			console.warn('No level score milestone data found for this level key.');
+			milestones = [9999, 9999, 9999]
+		}
+		if (score == null)
+		{
+			score = 0;
+		}
+
+		if (score >= milestones[0]&& score < milestones[1])
+		{
+			awardString = 'Bronze';
+			awardColour = 10971430;
+		}
+		else if (score >= milestones[1]&& score < milestones[2])
+		{
+			awardString = 'Silver';
+			awardColour = 13816530;
+		}
+		else if (score >= milestones[2])
+		{
+			awardString = 'Gold';
+			awardColour = 16769358;
+		}
+
+			this.levelInfoText.setText(
+			`${(score !== 0 && this.selectedLevel > 1) ? `` : `- LOCKED -`}\n
+			Best: ${score}\n
+			Award: ${awardString}`
+		);
 	}
 
 	loadLevel()
 	{
+		console.debug(this.game.registry.get(`top-score: ${LevelSelect.levelsKey[this.selectedLevel]}`))
+		if (!__DEV__
+		&& this.game.registry.get('game-mode') === 'level' 
+		&& this.game.registry.get(`top-score: ${LevelSelect.levelsKey[this.selectedLevel]}`) == undefined)
+		{
+			return;
+		}
+
 		this.registry.set('current-level', LevelSelect.levelsKey[this.selectedLevel]);
 		this.registry.set('current-level-index', this.selectedLevel)
 		this.scene.stop(this);
@@ -303,10 +466,11 @@ export default class LevelSelect extends Phaser.Scene {
 	createCameras()
 	{
 		CameraUtil.configureMainCamera(this);
-		this.cameras.main.ignore(this.uiLayer.getChildren());
+		this.cameras.main.setBackgroundColor();
+		// this.cameras.main.ignore(this.uiLayer.getChildren());
 
-		this.UICam = CameraUtil.createUICamera(this);
-		this.UICam.ignore(this.mainLayer.getChildren());
+		// this.UICam = CameraUtil.createUICamera(this);
+		// this.UICam.ignore(this.mainLayer.getChildren());
 	}
 
 	resize()

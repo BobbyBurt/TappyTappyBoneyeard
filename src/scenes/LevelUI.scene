@@ -189,29 +189,6 @@
         },
         {
             "type": "BitmapText",
-            "id": "e8bb6dbb-d4cb-4c1b-a829-603b39dbd6ac",
-            "label": "scoreText",
-            "scope": "PUBLIC",
-            "components": [
-                "Align"
-            ],
-            "Align.up": true,
-            "Align.center": true,
-            "Align.verticalOffset": -95,
-            "x": 442.6918182373047,
-            "y": 870.46142578125,
-            "originX": 0.5,
-            "visible": false,
-            "text": "12359135",
-            "font": "nokia",
-            "align": 1,
-            "fontSize": -16,
-            "dropShadowY": 100,
-            "dropShadowAlpha": 1,
-            "dropShadowColor": "#222222ff"
-        },
-        {
-            "type": "BitmapText",
             "id": "3f3957ff-d03c-4674-a0bc-b8a1cee4747b",
             "label": "enemiesText",
             "scope": "PUBLIC",
@@ -488,19 +465,19 @@
                 "Align"
             ],
             "Align.up": true,
-            "Align.left": true,
-            "Align.horizontalOffset": 10,
+            "Align.right": true,
+            "Align.horizontalOffset": -10,
             "Align.verticalOffset": 10,
             "texture": {
                 "key": "bird0fist"
             },
-            "x": 322,
+            "x": 360,
             "y": 694,
             "scaleX": 2,
             "scaleY": 2,
             "angle": 90,
             "originX": 0,
-            "originY": 1
+            "originY": 0
         },
         {
             "type": "Image",
@@ -511,19 +488,19 @@
                 "Align"
             ],
             "Align.up": true,
-            "Align.left": true,
-            "Align.horizontalOffset": 10,
+            "Align.right": true,
+            "Align.horizontalOffset": -10,
             "Align.verticalOffset": 10,
             "texture": {
                 "key": "bird2fist"
             },
-            "x": 349,
+            "x": 387,
             "y": 682,
             "scaleX": 2,
             "scaleY": 2,
             "angle": 90,
             "originX": 0,
-            "originY": 1
+            "originY": 0
         },
         {
             "type": "Image",
@@ -604,8 +581,8 @@
                     "texture": {
                         "key": "soldiermid"
                     },
-                    "x": -66,
-                    "y": -32,
+                    "x": -32,
+                    "y": -35,
                     "flipX": true,
                     "visible": false
                 },
@@ -618,8 +595,8 @@
                     "texture": {
                         "key": "soldiermid"
                     },
-                    "x": -49,
-                    "y": -20,
+                    "x": -15,
+                    "y": -35,
                     "flipX": true,
                     "visible": false
                 },
@@ -632,8 +609,8 @@
                     "texture": {
                         "key": "soldiermid"
                     },
-                    "x": -31,
-                    "y": -32,
+                    "x": 3,
+                    "y": -35,
                     "flipX": true,
                     "visible": false
                 },
@@ -646,8 +623,8 @@
                     "texture": {
                         "key": "soldiermid"
                     },
-                    "x": -14,
-                    "y": -20,
+                    "x": 20,
+                    "y": -35,
                     "flipX": true,
                     "visible": false
                 },
@@ -660,8 +637,8 @@
                     "texture": {
                         "key": "soldiermid"
                     },
-                    "x": 4,
-                    "y": -32,
+                    "x": 38,
+                    "y": -35,
                     "flipX": true,
                     "visible": false
                 },
@@ -674,8 +651,8 @@
                     "texture": {
                         "key": "soldiermid"
                     },
-                    "x": 21,
-                    "y": -20,
+                    "x": -42,
+                    "y": -12,
                     "flipX": true,
                     "visible": false
                 },
@@ -688,8 +665,8 @@
                     "texture": {
                         "key": "soldiermid"
                     },
-                    "x": 39,
-                    "y": -32,
+                    "x": -24,
+                    "y": -12,
                     "flipX": true,
                     "visible": false
                 },
@@ -702,8 +679,8 @@
                     "texture": {
                         "key": "soldiermid"
                     },
-                    "x": 56,
-                    "y": -20,
+                    "x": -7,
+                    "y": -12,
                     "flipX": true,
                     "visible": false
                 },
@@ -716,8 +693,36 @@
                     "texture": {
                         "key": "soldiermid"
                     },
-                    "x": 74,
-                    "y": -32,
+                    "x": 11,
+                    "y": -12,
+                    "flipX": true,
+                    "visible": false
+                },
+                {
+                    "type": "Image",
+                    "id": "4e6a9872-a844-4e35-ada1-813ca8377a24",
+                    "label": "soldiermid",
+                    "scope": "CLASS",
+                    "components": [],
+                    "texture": {
+                        "key": "soldiermid"
+                    },
+                    "x": 28,
+                    "y": -12,
+                    "flipX": true,
+                    "visible": false
+                },
+                {
+                    "type": "Image",
+                    "id": "09214c03-4708-420c-94ff-f9c0a8673647",
+                    "label": "soldiermid_9",
+                    "scope": "CLASS",
+                    "components": [],
+                    "texture": {
+                        "key": "soldiermid"
+                    },
+                    "x": 45,
+                    "y": -12,
                     "flipX": true,
                     "visible": false
                 },
@@ -733,8 +738,83 @@
                     "text": "use <input> to continue.\nuse <input> to retry.\nuse <input> to exit.",
                     "font": "nokia",
                     "fontSize": -8
+                },
+                {
+                    "type": "BitmapText",
+                    "id": "470a074c-d612-4d03-8c10-6fb3a0286833",
+                    "label": "awardLabel",
+                    "scope": "CLASS",
+                    "components": [],
+                    "x": -69,
+                    "y": 31,
+                    "visible": false,
+                    "text": "AWARD:",
+                    "font": "nokia",
+                    "fontSize": -8
+                },
+                {
+                    "type": "BitmapText",
+                    "id": "b112c374-917f-4eae-97df-b76b79f414f1",
+                    "label": "award",
+                    "scope": "CLASS",
+                    "components": [],
+                    "x": -26,
+                    "y": 26,
+                    "visible": false,
+                    "text": "BRONZE",
+                    "font": "nokia",
+                    "fontSize": -16,
+                    "dropShadowY": 2,
+                    "dropShadowAlpha": 1,
+                    "dropShadowColor": "#0AE735"
                 }
             ]
+        },
+        {
+            "type": "BitmapText",
+            "id": "aba54305-d1c0-48b3-be10-17e4b68860c3",
+            "label": "scoreText",
+            "scope": "CLASS",
+            "components": [
+                "Align"
+            ],
+            "Align.up": true,
+            "Align.left": true,
+            "Align.horizontalOffset": 10,
+            "Align.verticalOffset": 10,
+            "x": 474.2378845214844,
+            "y": 742.5822143554688,
+            "tintTopLeft": "#000000",
+            "tintTopRight": "#000000",
+            "tintBottomLeft": "#000000",
+            "tintBottomRight": "#000000",
+            "text": "999999",
+            "font": "nokia",
+            "fontSize": -16,
+            "dropShadowColor": "#000000ff"
+        },
+        {
+            "type": "BitmapText",
+            "id": "82e82668-801f-4a4a-b6d5-b984221a1d60",
+            "label": "totalScoreText",
+            "scope": "CLASS",
+            "components": [
+                "Align"
+            ],
+            "Align.up": true,
+            "Align.left": true,
+            "Align.horizontalOffset": 10,
+            "Align.verticalOffset": 30,
+            "x": 485,
+            "y": 767,
+            "tintTopLeft": "#313131",
+            "tintTopRight": "#313131",
+            "tintBottomLeft": "#313131",
+            "tintBottomRight": "#313131",
+            "text": "999999",
+            "font": "nokia",
+            "fontSize": -16,
+            "dropShadowColor": "#515151ff"
         }
     ],
     "plainObjects": [],

@@ -30,26 +30,27 @@ export default class Preload extends Phaser.Scene {
 	editorCreate(): void {
 
 		// progress
-		const progress = this.add.text(48, 55, "", {});
+		const progress = this.add.text(480, 270, "", {});
 		progress.setOrigin(0.5, 0.5);
 		progress.text = "0%";
-		progress.setStyle({ "fontFamily": "nokia cellphone fc small", "fontSize": "30px" });
-
-		// logo
-		const logo = this.add.image(35, -94, "logo");
-		logo.scaleX = 3.09831503427523;
-		logo.scaleY = 3.09831503427523;
+		progress.setStyle({ "fontFamily": "nokia cellphone fc small" });
 
 		// fileText
-		const fileText = this.add.bitmapText(-154, 212, "nokia", "New BitmapText");
-		fileText.alpha = 0.3;
-		fileText.alphaTopLeft = 0.3;
-		fileText.alphaTopRight = 0.3;
-		fileText.alphaBottomLeft = 0.3;
-		fileText.alphaBottomRight = 0.3;
+		const fileText = this.add.bitmapText(369, 324, "nokia", "New BitmapText");
+		fileText.alpha = 0.2;
+		fileText.alphaTopLeft = 0.2;
+		fileText.alphaTopRight = 0.2;
+		fileText.alphaBottomLeft = 0.2;
+		fileText.alphaBottomRight = 0.2;
 		fileText.text = "New BitmapText";
 		fileText.fontSize = -8;
 		fileText.maxWidth = 200;
+
+		// progress_1
+		const progress_1 = this.add.text(480, 293.79905369327156, "", {});
+		progress_1.setOrigin(0.5, 0.5);
+		progress_1.text = "(Game does not officially support mobile or gamepads yet)";
+		progress_1.setStyle({ "fontFamily": "nokia cellphone fc small", "fontSize": "8px" });
 
 		// progress (components)
 		new PreloadText(progress);
@@ -74,6 +75,9 @@ export default class Preload extends Phaser.Scene {
 		this.resize();
 
 		this.scale.autoRound = true;
+
+		// TEMP 
+		this.game.registry.set('total-score', 0);
 
 	// camera
 		this.cameras.main.setViewport(0, 0, this.scale.width, this.scale.height);
@@ -146,7 +150,7 @@ export default class Preload extends Phaser.Scene {
 
 	resize()
 	{
-		this.cameras.main.centerOn(0, 0);
+		// this.cameras.main.centerOn(0, 0);
 	}
 
 	/* END-USER-CODE */

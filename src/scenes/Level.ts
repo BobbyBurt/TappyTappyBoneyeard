@@ -22,6 +22,7 @@ import tutorialManager from "~/components/tutorialManager";
 import InputManager from "~/components/InputManager";
 import LevelSelect from "./LevelSelect";
 import MinePrefab from "~/prefabs/MinePrefab";
+import cameraOffsetTrigger from "~/components/CameraOffsetTrigger";
 
 /* END-USER-IMPORTS */
 
@@ -37,88 +38,312 @@ export default class Level extends Phaser.Scene {
 
 	editorCreate(): void {
 
-		// BGLayer
-		const bGLayer = this.add.layer();
+		// BGLayerCity
+		const bGLayerCity = this.add.layer();
 
 		// parallax_Backing
-		const parallax_Backing = this.add.image(352, 474, "Parallax-Backing");
+		const parallax_Backing = this.add.image(352, 306, "Parallax-Backing");
 		parallax_Backing.scaleX = 8.415017240244449;
-		bGLayer.add(parallax_Backing);
+		bGLayerCity.add(parallax_Backing);
 
 		// parallax_Cityscape
-		const parallax_Cityscape = this.add.image(480, 552, "Parallax-Cityscape");
-		parallax_Cityscape.visible = false;
-		bGLayer.add(parallax_Cityscape);
+		const parallax_Cityscape = this.add.image(480, 318, "Parallax-Cityscape");
+		parallax_Cityscape.tintFill = true;
+		parallax_Cityscape.tintTopLeft = 16756150;
+		parallax_Cityscape.tintTopRight = 16756150;
+		parallax_Cityscape.tintBottomLeft = 16756150;
+		parallax_Cityscape.tintBottomRight = 16756150;
+		bGLayerCity.add(parallax_Cityscape);
 
 		// parallax_Cityscape_1
-		const parallax_Cityscape_1 = this.add.image(160, 552, "Parallax-Cityscape");
-		parallax_Cityscape_1.visible = false;
-		bGLayer.add(parallax_Cityscape_1);
+		const parallax_Cityscape_1 = this.add.image(160, 318, "Parallax-Cityscape");
+		parallax_Cityscape_1.tintFill = true;
+		parallax_Cityscape_1.tintTopLeft = 16756150;
+		parallax_Cityscape_1.tintTopRight = 16756150;
+		parallax_Cityscape_1.tintBottomLeft = 16756150;
+		parallax_Cityscape_1.tintBottomRight = 16756150;
+		bGLayerCity.add(parallax_Cityscape_1);
 
 		// parallax_Cityscape_2
-		const parallax_Cityscape_2 = this.add.image(800, 552, "Parallax-Cityscape");
-		parallax_Cityscape_2.visible = false;
-		bGLayer.add(parallax_Cityscape_2);
+		const parallax_Cityscape_2 = this.add.image(800, 318, "Parallax-Cityscape");
+		parallax_Cityscape_2.tintFill = true;
+		parallax_Cityscape_2.tintTopLeft = 16756150;
+		parallax_Cityscape_2.tintTopRight = 16756150;
+		parallax_Cityscape_2.tintBottomLeft = 16756150;
+		parallax_Cityscape_2.tintBottomRight = 16756150;
+		bGLayerCity.add(parallax_Cityscape_2);
 
 		// parallax_Cityscape_3
-		const parallax_Cityscape_3 = this.add.image(-160, 552, "Parallax-Cityscape");
-		parallax_Cityscape_3.visible = false;
-		bGLayer.add(parallax_Cityscape_3);
+		const parallax_Cityscape_3 = this.add.image(-160, 318, "Parallax-Cityscape");
+		parallax_Cityscape_3.tintFill = true;
+		parallax_Cityscape_3.tintTopLeft = 16756150;
+		parallax_Cityscape_3.tintTopRight = 16756150;
+		parallax_Cityscape_3.tintBottomLeft = 16756150;
+		parallax_Cityscape_3.tintBottomRight = 16756150;
+		bGLayerCity.add(parallax_Cityscape_3);
 
 		// parallax_Cityscape_4
-		const parallax_Cityscape_4 = this.add.image(1119, 552, "Parallax-Cityscape");
-		parallax_Cityscape_4.visible = false;
-		bGLayer.add(parallax_Cityscape_4);
+		const parallax_Cityscape_4 = this.add.image(1119, 318, "Parallax-Cityscape");
+		parallax_Cityscape_4.tintFill = true;
+		parallax_Cityscape_4.tintTopLeft = 16756150;
+		parallax_Cityscape_4.tintTopRight = 16756150;
+		parallax_Cityscape_4.tintBottomLeft = 16756150;
+		parallax_Cityscape_4.tintBottomRight = 16756150;
+		bGLayerCity.add(parallax_Cityscape_4);
 
 		// parallax_Cityscape_5
-		const parallax_Cityscape_5 = this.add.image(357.0000305175781, 619, "Parallax-Cityscape");
+		const parallax_Cityscape_5 = this.add.image(357, 385, "Parallax-Cityscape");
 		parallax_Cityscape_5.scaleX = 9.144642541425284;
 		parallax_Cityscape_5.scaleY = 9.144642541425284;
 		parallax_Cityscape_5.setOrigin(0.5, 0);
 		parallax_Cityscape_5.flipY = true;
-		parallax_Cityscape_5.visible = false;
-		bGLayer.add(parallax_Cityscape_5);
+		parallax_Cityscape_5.tintFill = true;
+		parallax_Cityscape_5.tintTopLeft = 16028060;
+		parallax_Cityscape_5.tintTopRight = 16028060;
+		parallax_Cityscape_5.tintBottomLeft = 16028060;
+		parallax_Cityscape_5.tintBottomRight = 16028060;
+		bGLayerCity.add(parallax_Cityscape_5);
 
 		// parallax_Cityscape_6
-		const parallax_Cityscape_6 = this.add.image(1439, 552, "Parallax-Cityscape");
-		parallax_Cityscape_6.visible = false;
-		bGLayer.add(parallax_Cityscape_6);
+		const parallax_Cityscape_6 = this.add.image(1439, 318, "Parallax-Cityscape");
+		parallax_Cityscape_6.tintFill = true;
+		parallax_Cityscape_6.tintTopLeft = 16756150;
+		parallax_Cityscape_6.tintTopRight = 16756150;
+		parallax_Cityscape_6.tintBottomLeft = 16756150;
+		parallax_Cityscape_6.tintBottomRight = 16756150;
+		bGLayerCity.add(parallax_Cityscape_6);
 
-		// parallax_Cityscape_7
-		const parallax_Cityscape_7 = this.add.image(-181, 530, "Parallax-Forest");
-		bGLayer.add(parallax_Cityscape_7);
+		// parallax_Cityscape_15
+		const parallax_Cityscape_15 = this.add.image(1328, 347, "Parallax-Cityscape");
+		parallax_Cityscape_15.tintFill = true;
+		parallax_Cityscape_15.tintTopLeft = 16028060;
+		parallax_Cityscape_15.tintTopRight = 16028060;
+		parallax_Cityscape_15.tintBottomLeft = 16028060;
+		parallax_Cityscape_15.tintBottomRight = 16028060;
+		bGLayerCity.add(parallax_Cityscape_15);
 
-		// parallax_Cityscape_8
-		const parallax_Cityscape_8 = this.add.image(94, 530, "Parallax-Forest");
-		bGLayer.add(parallax_Cityscape_8);
+		// parallax_Cityscape_16
+		const parallax_Cityscape_16 = this.add.image(1008, 347, "Parallax-Cityscape");
+		parallax_Cityscape_16.tintFill = true;
+		parallax_Cityscape_16.tintTopLeft = 16028060;
+		parallax_Cityscape_16.tintTopRight = 16028060;
+		parallax_Cityscape_16.tintBottomLeft = 16028060;
+		parallax_Cityscape_16.tintBottomRight = 16028060;
+		bGLayerCity.add(parallax_Cityscape_16);
 
-		// parallax_Cityscape_9
-		const parallax_Cityscape_9 = this.add.image(370, 530, "Parallax-Forest");
-		bGLayer.add(parallax_Cityscape_9);
+		// parallax_Cityscape_17
+		const parallax_Cityscape_17 = this.add.image(-271, 347, "Parallax-Cityscape");
+		parallax_Cityscape_17.tintFill = true;
+		parallax_Cityscape_17.tintTopLeft = 16028060;
+		parallax_Cityscape_17.tintTopRight = 16028060;
+		parallax_Cityscape_17.tintBottomLeft = 16028060;
+		parallax_Cityscape_17.tintBottomRight = 16028060;
+		bGLayerCity.add(parallax_Cityscape_17);
 
-		// parallax_Cityscape_10
-		const parallax_Cityscape_10 = this.add.image(645, 530, "Parallax-Forest");
-		bGLayer.add(parallax_Cityscape_10);
+		// parallax_Cityscape_18
+		const parallax_Cityscape_18 = this.add.image(689, 347, "Parallax-Cityscape");
+		parallax_Cityscape_18.tintFill = true;
+		parallax_Cityscape_18.tintTopLeft = 16028060;
+		parallax_Cityscape_18.tintTopRight = 16028060;
+		parallax_Cityscape_18.tintBottomLeft = 16028060;
+		parallax_Cityscape_18.tintBottomRight = 16028060;
+		bGLayerCity.add(parallax_Cityscape_18);
 
-		// parallax_Cityscape_11
-		const parallax_Cityscape_11 = this.add.image(921, 530, "Parallax-Forest");
-		bGLayer.add(parallax_Cityscape_11);
+		// parallax_Cityscape_19
+		const parallax_Cityscape_19 = this.add.image(49, 347, "Parallax-Cityscape");
+		parallax_Cityscape_19.tintFill = true;
+		parallax_Cityscape_19.tintTopLeft = 16028060;
+		parallax_Cityscape_19.tintTopRight = 16028060;
+		parallax_Cityscape_19.tintBottomLeft = 16028060;
+		parallax_Cityscape_19.tintBottomRight = 16028060;
+		bGLayerCity.add(parallax_Cityscape_19);
 
-		// parallax_Cityscape_12
-		const parallax_Cityscape_12 = this.add.image(1197, 530, "Parallax-Forest");
-		bGLayer.add(parallax_Cityscape_12);
+		// parallax_Cityscape_20
+		const parallax_Cityscape_20 = this.add.image(369, 347, "Parallax-Cityscape");
+		parallax_Cityscape_20.tintFill = true;
+		parallax_Cityscape_20.tintTopLeft = 16028060;
+		parallax_Cityscape_20.tintTopRight = 16028060;
+		parallax_Cityscape_20.tintBottomLeft = 16028060;
+		parallax_Cityscape_20.tintBottomRight = 16028060;
+		bGLayerCity.add(parallax_Cityscape_20);
 
-		// parallax_Cityscape_13
-		const parallax_Cityscape_13 = this.add.image(1472, 530, "Parallax-Forest");
-		bGLayer.add(parallax_Cityscape_13);
+		// BGLayerHills
+		const bGLayerHills = this.add.layer();
+		bGLayerHills.visible = false;
 
-		// parallax_Cityscape_14
-		const parallax_Cityscape_14 = this.add.image(422, 570, "Parallax-Forest");
-		parallax_Cityscape_14.scaleX = 9.144642541425284;
-		parallax_Cityscape_14.scaleY = 9.144642541425284;
-		parallax_Cityscape_14.setOrigin(0.5, 0);
-		parallax_Cityscape_14.flipY = true;
-		bGLayer.add(parallax_Cityscape_14);
+		// parallax_Backing_2
+		const parallax_Backing_2 = this.add.image(352, 306, "Parallax-Backing");
+		parallax_Backing_2.scaleX = 8.415017240244449;
+		bGLayerHills.add(parallax_Backing_2);
+
+		// parallax_Hills_1
+		const parallax_Hills_1 = this.add.image(160, 318, "Parallax-Forest");
+		parallax_Hills_1.tintFill = true;
+		parallax_Hills_1.tintTopLeft = 16756150;
+		parallax_Hills_1.tintTopRight = 16756150;
+		parallax_Hills_1.tintBottomLeft = 16756150;
+		parallax_Hills_1.tintBottomRight = 16756150;
+		bGLayerHills.add(parallax_Hills_1);
+
+		// parallax_Hills_7
+		const parallax_Hills_7 = this.add.image(433, 318, "Parallax-Forest");
+		parallax_Hills_7.tintFill = true;
+		parallax_Hills_7.tintTopLeft = 16756150;
+		parallax_Hills_7.tintTopRight = 16756150;
+		parallax_Hills_7.tintBottomLeft = 16756150;
+		parallax_Hills_7.tintBottomRight = 16756150;
+		bGLayerHills.add(parallax_Hills_7);
+
+		// parallax_Hills_9
+		const parallax_Hills_9 = this.add.image(709, 318, "Parallax-Forest");
+		parallax_Hills_9.tintFill = true;
+		parallax_Hills_9.tintTopLeft = 16756150;
+		parallax_Hills_9.tintTopRight = 16756150;
+		parallax_Hills_9.tintBottomLeft = 16756150;
+		parallax_Hills_9.tintBottomRight = 16756150;
+		bGLayerHills.add(parallax_Hills_9);
+
+		// parallax_Hills_12
+		const parallax_Hills_12 = this.add.image(985, 318, "Parallax-Forest");
+		parallax_Hills_12.tintFill = true;
+		parallax_Hills_12.tintTopLeft = 16756150;
+		parallax_Hills_12.tintTopRight = 16756150;
+		parallax_Hills_12.tintBottomLeft = 16756150;
+		parallax_Hills_12.tintBottomRight = 16756150;
+		bGLayerHills.add(parallax_Hills_12);
+
+		// parallax_Hills_14
+		const parallax_Hills_14 = this.add.image(1261, 318, "Parallax-Forest");
+		parallax_Hills_14.tintFill = true;
+		parallax_Hills_14.tintTopLeft = 16756150;
+		parallax_Hills_14.tintTopRight = 16756150;
+		parallax_Hills_14.tintBottomLeft = 16756150;
+		parallax_Hills_14.tintBottomRight = 16756150;
+		bGLayerHills.add(parallax_Hills_14);
+
+		// parallax_Hills_22
+		const parallax_Hills_22 = this.add.image(1536, 318, "Parallax-Forest");
+		parallax_Hills_22.tintFill = true;
+		parallax_Hills_22.tintTopLeft = 16756150;
+		parallax_Hills_22.tintTopRight = 16756150;
+		parallax_Hills_22.tintBottomLeft = 16756150;
+		parallax_Hills_22.tintBottomRight = 16756150;
+		bGLayerHills.add(parallax_Hills_22);
+
+		// parallax_Hills_24
+		const parallax_Hills_24 = this.add.image(-115, 318, "Parallax-Forest");
+		parallax_Hills_24.tintFill = true;
+		parallax_Hills_24.tintTopLeft = 16756150;
+		parallax_Hills_24.tintTopRight = 16756150;
+		parallax_Hills_24.tintBottomLeft = 16756150;
+		parallax_Hills_24.tintBottomRight = 16756150;
+		bGLayerHills.add(parallax_Hills_24);
+
+		// parallax_Hills_26
+		const parallax_Hills_26 = this.add.image(-323, 318, "Parallax-Forest");
+		parallax_Hills_26.tintFill = true;
+		parallax_Hills_26.tintTopLeft = 16756150;
+		parallax_Hills_26.tintTopRight = 16756150;
+		parallax_Hills_26.tintBottomLeft = 16756150;
+		parallax_Hills_26.tintBottomRight = 16756150;
+		bGLayerHills.add(parallax_Hills_26);
+
+		// parallax_Cityscape_big_5
+		const parallax_Cityscape_big_5 = this.add.image(357, 352, "Parallax-Cityscape");
+		parallax_Cityscape_big_5.scaleX = 9.144642541425284;
+		parallax_Cityscape_big_5.scaleY = 9.144642541425284;
+		parallax_Cityscape_big_5.setOrigin(0.5, 0);
+		parallax_Cityscape_big_5.flipY = true;
+		parallax_Cityscape_big_5.tintFill = true;
+		parallax_Cityscape_big_5.tintTopLeft = 16028060;
+		parallax_Cityscape_big_5.tintTopRight = 16028060;
+		parallax_Cityscape_big_5.tintBottomLeft = 16028060;
+		parallax_Cityscape_big_5.tintBottomRight = 16028060;
+		bGLayerHills.add(parallax_Cityscape_big_5);
+
+		// parallax_Hills_20
+		const parallax_Hills_20 = this.add.image(369, 347, "Parallax-Forest");
+		parallax_Hills_20.tintFill = true;
+		parallax_Hills_20.tintTopLeft = 16028060;
+		parallax_Hills_20.tintTopRight = 16028060;
+		parallax_Hills_20.tintBottomLeft = 16028060;
+		parallax_Hills_20.tintBottomRight = 16028060;
+		bGLayerHills.add(parallax_Hills_20);
+
+		// parallax_Hills_8
+		const parallax_Hills_8 = this.add.image(642, 347, "Parallax-Forest");
+		parallax_Hills_8.tintFill = true;
+		parallax_Hills_8.tintTopLeft = 16028060;
+		parallax_Hills_8.tintTopRight = 16028060;
+		parallax_Hills_8.tintBottomLeft = 16028060;
+		parallax_Hills_8.tintBottomRight = 16028060;
+		bGLayerHills.add(parallax_Hills_8);
+
+		// parallax_Hills_10
+		const parallax_Hills_10 = this.add.image(918, 347, "Parallax-Forest");
+		parallax_Hills_10.tintFill = true;
+		parallax_Hills_10.tintTopLeft = 16028060;
+		parallax_Hills_10.tintTopRight = 16028060;
+		parallax_Hills_10.tintBottomLeft = 16028060;
+		parallax_Hills_10.tintBottomRight = 16028060;
+		bGLayerHills.add(parallax_Hills_10);
+
+		// parallax_Hills_11
+		const parallax_Hills_11 = this.add.image(1194, 347, "Parallax-Forest");
+		parallax_Hills_11.tintFill = true;
+		parallax_Hills_11.tintTopLeft = 16028060;
+		parallax_Hills_11.tintTopRight = 16028060;
+		parallax_Hills_11.tintBottomLeft = 16028060;
+		parallax_Hills_11.tintBottomRight = 16028060;
+		bGLayerHills.add(parallax_Hills_11);
+
+		// parallax_Hills_13
+		const parallax_Hills_13 = this.add.image(1470, 347, "Parallax-Forest");
+		parallax_Hills_13.tintFill = true;
+		parallax_Hills_13.tintTopLeft = 16028060;
+		parallax_Hills_13.tintTopRight = 16028060;
+		parallax_Hills_13.tintBottomLeft = 16028060;
+		parallax_Hills_13.tintBottomRight = 16028060;
+		bGLayerHills.add(parallax_Hills_13);
+
+		// parallax_Hills_21
+		const parallax_Hills_21 = this.add.image(1745, 347, "Parallax-Forest");
+		parallax_Hills_21.tintFill = true;
+		parallax_Hills_21.tintTopLeft = 16028060;
+		parallax_Hills_21.tintTopRight = 16028060;
+		parallax_Hills_21.tintBottomLeft = 16028060;
+		parallax_Hills_21.tintBottomRight = 16028060;
+		bGLayerHills.add(parallax_Hills_21);
+
+		// parallax_Hills_23
+		const parallax_Hills_23 = this.add.image(94, 347, "Parallax-Forest");
+		parallax_Hills_23.tintFill = true;
+		parallax_Hills_23.tintTopLeft = 16028060;
+		parallax_Hills_23.tintTopRight = 16028060;
+		parallax_Hills_23.tintBottomLeft = 16028060;
+		parallax_Hills_23.tintBottomRight = 16028060;
+		bGLayerHills.add(parallax_Hills_23);
+
+		// parallax_Hills_25
+		const parallax_Hills_25 = this.add.image(-114, 347, "Parallax-Forest");
+		parallax_Hills_25.tintFill = true;
+		parallax_Hills_25.tintTopLeft = 16028060;
+		parallax_Hills_25.tintTopRight = 16028060;
+		parallax_Hills_25.tintBottomLeft = 16028060;
+		parallax_Hills_25.tintBottomRight = 16028060;
+		bGLayerHills.add(parallax_Hills_25);
+
+		// parallax_Hills_27
+		const parallax_Hills_27 = this.add.image(-389, 347, "Parallax-Forest");
+		parallax_Hills_27.tintFill = true;
+		parallax_Hills_27.tintTopLeft = 16028060;
+		parallax_Hills_27.tintTopRight = 16028060;
+		parallax_Hills_27.tintBottomLeft = 16028060;
+		parallax_Hills_27.tintBottomRight = 16028060;
+		bGLayerHills.add(parallax_Hills_27);
+
+		// bGLayer
+		const bGLayer = this.add.layer();
 
 		// mainLayer
 		const mainLayer = this.add.layer();
@@ -172,47 +397,133 @@ export default class Level extends Phaser.Scene {
 		parallax_Cityscape_6ScrollFactor.factorX = 0.2;
 		parallax_Cityscape_6ScrollFactor.factorY = 0.1;
 
-		// parallax_Cityscape_7 (components)
-		const parallax_Cityscape_7ScrollFactor = new ScrollFactor(parallax_Cityscape_7);
-		parallax_Cityscape_7ScrollFactor.factorX = 0.2;
-		parallax_Cityscape_7ScrollFactor.factorY = 0.1;
+		// parallax_Cityscape_15 (components)
+		const parallax_Cityscape_15ScrollFactor = new ScrollFactor(parallax_Cityscape_15);
+		parallax_Cityscape_15ScrollFactor.factorX = 0.25;
+		parallax_Cityscape_15ScrollFactor.factorY = 0.15;
 
-		// parallax_Cityscape_8 (components)
-		const parallax_Cityscape_8ScrollFactor = new ScrollFactor(parallax_Cityscape_8);
-		parallax_Cityscape_8ScrollFactor.factorX = 0.2;
-		parallax_Cityscape_8ScrollFactor.factorY = 0.1;
+		// parallax_Cityscape_16 (components)
+		const parallax_Cityscape_16ScrollFactor = new ScrollFactor(parallax_Cityscape_16);
+		parallax_Cityscape_16ScrollFactor.factorX = 0.25;
+		parallax_Cityscape_16ScrollFactor.factorY = 0.15;
 
-		// parallax_Cityscape_9 (components)
-		const parallax_Cityscape_9ScrollFactor = new ScrollFactor(parallax_Cityscape_9);
-		parallax_Cityscape_9ScrollFactor.factorX = 0.2;
-		parallax_Cityscape_9ScrollFactor.factorY = 0.1;
+		// parallax_Cityscape_17 (components)
+		const parallax_Cityscape_17ScrollFactor = new ScrollFactor(parallax_Cityscape_17);
+		parallax_Cityscape_17ScrollFactor.factorX = 0.25;
+		parallax_Cityscape_17ScrollFactor.factorY = 0.15;
 
-		// parallax_Cityscape_10 (components)
-		const parallax_Cityscape_10ScrollFactor = new ScrollFactor(parallax_Cityscape_10);
-		parallax_Cityscape_10ScrollFactor.factorX = 0.2;
-		parallax_Cityscape_10ScrollFactor.factorY = 0.1;
+		// parallax_Cityscape_18 (components)
+		const parallax_Cityscape_18ScrollFactor = new ScrollFactor(parallax_Cityscape_18);
+		parallax_Cityscape_18ScrollFactor.factorX = 0.25;
+		parallax_Cityscape_18ScrollFactor.factorY = 0.15;
 
-		// parallax_Cityscape_11 (components)
-		const parallax_Cityscape_11ScrollFactor = new ScrollFactor(parallax_Cityscape_11);
-		parallax_Cityscape_11ScrollFactor.factorX = 0.2;
-		parallax_Cityscape_11ScrollFactor.factorY = 0.1;
+		// parallax_Cityscape_19 (components)
+		const parallax_Cityscape_19ScrollFactor = new ScrollFactor(parallax_Cityscape_19);
+		parallax_Cityscape_19ScrollFactor.factorX = 0.25;
+		parallax_Cityscape_19ScrollFactor.factorY = 0.15;
 
-		// parallax_Cityscape_12 (components)
-		const parallax_Cityscape_12ScrollFactor = new ScrollFactor(parallax_Cityscape_12);
-		parallax_Cityscape_12ScrollFactor.factorX = 0.2;
-		parallax_Cityscape_12ScrollFactor.factorY = 0.1;
+		// parallax_Cityscape_20 (components)
+		const parallax_Cityscape_20ScrollFactor = new ScrollFactor(parallax_Cityscape_20);
+		parallax_Cityscape_20ScrollFactor.factorX = 0.25;
+		parallax_Cityscape_20ScrollFactor.factorY = 0.15;
 
-		// parallax_Cityscape_13 (components)
-		const parallax_Cityscape_13ScrollFactor = new ScrollFactor(parallax_Cityscape_13);
-		parallax_Cityscape_13ScrollFactor.factorX = 0.2;
-		parallax_Cityscape_13ScrollFactor.factorY = 0.1;
+		// parallax_Backing_2 (components)
+		new ScrollFactor(parallax_Backing_2);
 
-		// parallax_Cityscape_14 (components)
-		const parallax_Cityscape_14ScrollFactor = new ScrollFactor(parallax_Cityscape_14);
-		parallax_Cityscape_14ScrollFactor.factorY = 0.1;
+		// parallax_Hills_1 (components)
+		const parallax_Hills_1ScrollFactor = new ScrollFactor(parallax_Hills_1);
+		parallax_Hills_1ScrollFactor.factorX = 0.2;
+		parallax_Hills_1ScrollFactor.factorY = 0.1;
 
-		this.bGLayer = bGLayer;
+		// parallax_Hills_7 (components)
+		const parallax_Hills_7ScrollFactor = new ScrollFactor(parallax_Hills_7);
+		parallax_Hills_7ScrollFactor.factorX = 0.2;
+		parallax_Hills_7ScrollFactor.factorY = 0.1;
+
+		// parallax_Hills_9 (components)
+		const parallax_Hills_9ScrollFactor = new ScrollFactor(parallax_Hills_9);
+		parallax_Hills_9ScrollFactor.factorX = 0.2;
+		parallax_Hills_9ScrollFactor.factorY = 0.1;
+
+		// parallax_Hills_12 (components)
+		const parallax_Hills_12ScrollFactor = new ScrollFactor(parallax_Hills_12);
+		parallax_Hills_12ScrollFactor.factorX = 0.2;
+		parallax_Hills_12ScrollFactor.factorY = 0.1;
+
+		// parallax_Hills_14 (components)
+		const parallax_Hills_14ScrollFactor = new ScrollFactor(parallax_Hills_14);
+		parallax_Hills_14ScrollFactor.factorX = 0.2;
+		parallax_Hills_14ScrollFactor.factorY = 0.1;
+
+		// parallax_Hills_22 (components)
+		const parallax_Hills_22ScrollFactor = new ScrollFactor(parallax_Hills_22);
+		parallax_Hills_22ScrollFactor.factorX = 0.2;
+		parallax_Hills_22ScrollFactor.factorY = 0.1;
+
+		// parallax_Hills_24 (components)
+		const parallax_Hills_24ScrollFactor = new ScrollFactor(parallax_Hills_24);
+		parallax_Hills_24ScrollFactor.factorX = 0.2;
+		parallax_Hills_24ScrollFactor.factorY = 0.1;
+
+		// parallax_Hills_26 (components)
+		const parallax_Hills_26ScrollFactor = new ScrollFactor(parallax_Hills_26);
+		parallax_Hills_26ScrollFactor.factorX = 0.2;
+		parallax_Hills_26ScrollFactor.factorY = 0.1;
+
+		// parallax_Cityscape_big_5 (components)
+		const parallax_Cityscape_big_5ScrollFactor = new ScrollFactor(parallax_Cityscape_big_5);
+		parallax_Cityscape_big_5ScrollFactor.factorY = 0.1;
+
+		// parallax_Hills_20 (components)
+		const parallax_Hills_20ScrollFactor = new ScrollFactor(parallax_Hills_20);
+		parallax_Hills_20ScrollFactor.factorX = 0.25;
+		parallax_Hills_20ScrollFactor.factorY = 0.15;
+
+		// parallax_Hills_8 (components)
+		const parallax_Hills_8ScrollFactor = new ScrollFactor(parallax_Hills_8);
+		parallax_Hills_8ScrollFactor.factorX = 0.25;
+		parallax_Hills_8ScrollFactor.factorY = 0.15;
+
+		// parallax_Hills_10 (components)
+		const parallax_Hills_10ScrollFactor = new ScrollFactor(parallax_Hills_10);
+		parallax_Hills_10ScrollFactor.factorX = 0.25;
+		parallax_Hills_10ScrollFactor.factorY = 0.15;
+
+		// parallax_Hills_11 (components)
+		const parallax_Hills_11ScrollFactor = new ScrollFactor(parallax_Hills_11);
+		parallax_Hills_11ScrollFactor.factorX = 0.25;
+		parallax_Hills_11ScrollFactor.factorY = 0.15;
+
+		// parallax_Hills_13 (components)
+		const parallax_Hills_13ScrollFactor = new ScrollFactor(parallax_Hills_13);
+		parallax_Hills_13ScrollFactor.factorX = 0.25;
+		parallax_Hills_13ScrollFactor.factorY = 0.15;
+
+		// parallax_Hills_21 (components)
+		const parallax_Hills_21ScrollFactor = new ScrollFactor(parallax_Hills_21);
+		parallax_Hills_21ScrollFactor.factorX = 0.25;
+		parallax_Hills_21ScrollFactor.factorY = 0.15;
+
+		// parallax_Hills_23 (components)
+		const parallax_Hills_23ScrollFactor = new ScrollFactor(parallax_Hills_23);
+		parallax_Hills_23ScrollFactor.factorX = 0.25;
+		parallax_Hills_23ScrollFactor.factorY = 0.15;
+
+		// parallax_Hills_25 (components)
+		const parallax_Hills_25ScrollFactor = new ScrollFactor(parallax_Hills_25);
+		parallax_Hills_25ScrollFactor.factorX = 0.25;
+		parallax_Hills_25ScrollFactor.factorY = 0.15;
+
+		// parallax_Hills_27 (components)
+		const parallax_Hills_27ScrollFactor = new ScrollFactor(parallax_Hills_27);
+		parallax_Hills_27ScrollFactor.factorX = 0.25;
+		parallax_Hills_27ScrollFactor.factorY = 0.15;
+
+		this.bGLayerCity = bGLayerCity;
 		this.parallax_Backing = parallax_Backing;
+		this.bGLayerHills = bGLayerHills;
+		this.parallax_Backing_2 = parallax_Backing_2;
+		this.bGLayer = bGLayer;
 		this.mainLayer = mainLayer;
 		this.player = player;
 		this.public_list = public_list;
@@ -225,8 +536,11 @@ export default class Level extends Phaser.Scene {
 		this.events.emit("scene-awake");
 	}
 
-	private bGLayer!: Phaser.GameObjects.Layer;
+	private bGLayerCity!: Phaser.GameObjects.Layer;
 	private parallax_Backing!: Phaser.GameObjects.Image;
+	private bGLayerHills!: Phaser.GameObjects.Layer;
+	private parallax_Backing_2!: Phaser.GameObjects.Image;
+	private bGLayer!: Phaser.GameObjects.Layer;
 	public mainLayer!: Phaser.GameObjects.Layer;
 	public player!: playerPrefab;
 	public public_list!: Array<any>;
@@ -260,6 +574,7 @@ export default class Level extends Phaser.Scene {
 	private mineList: Array<MinePrefab>;
 	/** Polygons used for enemies' player detection. */
 	private visionPolys: Array<VisionPoly>;
+	private cameraOffsetTriggers: Array<cameraOffsetTrigger>
 
 // particles
 	private enemyBloodEmitterManager: Phaser.GameObjects.Particles.ParticleEmitterManager;
@@ -293,6 +608,8 @@ export default class Level extends Phaser.Scene {
 	private scorePopupGroup: Phaser.GameObjects.Group;
 	private levelScore: number;
 	private levelTimer: Phaser.Time.TimerEvent;
+	private score = 0;
+	private airborneCombo = false;
 
 // pause
 	private hitStopPause = false;
@@ -313,6 +630,8 @@ export default class Level extends Phaser.Scene {
 		this.restarting = false;
 		this.combo = 0;
 		this.highestCombo = 0;
+		this.airborneCombo = false;
+		this.score = 0;
 		this.cameraFollow = new Phaser.Math.Vector2(this.player.x, this.player.y);
 		this.currentLevelIndex = this.registry.get('current-level-index');
 
@@ -354,6 +673,18 @@ export default class Level extends Phaser.Scene {
 
 		this.player.createFist();
 		this.mainLayer.add(this.player.fist);
+
+	// BG
+		if (this.registry.get('current-level-index') < 10)
+		{
+			this.bGLayerCity.setVisible(false);
+			this.bGLayerHills.setVisible(true);
+		}
+		else
+		{
+			this.bGLayerCity.setVisible(true);
+			this.bGLayerHills.setVisible(false);
+		}
 
 	//mines
 		this.mineList = new Array<MinePrefab>();
@@ -401,8 +732,10 @@ export default class Level extends Phaser.Scene {
 		// /* TODO: make this array length dynamic to the amount of vision rects that are in the 
 		// map, otherwise this acts as an arbitrary max which crashes the game if exceeded.
 		// */
+		this.cameraOffsetTriggers = new Array(0);
 		this.createMapEnemies();
 		this.createMapVisionPolys();
+		this.createCameraOffsetTriggers();
 
 	// tilemap special elements
 		let startPoint = TilemapUtil.getObjectPositionByGID(38, this.tileMap);
@@ -469,7 +802,7 @@ export default class Level extends Phaser.Scene {
 	// summary continue
 		this.uiScene.input.keyboard.on('keydown-' + InputManager.getInput('menu-confirm', 'keyboard') , () =>
 		{
-			if (this.uiScene.summaryVisible)
+			if (this.uiScene.summaryVisible && this.registry.get('game-mode') === 'arcade')
 			{
 				this.LoadNextLevel();
 			}
@@ -489,7 +822,7 @@ export default class Level extends Phaser.Scene {
 	// pause / summary exit
 		this.uiScene.input.keyboard.on('keydown-' + InputManager.getInput('menu-back', 'keyboard') , () =>
 		{
-			if (this.manualPause || this.uiScene.summaryVisible)
+			if (this.manualPause || (this.uiScene.summaryVisible && this.registry.get('game-mode') === 'level'))
 			{
 				this.LoadLevelSelect();
 			}
@@ -639,6 +972,7 @@ export default class Level extends Phaser.Scene {
 		}
 
 		this.checkVisionPolys();
+		this.checkCameraOffsetTriggers();
 
 		// player-plane check
 		if (this.planeRect)
@@ -661,10 +995,10 @@ export default class Level extends Phaser.Scene {
 
 	// update camera follow
 		this.cameraFollow.set(this.player.body.x, this.player.body.y);
-		if (this.uiScene.tutorialContainer.visible && !this.registry.get('mobile'))
-		{
-			this.cameraFollow.x += (this.uiScene.tutorialBox.width / 2);
-		}
+		// if (this.uiScene.tutorialContainer.visible && !this.registry.get('mobile'))
+		// {
+		// 	this.cameraFollow.x += (this.uiScene.tutorialBox.width / 2);
+		// }
 	}
 
 	/**
@@ -800,6 +1134,7 @@ export default class Level extends Phaser.Scene {
 
 			this.combo = 0;
 			this.updateCombo();
+			// this.airborneCombo = false;
 		}
 	}
 
@@ -1002,8 +1337,23 @@ export default class Level extends Phaser.Scene {
 			this.combo++;
 			this.updateCombo();
 		}
+		
+		let scoreToAdd = 500;
 
-		this.addEnemyScore();
+		if (cause === 'chain' || cause === 'explosion')
+		{
+			// this.combo++;
+			// this.updateCombo();
+
+			scoreToAdd = 750;
+		}
+		// else
+		// {
+		// 	this.combo = 0;
+		// 	this.updateCombo();
+		// }
+
+		console.debug(`enemy takeout cause: ${cause}`);
 
 		if (enemy.isMine)
 		{
@@ -1020,24 +1370,15 @@ export default class Level extends Phaser.Scene {
 
 		this.updateEnemiesUI(false);
 
+		// score
+		console.debug(`+ ${scoreToAdd * (this.combo > 1 ? this.combo : 1)}, combo: ${this.combo}`);
+		this.score += scoreToAdd * (this.combo > 1 ? this.combo : 1);
+		this.uiScene.setScore(this.score);
+
 		// if (this.player.stateController.currentState.name !== 'dive')
 		// {
 		// 	this.goalEnemyCheck(enemy);
 		// }
-	}
-
-	/**
-	 * Must be called after updateCombo()
-	 */
-	addEnemyScore()
-	{
-		let scoreToAdd = 200 * this.combo;
-		this.levelScore += scoreToAdd;
-
-		// const scorePopup = this.scorePopupGroup.get(this.player.x, this.player.y - 1020);
-		// this.mainLayer.add(scorePopup);
-		// scorePopup.setDepth(20);
-		// scorePopup.appear(scoreToAdd);
 	}
 
 	updateCombo()
@@ -1159,19 +1500,25 @@ export default class Level extends Phaser.Scene {
 	/** detects physics bodies within explosion range and impacts them appropriately */
 	explosionCheck(x: number, y: number)
 	{
-		let _this = this;
+		let _this = this as Level;
 		this.physics.overlapCirc(x, y, 25, true, false).forEach(function (element: any)
 		// TODO: specify type annotation
 		{
 			if (_this.enemyList.includes(element.gameObject))
 			{
-				element.gameObject.hit(0, -250);
-
-				if (!_this.player.onFloor)
+				if (!element.gameObject.isFalling())
 				{
-					_this.combo++;
-					_this.updateCombo();
+					// if (!_this.player.onFloor)
+					// {
+					// 	_this.combo++;
+					// 	_this.updateCombo();
+					// }
+
+					// element.gameObject.hit(0, -250);
+					_this.takeoutEnemy(element.gameObject, "explosion")
 				}
+
+				
 			}
 			if (element.gameObject.name == 'player')
 			{
@@ -1439,18 +1786,34 @@ export default class Level extends Phaser.Scene {
 		// this.uiScene.showLevelCompleteText();
 		this.uiScene.showSummaryUI();
 
+		this.time.addEvent({ delay: 3000, callback: () =>
+		{
+			console.debug(`score: +${this.score}`);
+			let timeScore = Math.floor(this.levelTimer.getRemaining() * .1);
+			this.score += timeScore;
+			console.debug(`time: +${timeScore}`);
+			this.uiScene.setScore(this.score);
+			this.registry.set('total-score', this.game.registry.get('total-score') + this.score);
+			
+			this.uiScene.setAward(this.score);
+	
+			// TODO: set highscore
+			this.game.registry.set(`top-score: ${this.game.registry.get('current-level')}`, this.score);
+		}});
+
+		
 		// Plane fly away tween
 		this.tweens.add
-			({
-				targets: this.plane,
-				duration: 4000,
-				hold: 1000,
-				// repeatDelay: 1000,
-				repeat: 0,
-				ease: Phaser.Math.Easing.Cubic.In,
-				y: this.plane.y - 300,
-				x: this.plane.x + 1000
-			});
+		({
+			targets: this.plane,
+			duration: 4000,
+			hold: 1000,
+			// repeatDelay: 1000,
+			repeat: 0,
+			ease: Phaser.Math.Easing.Cubic.In,
+			y: this.plane.y - 300,
+			x: this.plane.x + 1000
+		});
 
 		// Getting into Plane bob tween
 		// this.tweens.add
@@ -1654,6 +2017,40 @@ export default class Level extends Phaser.Scene {
 				}
 			}
 		}
+	}
+
+	createCameraOffsetTriggers()
+	{
+		let _mapObjects = this.tileMap.getObjectLayer('elements')
+		_mapObjects.objects.forEach((_object, index) =>
+		{
+			if (_object.rectangle)
+			{
+				let object = _object as any;
+
+				const trigger = new cameraOffsetTrigger(object.properties[0].value, 
+					object.properties[1].value, object.x, object.y, object.width, object.height);
+				this.cameraOffsetTriggers.push(trigger);
+				this.mapElementList[object.id] = trigger;
+			}
+		});
+	}
+
+	checkCameraOffsetTriggers()
+	{
+		this.cameraOffsetTriggers.forEach((object, index) =>
+		{
+			if (Phaser.Geom.Rectangle.ContainsPoint
+				(object, new Phaser.Geom.Point(this.player.x, this.player.y)))
+			{
+				if (this.cameras.main.followOffset.x !== object.cameraOffset.x 
+					|| this.cameras.main.followOffset.y !== object.cameraOffset.y)
+				{
+					this.cameras.main.setFollowOffset
+						(object.cameraOffset.x, object.cameraOffset.y);
+				}
+			}
+		});
 	}
 
 	createMapVisionPolys()
@@ -1982,7 +2379,7 @@ export default class Level extends Phaser.Scene {
 		{
 			// this.uiScene.setDebugText(0, `${this.player.stateController.currentState.name}`);
 			this.uiScene.setDebugText(0, `level completed: ${this.registry.get('completed-level-' + this.currentLevelIndex)}`);
-			this.uiScene.setDebugText(1, `manual pause : ${this.manualPause}`);
+			this.uiScene.setDebugText(1, `combo : ${this.combo}`);
 			this.uiScene.setDebugText(2, `punch input : ${this.player.punchInput}`);
 		}
 	}

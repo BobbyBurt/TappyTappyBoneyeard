@@ -8,10 +8,23 @@
         "createMethodName": "editorCreate",
         "sceneKey": "LevelSelect",
         "compilerOutputLanguage": "TYPE_SCRIPT",
-        "borderWidth": 0,
-        "borderHeight": 0
+        "borderWidth": 960,
+        "borderHeight": 540
     },
     "displayList": [
+        {
+            "type": "Rectangle",
+            "id": "a77bc4c7-7303-4c4f-abdd-223a5bba5faf",
+            "label": "back",
+            "scope": "CLASS",
+            "components": [],
+            "x": 480,
+            "y": 270,
+            "isFilled": true,
+            "fillColor": "#DB7884",
+            "width": 960,
+            "height": 540
+        },
         {
             "type": "Layer",
             "id": "11f9358b-435b-4e69-a55f-e43fcd8653d9",
@@ -26,17 +39,24 @@
             "label": "uiLayer",
             "scope": "CLASS",
             "components": [],
+            "list": []
+        },
+        {
+            "type": "Container",
+            "id": "5443ffc6-b6ff-4f1f-abdf-d703c6c1e15e",
+            "label": "levelSelectContainer",
+            "scope": "CLASS",
+            "components": [],
+            "visible": false,
             "list": [
                 {
                     "type": "Rectangle",
                     "id": "1afaacd1-16ce-4e86-8a28-e0c8e9dc7a75",
                     "label": "levelBack",
                     "scope": "CLASS",
-                    "components": [
-                        "Align"
-                    ],
-                    "Align.middle": true,
-                    "Align.center": true,
+                    "components": [],
+                    "x": 480,
+                    "y": 290,
                     "isFilled": true,
                     "fillColor": "#292929",
                     "width": 150,
@@ -47,11 +67,9 @@
                     "id": "4fafc039-7004-4d02-8cbf-6bff8a84a42a",
                     "label": "levelText",
                     "scope": "CLASS",
-                    "components": [
-                        "Align"
-                    ],
-                    "Align.middle": true,
-                    "Align.center": true,
+                    "components": [],
+                    "x": 480,
+                    "y": 290,
                     "originX": 0.5,
                     "originY": 0.5,
                     "text": "intro\n",
@@ -64,14 +82,9 @@
                     "id": "d181fd9a-53f4-43c0-9448-0ebbedb69f12",
                     "label": "downBack",
                     "scope": "CLASS",
-                    "components": [
-                        "Align"
-                    ],
-                    "Align.middle": true,
-                    "Align.center": true,
-                    "Align.verticalOffset": 50,
-                    "x": -3,
-                    "y": 48,
+                    "components": [],
+                    "x": 480,
+                    "y": 344,
                     "isFilled": true,
                     "fillColor": "#292929",
                     "width": 100,
@@ -81,14 +94,9 @@
                     "type": "BitmapText",
                     "id": "cb5cada5-be41-408d-a894-e46a323270f5",
                     "label": "downText",
-                    "components": [
-                        "Align"
-                    ],
-                    "Align.middle": true,
-                    "Align.center": true,
-                    "Align.verticalOffset": 50,
-                    "x": 6,
-                    "y": 48,
+                    "components": [],
+                    "x": 480,
+                    "y": 344,
                     "originX": 0.5,
                     "originY": 0.5,
                     "text": "v\n",
@@ -101,14 +109,9 @@
                     "id": "ba18145b-0f47-4105-be70-52bcd49c8495",
                     "label": "upBack",
                     "scope": "CLASS",
-                    "components": [
-                        "Align"
-                    ],
-                    "Align.middle": true,
-                    "Align.center": true,
-                    "Align.verticalOffset": -50,
-                    "x": 3,
-                    "y": 96,
+                    "components": [],
+                    "x": 480,
+                    "y": 236,
                     "isFilled": true,
                     "fillColor": "#292929",
                     "width": 100,
@@ -118,14 +121,9 @@
                     "type": "BitmapText",
                     "id": "45e1df7d-5532-4767-9bb8-bfa8735e1f09",
                     "label": "upText",
-                    "components": [
-                        "Align"
-                    ],
-                    "Align.middle": true,
-                    "Align.center": true,
-                    "Align.verticalOffset": -50,
-                    "x": 7,
-                    "y": 91,
+                    "components": [],
+                    "x": 480,
+                    "y": 236,
                     "angle": -180,
                     "originX": 0.5,
                     "originY": 0.5,
@@ -133,6 +131,150 @@
                     "font": "nokia",
                     "align": 1,
                     "fontSize": -16
+                },
+                {
+                    "type": "BitmapText",
+                    "id": "ef9271e6-c780-40f7-ace9-eb114238d83d",
+                    "label": "titleText",
+                    "scope": "CLASS",
+                    "components": [],
+                    "x": 480,
+                    "y": 176,
+                    "originX": 0.5,
+                    "originY": 0.5,
+                    "text": "Level Select\n",
+                    "font": "nokia",
+                    "align": 1,
+                    "fontSize": -16
+                },
+                {
+                    "type": "Rectangle",
+                    "id": "f023527d-03ab-41d5-bb58-bdb173e2bd53",
+                    "label": "backBack",
+                    "scope": "CLASS",
+                    "components": [],
+                    "x": 356,
+                    "y": 179,
+                    "isFilled": true,
+                    "fillColor": "#292929",
+                    "width": 50,
+                    "height": 30
+                },
+                {
+                    "type": "BitmapText",
+                    "id": "f8d3ad6d-0b80-4262-a0b1-4f80f96f1064",
+                    "label": "backText",
+                    "scope": "CLASS",
+                    "components": [],
+                    "x": 356,
+                    "y": 179,
+                    "originX": 0.5,
+                    "originY": 0.5,
+                    "text": "back",
+                    "font": "nokia",
+                    "align": 1,
+                    "fontSize": -8
+                },
+                {
+                    "type": "BitmapText",
+                    "id": "4f5a0d16-bbb5-49c0-8353-bcc5a1de1f13",
+                    "label": "levelInfoText",
+                    "scope": "CLASS",
+                    "components": [],
+                    "x": 580,
+                    "y": 269,
+                    "text": "\n",
+                    "font": "nokia",
+                    "fontSize": -8
+                }
+            ]
+        },
+        {
+            "type": "Container",
+            "id": "c98b2e24-fe1c-4fa4-8ed7-fbb70047694b",
+            "label": "mainMenuContainer",
+            "scope": "CLASS",
+            "components": [],
+            "list": [
+                {
+                    "type": "Rectangle",
+                    "id": "a1f4bc3f-e13d-44a0-8086-c33a6d495e52",
+                    "label": "arcadeBack",
+                    "scope": "CLASS",
+                    "components": [],
+                    "x": 480,
+                    "y": 267,
+                    "isFilled": true,
+                    "fillColor": "#292929",
+                    "width": 150,
+                    "height": 40
+                },
+                {
+                    "type": "BitmapText",
+                    "id": "15af755c-4aee-478e-b6ec-4bc43e5ca884",
+                    "label": "arcadeText",
+                    "scope": "CLASS",
+                    "components": [],
+                    "x": 480,
+                    "y": 267,
+                    "originX": 0.5,
+                    "originY": 0.5,
+                    "text": "Arcade Mode\n",
+                    "font": "nokia",
+                    "align": 1,
+                    "fontSize": -8
+                },
+                {
+                    "type": "Rectangle",
+                    "id": "04b48337-785d-42d5-9b07-3fadc7138647",
+                    "label": "levelSelectBack",
+                    "scope": "CLASS",
+                    "components": [],
+                    "x": 480,
+                    "y": 331,
+                    "scaleX": 0.8172138893396567,
+                    "isFilled": true,
+                    "fillColor": "#292929",
+                    "width": 150,
+                    "height": 40
+                },
+                {
+                    "type": "BitmapText",
+                    "id": "63887559-21a3-4a76-9acf-9284f3130775",
+                    "label": "levelSelectText",
+                    "scope": "CLASS",
+                    "components": [],
+                    "x": 480,
+                    "y": 331,
+                    "originX": 0.5,
+                    "originY": 0.5,
+                    "text": "Level Select",
+                    "font": "nokia",
+                    "align": 1,
+                    "fontSize": -8
+                },
+                {
+                    "type": "Image",
+                    "id": "83710f0c-6b6f-49b3-8235-7430efad79f3",
+                    "label": "logo",
+                    "components": [],
+                    "texture": {
+                        "key": "logo"
+                    },
+                    "x": 480,
+                    "y": 193
+                },
+                {
+                    "type": "BitmapText",
+                    "id": "48c31761-788b-4c8b-a9af-5fb11b5c58be",
+                    "label": "highScoreText",
+                    "scope": "CLASS",
+                    "components": [],
+                    "x": 570,
+                    "y": 247,
+                    "text": "Arcade Mode\n",
+                    "font": "nokia",
+                    "fontSize": -8
                 }
             ]
         }
