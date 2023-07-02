@@ -23,6 +23,7 @@ import InputManager from "~/components/InputManager";
 import LevelSelect from "./LevelSelect";
 import MinePrefab from "~/prefabs/MinePrefab";
 import cameraOffsetTrigger from "~/components/CameraOffsetTrigger";
+import cloudSaves from "~/API/cloudSaves";
 
 /* END-USER-IMPORTS */
 
@@ -1799,8 +1800,18 @@ export default class Level extends Phaser.Scene {
 	
 			// TODO: set highscore
 			this.game.registry.set(`top-score: ${this.game.registry.get('current-level')}`, this.score);
+
+			cloudSaves.saveData(this);
 		}});
 
+		// tutorial medal
+		this.time.addEvent({ delay: 1000, callback: ()=>
+		{
+			if (this.registry.get('current-level') === 'tutorial-finale')
+			{
+				this.game.events.emit('unlock-medal: Fish Splasher');
+			}
+		}});
 		
 		// Plane fly away tween
 		this.tweens.add

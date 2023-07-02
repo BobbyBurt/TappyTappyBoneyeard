@@ -613,6 +613,11 @@
                 "key": "tutorial-ipad"
             },
             {
+                "url": "assets/levels/umbrella-trap.json",
+                "type": "tilemapTiledJSON",
+                "key": "umbrella-trap"
+            },
+            {
                 "url": "assets/levels/uppercut.json",
                 "type": "tilemapTiledJSON",
                 "key": "uppercut"

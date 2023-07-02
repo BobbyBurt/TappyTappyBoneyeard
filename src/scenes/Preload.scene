@@ -53,10 +53,12 @@
             "label": "progress_1",
             "components": [],
             "x": 480,
-            "y": 293.79905369327156,
+            "y": 302,
             "originX": 0.5,
             "originY": 0.5,
-            "text": "(Game does not officially support mobile or gamepads yet)",
+            "text": "Log into Newgrounds to earn medals and use cloud save data.\nGame does not officially support mobile or gamepads yet.",
+            "lineSpacing": 5,
+            "align": "right",
             "fontFamily": "nokia cellphone fc small",
             "fontSize": "8px"
         }

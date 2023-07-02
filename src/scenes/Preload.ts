@@ -47,10 +47,11 @@ export default class Preload extends Phaser.Scene {
 		fileText.maxWidth = 200;
 
 		// progress_1
-		const progress_1 = this.add.text(480, 293.79905369327156, "", {});
+		const progress_1 = this.add.text(480, 302, "", {});
 		progress_1.setOrigin(0.5, 0.5);
-		progress_1.text = "(Game does not officially support mobile or gamepads yet)";
-		progress_1.setStyle({ "fontFamily": "nokia cellphone fc small", "fontSize": "8px" });
+		progress_1.text = "Log into Newgrounds to earn medals and use cloud save data.\nGame does not officially support mobile or gamepads yet.";
+		progress_1.setStyle({ "align": "right", "fontFamily": "nokia cellphone fc small", "fontSize": "8px" });
+		progress_1.setLineSpacing(5);
 
 		// progress (components)
 		new PreloadText(progress);
@@ -106,6 +107,8 @@ export default class Preload extends Phaser.Scene {
 			this.fileText.setText(this.fileText.text + `\nloaded: ${key} ${type}`)
 			this.fileText.setY(this.fileText.y - 10)
 		});
+
+		this.scene.launch('medal-scene');
 	}
 
 	/** 

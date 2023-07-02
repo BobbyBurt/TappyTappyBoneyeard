@@ -8,9 +8,9 @@ import Phaser from "phaser";
 
 import CameraUtil from "~/components/CameraUtil";
 import InputManager from "~/components/InputManager";
-import NGIOPlugin from "~/plugins/NGIOPlugin";
 import { levelScoreMilestones } from "~/components/LevelScores";
 import SoundManager from "~/components/SoundManager";
+import cloudSaves from "~/API/cloudSaves";
 
 /* END-USER-IMPORTS */
 
@@ -214,12 +214,13 @@ export default class LevelSelect extends Phaser.Scene {
 	private UICam!: Phaser.Cameras.Scene2D.BaseCamera | any;
 
 	public static levelsKey = 
-		[ 'bullet-ceiling',
+		[ 'umbrella-trap',
 		'jump', 'flap', 'punch', 'airborne', 'dive', 'gunfire', 'uppercut', 'charge', 'combo', 'tutorial-finale', 
 		'bomb-intro', 'bomb-holder', 'bomb-punch', 'bomb-uppercut', 
-		'mine-intro', 'bullet-ceiling', 
+		'mine-intro', 
 		'parasol', 
 		'pogo-intro', 'pogo-ideas', 'pogo-challenge', 
+		'bullet-ceiling',
 		'grenade'];
 
 	private gamepad:Phaser.Input.Gamepad.Gamepad | undefined;
@@ -232,13 +233,7 @@ export default class LevelSelect extends Phaser.Scene {
 	/** used to only call functionality on down */
 	private gamepadSelectorDown = false;
 
-	private NGIOPlugin:NGIOPlugin;
-
 	create() {
-
-	// plugin test
-
-		// this.NGIOPlugin = this.plugins.get('NGIO-plugin', true) as NGIOPlugin;
 
 		this.editorCreate();
 		this.createCameras();
@@ -267,6 +262,10 @@ export default class LevelSelect extends Phaser.Scene {
 			this.registry.set('game-mode', 'level');
 			this.mainMenuContainer.setVisible(false);
 			this.levelSelectContainer.setVisible(true);
+
+			// TEMP: load cloud save
+			cloudSaves.loadData(this);
+			// this would be better with a status ready callback
 		});
 
 	// level select back
@@ -348,8 +347,6 @@ export default class LevelSelect extends Phaser.Scene {
 
 	update(time: number, delta: number): void
 	{
-	// NGIO test
-		// this.NGIOPlugin.update(this.levelText);
 
 		// if (this.gamepad?.isButtonDown(9) || this.StartKey.isDown)
 		// {

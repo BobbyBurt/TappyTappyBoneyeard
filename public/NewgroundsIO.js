@@ -396,7 +396,7 @@ class NGIO
 			this.#ngioCore = new NewgroundsIO.Core(appID, aesKey);
 
 			this.#ngioCore.addEventListener("serverResponse", function(e) {
-				// NGIO.#onServerResponse(e);
+				NGIO.#onServerResponse(e);
 			});
 
 			if (options && typeof(options) === "object") {

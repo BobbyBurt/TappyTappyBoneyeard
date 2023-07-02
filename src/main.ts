@@ -1,9 +1,11 @@
+import cloudSaves from './API/cloudSaves';
+import medalScene from './API/medalScene';
+import { newgroundsIOWrapper } from './API/newgroundsIOWrapper';
 import Level from './scenes/Level';
 import LevelSelect from './scenes/LevelSelect';
 import LevelUI from './scenes/LevelUI';
 import Pause from './scenes/Pause';
 import Preload from './scenes/Preload';
-import NGIOPlugin from 'plugins/NGIOPlugin'
 
 
 window.addEventListener('load', function ()
@@ -12,7 +14,7 @@ window.addEventListener('load', function ()
 	{
 		title: 'Tappy Tappy Boneyard',
 		url: 'https://www.newgrounds.com/projects/games/1923225/preview',
-		version: '12 alpha',
+		version: '13 beta',
 		
 	// visuals
 		type: Phaser.AUTO,
@@ -52,25 +54,25 @@ window.addEventListener('load', function ()
 			}
 		},
 
-		plugins:
-		{
-			global:
-			[
-				{
-					key: 'NGIO-plugin', 
-					plugin: NGIOPlugin, 
-					start: true
-				}
-			],
-			scene:
-			[
-				// {
-				// 	key: 'scene-plugin-test',
-				// 	plugin: ScenePluginTest,
-				// 	mapping: 'scenePluginMap'
-				// }
-			]
-		}
+		// plugins:
+		// {
+		// 	global:
+		// 	[
+		// 		{
+		// 			key: 'NGIO-plugin', 
+		// 			plugin: NGIOPlugin, 
+		// 			start: true
+		// 		}
+		// 	],
+		// 	scene:
+		// 	[
+		// 		// {
+		// 		// 	key: 'scene-plugin-test',
+		// 		// 	plugin: ScenePluginTest,
+		// 		// 	mapping: 'scenePluginMap'
+		// 		// }
+		// 	]
+		// }
 	});
 	
 	game.scene.add("Preload", Preload);
@@ -79,10 +81,13 @@ window.addEventListener('load', function ()
 	game.scene.add("Boot", Boot, true);
 	game.scene.add("LevelUI", LevelUI);
 	game.scene.add("Pause", Pause);
+	game.scene.add('medal-scene', medalScene);
 });
 
 class Boot extends Phaser.Scene
 {
+	private ngWrap: newgroundsIOWrapper;
+
 	/**
 	 * load preload assets, then the scene
 	 */
@@ -94,7 +99,26 @@ class Boot extends Phaser.Scene
 
 	create()
 	{
-		// window.addEventListener('resize', this.resize.bind(this));
+		this.game.events.once(Phaser.Core.Events.STEP, () => 
+		{
+			this.ngWrap = new newgroundsIOWrapper();
+			this.ngWrap.start();
+		});
+		
+		this.game.events.on(Phaser.Core.Events.STEP, () => 
+		{
+			NGIO.keepSessionAlive();
+			if (NGIO.isInitialized)
+			{
+				this.ngWrap.update();
+			}
+		});
+
+		cloudSaves.setDataKeys([
+			'top-score: punch', 'top-score: airborne', 'top-score: dive', 'top-score: gunfire', 'top-score: uppercut', 'top-score: charge', 'top-score: combo', 'top-score: tutorial-finale',
+			'top-score'
+		]);
+		// TODO: add all level key topscores
 	}
 
 	/**
