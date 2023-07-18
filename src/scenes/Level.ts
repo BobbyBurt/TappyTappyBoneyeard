@@ -24,6 +24,7 @@ import LevelSelect from "./LevelSelect";
 import MinePrefab from "~/prefabs/MinePrefab";
 import cameraOffsetTrigger from "~/components/CameraOffsetTrigger";
 import cloudSaves from "~/API/cloudSaves";
+import { getEarnedAward } from "~/components/LevelScores";
 
 /* END-USER-IMPORTS */
 
@@ -39,8 +40,138 @@ export default class Level extends Phaser.Scene {
 
 	editorCreate(): void {
 
+		// BGLayerIndustry
+		const bGLayerIndustry = this.add.layer();
+
+		// parallax_Backing111
+		const parallax_Backing111 = this.add.image(352, 306, "Parallax-Backing");
+		parallax_Backing111.scaleX = 8.415017240244449;
+		bGLayerIndustry.add(parallax_Backing111);
+
+		// parallax_Cityscape111
+		const parallax_Cityscape111 = this.add.image(480, 299, "Parallax-Industry");
+		parallax_Cityscape111.tintFill = true;
+		parallax_Cityscape111.tintTopLeft = 16756150;
+		parallax_Cityscape111.tintTopRight = 16756150;
+		parallax_Cityscape111.tintBottomLeft = 16756150;
+		parallax_Cityscape111.tintBottomRight = 16756150;
+		bGLayerIndustry.add(parallax_Cityscape111);
+
+		// parallax_Cityscape_111
+		const parallax_Cityscape_111 = this.add.image(160, 299, "Parallax-Industry");
+		parallax_Cityscape_111.tintFill = true;
+		parallax_Cityscape_111.tintTopLeft = 16756150;
+		parallax_Cityscape_111.tintTopRight = 16756150;
+		parallax_Cityscape_111.tintBottomLeft = 16756150;
+		parallax_Cityscape_111.tintBottomRight = 16756150;
+		bGLayerIndustry.add(parallax_Cityscape_111);
+
+		// parallax_Cityscape_21
+		const parallax_Cityscape_21 = this.add.image(800, 299, "Parallax-Industry");
+		parallax_Cityscape_21.tintFill = true;
+		parallax_Cityscape_21.tintTopLeft = 16756150;
+		parallax_Cityscape_21.tintTopRight = 16756150;
+		parallax_Cityscape_21.tintBottomLeft = 16756150;
+		parallax_Cityscape_21.tintBottomRight = 16756150;
+		bGLayerIndustry.add(parallax_Cityscape_21);
+
+		// parallax_Cityscape_31
+		const parallax_Cityscape_31 = this.add.image(-160, 299, "Parallax-Industry");
+		parallax_Cityscape_31.tintFill = true;
+		parallax_Cityscape_31.tintTopLeft = 16756150;
+		parallax_Cityscape_31.tintTopRight = 16756150;
+		parallax_Cityscape_31.tintBottomLeft = 16756150;
+		parallax_Cityscape_31.tintBottomRight = 16756150;
+		bGLayerIndustry.add(parallax_Cityscape_31);
+
+		// parallax_Cityscape_41
+		const parallax_Cityscape_41 = this.add.image(1119, 299, "Parallax-Industry");
+		parallax_Cityscape_41.tintFill = true;
+		parallax_Cityscape_41.tintTopLeft = 16756150;
+		parallax_Cityscape_41.tintTopRight = 16756150;
+		parallax_Cityscape_41.tintBottomLeft = 16756150;
+		parallax_Cityscape_41.tintBottomRight = 16756150;
+		bGLayerIndustry.add(parallax_Cityscape_41);
+
+		// parallax_Cityscape_51
+		const parallax_Cityscape_51 = this.add.image(357, 372, "Parallax-Industry");
+		parallax_Cityscape_51.scaleX = 9.144642541425284;
+		parallax_Cityscape_51.scaleY = 9.144642541425284;
+		parallax_Cityscape_51.setOrigin(0.5, 0);
+		parallax_Cityscape_51.flipY = true;
+		parallax_Cityscape_51.tintFill = true;
+		parallax_Cityscape_51.tintTopLeft = 16028060;
+		parallax_Cityscape_51.tintTopRight = 16028060;
+		parallax_Cityscape_51.tintBottomLeft = 16028060;
+		parallax_Cityscape_51.tintBottomRight = 16028060;
+		bGLayerIndustry.add(parallax_Cityscape_51);
+
+		// parallax_Cityscape_61
+		const parallax_Cityscape_61 = this.add.image(1439, 299, "Parallax-Industry");
+		parallax_Cityscape_61.tintFill = true;
+		parallax_Cityscape_61.tintTopLeft = 16756150;
+		parallax_Cityscape_61.tintTopRight = 16756150;
+		parallax_Cityscape_61.tintBottomLeft = 16756150;
+		parallax_Cityscape_61.tintBottomRight = 16756150;
+		bGLayerIndustry.add(parallax_Cityscape_61);
+
+		// parallax_Cityscape_151
+		const parallax_Cityscape_151 = this.add.image(1328, 334, "Parallax-Industry");
+		parallax_Cityscape_151.tintFill = true;
+		parallax_Cityscape_151.tintTopLeft = 16028060;
+		parallax_Cityscape_151.tintTopRight = 16028060;
+		parallax_Cityscape_151.tintBottomLeft = 16028060;
+		parallax_Cityscape_151.tintBottomRight = 16028060;
+		bGLayerIndustry.add(parallax_Cityscape_151);
+
+		// parallax_Cityscape_161
+		const parallax_Cityscape_161 = this.add.image(1008, 334, "Parallax-Industry");
+		parallax_Cityscape_161.tintFill = true;
+		parallax_Cityscape_161.tintTopLeft = 16028060;
+		parallax_Cityscape_161.tintTopRight = 16028060;
+		parallax_Cityscape_161.tintBottomLeft = 16028060;
+		parallax_Cityscape_161.tintBottomRight = 16028060;
+		bGLayerIndustry.add(parallax_Cityscape_161);
+
+		// parallax_Cityscape_171
+		const parallax_Cityscape_171 = this.add.image(-271, 334, "Parallax-Industry");
+		parallax_Cityscape_171.tintFill = true;
+		parallax_Cityscape_171.tintTopLeft = 16028060;
+		parallax_Cityscape_171.tintTopRight = 16028060;
+		parallax_Cityscape_171.tintBottomLeft = 16028060;
+		parallax_Cityscape_171.tintBottomRight = 16028060;
+		bGLayerIndustry.add(parallax_Cityscape_171);
+
+		// parallax_Cityscape_181
+		const parallax_Cityscape_181 = this.add.image(689, 334, "Parallax-Industry");
+		parallax_Cityscape_181.tintFill = true;
+		parallax_Cityscape_181.tintTopLeft = 16028060;
+		parallax_Cityscape_181.tintTopRight = 16028060;
+		parallax_Cityscape_181.tintBottomLeft = 16028060;
+		parallax_Cityscape_181.tintBottomRight = 16028060;
+		bGLayerIndustry.add(parallax_Cityscape_181);
+
+		// parallax_Cityscape_1911
+		const parallax_Cityscape_1911 = this.add.image(49, 334, "Parallax-Industry");
+		parallax_Cityscape_1911.tintFill = true;
+		parallax_Cityscape_1911.tintTopLeft = 16028060;
+		parallax_Cityscape_1911.tintTopRight = 16028060;
+		parallax_Cityscape_1911.tintBottomLeft = 16028060;
+		parallax_Cityscape_1911.tintBottomRight = 16028060;
+		bGLayerIndustry.add(parallax_Cityscape_1911);
+
+		// parallax_Cityscape_201
+		const parallax_Cityscape_201 = this.add.image(369, 334, "Parallax-Industry");
+		parallax_Cityscape_201.tintFill = true;
+		parallax_Cityscape_201.tintTopLeft = 16028060;
+		parallax_Cityscape_201.tintTopRight = 16028060;
+		parallax_Cityscape_201.tintBottomLeft = 16028060;
+		parallax_Cityscape_201.tintBottomRight = 16028060;
+		bGLayerIndustry.add(parallax_Cityscape_201);
+
 		// BGLayerCity
 		const bGLayerCity = this.add.layer();
+		bGLayerCity.visible = false;
 
 		// parallax_Backing
 		const parallax_Backing = this.add.image(352, 306, "Parallax-Backing");
@@ -361,6 +492,73 @@ export default class Level extends Phaser.Scene {
 		const bulletList: Array<any> = [];
 		const hiddenByTutorialList: Array<any> = [];
 
+		// parallax_Backing111 (components)
+		new ScrollFactor(parallax_Backing111);
+
+		// parallax_Cityscape111 (components)
+		const parallax_Cityscape111ScrollFactor = new ScrollFactor(parallax_Cityscape111);
+		parallax_Cityscape111ScrollFactor.factorX = 0.2;
+		parallax_Cityscape111ScrollFactor.factorY = 0.1;
+
+		// parallax_Cityscape_111 (components)
+		const parallax_Cityscape_111ScrollFactor = new ScrollFactor(parallax_Cityscape_111);
+		parallax_Cityscape_111ScrollFactor.factorX = 0.2;
+		parallax_Cityscape_111ScrollFactor.factorY = 0.1;
+
+		// parallax_Cityscape_21 (components)
+		const parallax_Cityscape_21ScrollFactor = new ScrollFactor(parallax_Cityscape_21);
+		parallax_Cityscape_21ScrollFactor.factorX = 0.2;
+		parallax_Cityscape_21ScrollFactor.factorY = 0.1;
+
+		// parallax_Cityscape_31 (components)
+		const parallax_Cityscape_31ScrollFactor = new ScrollFactor(parallax_Cityscape_31);
+		parallax_Cityscape_31ScrollFactor.factorX = 0.2;
+		parallax_Cityscape_31ScrollFactor.factorY = 0.1;
+
+		// parallax_Cityscape_41 (components)
+		const parallax_Cityscape_41ScrollFactor = new ScrollFactor(parallax_Cityscape_41);
+		parallax_Cityscape_41ScrollFactor.factorX = 0.2;
+		parallax_Cityscape_41ScrollFactor.factorY = 0.1;
+
+		// parallax_Cityscape_51 (components)
+		const parallax_Cityscape_51ScrollFactor = new ScrollFactor(parallax_Cityscape_51);
+		parallax_Cityscape_51ScrollFactor.factorY = 0.1;
+
+		// parallax_Cityscape_61 (components)
+		const parallax_Cityscape_61ScrollFactor = new ScrollFactor(parallax_Cityscape_61);
+		parallax_Cityscape_61ScrollFactor.factorX = 0.2;
+		parallax_Cityscape_61ScrollFactor.factorY = 0.1;
+
+		// parallax_Cityscape_151 (components)
+		const parallax_Cityscape_151ScrollFactor = new ScrollFactor(parallax_Cityscape_151);
+		parallax_Cityscape_151ScrollFactor.factorX = 0.25;
+		parallax_Cityscape_151ScrollFactor.factorY = 0.15;
+
+		// parallax_Cityscape_161 (components)
+		const parallax_Cityscape_161ScrollFactor = new ScrollFactor(parallax_Cityscape_161);
+		parallax_Cityscape_161ScrollFactor.factorX = 0.25;
+		parallax_Cityscape_161ScrollFactor.factorY = 0.15;
+
+		// parallax_Cityscape_171 (components)
+		const parallax_Cityscape_171ScrollFactor = new ScrollFactor(parallax_Cityscape_171);
+		parallax_Cityscape_171ScrollFactor.factorX = 0.25;
+		parallax_Cityscape_171ScrollFactor.factorY = 0.15;
+
+		// parallax_Cityscape_181 (components)
+		const parallax_Cityscape_181ScrollFactor = new ScrollFactor(parallax_Cityscape_181);
+		parallax_Cityscape_181ScrollFactor.factorX = 0.25;
+		parallax_Cityscape_181ScrollFactor.factorY = 0.15;
+
+		// parallax_Cityscape_1911 (components)
+		const parallax_Cityscape_1911ScrollFactor = new ScrollFactor(parallax_Cityscape_1911);
+		parallax_Cityscape_1911ScrollFactor.factorX = 0.25;
+		parallax_Cityscape_1911ScrollFactor.factorY = 0.15;
+
+		// parallax_Cityscape_201 (components)
+		const parallax_Cityscape_201ScrollFactor = new ScrollFactor(parallax_Cityscape_201);
+		parallax_Cityscape_201ScrollFactor.factorX = 0.25;
+		parallax_Cityscape_201ScrollFactor.factorY = 0.15;
+
 		// parallax_Backing (components)
 		new ScrollFactor(parallax_Backing);
 
@@ -520,6 +718,8 @@ export default class Level extends Phaser.Scene {
 		parallax_Hills_27ScrollFactor.factorX = 0.25;
 		parallax_Hills_27ScrollFactor.factorY = 0.15;
 
+		this.bGLayerIndustry = bGLayerIndustry;
+		this.parallax_Backing111 = parallax_Backing111;
 		this.bGLayerCity = bGLayerCity;
 		this.parallax_Backing = parallax_Backing;
 		this.bGLayerHills = bGLayerHills;
@@ -537,6 +737,8 @@ export default class Level extends Phaser.Scene {
 		this.events.emit("scene-awake");
 	}
 
+	private bGLayerIndustry!: Phaser.GameObjects.Layer;
+	private parallax_Backing111!: Phaser.GameObjects.Image;
 	private bGLayerCity!: Phaser.GameObjects.Layer;
 	private parallax_Backing!: Phaser.GameObjects.Image;
 	private bGLayerHills!: Phaser.GameObjects.Layer;
@@ -676,15 +878,24 @@ export default class Level extends Phaser.Scene {
 		this.mainLayer.add(this.player.fist);
 
 	// BG
-		if (this.registry.get('current-level-index') < 10)
+		const levelIndex = this.registry.get('current-level-index');
+		if (levelIndex < 10)
 		{
 			this.bGLayerCity.setVisible(false);
 			this.bGLayerHills.setVisible(true);
+			this.bGLayerIndustry.setVisible(false);
 		}
-		else
+		else if (levelIndex >= 10 && levelIndex < 191)
 		{
 			this.bGLayerCity.setVisible(true);
 			this.bGLayerHills.setVisible(false);
+			this.bGLayerIndustry.setVisible(false);
+		}
+		else
+		{
+			this.bGLayerCity.setVisible(false);
+			this.bGLayerHills.setVisible(false);
+			this.bGLayerIndustry.setVisible(true);
 		}
 
 	//mines
@@ -801,11 +1012,21 @@ export default class Level extends Phaser.Scene {
 		}
 
 	// summary continue
-		this.uiScene.input.keyboard.on('keydown-' + InputManager.getInput('menu-confirm', 'keyboard') , () =>
+		this.uiScene.input.keyboard.on('keydown-' 
+		+ InputManager.getInput('menu-confirm', 'keyboard') , () =>
 		{
-			if (this.uiScene.summaryVisible && this.registry.get('game-mode') === 'arcade')
+			if (this.uiScene.postSummaryInstructions.visible 
+				&& this.registry.get('game-mode') === 'arcade')
 			{
-				this.LoadNextLevel();
+				if (this.registry.get('current-level') !== 'finale')
+				{
+					this.LoadNextLevel();
+				}
+				else
+				{
+					this.uiScene.summaryContainer.setVisible(false);
+					this.uiScene.showASummaryUI();
+				}
 			}
 		});
 		this.uiScene.input.gamepad.on('down', 
@@ -839,6 +1060,15 @@ export default class Level extends Phaser.Scene {
 				}
 			}
 		});
+
+	// DEV - arcade skip level
+	this.uiScene.input.keyboard.on('keydown-W', () =>
+	{
+		if (this.registry.get('game-mode') === 'arcade')
+		{
+			this.LoadNextLevel();
+		}
+	});
 
 	// pause restart
 		this.uiScene.input.keyboard.on('keydown-' + InputManager.getInput('menu-confirm', 'keyboard') , () =>
@@ -1338,7 +1568,7 @@ export default class Level extends Phaser.Scene {
 			this.combo++;
 			this.updateCombo();
 		}
-		
+
 		let scoreToAdd = 500;
 
 		if (cause === 'chain' || cause === 'explosion')
@@ -1359,7 +1589,7 @@ export default class Level extends Phaser.Scene {
 		if (enemy.isMine)
 		{
 			this.explode(enemy.x, enemy.y);
-			return;
+			// return;
 		}
 
 		if (enemy.bombCooldownTimer != undefined)
@@ -1375,6 +1605,15 @@ export default class Level extends Phaser.Scene {
 		console.debug(`+ ${scoreToAdd * (this.combo > 1 ? this.combo : 1)}, combo: ${this.combo}`);
 		this.score += scoreToAdd * (this.combo > 1 ? this.combo : 1);
 		this.uiScene.setScore(this.score);
+
+		// combo medal
+		if (this.highestCombo >= 6)
+		{
+			this.time.addEvent({ delay: 500, callback: ()=>
+			{
+				this.game.events.emit('unlock-medal: Plato');
+			}});
+		}
 
 		// if (this.player.stateController.currentState.name !== 'dive')
 		// {
@@ -1519,7 +1758,7 @@ export default class Level extends Phaser.Scene {
 					_this.takeoutEnemy(element.gameObject, "explosion")
 				}
 
-				
+
 			}
 			if (element.gameObject.name == 'player')
 			{
@@ -1783,36 +2022,109 @@ export default class Level extends Phaser.Scene {
 	}
 
 	levelEndFeedback()
-	{
+	{	
 		// this.uiScene.showLevelCompleteText();
 		this.uiScene.showSummaryUI();
 
-		this.time.addEvent({ delay: 3000, callback: () =>
+		this.time.addEvent({ delay: 2000, callback: () =>
 		{
 			console.debug(`score: +${this.score}`);
-			let timeScore = Math.floor(this.levelTimer.getRemaining() * .1);
-			this.score += timeScore;
-			console.debug(`time: +${timeScore}`);
+			// let timeScore = Math.floor(this.levelTimer.getRemaining() * .1);
+			// this.score += timeScore;
+			// console.debug(`time: +${timeScore}`);
 			this.uiScene.setScore(this.score);
 			this.registry.set('total-score', this.game.registry.get('total-score') + this.score);
-			
-			this.uiScene.setAward(this.score);
-	
-			// TODO: set highscore
-			this.game.registry.set(`top-score: ${this.game.registry.get('current-level')}`, this.score);
 
-			cloudSaves.saveData(this);
+			this.uiScene.setAward(this.score);
+
+			// set highscore
+			if (this.game.registry.get(`top-score: ${this.game.registry.get('current-level')}`))
+			{
+				if (this.score > this.game.registry.get(`top-score: ${this.game.registry.get('current-level')}`))
+				{
+					this.game.registry.set(`top-score: ${this.game.registry.get('current-level')}`, this.score);
+					this.uiScene.setNewHighscore(true);
+					cloudSaves.saveData(this);
+				}
+			}
+			else
+			{
+				this.game.registry.set(`top-score: ${this.game.registry.get('current-level')}`, this.score);
+				cloudSaves.saveData(this);
+			}
+
 		}});
 
-		// tutorial medal
-		this.time.addEvent({ delay: 1000, callback: ()=>
+		// award medals
+		let allBronze = true;
+		let allSilver = true;
+		let allGold = true;
+		LevelSelect.levelsKey.forEach((value, index) =>
 		{
-			if (this.registry.get('current-level') === 'tutorial-finale')
+			const score = this.game.registry.get(`top-score: ${value}`);
+			const award = getEarnedAward(value, score);
+			if (award === 'none')
+			{
+				allBronze = false;
+				allSilver = false;
+				allGold = false;
+			}
+			else if (award === 'bronze')
+			{
+				allSilver = false;
+				allGold = false;
+			}
+			else if (award === 'silver')
+			{
+				allGold = false;
+			}
+		});
+		if (allBronze)
+		{
+			this.time.addEvent({ delay: 1000, callback: ()=>
+			{
+				this.game.events.emit('unlock-medal: Bronze Trophy');
+			}});
+		}
+		if (allSilver)
+		{
+			this.time.addEvent({ delay: 1000, callback: ()=>
+			{
+				this.game.events.emit('unlock-medal: Silver Trophy');
+			}});
+		}
+		if (allGold)
+		{
+			this.time.addEvent({ delay: 1000, callback: ()=>
+			{
+				this.game.events.emit('unlock-medal: Golden Trophy');
+			}});
+		}
+
+		// level medals
+		if (this.registry.get('current-level') === 'tutorial-finale')
+		{
+			this.time.addEvent({ delay: 1000, callback: ()=>
 			{
 				this.game.events.emit('unlock-medal: Fish Splasher');
-			}
-		}});
-		
+			}});
+		}
+		else if (this.registry.get('current-level') === 'bomb-punch')
+		{
+			this.time.addEvent({ delay: 1000, callback: ()=>
+			{
+				this.game.events.emit('unlock-medal: Seeing Double');
+			}});
+		}
+		else if (this.registry.get('current-level') === 'finale')
+		{
+			this.time.addEvent({ delay: 1000, callback: ()=>
+			{
+				this.game.events.emit('unlock-medal: Thanks For Playing!');
+			}});
+		}
+
+
 		// Plane fly away tween
 		this.tweens.add
 		({

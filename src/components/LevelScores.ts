@@ -2,29 +2,65 @@
 export let levelScoreMilestones = new Map<string, Array<number>>(
 [
     ['jump', [ -2, -1, 0 ]],
-    ['flap', [ -2, -1, 0 ]],
-    ['punch', [ 2000, 3000, 3600 ]],
-    ['airborne', [ 2500, 3300, 4500 ]],
-    ['dive', [ 3000, 4500, 7200 ]],
-    ['gunfire', [ 2500, 2900, 3200 ]],
-    ['uppercut', [ 3000, 5000, 7000 ]],
-    ['charge', [ 3000, 4000, 5000 ]],
-    ['combo', [ 4500, 9000, 14700 ]],
-    ['tutorial-finale', [ 0, 0, 0 ]],
+    ['flap', [ -2, -2, 0 ]],
+    ['punch', [ 500, 1000, 2000 ]],
+    ['airborne', [ 1000, 1500, 2500 ]],
+    ['dive', [ 2500, 3000, 4500 ]],
+    ['dive-practice', [ 3500, 5000, 7000 ]],
+    ['uppercut', [ 2500, 3500, 7250 ]],
+    ['charge', [ 3000, 3500, 4500 ]],
+    ['combo', [ 4000, 7250, 12000 ]],
+    ['tutorial-finale', [ 3000, 4500, 6500 ]],
     
-    ['bomb-intro', [ 3000, 4500, 6300 ]],
-    ['bomb-holder', [ 4500, 5000, 8700 ]],
-    ['bomb-punch', [ 2800, 5000, 6500 ]],
-    ['bomb-uppercut', [ 2750, 4000, 5600 ]],
+    ['bomb-intro', [ 1500, 2250, 3250 ]],
+    ['bomb-holder', [ 3750, 5500, 7000 ]],
+    ['bomb-punch', [ 3000, 4750, 6250 ]],
+    ['mine-intro', [ 4000, 4500, 5500 ]],
+    ['mine-wall', [ 3750, 4250, 5750 ]],
+    ['gun-intro', [ 3250, 4250, 6250 ]],
+    ['bullet-ceiling', [ 4000, 4500, 5250 ]],
 
-    ['bullet-ceiling', [ 0, 0, 5500 ]],
-
-    ['parasol', [ 0, 0, 0 ]],
-
+    ['parasol', [ 2000, 2500, 3000 ]],
+    ['umbrella-trap', [ 3000, 4200, 6000 ]],
+    
     ['pogo-intro', [ 3500, 5000, 6500 ]],
-    ['pogo-ideas', [ 5000, 9000, 14200 ]],
+    ['pogo-ideas', [ 4000, 9000, 14200 ]],
     ['pogo-challenge', [ 7000, 8000, 13600 ]],
+
+    ['grenade', [ 4000, 6000, 8400 ]],
+
+    ['finale', [ 3500, 5250, 8250 ]],
 ]);
+
+// MARKED FOR DELETION
+export let arcadeScoreMilestones: Array<number> = 
+[
+    30000, 58050, 7500, 92450, 120000, 141375
+]
+
+export function getEarnedAward(levelKey: string, score: number): 'none' | 'bronze' | 'silver' | 'gold'
+{
+    let milestones: Array<number> = levelScoreMilestones.get(levelKey)!;
+    if (milestones === undefined)
+    {
+        console.warn(`No level score milestone data found for level key: ${levelKey}`);
+        return 'none';
+    }
+
+    if (score >= milestones[0]&& score < milestones[1])
+    {
+        return 'bronze';
+    }
+    else if (score >= milestones[1]&& score < milestones[2])
+    {
+        return 'silver';
+    }
+    else if (score >= milestones[2])
+    {
+        return 'gold';
+    }
+    return 'none';
+}
 
 /* award text drop shadow colours:
 b 10971430

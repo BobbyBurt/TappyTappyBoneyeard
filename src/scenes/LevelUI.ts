@@ -13,7 +13,8 @@ import CameraUtil from "~/components/CameraUtil";
 import InputManager from "~/components/InputManager";
 import tutorialManager from "~/components/tutorialManager";
 import Level from "./Level";
-import { levelScoreMilestones } from "~/components/LevelScores";
+import { levelScoreMilestones, arcadeScoreMilestones } from "~/components/LevelScores";
+import cloudSaves from "~/API/cloudSaves";
 
 /* END-USER-IMPORTS */
 
@@ -335,6 +336,16 @@ export default class LevelUI extends Phaser.Scene {
 		award.dropShadowColor = 714549;
 		summaryContainer.add(award);
 
+		// newHighscoreText
+		const newHighscoreText = this.add.bitmapText(-94, -55, "nokia", "NEW HIGHSCORE");
+		newHighscoreText.visible = false;
+		newHighscoreText.text = "NEW HIGHSCORE";
+		newHighscoreText.fontSize = -8;
+		newHighscoreText.dropShadowY = 1;
+		newHighscoreText.dropShadowAlpha = 1;
+		newHighscoreText.dropShadowColor = 714549;
+		summaryContainer.add(newHighscoreText);
+
 		// scoreText
 		const scoreText = this.add.bitmapText(474.2378845214844, 742.5822143554688, "nokia", "999999");
 		scoreText.tintTopLeft = 0;
@@ -351,8 +362,89 @@ export default class LevelUI extends Phaser.Scene {
 		totalScoreText.tintBottomLeft = 3223857;
 		totalScoreText.tintBottomRight = 3223857;
 		totalScoreText.text = "999999";
-		totalScoreText.fontSize = -16;
+		totalScoreText.fontSize = -8;
 		totalScoreText.dropShadowColor = 5329233;
+
+		// arcadeSummaryContainer
+		const arcadeSummaryContainer = this.add.container(702.859619140625, 319.77325439453125);
+		arcadeSummaryContainer.visible = false;
+
+		// arcadeSummaryBox
+		const arcadeSummaryBox = this.add.rectangle(0, 15, 200, 150);
+		arcadeSummaryBox.alpha = 0.5;
+		arcadeSummaryBox.isFilled = true;
+		arcadeSummaryBox.fillColor = 14383236;
+		arcadeSummaryContainer.add(arcadeSummaryBox);
+
+		// arcadeScoreLabel
+		const arcadeScoreLabel = this.add.bitmapText(-70, -10, "nokia", "TOTAL SCORE:");
+		arcadeScoreLabel.visible = false;
+		arcadeScoreLabel.text = "TOTAL SCORE:";
+		arcadeScoreLabel.fontSize = -8;
+		arcadeSummaryContainer.add(arcadeScoreLabel);
+
+		// arcadeSoldier
+		const arcadeSoldier = this.add.image(-14, -28, "soldier-marked");
+		arcadeSoldier.flipX = true;
+		arcadeSoldier.visible = false;
+		arcadeSummaryContainer.add(arcadeSoldier);
+
+		// arcadePostSummaryInstructions
+		const arcadePostSummaryInstructions = this.add.bitmapText(-67, 49, "nokia", "use <input> to continue.\nuse <input> to retry.\nuse <input> to exit.");
+		arcadePostSummaryInstructions.visible = false;
+		arcadePostSummaryInstructions.text = "use <input> to continue.\nuse <input> to retry.\nuse <input> to exit.";
+		arcadePostSummaryInstructions.fontSize = -8;
+		arcadeSummaryContainer.add(arcadePostSummaryInstructions);
+
+		// arcadeAwardLabel
+		const arcadeAwardLabel = this.add.bitmapText(-69, 28, "nokia", "AWARD:");
+		arcadeAwardLabel.visible = false;
+		arcadeAwardLabel.text = "AWARD:";
+		arcadeAwardLabel.fontSize = -8;
+		arcadeSummaryContainer.add(arcadeAwardLabel);
+
+		// arcadeAward
+		const arcadeAward = this.add.bitmapText(-26, 23, "nokia", "BRONZE");
+		arcadeAward.visible = false;
+		arcadeAward.text = "BRONZE";
+		arcadeAward.fontSize = -16;
+		arcadeAward.dropShadowY = 2;
+		arcadeAward.dropShadowAlpha = 1;
+		arcadeAward.dropShadowColor = 714549;
+		arcadeSummaryContainer.add(arcadeAward);
+
+		// arcadeNewHighscoreText
+		const arcadeNewHighscoreText = this.add.bitmapText(8, -10, "nokia", "NEW HIGHSCORE");
+		arcadeNewHighscoreText.visible = false;
+		arcadeNewHighscoreText.text = "NEW HIGHSCORE";
+		arcadeNewHighscoreText.fontSize = -8;
+		arcadeNewHighscoreText.dropShadowY = 1;
+		arcadeNewHighscoreText.dropShadowAlpha = 1;
+		arcadeNewHighscoreText.dropShadowColor = 714549;
+		arcadeSummaryContainer.add(arcadeNewHighscoreText);
+
+		// enemiesKilledText
+		const enemiesKilledText = this.add.bitmapText(4, -33, "nokia", "x 99");
+		enemiesKilledText.visible = false;
+		enemiesKilledText.text = "x 99";
+		enemiesKilledText.fontSize = -8;
+		arcadeSummaryContainer.add(enemiesKilledText);
+
+		// arcadeSummaryHeader
+		const arcadeSummaryHeader = this.add.bitmapText(0, -51, "nokia", "Arcade mode final results");
+		arcadeSummaryHeader.setOrigin(0.5, 0.5);
+		arcadeSummaryHeader.text = "Arcade mode final results";
+		arcadeSummaryHeader.fontSize = -8;
+		arcadeSummaryHeader.dropShadowAlpha = 1;
+		arcadeSummaryHeader.dropShadowColor = 714549;
+		arcadeSummaryContainer.add(arcadeSummaryHeader);
+
+		// arcadeTotalScore
+		const arcadeTotalScore = this.add.bitmapText(-70, -1, "nokia", "9999999");
+		arcadeTotalScore.visible = false;
+		arcadeTotalScore.text = "9999999";
+		arcadeTotalScore.fontSize = -16;
+		arcadeSummaryContainer.add(arcadeTotalScore);
 
 		// timerBox (components)
 		const timerBoxAlign = new Align(timerBox);
@@ -510,6 +602,11 @@ export default class LevelUI extends Phaser.Scene {
 		totalScoreTextAlign.horizontalOffset = 10;
 		totalScoreTextAlign.verticalOffset = 30;
 
+		// arcadeSummaryContainer (components)
+		const arcadeSummaryContainerAlign = new Align(arcadeSummaryContainer);
+		arcadeSummaryContainerAlign.middle = true;
+		arcadeSummaryContainerAlign.center = true;
+
 		this.timerText = timerText;
 		this.tutorialContainer = tutorialContainer;
 		this.tutorialOffsetContainer = tutorialOffsetContainer;
@@ -551,8 +648,19 @@ export default class LevelUI extends Phaser.Scene {
 		this.postSummaryInstructions = postSummaryInstructions;
 		this.awardLabel = awardLabel;
 		this.award = award;
+		this.newHighscoreText = newHighscoreText;
 		this.scoreText = scoreText;
 		this.totalScoreText = totalScoreText;
+		this.arcadeSummaryContainer = arcadeSummaryContainer;
+		this.arcadeScoreLabel = arcadeScoreLabel;
+		this.arcadeSoldier = arcadeSoldier;
+		this.arcadePostSummaryInstructions = arcadePostSummaryInstructions;
+		this.arcadeAwardLabel = arcadeAwardLabel;
+		this.arcadeAward = arcadeAward;
+		this.arcadeNewHighscoreText = arcadeNewHighscoreText;
+		this.enemiesKilledText = enemiesKilledText;
+		this.arcadeSummaryHeader = arcadeSummaryHeader;
+		this.arcadeTotalScore = arcadeTotalScore;
 
 		this.events.emit("scene-awake");
 	}
@@ -581,7 +689,7 @@ export default class LevelUI extends Phaser.Scene {
 	private punchChargeEmpty!: Phaser.GameObjects.Image;
 	private punchChargeFull!: Phaser.GameObjects.Image;
 	private fullscreenTestButton!: Phaser.GameObjects.Image;
-	private summaryContainer!: Phaser.GameObjects.Container;
+	public summaryContainer!: Phaser.GameObjects.Container;
 	private highestComboLabel!: Phaser.GameObjects.BitmapText;
 	private highestCombo!: Phaser.GameObjects.BitmapText;
 	private soldiermid_0!: Phaser.GameObjects.Image;
@@ -595,11 +703,22 @@ export default class LevelUI extends Phaser.Scene {
 	private soldiermid_8!: Phaser.GameObjects.Image;
 	private soldiermid!: Phaser.GameObjects.Image;
 	private soldiermid_9!: Phaser.GameObjects.Image;
-	private postSummaryInstructions!: Phaser.GameObjects.BitmapText;
+	public postSummaryInstructions!: Phaser.GameObjects.BitmapText;
 	private awardLabel!: Phaser.GameObjects.BitmapText;
 	private award!: Phaser.GameObjects.BitmapText;
+	private newHighscoreText!: Phaser.GameObjects.BitmapText;
 	private scoreText!: Phaser.GameObjects.BitmapText;
 	private totalScoreText!: Phaser.GameObjects.BitmapText;
+	private arcadeSummaryContainer!: Phaser.GameObjects.Container;
+	private arcadeScoreLabel!: Phaser.GameObjects.BitmapText;
+	private arcadeSoldier!: Phaser.GameObjects.Image;
+	public arcadePostSummaryInstructions!: Phaser.GameObjects.BitmapText;
+	private arcadeAwardLabel!: Phaser.GameObjects.BitmapText;
+	private arcadeAward!: Phaser.GameObjects.BitmapText;
+	private arcadeNewHighscoreText!: Phaser.GameObjects.BitmapText;
+	private enemiesKilledText!: Phaser.GameObjects.BitmapText;
+	private arcadeSummaryHeader!: Phaser.GameObjects.BitmapText;
+	private arcadeTotalScore!: Phaser.GameObjects.BitmapText;
 
 	/* START-USER-CODE */
 
@@ -638,7 +757,8 @@ export default class LevelUI extends Phaser.Scene {
 
 		this.scoreText.setText('0');
 
-		this.totalScoreText.setText(`${this.game.registry.get('total-score')}`);
+		this.totalScoreText.setText(`total: ${this.game.registry.get('total-score')}`);
+		this.totalScoreText.setVisible(this.registry.get('game-mode') === 'arcade');
 
 		this.lastAward = 'none';
 
@@ -700,6 +820,7 @@ export default class LevelUI extends Phaser.Scene {
 		let awardString: 'none' | 'Bronze' | 'Silver' | 'Gold' = 'none';
 		let awardColour = 0;
 
+		console.debug(this.game.registry.get('current-level'))
 		let milestones = levelScoreMilestones.get
 		(this.game.registry.get('current-level')) as Array<number>;
 		if (milestones === undefined)
@@ -929,10 +1050,98 @@ export default class LevelUI extends Phaser.Scene {
 		});
 	}
 
+	public showASummaryUI()
+	{
+		this.arcadeSummaryContainer.setVisible(true);
+		this.arcadeNewHighscoreText.setVisible(false);
+
+		this.sound.play('reflect', {volume: .4});
+
+		this.time.delayedCall(1500, this.ASummaryShowScoreLabel, [], this);
+	}
+
+	private ASummaryShowScoreLabel()
+	{
+		this.arcadeScoreLabel.setVisible(true);
+		this.sound.play('reflect', {volume: .4});
+
+		this.time.delayedCall(1500, this.ASummaryShowScore, [], this);
+	}
+
+	private ASummaryShowScore()
+	{
+		this.arcadeTotalScore.setText(this.registry.get('total-score'));
+		this.arcadeTotalScore.setVisible(true);
+		this.sound.play('combo-hit', {volume: 1});
+
+		if (this.registry.get('top-score'))
+		{
+			if (this.registry.get('total-score') > this.registry.get('top-score'))
+			{
+				this.registry.set('top-score', this.registry.get('total-score'));
+				this.arcadeNewHighscoreText.setVisible(true);
+				cloudSaves.saveData(this);
+			}
+		}
+		else
+		{
+			this.registry.set('top-score', this.registry.get('total-score'));
+			cloudSaves.saveData(this);
+		}
+
+		this.time.delayedCall(1500, this.ASummaryShowAwardLabel, [], this);
+	}
+
+	private ASummaryShowAwardLabel()
+	{
+		this.arcadeAwardLabel.setVisible(true);
+		this.sound.play('reflect', {volume: .4});
+
+		this.time.delayedCall(1500, this.ASummaryShowAward, [], this);
+	}
+
+	private ASummaryShowAward()
+	{
+		let milestone = 0;
+
+		arcadeScoreMilestones.forEach((value, index) =>
+		{
+			let totalScore = this.registry.get('total-score');
+			if (totalScore > value)
+			{
+				milestone++;
+			}
+		});
+
+		const milestones = ['F- grade', 'E grade', 'D grade', 'C grade', 'B grade', 'A grade', 'S+ grade'];
+
+		this.arcadeAward.setText(milestones[milestone]);
+		this.arcadeAward.setVisible(true);
+		this.sound.play('victory', {volume: 1});
+
+		this.time.delayedCall(4000, this.ASummaryShowInstructions, [], this);
+	}
+
+	private ASummaryShowInstructions()
+	{
+		// this.arcadePostSummaryInstructions.setVisible(true);
+		// this.sound.play('reflect', {volume: .4});
+
+		this.levelScene.LoadLevelSelect();
+
+	}
+
+	public setNewHighscore(value: boolean)
+	{
+		this.newHighscoreText.setVisible(value);
+	}
+
 	public showSummaryUI()
 	{
 		this.summaryContainer.setVisible(true);
 		this.summaryVisible = true;
+
+		this.newHighscoreText.setVisible(false);
 
 		if (this.levelScene.enemyList.length > 0)
 		{
@@ -940,14 +1149,14 @@ export default class LevelUI extends Phaser.Scene {
 		}
 		else
 		{
-			this.time.delayedCall(500, this.showPostSummaryInstructions, undefined, this);
+			this.time.delayedCall(2000, this.showPostSummaryInstructions, undefined, this);
 		}
 	}
 
 	private summaryShowEnemy(index: number)
 	{
 		this.enemyArray[index].setVisible(true);
-			/* 	TODO: game crashes if there are more than 9 enemies. Add a condition to just ignore 
+			/* 	TODO: game crashes if there are more than # enemies. Add a condition to just ignore 
 				such a case. 
 			*/
 		this.sound.play('reflect', {volume: .4});

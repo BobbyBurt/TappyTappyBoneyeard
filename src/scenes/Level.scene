@@ -14,10 +14,298 @@
     "displayList": [
         {
             "type": "Layer",
+            "id": "b9077fa4-2592-4200-9a9e-21951d7f6336",
+            "label": "BGLayerIndustry",
+            "scope": "CLASS",
+            "components": [],
+            "list": [
+                {
+                    "type": "Image",
+                    "id": "1a78e33e-dab7-41a7-b134-b3efa9479880",
+                    "label": "parallax_Backing111",
+                    "scope": "CLASS",
+                    "components": [
+                        "ScrollFactor"
+                    ],
+                    "texture": {
+                        "key": "Parallax-Backing"
+                    },
+                    "x": 352,
+                    "y": 306,
+                    "scaleX": 8.415017240244449
+                },
+                {
+                    "type": "Image",
+                    "id": "e1ad69af-8739-4749-8de7-857bff1cf944",
+                    "label": "parallax_Cityscape111",
+                    "components": [
+                        "ScrollFactor"
+                    ],
+                    "ScrollFactor.factorX": 0.2,
+                    "ScrollFactor.factorY": 0.1,
+                    "texture": {
+                        "key": "Parallax-Industry"
+                    },
+                    "x": 480,
+                    "y": 299,
+                    "tintTopLeft": "#FFADB6",
+                    "tintTopRight": "#FFADB6",
+                    "tintBottomLeft": "#FFADB6",
+                    "tintBottomRight": "#FFADB6",
+                    "tintFill": true
+                },
+                {
+                    "type": "Image",
+                    "id": "9e9fdf11-62a3-4bf2-bd26-676d379ba788",
+                    "label": "parallax_Cityscape_111",
+                    "components": [
+                        "ScrollFactor"
+                    ],
+                    "ScrollFactor.factorX": 0.2,
+                    "ScrollFactor.factorY": 0.1,
+                    "texture": {
+                        "key": "Parallax-Industry"
+                    },
+                    "x": 160,
+                    "y": 299,
+                    "tintTopLeft": "#FFADB6",
+                    "tintTopRight": "#FFADB6",
+                    "tintBottomLeft": "#FFADB6",
+                    "tintBottomRight": "#FFADB6",
+                    "tintFill": true
+                },
+                {
+                    "type": "Image",
+                    "id": "0c8a30b9-b7bc-41c7-aef2-732de9345a28",
+                    "label": "parallax_Cityscape_21",
+                    "components": [
+                        "ScrollFactor"
+                    ],
+                    "ScrollFactor.factorX": 0.2,
+                    "ScrollFactor.factorY": 0.1,
+                    "texture": {
+                        "key": "Parallax-Industry"
+                    },
+                    "x": 800,
+                    "y": 299,
+                    "tintTopLeft": "#FFADB6",
+                    "tintTopRight": "#FFADB6",
+                    "tintBottomLeft": "#FFADB6",
+                    "tintBottomRight": "#FFADB6",
+                    "tintFill": true
+                },
+                {
+                    "type": "Image",
+                    "id": "9a39915f-b378-41bd-80a8-5dfac8319318",
+                    "label": "parallax_Cityscape_31",
+                    "components": [
+                        "ScrollFactor"
+                    ],
+                    "ScrollFactor.factorX": 0.2,
+                    "ScrollFactor.factorY": 0.1,
+                    "texture": {
+                        "key": "Parallax-Industry"
+                    },
+                    "x": -160,
+                    "y": 299,
+                    "tintTopLeft": "#FFADB6",
+                    "tintTopRight": "#FFADB6",
+                    "tintBottomLeft": "#FFADB6",
+                    "tintBottomRight": "#FFADB6",
+                    "tintFill": true
+                },
+                {
+                    "type": "Image",
+                    "id": "a873149c-4259-43a8-bfc1-480516da6ed1",
+                    "label": "parallax_Cityscape_41",
+                    "components": [
+                        "ScrollFactor"
+                    ],
+                    "ScrollFactor.factorX": 0.2,
+                    "ScrollFactor.factorY": 0.1,
+                    "texture": {
+                        "key": "Parallax-Industry"
+                    },
+                    "x": 1119,
+                    "y": 299,
+                    "tintTopLeft": "#FFADB6",
+                    "tintTopRight": "#FFADB6",
+                    "tintBottomLeft": "#FFADB6",
+                    "tintBottomRight": "#FFADB6",
+                    "tintFill": true
+                },
+                {
+                    "type": "Image",
+                    "id": "d3ed4993-178b-4385-9aea-1a15ed357aed",
+                    "label": "parallax_Cityscape_51",
+                    "components": [
+                        "ScrollFactor"
+                    ],
+                    "ScrollFactor.factorY": 0.1,
+                    "texture": {
+                        "key": "Parallax-Industry"
+                    },
+                    "x": 357,
+                    "y": 372,
+                    "scaleX": 9.144642541425284,
+                    "scaleY": 9.144642541425284,
+                    "originY": 0,
+                    "flipY": true,
+                    "tintTopLeft": "#F4919C",
+                    "tintTopRight": "#F4919C",
+                    "tintBottomLeft": "#F4919C",
+                    "tintBottomRight": "#F4919C",
+                    "tintFill": true
+                },
+                {
+                    "type": "Image",
+                    "id": "8ce4320e-6f3b-44c6-9ae8-96e612c1eeba",
+                    "label": "parallax_Cityscape_61",
+                    "components": [
+                        "ScrollFactor"
+                    ],
+                    "ScrollFactor.factorX": 0.2,
+                    "ScrollFactor.factorY": 0.1,
+                    "texture": {
+                        "key": "Parallax-Industry"
+                    },
+                    "x": 1439,
+                    "y": 299,
+                    "tintTopLeft": "#FFADB6",
+                    "tintTopRight": "#FFADB6",
+                    "tintBottomLeft": "#FFADB6",
+                    "tintBottomRight": "#FFADB6",
+                    "tintFill": true
+                },
+                {
+                    "type": "Image",
+                    "id": "2b670427-da15-4641-aa49-e3d84d1591c3",
+                    "label": "parallax_Cityscape_151",
+                    "components": [
+                        "ScrollFactor"
+                    ],
+                    "ScrollFactor.factorX": 0.25,
+                    "ScrollFactor.factorY": 0.15,
+                    "texture": {
+                        "key": "Parallax-Industry"
+                    },
+                    "x": 1328,
+                    "y": 334,
+                    "tintTopLeft": "#F4919C",
+                    "tintTopRight": "#F4919C",
+                    "tintBottomLeft": "#F4919C",
+                    "tintBottomRight": "#F4919C",
+                    "tintFill": true
+                },
+                {
+                    "type": "Image",
+                    "id": "5871919d-4e1a-4692-9747-ac9d969a95c4",
+                    "label": "parallax_Cityscape_161",
+                    "components": [
+                        "ScrollFactor"
+                    ],
+                    "ScrollFactor.factorX": 0.25,
+                    "ScrollFactor.factorY": 0.15,
+                    "texture": {
+                        "key": "Parallax-Industry"
+                    },
+                    "x": 1008,
+                    "y": 334,
+                    "tintTopLeft": "#F4919C",
+                    "tintTopRight": "#F4919C",
+                    "tintBottomLeft": "#F4919C",
+                    "tintBottomRight": "#F4919C",
+                    "tintFill": true
+                },
+                {
+                    "type": "Image",
+                    "id": "e51e9519-3a06-4f57-93ea-94b701c0f1dc",
+                    "label": "parallax_Cityscape_171",
+                    "components": [
+                        "ScrollFactor"
+                    ],
+                    "ScrollFactor.factorX": 0.25,
+                    "ScrollFactor.factorY": 0.15,
+                    "texture": {
+                        "key": "Parallax-Industry"
+                    },
+                    "x": -271,
+                    "y": 334,
+                    "tintTopLeft": "#F4919C",
+                    "tintTopRight": "#F4919C",
+                    "tintBottomLeft": "#F4919C",
+                    "tintBottomRight": "#F4919C",
+                    "tintFill": true
+                },
+                {
+                    "type": "Image",
+                    "id": "1f3491a6-a827-4df7-9e9a-41c3591f53c2",
+                    "label": "parallax_Cityscape_181",
+                    "components": [
+                        "ScrollFactor"
+                    ],
+                    "ScrollFactor.factorX": 0.25,
+                    "ScrollFactor.factorY": 0.15,
+                    "texture": {
+                        "key": "Parallax-Industry"
+                    },
+                    "x": 689,
+                    "y": 334,
+                    "tintTopLeft": "#F4919C",
+                    "tintTopRight": "#F4919C",
+                    "tintBottomLeft": "#F4919C",
+                    "tintBottomRight": "#F4919C",
+                    "tintFill": true
+                },
+                {
+                    "type": "Image",
+                    "id": "2e604330-10d1-4092-8720-5692c4f71a59",
+                    "label": "parallax_Cityscape_1911",
+                    "components": [
+                        "ScrollFactor"
+                    ],
+                    "ScrollFactor.factorX": 0.25,
+                    "ScrollFactor.factorY": 0.15,
+                    "texture": {
+                        "key": "Parallax-Industry"
+                    },
+                    "x": 49,
+                    "y": 334,
+                    "tintTopLeft": "#F4919C",
+                    "tintTopRight": "#F4919C",
+                    "tintBottomLeft": "#F4919C",
+                    "tintBottomRight": "#F4919C",
+                    "tintFill": true
+                },
+                {
+                    "type": "Image",
+                    "id": "8a6d05ac-c42c-467b-b0bb-666dca9bb3f1",
+                    "label": "parallax_Cityscape_201",
+                    "components": [
+                        "ScrollFactor"
+                    ],
+                    "ScrollFactor.factorX": 0.25,
+                    "ScrollFactor.factorY": 0.15,
+                    "texture": {
+                        "key": "Parallax-Industry"
+                    },
+                    "x": 369,
+                    "y": 334,
+                    "tintTopLeft": "#F4919C",
+                    "tintTopRight": "#F4919C",
+                    "tintBottomLeft": "#F4919C",
+                    "tintBottomRight": "#F4919C",
+                    "tintFill": true
+                }
+            ]
+        },
+        {
+            "type": "Layer",
             "id": "c6bd6b22-fb38-41de-9c40-b4c8c854725c",
             "label": "BGLayerCity",
             "scope": "CLASS",
             "components": [],
+            "visible": false,
             "list": [
                 {
                     "type": "Image",

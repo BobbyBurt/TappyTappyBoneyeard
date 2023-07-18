@@ -33,16 +33,16 @@ export default class tutorialManager {
 				null,
 			
 			// level 7
-				`When punching forward isn't enough, hit 'em with an uppercut!\n\nUse the ${InputManager.getInputName('uppercut')} to launch upward and take out the enemies above you.`,
+				`When punching forward doesn't work, hit 'em with an uppercut!\n\nUse the ${InputManager.getInputName('uppercut')} to launch upward and take out the enemies above you.This move can also help you reach high places.`,
 
 			// level 8
-				`Punches and uppercuts take a lot out of you... This is indicated by the icon in the top left.\n\nLanding on ground is one way to recharge, but you'll also automatically regain charge if you take out an enemy with your attack!`,
+				`Punches and uppercuts take a lot out of you... Your charge is indicated by the icon in the top right corner.\n\nLanding on ground is one way to recharge, but you'll also automatically regain charge if you take out an enemy with your attack!`,
 				
 			// level 9
-				`Each enemy you take out will add to your combo as long as you're not grounded.\n\nTry to figure out ways to build that combo!`,
+				`Each enemy is worth 500 points. An enemy takeout is worth even more if it's indirect, like knocking an enemy into another one.\n\nPoints earned from enemies are multiplied by the combo number. Each enemy you take out will add to your combo as long as you're not grounded.`,
 
 			// level 10
-				`Good hustle out there!\n\nThis concludes the tutorial. Break a leg out there!`
+				`There are a number of ways to approach each problem, and you'll often need to use more than one move. Creativity is how you score big combos!\n\nThis concludes the tutorial. Break a leg out there!`
 		]
 
 		return texts[levelIndex];

@@ -228,6 +228,11 @@
                 "key": "bullet-ceiling"
             },
             {
+                "url": "assets/levels/celeste.json",
+                "type": "tilemapTiledJSON",
+                "key": "celeste"
+            },
+            {
                 "url": "assets/levels/charge.json",
                 "type": "tilemapTiledJSON",
                 "key": "charge"
@@ -258,6 +263,11 @@
                 "url": "assets/levels/dive.json",
                 "type": "tilemapTiledJSON",
                 "key": "dive"
+            },
+            {
+                "url": "assets/levels/dive-practice.json",
+                "type": "tilemapTiledJSON",
+                "key": "dive-practice"
             },
             {
                 "url": "assets/levels/dive-tec.json",
@@ -303,6 +313,11 @@
                 "url": "assets/levels/rapidfire.json",
                 "type": "tilemapTiledJSON",
                 "key": "final"
+            },
+            {
+                "url": "assets/levels/finale.json",
+                "type": "tilemapTiledJSON",
+                "key": "finale"
             },
             {
                 "url": "assets/levels/flap.json",
@@ -351,6 +366,11 @@
                 "key": "gun"
             },
             {
+                "url": "assets/levels/gun-intro.json",
+                "type": "tilemapTiledJSON",
+                "key": "gun-intro"
+            },
+            {
                 "url": "assets/gundiagonal.png",
                 "type": "image",
                 "key": "gundiagonal"
@@ -359,6 +379,11 @@
                 "url": "assets/levels/gunfire.json",
                 "type": "tilemapTiledJSON",
                 "key": "gunfire"
+            },
+            {
+                "url": "assets/levels/guns.json",
+                "type": "tilemapTiledJSON",
+                "key": "guns"
             },
             {
                 "url": "assets/hit-effect-diagonal.png",
@@ -386,6 +411,11 @@
                 ],
                 "type": "audio",
                 "key": "main-game"
+            },
+            {
+                "url": "assets/levels/mine-combo.json",
+                "type": "tilemapTiledJSON",
+                "key": "mine-combo"
             },
             {
                 "url": "assets/levels/mine-intro.json",
@@ -418,6 +448,11 @@
                 "key": "Parallax-Forest"
             },
             {
+                "url": "assets/Parallax-Industry.png",
+                "type": "image",
+                "key": "Parallax-Industry"
+            },
+            {
                 "url": "assets/parasol.png",
                 "type": "image",
                 "key": "parasol"
@@ -431,6 +466,11 @@
                 "url": "assets/plane.png",
                 "type": "image",
                 "key": "plane"
+            },
+            {
+                "url": "assets/levels/platforming.json",
+                "type": "tilemapTiledJSON",
+                "key": "platforming"
             },
             {
                 "url": "assets/pogo.png",
@@ -463,6 +503,11 @@
                 "url": "assets/levels/pogo-intro.json",
                 "type": "tilemapTiledJSON",
                 "key": "pogo-intro"
+            },
+            {
+                "url": "assets/levels/pogo-mine.json",
+                "type": "tilemapTiledJSON",
+                "key": "pogo-mine"
             },
             {
                 "url": "assets/levels/pogo-mines.json",

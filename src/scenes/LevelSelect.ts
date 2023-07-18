@@ -214,14 +214,14 @@ export default class LevelSelect extends Phaser.Scene {
 	private UICam!: Phaser.Cameras.Scene2D.BaseCamera | any;
 
 	public static levelsKey = 
-		[ 'umbrella-trap',
-		'jump', 'flap', 'punch', 'airborne', 'dive', 'gunfire', 'uppercut', 'charge', 'combo', 'tutorial-finale', 
-		'bomb-intro', 'bomb-holder', 'bomb-punch', 'bomb-uppercut', 
-		'mine-intro', 
-		'parasol', 
+		[ 
+		'jump', 'flap', 'punch', 'airborne', 'dive', 'dive-practice', 'uppercut', 'charge', 'combo', 'tutorial-finale', 
+		'bomb-intro', 'bomb-holder', 'bomb-punch', 'mine-intro', 'mine-wall', 'gun-intro', 'bullet-ceiling',
+		'parasol', 'umbrella-trap',
 		'pogo-intro', 'pogo-ideas', 'pogo-challenge', 
-		'bullet-ceiling',
-		'grenade'];
+		'grenade',
+		'finale'
+		];
 
 	private gamepad:Phaser.Input.Gamepad.Gamepad | undefined;
 	private SelectKey!: Phaser.Input.Keyboard.Key;
@@ -239,18 +239,31 @@ export default class LevelSelect extends Phaser.Scene {
 		this.createCameras();
 
 	// show level select in DEV
-		if (__DEV__)
-		{
+		// if (__DEV__)
+		// {
 			this.registry.set('game-mode', 'level');
 			this.mainMenuContainer.setVisible(false);
 			this.levelSelectContainer.setVisible(true);
-		}
+		// }
+
+	this.levelSelectBack.setVisible(false);
+
+	// top score
+	if (!this.registry.get('top-score'))
+	{
+		this.highScoreText.setText('');
+	}
+	else
+	{
+		this.highScoreText.setText(`highscore:\n\n${this.registry.get('top-score')}`);
+	}
 
 	// arcade mode
 		this.arcadeBack.setInteractive();
 		this.arcadeBack.on('pointerdown', () =>
 		{
 			this.registry.set('game-mode', 'arcade');
+			this.game.registry.set('total-score', 0);
 			this.selectedLevel = 0;
 			this.loadLevel();
 		});
@@ -262,10 +275,6 @@ export default class LevelSelect extends Phaser.Scene {
 			this.registry.set('game-mode', 'level');
 			this.mainMenuContainer.setVisible(false);
 			this.levelSelectContainer.setVisible(true);
-
-			// TEMP: load cloud save
-			cloudSaves.loadData(this);
-			// this would be better with a status ready callback
 		});
 
 	// level select back
@@ -274,6 +283,15 @@ export default class LevelSelect extends Phaser.Scene {
 		{
 			this.mainMenuContainer.setVisible(true);
 			this.levelSelectContainer.setVisible(false);
+			
+			if (!this.registry.get('top-score'))
+			{
+				this.highScoreText.setText('');
+			}
+			else
+			{
+				this.highScoreText.setText(`highscore:\n\n${this.registry.get('top-score')}`);
+			}
 		});
 
 		if (this.registry.get('game-mode') === 'level')
@@ -342,6 +360,22 @@ export default class LevelSelect extends Phaser.Scene {
 			{
 				this.setSelectedLevel('down');
 			}
+		});
+
+		// cloud save data clear
+		this.input.keyboard.on('keydown-C', () =>
+		{
+			LevelSelect.levelsKey.forEach((value, index) =>
+			{
+				this.registry.set(`top-score: ${value}`, null);
+			});
+			cloudSaves.saveData(this);
+		});
+
+		this.input.keyboard.on('keydown-L', () =>
+		{
+			cloudSaves.loadData(this);
+			// this would be better with a status ready callback
 		});
 	}
 
@@ -431,22 +465,26 @@ export default class LevelSelect extends Phaser.Scene {
 			awardColour = 16769358;
 		}
 
+			// this.levelInfoText.setText(
+			// `${(score !== 0) ? `` : `- LOCKED -`}\n
+			// Best: ${score}\n
+			// Award: ${awardString}`
+
 			this.levelInfoText.setText(
-			`${(score !== 0 && this.selectedLevel > 1) ? `` : `- LOCKED -`}\n
-			Best: ${score}\n
-			Award: ${awardString}`
+				`Best: ${score}\n
+				Award: ${awardString}`
 		);
 	}
 
 	loadLevel()
 	{
-		console.debug(this.game.registry.get(`top-score: ${LevelSelect.levelsKey[this.selectedLevel]}`))
-		if (!__DEV__
-		&& this.game.registry.get('game-mode') === 'level' 
-		&& this.game.registry.get(`top-score: ${LevelSelect.levelsKey[this.selectedLevel]}`) == undefined)
-		{
-			return;
-		}
+		// console.debug(this.game.registry.get(`top-score: ${LevelSelect.levelsKey[this.selectedLevel]}`))
+		// if (!__DEV__
+		// && this.game.registry.get('game-mode') === 'level' 
+		// && this.game.registry.get(`top-score: ${LevelSelect.levelsKey[this.selectedLevel]}`) == undefined)
+		// {
+		// 	return;
+		// }
 
 		this.registry.set('current-level', LevelSelect.levelsKey[this.selectedLevel]);
 		this.registry.set('current-level-index', this.selectedLevel)
