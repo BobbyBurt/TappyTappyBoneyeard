@@ -33,10 +33,12 @@ export default class LevelUI extends Phaser.Scene {
 		// TimerBox
 		const timerBox = this.add.rectangle(348, 961, 80, 23);
 		timerBox.setOrigin(0.5, 0);
+		timerBox.visible = false;
 		timerBox.isFilled = true;
 
 		// timerText
 		const timerText = this.add.bitmapText(323.3856506347656, 857.4503784179688, "nokia", "30:00");
+		timerText.visible = false;
 		timerText.text = "30:00";
 		timerText.fontSize = -16;
 		timerText.dropShadowY = 100;
@@ -167,9 +169,9 @@ export default class LevelUI extends Phaser.Scene {
 		buildText.dropShadowY = -100;
 
 		// mobileButtonDive
-		const mobileButtonDive = this.add.rectangle(713.4493914309744, 1060.0118990523656, 150, 120);
+		const mobileButtonDive = this.add.rectangle(746, 1082, 150, 120);
 		mobileButtonDive.setOrigin(1, 1);
-		mobileButtonDive.alpha = 0.5;
+		mobileButtonDive.alpha = 0.3;
 		mobileButtonDive.isFilled = true;
 		mobileButtonDive.fillColor = 8168429;
 
@@ -446,6 +448,22 @@ export default class LevelUI extends Phaser.Scene {
 		arcadeTotalScore.fontSize = -16;
 		arcadeSummaryContainer.add(arcadeTotalScore);
 
+		// parallax_Backing
+		const parallax_Backing = this.add.image(727, 981.5999984741211, "Parallax-Backing");
+		parallax_Backing.scaleX = 0.5;
+		parallax_Backing.scaleY = 0.15;
+		parallax_Backing.setOrigin(1, 0);
+		parallax_Backing.visible = false;
+		parallax_Backing.alphaTopLeft = 0;
+		parallax_Backing.alphaTopRight = 0.4;
+		parallax_Backing.alphaBottomLeft = 0;
+		parallax_Backing.alphaBottomRight = 0;
+		parallax_Backing.tintFill = true;
+		parallax_Backing.tintTopLeft = 18942;
+		parallax_Backing.tintTopRight = 18942;
+		parallax_Backing.tintBottomLeft = 18942;
+		parallax_Backing.tintBottomRight = 18942;
+
 		// timerBox (components)
 		const timerBoxAlign = new Align(timerBox);
 		timerBoxAlign.up = true;
@@ -606,6 +624,11 @@ export default class LevelUI extends Phaser.Scene {
 		const arcadeSummaryContainerAlign = new Align(arcadeSummaryContainer);
 		arcadeSummaryContainerAlign.middle = true;
 		arcadeSummaryContainerAlign.center = true;
+
+		// parallax_Backing (components)
+		const parallax_BackingAlign = new Align(parallax_Backing);
+		parallax_BackingAlign.middle = true;
+		parallax_BackingAlign.right = true;
 
 		this.timerText = timerText;
 		this.tutorialContainer = tutorialContainer;
@@ -1235,9 +1258,9 @@ export default class LevelUI extends Phaser.Scene {
 
 	private showPostSummaryInstructions()
 	{
-		this.postSummaryInstructions.setText(this.registry.get('game-mode') === 'arcade' ?
-			`${InputManager.getInputName('menu-confirm')} to continue.`
-			: `${InputManager.getInputName('menu-back')} to exit.`
+		this.postSummaryInstructions.setText(
+			`${InputManager.getInputName('menu-confirm')} to continue.\n
+			${InputManager.getInputName('menu-back')} to exit.`
 			);
 		this.postSummaryInstructions.setVisible(true);
 		this.sound.play('reflect', {volume: .4});

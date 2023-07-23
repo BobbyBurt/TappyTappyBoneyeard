@@ -428,6 +428,11 @@
                 "key": "mine-wall"
             },
             {
+                "url": "assets/levels/multi-move.json",
+                "type": "tilemapTiledJSON",
+                "key": "multi-move"
+            },
+            {
                 "url": "assets/levels/multipath.json",
                 "type": "tilemapTiledJSON",
                 "key": "multipath"
@@ -532,6 +537,16 @@
                 ],
                 "type": "audio",
                 "key": "reflect"
+            },
+            {
+                "url": "assets/levels/score.json",
+                "type": "tilemapTiledJSON",
+                "key": "score"
+            },
+            {
+                "url": "assets/shield.png",
+                "type": "image",
+                "key": "shield"
             },
             {
                 "url": "assets/soldier-blood.png",

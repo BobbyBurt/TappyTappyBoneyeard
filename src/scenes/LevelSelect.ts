@@ -101,20 +101,6 @@ export default class LevelSelect extends Phaser.Scene {
 		titleText.align = 1;
 		levelSelectContainer.add(titleText);
 
-		// backBack
-		const backBack = this.add.rectangle(356, 179, 50, 30);
-		backBack.isFilled = true;
-		backBack.fillColor = 2697513;
-		levelSelectContainer.add(backBack);
-
-		// backText
-		const backText = this.add.bitmapText(356, 179, "nokia", "back");
-		backText.setOrigin(0.5, 0.5);
-		backText.text = "back";
-		backText.fontSize = -8;
-		backText.align = 1;
-		levelSelectContainer.add(backText);
-
 		// levelInfoText
 		const levelInfoText = this.add.bitmapText(580, 269, "nokia", "\n");
 		levelInfoText.text = "\n";
@@ -175,8 +161,6 @@ export default class LevelSelect extends Phaser.Scene {
 		this.downBack = downBack;
 		this.upBack = upBack;
 		this.titleText = titleText;
-		this.backBack = backBack;
-		this.backText = backText;
 		this.levelInfoText = levelInfoText;
 		this.mainMenuContainer = mainMenuContainer;
 		this.arcadeBack = arcadeBack;
@@ -198,8 +182,6 @@ export default class LevelSelect extends Phaser.Scene {
 	private downBack!: Phaser.GameObjects.Rectangle;
 	private upBack!: Phaser.GameObjects.Rectangle;
 	private titleText!: Phaser.GameObjects.BitmapText;
-	private backBack!: Phaser.GameObjects.Rectangle;
-	private backText!: Phaser.GameObjects.BitmapText;
 	private levelInfoText!: Phaser.GameObjects.BitmapText;
 	private mainMenuContainer!: Phaser.GameObjects.Container;
 	private arcadeBack!: Phaser.GameObjects.Rectangle;
@@ -214,12 +196,18 @@ export default class LevelSelect extends Phaser.Scene {
 	private UICam!: Phaser.Cameras.Scene2D.BaseCamera | any;
 
 	public static levelsKey = 
-		[ 
-		'jump', 'flap', 'punch', 'airborne', 'dive', 'dive-practice', 'uppercut', 'charge', 'combo', 'tutorial-finale', 
-		'bomb-intro', 'bomb-holder', 'bomb-punch', 'mine-intro', 'mine-wall', 'gun-intro', 'bullet-ceiling',
+		[
+		'jump', 'flap', 'punch',
+		'airborne', 'dive', 'dive-practice',
+		'uppercut', 'charge', 'tutorial-finale', 
+		
+		'bomb-intro', 'bomb-holder', 'bomb-punch', 
+		'combo', 'mine-intro', 'mine-wall',
+		'multi-move', 'gun-intro', 'bullet-ceiling',
+
+		'grenade',
 		'parasol', 'umbrella-trap',
 		'pogo-intro', 'pogo-ideas', 'pogo-challenge', 
-		'grenade',
 		'finale'
 		];
 
@@ -245,8 +233,6 @@ export default class LevelSelect extends Phaser.Scene {
 			this.mainMenuContainer.setVisible(false);
 			this.levelSelectContainer.setVisible(true);
 		// }
-
-	this.levelSelectBack.setVisible(false);
 
 	// top score
 	if (!this.registry.get('top-score'))
@@ -278,21 +264,21 @@ export default class LevelSelect extends Phaser.Scene {
 		});
 
 	// level select back
-		this.backBack.setInteractive();
-		this.backBack.on('pointerdown', () =>
-		{
-			this.mainMenuContainer.setVisible(true);
-			this.levelSelectContainer.setVisible(false);
-			
-			if (!this.registry.get('top-score'))
-			{
-				this.highScoreText.setText('');
-			}
-			else
-			{
-				this.highScoreText.setText(`highscore:\n\n${this.registry.get('top-score')}`);
-			}
-		});
+		// this.backBack.setInteractive();
+		// this.backBack.on('pointerdown', () =>
+		// {
+		// 	this.mainMenuContainer.setVisible(true);
+		// 	this.levelSelectContainer.setVisible(false);
+
+		// 	if (!this.registry.get('top-score'))
+		// 	{
+		// 		this.highScoreText.setText('');
+		// 	}
+		// 	else
+		// 	{
+		// 		this.highScoreText.setText(`highscore:\n\n${this.registry.get('top-score')}`);
+		// 	}
+		// });
 
 		if (this.registry.get('game-mode') === 'level')
 		{

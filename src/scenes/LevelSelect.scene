@@ -148,34 +148,6 @@
                     "fontSize": -16
                 },
                 {
-                    "type": "Rectangle",
-                    "id": "f023527d-03ab-41d5-bb58-bdb173e2bd53",
-                    "label": "backBack",
-                    "scope": "CLASS",
-                    "components": [],
-                    "x": 356,
-                    "y": 179,
-                    "isFilled": true,
-                    "fillColor": "#292929",
-                    "width": 50,
-                    "height": 30
-                },
-                {
-                    "type": "BitmapText",
-                    "id": "f8d3ad6d-0b80-4262-a0b1-4f80f96f1064",
-                    "label": "backText",
-                    "scope": "CLASS",
-                    "components": [],
-                    "x": 356,
-                    "y": 179,
-                    "originX": 0.5,
-                    "originY": 0.5,
-                    "text": "back",
-                    "font": "nokia",
-                    "align": 1,
-                    "fontSize": -8
-                },
-                {
                     "type": "BitmapText",
                     "id": "4f5a0d16-bbb5-49c0-8353-bcc5a1de1f13",
                     "label": "levelInfoText",

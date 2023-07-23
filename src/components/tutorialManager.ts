@@ -24,13 +24,13 @@ export default class tutorialManager {
 				`Soldiers are dangerous, so it's time to attack! Hit the ${InputManager.getInputName('punch')} to punch forward with a burst of speed.\n\nDo this in front of an enemy to take them out with your fist. Punches are also an easy way to launch yourself from a wall.`,
 				
 			// level 4
-				null,
+				`To reach higher or farther, you may need to space out your mid-air flaps. You won't get far if you use them up too fast or slow.`,
 
 			// level 5
-				`Time to dive. Use the ${InputManager.getInputName('dive')} to boost yourself downwards. If you hit an enemy, you'll take them out!\n\nDiving also aids your mobility, helping you control / time your landings.`,
+				`These enemies are protected from the sides, so it's time to dive! Use the ${InputManager.getInputName('dive')} to boost yourself downwards. If you hit an enemy, you'll take them out!\n\nDiving also aids your mobility, helping you control / time your landings.`,
 
 			// level 6
-				null,
+				`If you take out more than one enemy without landing, you get a combo which multiplies the score for each enemy!\n\nBe creative and look for ways to get big combos, as that's how you get real high scores.`,
 			
 			// level 7
 				`When punching forward doesn't work, hit 'em with an uppercut!\n\nUse the ${InputManager.getInputName('uppercut')} to launch upward and take out the enemies above you.This move can also help you reach high places.`,
@@ -39,10 +39,7 @@ export default class tutorialManager {
 				`Punches and uppercuts take a lot out of you... Your charge is indicated by the icon in the top right corner.\n\nLanding on ground is one way to recharge, but you'll also automatically regain charge if you take out an enemy with your attack!`,
 				
 			// level 9
-				`Each enemy is worth 500 points. An enemy takeout is worth even more if it's indirect, like knocking an enemy into another one.\n\nPoints earned from enemies are multiplied by the combo number. Each enemy you take out will add to your combo as long as you're not grounded.`,
-
-			// level 10
-				`There are a number of ways to approach each problem, and you'll often need to use more than one move. Creativity is how you score big combos!\n\nThis concludes the tutorial. Break a leg out there!`
+				`There are a number of ways to approach each problem, and you'll often need to use more than one move.\n\nThis concludes the tutorial. Break a leg out there!`
 		]
 
 		return texts[levelIndex];

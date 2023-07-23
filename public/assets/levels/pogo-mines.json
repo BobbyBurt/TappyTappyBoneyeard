@@ -109,15 +109,15 @@
                  "x":64,
                  "y":48
                 }],
-         "height":64,
+         "height":48,
          "id":1,
          "name":"Tile Layer 1",
          "opacity":1,
          "startx":0,
-         "starty":0,
+         "starty":16,
          "type":"tilelayer",
          "visible":true,
-         "width":96,
+         "width":80,
          "x":0,
          "y":0
         }, 
@@ -222,6 +222,16 @@
                          "name":"Pogo",
                          "type":"bool",
                          "value":true
+                        }, 
+                        {
+                         "name":"Shield Back",
+                         "type":"bool",
+                         "value":false
+                        }, 
+                        {
+                         "name":"Shield Front",
+                         "type":"bool",
+                         "value":false
                         }],
                  "rotation":0,
                  "type":"",
@@ -270,6 +280,16 @@
                          "name":"Pogo",
                          "type":"bool",
                          "value":true
+                        }, 
+                        {
+                         "name":"Shield Back",
+                         "type":"bool",
+                         "value":false
+                        }, 
+                        {
+                         "name":"Shield Front",
+                         "type":"bool",
+                         "value":false
                         }],
                  "rotation":0,
                  "type":"",
@@ -318,6 +338,16 @@
                          "name":"Pogo",
                          "type":"bool",
                          "value":true
+                        }, 
+                        {
+                         "name":"Shield Back",
+                         "type":"bool",
+                         "value":false
+                        }, 
+                        {
+                         "name":"Shield Front",
+                         "type":"bool",
+                         "value":false
                         }],
                  "rotation":0,
                  "type":"",
@@ -366,6 +396,16 @@
                          "name":"Pogo",
                          "type":"bool",
                          "value":true
+                        }, 
+                        {
+                         "name":"Shield Back",
+                         "type":"bool",
+                         "value":false
+                        }, 
+                        {
+                         "name":"Shield Front",
+                         "type":"bool",
+                         "value":false
                         }],
                  "rotation":0,
                  "type":"",

@@ -1015,8 +1015,7 @@ export default class Level extends Phaser.Scene {
 		this.uiScene.input.keyboard.on('keydown-' 
 		+ InputManager.getInput('menu-confirm', 'keyboard') , () =>
 		{
-			if (this.uiScene.postSummaryInstructions.visible 
-				&& this.registry.get('game-mode') === 'arcade')
+			if (this.uiScene.postSummaryInstructions.visible)
 			{
 				if (this.registry.get('current-level') !== 'finale')
 				{
@@ -1024,8 +1023,7 @@ export default class Level extends Phaser.Scene {
 				}
 				else
 				{
-					this.uiScene.summaryContainer.setVisible(false);
-					this.uiScene.showASummaryUI();
+					this.LoadLevelSelect();
 				}
 			}
 		});
@@ -1044,7 +1042,7 @@ export default class Level extends Phaser.Scene {
 	// pause / summary exit
 		this.uiScene.input.keyboard.on('keydown-' + InputManager.getInput('menu-back', 'keyboard') , () =>
 		{
-			if (this.manualPause || (this.uiScene.summaryVisible && this.registry.get('game-mode') === 'level'))
+			if (this.manualPause || (this.uiScene.summaryVisible))
 			{
 				this.LoadLevelSelect();
 			}
@@ -1060,15 +1058,6 @@ export default class Level extends Phaser.Scene {
 				}
 			}
 		});
-
-	// DEV - arcade skip level
-	this.uiScene.input.keyboard.on('keydown-W', () =>
-	{
-		if (this.registry.get('game-mode') === 'arcade')
-		{
-			this.LoadNextLevel();
-		}
-	});
 
 	// pause restart
 		this.uiScene.input.keyboard.on('keydown-' + InputManager.getInput('menu-confirm', 'keyboard') , () =>
@@ -1156,10 +1145,10 @@ export default class Level extends Phaser.Scene {
 			this.levelTimer = this.time.addEvent({
 				delay: 30000, callback: () =>
 				{
-					if (!this.reachedGoal && !__DEV__)
-					{
-						this.resetLevel();
-					}
+					// if (!this.reachedGoal && !__DEV__)
+					// {
+					// 	this.resetLevel();
+					// }
 				}
 			});
 		});
@@ -1419,6 +1408,19 @@ export default class Level extends Phaser.Scene {
 
 		const enemy = _enemy as EnemyPrefab;
 
+		if (this.player.stateController.currentState.name === 'punch'
+			&& enemy.hasShieldFront() && (enemy.flipX === this.player.flipX))
+		{
+			this.player.setFlipX(!this.player.flipX);
+			return;
+		}
+		if (this.player.stateController.currentState.name === 'punch'
+			&& enemy.hasShieldBack() && (enemy.flipX !== this.player.flipX))
+		{
+			this.player.setFlipX(!this.player.flipX);
+			return;
+		}
+
 		this.takeoutEnemy(_enemy, 
 			(this.player.stateController.currentState.name === 'punch'? 'punch' : 'uppercut'));
 			// TODO: this isn't foolproof. Not sure how to recreate it, but sometimes it passes uppercut during a punch.
@@ -1571,13 +1573,13 @@ export default class Level extends Phaser.Scene {
 
 		let scoreToAdd = 500;
 
-		if (cause === 'chain' || cause === 'explosion')
-		{
-			// this.combo++;
-			// this.updateCombo();
+		// if (cause === 'chain' || cause === 'explosion')
+		// {
+		// 	// this.combo++;
+		// 	// this.updateCombo();
 
-			scoreToAdd = 750;
-		}
+		// 	scoreToAdd = 750;
+		// }
 		// else
 		// {
 		// 	this.combo = 0;
@@ -2199,23 +2201,35 @@ export default class Level extends Phaser.Scene {
 			const mine = object.properties[4].value;
 			const parasol: boolean = object.properties[5].value;
 			const pogo: boolean = object.properties[6].value;
+			let shieldFront: boolean = false;
+			if (object.properties[7].value)
+			{
+				shieldFront = true;
+				console.debug('shield front');
+			}
+			let shieldBack: boolean = false;
+			if (object.properties[8].value)
+			{
+				console.debug('shield back');
+				shieldBack = true;
+			}
 			// const vision: ? = object.properties[7].value;
 
 			// Enemy type
 			if (balloon)
 			{
 				enemy = new BalloonEnemy
-					(this, object.x! + 8, object.y! - 8, gunDirection, parasol, mine, alwaysFire);
+					(this, object.x! + 8, object.y! - 8, gunDirection, parasol, mine, alwaysFire, shieldFront, shieldBack);
 			}
 			else if (pogo)
 			{
 				enemy = new PogoEnemy
-					(this, object.x! + 8, object.y! - 8, gunDirection, parasol, mine, alwaysFire);
+					(this, object.x! + 8, object.y! - 8, gunDirection, parasol, mine, alwaysFire, shieldFront, shieldBack);
 			}
 			else if (goal)
 			{
 				enemy = new GroundEnemy
-					(this, object.x! + 8, object.y! - 8, gunDirection, parasol, mine, alwaysFire);
+					(this, object.x! + 8, object.y! - 8, gunDirection, parasol, mine, alwaysFire, shieldFront, shieldBack);
 				enemy.isGoal = true;
 				this.goalEnemyIndex = this.enemyList.length;
 
@@ -2224,7 +2238,7 @@ export default class Level extends Phaser.Scene {
 			else
 			{
 				enemy = new GroundEnemy
-					(this, object.x! + 8, object.y! - 8, gunDirection, parasol, mine, alwaysFire);
+					(this, object.x! + 8, object.y! - 8, gunDirection, parasol, mine, alwaysFire, shieldFront, shieldBack);
 			}
 
 			if (gunDirection !== undefined)
@@ -2612,6 +2626,7 @@ export default class Level extends Phaser.Scene {
 	 */
 	setTutorialUI(show: boolean, initial: boolean)
 	{
+		console.debug('set');
 	// redndancy check
 		if ((show && this.uiScene.tutorialVisible) || (!show && !this.uiScene.tutorialVisible))
 		{
@@ -2636,7 +2651,7 @@ export default class Level extends Phaser.Scene {
 			}
 		}
 
-		if (show && !tutorialManager.doTutorialInDevMode)
+		if (show && (!tutorialManager.doTutorialInDevMode && __DEV__))
 		{
 			show = false;
 		}
@@ -2663,6 +2678,8 @@ export default class Level extends Phaser.Scene {
 			else
 			{
 				this.uiScene.setTutorialUI(true, true, this.currentLevelIndex);
+
+
 
 				this.scene.pause();
 			}

@@ -117,6 +117,16 @@
                          "name":"Pogo",
                          "type":"bool",
                          "value":false
+                        }, 
+                        {
+                         "name":"Shield Back",
+                         "type":"bool",
+                         "value":false
+                        }, 
+                        {
+                         "name":"Shield Front",
+                         "type":"bool",
+                         "value":false
                         }],
                  "rotation":0,
                  "type":"",
@@ -165,6 +175,16 @@
                          "name":"Pogo",
                          "type":"bool",
                          "value":false
+                        }, 
+                        {
+                         "name":"Shield Back",
+                         "type":"bool",
+                         "value":false
+                        }, 
+                        {
+                         "name":"Shield Front",
+                         "type":"bool",
+                         "value":false
                         }],
                  "rotation":0,
                  "type":"",
@@ -211,6 +231,16 @@
                         }, 
                         {
                          "name":"Pogo",
+                         "type":"bool",
+                         "value":false
+                        }, 
+                        {
+                         "name":"Shield Back",
+                         "type":"bool",
+                         "value":false
+                        }, 
+                        {
+                         "name":"Shield Front",
                          "type":"bool",
                          "value":false
                         }],
@@ -293,6 +323,16 @@
                         }, 
                         {
                          "name":"Pogo",
+                         "type":"bool",
+                         "value":false
+                        }, 
+                        {
+                         "name":"Shield Back",
+                         "type":"bool",
+                         "value":false
+                        }, 
+                        {
+                         "name":"Shield Front",
                          "type":"bool",
                          "value":false
                         }],

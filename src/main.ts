@@ -14,7 +14,7 @@ window.addEventListener('load', function ()
 	{
 		title: 'Tappy Tappy Boneyard',
 		url: 'https://www.newgrounds.com/projects/games/1923225/preview',
-		version: '14 prebeta',
+		version: '16 prebeta',
 		
 	// visuals
 		type: Phaser.AUTO,
@@ -35,7 +35,7 @@ window.addEventListener('load', function ()
 		// 		// TODO: reconsider this before release
 		// },
 		scale: {
-			// mode: Phaser.Scale.ScaleModes.FIT,
+			mode: Phaser.Scale.ScaleModes.FIT,
 			autoCenter: Phaser.Scale.CENTER_BOTH,
 			width: 960,
 			height: 540

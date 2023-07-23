@@ -12,7 +12,7 @@ export default interface EnemyPrefab {
 
 export default class EnemyPrefab extends Phaser.GameObjects.Sprite {
 
-	constructor(scene: Phaser.Scene, x?: number, y?: number, gunDirection?:GunDirection, parasol?: boolean, mine?: boolean, alwaysFire?: boolean, texture?: string, frame?: number | string) {
+	constructor(scene: Phaser.Scene, x?: number, y?: number, gunDirection?:GunDirection, parasol?: boolean, mine?: boolean, alwaysFire?: boolean, shieldFront?: boolean, shieldBack?:boolean, texture?: string, frame?: number | string) {
 		super(scene, x ?? 0, y ?? 0, texture || "soldiermid", frame);
 
 		scene.physics.add.existing(this, false);
@@ -53,6 +53,16 @@ export default class EnemyPrefab extends Phaser.GameObjects.Sprite {
 		{
 			this.alwaysFire = true;
 		}
+		if (shieldFront)
+		{
+			this._hasShieldFront = true;
+			console.debug('shield front');
+		}
+		if (shieldBack)
+		{
+			this._hasShieldBack = true;
+			console.debug('shield back');
+		}
 
 		/* END-USER-CTR-CODE */
 	}
@@ -70,6 +80,16 @@ export default class EnemyPrefab extends Phaser.GameObjects.Sprite {
 	protected get parasol() { return this._parasol }
 	private _hasParasol = false;
 	public get hasParasol() { return this._hasParasol }
+
+	private _shieldFront!: Phaser.GameObjects.Image;
+	protected get shieldFront() { return this._shieldFront }
+	private _hasShieldFront = false;
+	public hasShieldFront() { return this._hasShieldFront };
+
+	private _shieldBack!: Phaser.GameObjects.Image;
+	protected get shieldBack() { return this._shieldBack }
+	private _hasShieldBack = false;
+	public hasShieldBack() { return this._hasShieldBack };
 
 	/** If true, enemy explodes on player contact even in attack states. */
 	public isMine: boolean = false;
@@ -137,6 +157,15 @@ export default class EnemyPrefab extends Phaser.GameObjects.Sprite {
 		{
 			this.createGrenade();
 		}
+
+		if (this.hasShieldFront())
+		{
+			this.createShieldFront();
+		}
+		if (this.hasShieldBack())
+		{
+			this.createShieldBack();
+		}
 	}
 
 	/** update which runs on all enemy classes. Each enemy class has it's own update() for specific
@@ -157,6 +186,17 @@ export default class EnemyPrefab extends Phaser.GameObjects.Sprite {
 			this.parasol.rotation += this.spin * 3;
 		}
 
+		if (this.hasShieldFront())
+		{
+			this.shieldFront.rotation += this.spin * 4;
+			this.shieldFront.setPosition(this.x + (this.flipX ? -10 : 10), this.y);
+		}
+		if (this.hasShieldBack())
+		{
+			this.shieldBack.rotation += this.spin * 4;
+			this.shieldBack.setPosition(this.x + (this.flipX ? 10 : -10), this.y);
+		}
+
 		if (this.bombProp && this.spin === 0)
 		{
 			this.bombProp.setPosition(this.x, this.y + 10);
@@ -172,7 +212,6 @@ export default class EnemyPrefab extends Phaser.GameObjects.Sprite {
 					// TODO: move with idle animation
 			}
 		}
-		
 	}
 
 	private createGun()
@@ -235,6 +274,34 @@ export default class EnemyPrefab extends Phaser.GameObjects.Sprite {
 		_parasolBody.setAllowGravity(false);
 	}
 
+	createShieldFront()
+	{
+		this._shieldFront = this.scene.add.image(this.x + (this.flipX ? -10 : 10), this.y, 'shield');
+		this._shieldFront.setFlipX(this.flipX ? false : true );
+		// this.parasol.setDepth(this.depth - 1);
+		this.scene.physics.add.existing(this.shieldFront, false);
+		this._scene.mainLayer.add(this._shieldFront);
+		this._shieldFront.setDepth(-11);
+		let _shieldFrontBody = this.shieldFront.body as Phaser.Physics.Arcade.Body;
+			// simply calling this.gun.body doesn't give me much to work with. There must be 
+			// a better way to do this
+		_shieldFrontBody.setAllowGravity(false);
+	}
+
+	createShieldBack()
+	{
+		this._shieldBack = this.scene.add.image(this.x + (this.flipX ? 10 : -10), this.y, 'shield');
+		this._shieldBack.setFlipX(this.flipX ? true : false );
+		// this.parasol.setDepth(this.depth - 1);
+		this.scene.physics.add.existing(this.shieldBack, false);
+		this._scene.mainLayer.add(this._shieldBack);
+		this._shieldBack.setDepth(-11);
+		let _shieldBackBody = this.shieldBack.body as Phaser.Physics.Arcade.Body;
+			// simply calling this.gun.body doesn't give me much to work with. There must be 
+			// a better way to do this
+		_shieldBackBody.setAllowGravity(false);
+	}
+
 	createGrenade()
 	{
 		this.grenadeProp = this.scene.add.image(this.x, this.y, 'bomb-mask');
@@ -282,6 +349,18 @@ export default class EnemyPrefab extends Phaser.GameObjects.Sprite {
 			let _parasolBody = this.parasol.body as Phaser.Physics.Arcade.Body;
 			_parasolBody.setAllowGravity(true);
 			_parasolBody.setVelocity(directionX * .8, -200)
+		}
+		if (this.shieldFront)
+		{
+			let _shieldFrontBody = this.shieldFront.body as Phaser.Physics.Arcade.Body;
+			_shieldFrontBody.setAllowGravity(true);
+			_shieldFrontBody.setVelocity(directionX * 1.2, -205);
+		}
+		if (this.shieldBack)
+		{
+			let _shieldBackBody = this.shieldBack.body as Phaser.Physics.Arcade.Body;
+			_shieldBackBody.setAllowGravity(true);
+			_shieldBackBody.setVelocity(directionX * 1.3, -195);
 		}
 		if (this.bombProp)
 		{

@@ -8,8 +8,8 @@
         "createMethodName": "editorCreate",
         "sceneKey": "LevelUI",
         "compilerOutputLanguage": "TYPE_SCRIPT",
-        "borderWidth": 0,
-        "borderHeight": 0
+        "borderWidth": 960,
+        "borderHeight": 540
     },
     "displayList": [
         {
@@ -25,6 +25,7 @@
             "x": 348,
             "y": 961,
             "originY": 0,
+            "visible": false,
             "isFilled": true,
             "fillColor": "#ffffff",
             "width": 80,
@@ -44,6 +45,7 @@
             "Align.verticalOffset": -90,
             "x": 323.3856506347656,
             "y": 857.4503784179688,
+            "visible": false,
             "text": "30:00",
             "font": "nokia",
             "fontSize": -16,
@@ -356,11 +358,11 @@
             "Align.down": true,
             "Align.right": true,
             "MobileButton.input": "jump",
-            "x": 713.4493914309744,
-            "y": 1060.0118990523656,
+            "x": 746,
+            "y": 1082,
             "originX": 1,
             "originY": 1,
-            "alpha": 0.5,
+            "alpha": 0.3,
             "isFilled": true,
             "fillColor": "#7ca3ed",
             "width": 150,
@@ -985,6 +987,35 @@
                     "fontSize": -16
                 }
             ]
+        },
+        {
+            "type": "Image",
+            "id": "766721ca-14c0-4b11-a0ac-52388883e2e5",
+            "label": "parallax_Backing",
+            "components": [
+                "Align"
+            ],
+            "Align.middle": true,
+            "Align.right": true,
+            "texture": {
+                "key": "Parallax-Backing"
+            },
+            "x": 727,
+            "y": 981.5999984741211,
+            "scaleX": 0.5,
+            "scaleY": 0.15,
+            "originX": 1,
+            "originY": 0,
+            "visible": false,
+            "alphaTopLeft": 0,
+            "alphaTopRight": 0.4,
+            "alphaBottomLeft": 0,
+            "alphaBottomRight": 0,
+            "tintTopLeft": "#0049fe",
+            "tintTopRight": "#0049fe",
+            "tintBottomLeft": "#0049fe",
+            "tintBottomRight": "#0049fe",
+            "tintFill": true
         }
     ],
     "plainObjects": [],

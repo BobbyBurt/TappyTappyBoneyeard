@@ -69,7 +69,7 @@ export default class playerPrefab extends Phaser.Physics.Arcade.Sprite {
 	/** set based on key, gamepad or mobile input */
 	public jumpInput: input = 'up';
 	private jumpKey: Phaser.Input.Keyboard.Key 
-	= this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP);
+	= this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.X);
 	private jumpButton: number = 1;
 	public jumpMobileButton: boolean = false;
 
@@ -85,7 +85,7 @@ export default class playerPrefab extends Phaser.Physics.Arcade.Sprite {
 	/** set based on key, gamepad or mobile input */
 	public punchInput: input = 'up';
 	private punchKey: Phaser.Input.Keyboard.Key 
-		= this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.X);
+		= this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Z);
 	private punchButton: number = 0;
 	public punchCharged: boolean = true;
 	public punchMobileButton: boolean = false;
@@ -100,7 +100,7 @@ export default class playerPrefab extends Phaser.Physics.Arcade.Sprite {
 	/** set based on key, gamepad or mobile input */
 	public uppercutInput: input = 'up';
 	private uppercutKey: Phaser.Input.Keyboard.Key 
-		= this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Z);
+		= this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP);
 	private uppercutButton: number = 12;
 	public uppercutMobileButton: boolean = false;
 
