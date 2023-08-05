@@ -16,7 +16,7 @@
     },
     "displayList": [
         {
-            "type": "Text",
+            "type": "BitmapText",
             "id": "2ce42443-5227-4c9b-b498-e81f9a21cde3",
             "label": "progress",
             "components": [
@@ -27,7 +27,8 @@
             "originX": 0.5,
             "originY": 0.5,
             "text": "0%",
-            "fontFamily": "nokia cellphone fc small"
+            "font": "nokia",
+            "fontSize": -16
         },
         {
             "type": "BitmapText",
@@ -48,7 +49,7 @@
             "maxWidth": 200
         },
         {
-            "type": "Text",
+            "type": "BitmapText",
             "id": "4328f21b-07e1-4f13-abb7-8f792f3223c6",
             "label": "progress_1",
             "components": [],
@@ -56,11 +57,10 @@
             "y": 302,
             "originX": 0.5,
             "originY": 0.5,
-            "text": "Log into Newgrounds to earn medals and use cloud save data.\nGame does not officially support mobile or gamepads yet.",
-            "lineSpacing": 5,
+            "text": "Log into Newgrounds to earn medals and use cloud save data.",
+            "font": "nokia",
             "align": "right",
-            "fontFamily": "nokia cellphone fc small",
-            "fontSize": "8px"
+            "fontSize": -10
         }
     ],
     "plainObjects": [],

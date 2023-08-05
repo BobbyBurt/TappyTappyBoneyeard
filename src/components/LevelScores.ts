@@ -1,40 +1,80 @@
 /** */
 export let levelScoreMilestones = new Map<string, Array<number>>(
 [
-    ['jump', [ -2, -1, 0 ]],
-    ['flap', [ -2, -2, 0 ]],
-    ['punch', [ 500, 1000, 2000 ]],
+    ['jump',            [ -2, -1, 0 ]],
+    ['flap',            [ -2, -2, 0 ]],
+    ['punch',           [ 500, 1000, 2000 ]],
     
-    ['airborne', [ 500, 750, 1000 ]],
-    ['dive', [ 1000, 1500, 2000 ]],
-    ['dive-practice', [ 1500, 2500, 5000 ]],
+    ['airborne',        [ 500, 750, 1000 ]],
+    ['dive',            [ 1000, 1500, 2000 ]],
+    ['dive-practice',   [ 1500, 2500, 5000 ]],
 
-    ['uppercut', [ 2000, 2500, 3500 ]],
-    ['charge', [ 3000, 3500, 4500 ]],
+    ['uppercut',        [ 2000, 2500, 3500 ]],
+    ['charge',          [ 3000, 3500, 4500 ]],
     ['tutorial-finale', [ 4000, 6000, 9000 ]],
     
-    ['bomb-intro', [ 1500, 2250, 3250 ]],
-    ['bomb-holder', [ 3750, 5500, 7000 ]],
-    ['bomb-punch', [ 3000, 4750, 6250 ]],
+    ['bomb-intro',      [ 1500, 2250, 3250 ]],
+    ['bomb-holder',     [ 3750, 5500, 7000 ]],
+    ['bomb-punch',      [ 3000, 4750, 6250 ]],
 
-    ['mine-intro', [ 4000, 4500, 5500 ]],
-    ['mine-wall', [ 3750, 4250, 5750 ]],
-    ['gun-intro', [ 3250, 4250, 6250 ]],
-    ['bullet-ceiling', [ 4000, 4500, 5250 ]],
+    ['mine-intro',      [ 4000, 4500, 5500 ]],
+    ['mine-wall',       [ 3750, 4250, 5750 ]],
+    ['gun-intro',       [ 3250, 4250, 6250 ]],
+    ['bullet-ceiling',  [ 4000, 4500, 5250 ]],
 
-    ['combo', [ 4000, 7250, 12000 ]],
+    ['combo',           [ 4000, 7250, 12000 ]],
 
-    ['parasol', [ 2000, 2500, 3000 ]],
-    ['umbrella-trap', [ 3000, 4200, 6000 ]],
+    ['parasol',         [ 2000, 2500, 3000 ]],
+    ['umbrella-trap',   [ 3000, 4200, 6000 ]],
     
-    ['pogo-intro', [ 3500, 5000, 6500 ]],
-    ['pogo-ideas', [ 4000, 9000, 14200 ]],
-    ['pogo-challenge', [ 7000, 8000, 13600 ]],
+    ['pogo-intro',      [ 3500, 5000, 6500 ]],
+    ['pogo-ideas',      [ 4000, 9000, 14200 ]],
+    ['pogo-challenge',  [ 7000, 8000, 13600 ]],
 
-    ['grenade', [ 4000, 6000, 8400 ]],
+    ['grenade',         [ 4000, 6000, 8400 ]],
 
-    ['finale', [ 3500, 5250, 8250 ]],
+    ['finale',          [ 3500, 5250, 8250 ]],
 ]);
+
+/**
+ * `level key` => [ `# of bronze`, `# of silver`, `# of gold`, ]
+ */
+export let levelRequiredMedals = new Map<string, Array<number>>(
+    [
+        ['jump',            [ 0, 0, 0 ]],
+        ['flap',            [ 0, 0, 0 ]],
+        ['punch',           [ 0, 0, 0 ]],
+        
+        ['airborne',        [ 6, 0, 0 ]],
+        ['dive',            [ 6, 0, 0 ]],
+        ['dive-practice',   [ 6, 0, 0 ]],
+    
+        ['uppercut',        [ 9, 0, 0 ]],
+        ['charge',          [ 9, 0, 0 ]],
+        ['tutorial-finale', [ 9, 0, 0 ]],
+        
+        ['bomb-intro',      [ 11, 3, 0 ]],
+        ['bomb-holder',     [ 11, 3, 0 ]],
+        ['bomb-punch',      [ 11, 3, 0 ]],
+    
+        ['mine-intro',      [ 0, 0, 0 ]],
+        ['mine-wall',       [ 0, 0, 0 ]],
+        ['gun-intro',       [ 0, 0, 0 ]],
+        ['bullet-ceiling',  [ 0, 0, 0 ]],
+    
+        ['combo',           [ 0, 0, 0 ]],
+    
+        ['parasol',         [ 0, 0, 0 ]],
+        ['umbrella-trap',   [ 0, 0, 0 ]],
+        
+        ['pogo-intro',      [ 0, 0, 0 ]],
+        ['pogo-ideas',      [ 0, 0, 0 ]],
+        ['pogo-challenge',  [ 0, 0, 0 ]],
+    
+        ['grenade',         [ 0, 0, 0 ]],
+    
+        ['finale',          [ 0, 0, 0 ]],
+    ]);
 
 // MARKED FOR DELETION
 export let arcadeScoreMilestones: Array<number> = 

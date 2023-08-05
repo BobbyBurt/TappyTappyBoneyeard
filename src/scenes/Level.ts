@@ -25,6 +25,7 @@ import MinePrefab from "~/prefabs/MinePrefab";
 import cameraOffsetTrigger from "~/components/CameraOffsetTrigger";
 import cloudSaves from "~/API/cloudSaves";
 import { getEarnedAward } from "~/components/LevelScores";
+import TapperDeadProp from "prefabs/tapperDeadProp";
 
 /* END-USER-IMPORTS */
 
@@ -805,7 +806,7 @@ export default class Level extends Phaser.Scene {
 	public enemiesDefeated = 0;
 
 // arcade
-	private combo = 0;
+	public combo = 0;
 	public highestCombo = 0;
 	private comboTextTween: Phaser.Tweens.Tween;
 	private scorePopupGroup: Phaser.GameObjects.Group;
@@ -823,6 +824,8 @@ export default class Level extends Phaser.Scene {
 	private cameraFollow: Phaser.Math.Vector2;
 
 	private uiScene: LevelUI;
+
+	private tapperDeadProp!:TapperDeadProp;
 
 	create()
 	{
@@ -850,7 +853,7 @@ export default class Level extends Phaser.Scene {
 			this.bindMobileButtons();
 		}
 
-		this.player.setDepth(-20)
+		this.player.setDepth(-20);
 
 	// tilemap
 		this.tileMap = this.add.tilemap(this.registry.get('current-level'));
@@ -879,13 +882,13 @@ export default class Level extends Phaser.Scene {
 
 	// BG
 		const levelIndex = this.registry.get('current-level-index');
-		if (levelIndex < 10)
+		if (levelIndex < 9)
 		{
 			this.bGLayerCity.setVisible(false);
 			this.bGLayerHills.setVisible(true);
 			this.bGLayerIndustry.setVisible(false);
 		}
-		else if (levelIndex >= 10 && levelIndex < 191)
+		else if (levelIndex >= 9 && levelIndex < 19)
 		{
 			this.bGLayerCity.setVisible(true);
 			this.bGLayerHills.setVisible(false);
@@ -934,6 +937,7 @@ export default class Level extends Phaser.Scene {
 		// this.cameras.main.setScroll(this.player.x, this.player.y);
 		this.cameras.main.startFollow(this.cameraFollow, true, .1, .1);
 		this.cameras.main.setBounds(0, 0, this.tileLayer.width, this.tileLayer.height);
+		// this.cameras.main.setZoom(1);
 
 	// enemies
 		this.mapElementList = new Array(150);
@@ -996,20 +1000,72 @@ export default class Level extends Phaser.Scene {
 			InputManager.activeInputMode = 'gamepad';
 		});
 
-	// DEV - quick restart & exit
-		if (__DEV__)
+	// quick restart
+
+		this.input.keyboard.on('keydown-' + InputManager.getInput('quick-restart', 'keyboard'), () =>
 		{
-			this.input.keyboard.on('keydown-S', () =>
+			if (__DEV__ || (!this.uiScene.summaryVisible && !this.uiScene.tutorialVisible))
 			{
 				this.resetLevel();
-			});
+			}
+		});
+		this.input.gamepad.on('down', (pad:Phaser.Input.Gamepad.Gamepad, button:Phaser.Input.Gamepad.Button, index:number) =>
+		{
+			if (button.index == InputManager.getInput('quick-restart', 'gamepad'))
+			{
+				if (!this.uiScene.summaryVisible && !this.uiScene.tutorialVisible)
+				{
+					this.resetLevel();
+				}
+			}
+		});
 
-			// level select input
-			this.input.keyboard.on('keydown-A', () =>
+	// gameover retry
+
+		this.input.keyboard.on('keydown-' + InputManager.getInput('menu-confirm', 'keyboard'), () =>
+		{
+			if (this.uiScene.gameOverContainer.visible)
+			{
+				this.resetLevel();
+			}
+		});
+		this.input.gamepad.on('down', (pad:Phaser.Input.Gamepad.Gamepad, button:Phaser.Input.Gamepad.Button, index:number) =>
+		{
+			if (button.index == InputManager.getInput('menu-confirm', 'gamepad'))
+			{
+				if (this.uiScene.gameOverContainer.visible)
+				{
+					this.resetLevel();
+				}
+			}
+		});
+
+	// gameover exit
+
+		this.input.keyboard.on('keydown-' + InputManager.getInput('gameover-back', 'keyboard'), () =>
+		{
+			if (this.uiScene.gameOverContainer.visible)
 			{
 				this.LoadLevelSelect();
-			});
-		}
+			}
+		});
+		this.input.gamepad.on('down', (pad:Phaser.Input.Gamepad.Gamepad, button:Phaser.Input.Gamepad.Button, index:number) =>
+		{
+			if (button.index == InputManager.getInput('gameover-back', 'gamepad'))
+			{
+				if (this.uiScene.gameOverContainer.visible)
+				{
+					this.LoadLevelSelect();
+				}
+			}
+		});
+
+		// level select input
+		this.input.keyboard.on('keydown-A', () =>
+		{
+			if (__DEV__)
+				this.LoadLevelSelect();
+		});
 
 	// summary continue
 		this.uiScene.input.keyboard.on('keydown-' 
@@ -1094,23 +1150,23 @@ export default class Level extends Phaser.Scene {
 		});
 
 	// pause
-		this.game.events.on(Phaser.Core.Events.BLUR, this.pause, this);
-		if (__DEV__)
-		{
-			this.game.events.on(Phaser.Core.Events.FOCUS, this.unpause, this);
-		}
-		this.uiScene.input.gamepad.on('down', 
-			(pad:Phaser.Input.Gamepad.Gamepad, button:Phaser.Input.Gamepad.Button, index:number) =>
-		{
-			if (button.index === InputManager.getInput('pause', 'gamepad'))
-			{
-				this.toggleManualPause();
-			}
-		});
-		this.uiScene.input.keyboard.on('keydown-' + InputManager.getInput('pause', 'keyboard'), () =>
-		{
-			this.toggleManualPause();
-		});
+		// this.game.events.on(Phaser.Core.Events.BLUR, this.pause, this);
+		// if (__DEV__)
+		// {
+		// 	this.game.events.on(Phaser.Core.Events.FOCUS, this.unpause, this);
+		// }
+		// this.uiScene.input.gamepad.on('down', 
+		// 	(pad:Phaser.Input.Gamepad.Gamepad, button:Phaser.Input.Gamepad.Button, index:number) =>
+		// {
+		// 	if (button.index === InputManager.getInput('pause', 'gamepad'))
+		// 	{
+		// 		this.toggleManualPause();
+		// 	}
+		// });
+		// this.uiScene.input.keyboard.on('keydown-' + InputManager.getInput('pause', 'keyboard'), () =>
+		// {
+		// 	this.toggleManualPause();
+		// });
 
 	// mute
 		this.input.keyboard.on('keydown-M', () =>
@@ -1201,11 +1257,12 @@ export default class Level extends Phaser.Scene {
 		}
 
 	// out-of-bounds checks
-		if (this.player.y > this.cameras.main.getBounds().bottom)
+		if (this.player.y > this.cameras.main.getBounds().bottom && this.player.active)
 		{
 			// this.player.reset();
 
-			this.resetLevel();
+			// this.resetLevel();
+			this.killPlayer(true);
 		}
 		this.bombGroup.getChildren().forEach(member =>
 		{
@@ -1246,6 +1303,8 @@ export default class Level extends Phaser.Scene {
 	{
 		console.debug('reset level');
 
+		this.registry.set('last-scene', this.scene.key);
+
 		// this function should only happen once
 		if (!this.restarting)
 		{
@@ -1281,6 +1340,8 @@ export default class Level extends Phaser.Scene {
 
 		// set level played
 		this.registry.set('level-played-' + this.currentLevelIndex, true)
+
+		this.registry.set('last-scene', this.scene.key);
 
 		this.destroyScene();
 		this.uiScene.scene.stop();
@@ -1390,7 +1451,8 @@ export default class Level extends Phaser.Scene {
 		}
 		else
 		{
-			this.resetLevel();
+			// this.resetLevel();
+			this.killPlayer();
 		}
 	}
 
@@ -1512,7 +1574,10 @@ export default class Level extends Phaser.Scene {
 
 	playerMineOverlap(player: any, mine: any)
 	{
-		this.resetLevel();
+		// this.resetLevel();
+		// this.killPlayer();
+		this.explode(mine.x, mine.y);
+		mine.setVisible(false);
 	}
 
 	bombTilemapCollide(bomb: any, tileLayer: any)
@@ -1531,12 +1596,52 @@ export default class Level extends Phaser.Scene {
 
 	bulletPlayerCollide(_bullet: any, _player: any)
 	{
-		this.resetLevel();
+		// this.resetLevel();
+		this.killPlayer();
 	}
 
 	bulletTilemapCollide(_bullet: any, _tilemap: any)
 	{
 		_bullet.disappear();
+	}
+
+	killPlayer(pit?: boolean)
+	{
+		this.player.lockInput = true;
+		this.player.setActive(false)
+		this.player.setVisible(false);
+		this.player.body.setEnable(false);
+
+		if (pit)
+			SoundManager.play('fall', this);
+		else
+			SoundManager.play('bird-die', this);
+
+		if (!pit)
+		{
+			this.tapperDeadProp = new TapperDeadProp(this, this.player.x, this.player.y);
+			this.mainLayer.add(this.tapperDeadProp);
+			this.tapperDeadProp.setDepth(this.player.depth);
+			this.tapperDeadProp.setFlipX(this.player.flipX);
+			let tiredState: 'normal' | 'tired' | 'exhausted' = 'normal';
+			if (this.player.flapCharge === 1)
+				tiredState = 'tired';
+			else if (this.player.flapCharge === 0)
+				tiredState = 'exhausted';
+			this.tapperDeadProp.startSequnce(tiredState);
+		}
+
+		this.uiScene.gameOverContainer.setVisible(true);
+		this.uiScene.scoreText.setVisible(false);
+		this.uiScene.mobileButtonDive.setVisible(false);
+		this.uiScene.mobileButtonJump.setVisible(false);
+		this.uiScene.mobileButtonPunch.setVisible(false);
+		this.uiScene.mobileButtonUppercut.setVisible(false);
+		this.uiScene.airborneLabelText.setVisible(false);
+		this.uiScene.comboLabelText.setVisible(false);
+		this.uiScene.comboText.setVisible(false);
+
+
 	}
 
 	/**
@@ -1762,10 +1867,11 @@ export default class Level extends Phaser.Scene {
 
 
 			}
-			if (element.gameObject.name == 'player')
+			if (element.gameObject.name == 'player' && _this.player.active)
 			{
 				// _this.player.reset();
-				_this.resetLevel();
+				// _this.resetLevel();
+				_this.killPlayer();
 			}
 		});
 	}
@@ -2034,7 +2140,7 @@ export default class Level extends Phaser.Scene {
 			// let timeScore = Math.floor(this.levelTimer.getRemaining() * .1);
 			// this.score += timeScore;
 			// console.debug(`time: +${timeScore}`);
-			this.uiScene.setScore(this.score);
+			// this.uiScene.setScore(this.score);
 			this.registry.set('total-score', this.game.registry.get('total-score') + this.score);
 
 			this.uiScene.setAward(this.score);
@@ -2156,13 +2262,13 @@ export default class Level extends Phaser.Scene {
 
 		this.cameras.main.stopFollow();
 
-		this.levelTimer.paused = true;
-		this.time.addEvent({
-			delay: 200, repeat: -1, callback: () =>
-			{
-				this.uiScene.timerText.setVisible(!this.uiScene.timerText.visible);
-			}
-		});
+		// this.levelTimer.paused = true;
+		// this.time.addEvent({
+		// 	delay: 200, repeat: -1, callback: () =>
+		// 	{
+		// 		this.uiScene.timerText.setVisible(!this.uiScene.timerText.visible);
+		// 	}
+		// });
 
 		this.registry.set('completed-level-' + this.registry.get('current-level-index'), true);
 
@@ -2437,7 +2543,8 @@ export default class Level extends Phaser.Scene {
 		this.visionPolys.forEach((object, index) =>
 		{
 			if (Phaser.Geom.Polygon.ContainsPoint
-				(object, new Phaser.Geom.Point(this.player.x, this.player.y)))
+				(object, new Phaser.Geom.Point(this.player.x, this.player.y))
+				&& this.player.active)
 			{
 				if (object.parentEnemy.gunDirection)
 				{
@@ -2480,14 +2587,17 @@ export default class Level extends Phaser.Scene {
 		this.uiScene.mobileButtonJump.on('pointerdown', () =>
 		{
 			this.player.jumpMobileButton = true;
+			this.uiScene.mobileButtonJump.setAlpha(.3, .01, .3, .01);
 		});
 		this.uiScene.mobileButtonJump.on('pointerup', () =>
 		{
 			this.player.jumpMobileButton = false;
+			this.uiScene.mobileButtonJump.setAlpha(.01, .01, .01, .01);
 		});
 		this.uiScene.mobileButtonJump.on('pointerout', () =>
 		{
 			this.player.jumpMobileButton = false;
+			this.uiScene.mobileButtonJump.setAlpha(.01, .01, .01, .01);
 		});
 
 		// punch
@@ -2495,14 +2605,18 @@ export default class Level extends Phaser.Scene {
 		this.uiScene.mobileButtonPunch.on('pointerdown', () =>
 		{
 			this.player.punchMobileButton = true;
+			// this.uiScene.mobileButtonPunch
+			this.uiScene.mobileButtonPunch.setAlpha(.01, .3, .01, .3);
 		});
 		this.uiScene.mobileButtonPunch.on('pointerup', () =>
 		{
 			this.player.punchMobileButton = false;
+			this.uiScene.mobileButtonPunch.setAlpha(.01, .01, .01, .01);
 		});
 		this.uiScene.mobileButtonPunch.on('pointerout', () =>
 		{
 			this.player.punchMobileButton = false;
+			this.uiScene.mobileButtonPunch.setAlpha(.01, .01, .01, .01);
 		});
 
 		// uppercut
@@ -2510,14 +2624,17 @@ export default class Level extends Phaser.Scene {
 		this.uiScene.mobileButtonUppercut.on('pointerdown', () =>
 		{
 			this.player.uppercutMobileButton = true;
+			this.uiScene.mobileButtonUppercut.setAlpha(.01, .3, .01, .3);
 		});
 		this.uiScene.mobileButtonUppercut.on('pointerup', () =>
 		{
 			this.player.uppercutMobileButton = false;
+			this.uiScene.mobileButtonUppercut.setAlpha(.01, .01, .01, .01);
 		});
 		this.uiScene.mobileButtonUppercut.on('pointerout', () =>
 		{
 			this.player.uppercutMobileButton = false;
+			this.uiScene.mobileButtonUppercut.setAlpha(.01, .01, .01, .01);
 		});
 
 		// dive
@@ -2525,14 +2642,17 @@ export default class Level extends Phaser.Scene {
 		this.uiScene.mobileButtonDive.on('pointerdown', () =>
 		{
 			this.player.diveMobileButton = true;
+			this.uiScene.mobileButtonDive.setAlpha(.3, .01, .3, .01);
 		});
 		this.uiScene.mobileButtonDive.on('pointerup', () =>
 		{
 			this.player.diveMobileButton = false;
+			this.uiScene.mobileButtonDive.setAlpha(.01, .01, .01, .01);
 		});
 		this.uiScene.mobileButtonDive.on('pointerout', () =>
 		{
 			this.player.diveMobileButton = false;
+			this.uiScene.mobileButtonDive.setAlpha(.01, .01, .01, .01);
 		});
 
 		// level select
@@ -2618,28 +2738,38 @@ export default class Level extends Phaser.Scene {
 	}
 
 	/**
-	 * Calls UI scene to show or hide tutorial.
+	 * Calls UI scene to initialize tutorial.
 	 * 
-	 * Will check if tutorial it's necessary based on level, it's completion & dev override.
-	 * @param show 
+	 * Checks necessity, redundancy and conflicts and will return if found.
+	 * 
+	 * @param show if false, tutorial will still be initialized and can be shown manually
 	 * @param initial If this is upon scene setup, will be instant rather than tweened animation.
 	 */
 	setTutorialUI(show: boolean, initial: boolean)
 	{
-		console.debug('set');
+		console.debug(show, initial);
+
+		if (!tutorialManager.getTutorialText(this.currentLevelIndex, this))
+		{
+			console.debug('returned; no tutorial for this level');
+			return;
+		}
 	// redndancy check
 		if ((show && this.uiScene.tutorialVisible) || (!show && !this.uiScene.tutorialVisible))
 		{
+			console.debug('returned; redundant');
 			return;
 		}
 
 		if (this.scene.isPaused() && show)
 		{
+			console.debug('returned; already paused');
 			return;
 		}
 
 		if (this.uiScene.summaryVisible)
 		{
+			console.debug('returned; summary visible');
 			return;
 		}
 
@@ -2647,6 +2777,7 @@ export default class Level extends Phaser.Scene {
 		{
 			if (this.uiScene.tutorialOffsetTween.progress < 1)
 			{
+				console.debug('returned; tutorial tween incomplete');
 				return;
 			}
 		}
@@ -2656,7 +2787,7 @@ export default class Level extends Phaser.Scene {
 			show = false;
 		}
 
-		if (!show)
+		if (!show || (this.registry.get('last-scene') === this.scene.key && initial))
 		{
 			this.uiScene.setTutorialUI(false, true);
 
@@ -2665,26 +2796,18 @@ export default class Level extends Phaser.Scene {
 			return;
 		}
 
-		let tutorialNecessary = (this.currentLevelIndex < 10);
+		console.debug(this.registry.get('last-scene'));
+		// if (this.registry.get('last-scene') === this.scene.key)
+		// {
+		// 	show = false;
+		// }
+
+		// let tutorialNecessary = (this.currentLevelIndex < 9);
 			// hardcoded: change this if tutorial level count changes
 
+			this.uiScene.setTutorialUI(true, initial, this.currentLevelIndex);
 
-		if (tutorialManager.getTutorialText(this.currentLevelIndex))
-		{
-			if (this.registry.get('level-played-' + this.currentLevelIndex) && initial)
-			{
-				this.uiScene.setTutorialUI(false, false, this.currentLevelIndex);
-			}
-			else
-			{
-				this.uiScene.setTutorialUI(true, true, this.currentLevelIndex);
-
-
-
-				this.scene.pause();
-			}
-
-		}
+			this.scene.pause();
 	}
 
 	/**

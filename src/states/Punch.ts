@@ -10,6 +10,8 @@ export default class Punch implements State {
 	stateController: StateController;
 
 	timer: Phaser.Time.TimerEvent | undefined;
+	uppercutAllowTimer!: Phaser.Time.TimerEvent;
+	pauseTimer!: Phaser.Time.TimerEvent;
 	
 	constructor(_player:playerPrefab, _stateController:StateController)
 	{
@@ -24,18 +26,32 @@ export default class Punch implements State {
 		this.player.scene.events.emit('player-start');
 		this.player.started = true;
 
-		this.player.playAnimation('punch');
-		this.player.scene.sound.play('punch-swing');
-
-		this.player.variablePunchSpeed = this.player.punchSpeed;
-
-		// this.player.setPosition(this.player.x + (this.player.flipX ? 5 : -5 ), this.player.y);
-
-		this.player.setFist(true, false);
+		this.player.playAnimation('uppercut');
 
 		this.player.punchCharged = false;
 
-		this.timer = new Phaser.Time.TimerEvent({ delay: 170, loop: false, callback: () =>
+		this.player.setVelocity(0, 0);
+
+		this.pauseTimer = new Phaser.Time.TimerEvent({ delay: 150, callback: () =>
+		{
+			this.player.playAnimation('punch');
+			this.player.scene.sound.play('punch-swing');
+	
+			this.player.variablePunchSpeed = this.player.punchSpeed;
+	
+			// this.player.setPosition(this.player.x + (this.player.flipX ? 5 : -5 ), this.player.y);
+	
+			this.player.setFist(true, false);
+		}});
+
+		this.uppercutAllowTimer = new Phaser.Time.TimerEvent({ delay: 230, callback: () =>
+		{
+			console.debug('uppercut no longer allowed');
+			// this.player.scene.sound.play('punch-swing');
+		}});
+
+		// prev 170
+		this.timer = new Phaser.Time.TimerEvent({ delay: 320, loop: false, callback: () =>
 		{	
 			this.player.body.setVelocity
 				((this.player.flipX? this.player.moveSpeed : -this.player.moveSpeed), 0);
@@ -57,6 +73,8 @@ export default class Punch implements State {
 		}});
 	
 		this.player.scene.time.addEvent(this.timer);
+		this.player.scene.time.addEvent(this.uppercutAllowTimer);
+		this.player.scene.time.addEvent(this.pauseTimer);
 
 		if (!this.player.onFloor)
 		{
@@ -67,7 +85,16 @@ export default class Punch implements State {
 	}
 	
 	update()
-	{	
+	{
+		if (this.player.punchInput == 'just-down' && this.uppercutAllowTimer.getProgress() !== 1)
+		{
+			this.timer?.remove();
+			this.pauseTimer?.remove();
+			this.player.body.allowGravity = true;
+			
+			this.stateController.setState('uppercut');
+		}
+
 		if (this.player.onWallFacing(true))
 		{
 			if (this.player.onFloor)
@@ -92,7 +119,7 @@ export default class Punch implements State {
 			}
 
 		}
-		else
+		else if (this.pauseTimer.getProgress() === 1)
 		{
 			this.player.body.setVelocity((this.player.flipX? 
 				this.player.variablePunchSpeed : -this.player.variablePunchSpeed), 0);

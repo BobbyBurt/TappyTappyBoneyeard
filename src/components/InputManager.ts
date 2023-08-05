@@ -1,6 +1,6 @@
 
 type outPutName = 'jump' | 'punch' | 'uppercut' | 'dive' 
-	| 'tutorial-toggle' | 'pause' 
+	| 'tutorial-toggle' | 'pause' | 'quick-restart' | 'gameover-back'
 	| 'menu-up' | 'menu-down' | 'menu-left' | 'menu-right' | 'menu-confirm' | 'menu-back';
 
 interface outputTest
@@ -19,25 +19,25 @@ export default class InputManager {
 		[
 			'X key',
 			`right button`,
-			'green button'
+			'top left corner of the screen'
 		]],
 		['punch',
 		[
 			'Z key',
 			`down button`,
-			'red button'
+			'bottom left corner'
 		]],
 		['uppercut',
 		[
 			'up arrow key',
 			`D-pad up`,
-			'yellow button'
+			'top right corner'
 		]],
 		['dive',
 		[
 			'down arrow key',
 			`D-pad down`,
-			'blue button'
+			'bottom right corner'
 		]],
 		['tutorial-toggle',
 		[
@@ -49,7 +49,19 @@ export default class InputManager {
 		[
 			'P key',
 			`start button`,
-			'top right button'
+			null,
+		]],
+		['quick-restart',
+		[
+			'shift key',
+			`select button`,
+			null
+		]],
+		['gameover-back',
+		[
+			'space bar',
+			`up button`,
+			null
 		]],
 		['menu-up',
 		[
@@ -95,7 +107,7 @@ export default class InputManager {
 		['jump', 
 		[
 			'up arrow key',
-			1,
+			2,
 			'green button'
 		]],
 		['punch',
@@ -133,6 +145,18 @@ export default class InputManager {
 			'P',
 			9,
 			'top right button'
+		]],
+		['quick-restart',
+		[
+			'SHIFT',
+			8,
+			null
+		]],
+		['gameover-back',
+		[
+			'SPACE',
+			3,
+			null
 		]],
 		['menu-up',
 		[

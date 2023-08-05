@@ -310,6 +310,13 @@
                 "key": "explosion"
             },
             {
+                "url": [
+                    "assets/sfx/fall TEMP.wav"
+                ],
+                "type": "audio",
+                "key": "fall"
+            },
+            {
                 "url": "assets/levels/rapidfire.json",
                 "type": "tilemapTiledJSON",
                 "key": "final"
@@ -349,6 +356,11 @@
                 },
                 "type": "spritesheet",
                 "key": "flap-sprites"
+            },
+            {
+                "url": "assets/fuel-test.png",
+                "type": "image",
+                "key": "fuel-test"
             },
             {
                 "url": "assets/grenade.png",
@@ -406,11 +418,39 @@
                 "key": "jump"
             },
             {
+                "url": "assets/level-icon-selected.png",
+                "type": "image",
+                "key": "level-icon-selected"
+            },
+            {
+                "url": "assets/level-icons.png",
+                "frameConfig": {
+                    "frameWidth": 35,
+                    "frameHeight": 28,
+                    "startFrame": 0,
+                    "endFrame": 5,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "level-icons"
+            },
+            {
+                "url": "assets/load-bg.png",
+                "type": "image",
+                "key": "load-bg"
+            },
+            {
                 "url": [
                     "assets/music/main-game.mp3"
                 ],
                 "type": "audio",
                 "key": "main-game"
+            },
+            {
+                "url": "assets/menu-bg.png",
+                "type": "image",
+                "key": "menu-bg"
             },
             {
                 "url": "assets/levels/mine-combo.json",
@@ -520,6 +560,21 @@
                 "key": "pogo-mines"
             },
             {
+                "url": "assets/level-previews/preview-bomb-holder.png",
+                "type": "image",
+                "key": "preview-bomb-holder"
+            },
+            {
+                "url": "assets/level-previews/preview-bomb-punch.png",
+                "type": "image",
+                "key": "preview-bomb-punch"
+            },
+            {
+                "url": "assets/level-previews/preview-mine-intro.png",
+                "type": "image",
+                "key": "preview-mine-intro"
+            },
+            {
                 "url": "assets/levels/punch.json",
                 "type": "tilemapTiledJSON",
                 "key": "punch"
@@ -547,6 +602,11 @@
                 "url": "assets/shield.png",
                 "type": "image",
                 "key": "shield"
+            },
+            {
+                "url": "assets/levels/shield-turn.json",
+                "type": "tilemapTiledJSON",
+                "key": "shield-turn"
             },
             {
                 "url": "assets/soldier-blood.png",
@@ -671,6 +731,11 @@
                 "url": "assets/tutorial-ipad.png",
                 "type": "image",
                 "key": "tutorial-ipad"
+            },
+            {
+                "url": "assets/levels/umbrella-shield.json",
+                "type": "tilemapTiledJSON",
+                "key": "umbrella-shield"
             },
             {
                 "url": "assets/levels/umbrella-trap.json",

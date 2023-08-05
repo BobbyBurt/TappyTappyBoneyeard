@@ -9,7 +9,7 @@
         {
             "name": "PreloadText",
             "baseClass": "UserComponent",
-            "gameObjectType": "Phaser.GameObjects.Text",
+            "gameObjectType": "Phaser.GameObjects.BitmapText",
             "properties": []
         },
         {
@@ -233,6 +233,24 @@
                     "customDefinition": false,
                     "type": {
                         "id": "string"
+                    }
+                }
+            ]
+        },
+        {
+            "name": "UIButton",
+            "baseClass": "UserComponent",
+            "gameObjectType": "any",
+            "properties": [
+                {
+                    "name": "property1",
+                    "label": "Property 1",
+                    "tooltip": "Property 1",
+                    "defValue": "",
+                    "customDefinition": false,
+                    "type": {
+                        "id": "object-var",
+                        "expressionType": "Phaser.GameObjects.GameObject"
                     }
                 }
             ]

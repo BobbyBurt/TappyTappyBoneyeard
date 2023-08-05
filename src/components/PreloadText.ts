@@ -7,7 +7,7 @@ import Phaser from "phaser";
 
 export default class PreloadText extends UserComponent {
 
-	constructor(gameObject: Phaser.GameObjects.Text) {
+	constructor(gameObject: Phaser.GameObjects.BitmapText) {
 		super(gameObject);
 
 		this.gameObject = gameObject;
@@ -16,7 +16,7 @@ export default class PreloadText extends UserComponent {
 		/* START-USER-CTR-CODE */
 
 		this.scene.load.on(Phaser.Loader.Events.PROGRESS, (p:number) => {
-			
+
 			if (p === 1)
 			{
 				this.gameObject.text = "Click / tap to start";
@@ -30,11 +30,11 @@ export default class PreloadText extends UserComponent {
 		/* END-USER-CTR-CODE */
 	}
 
-	static getComponent(gameObject: Phaser.GameObjects.Text): PreloadText {
+	static getComponent(gameObject: Phaser.GameObjects.BitmapText): PreloadText {
 		return (gameObject as any)["__PreloadText"];
 	}
 
-	private gameObject: Phaser.GameObjects.Text;
+	private gameObject: Phaser.GameObjects.BitmapText;
 
 	/* START-USER-CODE */
 

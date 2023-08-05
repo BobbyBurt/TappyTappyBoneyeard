@@ -4,11 +4,12 @@
 /* START OF COMPILED CODE */
 
 import Phaser from "phaser";
+import LevelIconPrefab from "../prefabs/LevelIconPrefab";
 /* START-USER-IMPORTS */
 
 import CameraUtil from "~/components/CameraUtil";
 import InputManager from "~/components/InputManager";
-import { levelScoreMilestones } from "~/components/LevelScores";
+import { getEarnedAward, levelScoreMilestones } from "~/components/LevelScores";
 import SoundManager from "~/components/SoundManager";
 import cloudSaves from "~/API/cloudSaves";
 
@@ -35,29 +36,197 @@ export default class LevelSelect extends Phaser.Scene {
 
 	editorCreate(): void {
 
-		// back
-		const back = this.add.rectangle(480, 270, 960, 540);
-		back.isFilled = true;
-		back.fillColor = 14383236;
+		// rectangle
+		const rectangle = this.add.rectangle(338, 22, 100, 60);
+		rectangle.setOrigin(0, 0);
+		rectangle.isFilled = true;
 
-		// mainLayer
-		const mainLayer = this.add.layer();
+		// preview_bomb_punch
+		const preview_bomb_punch = this.add.image(390, 52, "preview-bomb-punch");
+		preview_bomb_punch.scaleX = 0.538068679604508;
+		preview_bomb_punch.scaleY = 0.33771521273288463;
 
-		// uiLayer
-		const uiLayer = this.add.layer();
+		// highscoreWindowContainer
+		const highscoreWindowContainer = this.add.container(0, 0);
+		highscoreWindowContainer.visible = false;
+
+		// rectangle_1
+		const rectangle_1 = this.add.rectangle(41, 24, 250, 60);
+		rectangle_1.setOrigin(0, 0);
+		rectangle_1.isFilled = true;
+		rectangle_1.fillColor = 4934475;
+		highscoreWindowContainer.add(rectangle_1);
+
+		// titleText_2
+		const titleText_2 = this.add.bitmapText(113, 68, "nokia", "2000\n");
+		titleText_2.setOrigin(1, 0);
+		titleText_2.tintFill = true;
+		titleText_2.tintTopLeft = 13275481;
+		titleText_2.tintTopRight = 13275481;
+		titleText_2.tintBottomLeft = 13275481;
+		titleText_2.tintBottomRight = 13275481;
+		titleText_2.text = "2000\n";
+		titleText_2.fontSize = -8;
+		titleText_2.align = 2;
+		highscoreWindowContainer.add(titleText_2);
+
+		// titleText_3
+		const titleText_3 = this.add.bitmapText(203, 68, "nokia", "4000\n");
+		titleText_3.setOrigin(1, 0);
+		titleText_3.tintFill = true;
+		titleText_3.tintTopLeft = 13553358;
+		titleText_3.tintTopRight = 13553358;
+		titleText_3.tintBottomLeft = 13553358;
+		titleText_3.tintBottomRight = 13553358;
+		titleText_3.text = "4000\n";
+		titleText_3.fontSize = -8;
+		titleText_3.align = 2;
+		highscoreWindowContainer.add(titleText_3);
+
+		// titleText_4
+		const titleText_4 = this.add.bitmapText(280, 68, "nokia", "6000\n");
+		titleText_4.setOrigin(1, 0);
+		titleText_4.tintFill = true;
+		titleText_4.tintTopLeft = 15720529;
+		titleText_4.tintTopRight = 15720529;
+		titleText_4.tintBottomLeft = 15720529;
+		titleText_4.tintBottomRight = 15720529;
+		titleText_4.text = "6000\n";
+		titleText_4.fontSize = -8;
+		titleText_4.align = 2;
+		highscoreWindowContainer.add(titleText_4);
+
+		// rectangle_2
+		const rectangle_2 = this.add.rectangle(51, 54, 230, 10);
+		rectangle_2.setOrigin(0, 0);
+		rectangle_2.isFilled = true;
+		rectangle_2.fillColor = 10132122;
+		highscoreWindowContainer.add(rectangle_2);
+
+		// rectangle_3
+		const rectangle_3 = this.add.rectangle(50, 54, 70, 10);
+		rectangle_3.setOrigin(0, 0);
+		rectangle_3.isFilled = true;
+		rectangle_3.fillColor = 5675510;
+		highscoreWindowContainer.add(rectangle_3);
+
+		// titleText_1
+		const titleText_1 = this.add.bitmapText(50, 34, "nokia", "Highscore: 3000\n");
+		titleText_1.tintFill = true;
+		titleText_1.text = "Highscore: 3000\n";
+		titleText_1.fontSize = -10;
+		titleText_1.align = 1;
+		highscoreWindowContainer.add(titleText_1);
+
+		// rectangle_4
+		const rectangle_4 = this.add.rectangle(279, 54, 2, 10);
+		rectangle_4.setOrigin(0, 0);
+		rectangle_4.isFilled = true;
+		rectangle_4.fillColor = 15720529;
+		highscoreWindowContainer.add(rectangle_4);
+
+		// rectangle_5
+		const rectangle_5 = this.add.rectangle(201, 54, 2, 10);
+		rectangle_5.setOrigin(0, 0);
+		rectangle_5.isFilled = true;
+		rectangle_5.fillColor = 13553358;
+		highscoreWindowContainer.add(rectangle_5);
+
+		// rectangle_6
+		const rectangle_6 = this.add.rectangle(111, 54, 2, 10);
+		rectangle_6.setOrigin(0, 0);
+		rectangle_6.isFilled = true;
+		rectangle_6.fillColor = 13275481;
+		highscoreWindowContainer.add(rectangle_6);
+
+		// LockedWindowContainer
+		const lockedWindowContainer = this.add.container(0, 0);
+
+		// rectangle_12
+		const rectangle_12 = this.add.rectangle(41, 24, 250, 60);
+		rectangle_12.setOrigin(0, 0);
+		rectangle_12.isFilled = true;
+		rectangle_12.fillColor = 4934475;
+		lockedWindowContainer.add(rectangle_12);
+
+		// titleText_22
+		const titleText_22 = this.add.bitmapText(116, 54, "nokia", "x 6");
+		titleText_22.setOrigin(1, 0);
+		titleText_22.tintFill = true;
+		titleText_22.tintTopLeft = 13275481;
+		titleText_22.tintTopRight = 13275481;
+		titleText_22.tintBottomLeft = 13275481;
+		titleText_22.tintBottomRight = 13275481;
+		titleText_22.text = "x 6";
+		titleText_22.fontSize = -16;
+		titleText_22.align = 2;
+		lockedWindowContainer.add(titleText_22);
+
+		// titleText_32
+		const titleText_32 = this.add.bitmapText(195, 54, "nokia", "x 4");
+		titleText_32.setOrigin(1, 0);
+		titleText_32.tintFill = true;
+		titleText_32.tintTopLeft = 13553358;
+		titleText_32.tintTopRight = 13553358;
+		titleText_32.tintBottomLeft = 13553358;
+		titleText_32.tintBottomRight = 13553358;
+		titleText_32.text = "x 4";
+		titleText_32.fontSize = -16;
+		titleText_32.align = 2;
+		lockedWindowContainer.add(titleText_32);
+
+		// titleText_42
+		const titleText_42 = this.add.bitmapText(277, 55, "nokia", "x 2\n");
+		titleText_42.setOrigin(1, 0);
+		titleText_42.tintFill = true;
+		titleText_42.tintTopLeft = 15720529;
+		titleText_42.tintTopRight = 15720529;
+		titleText_42.tintBottomLeft = 15720529;
+		titleText_42.tintBottomRight = 15720529;
+		titleText_42.text = "x 2\n";
+		titleText_42.fontSize = -16;
+		titleText_42.align = 2;
+		lockedWindowContainer.add(titleText_42);
+
+		// titleText_12
+		const titleText_12 = this.add.bitmapText(50, 34, "nokia", "Awards needed to unlock level:\n");
+		titleText_12.tintFill = true;
+		titleText_12.text = "Awards needed to unlock level:\n";
+		titleText_12.fontSize = -10;
+		titleText_12.align = 1;
+		lockedWindowContainer.add(titleText_12);
+
+		// rectangle_42
+		const rectangle_42 = this.add.rectangle(219, 53, 20, 20);
+		rectangle_42.setOrigin(0, 0);
+		rectangle_42.isFilled = true;
+		rectangle_42.fillColor = 15720529;
+		lockedWindowContainer.add(rectangle_42);
+
+		// rectangle_52
+		const rectangle_52 = this.add.rectangle(139, 53, 20, 20);
+		rectangle_52.setOrigin(0, 0);
+		rectangle_52.isFilled = true;
+		lockedWindowContainer.add(rectangle_52);
+
+		// rectangle_62
+		const rectangle_62 = this.add.rectangle(59, 53, 20, 20);
+		rectangle_62.setOrigin(0, 0);
+		rectangle_62.isFilled = true;
+		rectangle_62.fillColor = 13275481;
+		lockedWindowContainer.add(rectangle_62);
 
 		// levelSelectContainer
-		const levelSelectContainer = this.add.container(0, 0);
-		levelSelectContainer.visible = false;
+		const levelSelectContainer = this.add.container(649, 43);
 
 		// levelBack
-		const levelBack = this.add.rectangle(480, 290, 150, 40);
+		const levelBack = this.add.rectangle(585, 323, 150, 40);
 		levelBack.isFilled = true;
 		levelBack.fillColor = 2697513;
 		levelSelectContainer.add(levelBack);
 
 		// levelText
-		const levelText = this.add.bitmapText(480, 290, "nokia", "intro\n");
+		const levelText = this.add.bitmapText(585, 323, "nokia", "intro\n");
 		levelText.setOrigin(0.5, 0.5);
 		levelText.text = "intro\n";
 		levelText.fontSize = -8;
@@ -65,13 +234,13 @@ export default class LevelSelect extends Phaser.Scene {
 		levelSelectContainer.add(levelText);
 
 		// downBack
-		const downBack = this.add.rectangle(480, 344, 100, 40);
+		const downBack = this.add.rectangle(585, 377, 100, 40);
 		downBack.isFilled = true;
 		downBack.fillColor = 2697513;
 		levelSelectContainer.add(downBack);
 
 		// downText
-		const downText = this.add.bitmapText(480, 344, "nokia", "v\n");
+		const downText = this.add.bitmapText(585, 377, "nokia", "v\n");
 		downText.setOrigin(0.5, 0.5);
 		downText.text = "v\n";
 		downText.fontSize = -16;
@@ -79,13 +248,13 @@ export default class LevelSelect extends Phaser.Scene {
 		levelSelectContainer.add(downText);
 
 		// upBack
-		const upBack = this.add.rectangle(480, 236, 100, 40);
+		const upBack = this.add.rectangle(585, 269, 100, 40);
 		upBack.isFilled = true;
 		upBack.fillColor = 2697513;
 		levelSelectContainer.add(upBack);
 
 		// upText
-		const upText = this.add.bitmapText(480, 236, "nokia", "v");
+		const upText = this.add.bitmapText(585, 269, "nokia", "v");
 		upText.angle = -180;
 		upText.setOrigin(0.5, 0.5);
 		upText.text = "v";
@@ -94,8 +263,12 @@ export default class LevelSelect extends Phaser.Scene {
 		levelSelectContainer.add(upText);
 
 		// titleText
-		const titleText = this.add.bitmapText(480, 176, "nokia", "Level Select\n");
-		titleText.setOrigin(0.5, 0.5);
+		const titleText = this.add.bitmapText(36, -33, "nokia", "Level Select\n");
+		titleText.tintFill = true;
+		titleText.tintTopLeft = 3158064;
+		titleText.tintTopRight = 3158064;
+		titleText.tintBottomLeft = 3158064;
+		titleText.tintBottomRight = 3158064;
 		titleText.text = "Level Select\n";
 		titleText.fontSize = -16;
 		titleText.align = 1;
@@ -107,54 +280,208 @@ export default class LevelSelect extends Phaser.Scene {
 		levelInfoText.fontSize = -8;
 		levelSelectContainer.add(levelInfoText);
 
-		// mainMenuContainer
-		const mainMenuContainer = this.add.container(0, 0);
+		// levelIconPrefab
+		const levelIconPrefab = new LevelIconPrefab(this, 60, 123);
+		this.add.existing(levelIconPrefab);
 
-		// arcadeBack
-		const arcadeBack = this.add.rectangle(480, 267, 150, 40);
-		arcadeBack.isFilled = true;
-		arcadeBack.fillColor = 2697513;
-		mainMenuContainer.add(arcadeBack);
+		// levelIconPrefab_1
+		const levelIconPrefab_1 = new LevelIconPrefab(this, 105, 123);
+		this.add.existing(levelIconPrefab_1);
 
-		// arcadeText
-		const arcadeText = this.add.bitmapText(480, 267, "nokia", "Arcade Mode\n");
-		arcadeText.setOrigin(0.5, 0.5);
-		arcadeText.text = "Arcade Mode\n";
-		arcadeText.fontSize = -8;
-		arcadeText.align = 1;
-		mainMenuContainer.add(arcadeText);
+		// levelIconPrefab_2
+		const levelIconPrefab_2 = new LevelIconPrefab(this, 150, 123);
+		this.add.existing(levelIconPrefab_2);
 
-		// levelSelectBack
-		const levelSelectBack = this.add.rectangle(480, 331, 150, 40);
-		levelSelectBack.scaleX = 0.8172138893396567;
-		levelSelectBack.isFilled = true;
-		levelSelectBack.fillColor = 2697513;
-		mainMenuContainer.add(levelSelectBack);
+		// levelIconPrefab_3
+		const levelIconPrefab_3 = new LevelIconPrefab(this, 195, 123);
+		this.add.existing(levelIconPrefab_3);
 
-		// levelSelectText
-		const levelSelectText = this.add.bitmapText(480, 331, "nokia", "Level Select");
-		levelSelectText.setOrigin(0.5, 0.5);
-		levelSelectText.text = "Level Select";
-		levelSelectText.fontSize = -8;
-		levelSelectText.align = 1;
-		mainMenuContainer.add(levelSelectText);
+		// levelIconPrefab_4
+		const levelIconPrefab_4 = new LevelIconPrefab(this, 240, 123);
+		this.add.existing(levelIconPrefab_4);
 
-		// logo
-		const logo = this.add.image(480, 193, "logo");
-		mainMenuContainer.add(logo);
+		// levelIconPrefab_5
+		const levelIconPrefab_5 = new LevelIconPrefab(this, 285, 123);
+		this.add.existing(levelIconPrefab_5);
 
-		// highScoreText
-		const highScoreText = this.add.bitmapText(570, 247, "nokia", "Arcade Mode\n");
-		highScoreText.text = "Arcade Mode\n";
-		highScoreText.fontSize = -8;
-		mainMenuContainer.add(highScoreText);
+		// levelIconPrefab_6
+		const levelIconPrefab_6 = new LevelIconPrefab(this, 330, 123);
+		this.add.existing(levelIconPrefab_6);
+
+		// levelIconPrefab_7
+		const levelIconPrefab_7 = new LevelIconPrefab(this, 375, 123);
+		this.add.existing(levelIconPrefab_7);
+
+		// levelIconPrefab_8
+		const levelIconPrefab_8 = new LevelIconPrefab(this, 420, 123);
+		this.add.existing(levelIconPrefab_8);
+
+		// levelIconPrefab_9
+		const levelIconPrefab_9 = new LevelIconPrefab(this, 105, 173);
+		this.add.existing(levelIconPrefab_9);
+
+		// levelIconPrefab_10
+		const levelIconPrefab_10 = new LevelIconPrefab(this, 420, 173);
+		this.add.existing(levelIconPrefab_10);
+
+		// levelIconPrefab_11
+		const levelIconPrefab_11 = new LevelIconPrefab(this, 375, 173);
+		this.add.existing(levelIconPrefab_11);
+
+		// levelIconPrefab_12
+		const levelIconPrefab_12 = new LevelIconPrefab(this, 330, 173);
+		this.add.existing(levelIconPrefab_12);
+
+		// levelIconPrefab_13
+		const levelIconPrefab_13 = new LevelIconPrefab(this, 60, 173);
+		this.add.existing(levelIconPrefab_13);
+
+		// levelIconPrefab_14
+		const levelIconPrefab_14 = new LevelIconPrefab(this, 285, 173);
+		this.add.existing(levelIconPrefab_14);
+
+		// levelIconPrefab_15
+		const levelIconPrefab_15 = new LevelIconPrefab(this, 240, 173);
+		this.add.existing(levelIconPrefab_15);
+
+		// levelIconPrefab_16
+		const levelIconPrefab_16 = new LevelIconPrefab(this, 195, 173);
+		this.add.existing(levelIconPrefab_16);
+
+		// levelIconPrefab_17
+		const levelIconPrefab_17 = new LevelIconPrefab(this, 150, 173);
+		this.add.existing(levelIconPrefab_17);
+
+		// levelIconPrefab_18
+		const levelIconPrefab_18 = new LevelIconPrefab(this, 105, 223);
+		this.add.existing(levelIconPrefab_18);
+
+		// levelIconPrefab_19
+		const levelIconPrefab_19 = new LevelIconPrefab(this, 420, 223);
+		this.add.existing(levelIconPrefab_19);
+
+		// levelIconPrefab_20
+		const levelIconPrefab_20 = new LevelIconPrefab(this, 375, 223);
+		this.add.existing(levelIconPrefab_20);
+
+		// levelIconPrefab_21
+		const levelIconPrefab_21 = new LevelIconPrefab(this, 330, 223);
+		this.add.existing(levelIconPrefab_21);
+
+		// levelIconPrefab_22
+		const levelIconPrefab_22 = new LevelIconPrefab(this, 60, 223);
+		this.add.existing(levelIconPrefab_22);
+
+		// levelIconPrefab_23
+		const levelIconPrefab_23 = new LevelIconPrefab(this, 285, 223);
+		this.add.existing(levelIconPrefab_23);
+
+		// levelIconPrefab_24
+		const levelIconPrefab_24 = new LevelIconPrefab(this, 240, 223);
+		this.add.existing(levelIconPrefab_24);
+
+		// levelIconPrefab_25
+		const levelIconPrefab_25 = new LevelIconPrefab(this, 195, 223);
+		this.add.existing(levelIconPrefab_25);
+
+		// levelIconPrefab_26
+		const levelIconPrefab_26 = new LevelIconPrefab(this, 150, 223);
+		this.add.existing(levelIconPrefab_26);
 
 		// lists
 		const levelBackList = [levelBack, downBack, upBack];
 
-		this.back = back;
-		this.mainLayer = mainLayer;
-		this.uiLayer = uiLayer;
+		// levelIconPrefab (prefab fields)
+		levelIconPrefab.levelIndex = 0;
+
+		// levelIconPrefab_1 (prefab fields)
+		levelIconPrefab_1.levelIndex = 1;
+
+		// levelIconPrefab_2 (prefab fields)
+		levelIconPrefab_2.levelIndex = 2;
+
+		// levelIconPrefab_3 (prefab fields)
+		levelIconPrefab_3.levelIndex = 3;
+
+		// levelIconPrefab_4 (prefab fields)
+		levelIconPrefab_4.levelIndex = 4;
+
+		// levelIconPrefab_5 (prefab fields)
+		levelIconPrefab_5.levelIndex = 5;
+
+		// levelIconPrefab_6 (prefab fields)
+		levelIconPrefab_6.levelIndex = 6;
+
+		// levelIconPrefab_7 (prefab fields)
+		levelIconPrefab_7.levelIndex = 7;
+
+		// levelIconPrefab_8 (prefab fields)
+		levelIconPrefab_8.levelIndex = 8;
+
+		// levelIconPrefab_9 (prefab fields)
+		levelIconPrefab_9.levelIndex = 10;
+
+		// levelIconPrefab_10 (prefab fields)
+		levelIconPrefab_10.levelIndex = 17;
+
+		// levelIconPrefab_11 (prefab fields)
+		levelIconPrefab_11.levelIndex = 16;
+
+		// levelIconPrefab_12 (prefab fields)
+		levelIconPrefab_12.levelIndex = 15;
+
+		// levelIconPrefab_13 (prefab fields)
+		levelIconPrefab_13.levelIndex = 9;
+
+		// levelIconPrefab_14 (prefab fields)
+		levelIconPrefab_14.levelIndex = 14;
+
+		// levelIconPrefab_15 (prefab fields)
+		levelIconPrefab_15.levelIndex = 13;
+
+		// levelIconPrefab_16 (prefab fields)
+		levelIconPrefab_16.levelIndex = 12;
+
+		// levelIconPrefab_17 (prefab fields)
+		levelIconPrefab_17.levelIndex = 11;
+
+		// levelIconPrefab_18 (prefab fields)
+		levelIconPrefab_18.levelIndex = 19;
+
+		// levelIconPrefab_19 (prefab fields)
+		levelIconPrefab_19.levelIndex = 26;
+
+		// levelIconPrefab_20 (prefab fields)
+		levelIconPrefab_20.levelIndex = 25;
+
+		// levelIconPrefab_21 (prefab fields)
+		levelIconPrefab_21.levelIndex = 24;
+
+		// levelIconPrefab_22 (prefab fields)
+		levelIconPrefab_22.levelIndex = 18;
+
+		// levelIconPrefab_23 (prefab fields)
+		levelIconPrefab_23.levelIndex = 23;
+
+		// levelIconPrefab_24 (prefab fields)
+		levelIconPrefab_24.levelIndex = 22;
+
+		// levelIconPrefab_25 (prefab fields)
+		levelIconPrefab_25.levelIndex = 21;
+
+		// levelIconPrefab_26 (prefab fields)
+		levelIconPrefab_26.levelIndex = 20;
+
+		this.highscoreWindowContainer = highscoreWindowContainer;
+		this.titleText_2 = titleText_2;
+		this.titleText_3 = titleText_3;
+		this.titleText_4 = titleText_4;
+		this.titleText_1 = titleText_1;
+		this.lockedWindowContainer = lockedWindowContainer;
+		this.titleText_22 = titleText_22;
+		this.titleText_32 = titleText_32;
+		this.titleText_42 = titleText_42;
+		this.titleText_12 = titleText_12;
 		this.levelSelectContainer = levelSelectContainer;
 		this.levelBack = levelBack;
 		this.levelText = levelText;
@@ -162,20 +489,48 @@ export default class LevelSelect extends Phaser.Scene {
 		this.upBack = upBack;
 		this.titleText = titleText;
 		this.levelInfoText = levelInfoText;
-		this.mainMenuContainer = mainMenuContainer;
-		this.arcadeBack = arcadeBack;
-		this.arcadeText = arcadeText;
-		this.levelSelectBack = levelSelectBack;
-		this.levelSelectText = levelSelectText;
-		this.highScoreText = highScoreText;
+		this.levelIconPrefab = levelIconPrefab;
+		this.levelIconPrefab_1 = levelIconPrefab_1;
+		this.levelIconPrefab_2 = levelIconPrefab_2;
+		this.levelIconPrefab_3 = levelIconPrefab_3;
+		this.levelIconPrefab_4 = levelIconPrefab_4;
+		this.levelIconPrefab_5 = levelIconPrefab_5;
+		this.levelIconPrefab_6 = levelIconPrefab_6;
+		this.levelIconPrefab_7 = levelIconPrefab_7;
+		this.levelIconPrefab_8 = levelIconPrefab_8;
+		this.levelIconPrefab_9 = levelIconPrefab_9;
+		this.levelIconPrefab_10 = levelIconPrefab_10;
+		this.levelIconPrefab_11 = levelIconPrefab_11;
+		this.levelIconPrefab_12 = levelIconPrefab_12;
+		this.levelIconPrefab_13 = levelIconPrefab_13;
+		this.levelIconPrefab_14 = levelIconPrefab_14;
+		this.levelIconPrefab_15 = levelIconPrefab_15;
+		this.levelIconPrefab_16 = levelIconPrefab_16;
+		this.levelIconPrefab_17 = levelIconPrefab_17;
+		this.levelIconPrefab_18 = levelIconPrefab_18;
+		this.levelIconPrefab_19 = levelIconPrefab_19;
+		this.levelIconPrefab_20 = levelIconPrefab_20;
+		this.levelIconPrefab_21 = levelIconPrefab_21;
+		this.levelIconPrefab_22 = levelIconPrefab_22;
+		this.levelIconPrefab_23 = levelIconPrefab_23;
+		this.levelIconPrefab_24 = levelIconPrefab_24;
+		this.levelIconPrefab_25 = levelIconPrefab_25;
+		this.levelIconPrefab_26 = levelIconPrefab_26;
 		this.levelBackList = levelBackList;
 
 		this.events.emit("scene-awake");
 	}
 
-	private back!: Phaser.GameObjects.Rectangle;
-	private mainLayer!: Phaser.GameObjects.Layer;
-	private uiLayer!: Phaser.GameObjects.Layer;
+	private highscoreWindowContainer!: Phaser.GameObjects.Container;
+	private titleText_2!: Phaser.GameObjects.BitmapText;
+	private titleText_3!: Phaser.GameObjects.BitmapText;
+	private titleText_4!: Phaser.GameObjects.BitmapText;
+	private titleText_1!: Phaser.GameObjects.BitmapText;
+	private lockedWindowContainer!: Phaser.GameObjects.Container;
+	private titleText_22!: Phaser.GameObjects.BitmapText;
+	private titleText_32!: Phaser.GameObjects.BitmapText;
+	private titleText_42!: Phaser.GameObjects.BitmapText;
+	private titleText_12!: Phaser.GameObjects.BitmapText;
 	private levelSelectContainer!: Phaser.GameObjects.Container;
 	private levelBack!: Phaser.GameObjects.Rectangle;
 	private levelText!: Phaser.GameObjects.BitmapText;
@@ -183,15 +538,38 @@ export default class LevelSelect extends Phaser.Scene {
 	private upBack!: Phaser.GameObjects.Rectangle;
 	private titleText!: Phaser.GameObjects.BitmapText;
 	private levelInfoText!: Phaser.GameObjects.BitmapText;
-	private mainMenuContainer!: Phaser.GameObjects.Container;
-	private arcadeBack!: Phaser.GameObjects.Rectangle;
-	private arcadeText!: Phaser.GameObjects.BitmapText;
-	private levelSelectBack!: Phaser.GameObjects.Rectangle;
-	private levelSelectText!: Phaser.GameObjects.BitmapText;
-	private highScoreText!: Phaser.GameObjects.BitmapText;
+	private levelIconPrefab!: LevelIconPrefab;
+	private levelIconPrefab_1!: LevelIconPrefab;
+	private levelIconPrefab_2!: LevelIconPrefab;
+	private levelIconPrefab_3!: LevelIconPrefab;
+	private levelIconPrefab_4!: LevelIconPrefab;
+	private levelIconPrefab_5!: LevelIconPrefab;
+	private levelIconPrefab_6!: LevelIconPrefab;
+	private levelIconPrefab_7!: LevelIconPrefab;
+	private levelIconPrefab_8!: LevelIconPrefab;
+	private levelIconPrefab_9!: LevelIconPrefab;
+	private levelIconPrefab_10!: LevelIconPrefab;
+	private levelIconPrefab_11!: LevelIconPrefab;
+	private levelIconPrefab_12!: LevelIconPrefab;
+	private levelIconPrefab_13!: LevelIconPrefab;
+	private levelIconPrefab_14!: LevelIconPrefab;
+	private levelIconPrefab_15!: LevelIconPrefab;
+	private levelIconPrefab_16!: LevelIconPrefab;
+	private levelIconPrefab_17!: LevelIconPrefab;
+	private levelIconPrefab_18!: LevelIconPrefab;
+	private levelIconPrefab_19!: LevelIconPrefab;
+	private levelIconPrefab_20!: LevelIconPrefab;
+	private levelIconPrefab_21!: LevelIconPrefab;
+	private levelIconPrefab_22!: LevelIconPrefab;
+	private levelIconPrefab_23!: LevelIconPrefab;
+	private levelIconPrefab_24!: LevelIconPrefab;
+	private levelIconPrefab_25!: LevelIconPrefab;
+	private levelIconPrefab_26!: LevelIconPrefab;
 	private levelBackList!: Phaser.GameObjects.Rectangle[];
 
 	/* START-USER-CODE */
+
+	private levelPreviewImage: Phaser.GameObjects.Image;
 
 	private UICam!: Phaser.Cameras.Scene2D.BaseCamera | any;
 
@@ -200,7 +578,7 @@ export default class LevelSelect extends Phaser.Scene {
 		'jump', 'flap', 'punch',
 		'airborne', 'dive', 'dive-practice',
 		'uppercut', 'charge', 'tutorial-finale', 
-		
+
 		'bomb-intro', 'bomb-holder', 'bomb-punch', 
 		'combo', 'mine-intro', 'mine-wall',
 		'multi-move', 'gun-intro', 'bullet-ceiling',
@@ -208,15 +586,21 @@ export default class LevelSelect extends Phaser.Scene {
 		'grenade',
 		'parasol', 'umbrella-trap',
 		'pogo-intro', 'pogo-ideas', 'pogo-challenge', 
-		'finale'
+		'finale',
 		];
 
 	private gamepad:Phaser.Input.Gamepad.Gamepad | undefined;
 	private SelectKey!: Phaser.Input.Keyboard.Key;
 	private StartKey!: Phaser.Input.Keyboard.Key;
 
+	private levelIcons!: Array<LevelIconPrefab>;
+
+	/** True during post-level sequence. Don't set directly. */
+	private lockInput = false;
+
 // selected level
-	private selectedLevel = 0;
+	/**`-1`: none selected */
+	private selectedLevel = -1;
 
 	/** used to only call functionality on down */
 	private gamepadSelectorDown = false;
@@ -226,13 +610,8 @@ export default class LevelSelect extends Phaser.Scene {
 		this.editorCreate();
 		this.createCameras();
 
-	// show level select in DEV
-		// if (__DEV__)
-		// {
-			this.registry.set('game-mode', 'level');
-			this.mainMenuContainer.setVisible(false);
-			this.levelSelectContainer.setVisible(true);
-		// }
+		// this.levelPreviewImage = this.add.image(this.titleText.x, this.titleText.y, `preview-${LevelSelect.levelsKey[this.selectedLevel]}`);
+
 
 	// top score
 	if (!this.registry.get('top-score'))
@@ -363,6 +742,137 @@ export default class LevelSelect extends Phaser.Scene {
 			cloudSaves.loadData(this);
 			// this would be better with a status ready callback
 		});
+
+		// prefab setup
+		this.levelIcons = new Array<LevelIconPrefab>();
+		this.levelIcons.push(this.levelIconPrefab);
+		this.levelIcons.push(this.levelIconPrefab_1);
+		this.levelIcons.push(this.levelIconPrefab_2);
+		this.levelIcons.push(this.levelIconPrefab_3);
+		this.levelIcons.push(this.levelIconPrefab_4);
+		this.levelIcons.push(this.levelIconPrefab_5);
+		this.levelIcons.push(this.levelIconPrefab_6);
+		this.levelIcons.push(this.levelIconPrefab_7);
+		this.levelIcons.push(this.levelIconPrefab_8);
+		this.levelIcons.push(this.levelIconPrefab_13);
+		this.levelIcons.push(this.levelIconPrefab_9);
+		this.levelIcons.push(this.levelIconPrefab_17);
+		this.levelIcons.push(this.levelIconPrefab_16);
+		this.levelIcons.push(this.levelIconPrefab_15);
+		this.levelIcons.push(this.levelIconPrefab_14);
+		this.levelIcons.push(this.levelIconPrefab_12);
+		this.levelIcons.push(this.levelIconPrefab_11);
+		this.levelIcons.push(this.levelIconPrefab_10);
+		this.levelIcons.push(this.levelIconPrefab_22);
+		this.levelIcons.push(this.levelIconPrefab_18);
+		this.levelIcons.push(this.levelIconPrefab_26);
+		this.levelIcons.push(this.levelIconPrefab_25);
+		this.levelIcons.push(this.levelIconPrefab_24);
+		this.levelIcons.push(this.levelIconPrefab_23);
+		this.levelIcons.push(this.levelIconPrefab_21);
+		this.levelIcons.push(this.levelIconPrefab_20);
+		this.levelIcons.push(this.levelIconPrefab_19);
+		LevelSelect.levelsKey.forEach((value, index) =>
+		{
+			if (index === this.selectedLevel)
+			{
+				return;
+			}
+
+			const award = getEarnedAward(value, this.registry.get(`top-score: ${value}`));
+			if (award === 'bronze')
+			{
+				this.levelIcons[index].setIcon('bronze');
+			}
+			else if (award === 'silver')
+			{
+				this.levelIcons[index].setIcon('silver');
+			}
+			else if (award === 'gold')
+			{
+				this.levelIcons[index].setIcon('gold');
+			}
+			else 
+			{
+				this.levelIcons[index].setIcon('played');
+			}
+		});
+
+		this.levelIcons.forEach((value, index) =>
+		{
+			value.setSize(35, 45);
+			value.setInteractive();
+			value.on('pointerdown', () =>
+			{
+				if (this.lockInput)
+				{
+					console.debug('returned; `lockInput` is true');
+					return;
+				}
+
+				if (this.selectedLevel === index)
+				{
+					this.loadLevel();
+				}
+				else
+				{
+					this.selectedLevel = index;
+					this.setHighlightedLevel(index);
+				}
+			});
+		});
+
+		if (this.selectedLevel > -1)
+		{
+			this.setHighlightedLevel(this.selectedLevel);
+
+
+			this.time.delayedCall(1000, () =>
+			{
+				const award = getEarnedAward(LevelSelect.levelsKey[this.selectedLevel], this.registry.get(`top-score: ${LevelSelect.levelsKey[this.selectedLevel]}`));
+				if (award === 'bronze')
+				{
+					this.levelIcons[this.selectedLevel].setIcon('bronze');
+				}
+				else if (award === 'silver')
+				{
+					this.levelIcons[this.selectedLevel].setIcon('silver');
+				}
+				else if (award === 'gold')
+				{
+					this.levelIcons[this.selectedLevel].setIcon('gold');
+				}
+				else 
+				{
+					this.levelIcons[this.selectedLevel].setIcon('played');
+				}
+
+				this.levelIcons[this.selectedLevel].runAchieveTween();
+			});
+
+			this.time.delayedCall(1500, () =>
+			{
+				this.lockInput = false;
+			});
+		}
+
+
+	}
+
+	setHighlightedLevel(levelIndex: number)
+	{
+		this.levelIcons.forEach((value, iconIndex) =>
+		{
+			if (iconIndex === levelIndex)
+			{
+				value.setHighlight(true);
+				// value.runAchieveTween();
+			}
+			else
+			{
+				value.setHighlight(false);
+			}
+		});
 	}
 
 	update(time: number, delta: number): void
@@ -413,7 +923,8 @@ export default class LevelSelect extends Phaser.Scene {
 
 	// update text
 		this.levelText.setText('Level ' + (this.selectedLevel + 1) 
-			+ (__DEV__ ? `- ${LevelSelect.levelsKey[this.selectedLevel]}` : ''));
+			// + (__DEV__ ? `- ${LevelSelect.levelsKey[this.selectedLevel]}` : ''));
+			+ (true ? `- ${LevelSelect.levelsKey[this.selectedLevel]}` : ''));
 
 		let score = this.game.registry.get
 		(
@@ -460,6 +971,9 @@ export default class LevelSelect extends Phaser.Scene {
 				`Best: ${score}\n
 				Award: ${awardString}`
 		);
+
+		// preview
+		// this.levelPreviewImage.setTexture(`preview-${LevelSelect.levelsKey[this.selectedLevel]}`)
 	}
 
 	loadLevel()
@@ -471,6 +985,14 @@ export default class LevelSelect extends Phaser.Scene {
 		// {
 		// 	return;
 		// }
+
+		if (this.selectedLevel === -1)
+		{
+			console.debug('returned; no level selected');
+			return;
+		}
+
+		this.registry.set('last-scene', this.scene.key);
 
 		this.registry.set('current-level', LevelSelect.levelsKey[this.selectedLevel]);
 		this.registry.set('current-level-index', this.selectedLevel)
@@ -488,6 +1010,8 @@ export default class LevelSelect extends Phaser.Scene {
 	{
 		CameraUtil.configureMainCamera(this);
 		this.cameras.main.setBackgroundColor();
+		this.cameras.main.setOrigin(0, 0);
+		this.cameras.main.setBackgroundColor(0x808080);
 		// this.cameras.main.ignore(this.uiLayer.getChildren());
 
 		// this.UICam = CameraUtil.createUICamera(this);

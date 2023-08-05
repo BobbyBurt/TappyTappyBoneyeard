@@ -17,7 +17,7 @@ export default class CameraUtil {
         
         scene.cameras.main.setName('main');
 		scene.cameras.main.setZoom(zoom);
-        scene.cameras.main.fadeIn(200, 255, 255, 255);
+        // scene.cameras.main.fadeIn(200, 255, 255, 255);
 
         return scene.cameras.main;
     }

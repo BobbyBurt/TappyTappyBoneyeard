@@ -8,7 +8,7 @@ export default class SoundManager {
 // music tracks
 	private static tracksKey = ['tutorial', 'main-game', 'tutorial']
 		// TODO: Replace this with 3rd track key
-	private static tracksFirstLevel = [0, 10, 25]
+	private static tracksFirstLevel = [0, 9, 19]
 	private static tracksVolume = [.7, .7, .7]
 
 // sounds
@@ -20,6 +20,7 @@ export default class SoundManager {
 		['bird-die', 1],
 		['enemy-death', 1],
 		['explosion', .7],
+		['fall', .8],
 		['punch-swing', 1]
 	]);
 
@@ -33,6 +34,7 @@ export default class SoundManager {
 	public static setLevelMusic
 		(musicBS: Phaser.Sound.BaseSound, levelIndex: number, levelScene: Level): Phaser.Sound.BaseSound
 	{
+
 	// Which track
 		let trackToPlayKey = this.tracksKey[0];
 		if (levelIndex >= this.tracksFirstLevel[1] && levelIndex < this.tracksFirstLevel[2])

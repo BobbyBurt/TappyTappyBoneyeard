@@ -233,6 +233,12 @@ export default class medalScene extends Phaser.Scene {
 			return;
 		}
 
+		if (!NGIO.hasUser)
+		{
+			console.debug("medal unlock ignored because NGIO has no user");
+			return;
+		}
+
 		console.debug(`call to unlock medal: ${medal.name}`);
 
 		if (!__DEV__)

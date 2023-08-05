@@ -87,28 +87,6 @@ export default class LevelUI extends Phaser.Scene {
 		inputHint.visible = false;
 		tutorialOffsetContainer.add(inputHint);
 
-		// comboLabelText
-		const comboLabelText = this.add.bitmapText(1163.6669311523438, 736.8461456298828, "nokia", "COMBO!");
-		comboLabelText.angle = -10;
-		comboLabelText.setOrigin(0, 0.5);
-		comboLabelText.visible = false;
-		comboLabelText.text = "COMBO!";
-		comboLabelText.fontSize = -16;
-		comboLabelText.dropShadowX = 100;
-		comboLabelText.dropShadowAlpha = 1;
-		comboLabelText.dropShadowColor = 714549;
-
-		// comboText
-		const comboText = this.add.bitmapText(1184.6669311523438, 755.8461494445801, "nokia", "3");
-		comboText.angle = -10;
-		comboText.setOrigin(0, 0.5);
-		comboText.visible = false;
-		comboText.text = "3";
-		comboText.fontSize = -36;
-		comboText.dropShadowX = 100;
-		comboText.dropShadowAlpha = 1;
-		comboText.dropShadowColor = 714549;
-
 		// enemiesText
 		const enemiesText = this.add.bitmapText(957, 756.12646484375, "nokia", "5/6");
 		enemiesText.setOrigin(1, 0.5);
@@ -168,37 +146,74 @@ export default class LevelUI extends Phaser.Scene {
 		buildText.fontSize = -8;
 		buildText.dropShadowY = -100;
 
-		// mobileButtonDive
-		const mobileButtonDive = this.add.rectangle(746, 1082, 150, 120);
-		mobileButtonDive.setOrigin(1, 1);
-		mobileButtonDive.alpha = 0.3;
-		mobileButtonDive.isFilled = true;
-		mobileButtonDive.fillColor = 8168429;
-
 		// mobileButtonPunch
-		const mobileButtonPunch = this.add.rectangle(337.44939143097434, 1081.0118990523656, 150, 120);
-		mobileButtonPunch.setOrigin(0, 1);
-		mobileButtonPunch.alpha = 0.5;
-		mobileButtonPunch.isFilled = true;
-		mobileButtonPunch.fillColor = 15563900;
-
-		// mobileButtonUppercut
-		const mobileButtonUppercut = this.add.rectangle(359, 967, 150, 120);
-		mobileButtonUppercut.setOrigin(0, 1);
-		mobileButtonUppercut.alpha = 0.5;
-		mobileButtonUppercut.isFilled = true;
-		mobileButtonUppercut.fillColor = 16051043;
+		const mobileButtonPunch = this.add.image(746, 1082, "soldier-blood-2");
+		mobileButtonPunch.scaleX = 75;
+		mobileButtonPunch.scaleY = 135;
+		mobileButtonPunch.setOrigin(1, 1);
+		mobileButtonPunch.alpha = 0.01;
+		mobileButtonPunch.alphaTopLeft = 0.01;
+		mobileButtonPunch.alphaTopRight = 0.01;
+		mobileButtonPunch.alphaBottomLeft = 0.01;
+		mobileButtonPunch.alphaBottomRight = 0.01;
+		mobileButtonPunch.tintFill = true;
+		mobileButtonPunch.tintTopLeft = 5675510;
+		mobileButtonPunch.tintTopRight = 5675510;
+		mobileButtonPunch.tintBottomLeft = 5675510;
+		mobileButtonPunch.tintBottomRight = 5675510;
 
 		// mobileButtonJump
-		const mobileButtonJump = this.add.rectangle(743.4493914309744, 950.0118990523655, 150, 120);
-		mobileButtonJump.setOrigin(1, 1);
-		mobileButtonJump.alpha = 0.5;
-		mobileButtonJump.isFilled = true;
-		mobileButtonJump.fillColor = 8845444;
+		const mobileButtonJump = this.add.image(337.44940185546875, 1081.0118408203125, "soldier-blood-2");
+		mobileButtonJump.scaleX = 75;
+		mobileButtonJump.scaleY = 60;
+		mobileButtonJump.setOrigin(0, 1);
+		mobileButtonJump.alpha = 0.01;
+		mobileButtonJump.alphaTopLeft = 0.01;
+		mobileButtonJump.alphaTopRight = 0.01;
+		mobileButtonJump.alphaBottomLeft = 0.01;
+		mobileButtonJump.alphaBottomRight = 0.01;
+		mobileButtonJump.tintFill = true;
+		mobileButtonJump.tintTopLeft = 5675510;
+		mobileButtonJump.tintTopRight = 5675510;
+		mobileButtonJump.tintBottomLeft = 5675510;
+		mobileButtonJump.tintBottomRight = 5675510;
+
+		// mobileButtonUppercut
+		const mobileButtonUppercut = this.add.image(509, 967, "soldier-blood-2");
+		mobileButtonUppercut.scaleX = 75;
+		mobileButtonUppercut.scaleY = 75;
+		mobileButtonUppercut.setOrigin(1, 1);
+		mobileButtonUppercut.visible = false;
+		mobileButtonUppercut.alpha = 0.01;
+		mobileButtonUppercut.alphaTopLeft = 0.01;
+		mobileButtonUppercut.alphaTopRight = 0.01;
+		mobileButtonUppercut.alphaBottomLeft = 0.01;
+		mobileButtonUppercut.alphaBottomRight = 0.01;
+		mobileButtonUppercut.tintFill = true;
+		mobileButtonUppercut.tintTopLeft = 5675510;
+		mobileButtonUppercut.tintTopRight = 5675510;
+		mobileButtonUppercut.tintBottomLeft = 5675510;
+		mobileButtonUppercut.tintBottomRight = 5675510;
+
+		// mobileButtonDive
+		const mobileButtonDive = this.add.image(593.4494018554688, 950.0119018554688, "soldier-blood-2");
+		mobileButtonDive.scaleX = 75;
+		mobileButtonDive.scaleY = 75;
+		mobileButtonDive.setOrigin(0, 1);
+		mobileButtonDive.alpha = 0.01;
+		mobileButtonDive.alphaTopLeft = 0.01;
+		mobileButtonDive.alphaTopRight = 0.01;
+		mobileButtonDive.alphaBottomLeft = 0.01;
+		mobileButtonDive.alphaBottomRight = 0.01;
+		mobileButtonDive.tintFill = true;
+		mobileButtonDive.tintTopLeft = 5675510;
+		mobileButtonDive.tintTopRight = 5675510;
+		mobileButtonDive.tintBottomLeft = 5675510;
+		mobileButtonDive.tintBottomRight = 5675510;
 
 		// mobileButtonLevelSelect
-		const mobileButtonLevelSelect = this.add.rectangle(745.9039965335135, 635.8854342086155, 75, 75);
-		mobileButtonLevelSelect.setOrigin(1, 0);
+		const mobileButtonLevelSelect = this.add.rectangle(670.9039916992188, 635.8854370117188, 75, 75);
+		mobileButtonLevelSelect.setOrigin(0, 0);
 		mobileButtonLevelSelect.alpha = 0.5;
 		mobileButtonLevelSelect.isFilled = true;
 		mobileButtonLevelSelect.fillColor = 13532397;
@@ -348,17 +363,8 @@ export default class LevelUI extends Phaser.Scene {
 		newHighscoreText.dropShadowColor = 714549;
 		summaryContainer.add(newHighscoreText);
 
-		// scoreText
-		const scoreText = this.add.bitmapText(474.2378845214844, 742.5822143554688, "nokia", "999999");
-		scoreText.tintTopLeft = 0;
-		scoreText.tintTopRight = 0;
-		scoreText.tintBottomLeft = 0;
-		scoreText.tintBottomRight = 0;
-		scoreText.text = "999999";
-		scoreText.fontSize = -16;
-
 		// totalScoreText
-		const totalScoreText = this.add.bitmapText(485, 767, "nokia", "999999");
+		const totalScoreText = this.add.bitmapText(651, 810, "nokia", "999999");
 		totalScoreText.tintTopLeft = 3223857;
 		totalScoreText.tintTopRight = 3223857;
 		totalScoreText.tintBottomLeft = 3223857;
@@ -464,6 +470,170 @@ export default class LevelUI extends Phaser.Scene {
 		parallax_Backing.tintBottomLeft = 18942;
 		parallax_Backing.tintBottomRight = 18942;
 
+		// gameOverContainer
+		const gameOverContainer = this.add.container(0, 0);
+		gameOverContainer.visible = false;
+
+		// gameOverText
+		const gameOverText = this.add.bitmapText(419.85675048828125, 496.0970153808594, "nokia", "Tapped out!");
+		gameOverText.tintFill = true;
+		gameOverText.tintTopLeft = 5388102;
+		gameOverText.tintTopRight = 5388102;
+		gameOverText.tintBottomLeft = 5388102;
+		gameOverText.tintBottomRight = 5388102;
+		gameOverText.text = "Tapped out!";
+		gameOverText.fontSize = -32;
+		gameOverText.dropShadowColor = 3487029;
+		gameOverContainer.add(gameOverText);
+
+		// gameOverInstructionText
+		const gameOverInstructionText = this.add.bitmapText(135.4416046142578, 393.039794921875, "nokia", "X key to retry\nSpace bar to return to menu");
+		gameOverInstructionText.setOrigin(0, 1);
+		gameOverInstructionText.tintFill = true;
+		gameOverInstructionText.tintTopLeft = 5388102;
+		gameOverInstructionText.tintTopRight = 5388102;
+		gameOverInstructionText.tintBottomLeft = 5388102;
+		gameOverInstructionText.tintBottomRight = 5388102;
+		gameOverInstructionText.text = "X key to retry\nSpace bar to return to menu";
+		gameOverInstructionText.fontSize = -12;
+		gameOverInstructionText.dropShadowColor = 3487029;
+		gameOverContainer.add(gameOverInstructionText);
+
+		// mobileBackButton
+		const mobileBackButton = this.add.rectangle(325, 300, 128, 50);
+		mobileBackButton.isFilled = true;
+		mobileBackButton.fillColor = 16765919;
+		mobileBackButton.fillAlpha = 0.7;
+		mobileBackButton.isStroked = true;
+		mobileBackButton.strokeColor = 3158064;
+		mobileBackButton.lineWidth = 3;
+		gameOverContainer.add(mobileBackButton);
+
+		// mobileBackText
+		const mobileBackText = this.add.bitmapText(312, 303, "nokia", "return to\nlevel select");
+		mobileBackText.setOrigin(0.5, 0.5);
+		mobileBackText.tintFill = true;
+		mobileBackText.tintTopLeft = 5388102;
+		mobileBackText.tintTopRight = 5388102;
+		mobileBackText.tintBottomLeft = 5388102;
+		mobileBackText.tintBottomRight = 5388102;
+		mobileBackText.text = "return to\nlevel select";
+		mobileBackText.fontSize = -12;
+		mobileBackText.align = 1;
+		mobileBackText.dropShadowColor = 3487029;
+		gameOverContainer.add(mobileBackText);
+
+		// mobileRetryButton
+		const mobileRetryButton = this.add.rectangle(403, 360, 128, 75);
+		mobileRetryButton.isFilled = true;
+		mobileRetryButton.fillColor = 16765919;
+		mobileRetryButton.fillAlpha = 0.7;
+		mobileRetryButton.isStroked = true;
+		mobileRetryButton.strokeColor = 3158064;
+		mobileRetryButton.lineWidth = 3;
+		gameOverContainer.add(mobileRetryButton);
+
+		// mobileRetryText
+		const mobileRetryText = this.add.bitmapText(390, 363, "nokia", "retry");
+		mobileRetryText.setOrigin(0.5, 0.5);
+		mobileRetryText.tintFill = true;
+		mobileRetryText.tintTopLeft = 5388102;
+		mobileRetryText.tintTopRight = 5388102;
+		mobileRetryText.tintBottomLeft = 5388102;
+		mobileRetryText.tintBottomRight = 5388102;
+		mobileRetryText.text = "retry";
+		mobileRetryText.fontSize = -12;
+		mobileRetryText.align = 1;
+		mobileRetryText.dropShadowColor = 3487029;
+		gameOverContainer.add(mobileRetryText);
+
+		// transitionBG
+		const transitionBG = this.add.image(1028, 398, "load-bg");
+
+		// scoreContainer
+		const scoreContainer = this.add.container(0, 0);
+
+		// comboLabelText
+		const comboLabelText = this.add.bitmapText(0, 56, "nokia", "Combo");
+		comboLabelText.setOrigin(0, 0.5);
+		comboLabelText.tintTopLeft = 5675510;
+		comboLabelText.tintTopRight = 5675510;
+		comboLabelText.tintBottomLeft = 5675510;
+		comboLabelText.tintBottomRight = 5675510;
+		comboLabelText.text = "Combo";
+		comboLabelText.fontSize = -14;
+		comboLabelText.dropShadowAlpha = 1;
+		comboLabelText.dropShadowColor = 16777215;
+		scoreContainer.add(comboLabelText);
+
+		// airborneLabelText
+		const airborneLabelText = this.add.bitmapText(0, 42, "nokia", "Airborne");
+		airborneLabelText.setOrigin(0, 0.5);
+		airborneLabelText.tintTopLeft = 5675510;
+		airborneLabelText.tintTopRight = 5675510;
+		airborneLabelText.tintBottomLeft = 5675510;
+		airborneLabelText.tintBottomRight = 5675510;
+		airborneLabelText.text = "Airborne";
+		airborneLabelText.fontSize = -10;
+		airborneLabelText.dropShadowAlpha = 1;
+		airborneLabelText.dropShadowColor = 16777215;
+		scoreContainer.add(airborneLabelText);
+
+		// comboText
+		const comboText = this.add.bitmapText(61, 22, "nokia", "3");
+		comboText.tintTopLeft = 5675510;
+		comboText.tintTopRight = 5675510;
+		comboText.tintBottomLeft = 5675510;
+		comboText.tintBottomRight = 5675510;
+		comboText.text = "3";
+		comboText.fontSize = -40;
+		comboText.dropShadowAlpha = 1;
+		comboText.dropShadowColor = 16777215;
+		scoreContainer.add(comboText);
+
+		// scoreAdditionText
+		const scoreAdditionText = this.add.bitmapText(0, 24, "nokia", "+500");
+		scoreAdditionText.alpha = 0;
+		scoreAdditionText.alphaTopLeft = 0;
+		scoreAdditionText.alphaTopRight = 0;
+		scoreAdditionText.alphaBottomLeft = 0;
+		scoreAdditionText.alphaBottomRight = 0;
+		scoreAdditionText.tintFill = true;
+		scoreAdditionText.tintTopLeft = 5388102;
+		scoreAdditionText.tintTopRight = 5388102;
+		scoreAdditionText.tintBottomLeft = 5388102;
+		scoreAdditionText.tintBottomRight = 5388102;
+		scoreAdditionText.text = "+500";
+		scoreAdditionText.fontSize = -10;
+		scoreContainer.add(scoreAdditionText);
+
+		// scoreText
+		const scoreText = this.add.bitmapText(0, 0, "nokia", "999999");
+		scoreText.tintFill = true;
+		scoreText.tintTopLeft = 5388102;
+		scoreText.tintTopRight = 5388102;
+		scoreText.tintBottomLeft = 5388102;
+		scoreText.tintBottomRight = 5388102;
+		scoreText.text = "999999";
+		scoreText.fontSize = -20;
+		scoreContainer.add(scoreText);
+
+		// touchscreenDividerLeft
+		const touchscreenDividerLeft = this.add.image(531.1637573242188, 898.9600219726562, "soldier-blood-2");
+		touchscreenDividerLeft.scaleX = 3;
+		touchscreenDividerLeft.scaleY = 10;
+		touchscreenDividerLeft.setOrigin(0, 1);
+		touchscreenDividerLeft.alpha = 0.3;
+		touchscreenDividerLeft.alphaTopLeft = 0.3;
+		touchscreenDividerLeft.alphaTopRight = 0.3;
+		touchscreenDividerLeft.alphaBottomLeft = 0.3;
+		touchscreenDividerLeft.alphaBottomRight = 0.3;
+		touchscreenDividerLeft.tintFill = true;
+		touchscreenDividerLeft.tintTopLeft = 5675510;
+		touchscreenDividerLeft.tintTopRight = 5675510;
+		touchscreenDividerLeft.tintBottomLeft = 5675510;
+		touchscreenDividerLeft.tintBottomRight = 5675510;
+
 		// timerBox (components)
 		const timerBoxAlign = new Align(timerBox);
 		timerBoxAlign.up = true;
@@ -481,19 +651,6 @@ export default class LevelUI extends Phaser.Scene {
 		const tutorialContainerAlign = new Align(tutorialContainer);
 		tutorialContainerAlign.middle = true;
 		tutorialContainerAlign.center = true;
-
-		// comboLabelText (components)
-		const comboLabelTextAlign = new Align(comboLabelText);
-		comboLabelTextAlign.middle = true;
-		comboLabelTextAlign.left = true;
-		comboLabelTextAlign.horizontalOffset = -90;
-
-		// comboText (components)
-		const comboTextAlign = new Align(comboText);
-		comboTextAlign.middle = true;
-		comboTextAlign.left = true;
-		comboTextAlign.horizontalOffset = -85;
-		comboTextAlign.verticalOffset = -30;
 
 		// enemiesText (components)
 		const enemiesTextAlign = new Align(enemiesText);
@@ -543,20 +700,17 @@ export default class LevelUI extends Phaser.Scene {
 		buildTextAlign.horizontalOffset = 5;
 		buildTextAlign.verticalOffset = 95;
 
-		// mobileButtonDive (components)
-		const mobileButtonDiveAlign = new Align(mobileButtonDive);
-		mobileButtonDiveAlign.down = true;
-		mobileButtonDiveAlign.right = true;
-		new MobileDependent(mobileButtonDive);
-		const mobileButtonDiveMobileButton = new MobileButton(mobileButtonDive);
-		mobileButtonDiveMobileButton.input = "jump";
-
 		// mobileButtonPunch (components)
 		const mobileButtonPunchAlign = new Align(mobileButtonPunch);
 		mobileButtonPunchAlign.down = true;
-		mobileButtonPunchAlign.left = true;
+		mobileButtonPunchAlign.right = true;
 		new MobileDependent(mobileButtonPunch);
-		new MobileButton(mobileButtonPunch);
+
+		// mobileButtonJump (components)
+		const mobileButtonJumpAlign = new Align(mobileButtonJump);
+		mobileButtonJumpAlign.down = true;
+		mobileButtonJumpAlign.left = true;
+		new MobileDependent(mobileButtonJump);
 
 		// mobileButtonUppercut (components)
 		const mobileButtonUppercutAlign = new Align(mobileButtonUppercut);
@@ -564,15 +718,13 @@ export default class LevelUI extends Phaser.Scene {
 		mobileButtonUppercutAlign.left = true;
 		mobileButtonUppercutAlign.verticalOffset = -140;
 		new MobileDependent(mobileButtonUppercut);
-		new MobileButton(mobileButtonUppercut);
 
-		// mobileButtonJump (components)
-		const mobileButtonJumpAlign = new Align(mobileButtonJump);
-		mobileButtonJumpAlign.down = true;
-		mobileButtonJumpAlign.right = true;
-		mobileButtonJumpAlign.verticalOffset = -140;
-		new MobileDependent(mobileButtonJump);
-		new MobileButton(mobileButtonJump);
+		// mobileButtonDive (components)
+		const mobileButtonDiveAlign = new Align(mobileButtonDive);
+		mobileButtonDiveAlign.down = true;
+		mobileButtonDiveAlign.left = true;
+		mobileButtonDiveAlign.verticalOffset = -140;
+		new MobileDependent(mobileButtonDive);
 
 		// mobileButtonLevelSelect (components)
 		const mobileButtonLevelSelectAlign = new Align(mobileButtonLevelSelect);
@@ -585,15 +737,15 @@ export default class LevelUI extends Phaser.Scene {
 		const punchChargeEmptyAlign = new Align(punchChargeEmpty);
 		punchChargeEmptyAlign.up = true;
 		punchChargeEmptyAlign.right = true;
-		punchChargeEmptyAlign.horizontalOffset = -10;
-		punchChargeEmptyAlign.verticalOffset = 10;
+		punchChargeEmptyAlign.horizontalOffset = -15;
+		punchChargeEmptyAlign.verticalOffset = 15;
 
 		// punchChargeFull (components)
 		const punchChargeFullAlign = new Align(punchChargeFull);
 		punchChargeFullAlign.up = true;
 		punchChargeFullAlign.right = true;
-		punchChargeFullAlign.horizontalOffset = -10;
-		punchChargeFullAlign.verticalOffset = 10;
+		punchChargeFullAlign.horizontalOffset = -15;
+		punchChargeFullAlign.verticalOffset = 15;
 
 		// fullscreenTestButton (components)
 		const fullscreenTestButtonAlign = new Align(fullscreenTestButton);
@@ -605,13 +757,6 @@ export default class LevelUI extends Phaser.Scene {
 		const summaryContainerAlign = new Align(summaryContainer);
 		summaryContainerAlign.middle = true;
 		summaryContainerAlign.center = true;
-
-		// scoreText (components)
-		const scoreTextAlign = new Align(scoreText);
-		scoreTextAlign.up = true;
-		scoreTextAlign.left = true;
-		scoreTextAlign.horizontalOffset = 10;
-		scoreTextAlign.verticalOffset = 10;
 
 		// totalScoreText (components)
 		const totalScoreTextAlign = new Align(totalScoreText);
@@ -630,6 +775,70 @@ export default class LevelUI extends Phaser.Scene {
 		parallax_BackingAlign.middle = true;
 		parallax_BackingAlign.right = true;
 
+		// gameOverText (components)
+		const gameOverTextAlign = new Align(gameOverText);
+		gameOverTextAlign.up = true;
+		gameOverTextAlign.left = true;
+		gameOverTextAlign.horizontalOffset = 15;
+		gameOverTextAlign.verticalOffset = 15;
+
+		// gameOverInstructionText (components)
+		const gameOverInstructionTextAlign = new Align(gameOverInstructionText);
+		gameOverInstructionTextAlign.down = true;
+		gameOverInstructionTextAlign.left = true;
+		gameOverInstructionTextAlign.horizontalOffset = 15;
+		gameOverInstructionTextAlign.verticalOffset = -15;
+		const gameOverInstructionTextMobileDependent = new MobileDependent(gameOverInstructionText);
+		gameOverInstructionTextMobileDependent.activeIfMobile = false;
+		gameOverInstructionTextMobileDependent.visibleIfMobile = false;
+
+		// mobileBackButton (components)
+		const mobileBackButtonAlign = new Align(mobileBackButton);
+		mobileBackButtonAlign.up = true;
+		mobileBackButtonAlign.center = true;
+		mobileBackButtonAlign.verticalOffset = 40;
+		new MobileDependent(mobileBackButton);
+
+		// mobileBackText (components)
+		const mobileBackTextAlign = new Align(mobileBackText);
+		mobileBackTextAlign.up = true;
+		mobileBackTextAlign.center = true;
+		mobileBackTextAlign.verticalOffset = 40;
+		new MobileDependent(mobileBackText);
+
+		// mobileRetryButton (components)
+		const mobileRetryButtonAlign = new Align(mobileRetryButton);
+		mobileRetryButtonAlign.down = true;
+		mobileRetryButtonAlign.center = true;
+		mobileRetryButtonAlign.verticalOffset = -50;
+		new MobileDependent(mobileRetryButton);
+
+		// mobileRetryText (components)
+		const mobileRetryTextAlign = new Align(mobileRetryText);
+		mobileRetryTextAlign.down = true;
+		mobileRetryTextAlign.center = true;
+		mobileRetryTextAlign.verticalOffset = -50;
+		new MobileDependent(mobileRetryText);
+
+		// transitionBG (components)
+		const transitionBGAlign = new Align(transitionBG);
+		transitionBGAlign.middle = true;
+		transitionBGAlign.center = true;
+
+		// scoreContainer (components)
+		const scoreContainerAlign = new Align(scoreContainer);
+		scoreContainerAlign.up = true;
+		scoreContainerAlign.left = true;
+		scoreContainerAlign.horizontalOffset = 15;
+		scoreContainerAlign.verticalOffset = 15;
+
+		// touchscreenDividerLeft (components)
+		const touchscreenDividerLeftAlign = new Align(touchscreenDividerLeft);
+		touchscreenDividerLeftAlign.down = true;
+		touchscreenDividerLeftAlign.left = true;
+		touchscreenDividerLeftAlign.verticalOffset = -120;
+		new MobileDependent(touchscreenDividerLeft);
+
 		this.timerText = timerText;
 		this.tutorialContainer = tutorialContainer;
 		this.tutorialOffsetContainer = tutorialOffsetContainer;
@@ -637,8 +846,6 @@ export default class LevelUI extends Phaser.Scene {
 		this.tutorialText = tutorialText;
 		this.tutorialCloseText = tutorialCloseText;
 		this.inputHint = inputHint;
-		this.comboLabelText = comboLabelText;
-		this.comboText = comboText;
 		this.enemiesText = enemiesText;
 		this.enemiesLabelText = enemiesLabelText;
 		this.winText = winText;
@@ -646,10 +853,10 @@ export default class LevelUI extends Phaser.Scene {
 		this.debugText2 = debugText2;
 		this.debugText = debugText;
 		this.buildText = buildText;
-		this.mobileButtonDive = mobileButtonDive;
 		this.mobileButtonPunch = mobileButtonPunch;
-		this.mobileButtonUppercut = mobileButtonUppercut;
 		this.mobileButtonJump = mobileButtonJump;
+		this.mobileButtonUppercut = mobileButtonUppercut;
+		this.mobileButtonDive = mobileButtonDive;
 		this.mobileButtonLevelSelect = mobileButtonLevelSelect;
 		this.punchChargeEmpty = punchChargeEmpty;
 		this.punchChargeFull = punchChargeFull;
@@ -672,7 +879,6 @@ export default class LevelUI extends Phaser.Scene {
 		this.awardLabel = awardLabel;
 		this.award = award;
 		this.newHighscoreText = newHighscoreText;
-		this.scoreText = scoreText;
 		this.totalScoreText = totalScoreText;
 		this.arcadeSummaryContainer = arcadeSummaryContainer;
 		this.arcadeScoreLabel = arcadeScoreLabel;
@@ -684,6 +890,19 @@ export default class LevelUI extends Phaser.Scene {
 		this.enemiesKilledText = enemiesKilledText;
 		this.arcadeSummaryHeader = arcadeSummaryHeader;
 		this.arcadeTotalScore = arcadeTotalScore;
+		this.gameOverContainer = gameOverContainer;
+		this.gameOverText = gameOverText;
+		this.gameOverInstructionText = gameOverInstructionText;
+		this.mobileBackButton = mobileBackButton;
+		this.mobileBackText = mobileBackText;
+		this.mobileRetryButton = mobileRetryButton;
+		this.mobileRetryText = mobileRetryText;
+		this.transitionBG = transitionBG;
+		this.comboLabelText = comboLabelText;
+		this.airborneLabelText = airborneLabelText;
+		this.comboText = comboText;
+		this.scoreAdditionText = scoreAdditionText;
+		this.scoreText = scoreText;
 
 		this.events.emit("scene-awake");
 	}
@@ -695,8 +914,6 @@ export default class LevelUI extends Phaser.Scene {
 	public tutorialText!: Phaser.GameObjects.BitmapText;
 	public tutorialCloseText!: Phaser.GameObjects.BitmapText;
 	private inputHint!: Phaser.GameObjects.Image;
-	public comboLabelText!: Phaser.GameObjects.BitmapText;
-	public comboText!: Phaser.GameObjects.BitmapText;
 	public enemiesText!: Phaser.GameObjects.BitmapText;
 	public enemiesLabelText!: Phaser.GameObjects.BitmapText;
 	public winText!: Phaser.GameObjects.BitmapText;
@@ -704,10 +921,10 @@ export default class LevelUI extends Phaser.Scene {
 	public debugText2!: Phaser.GameObjects.BitmapText;
 	public debugText!: Phaser.GameObjects.BitmapText;
 	public buildText!: Phaser.GameObjects.BitmapText;
-	public mobileButtonDive!: Phaser.GameObjects.Rectangle;
-	public mobileButtonPunch!: Phaser.GameObjects.Rectangle;
-	public mobileButtonUppercut!: Phaser.GameObjects.Rectangle;
-	public mobileButtonJump!: Phaser.GameObjects.Rectangle;
+	public mobileButtonPunch!: Phaser.GameObjects.Image;
+	public mobileButtonJump!: Phaser.GameObjects.Image;
+	public mobileButtonUppercut!: Phaser.GameObjects.Image;
+	public mobileButtonDive!: Phaser.GameObjects.Image;
 	public mobileButtonLevelSelect!: Phaser.GameObjects.Rectangle;
 	private punchChargeEmpty!: Phaser.GameObjects.Image;
 	private punchChargeFull!: Phaser.GameObjects.Image;
@@ -730,7 +947,6 @@ export default class LevelUI extends Phaser.Scene {
 	private awardLabel!: Phaser.GameObjects.BitmapText;
 	private award!: Phaser.GameObjects.BitmapText;
 	private newHighscoreText!: Phaser.GameObjects.BitmapText;
-	private scoreText!: Phaser.GameObjects.BitmapText;
 	private totalScoreText!: Phaser.GameObjects.BitmapText;
 	private arcadeSummaryContainer!: Phaser.GameObjects.Container;
 	private arcadeScoreLabel!: Phaser.GameObjects.BitmapText;
@@ -742,6 +958,19 @@ export default class LevelUI extends Phaser.Scene {
 	private enemiesKilledText!: Phaser.GameObjects.BitmapText;
 	private arcadeSummaryHeader!: Phaser.GameObjects.BitmapText;
 	private arcadeTotalScore!: Phaser.GameObjects.BitmapText;
+	public gameOverContainer!: Phaser.GameObjects.Container;
+	private gameOverText!: Phaser.GameObjects.BitmapText;
+	private gameOverInstructionText!: Phaser.GameObjects.BitmapText;
+	private mobileBackButton!: Phaser.GameObjects.Rectangle;
+	private mobileBackText!: Phaser.GameObjects.BitmapText;
+	private mobileRetryButton!: Phaser.GameObjects.Rectangle;
+	private mobileRetryText!: Phaser.GameObjects.BitmapText;
+	private transitionBG!: Phaser.GameObjects.Image;
+	public comboLabelText!: Phaser.GameObjects.BitmapText;
+	public airborneLabelText!: Phaser.GameObjects.BitmapText;
+	public comboText!: Phaser.GameObjects.BitmapText;
+	private scoreAdditionText!: Phaser.GameObjects.BitmapText;
+	public scoreText!: Phaser.GameObjects.BitmapText;
 
 	/* START-USER-CODE */
 
@@ -751,6 +980,9 @@ export default class LevelUI extends Phaser.Scene {
 	private punchChargeTween: Phaser.Tweens.Tween;
 	private punchChargeTween2: Phaser.Tweens.Tween;
 	private scoreTextTween: Phaser.Tweens.Tween;
+	private scoreAddPopTween: Phaser.Tweens.Tween;
+	private scoreAddFadeTween: Phaser.Tweens.Tween;
+	private comboFadeOutTween: Phaser.Tweens.Tween;
 
 // tutorial
 	public tutorialVisible = false;
@@ -775,10 +1007,17 @@ export default class LevelUI extends Phaser.Scene {
 		this.summaryVisible = false;
 
 		this.buildText.setText('Tappy Tappy Boneyard v' + this.game.config.gameVersion);
+		if (!__DEV__)
+			this.buildText.setVisible(false);
 
 		this.timerText.setText('30:00');
 
 		this.scoreText.setText('0');
+
+		this.gameOverInstructionText.setText(`${InputManager.getInputName('menu-confirm')} to retry\n${InputManager.getInputName('gameover-back')} to return to level select`)
+		this.gameOverText.setText(`Tapped ${(this.registry.get('mobile'))? '\n' : ''}out!`)
+
+		this.scoreText.setVisible(false);
 
 		this.totalScoreText.setText(`total: ${this.game.registry.get('total-score')}`);
 		this.totalScoreText.setVisible(this.registry.get('game-mode') === 'arcade');
@@ -803,7 +1042,16 @@ export default class LevelUI extends Phaser.Scene {
 			this.soldiermid_3, this.soldiermid_4, this.soldiermid_5, this.soldiermid_6, 
 			this.soldiermid_7, this.soldiermid_8, this.soldiermid, this.soldiermid_9];
 
-	// fullscreen test
+		this.tweens.add({
+			targets: this.transitionBG,
+			delay: 50,
+			duration: 300,
+			alpha: 0,
+			ease: Phaser.Math.Easing.Cubic.In
+			// ease: Phaser.Math.Easing.Linear
+		});
+
+	// fullscreen testasdf
 
 		this.fullscreenTestButton.setInteractive();
 		this.fullscreenTestButton.on('pointerdown', () =>
@@ -818,6 +1066,17 @@ export default class LevelUI extends Phaser.Scene {
 			}
 			// TODO: figure out how to force resize
 		});
+
+		this.mobileBackButton.setInteractive();
+		this.mobileBackButton.on('pointerdown', () =>
+		{
+			this.levelScene.LoadLevelSelect();
+		});
+		this.mobileRetryButton.setInteractive();
+		this.mobileRetryButton.on('pointerdown', () =>
+		{
+			this.levelScene.resetLevel();
+		});
 	}
 
 	/**
@@ -826,7 +1085,28 @@ export default class LevelUI extends Phaser.Scene {
 	 */
 	public setScore(score: number)
 	{
+		this.scoreText.setVisible(true);
 		this.scoreText.setText(`${score}`);
+		this.scoreAdditionText.setText(`+500 ${(this.levelScene.combo > 1 ? 'x' : '')}`);
+
+		this.scoreAdditionText.setAlpha(1);
+		if (this.scoreAddFadeTween)
+			this.scoreAddFadeTween.stop();
+		this.scoreAddFadeTween = this.tweens.add({
+			targets: this.scoreAdditionText,
+			delay: 500,
+			duration: 100,
+			alpha: 0
+		});
+		this.scoreAdditionText.setX(20);
+		if (this.scoreAddPopTween)
+			this.scoreAddPopTween.stop();
+		this.scoreAddPopTween = this.tweens.add({
+			targets: this.scoreAdditionText,
+			duration: 150,
+			ease: Phaser.Math.Easing.Circular.Out,
+			x: 0
+		});
 
 		// this.scoreText.setY(20);
 		// this.scoreTextTween = this.tweens.add
@@ -877,19 +1157,28 @@ export default class LevelUI extends Phaser.Scene {
 
 	public showComboUI(combo: number)
 	{
-		this.comboText.setVisible(true);
+		if (this.comboFadeOutTween)
+			this.comboFadeOutTween.stop();
 		this.comboLabelText.setVisible(true);
+		this.airborneLabelText.setVisible(true);
+		this.comboLabelText.setAlpha(1);
+		this.airborneLabelText.setAlpha(1);
+		this.comboLabelText.setX(0);
+		this.airborneLabelText.setX(0);
+
+
+		this.comboText.setVisible(true);
 		this.comboText.setText(combo + '');
 
 		if (this.comboTextTween)
 		{
 			this.comboTextTween.stop()
 		}
-		this.comboText.setScale(1.5);
+		this.comboText.setScale(3);
 		this.comboTextTween = this.tweens.add
 		({
 			targets: this.comboText,
-			duration: 500,
+			duration: 400,
 			ease: Phaser.Math.Easing.Circular.Out,
 			scale: 1,
 		});
@@ -899,6 +1188,18 @@ export default class LevelUI extends Phaser.Scene {
 	{
 		this.comboText.setVisible(false);
 		this.comboLabelText.setVisible(false);
+		this.airborneLabelText.setVisible(false);
+
+		// if (this.comboFadeOutTween)
+		// 	this.comboFadeOutTween.stop();
+		// console.debug('asdfasdf');
+		// this.comboFadeOutTween = this.tweens.add({
+		// 	targets: [this.comboLabelText, this.airborneLabelText],
+		// 	duration: 100,
+		// 	ease: Phaser.Math.Easing.Quadratic.In,
+		// 	alpha: 0,
+		// 	x: 20
+		// });
 
 		/* 	Resolve the UI to indicate that the combo has finished while giving the player the 
 			chance to read it.
@@ -1002,7 +1303,7 @@ export default class LevelUI extends Phaser.Scene {
 
 		if (this.tutorialText.text === '')
 		{
-			this.tutorialText.setText(tutorialManager.getTutorialText(level!)!);
+			this.tutorialText.setText(tutorialManager.getTutorialText(level!, this)!);
 			this.tutorialCloseText.setText
 				(`- ${InputManager.getInputName('tutorial-toggle')?.toString().toUpperCase()} TO DISMISS -`);
 			this.tutorialContainer.setVisible(true);
@@ -1213,6 +1514,10 @@ export default class LevelUI extends Phaser.Scene {
 
 	private summaryShowHighestComboLabel()
 	{
+		this.levelScene.LoadLevelSelect();
+
+		return;
+
 		this.highestComboLabel.setVisible(true);
 		this.sound.play('reflect', {volume: .4});
 
@@ -1258,6 +1563,10 @@ export default class LevelUI extends Phaser.Scene {
 
 	private showPostSummaryInstructions()
 	{
+		this.levelScene.LoadLevelSelect();
+
+		return;
+
 		this.postSummaryInstructions.setText(
 			`${InputManager.getInputName('menu-confirm')} to continue.\n
 			${InputManager.getInputName('menu-back')} to exit.`

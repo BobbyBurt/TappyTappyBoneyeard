@@ -11,7 +11,7 @@ export default class Uppercut implements State {
 
 	timer: Phaser.Time.TimerEvent | undefined;
 
-	priorXVelocity: number = 0;
+	// priorXVelocity: number = 0;
 	
 	constructor(_player:playerPrefab, _stateController:StateController)
 	{
@@ -39,11 +39,11 @@ export default class Uppercut implements State {
 
 		this.player.punchCharged = false;
 
-		this.priorXVelocity = this.player.body.velocity.x;
+		// this.priorXVelocity = this.player.body.velocity.x;
 		
 		this.timer = new Phaser.Time.TimerEvent({ delay: 180, loop: false, callback: () =>
 		{	
-			this.player.setVelocity(this.priorXVelocity, -200);
+			this.player.setVelocity((this.player.flipX ? this.player.moveSpeed : -this.player.moveSpeed ), -200);
 			
 			// this.player.setRotation(0);
 			this.player.stateController.setState('airborne');

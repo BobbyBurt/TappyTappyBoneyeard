@@ -14,7 +14,7 @@ window.addEventListener('load', function ()
 	{
 		title: 'Tappy Tappy Boneyard',
 		url: 'https://www.newgrounds.com/projects/games/1923225/preview',
-		version: '16 prebeta',
+		version: '17',
 		
 	// visuals
 		type: Phaser.AUTO,
@@ -114,10 +114,17 @@ class Boot extends Phaser.Scene
 			}
 		});
 
-		cloudSaves.setDataKeys([
-			'top-score: punch', 'top-score: airborne', 'top-score: dive', 'top-score: gunfire', 'top-score: uppercut', 'top-score: charge', 'top-score: combo', 'top-score: tutorial-finale',
-			'top-score'
-		]);
+		let dataKeys = new Array<string>();
+		LevelSelect.levelsKey.forEach((value, index) =>
+		{
+			dataKeys.push(`top-score: ${value}`);
+			dataKeys.push(`unlocked: ${value}`);
+		});
+		cloudSaves.setDataKeys(dataKeys);
+		// cloudSaves.setDataKeys([
+		// 	'top-score: punch', 'top-score: airborne', 'top-score: dive', 'top-score: gunfire', 'top-score: uppercut', 'top-score: charge', 'top-score: combo', 'top-score: tutorial-finale',
+		// 	'top-score'
+		// ]);
 		// TODO: add all level key topscores
 	}
 

@@ -1,0 +1,74 @@
+{
+    "id": "d4dbcb90-fe7e-4246-9d01-d1793779146b",
+    "sceneType": "PREFAB",
+    "settings": {
+        "exportClass": true,
+        "autoImport": true,
+        "preloadMethodName": "",
+        "preloadPackFiles": [],
+        "createMethodName": "",
+        "compilerOutputLanguage": "TYPE_SCRIPT",
+        "borderWidth": 0,
+        "borderHeight": 0
+    },
+    "displayList": [
+        {
+            "type": "Container",
+            "id": "c086f0b6-c7ac-407c-b53b-02060dea5127",
+            "label": "level-icon",
+            "components": [],
+            "list": [
+                {
+                    "type": "Image",
+                    "id": "407341ef-1432-4866-9699-2d436df16d62",
+                    "label": "highlight",
+                    "scope": "CLASS",
+                    "components": [],
+                    "texture": {
+                        "key": "level-icon-selected"
+                    },
+                    "y": 3
+                },
+                {
+                    "type": "BitmapText",
+                    "id": "60f67bf3-5757-44cd-abfa-b712c38bdb22",
+                    "label": "numberText",
+                    "scope": "CLASS",
+                    "components": [],
+                    "x": 1,
+                    "y": -2,
+                    "originX": 0.5,
+                    "originY": 0.5,
+                    "tintTopLeft": "#523746",
+                    "tintTopRight": "#523746",
+                    "tintBottomLeft": "#523746",
+                    "tintBottomRight": "#523746",
+                    "tintFill": true,
+                    "text": "25",
+                    "font": "nokia",
+                    "align": 1,
+                    "fontSize": -12
+                }
+            ]
+        }
+    ],
+    "plainObjects": [],
+    "meta": {
+        "app": "Phaser Editor 2D - Scene Editor",
+        "url": "https://phasereditor2d.com",
+        "contentType": "phasereditor2d.core.scene.SceneContentType",
+        "version": 3
+    },
+    "prefabProperties": [
+        {
+            "name": "levelIndex",
+            "label": "Level Index",
+            "tooltip": "",
+            "defValue": 0,
+            "customDefinition": false,
+            "type": {
+                "id": "number"
+            }
+        }
+    ]
+}

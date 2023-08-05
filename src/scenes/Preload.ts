@@ -30,10 +30,10 @@ export default class Preload extends Phaser.Scene {
 	editorCreate(): void {
 
 		// progress
-		const progress = this.add.text(480, 270, "", {});
+		const progress = this.add.bitmapText(480, 270, "nokia", "0%");
 		progress.setOrigin(0.5, 0.5);
 		progress.text = "0%";
-		progress.setStyle({ "fontFamily": "nokia cellphone fc small" });
+		progress.fontSize = -16;
 
 		// fileText
 		const fileText = this.add.bitmapText(369, 324, "nokia", "New BitmapText");
@@ -47,11 +47,11 @@ export default class Preload extends Phaser.Scene {
 		fileText.maxWidth = 200;
 
 		// progress_1
-		const progress_1 = this.add.text(480, 302, "", {});
+		const progress_1 = this.add.bitmapText(480, 302, "nokia", "Log into Newgrounds to earn medals and use cloud save data.");
 		progress_1.setOrigin(0.5, 0.5);
-		progress_1.text = "Log into Newgrounds to earn medals and use cloud save data.\nGame does not officially support mobile or gamepads yet.";
-		progress_1.setStyle({ "align": "right", "fontFamily": "nokia cellphone fc small", "fontSize": "8px" });
-		progress_1.setLineSpacing(5);
+		progress_1.text = "Log into Newgrounds to earn medals and use cloud save data.";
+		progress_1.fontSize = -10;
+		progress_1.align = NaN;
 
 		// progress (components)
 		new PreloadText(progress);
