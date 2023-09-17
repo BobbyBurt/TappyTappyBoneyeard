@@ -260,6 +260,13 @@
                 "key": "cool-combo"
             },
             {
+                "url": [
+                    "assets/music/Danny Baranowsky - Super Meat Boy! - Digital Special Edition Soundtrack - 10 Rocket Rider (Ch 3 Dark World).mp3"
+                ],
+                "type": "audio",
+                "key": "hard-game"
+            },
+            {
                 "url": "assets/levels/dive.json",
                 "type": "tilemapTiledJSON",
                 "key": "dive"
@@ -423,6 +430,26 @@
                 "key": "level-icon-selected"
             },
             {
+                "url": "assets/level-icon-small-bronze.png",
+                "type": "image",
+                "key": "level-icon-small-bronze"
+            },
+            {
+                "url": "assets/level-icon-small-gold.png",
+                "type": "image",
+                "key": "level-icon-small-gold"
+            },
+            {
+                "url": "assets/level-icon-small-played.png",
+                "type": "image",
+                "key": "level-icon-small-played"
+            },
+            {
+                "url": "assets/level-icon-small-silver.png",
+                "type": "image",
+                "key": "level-icon-small-silver"
+            },
+            {
                 "url": "assets/level-icons.png",
                 "frameConfig": {
                     "frameWidth": 35,
@@ -451,6 +478,13 @@
                 "url": "assets/menu-bg.png",
                 "type": "image",
                 "key": "menu-bg"
+            },
+            {
+                "url": [
+                    "assets/music/menu-TEMP.mp3"
+                ],
+                "type": "audio",
+                "key": "menu"
             },
             {
                 "url": "assets/levels/mine-combo.json",
@@ -560,19 +594,24 @@
                 "key": "pogo-mines"
             },
             {
+                "url": "assets/level-previews/preview-blank.png",
+                "type": "image",
+                "key": "preview-blank"
+            },
+            {
                 "url": "assets/level-previews/preview-bomb-holder.png",
                 "type": "image",
                 "key": "preview-bomb-holder"
             },
             {
+                "url": "assets/level-previews/preview-bomb-intro.png",
+                "type": "image",
+                "key": "preview-bomb-intro"
+            },
+            {
                 "url": "assets/level-previews/preview-bomb-punch.png",
                 "type": "image",
                 "key": "preview-bomb-punch"
-            },
-            {
-                "url": "assets/level-previews/preview-mine-intro.png",
-                "type": "image",
-                "key": "preview-mine-intro"
             },
             {
                 "url": "assets/levels/punch.json",
@@ -733,6 +772,11 @@
                 "key": "tutorial-ipad"
             },
             {
+                "url": "assets/levels/umbrella-intro.json",
+                "type": "tilemapTiledJSON",
+                "key": "umbrella-intro"
+            },
+            {
                 "url": "assets/levels/umbrella-shield.json",
                 "type": "tilemapTiledJSON",
                 "key": "umbrella-shield"
@@ -753,6 +797,11 @@
                 ],
                 "type": "audio",
                 "key": "victory"
+            },
+            {
+                "url": "assets/white-px.png",
+                "type": "image",
+                "key": "white-px"
             }
         ]
     },

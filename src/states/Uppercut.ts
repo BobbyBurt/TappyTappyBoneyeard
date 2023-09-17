@@ -23,6 +23,9 @@ export default class Uppercut implements State {
 	{
 		this.player.scene.game.events.emit('uppercut');
 
+		// last move
+		this.player.lastFistMove = 'uppercut';
+
 		this.player.scene.events.emit('player-start');
 		this.player.started = true;
 		
@@ -48,6 +51,10 @@ export default class Uppercut implements State {
 			// this.player.setRotation(0);
 			this.player.stateController.setState('airborne');
 			this.player.setFist(false, true);
+
+			// grace timer
+			this.player.fistGraceTimer = new Phaser.Time.TimerEvent({ delay: 50 });
+			this.player.scene.time.addEvent(this.player.fistGraceTimer);
 		}});
 	
 		this.player.scene.time.addEvent(this.timer);

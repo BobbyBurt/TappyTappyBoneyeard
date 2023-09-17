@@ -15,6 +15,7 @@ import tutorialManager from "~/components/tutorialManager";
 import Level from "./Level";
 import { levelScoreMilestones, arcadeScoreMilestones } from "~/components/LevelScores";
 import cloudSaves from "~/API/cloudSaves";
+import LevelSelect from "./LevelSelect";
 
 /* END-USER-IMPORTS */
 
@@ -487,14 +488,14 @@ export default class LevelUI extends Phaser.Scene {
 		gameOverContainer.add(gameOverText);
 
 		// gameOverInstructionText
-		const gameOverInstructionText = this.add.bitmapText(135.4416046142578, 393.039794921875, "nokia", "X key to retry\nSpace bar to return to menu");
+		const gameOverInstructionText = this.add.bitmapText(135.4416046142578, 393.039794921875, "nokia", "X key to retry\nZ key to return to menu");
 		gameOverInstructionText.setOrigin(0, 1);
 		gameOverInstructionText.tintFill = true;
 		gameOverInstructionText.tintTopLeft = 5388102;
 		gameOverInstructionText.tintTopRight = 5388102;
 		gameOverInstructionText.tintBottomLeft = 5388102;
 		gameOverInstructionText.tintBottomRight = 5388102;
-		gameOverInstructionText.text = "X key to retry\nSpace bar to return to menu";
+		gameOverInstructionText.text = "X key to retry\nZ key to return to menu";
 		gameOverInstructionText.fontSize = -12;
 		gameOverInstructionText.dropShadowColor = 3487029;
 		gameOverContainer.add(gameOverInstructionText);
@@ -547,14 +548,11 @@ export default class LevelUI extends Phaser.Scene {
 		mobileRetryText.dropShadowColor = 3487029;
 		gameOverContainer.add(mobileRetryText);
 
-		// transitionBG
-		const transitionBG = this.add.image(1028, 398, "load-bg");
-
 		// scoreContainer
 		const scoreContainer = this.add.container(0, 0);
 
 		// comboLabelText
-		const comboLabelText = this.add.bitmapText(0, 56, "nokia", "Combo");
+		const comboLabelText = this.add.bitmapText(0, 81, "nokia", "Combo");
 		comboLabelText.setOrigin(0, 0.5);
 		comboLabelText.tintTopLeft = 5675510;
 		comboLabelText.tintTopRight = 5675510;
@@ -567,7 +565,7 @@ export default class LevelUI extends Phaser.Scene {
 		scoreContainer.add(comboLabelText);
 
 		// airborneLabelText
-		const airborneLabelText = this.add.bitmapText(0, 42, "nokia", "Airborne");
+		const airborneLabelText = this.add.bitmapText(0, 67, "nokia", "Airborne");
 		airborneLabelText.setOrigin(0, 0.5);
 		airborneLabelText.tintTopLeft = 5675510;
 		airborneLabelText.tintTopRight = 5675510;
@@ -581,6 +579,11 @@ export default class LevelUI extends Phaser.Scene {
 
 		// comboText
 		const comboText = this.add.bitmapText(61, 22, "nokia", "3");
+		comboText.alpha = 0;
+		comboText.alphaTopLeft = 0;
+		comboText.alphaTopRight = 0;
+		comboText.alphaBottomLeft = 0;
+		comboText.alphaBottomRight = 0;
 		comboText.tintTopLeft = 5675510;
 		comboText.tintTopRight = 5675510;
 		comboText.tintBottomLeft = 5675510;
@@ -592,19 +595,21 @@ export default class LevelUI extends Phaser.Scene {
 		scoreContainer.add(comboText);
 
 		// scoreAdditionText
-		const scoreAdditionText = this.add.bitmapText(0, 24, "nokia", "+500");
+		const scoreAdditionText = this.add.bitmapText(0, 26, "nokia", "500");
 		scoreAdditionText.alpha = 0;
 		scoreAdditionText.alphaTopLeft = 0;
 		scoreAdditionText.alphaTopRight = 0;
 		scoreAdditionText.alphaBottomLeft = 0;
 		scoreAdditionText.alphaBottomRight = 0;
 		scoreAdditionText.tintFill = true;
-		scoreAdditionText.tintTopLeft = 5388102;
-		scoreAdditionText.tintTopRight = 5388102;
-		scoreAdditionText.tintBottomLeft = 5388102;
-		scoreAdditionText.tintBottomRight = 5388102;
-		scoreAdditionText.text = "+500";
-		scoreAdditionText.fontSize = -10;
+		scoreAdditionText.tintTopLeft = 5675510;
+		scoreAdditionText.tintTopRight = 5675510;
+		scoreAdditionText.tintBottomLeft = 5675510;
+		scoreAdditionText.tintBottomRight = 5675510;
+		scoreAdditionText.text = "500";
+		scoreAdditionText.fontSize = -28;
+		scoreAdditionText.dropShadowAlpha = 1;
+		scoreAdditionText.dropShadowColor = 16777215;
 		scoreContainer.add(scoreAdditionText);
 
 		// scoreText
@@ -633,6 +638,21 @@ export default class LevelUI extends Phaser.Scene {
 		touchscreenDividerLeft.tintTopRight = 5675510;
 		touchscreenDividerLeft.tintBottomLeft = 5675510;
 		touchscreenDividerLeft.tintBottomRight = 5675510;
+
+		// completeText
+		const completeText = this.add.bitmapText(351.3484191894531, 106.2844467163086, "nokia", "Level complete!");
+		completeText.setOrigin(0.5, 0.5);
+		completeText.visible = false;
+		completeText.tintFill = true;
+		completeText.tintTopLeft = 5388102;
+		completeText.tintTopRight = 5388102;
+		completeText.tintBottomLeft = 5388102;
+		completeText.tintBottomRight = 5388102;
+		completeText.text = "Level complete!";
+		completeText.fontSize = -20;
+
+		// transitionBG
+		const transitionBG = this.add.image(1028, 398, "load-bg");
 
 		// timerBox (components)
 		const timerBoxAlign = new Align(timerBox);
@@ -820,11 +840,6 @@ export default class LevelUI extends Phaser.Scene {
 		mobileRetryTextAlign.verticalOffset = -50;
 		new MobileDependent(mobileRetryText);
 
-		// transitionBG (components)
-		const transitionBGAlign = new Align(transitionBG);
-		transitionBGAlign.middle = true;
-		transitionBGAlign.center = true;
-
 		// scoreContainer (components)
 		const scoreContainerAlign = new Align(scoreContainer);
 		scoreContainerAlign.up = true;
@@ -838,6 +853,16 @@ export default class LevelUI extends Phaser.Scene {
 		touchscreenDividerLeftAlign.left = true;
 		touchscreenDividerLeftAlign.verticalOffset = -120;
 		new MobileDependent(touchscreenDividerLeft);
+
+		// completeText (components)
+		const completeTextAlign = new Align(completeText);
+		completeTextAlign.middle = true;
+		completeTextAlign.center = true;
+
+		// transitionBG (components)
+		const transitionBGAlign = new Align(transitionBG);
+		transitionBGAlign.middle = true;
+		transitionBGAlign.center = true;
 
 		this.timerText = timerText;
 		this.tutorialContainer = tutorialContainer;
@@ -897,12 +922,13 @@ export default class LevelUI extends Phaser.Scene {
 		this.mobileBackText = mobileBackText;
 		this.mobileRetryButton = mobileRetryButton;
 		this.mobileRetryText = mobileRetryText;
-		this.transitionBG = transitionBG;
 		this.comboLabelText = comboLabelText;
 		this.airborneLabelText = airborneLabelText;
 		this.comboText = comboText;
 		this.scoreAdditionText = scoreAdditionText;
 		this.scoreText = scoreText;
+		this.completeText = completeText;
+		this.transitionBG = transitionBG;
 
 		this.events.emit("scene-awake");
 	}
@@ -965,12 +991,13 @@ export default class LevelUI extends Phaser.Scene {
 	private mobileBackText!: Phaser.GameObjects.BitmapText;
 	private mobileRetryButton!: Phaser.GameObjects.Rectangle;
 	private mobileRetryText!: Phaser.GameObjects.BitmapText;
-	private transitionBG!: Phaser.GameObjects.Image;
 	public comboLabelText!: Phaser.GameObjects.BitmapText;
 	public airborneLabelText!: Phaser.GameObjects.BitmapText;
 	public comboText!: Phaser.GameObjects.BitmapText;
 	private scoreAdditionText!: Phaser.GameObjects.BitmapText;
 	public scoreText!: Phaser.GameObjects.BitmapText;
+	public completeText!: Phaser.GameObjects.BitmapText;
+	private transitionBG!: Phaser.GameObjects.Image;
 
 	/* START-USER-CODE */
 
@@ -1070,6 +1097,7 @@ export default class LevelUI extends Phaser.Scene {
 		this.mobileBackButton.setInteractive();
 		this.mobileBackButton.on('pointerdown', () =>
 		{
+			LevelSelect.levelSelectEntry = 'return';
 			this.levelScene.LoadLevelSelect();
 		});
 		this.mobileRetryButton.setInteractive();
@@ -1079,26 +1107,36 @@ export default class LevelUI extends Phaser.Scene {
 		});
 	}
 
+	public setAirborneLabelAlpha(value: number)
+	{
+		this.airborneLabelText.setAlpha(value);
+	}
+
 	/**
 	 * 
-	 * @param score total level score
+	 * @param levelScore total level score
 	 */
-	public setScore(score: number)
+	public setScore(levelScore: number, addedScore: number)
 	{
 		this.scoreText.setVisible(true);
-		this.scoreText.setText(`${score}`);
-		this.scoreAdditionText.setText(`+500 ${(this.levelScene.combo > 1 ? 'x' : '')}`);
+		this.scoreText.setText(`${levelScore}`);
+
+		this.scoreAdditionText.setText(`+${(addedScore)}`);
+		this.scoreAdditionText.setTintFill(addedScore > 100 ? 0x5699F6 : 0x523746);
+		// this.scoreAdditionText.setFontSize(addedScore > 100 ? -32 : -24);
+
+		this.comboLabelText.setAlpha(1);
 
 		this.scoreAdditionText.setAlpha(1);
 		if (this.scoreAddFadeTween)
 			this.scoreAddFadeTween.stop();
 		this.scoreAddFadeTween = this.tweens.add({
 			targets: this.scoreAdditionText,
-			delay: 500,
+			delay: 1000,
 			duration: 100,
 			alpha: 0
 		});
-		this.scoreAdditionText.setX(20);
+		this.scoreAdditionText.setX(70);
 		if (this.scoreAddPopTween)
 			this.scoreAddPopTween.stop();
 		this.scoreAddPopTween = this.tweens.add({
@@ -1157,38 +1195,48 @@ export default class LevelUI extends Phaser.Scene {
 
 	public showComboUI(combo: number)
 	{
-		if (this.comboFadeOutTween)
-			this.comboFadeOutTween.stop();
-		this.comboLabelText.setVisible(true);
-		this.airborneLabelText.setVisible(true);
+		// if (this.comboFadeOutTween)
+		// 	this.comboFadeOutTween.stop();
 		this.comboLabelText.setAlpha(1);
-		this.airborneLabelText.setAlpha(1);
-		this.comboLabelText.setX(0);
-		this.airborneLabelText.setX(0);
+		// this.airborneLabelText.setAlpha(1);
+		// this.comboLabelText.setX(0);
+		// this.airborneLabelText.setX(0);
 
 
-		this.comboText.setVisible(true);
-		this.comboText.setText(combo + '');
+		// this.comboText.setVisible(true);
+		// this.comboText.setText(combo + '');
 
 		if (this.comboTextTween)
 		{
 			this.comboTextTween.stop()
 		}
-		this.comboText.setScale(3);
+		this.comboLabelText.setX(15);
 		this.comboTextTween = this.tweens.add
 		({
-			targets: this.comboText,
-			duration: 400,
-			ease: Phaser.Math.Easing.Circular.Out,
-			scale: 1,
+			targets: this.comboLabelText,
+			duration: 200,
+			ease: Phaser.Math.Easing.Cubic.In,
+			yoyo: true,
+			repeat: 999,
+			x: 0
 		});
 	}
 
 	public hideComboUI()
 	{
-		this.comboText.setVisible(false);
-		this.comboLabelText.setVisible(false);
-		this.airborneLabelText.setVisible(false);
+		// this.comboText.setVisible(false);
+		// this.comboLabelText.setVisible(false);
+		// this.airborneLabelText.setVisible(false);
+
+		this.comboLabelText.setAlpha(.2);
+		// this.airborneLabelText.setAlpha(.2);
+
+		this.comboLabelText.setX(0);
+
+		if (this.comboTextTween)
+		{
+			this.comboTextTween.stop()
+		}
 
 		// if (this.comboFadeOutTween)
 		// 	this.comboFadeOutTween.stop();
@@ -1451,6 +1499,7 @@ export default class LevelUI extends Phaser.Scene {
 		// this.arcadePostSummaryInstructions.setVisible(true);
 		// this.sound.play('reflect', {volume: .4});
 
+		LevelSelect.levelSelectEntry = 'complete';
 		this.levelScene.LoadLevelSelect();
 
 	}
@@ -1462,6 +1511,17 @@ export default class LevelUI extends Phaser.Scene {
 
 	public showSummaryUI()
 	{
+		this.completeText.setVisible(true);
+
+		this.time.delayedCall(3000, () =>
+		{
+
+			LevelSelect.levelSelectEntry = 'complete';
+			this.levelScene.LoadLevelSelect();
+		});
+
+		return;
+
 		this.summaryContainer.setVisible(true);
 		this.summaryVisible = true;
 
@@ -1473,7 +1533,7 @@ export default class LevelUI extends Phaser.Scene {
 		}
 		else
 		{
-			this.time.delayedCall(2000, this.showPostSummaryInstructions, undefined, this);
+			this.time.delayedCall(3000, this.showPostSummaryInstructions, undefined, this);
 		}
 	}
 
@@ -1514,6 +1574,7 @@ export default class LevelUI extends Phaser.Scene {
 
 	private summaryShowHighestComboLabel()
 	{
+		LevelSelect.levelSelectEntry = 'complete';
 		this.levelScene.LoadLevelSelect();
 
 		return;
@@ -1563,6 +1624,7 @@ export default class LevelUI extends Phaser.Scene {
 
 	private showPostSummaryInstructions()
 	{
+		LevelSelect.levelSelectEntry = 'complete';
 		this.levelScene.LoadLevelSelect();
 
 		return;

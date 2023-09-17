@@ -12,6 +12,9 @@ export default class Punch implements State {
 	timer: Phaser.Time.TimerEvent | undefined;
 	uppercutAllowTimer!: Phaser.Time.TimerEvent;
 	pauseTimer!: Phaser.Time.TimerEvent;
+
+	/** Set true if up is held on entry. Will enter uppercut state after windup. */
+	queueUppercut = false;
 	
 	constructor(_player:playerPrefab, _stateController:StateController)
 	{
@@ -22,6 +25,11 @@ export default class Punch implements State {
 	enter()
 	{
 		this.player.scene.game.events.emit('punch');
+
+		this.queueUppercut = false;
+
+		// last move
+		this.player.lastFistMove = 'punch'
 		
 		this.player.scene.events.emit('player-start');
 		this.player.started = true;
@@ -34,6 +42,13 @@ export default class Punch implements State {
 
 		this.pauseTimer = new Phaser.Time.TimerEvent({ delay: 150, callback: () =>
 		{
+			if (this.queueUppercut)
+			{
+				this.uppercut();
+
+				return;
+			}
+
 			this.player.playAnimation('punch');
 			this.player.scene.sound.play('punch-swing');
 	
@@ -57,17 +72,23 @@ export default class Punch implements State {
 				((this.player.flipX? this.player.moveSpeed : -this.player.moveSpeed), 0);
 			this.player.body.allowGravity = true;
 
+			// grace timer
+			this.player.fistGraceTimer = new Phaser.Time.TimerEvent({ delay: 50 });
+			this.player.scene.time.addEvent(this.player.fistGraceTimer);
+
 		// state transitions
 			if (this.player.onFloor)
 			{
 				this.player.setFist(false, false);
 				this.player.punchCooldownTimer = this.player.scene.time.addEvent({delay: 200});
+				this.player.punchDeflected = false;
 				this.player.stateController.setState('running');
 			}
 			else
 			{
 				this.player.setFist(false, false);
 				this.player.punchCooldownTimer = this.player.scene.time.addEvent({delay: 200});
+				this.player.punchDeflected = false;
 				this.player.stateController.setState('airborne');
 			}
 		}});
@@ -86,13 +107,20 @@ export default class Punch implements State {
 	
 	update()
 	{
-		if (this.player.punchInput == 'just-down' && this.uppercutAllowTimer.getProgress() !== 1)
+		// queue uppercut for after windup
+		if (this.pauseTimer.getProgress() < 1 && 
+			(this.player.jumpInput === 'down' || this.player.jumpInput === 'just-down'))
 		{
-			this.timer?.remove();
-			this.pauseTimer?.remove();
-			this.player.body.allowGravity = true;
-			
-			this.stateController.setState('uppercut');
+			console.debug('queuing uppercut');
+
+			this.queueUppercut = true;
+		}
+		
+		if (this.player.jumpInput == 'just-down' 
+			&& this.uppercutAllowTimer.getProgress() !== 1 
+			&& this.pauseTimer.getProgress() > 0)
+		{
+			this.uppercut();
 		}
 
 		if (this.player.onWallFacing(true))
@@ -102,6 +130,7 @@ export default class Punch implements State {
 				this.player.body.setVelocity(0, 0);
 				this.player.body.allowGravity = true;
 				this.player.setFist(false, false);
+				this.player.punchDeflected = false;
 				this.stateController.setState('groundCling');
 				this.player.punchCooldownTimer = this.player.scene.time.addEvent({delay: 200});
 				this.timer?.remove();
@@ -112,6 +141,7 @@ export default class Punch implements State {
 				this.player.body.setVelocity(0, 0);
 				this.player.body.allowGravity = true;
 				this.player.setFist(false, false);
+				this.player.punchDeflected = false;
 				this.stateController.setState('cling');
 				this.player.punchCooldownTimer = this.player.scene.time.addEvent({delay: 200});
 				this.timer?.remove();
@@ -125,5 +155,14 @@ export default class Punch implements State {
 				this.player.variablePunchSpeed : -this.player.variablePunchSpeed), 0);
 		}
 
+	}
+
+	uppercut()
+	{
+		this.timer?.remove();
+		this.pauseTimer?.remove();
+		this.player.body.allowGravity = true;
+		this.player.punchDeflected = false;
+		this.stateController.setState('uppercut');
 	}
 }

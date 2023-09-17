@@ -90,10 +90,17 @@ export default class playerPrefab extends Phaser.Physics.Arcade.Sprite {
 	public punchCharged: boolean = true;
 	public punchMobileButton: boolean = false;
 	public punchCooldownTimer: Phaser.Time.TimerEvent;
+	/** True after shield deflects a punch until punch state ends */
+	public punchDeflected = false;
 
 	public punchSpeed = 300;
 	/** effected by hitting targets */
 	public variablePunchSpeed = 0;
+	/**
+	 * Active for a few frames past punch / uppercut. During which fist / bomb overlap will still be accepted.
+	 */
+	public fistGraceTimer: Phaser.Time.TimerEvent;
+	public lastFistMove: 'punch' | 'uppercut' = 'punch';
 
 // uppercut
 
@@ -145,6 +152,8 @@ export default class playerPrefab extends Phaser.Physics.Arcade.Sprite {
 
 		this.setName('player');
 
+		this.fistGraceTimer = this.scene.time.addEvent({ delay: 1});
+
 		if (this.debugImage && __DEV__)
 		{
 			this.setTexture('20-test');
@@ -167,6 +176,8 @@ export default class playerPrefab extends Phaser.Physics.Arcade.Sprite {
 			fillStyle: { color: 0x00ffff, alpha: (__DEV__ ? 1 : 0) } 
 		});
 		this.debugWallDetectGraphics.setDepth(100);
+
+		// DEBUG
 	}
 
 	update()

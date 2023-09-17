@@ -5,6 +5,7 @@
 
 import Phaser from "phaser";
 /* START-USER-IMPORTS */
+
 /* END-USER-IMPORTS */
 
 export default class LevelIconPrefab extends Phaser.GameObjects.Container {
@@ -65,6 +66,7 @@ export default class LevelIconPrefab extends Phaser.GameObjects.Container {
 		this.highlight.setDepth(-2);
 
 		this.iconOriginalY = this.icon.y;
+		this.iconOriginalX = this.icon.x;
 
 		this.scene.events.once(Phaser.Scenes.Events.UPDATE, this.start, this);
 
@@ -85,8 +87,9 @@ export default class LevelIconPrefab extends Phaser.GameObjects.Container {
 	private numberTween!: Phaser.Tweens.Tween;
 	private silverIconTween!: Phaser.Tweens.Tween;
 	private goldIconTween!: Phaser.Tweens.Tween;
-	
+
 	private iconOriginalY!: number;
+	private iconOriginalX!: number;
 	private numberOffsetY = -1;
 
 	start()
@@ -134,7 +137,7 @@ export default class LevelIconPrefab extends Phaser.GameObjects.Container {
 			ease: Phaser.Math.Easing.Cubic.Out,
 			y: this.iconOriginalY - baseIconPeak
 		});
-		
+
 		this.silverIconTween = this.scene.tweens.add({
 			targets: this.silverIcon,
 			duration: 250,
@@ -152,21 +155,40 @@ export default class LevelIconPrefab extends Phaser.GameObjects.Container {
 		});
 
 		let numberTweenDuration = 200;
+		let numberPeak = 25;
 		if (this.goldIcon.visible)
 		{
-			numberTweenDuration = 250;
+			numberTweenDuration = 300;
+			numberPeak = 37;
+			console.debug('g');
 		}
 		else if (this.silverIcon.visible)
 		{
-			numberTweenDuration = 300;
+			numberTweenDuration = 250;
+			numberPeak = 34;
+			console.debug('s');
 		}
+
 		this.numberTween = this.scene.tweens.add({
 			targets: this.numberText,
 			duration: numberTweenDuration,
 			yoyo: true,
-			ease: Phaser.Math.Easing.Circular.Out,
-			y: (this.iconOriginalY - baseIconPeak) + this.numberOffsetY
+			ease: Phaser.Math.Easing.Cubic.Out,
+			y: (this.iconOriginalY - numberPeak)
 		});
+	}
+
+	public runLockedFeedbackTween()
+	{
+		this.baseIconTween = this.scene.tweens.add({
+			targets: this.icon,
+			duration: 200,
+			yoyo: true,
+			ease: Phaser.Math.Easing.Cubic.Out,
+			x: this.iconOriginalX - 10
+		});
+
+		// My problem here is that I want the tween to go in both directions, but that's beyond the scope of what tweens can do. I'd need more than one tween. I'll come back to this if visual feedback is neccessary.
 	}
 
 	/* END-USER-CODE */

@@ -1038,7 +1038,7 @@
                     "tintBottomLeft": "#523746",
                     "tintBottomRight": "#523746",
                     "tintFill": true,
-                    "text": "X key to retry\nSpace bar to return to menu",
+                    "text": "X key to retry\nZ key to return to menu",
                     "font": "nokia",
                     "fontSize": -12,
                     "dropShadowColor": "#353535ff"
@@ -1146,22 +1146,6 @@
             ]
         },
         {
-            "type": "Image",
-            "id": "5301e166-8655-41d7-b5b8-4dfceacb92d7",
-            "label": "transitionBG",
-            "scope": "CLASS",
-            "components": [
-                "Align"
-            ],
-            "Align.middle": true,
-            "Align.center": true,
-            "texture": {
-                "key": "load-bg"
-            },
-            "x": 1028,
-            "y": 398
-        },
-        {
             "type": "Container",
             "id": "78e91cfb-e728-4251-85f4-50bf92619b42",
             "label": "scoreContainer",
@@ -1179,7 +1163,7 @@
                     "label": "comboLabelText",
                     "scope": "PUBLIC",
                     "components": [],
-                    "y": 56,
+                    "y": 81,
                     "originY": 0.5,
                     "tintTopLeft": "#5699F6",
                     "tintTopRight": "#5699F6",
@@ -1197,7 +1181,7 @@
                     "label": "airborneLabelText",
                     "scope": "PUBLIC",
                     "components": [],
-                    "y": 42,
+                    "y": 67,
                     "originY": 0.5,
                     "tintTopLeft": "#5699F6",
                     "tintTopRight": "#5699F6",
@@ -1217,6 +1201,11 @@
                     "components": [],
                     "x": 61,
                     "y": 22,
+                    "alpha": 0,
+                    "alphaTopLeft": 0,
+                    "alphaTopRight": 0,
+                    "alphaBottomLeft": 0,
+                    "alphaBottomRight": 0,
                     "tintTopLeft": "#5699F6",
                     "tintTopRight": "#5699F6",
                     "tintBottomLeft": "#5699F6",
@@ -1233,21 +1222,22 @@
                     "label": "scoreAdditionText",
                     "scope": "CLASS",
                     "components": [],
-                    "y": 24,
+                    "y": 26,
                     "alpha": 0,
                     "alphaTopLeft": 0,
                     "alphaTopRight": 0,
                     "alphaBottomLeft": 0,
                     "alphaBottomRight": 0,
-                    "tintTopLeft": "#523746",
-                    "tintTopRight": "#523746",
-                    "tintBottomLeft": "#523746",
-                    "tintBottomRight": "#523746",
+                    "tintTopLeft": "#5699F6",
+                    "tintTopRight": "#5699F6",
+                    "tintBottomLeft": "#5699F6",
+                    "tintBottomRight": "#5699F6",
                     "tintFill": true,
-                    "text": "+500",
+                    "text": "500",
                     "font": "nokia",
-                    "fontSize": -10,
-                    "dropShadowColor": "#000000ff"
+                    "fontSize": -28,
+                    "dropShadowAlpha": 1,
+                    "dropShadowColor": "#ffffffff"
                 },
                 {
                     "type": "BitmapText",
@@ -1297,6 +1287,47 @@
             "tintBottomLeft": "#5699F6",
             "tintBottomRight": "#5699F6",
             "tintFill": true
+        },
+        {
+            "type": "BitmapText",
+            "id": "2438cf7b-3d5e-4978-8d58-a1ed79a060f4",
+            "label": "completeText",
+            "scope": "PUBLIC",
+            "components": [
+                "Align"
+            ],
+            "Align.middle": true,
+            "Align.center": true,
+            "x": 351.3484191894531,
+            "y": 106.2844467163086,
+            "originX": 0.5,
+            "originY": 0.5,
+            "visible": false,
+            "tintTopLeft": "#523746",
+            "tintTopRight": "#523746",
+            "tintBottomLeft": "#523746",
+            "tintBottomRight": "#523746",
+            "tintFill": true,
+            "text": "Level complete!",
+            "font": "nokia",
+            "fontSize": -20,
+            "dropShadowColor": "#000000ff"
+        },
+        {
+            "type": "Image",
+            "id": "5301e166-8655-41d7-b5b8-4dfceacb92d7",
+            "label": "transitionBG",
+            "scope": "CLASS",
+            "components": [
+                "Align"
+            ],
+            "Align.middle": true,
+            "Align.center": true,
+            "texture": {
+                "key": "load-bg"
+            },
+            "x": 1028,
+            "y": 398
         }
     ],
     "plainObjects": [],

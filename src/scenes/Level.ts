@@ -802,7 +802,7 @@ export default class Level extends Phaser.Scene {
 	 * Indexes correlate to the object's ID, so most of this array's indexes are empty.
 	 */
 	private mapElementList: Array<any>;
-	private goalEnemyIndex: number;
+	private goalEnemyIndex: number | undefined;
 	public enemiesDefeated = 0;
 
 // arcade
@@ -840,6 +840,7 @@ export default class Level extends Phaser.Scene {
 		this.score = 0;
 		this.cameraFollow = new Phaser.Math.Vector2(this.player.x, this.player.y);
 		this.currentLevelIndex = this.registry.get('current-level-index');
+		this.goalEnemyIndex = undefined;
 
 	// UI
 		this.uiScene = this.scene.get('LevelUI') as LevelUI;
@@ -888,7 +889,7 @@ export default class Level extends Phaser.Scene {
 			this.bGLayerHills.setVisible(true);
 			this.bGLayerIndustry.setVisible(false);
 		}
-		else if (levelIndex >= 9 && levelIndex < 19)
+		else if (levelIndex >= 9 && levelIndex < 18)
 		{
 			this.bGLayerCity.setVisible(true);
 			this.bGLayerHills.setVisible(false);
@@ -1046,6 +1047,7 @@ export default class Level extends Phaser.Scene {
 		{
 			if (this.uiScene.gameOverContainer.visible)
 			{
+				LevelSelect.levelSelectEntry = 'return';
 				this.LoadLevelSelect();
 			}
 		});
@@ -1055,6 +1057,7 @@ export default class Level extends Phaser.Scene {
 			{
 				if (this.uiScene.gameOverContainer.visible)
 				{
+					LevelSelect.levelSelectEntry = 'return';
 					this.LoadLevelSelect();
 				}
 			}
@@ -1064,42 +1067,47 @@ export default class Level extends Phaser.Scene {
 		this.input.keyboard.on('keydown-A', () =>
 		{
 			if (__DEV__)
+			{
+				LevelSelect.levelSelectEntry = 'return';
 				this.LoadLevelSelect();
+			}
 		});
 
-	// summary continue
-		this.uiScene.input.keyboard.on('keydown-' 
-		+ InputManager.getInput('menu-confirm', 'keyboard') , () =>
-		{
-			if (this.uiScene.postSummaryInstructions.visible)
-			{
-				if (this.registry.get('current-level') !== 'finale')
-				{
-					this.LoadNextLevel();
-				}
-				else
-				{
-					this.LoadLevelSelect();
-				}
-			}
-		});
-		this.uiScene.input.gamepad.on('down', 
-			(pad:Phaser.Input.Gamepad.Gamepad, button:Phaser.Input.Gamepad.Button, index:number) =>
-		{
-			if (button.index == InputManager.getInput('menu-confirm', 'gamepad'))
-			{
-				if (this.uiScene.summaryVisible)
-				{
-					this.LoadNextLevel();
-				}
-			}
-		});
+	// summary continue - DEPRECATED
+		// this.uiScene.input.keyboard.on('keydown-' 
+		// + InputManager.getInput('menu-confirm', 'keyboard') , () =>
+		// {
+		// 	if (this.uiScene.postSummaryInstructions.visible)
+		// 	{
+		// 		if (this.registry.get('current-level') !== 'finale')
+		// 		{
+		// 			this.LoadNextLevel();
+		// 		}
+		// 		else
+		// 		{
+		// 			LevelSelect.levelSelectEntry = 'return';
+		// 			this.LoadLevelSelect();
+		// 		}
+		// 	}
+		// });
+		// this.uiScene.input.gamepad.on('down', 
+		// 	(pad:Phaser.Input.Gamepad.Gamepad, button:Phaser.Input.Gamepad.Button, index:number) =>
+		// {
+		// 	if (button.index == InputManager.getInput('menu-confirm', 'gamepad'))
+		// 	{
+		// 		if (this.uiScene.summaryVisible)
+		// 		{
+		// 			this.LoadNextLevel();
+		// 		}
+		// 	}
+		// });
 
 	// pause / summary exit
 		this.uiScene.input.keyboard.on('keydown-' + InputManager.getInput('menu-back', 'keyboard') , () =>
 		{
 			if (this.manualPause || (this.uiScene.summaryVisible))
 			{
+				LevelSelect.levelSelectEntry = 'return';
 				this.LoadLevelSelect();
 			}
 		});
@@ -1110,6 +1118,7 @@ export default class Level extends Phaser.Scene {
 			{
 				if (this.manualPause || this.uiScene.summaryVisible)
 				{
+					LevelSelect.levelSelectEntry = 'return';
 					this.LoadLevelSelect();
 				}
 			}
@@ -1171,6 +1180,9 @@ export default class Level extends Phaser.Scene {
 	// mute
 		this.input.keyboard.on('keydown-M', () =>
 		{
+			// currently this causes an error
+			return;
+
 			if (this.registry.get('muted'))
 			{
 				this.music.play();
@@ -1227,7 +1239,9 @@ export default class Level extends Phaser.Scene {
 
 	update(time: number, delta: number): void
 	{
-		let FRAME_BRK;
+		// update airborne level ui
+		// console.debug(this.uiScene);
+		this.uiScene.setAirborneLabelAlpha(this.player.onFloor ? .2 : 1);
 
 		if (__DEV__)
 		{
@@ -1356,6 +1370,7 @@ export default class Level extends Phaser.Scene {
 		let nextLevelIndex = this.currentLevelIndex + 1;		
 		if (nextLevelIndex === LevelSelect.levelsKey.length)
 		{
+			LevelSelect.levelSelectEntry = 'complete';
 			this.LoadLevelSelect();
 			return;
 		}
@@ -1453,6 +1468,8 @@ export default class Level extends Phaser.Scene {
 		{
 			// this.resetLevel();
 			this.killPlayer();
+
+			console.debug('player enemy overlap');
 		}
 	}
 
@@ -1460,7 +1477,17 @@ export default class Level extends Phaser.Scene {
 	{
 		if (!this.player.fist.active)
 		{
-			return;
+			if (this.player.fistGraceTimer)
+			{
+				if (this.player.fistGraceTimer.getProgress() < 1)
+				{
+					console.debug('grace timer save! - enemy');
+				}
+				else
+				{
+					return;
+				}
+			}
 		}
 
 		if (_enemy.isFalling())
@@ -1471,14 +1498,18 @@ export default class Level extends Phaser.Scene {
 		const enemy = _enemy as EnemyPrefab;
 
 		if (this.player.stateController.currentState.name === 'punch'
-			&& enemy.hasShieldFront() && (enemy.flipX === this.player.flipX))
+			&& enemy.hasShieldFront() && (enemy.flipX === this.player.flipX) 
+			&& !this.player.punchDeflected)
 		{
 			this.player.setFlipX(!this.player.flipX);
+			this.player.punchDeflected = true;
 			return;
 		}
 		if (this.player.stateController.currentState.name === 'punch'
-			&& enemy.hasShieldBack() && (enemy.flipX !== this.player.flipX))
+			&& enemy.hasShieldBack() && (enemy.flipX !== this.player.flipX)
+			&& !this.player.punchDeflected)
 		{
+			this.player.punchDeflected = true;
 			this.player.setFlipX(!this.player.flipX);
 			return;
 		}
@@ -1499,7 +1530,7 @@ export default class Level extends Phaser.Scene {
 	{
 		let enemy1 = _enemy1 as EnemyPrefab;
 		let enemy2 = _enemy2 as EnemyPrefab;
-
+		
 		if (!enemy1.isFalling())
 		{
 			enemy1.hit(enemy2.body.velocity.x, enemy2.body.velocity.y);
@@ -1526,6 +1557,26 @@ export default class Level extends Phaser.Scene {
 			return;
 		}
 
+		// if (this.player.stateController.currentState.name === 'punch')
+		// {
+		// 	console.debug(`player bomb overlap return; punch state`);
+		// 	return;
+		// }
+
+		if (this.player.fistGraceTimer.getProgress() < 1)
+		{
+			console.debug(`player bomb overlap return; grace timer`);
+			return;
+		}
+
+		console.debug(`player bomb overlap`);
+
+		// if (this.player.fist.visible)
+		// {
+		// 	console.debug(`bomb player overlap return; fist visible`);
+		// 	return;
+		// }
+
 		_bomb.fuseTimer.destroy();
 		this.bombExplode(_bomb);
 	}
@@ -1536,27 +1587,36 @@ export default class Level extends Phaser.Scene {
 
 		if (!this.player.fist.active)
 		{
-			return;
+			if (this.player.fistGraceTimer.getProgress() < 1)
+			{
+				console.debug('grace timer save!');
+			}
+			else
+			{
+				return;
+			}
+
 		}
 
 		_bomb.setBombFuse();
 		_bomb.setPosition(_bomb.x, _bomb.y - 3);
-		const velocity = this.getKnockbackVelocty(false, (this.player.stateController.currentState.name === 'punch' ? 'punch' : 'uppercut'));
+		const velocity = this.getKnockbackVelocty(false, this.player.lastFistMove);
 		_bomb.body.setVelocity(velocity.x, velocity.y);
+		// _bomb.setPosition(_bomb.x, _bomb.y - 5);
 		// _bomb.body.setVelocity(this.player.body.velocity.x * 1.3, (this.player.body.velocity.y * 1.5) - 150);
 		_bomb.punched = true;
 	}
 
 	bombEnemyOverlap(bomb: any, enemy: any)
 	{
-		console.debug('bomb enemy overlap');
+		// console.debug('bomb enemy overlap');
 
 		let _bomb = bomb as BombPrefab;
 		let _enemy = enemy as EnemyPrefab;
 
 		if (_bomb.ignoreTimer.getProgress() < 1 && _bomb.enemy.enemyListIndex == _enemy.enemyListIndex)
 		{
-			console.debug('Bomb-enemy overlap has been ignored');
+			// console.debug('Bomb-enemy overlap has been ignored');
 			return;
 		}
 
@@ -1577,6 +1637,7 @@ export default class Level extends Phaser.Scene {
 		// this.resetLevel();
 		// this.killPlayer();
 		this.explode(mine.x, mine.y);
+		console.debug(`player mine overlap`);
 		mine.setVisible(false);
 	}
 
@@ -1584,8 +1645,18 @@ export default class Level extends Phaser.Scene {
 	{
 		let _bomb = bomb as BombPrefab;
 
+		if (!_bomb.active)
+		{
+			console.debug(`bomb tilemap return; bomb inactive`);
+
+			return;
+
+			// without this check, if the last bomb overlaped a tile and the player punched the enemy, it would explode immediately.
+		}
+
 		if (_bomb.punched)
 		{
+			console.debug(`bomb tilemap explode`);
 			this.bombExplode(_bomb);
 		}
 		else if (_bomb.fuseTimer.getProgress() == 1)
@@ -1676,7 +1747,7 @@ export default class Level extends Phaser.Scene {
 			this.updateCombo();
 		}
 
-		let scoreToAdd = 500;
+		let scoreToAdd = 100;
 
 		// if (cause === 'chain' || cause === 'explosion')
 		// {
@@ -1711,7 +1782,7 @@ export default class Level extends Phaser.Scene {
 		// score
 		console.debug(`+ ${scoreToAdd * (this.combo > 1 ? this.combo : 1)}, combo: ${this.combo}`);
 		this.score += scoreToAdd * (this.combo > 1 ? this.combo : 1);
-		this.uiScene.setScore(this.score);
+		this.uiScene.setScore(this.score, scoreToAdd * (this.combo > 1 ? this.combo : 1));
 
 		// combo medal
 		if (this.highestCombo >= 6)
@@ -1720,6 +1791,15 @@ export default class Level extends Phaser.Scene {
 			{
 				this.game.events.emit('unlock-medal: Plato');
 			}});
+		}
+
+		if (enemy.enemyListIndex === this.goalEnemyIndex)
+		{
+			this.reachedGoal = true;
+
+			this.levelEndFeedback();
+
+			this.player.putInPlane(this.plane.x, this.plane.y);
 		}
 
 		// if (this.player.stateController.currentState.name !== 'dive')
@@ -1739,7 +1819,6 @@ export default class Level extends Phaser.Scene {
 		{
 			this.uiScene.showComboUI(this.combo);
 			SoundManager.play('combo-hit', this, .7);
-
 		}
 		else
 		{
@@ -1776,7 +1855,10 @@ export default class Level extends Phaser.Scene {
 		}
 	}
 
-	/** starts or restarts bomb fuse timer & visual */
+	/**
+	 * DEPRECATED 
+	 * 
+	 *  starts or restarts bomb fuse timer & visual */
 	setBombFuse(bomb: BombPrefab)
 	{
 		// fuse visual blink
@@ -1785,7 +1867,7 @@ export default class Level extends Phaser.Scene {
 		// explosion delay
 		bomb.fuseTimer.destroy();
 		bomb.fuseTimer = this.time.addEvent({
-			delay: 1000, callback: () =>
+			delay: 1500, callback: () =>
 			{
 				if (bomb.active)
 				{
@@ -1872,6 +1954,7 @@ export default class Level extends Phaser.Scene {
 				// _this.player.reset();
 				// _this.resetLevel();
 				_this.killPlayer();
+				console.debug('kill player: explosion');
 			}
 		});
 	}
@@ -2134,80 +2217,94 @@ export default class Level extends Phaser.Scene {
 		// this.uiScene.showLevelCompleteText();
 		this.uiScene.showSummaryUI();
 
-		this.time.addEvent({ delay: 2000, callback: () =>
+		// +500pts on level 1 & 2
+		// if (this.registry.get('current-level-index') < 2)
+		// {
+		// 	this.score += 500;
+		// 	this.uiScene.setScore(this.score);
+		// }
+
+		
+		this.time.addEvent({ delay: 2900, callback: () =>
 		{
-			console.debug(`score: +${this.score}`);
+			this.registry.set('last-score', this.score);
+
+			console.debug(`score: ${this.score}`);
 			// let timeScore = Math.floor(this.levelTimer.getRemaining() * .1);
 			// this.score += timeScore;
 			// console.debug(`time: +${timeScore}`);
 			// this.uiScene.setScore(this.score);
-			this.registry.set('total-score', this.game.registry.get('total-score') + this.score);
+			// this.registry.set('total-score', this.game.registry.get('total-score') + this.score);
 
 			this.uiScene.setAward(this.score);
 
 			// set highscore
-			if (this.game.registry.get(`top-score: ${this.game.registry.get('current-level')}`))
-			{
-				if (this.score > this.game.registry.get(`top-score: ${this.game.registry.get('current-level')}`))
-				{
-					this.game.registry.set(`top-score: ${this.game.registry.get('current-level')}`, this.score);
-					this.uiScene.setNewHighscore(true);
-					cloudSaves.saveData(this);
-				}
-			}
-			else
-			{
-				this.game.registry.set(`top-score: ${this.game.registry.get('current-level')}`, this.score);
-				cloudSaves.saveData(this);
-			}
+			// if (this.game.registry.get(`top-score: ${this.game.registry.get('current-level')}`))
+			// {
+			// 	if (this.score > this.game.registry.get(`top-score: ${this.game.registry.get('current-level')}`))
+			// 	{
+			// 		this.game.registry.set(`top-score: ${this.game.registry.get('current-level')}`, this.score);
+			// 		this.uiScene.setNewHighscore(true);
+			// 		cloudSaves.saveData(this);
+			// 	}
+			// }
+			// else
+			// {
+			// 	this.game.registry.set(`top-score: ${this.game.registry.get('current-level')}`, this.score);
+			// 	cloudSaves.saveData(this);
+			// }
+
+			// set score in registry
 
 		}});
 
 		// award medals
-		let allBronze = true;
-		let allSilver = true;
-		let allGold = true;
-		LevelSelect.levelsKey.forEach((value, index) =>
-		{
-			const score = this.game.registry.get(`top-score: ${value}`);
-			const award = getEarnedAward(value, score);
-			if (award === 'none')
-			{
-				allBronze = false;
-				allSilver = false;
-				allGold = false;
-			}
-			else if (award === 'bronze')
-			{
-				allSilver = false;
-				allGold = false;
-			}
-			else if (award === 'silver')
-			{
-				allGold = false;
-			}
-		});
-		if (allBronze)
-		{
-			this.time.addEvent({ delay: 1000, callback: ()=>
-			{
-				this.game.events.emit('unlock-medal: Bronze Trophy');
-			}});
-		}
-		if (allSilver)
-		{
-			this.time.addEvent({ delay: 1000, callback: ()=>
-			{
-				this.game.events.emit('unlock-medal: Silver Trophy');
-			}});
-		}
-		if (allGold)
-		{
-			this.time.addEvent({ delay: 1000, callback: ()=>
-			{
-				this.game.events.emit('unlock-medal: Golden Trophy');
-			}});
-		}
+		// let allBronze = true;
+		// let allSilver = true;
+		// let allGold = true;
+		// LevelSelect.levelsKey.forEach((value, index) =>
+		// {
+		// 	const score = this.game.registry.get(`top-score: ${value}`);
+		// 	const award = getEarnedAward(value, score);
+		// 	if (award === 'none')
+		// 	{
+		// 		allBronze = false;
+		// 		allSilver = false;
+		// 		allGold = false;
+		// 	}
+		// 	else if (award === 'bronze')
+		// 	{
+		// 		allSilver = false;
+		// 		allGold = false;
+		// 	}
+		// 	else if (award === 'silver')
+		// 	{
+		// 		allGold = false;
+		// 	}
+		// });
+		// if (allBronze)
+		// {
+		// 	this.time.addEvent({ delay: 1000, callback: ()=>
+		// 	{
+		// 		this.game.events.emit('unlock-medal: Bronze Trophy');
+		// 	}});
+		// }
+		// if (allSilver)
+		// {
+		// 	this.time.addEvent({ delay: 1000, callback: ()=>
+		// 	{
+		// 		this.game.events.emit('unlock-medal: Silver Trophy');
+		// 	}});
+		// }
+		// if (allGold)
+		// {
+		// 	this.time.addEvent({ delay: 1000, callback: ()=>
+		// 	{
+		// 		this.game.events.emit('unlock-medal: Golden Trophy');
+		// 	}});
+		// }
+
+		// I'm doing this in the Level select now without all this redundant code.
 
 		// level medals
 		if (this.registry.get('current-level') === 'tutorial-finale')
@@ -2217,7 +2314,7 @@ export default class Level extends Phaser.Scene {
 				this.game.events.emit('unlock-medal: Fish Splasher');
 			}});
 		}
-		else if (this.registry.get('current-level') === 'bomb-punch')
+		else if (this.registry.get('current-level') === 'parasol')
 		{
 			this.time.addEvent({ delay: 1000, callback: ()=>
 			{
@@ -2439,8 +2536,11 @@ export default class Level extends Phaser.Scene {
 		{
 			if (!this.reachedGoal)
 			{
-				if (this.enemyList[this.goalEnemyIndex])
+				if (this.goalEnemyIndex)
+					// level with enemy in plane
 				{
+					console.log('plane: enemy');
+
 					if (this.enemyList[this.goalEnemyIndex].isFalling())
 					{
 						this.reachedGoal = true;
@@ -2451,7 +2551,10 @@ export default class Level extends Phaser.Scene {
 					}
 				}
 				else
+				// level without enemy in plane
 				{
+					console.log('plane: no enemy');
+
 					this.reachedGoal = true;
 
 					this.levelEndFeedback();
@@ -2582,6 +2685,7 @@ export default class Level extends Phaser.Scene {
 
 	bindMobileButtons()
 	{
+
 		// jump
 		this.uiScene.mobileButtonJump.setInteractive();
 		this.uiScene.mobileButtonJump.on('pointerdown', () =>
@@ -2600,6 +2704,11 @@ export default class Level extends Phaser.Scene {
 			this.uiScene.mobileButtonJump.setAlpha(.01, .01, .01, .01);
 		});
 
+		this.input.on('gameobjectdown', (pointer: any, gameobject: any) =>
+		{
+			console.debug(gameobject);
+		});
+
 		// punch
 		this.uiScene.mobileButtonPunch.setInteractive();
 		this.uiScene.mobileButtonPunch.on('pointerdown', () =>
@@ -2608,6 +2717,13 @@ export default class Level extends Phaser.Scene {
 			// this.uiScene.mobileButtonPunch
 			this.uiScene.mobileButtonPunch.setAlpha(.01, .3, .01, .3);
 		});
+
+	// For multitouch to work, I need to use the following event and compare the object
+
+		// this.uiScene.input.on('gameobjectdown', (pointer: any, gameobject: any) =>
+		// {
+		// });
+
 		this.uiScene.mobileButtonPunch.on('pointerup', () =>
 		{
 			this.player.punchMobileButton = false;
@@ -2659,6 +2775,7 @@ export default class Level extends Phaser.Scene {
 		this.uiScene.mobileButtonLevelSelect.setInteractive();
 		this.uiScene.mobileButtonLevelSelect.on('pointerdown', () =>
 		{
+			LevelSelect.levelSelectEntry = 'return';
 			this.LoadLevelSelect();
 		});
 	}
@@ -2843,7 +2960,7 @@ export default class Level extends Phaser.Scene {
 			// this.uiScene.setDebugText(0, `${this.player.stateController.currentState.name}`);
 			this.uiScene.setDebugText(0, `level completed: ${this.registry.get('completed-level-' + this.currentLevelIndex)}`);
 			this.uiScene.setDebugText(1, `combo : ${this.combo}`);
-			this.uiScene.setDebugText(2, `punch input : ${this.player.punchInput}`);
+			this.uiScene.setDebugText(2, `grace timer : ${this.player.fistGraceTimer.getProgress()}`);
 		}
 	}
 

@@ -17,21 +17,15 @@ export default class InputManager {
 	([
 		['jump', 
 		[
-			'X key',
+			'up arrow key',
 			`right button`,
 			'top left corner of the screen'
 		]],
 		['punch',
 		[
-			'Z key',
+			'X key',
 			`down button`,
 			'bottom left corner'
-		]],
-		['uppercut',
-		[
-			'up arrow key',
-			`D-pad up`,
-			'top right corner'
 		]],
 		['dive',
 		[
@@ -41,7 +35,7 @@ export default class InputManager {
 		]],
 		['tutorial-toggle',
 		[
-			'space key' ,
+			'Z key' ,
 			`up button`,
 			'tap'
 		]],
@@ -59,7 +53,7 @@ export default class InputManager {
 		]],
 		['gameover-back',
 		[
-			'space bar',
+			'Z key',
 			`up button`,
 			null
 		]],
@@ -136,7 +130,7 @@ export default class InputManager {
 		]],
 		['tutorial-toggle',
 		[
-			'SPACE' ,
+			'Z' ,
 			3,
 			null
 		]],
@@ -154,7 +148,7 @@ export default class InputManager {
 		]],
 		['gameover-back',
 		[
-			'SPACE',
+			'Z',
 			3,
 			null
 		]],

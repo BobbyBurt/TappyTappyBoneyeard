@@ -123,12 +123,13 @@ export default class BombPrefab extends Phaser.GameObjects.Image {
 	// explosion delay
 		this.fuseTimer.destroy();
 		this.fuseTimer = this.scene.time.addEvent({
-			delay: 1000, callback: () =>
+			delay: 1500, callback: () =>
 			{
 				if (this.active)
 				{
 					const _level = this.scene as Level;
 					_level.bombExplode(this);
+					console.debug('bomb fuse end');
 				}
 			}
 		});

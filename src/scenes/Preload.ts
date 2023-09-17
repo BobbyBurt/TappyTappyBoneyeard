@@ -9,6 +9,7 @@ import PreloadText from "../components/PreloadText";
 
 import CameraUtil from "~/components/CameraUtil";
 import InputManager from "~/components/InputManager";
+import LevelSelect from "./LevelSelect";
 
 /* END-USER-IMPORTS */
 
@@ -97,7 +98,7 @@ export default class Preload extends Phaser.Scene {
 		// DEBUG: auto load
 			if (__DEV__)
 			{
-				this.start();
+				// this.start();
 					// mobile detection will not run if enabled
 			}
 		});
@@ -123,10 +124,13 @@ export default class Preload extends Phaser.Scene {
 		{
 			this.registry.set('mobile', true);
 			InputManager.activeInputMode = 'touch';
+			this.input.addPointer(3);
 		}
 		else if (event.type == 'click')
 		{
-			this.registry.set('mobile', false);
+			// this.registry.set('mobile', false);
+			this.registry.set('mobile', true);
+			InputManager.activeInputMode = 'touch';
 		}
 
 		if (this.loaded)
@@ -135,7 +139,7 @@ export default class Preload extends Phaser.Scene {
 		}
 	}
 
-	/**
+	/**s
 	 * loads next scene
 	 */
 	start()
@@ -148,6 +152,7 @@ export default class Preload extends Phaser.Scene {
 		// remove music here if applicable
 
 		this.scene.stop(this);
+		LevelSelect.levelSelectEntry = 'titlescreen';
 		this.scene.launch("LevelSelect");
 	}
 

@@ -9,7 +9,7 @@ import LevelIconPrefab from "../prefabs/LevelIconPrefab";
 
 import CameraUtil from "~/components/CameraUtil";
 import InputManager from "~/components/InputManager";
-import { getEarnedAward, levelScoreMilestones } from "~/components/LevelScores";
+import { getEarnedAward, getTotalAwards, levelRequiredAwards, levelScoreMilestones } from "~/components/LevelScores";
 import SoundManager from "~/components/SoundManager";
 import cloudSaves from "~/API/cloudSaves";
 
@@ -36,249 +36,267 @@ export default class LevelSelect extends Phaser.Scene {
 
 	editorCreate(): void {
 
-		// rectangle
-		const rectangle = this.add.rectangle(338, 22, 100, 60);
-		rectangle.setOrigin(0, 0);
-		rectangle.isFilled = true;
+		// bgColour
+		const bgColour = this.add.rectangle(0, 0, 480, 270);
+		bgColour.setOrigin(0, 0);
+		bgColour.isFilled = true;
+		bgColour.fillColor = 6966365;
 
-		// preview_bomb_punch
-		const preview_bomb_punch = this.add.image(390, 52, "preview-bomb-punch");
-		preview_bomb_punch.scaleX = 0.538068679604508;
-		preview_bomb_punch.scaleY = 0.33771521273288463;
+		// levelPreviewImageOld
+		const levelPreviewImageOld = this.add.image(318, 24, "preview-blank");
+		levelPreviewImageOld.setOrigin(0, 0);
+		levelPreviewImageOld.visible = false;
+
+		// levelPreviewText
+		const levelPreviewText = this.add.bitmapText(378, 71, "nokia", "Level not beat");
+		levelPreviewText.setOrigin(0.5, 0.5);
+		levelPreviewText.visible = false;
+		levelPreviewText.tintFill = true;
+		levelPreviewText.tintTopLeft = 9737364;
+		levelPreviewText.tintTopRight = 9737364;
+		levelPreviewText.tintBottomLeft = 9737364;
+		levelPreviewText.tintBottomRight = 9737364;
+		levelPreviewText.text = "Level not beat";
+		levelPreviewText.fontSize = -8;
+
+		// levelPreviewImage
+		const levelPreviewImage = this.add.image(0, 0, "preview-blank");
+		levelPreviewImage.setOrigin(0, 0);
 
 		// highscoreWindowContainer
 		const highscoreWindowContainer = this.add.container(0, 0);
 		highscoreWindowContainer.visible = false;
 
-		// rectangle_1
-		const rectangle_1 = this.add.rectangle(41, 24, 250, 60);
-		rectangle_1.setOrigin(0, 0);
-		rectangle_1.isFilled = true;
-		rectangle_1.fillColor = 4934475;
-		highscoreWindowContainer.add(rectangle_1);
+		// scoreBack
+		const scoreBack = this.add.rectangle(41, 26, 250, 60);
+		scoreBack.setOrigin(0, 0);
+		scoreBack.alpha = 0.9;
+		scoreBack.isFilled = true;
+		scoreBack.fillColor = 6966365;
+		highscoreWindowContainer.add(scoreBack);
 
-		// titleText_2
-		const titleText_2 = this.add.bitmapText(113, 68, "nokia", "2000\n");
-		titleText_2.setOrigin(1, 0);
-		titleText_2.tintFill = true;
-		titleText_2.tintTopLeft = 13275481;
-		titleText_2.tintTopRight = 13275481;
-		titleText_2.tintBottomLeft = 13275481;
-		titleText_2.tintBottomRight = 13275481;
-		titleText_2.text = "2000\n";
-		titleText_2.fontSize = -8;
-		titleText_2.align = 2;
-		highscoreWindowContainer.add(titleText_2);
+		// highscoreMeter
+		const highscoreMeter = this.add.image(51, 54, "white-px");
+		highscoreMeter.scaleX = 50;
+		highscoreMeter.scaleY = 10;
+		highscoreMeter.setOrigin(0, 0);
+		highscoreWindowContainer.add(highscoreMeter);
 
-		// titleText_3
-		const titleText_3 = this.add.bitmapText(203, 68, "nokia", "4000\n");
-		titleText_3.setOrigin(1, 0);
-		titleText_3.tintFill = true;
-		titleText_3.tintTopLeft = 13553358;
-		titleText_3.tintTopRight = 13553358;
-		titleText_3.tintBottomLeft = 13553358;
-		titleText_3.tintBottomRight = 13553358;
-		titleText_3.text = "4000\n";
-		titleText_3.fontSize = -8;
-		titleText_3.align = 2;
-		highscoreWindowContainer.add(titleText_3);
+		// scoreMeter
+		const scoreMeter = this.add.image(51, 54, "white-px");
+		scoreMeter.scaleX = 228;
+		scoreMeter.scaleY = 10;
+		scoreMeter.setOrigin(0, 0);
+		scoreMeter.tintFill = true;
+		scoreMeter.tintTopRight = 16777215;
+		scoreMeter.tintBottomLeft = 16777215;
+		scoreMeter.tintBottomRight = 16777215;
+		highscoreWindowContainer.add(scoreMeter);
 
-		// titleText_4
-		const titleText_4 = this.add.bitmapText(280, 68, "nokia", "6000\n");
-		titleText_4.setOrigin(1, 0);
-		titleText_4.tintFill = true;
-		titleText_4.tintTopLeft = 15720529;
-		titleText_4.tintTopRight = 15720529;
-		titleText_4.tintBottomLeft = 15720529;
-		titleText_4.tintBottomRight = 15720529;
-		titleText_4.text = "6000\n";
-		titleText_4.fontSize = -8;
-		titleText_4.align = 2;
-		highscoreWindowContainer.add(titleText_4);
+		// bronzeIndicator
+		const bronzeIndicator = this.add.rectangle(110, 54, 2, 12);
+		bronzeIndicator.setOrigin(0, 0);
+		bronzeIndicator.isFilled = true;
+		bronzeIndicator.fillColor = 14658422;
+		highscoreWindowContainer.add(bronzeIndicator);
 
-		// rectangle_2
-		const rectangle_2 = this.add.rectangle(51, 54, 230, 10);
-		rectangle_2.setOrigin(0, 0);
-		rectangle_2.isFilled = true;
-		rectangle_2.fillColor = 10132122;
-		highscoreWindowContainer.add(rectangle_2);
+		// bronzeMilestone
+		const bronzeMilestone = this.add.bitmapText(113, 69, "nokia", "2000\n");
+		bronzeMilestone.setOrigin(1, 0);
+		bronzeMilestone.tintFill = true;
+		bronzeMilestone.tintTopLeft = 14658422;
+		bronzeMilestone.tintTopRight = 14658422;
+		bronzeMilestone.tintBottomLeft = 14658422;
+		bronzeMilestone.tintBottomRight = 14658422;
+		bronzeMilestone.text = "2000\n";
+		bronzeMilestone.fontSize = -8;
+		bronzeMilestone.align = 2;
+		highscoreWindowContainer.add(bronzeMilestone);
 
-		// rectangle_3
-		const rectangle_3 = this.add.rectangle(50, 54, 70, 10);
-		rectangle_3.setOrigin(0, 0);
-		rectangle_3.isFilled = true;
-		rectangle_3.fillColor = 5675510;
-		highscoreWindowContainer.add(rectangle_3);
+		// silverIndicator
+		const silverIndicator = this.add.rectangle(201, 54, 2, 12);
+		silverIndicator.setOrigin(0, 0);
+		silverIndicator.isFilled = true;
+		silverIndicator.fillColor = 13158600;
+		highscoreWindowContainer.add(silverIndicator);
 
-		// titleText_1
-		const titleText_1 = this.add.bitmapText(50, 34, "nokia", "Highscore: 3000\n");
-		titleText_1.tintFill = true;
-		titleText_1.text = "Highscore: 3000\n";
-		titleText_1.fontSize = -10;
-		titleText_1.align = 1;
-		highscoreWindowContainer.add(titleText_1);
+		// silverMilestone
+		const silverMilestone = this.add.bitmapText(204, 69, "nokia", "4000\n");
+		silverMilestone.setOrigin(1, 0);
+		silverMilestone.tintFill = true;
+		silverMilestone.tintTopLeft = 13158600;
+		silverMilestone.tintTopRight = 13158600;
+		silverMilestone.tintBottomLeft = 13158600;
+		silverMilestone.tintBottomRight = 13158600;
+		silverMilestone.text = "4000\n";
+		silverMilestone.fontSize = -8;
+		silverMilestone.align = 2;
+		highscoreWindowContainer.add(silverMilestone);
 
-		// rectangle_4
-		const rectangle_4 = this.add.rectangle(279, 54, 2, 10);
-		rectangle_4.setOrigin(0, 0);
-		rectangle_4.isFilled = true;
-		rectangle_4.fillColor = 15720529;
-		highscoreWindowContainer.add(rectangle_4);
+		// goldIndicator
+		const goldIndicator = this.add.rectangle(279, 54, 2, 12);
+		goldIndicator.setOrigin(0, 0);
+		goldIndicator.isFilled = true;
+		goldIndicator.fillColor = 15983966;
+		highscoreWindowContainer.add(goldIndicator);
 
-		// rectangle_5
-		const rectangle_5 = this.add.rectangle(201, 54, 2, 10);
-		rectangle_5.setOrigin(0, 0);
-		rectangle_5.isFilled = true;
-		rectangle_5.fillColor = 13553358;
-		highscoreWindowContainer.add(rectangle_5);
+		// goldMilestone
+		const goldMilestone = this.add.bitmapText(282, 69, "nokia", "6000\n");
+		goldMilestone.setOrigin(1, 0);
+		goldMilestone.tintFill = true;
+		goldMilestone.tintTopLeft = 15983966;
+		goldMilestone.tintTopRight = 15983966;
+		goldMilestone.tintBottomLeft = 15983966;
+		goldMilestone.tintBottomRight = 15983966;
+		goldMilestone.text = "6000\n";
+		goldMilestone.fontSize = -8;
+		goldMilestone.align = 2;
+		highscoreWindowContainer.add(goldMilestone);
 
-		// rectangle_6
-		const rectangle_6 = this.add.rectangle(111, 54, 2, 10);
-		rectangle_6.setOrigin(0, 0);
-		rectangle_6.isFilled = true;
-		rectangle_6.fillColor = 13275481;
-		highscoreWindowContainer.add(rectangle_6);
+		// highscoreText
+		const highscoreText = this.add.bitmapText(50, 34, "nokia", "Highscore: 3000\n");
+		highscoreText.tintFill = true;
+		highscoreText.text = "Highscore: 3000\n";
+		highscoreText.fontSize = -10;
+		highscoreWindowContainer.add(highscoreText);
+
+		// scoreText
+		const scoreText = this.add.bitmapText(171, 34, "nokia", "Highscore: 3000\n");
+		scoreText.tintFill = true;
+		scoreText.text = "Highscore: 3000\n";
+		scoreText.fontSize = -10;
+		highscoreWindowContainer.add(scoreText);
 
 		// LockedWindowContainer
 		const lockedWindowContainer = this.add.container(0, 0);
 
-		// rectangle_12
-		const rectangle_12 = this.add.rectangle(41, 24, 250, 60);
-		rectangle_12.setOrigin(0, 0);
-		rectangle_12.isFilled = true;
-		rectangle_12.fillColor = 4934475;
-		lockedWindowContainer.add(rectangle_12);
+		// lockedWindowBack
+		const lockedWindowBack = this.add.rectangle(41, 26, 250, 60);
+		lockedWindowBack.setOrigin(0, 0);
+		lockedWindowBack.alpha = 0.9;
+		lockedWindowBack.isFilled = true;
+		lockedWindowBack.fillColor = 6966365;
+		lockedWindowContainer.add(lockedWindowBack);
 
-		// titleText_22
-		const titleText_22 = this.add.bitmapText(116, 54, "nokia", "x 6");
-		titleText_22.setOrigin(1, 0);
-		titleText_22.tintFill = true;
-		titleText_22.tintTopLeft = 13275481;
-		titleText_22.tintTopRight = 13275481;
-		titleText_22.tintBottomLeft = 13275481;
-		titleText_22.tintBottomRight = 13275481;
-		titleText_22.text = "x 6";
-		titleText_22.fontSize = -16;
-		titleText_22.align = 2;
-		lockedWindowContainer.add(titleText_22);
+		// lockedWindowHeader
+		const lockedWindowHeader = this.add.bitmapText(62, 33, "nokia", "Needed for next unlock:\n");
+		lockedWindowHeader.tintFill = true;
+		lockedWindowHeader.text = "Needed for next unlock:\n";
+		lockedWindowHeader.fontSize = -10;
+		lockedWindowHeader.align = 1;
+		lockedWindowContainer.add(lockedWindowHeader);
 
-		// titleText_32
-		const titleText_32 = this.add.bitmapText(195, 54, "nokia", "x 4");
-		titleText_32.setOrigin(1, 0);
-		titleText_32.tintFill = true;
-		titleText_32.tintTopLeft = 13553358;
-		titleText_32.tintTopRight = 13553358;
-		titleText_32.tintBottomLeft = 13553358;
-		titleText_32.tintBottomRight = 13553358;
-		titleText_32.text = "x 4";
-		titleText_32.fontSize = -16;
-		titleText_32.align = 2;
-		lockedWindowContainer.add(titleText_32);
+		// awardsNeededContainerGold
+		const awardsNeededContainerGold = this.add.container(363, 69);
+		lockedWindowContainer.add(awardsNeededContainerGold);
 
-		// titleText_42
-		const titleText_42 = this.add.bitmapText(277, 55, "nokia", "x 2\n");
-		titleText_42.setOrigin(1, 0);
-		titleText_42.tintFill = true;
-		titleText_42.tintTopLeft = 15720529;
-		titleText_42.tintTopRight = 15720529;
-		titleText_42.tintBottomLeft = 15720529;
-		titleText_42.tintBottomRight = 15720529;
-		titleText_42.text = "x 2\n";
-		titleText_42.fontSize = -16;
-		titleText_42.align = 2;
-		lockedWindowContainer.add(titleText_42);
+		// countGold
+		const countGold = this.add.bitmapText(-0.25, 12, "nokia", "x 2\n");
+		countGold.setOrigin(0, 1);
+		countGold.tintFill = true;
+		countGold.text = "x 2\n";
+		countGold.fontSize = -14;
+		awardsNeededContainerGold.add(countGold);
 
-		// titleText_12
-		const titleText_12 = this.add.bitmapText(50, 34, "nokia", "Awards needed to unlock level:\n");
-		titleText_12.tintFill = true;
-		titleText_12.text = "Awards needed to unlock level:\n";
-		titleText_12.fontSize = -10;
-		titleText_12.align = 1;
-		lockedWindowContainer.add(titleText_12);
+		// awardNeededIcon4
+		const awardNeededIcon4 = this.add.image(-18, 0, "level-icon-small-gold");
+		awardsNeededContainerGold.add(awardNeededIcon4);
 
-		// rectangle_42
-		const rectangle_42 = this.add.rectangle(219, 53, 20, 20);
-		rectangle_42.setOrigin(0, 0);
-		rectangle_42.isFilled = true;
-		rectangle_42.fillColor = 15720529;
-		lockedWindowContainer.add(rectangle_42);
+		// headerGold
+		const headerGold = this.add.bitmapText(-31, -21, "nokia", "gold\n");
+		headerGold.alpha = 0.7;
+		headerGold.alphaTopLeft = 0.7;
+		headerGold.alphaTopRight = 0.7;
+		headerGold.alphaBottomLeft = 0.7;
+		headerGold.alphaBottomRight = 0.7;
+		headerGold.tintFill = true;
+		headerGold.text = "gold\n";
+		headerGold.fontSize = -8;
+		awardsNeededContainerGold.add(headerGold);
 
-		// rectangle_52
-		const rectangle_52 = this.add.rectangle(139, 53, 20, 20);
-		rectangle_52.setOrigin(0, 0);
-		rectangle_52.isFilled = true;
-		lockedWindowContainer.add(rectangle_52);
+		// awardsNeededContainerSilver
+		const awardsNeededContainerSilver = this.add.container(245, 70);
+		lockedWindowContainer.add(awardsNeededContainerSilver);
 
-		// rectangle_62
-		const rectangle_62 = this.add.rectangle(59, 53, 20, 20);
-		rectangle_62.setOrigin(0, 0);
-		rectangle_62.isFilled = true;
-		rectangle_62.fillColor = 13275481;
-		lockedWindowContainer.add(rectangle_62);
+		// countSilver
+		const countSilver = this.add.bitmapText(-0.25, 12, "nokia", "x 2\n");
+		countSilver.setOrigin(0, 1);
+		countSilver.tintFill = true;
+		countSilver.text = "x 2\n";
+		countSilver.fontSize = -14;
+		awardsNeededContainerSilver.add(countSilver);
 
-		// levelSelectContainer
-		const levelSelectContainer = this.add.container(649, 43);
+		// awardNeededIcon3
+		const awardNeededIcon3 = this.add.image(-18, 0, "level-icon-small-silver");
+		awardsNeededContainerSilver.add(awardNeededIcon3);
 
-		// levelBack
-		const levelBack = this.add.rectangle(585, 323, 150, 40);
-		levelBack.isFilled = true;
-		levelBack.fillColor = 2697513;
-		levelSelectContainer.add(levelBack);
+		// headerSilver
+		const headerSilver = this.add.bitmapText(-31, -21, "nokia", "silver\n");
+		headerSilver.alpha = 0.7;
+		headerSilver.alphaTopLeft = 0.7;
+		headerSilver.alphaTopRight = 0.7;
+		headerSilver.alphaBottomLeft = 0.7;
+		headerSilver.alphaBottomRight = 0.7;
+		headerSilver.tintFill = true;
+		headerSilver.text = "silver\n";
+		headerSilver.fontSize = -8;
+		awardsNeededContainerSilver.add(headerSilver);
 
-		// levelText
-		const levelText = this.add.bitmapText(585, 323, "nokia", "intro\n");
-		levelText.setOrigin(0.5, 0.5);
-		levelText.text = "intro\n";
-		levelText.fontSize = -8;
-		levelText.align = 1;
-		levelSelectContainer.add(levelText);
+		// awardsNeededContainerBronze
+		const awardsNeededContainerBronze = this.add.container(169, 70);
+		lockedWindowContainer.add(awardsNeededContainerBronze);
 
-		// downBack
-		const downBack = this.add.rectangle(585, 377, 100, 40);
-		downBack.isFilled = true;
-		downBack.fillColor = 2697513;
-		levelSelectContainer.add(downBack);
+		// countBronze
+		const countBronze = this.add.bitmapText(-0.25, 12, "nokia", "x 2\n");
+		countBronze.setOrigin(0, 1);
+		countBronze.tintFill = true;
+		countBronze.text = "x 2\n";
+		countBronze.fontSize = -14;
+		awardsNeededContainerBronze.add(countBronze);
 
-		// downText
-		const downText = this.add.bitmapText(585, 377, "nokia", "v\n");
-		downText.setOrigin(0.5, 0.5);
-		downText.text = "v\n";
-		downText.fontSize = -16;
-		downText.align = 1;
-		levelSelectContainer.add(downText);
+		// awardNeededIcon2
+		const awardNeededIcon2 = this.add.image(-18, 0, "level-icon-small-bronze");
+		awardsNeededContainerBronze.add(awardNeededIcon2);
 
-		// upBack
-		const upBack = this.add.rectangle(585, 269, 100, 40);
-		upBack.isFilled = true;
-		upBack.fillColor = 2697513;
-		levelSelectContainer.add(upBack);
+		// headerBronze
+		const headerBronze = this.add.bitmapText(-31, -21, "nokia", "bronze\n");
+		headerBronze.alpha = 0.7;
+		headerBronze.alphaTopLeft = 0.7;
+		headerBronze.alphaTopRight = 0.7;
+		headerBronze.alphaBottomLeft = 0.7;
+		headerBronze.alphaBottomRight = 0.7;
+		headerBronze.tintFill = true;
+		headerBronze.text = "bronze\n";
+		headerBronze.fontSize = -8;
+		awardsNeededContainerBronze.add(headerBronze);
 
-		// upText
-		const upText = this.add.bitmapText(585, 269, "nokia", "v");
-		upText.angle = -180;
-		upText.setOrigin(0.5, 0.5);
-		upText.text = "v";
-		upText.fontSize = -16;
-		upText.align = 1;
-		levelSelectContainer.add(upText);
+		// awardsNeededContainerPlayed
+		const awardsNeededContainerPlayed = this.add.container(93, 70);
+		lockedWindowContainer.add(awardsNeededContainerPlayed);
 
-		// titleText
-		const titleText = this.add.bitmapText(36, -33, "nokia", "Level Select\n");
-		titleText.tintFill = true;
-		titleText.tintTopLeft = 3158064;
-		titleText.tintTopRight = 3158064;
-		titleText.tintBottomLeft = 3158064;
-		titleText.tintBottomRight = 3158064;
-		titleText.text = "Level Select\n";
-		titleText.fontSize = -16;
-		titleText.align = 1;
-		levelSelectContainer.add(titleText);
+		// countPlayed
+		const countPlayed = this.add.bitmapText(-0.25, 12, "nokia", "x 2\n");
+		countPlayed.setOrigin(0, 1);
+		countPlayed.tintFill = true;
+		countPlayed.text = "x 2\n";
+		countPlayed.fontSize = -14;
+		awardsNeededContainerPlayed.add(countPlayed);
 
-		// levelInfoText
-		const levelInfoText = this.add.bitmapText(580, 269, "nokia", "\n");
-		levelInfoText.text = "\n";
-		levelInfoText.fontSize = -8;
-		levelSelectContainer.add(levelInfoText);
+		// awardNeededIcon1
+		const awardNeededIcon1 = this.add.image(-18, 0, "level-icon-small-played");
+		awardsNeededContainerPlayed.add(awardNeededIcon1);
+
+		// headerPlayed
+		const headerPlayed = this.add.bitmapText(-31, -21, "nokia", "completed\n");
+		headerPlayed.alpha = 0.7;
+		headerPlayed.alphaTopLeft = 0.7;
+		headerPlayed.alphaTopRight = 0.7;
+		headerPlayed.alphaBottomLeft = 0.7;
+		headerPlayed.alphaBottomRight = 0.7;
+		headerPlayed.tintFill = true;
+		headerPlayed.text = "completed\n";
+		headerPlayed.fontSize = -8;
+		awardsNeededContainerPlayed.add(headerPlayed);
 
 		// levelIconPrefab
 		const levelIconPrefab = new LevelIconPrefab(this, 60, 123);
@@ -323,6 +341,7 @@ export default class LevelSelect extends Phaser.Scene {
 		// levelIconPrefab_10
 		const levelIconPrefab_10 = new LevelIconPrefab(this, 420, 173);
 		this.add.existing(levelIconPrefab_10);
+		levelIconPrefab_10.visible = true;
 
 		// levelIconPrefab_11
 		const levelIconPrefab_11 = new LevelIconPrefab(this, 375, 173);
@@ -359,14 +378,12 @@ export default class LevelSelect extends Phaser.Scene {
 		// levelIconPrefab_19
 		const levelIconPrefab_19 = new LevelIconPrefab(this, 420, 223);
 		this.add.existing(levelIconPrefab_19);
+		levelIconPrefab_19.visible = false;
 
 		// levelIconPrefab_20
 		const levelIconPrefab_20 = new LevelIconPrefab(this, 375, 223);
 		this.add.existing(levelIconPrefab_20);
-
-		// levelIconPrefab_21
-		const levelIconPrefab_21 = new LevelIconPrefab(this, 330, 223);
-		this.add.existing(levelIconPrefab_21);
+		levelIconPrefab_20.visible = false;
 
 		// levelIconPrefab_22
 		const levelIconPrefab_22 = new LevelIconPrefab(this, 60, 223);
@@ -389,7 +406,7 @@ export default class LevelSelect extends Phaser.Scene {
 		this.add.existing(levelIconPrefab_26);
 
 		// lists
-		const levelBackList = [levelBack, downBack, upBack];
+		const levelBackList: Array<any> = [];
 
 		// levelIconPrefab (prefab fields)
 		levelIconPrefab.levelIndex = 0;
@@ -454,9 +471,6 @@ export default class LevelSelect extends Phaser.Scene {
 		// levelIconPrefab_20 (prefab fields)
 		levelIconPrefab_20.levelIndex = 25;
 
-		// levelIconPrefab_21 (prefab fields)
-		levelIconPrefab_21.levelIndex = 24;
-
 		// levelIconPrefab_22 (prefab fields)
 		levelIconPrefab_22.levelIndex = 18;
 
@@ -472,23 +486,38 @@ export default class LevelSelect extends Phaser.Scene {
 		// levelIconPrefab_26 (prefab fields)
 		levelIconPrefab_26.levelIndex = 20;
 
+		this.levelPreviewImageOld = levelPreviewImageOld;
+		this.levelPreviewText = levelPreviewText;
+		this.levelPreviewImage = levelPreviewImage;
 		this.highscoreWindowContainer = highscoreWindowContainer;
-		this.titleText_2 = titleText_2;
-		this.titleText_3 = titleText_3;
-		this.titleText_4 = titleText_4;
-		this.titleText_1 = titleText_1;
+		this.highscoreMeter = highscoreMeter;
+		this.scoreMeter = scoreMeter;
+		this.bronzeIndicator = bronzeIndicator;
+		this.bronzeMilestone = bronzeMilestone;
+		this.silverIndicator = silverIndicator;
+		this.silverMilestone = silverMilestone;
+		this.goldIndicator = goldIndicator;
+		this.goldMilestone = goldMilestone;
+		this.highscoreText = highscoreText;
+		this.scoreText = scoreText;
 		this.lockedWindowContainer = lockedWindowContainer;
-		this.titleText_22 = titleText_22;
-		this.titleText_32 = titleText_32;
-		this.titleText_42 = titleText_42;
-		this.titleText_12 = titleText_12;
-		this.levelSelectContainer = levelSelectContainer;
-		this.levelBack = levelBack;
-		this.levelText = levelText;
-		this.downBack = downBack;
-		this.upBack = upBack;
-		this.titleText = titleText;
-		this.levelInfoText = levelInfoText;
+		this.lockedWindowHeader = lockedWindowHeader;
+		this.awardsNeededContainerGold = awardsNeededContainerGold;
+		this.countGold = countGold;
+		this.awardNeededIcon4 = awardNeededIcon4;
+		this.headerGold = headerGold;
+		this.awardsNeededContainerSilver = awardsNeededContainerSilver;
+		this.countSilver = countSilver;
+		this.awardNeededIcon3 = awardNeededIcon3;
+		this.headerSilver = headerSilver;
+		this.awardsNeededContainerBronze = awardsNeededContainerBronze;
+		this.countBronze = countBronze;
+		this.awardNeededIcon2 = awardNeededIcon2;
+		this.headerBronze = headerBronze;
+		this.awardsNeededContainerPlayed = awardsNeededContainerPlayed;
+		this.countPlayed = countPlayed;
+		this.awardNeededIcon1 = awardNeededIcon1;
+		this.headerPlayed = headerPlayed;
 		this.levelIconPrefab = levelIconPrefab;
 		this.levelIconPrefab_1 = levelIconPrefab_1;
 		this.levelIconPrefab_2 = levelIconPrefab_2;
@@ -510,7 +539,6 @@ export default class LevelSelect extends Phaser.Scene {
 		this.levelIconPrefab_18 = levelIconPrefab_18;
 		this.levelIconPrefab_19 = levelIconPrefab_19;
 		this.levelIconPrefab_20 = levelIconPrefab_20;
-		this.levelIconPrefab_21 = levelIconPrefab_21;
 		this.levelIconPrefab_22 = levelIconPrefab_22;
 		this.levelIconPrefab_23 = levelIconPrefab_23;
 		this.levelIconPrefab_24 = levelIconPrefab_24;
@@ -521,23 +549,38 @@ export default class LevelSelect extends Phaser.Scene {
 		this.events.emit("scene-awake");
 	}
 
+	private levelPreviewImageOld!: Phaser.GameObjects.Image;
+	private levelPreviewText!: Phaser.GameObjects.BitmapText;
+	private levelPreviewImage!: Phaser.GameObjects.Image;
 	private highscoreWindowContainer!: Phaser.GameObjects.Container;
-	private titleText_2!: Phaser.GameObjects.BitmapText;
-	private titleText_3!: Phaser.GameObjects.BitmapText;
-	private titleText_4!: Phaser.GameObjects.BitmapText;
-	private titleText_1!: Phaser.GameObjects.BitmapText;
+	private highscoreMeter!: Phaser.GameObjects.Image;
+	private scoreMeter!: Phaser.GameObjects.Image;
+	private bronzeIndicator!: Phaser.GameObjects.Rectangle;
+	private bronzeMilestone!: Phaser.GameObjects.BitmapText;
+	private silverIndicator!: Phaser.GameObjects.Rectangle;
+	private silverMilestone!: Phaser.GameObjects.BitmapText;
+	private goldIndicator!: Phaser.GameObjects.Rectangle;
+	private goldMilestone!: Phaser.GameObjects.BitmapText;
+	private highscoreText!: Phaser.GameObjects.BitmapText;
+	private scoreText!: Phaser.GameObjects.BitmapText;
 	private lockedWindowContainer!: Phaser.GameObjects.Container;
-	private titleText_22!: Phaser.GameObjects.BitmapText;
-	private titleText_32!: Phaser.GameObjects.BitmapText;
-	private titleText_42!: Phaser.GameObjects.BitmapText;
-	private titleText_12!: Phaser.GameObjects.BitmapText;
-	private levelSelectContainer!: Phaser.GameObjects.Container;
-	private levelBack!: Phaser.GameObjects.Rectangle;
-	private levelText!: Phaser.GameObjects.BitmapText;
-	private downBack!: Phaser.GameObjects.Rectangle;
-	private upBack!: Phaser.GameObjects.Rectangle;
-	private titleText!: Phaser.GameObjects.BitmapText;
-	private levelInfoText!: Phaser.GameObjects.BitmapText;
+	private lockedWindowHeader!: Phaser.GameObjects.BitmapText;
+	private awardsNeededContainerGold!: Phaser.GameObjects.Container;
+	private countGold!: Phaser.GameObjects.BitmapText;
+	private awardNeededIcon4!: Phaser.GameObjects.Image;
+	private headerGold!: Phaser.GameObjects.BitmapText;
+	private awardsNeededContainerSilver!: Phaser.GameObjects.Container;
+	private countSilver!: Phaser.GameObjects.BitmapText;
+	private awardNeededIcon3!: Phaser.GameObjects.Image;
+	private headerSilver!: Phaser.GameObjects.BitmapText;
+	private awardsNeededContainerBronze!: Phaser.GameObjects.Container;
+	private countBronze!: Phaser.GameObjects.BitmapText;
+	private awardNeededIcon2!: Phaser.GameObjects.Image;
+	private headerBronze!: Phaser.GameObjects.BitmapText;
+	private awardsNeededContainerPlayed!: Phaser.GameObjects.Container;
+	private countPlayed!: Phaser.GameObjects.BitmapText;
+	private awardNeededIcon1!: Phaser.GameObjects.Image;
+	private headerPlayed!: Phaser.GameObjects.BitmapText;
 	private levelIconPrefab!: LevelIconPrefab;
 	private levelIconPrefab_1!: LevelIconPrefab;
 	private levelIconPrefab_2!: LevelIconPrefab;
@@ -559,35 +602,64 @@ export default class LevelSelect extends Phaser.Scene {
 	private levelIconPrefab_18!: LevelIconPrefab;
 	private levelIconPrefab_19!: LevelIconPrefab;
 	private levelIconPrefab_20!: LevelIconPrefab;
-	private levelIconPrefab_21!: LevelIconPrefab;
 	private levelIconPrefab_22!: LevelIconPrefab;
 	private levelIconPrefab_23!: LevelIconPrefab;
 	private levelIconPrefab_24!: LevelIconPrefab;
 	private levelIconPrefab_25!: LevelIconPrefab;
 	private levelIconPrefab_26!: LevelIconPrefab;
-	private levelBackList!: Phaser.GameObjects.Rectangle[];
+	private levelBackList!: Array<any>;
 
 	/* START-USER-CODE */
-
-	private levelPreviewImage: Phaser.GameObjects.Image;
 
 	private UICam!: Phaser.Cameras.Scene2D.BaseCamera | any;
 
 	public static levelsKey = 
 		[
-		'jump', 'flap', 'punch',
-		'airborne', 'dive', 'dive-practice',
-		'uppercut', 'charge', 'tutorial-finale', 
+		// TUTORIAL 1
+		'jump', 
+		'flap', 
+		'punch',
 
-		'bomb-intro', 'bomb-holder', 'bomb-punch', 
-		'combo', 'mine-intro', 'mine-wall',
-		'multi-move', 'gun-intro', 'bullet-ceiling',
+		// TUTORIAL 2
+		'airborne',
+		'dive',
+		'dive-practice',
 
+		// TUTORIAL 3
+		'uppercut',
+		'charge',
+		'tutorial-finale', 
+
+		// MAIN 1
+		'bomb-intro',
+		'combo',
+		'bomb-holder', 
+
+		// MAIN 2
+		'umbrella-intro',
+		'bomb-punch',
+
+		// MAIN 3
+		'pogo-intro',
+		'umbrella-shield',
+
+		// MAIN 4
 		'grenade',
-		'parasol', 'umbrella-trap',
-		'pogo-intro', 'pogo-ideas', 'pogo-challenge', 
-		'finale',
+		'pogo-ideas',
+
+		// HARD 1
+		'mine-intro',
+		/* mine enemy 2 */ 'pogo-challenge',
+
+		// HARD 2
+		'gun-intro',
+		'mine-wall',
+		'bullet-ceiling',
+
+		'finale'
 		];
+
+	public static levelSelectEntry: 'titlescreen' | 'return' | 'complete' = 'titlescreen';
 
 	private gamepad:Phaser.Input.Gamepad.Gamepad | undefined;
 	private SelectKey!: Phaser.Input.Keyboard.Key;
@@ -598,138 +670,58 @@ export default class LevelSelect extends Phaser.Scene {
 	/** True during post-level sequence. Don't set directly. */
 	private lockInput = false;
 
-// selected level
-	/**`-1`: none selected */
-	private selectedLevel = -1;
+	/** `-1`, means none is selected. This value persists, so it's also the previous level index' */
+	private selectedLevel = 0;
 
 	/** used to only call functionality on down */
 	private gamepadSelectorDown = false;
+
+	/**
+	 * When unlock check detects levels, the index is added to the end of the array.
+	 * 
+	 * The Unlock sequence animates the level index icon at [0], shifts it out and repeats.
+	 */
+	private levelIndexUnlockQueue: Array<number>;
+
+	/**
+	 * new medal check happens immediate upon complete, and this is set accordingly. The sequence following lastscore is determined by this.
+	 * This could also be a first-complete below bronze milestone.
+	 */
+	private newAwardAchieved = false;
+
+	/** Used by `setLockedWindow` */
+	private justUnlockedLevel = 0;
+
+	private scoreMeterTween!: Phaser.Tweens.Tween;
 
 	create() {
 
 		this.editorCreate();
 		this.createCameras();
 
+		this.newAwardAchieved = false;
+
+		this.justUnlockedLevel = 0;
+
+		this.levelIndexUnlockQueue = new Array<number>();
+
 		// this.levelPreviewImage = this.add.image(this.titleText.x, this.titleText.y, `preview-${LevelSelect.levelsKey[this.selectedLevel]}`);
-
-
-	// top score
-	if (!this.registry.get('top-score'))
-	{
-		this.highScoreText.setText('');
-	}
-	else
-	{
-		this.highScoreText.setText(`highscore:\n\n${this.registry.get('top-score')}`);
-	}
-
-	// arcade mode
-		this.arcadeBack.setInteractive();
-		this.arcadeBack.on('pointerdown', () =>
-		{
-			this.registry.set('game-mode', 'arcade');
-			this.game.registry.set('total-score', 0);
-			this.selectedLevel = 0;
-			this.loadLevel();
-		});
-
-	// level select
-		this.levelSelectBack.setInteractive()
-		this.levelSelectBack.on('pointerdown', () =>
-		{
-			this.registry.set('game-mode', 'level');
-			this.mainMenuContainer.setVisible(false);
-			this.levelSelectContainer.setVisible(true);
-		});
-
-	// level select back
-		// this.backBack.setInteractive();
-		// this.backBack.on('pointerdown', () =>
-		// {
-		// 	this.mainMenuContainer.setVisible(true);
-		// 	this.levelSelectContainer.setVisible(false);
-
-		// 	if (!this.registry.get('top-score'))
-		// 	{
-		// 		this.highScoreText.setText('');
-		// 	}
-		// 	else
-		// 	{
-		// 		this.highScoreText.setText(`highscore:\n\n${this.registry.get('top-score')}`);
-		// 	}
-		// });
-
-		if (this.registry.get('game-mode') === 'level')
-		{
-			this.mainMenuContainer.setVisible(false);
-			this.levelSelectContainer.setVisible(true);
-		}
 
 	// use previously selected level
 		if (this.registry.get('current-level-index'))
 		{
 			this.selectedLevel = this.registry.get('current-level-index');
 		}
-		this.setSelectedLevel('neutral');
 
-	// load level: pointer, key, button
-		this.levelBack.setInteractive();
-		this.levelBack.on('pointerdown', () =>
-		{
-			this.loadLevel();
-		});
-		this.input.keyboard.on('keydown-' + InputManager.getInput('menu-confirm', 'keyboard') , () =>
-		{
-			this.loadLevel();
-		});
-		this.input.gamepad.on('down', 
-			(pad:Phaser.Input.Gamepad.Gamepad, button:Phaser.Input.Gamepad.Button, index:number) =>
-		{
-			if (button.index == InputManager.getInput('menu-confirm', 'gamepad'))
-			{
-				this.loadLevel();
-			}
-		});
-
-	// navigation: pointer, key, button
-		this.upBack.setInteractive();
-		this.upBack.on('pointerdown', () =>
-		{
-			this.setSelectedLevel('up');
-		});		
-		this.downBack.setInteractive();
-		this.downBack.on('pointerdown', () =>
-		{
-			this.setSelectedLevel('down');
-		});
-		this.input.keyboard.on('keydown-' + InputManager.getInput('menu-up', 'keyboard') , () =>
-		{
-			this.setSelectedLevel('up');
-		});
-		this.input.keyboard.on('keydown-' + InputManager.getInput('menu-down', 'keyboard') , () =>
-		{
-			this.setSelectedLevel('down');
-		});
-		this.input.gamepad.on('down', 
-			(pad:Phaser.Input.Gamepad.Gamepad, button:Phaser.Input.Gamepad.Button, index:number) =>
-		{
-			if (button.index == InputManager.getInput('menu-up', 'gamepad'))
-			{
-				this.setSelectedLevel('up');
-			}
-		});
-		this.input.gamepad.on('down', 
-			(pad:Phaser.Input.Gamepad.Gamepad, button:Phaser.Input.Gamepad.Button, index:number) =>
-		{
-			if (button.index == InputManager.getInput('menu-down', 'gamepad'))
-			{
-				this.setSelectedLevel('down');
-			}
-		});
-
-		// cloud save data clear
+		// clear save data debug
 		this.input.keyboard.on('keydown-C', () =>
 		{
+			// if (!__DEV__)
+			// {
+			// 	console.debug('returned; dev only');
+			// 	return;
+			// }
+
 			LevelSelect.levelsKey.forEach((value, index) =>
 			{
 				this.registry.set(`top-score: ${value}`, null);
@@ -737,13 +729,241 @@ export default class LevelSelect extends Phaser.Scene {
 			cloudSaves.saveData(this);
 		});
 
+		// load save data debug
 		this.input.keyboard.on('keydown-L', () =>
 		{
 			cloudSaves.loadData(this);
+
 			// this would be better with a status ready callback
+
+			this.setLevelIcons();
 		});
 
-		// prefab setup
+		// award gold debug
+		this.input.keyboard.on('keydown-G', () =>
+		{
+			if (__DEV__)
+			{
+				this.registry.set(`top-score: ${LevelSelect.levelsKey[this.selectedLevel]}`, 100000);
+				this.topScoreCheck();
+				this.unlockCheck();
+			}
+		});
+
+		// unlock level debug
+		this.input.keyboard.on('keydown-U', () =>
+		{
+			// if (__DEV__)
+			// {
+				this.registry.set
+					(`unlocked: ${LevelSelect.levelsKey[this.selectedLevel]}`, true);
+				this.registry.set
+					(`unlocked: ${LevelSelect.levelsKey[this.selectedLevel]}`, true);
+				this.levelIndexUnlockQueue.push(this.selectedLevel);
+			// }
+		});
+
+		// registry log debug
+		this.input.keyboard.on('keydown-R', () =>
+		{
+			if (__DEV__)
+			{
+				console.debug(this.registry.list);
+			}
+		});
+
+		// set medal debug
+		this.input.keyboard.on('keydown-Q', () =>
+		{
+			this.registry.set(`top-score: ${LevelSelect.levelsKey[this.selectedLevel]}`,
+			levelScoreMilestones.get(LevelSelect.levelsKey[this.selectedLevel])![0])
+		});
+
+		// nav right input - keyboard
+		this.input.keyboard.on
+			(`keydown-${InputManager.getInput('menu-right', 'keyboard')}`, () =>
+		{
+			// input lock return
+			if (this.lockInput)
+			{
+				console.debug('returned; `lockInput` is true');
+				return;
+			}
+
+			this.setSelectedLevel(this.selectedLevel + 1);
+		});
+		// nav right input - gamepad
+		this.input.gamepad.on(`down`, (pad:Phaser.Input.Gamepad.Gamepad, 
+			button:Phaser.Input.Gamepad.Button, index:number) =>
+		{
+			// input lock return
+			if (this.lockInput)
+			{
+				console.debug('returned; `lockInput` is true');
+				return;
+			}
+
+			if (button.index == InputManager.getInput('menu-right', 'gamepad'))
+			{
+				this.setSelectedLevel(this.selectedLevel + 1);
+			}
+		});
+
+		// nav left input - keyboard
+		this.input.keyboard.on
+			(`keydown-${InputManager.getInput('menu-left', 'keyboard')}`, () =>
+		{
+			// input lock return
+			if (this.lockInput)
+			{
+				console.debug('returned; `lockInput` is true');
+				return;
+			}
+
+			this.setSelectedLevel(this.selectedLevel - 1);
+		});
+		// nav left input - gamepad
+		this.input.gamepad.on(`down`, (pad:Phaser.Input.Gamepad.Gamepad, 
+			button:Phaser.Input.Gamepad.Button, index:number) =>
+		{
+			// input lock return
+			if (this.lockInput)
+			{
+				console.debug('returned; `lockInput` is true');
+				return;
+			}
+
+			if (button.index == InputManager.getInput('menu-left', 'gamepad'))
+			{
+				this.setSelectedLevel(this.selectedLevel - 1);
+			}
+		});
+
+		// nav up input - keyboard
+		this.input.keyboard.on
+			(`keydown-${InputManager.getInput('menu-up', 'keyboard')}`, () =>
+		{
+			// input lock return
+			if (this.lockInput)
+			{
+				console.debug('returned; `lockInput` is true');
+				return;
+			}
+
+			// top row return
+			// HARDCODED; may need to be updated
+			if (this.selectedLevel < 9)
+			{
+				return;
+			}
+
+			this.setSelectedLevel(this.selectedLevel - 9);
+		});
+		// nav up input - gamepad
+		this.input.gamepad.on(`down`, (pad:Phaser.Input.Gamepad.Gamepad, 
+			button:Phaser.Input.Gamepad.Button, index:number) =>
+		{
+			// input lock return
+			if (this.lockInput)
+			{
+				console.debug('returned; `lockInput` is true');
+				return;
+			}
+
+			if (button.index == InputManager.getInput('menu-up', 'gamepad'))
+			{
+				// top row return
+				// HARDCODED; may need to be updated
+				if (this.selectedLevel < 9)
+				{
+					return;
+				}
+
+				this.setSelectedLevel(this.selectedLevel - 9);
+			}
+		});
+
+		// nav down input - keyboard
+		this.input.keyboard.on
+			(`keydown-${InputManager.getInput('menu-down', 'keyboard')}`, () =>
+		{
+			// input lock return
+			if (this.lockInput)
+			{
+				console.debug('returned; `lockInput` is true');
+				return;
+			}
+
+			// bottom row return
+			// HARDCODED; may need to be updated
+			if (this.selectedLevel > 14)
+			{
+				return;
+			}
+
+			this.setSelectedLevel(this.selectedLevel + 9);
+		});
+		// nav down input - gamepad
+		this.input.gamepad.on(`down`, (pad:Phaser.Input.Gamepad.Gamepad, 
+			button:Phaser.Input.Gamepad.Button, index:number) =>
+		{
+			// input lock return
+			if (this.lockInput)
+			{
+				console.debug('returned; `lockInput` is true');
+				return;
+			}
+
+			if (button.index == InputManager.getInput('menu-down', 'gamepad'))
+			{
+				// bottom row return
+				// HARDCODED; may need to be updated
+				if (this.selectedLevel > 14)
+				{
+					return;
+				}
+
+				this.setSelectedLevel(this.selectedLevel + 9);
+			}
+		});
+
+		// confirm input - keyboard
+		this.input.keyboard.on
+			(`keydown-${InputManager.getInput('menu-confirm', 'keyboard')}`, () =>
+		{
+			// input lock return
+			if (this.lockInput)
+			{
+				console.debug('returned; `lockInput` is true');
+				return;
+			}
+
+			this.loadLevel();
+		});
+		// nav down input - gamepad
+		this.input.gamepad.on(`down`, (pad:Phaser.Input.Gamepad.Gamepad, 
+			button:Phaser.Input.Gamepad.Button, index:number) =>
+		{
+			// input lock return
+			if (this.lockInput)
+			{
+				console.debug('returned; `lockInput` is true');
+				return;
+			}
+
+			if (button.index == InputManager.getInput('menu-confirm', 'gamepad'))
+			{
+				this.loadLevel();
+			}
+		});
+
+
+		// unlock first levels
+		this.registry.set(`unlocked: ${LevelSelect.levelsKey[0]}`, true);
+		this.registry.set(`unlocked: ${LevelSelect.levelsKey[1]}`, true);
+		this.registry.set(`unlocked: ${LevelSelect.levelsKey[2]}`, true);
+
+		// level icons setup
 		this.levelIcons = new Array<LevelIconPrefab>();
 		this.levelIcons.push(this.levelIconPrefab);
 		this.levelIcons.push(this.levelIconPrefab_1);
@@ -769,16 +989,690 @@ export default class LevelSelect extends Phaser.Scene {
 		this.levelIcons.push(this.levelIconPrefab_25);
 		this.levelIcons.push(this.levelIconPrefab_24);
 		this.levelIcons.push(this.levelIconPrefab_23);
-		this.levelIcons.push(this.levelIconPrefab_21);
+		// this.levelIcons.push(this.levelIconPrefab_21);
 		this.levelIcons.push(this.levelIconPrefab_20);
 		this.levelIcons.push(this.levelIconPrefab_19);
+		this.setLevelIcons();
+
+		// level icons pointer input
+		this.levelIcons.forEach((value, index) =>
+		{
+			value.setSize(35, 45);
+			value.setInteractive();
+			value.on('pointerdown', () =>
+			{
+				// input lock return
+				if (this.lockInput)
+				{
+					console.debug('returned; `lockInput` is true');
+					return;
+				}
+
+				// if second tap, load level
+				if (this.selectedLevel === index)
+				{
+					this.loadLevel();
+				}
+
+				// select level
+				else
+				{
+					this.setSelectedLevel(index);
+				}
+			});
+		});
+
+		if (this.selectedLevel > -1)
+		{
+			this.setSelectedLevel(this.selectedLevel);
+		}
+
+		if (LevelSelect.levelSelectEntry === 'complete')
+		{
+			// Set locked window based on registry before the completed level is factored in, so the 'update locked window sequence' can have a before / after.
+			this.setLockedWindow(false);
+			this.lockedWindowContainer.setVisible(false);
+			this.highscoreWindowContainer.setVisible(true);
+
+			this.topScoreCheck();
+			this.unlockCheck();
+			this.lastScoreSequence();
+		}
+	}
+
+	/**
+	 * Set variables, visuals to reflect selected level.
+	 * 
+	 * Score window or unlock window will be set.
+	 * 
+	 * Level preview image is set
+	 * 
+	 * @param levelIndex For navigation, this can be the current selected input + 1 or so. Out of range indexes will be handled.
+	 */
+	setSelectedLevel(levelIndex: number)
+	{
+		console.debug(levelIndex);
+
+		// clamp
+		// if (levelIndex < 0)
+		// {
+		// 	levelIndex = 0;
+		// }
+		// else if (levelIndex > LevelSelect.levelsKey.length - 1)
+		// {
+		// 	levelIndex = LevelSelect.levelsKey.length - 1;
+		// }
+		levelIndex = Phaser.Math.Clamp(levelIndex, 0, LevelSelect.levelsKey.length - 1);
+
+		// set var
+		this.selectedLevel = levelIndex;
+
+		// set visual
+		this.setHighlightedLevel(levelIndex);
+
+		// locked check
+		if (this.registry.get(`unlocked: ${LevelSelect.levelsKey[levelIndex]}`))
+		{	
+			this.setScoreWindow();
+		}
+		else
+		{
+			this.setLockedWindow(false);
+		}
+
+		// set preview
+		this.setPreview();
+	}
+
+	/**
+	 * Sets the preview for the currently selected level
+	 * 
+	 * If the level isn't unlocked or played, or if an image preview cannot be found, a template image will be used with accomodating text.
+	 */
+	setPreview()
+	{
+		if (this.registry.get(`top-score: ${LevelSelect.levelsKey[this.selectedLevel]}`))
+		{
+			// level has been beat
+
+			if (this.game.textures.exists
+				(`preview-${LevelSelect.levelsKey[this.selectedLevel]}`))
+			{
+				// set preview image
+				this.levelPreviewImage.setTexture
+					(`preview-${LevelSelect.levelsKey[this.selectedLevel]}`);
+				this.levelPreviewText.setText('');
+			}
+			else
+			{
+				// no image found
+
+				// set blank
+				this.levelPreviewImage.setTexture('preview-blank');
+				this.levelPreviewText.setText('no prev image');
+			}
+
+		}
+		else if (this.registry.get(`unlocked: ${LevelSelect.levelsKey[this.selectedLevel]}`))
+		{
+			// level has only been unlocked
+
+			// set blank
+			this.levelPreviewImage.setTexture('preview-blank');
+			this.levelPreviewText.setText('Level not beat');
+		}
+		else
+		{
+			// level is locked
+
+			// set blank
+			this.levelPreviewImage.setTexture('preview-blank');
+			this.levelPreviewText.setText('Level locked');
+		}
+	}
+
+	/**
+	 * Set & show window conveying which awards are needed for unlock.
+	 * @param justUnlockedLevel or first locked level
+	 * @returns 
+	 */
+	setLockedWindow(justUnlockedLevel: boolean)
+	{
+		// show / hide windows
+		this.lockedWindowContainer.setVisible(true);
+		this.highscoreWindowContainer.setVisible(false);
+
+		// get first locked level
+		let firstLockedLevel = 0;
+		for (let i = 0; i < LevelSelect.levelsKey.length; i++)
+		{
+			if (!this.registry.get(`unlocked: ${LevelSelect.levelsKey[i]}`))
+			{
+				firstLockedLevel = i;
+				break;
+			}
+		}
+
+		console.debug(`first locked level: ${firstLockedLevel}`);
+		console.debug(`just unlocked level: ${this.justUnlockedLevel}`);
+
+		// All levels unlocked check
+		if (firstLockedLevel === 0)
+		{
+			console.debug('no levels are locked');
+
+			// Do something. Not sure what.
+
+			return;
+		}
+
+		console.debug(levelRequiredAwards.get(LevelSelect.levelsKey[this.justUnlockedLevel]));
+
+		const requiredAwards = 
+			levelRequiredAwards.get(LevelSelect.levelsKey
+			[((justUnlockedLevel && this.justUnlockedLevel != 0) ? 
+			this.justUnlockedLevel : firstLockedLevel)]);
+		let remainingPlayed = requiredAwards![0];
+		let remainingBronze = requiredAwards![1];
+		let remainingSilver = requiredAwards![2];
+		let remainingGold = requiredAwards![3];
+
+		console.debug('required:');
+		console.debug(requiredAwards);
+
+		// calculate remaining played
+		remainingPlayed -= getTotalAwards(this)[0];
+		if (remainingPlayed < 0)
+		{
+			remainingPlayed = 0;	
+		}
+		// calculate remaining awards for bronze
+		remainingBronze -= getTotalAwards(this)[1];
+		if (remainingBronze < 0)
+		{
+			remainingBronze = 0;	
+		}
+		remainingSilver -= getTotalAwards(this)[2];
+		// calculate remaining awards for silver
+		if (remainingSilver < 0)
+		{
+			remainingSilver = 0;	
+		}
+		remainingGold -= getTotalAwards(this)[3];
+		// calculate remaining awards for gold
+		if (remainingGold < 0)
+		{
+			remainingGold = 0;	
+		}
+
+		console.debug('remaining: ' + remainingPlayed, remainingBronze, remainingSilver, remainingGold)
+
+		// console.debug(`required awards: ${requiredAwards}`);
+		// console.debug(`total awards: ${getTotalAwards(this)}`);
+		// console.debug(`remaining awards: ${remainingAwards}`);
+
+		/** 0-3. Used to determine container X placement */
+		let awardTypesNeeded = 0;
+		// set 'remaining played' container & text
+		this.awardsNeededContainerPlayed.setVisible(remainingPlayed > 0);
+		this.countPlayed.setText(`x ${remainingPlayed}`);
+		if (remainingPlayed > 0)
+		{
+			awardTypesNeeded++;
+		}
+		// set 'remaining Bronze' container & text
+		this.awardsNeededContainerBronze.setVisible(remainingBronze > 0);
+		this.countBronze.setText(`x ${remainingBronze}`);
+		if (remainingBronze > 0)
+		{
+			awardTypesNeeded++;
+		}
+		// set 'remaining silver' container & text
+		this.awardsNeededContainerSilver.setVisible(remainingSilver > 0);
+		this.countSilver.setText(`x ${remainingSilver}`);
+		if (remainingSilver > 0)
+		{
+			awardTypesNeeded++;
+		}
+		// set 'remaining Gold' container & text
+		this.awardsNeededContainerGold.setVisible(remainingGold > 0);
+		this.countGold.setText(`x ${remainingGold}`);
+		if (remainingGold > 0)
+		{
+			awardTypesNeeded++;
+		}
+
+		// set container positions
+		let position = 0;
+		this.awardsNeededContainerPlayed.setX(93);
+		if (this.awardsNeededContainerPlayed.visible)
+		{
+			position++;
+		}
+		this.awardsNeededContainerBronze.setX(93 + (76 * position));
+		if (this.awardsNeededContainerBronze.visible)
+		{
+			position++;
+		}
+		this.awardsNeededContainerSilver.setX(93 + (76 * position));
+		if (this.awardsNeededContainerSilver.visible)
+		{
+			position++;
+		}
+		this.awardsNeededContainerGold.setX(93 + (76 * position));
+
+		// // set text for bronze
+		// this.bronzeCount.setText(`x ${remainingBronze}`);
+		// // this.bronzeCount.setTintFill(remainingBronze > 0 ? 0xffffff : 0x84e467);
+		// this.bronzeCount.setAlpha(remainingBronze > 0 ? 1 : .5);
+		// this.level_icon_small_Bronze.setAlpha(remainingBronze > 0 ? 1 : .5);
+		// // set text for silver
+		// this.silverCount.setText(`x ${remainingSilver}`);
+		// // this.silverCount.setTintFill(remainingSilver > 0 ? 0xffffff : 0x84e467);
+		// this.silverCount.setAlpha(remainingSilver > 0 ? 1 : .5);
+		// this.level_icon_small_Silver.setAlpha(remainingSilver > 0 ? 1 : .5);
+		// // set text for gold
+		// this.goldCount.setText(`x ${remainingGold}`);
+		// // this.goldCount.setTintFill(remainingGold > 0 ? 0xffffff : 0x84e467);
+		// this.goldCount.setAlpha(remainingGold > 0 ? 1 : .5);
+		// this.level_icon_small_gold.setAlpha(remainingGold > 0 ? 1 : .5);
+	}
+
+	setScoreWindow()
+	{
+		// show / hide windows
+		this.lockedWindowContainer.setVisible(false);
+		this.highscoreWindowContainer.setVisible(true);
+
+		// get highscore
+		let highscore = this.registry.get
+			(`top-score: ${LevelSelect.levelsKey[this.selectedLevel]}`);
+		// if (highscore == null)
+		// {
+		// 	highscore = 0;
+		// }
+
+		// get score milestones
+		const bronzeMilestone = levelScoreMilestones.get
+			(LevelSelect.levelsKey[this.selectedLevel])![0];
+		const silverMilestone = levelScoreMilestones.get
+			(LevelSelect.levelsKey[this.selectedLevel])![1];
+		const goldMilestone = levelScoreMilestones.get
+			(LevelSelect.levelsKey[this.selectedLevel])![2];
+
+		// set text
+		this.scoreText.setText('');
+		this.highscoreText.setTint(0xffffff);
+		this.highscoreText.setText((highscore != null) ? 
+			`High-score: ${highscore}` : ``);
+		this.bronzeMilestone.setText(`${bronzeMilestone}`);
+		this.silverMilestone.setText(`${silverMilestone}`);
+		this.goldMilestone.setText(`${goldMilestone}`);
+
+		// set milestone positions
+		const bronzeX = 51 + (Phaser.Math.Percent(bronzeMilestone, 0, goldMilestone) * 228);
+		this.bronzeIndicator.setPosition(bronzeX, this.bronzeIndicator.y);
+		this.bronzeMilestone.setPosition(bronzeX, this.bronzeMilestone.y);
+		const silverX = 51 + (Phaser.Math.Percent(silverMilestone, 0, goldMilestone) * 228);
+		this.silverIndicator.setPosition(silverX, this.silverIndicator.y);
+		this.silverMilestone.setPosition(silverX + 3, this.silverMilestone.y);
+
+		if (highscore)
+		{
+			// set meters
+			let scorePercent = Phaser.Math.Percent(highscore, 0, goldMilestone)
+			scorePercent = Phaser.Math.Clamp(scorePercent, 0, goldMilestone);
+			this.highscoreMeter.setTintFill(0xffffff);
+			this.highscoreMeter.setScale(scorePercent * 228, 10);
+			this.scoreMeter.setScale(0, 10);
+		}
+		else
+		{
+			// set meters - no highscore
+			this.highscoreMeter.setTintFill(0xCE97B5);
+			this.highscoreMeter.setScale(228, 10);
+			this.scoreMeter.setScale(0, 10);
+		}
+	}
+
+	/**
+	 * Sequnce of the score meter filling up.
+	 * 
+	 * Sets input lock on during sequence.
+	 */
+	lastScoreSequence()
+	{
+		this.lockInput = true;
+
+		// get x scale
+		const lastScore = this.registry.get('last-score');
+		const goldMilestone = levelScoreMilestones.get
+			(LevelSelect.levelsKey[this.selectedLevel])![2];
+		const width = Phaser.Math.Percent(lastScore, 0, goldMilestone) * 228
+
+		// score window is already setup
+
+		// set highscore text & meter colour
+		this.highscoreMeter.setTintFill(0xCE97B5);
+		this.highscoreText.setTint(0xCE97B5);
+
+		if (!this.registry.get
+			(`top-score: ${LevelSelect.levelsKey[this.selectedLevel]}`))
+		{
+			this.highscoreText.setText('');
+			this.scoreText.setX(50);
+		}
+		else
+		{
+			this.scoreText.setX(170);
+		}
+
+		if (lastScore > 0)
+		{
+			// setup tween
+			const _this = this;
+			this.scoreMeterTween = this.tweens.add
+			({
+				targets: this.scoreMeter,
+				duration: 2000,
+				ease: Phaser.Math.Easing.Quadratic.In,
+				scaleX: width,
+				onUpdate: () =>
+				{
+					console.debug(`prog: ${_this.scoreMeterTween.progress}`);
+					_this.scoreText.setText
+						(`New score: ${Math.floor(_this.scoreMeterTween.progress * lastScore)}`);
+				}
+			});
+		}
+		else
+		{
+			// set score text
+			this.scoreText.setText(`New score: ${lastScore}`);
+
+			// blink score text
+			const _this = this;
+			const blink = this.time.addEvent({ delay: 200, repeat: 7, callback: () =>
+			{
+				_this.scoreText.visible = !_this.scoreText.visible;
+			}});
+		}
+
+		this.time.delayedCall(2000, () =>
+		{
+			this.lockInput = false;
+
+			// set score text to exact score
+			this.scoreText.setText(`New score: ${lastScore}`);
+
+			this.completionMedalCheck();
+
+
+			if (this.newAwardAchieved)
+			{
+				this.newAwardSequence();
+			}
+			else
+			{
+				this.setLevelIcons(this.selectedLevel);
+			}
+		});
+	}
+
+	/**
+	 * Calls completed level's icon's achieve tween and sets input lock for the duration.
+	 */
+	newAwardSequence()
+	{
+		this.lockInput = true;
+
+		// set visual
+		this.setLevelIcons(this.selectedLevel);
+		this.levelIcons[this.selectedLevel].runAchieveTween();
+
+		// audio
+		if (this.registry.get('last-score') < 
+			levelScoreMilestones.get(LevelSelect.levelsKey[this.selectedLevel])![0])
+		{
+			this.sound.play('reflect');
+		}
+		else
+		{
+			this.sound.play('combo-hit');
+		}
+
+		this.time.delayedCall(1000, () =>
+		{
+			this.lockInput = false;
+
+			this.setPreview();
+
+			// this.unlockSequence();
+			this.updateLockedWindowSequence();
+
+			this.trophyMedalCheck();
+		});
+	}
+
+	updateLockedWindowSequence()
+	{
+		this.lockInput = true;
+
+		this.lockedWindowContainer.setVisible(true);
+		this.highscoreWindowContainer.setVisible(false);
+
+		this.time.delayedCall(1000, () =>
+		{
+			this.setLockedWindow(true);
+			SoundManager.play('reflect', this);
+		});
+
+		this.time.delayedCall(2000, () =>
+		{
+			this.lockInput = false;
+
+			this.unlockSequence();
+		});
+	}
+
+	unlockSequence()
+	{
+		if (this.levelIndexUnlockQueue.length === 0)
+		{
+			console.debug('return; nothing in queue')
+			return;
+		}
+
+		this.lockInput = true;
+
+		// for each level index in unlock queue
+		this.levelIndexUnlockQueue.forEach((value, index) => 
+		{
+			this.time.delayedCall(300 * index, () =>
+			{
+				// set visual
+				this.setLevelIcons(value);
+				this.levelIcons[value].runAchieveTween();
+				this.levelIndexUnlockQueue.shift();
+
+				// audio
+				this.sound.play('combo-hit');
+
+				// if end of sequence, unlock input
+				if (this.levelIndexUnlockQueue.length === 0)
+				{
+					this.time.delayedCall(1000, () =>
+					{
+						this.setLockedWindow(false);
+
+						this.lockInput = false;
+					});
+				}
+			});
+		});
+	}
+
+	/**
+	 * Compares last-score and top-score of selected level (which should be the just-completed one) for a new topscore.
+	 * 
+	 * If true, start 
+	 */
+	topScoreCheck()
+	{
+		// console.debug(`selected: ${this.selectedLevel}`);
+
+		// null check
+		if (this.registry.get(`top-score: ${LevelSelect.levelsKey[this.selectedLevel]}`) 
+			!= null)
+		{
+			// console.debug(this.registry.get('last-score'));
+			// console.debug(this.registry.get(`top-score: ${LevelSelect.levelsKey[this.selectedLevel]}`));
+
+			// last-score top-score compare
+			if (this.registry.get('last-score') > 
+			this.registry.get(`top-score: ${LevelSelect.levelsKey[this.selectedLevel]}`))
+			{
+				console.debug('replace topscore');
+				this.topScoreGet(true);
+			}
+			else
+			{
+				console.debug('no topscore');
+			}
+		}
+		else
+		{
+			console.debug('first topscore');
+			this.topScoreGet(false);
+		}
+	}
+
+	/**
+	 * Saves new top score to registry, then calls for cloud save.
+	 * 
+	 * Checks if a new award has been achieved, then sets var which determines sequence
+	 * 
+	 * @param replacingTopscore or setting first top score (currently unused)
+	 */
+	topScoreGet(replacingTopscore: boolean)
+	{
+		console.log('topscore get!');
+
+		// get last & top score
+		const lastScore = this.registry.get('last-score');
+		let topScore = this.registry.get
+			(`top-score: ${LevelSelect.levelsKey[this.selectedLevel]}`);
+		// if (topScore == null)
+		// {
+		// 	topScore = 0;
+		// }
+
+		// get score milestones
+		const bronzeMilestone = levelScoreMilestones.get
+			(LevelSelect.levelsKey[this.selectedLevel])![0];
+		const silverMilestone = levelScoreMilestones.get
+			(LevelSelect.levelsKey[this.selectedLevel])![1];
+		const goldMilestone = levelScoreMilestones.get
+			(LevelSelect.levelsKey[this.selectedLevel])![2];
+
+		// new award check
+		if ((topScore == null)
+		|| (topScore < bronzeMilestone && lastScore >= bronzeMilestone)
+		|| (topScore < silverMilestone && lastScore >= silverMilestone)
+		|| (topScore < goldMilestone && lastScore >= goldMilestone))
+		{
+			// set var which determines sequence
+			this.newAwardAchieved = true;
+			console.debug(`new award achieved`);
+		}
+
+		// update registry & cloud save data
+		this.registry.set(`top-score: ${LevelSelect.levelsKey[this.selectedLevel]}`, 
+			lastScore);
+		cloudSaves.saveData(this);
+	}
+
+	/**
+	 * Checks if unlock condiditons are met for each locked level.
+	 * 
+	 * Called upon topscore get
+	 */
+	unlockCheck()
+	{
+		// get total awards
+		const totalAwards = getTotalAwards(this);
+		// console.debug(getTotalAwards(this));
+
 		LevelSelect.levelsKey.forEach((value, index) =>
 		{
-			if (index === this.selectedLevel)
+			if (!this.registry.get(`unlocked: ${value}`))
 			{
+				// get level required awards
+				let requiredAwards =  levelRequiredAwards.get(value);
+				if (requiredAwards == null)
+				{
+					console.debug(`no award requirement data present for level: ${value}`);
+					requiredAwards = [0, 0, 0, 0];
+				}
+
+				// console.debug(totalAwards);
+				// console.debug(requiredAwards);
+
+				// compare
+				if (totalAwards[0] >= requiredAwards![0] && 
+					totalAwards[1] >= requiredAwards![1] && 
+					totalAwards[2] >= requiredAwards![2] && 
+					totalAwards[3] >= requiredAwards![3])
+				{
+					console.debug('adding to queue');
+					this.registry.set(`unlocked: ${value}`, true);
+					this.justUnlockedLevel = index;
+					this.levelIndexUnlockQueue.push(index);
+				}
+			}
+		});
+	}
+
+	/**
+	 * Sets appropriate icon for each level based on save data, which should not yet have been updated based on a just-completed level.
+	 * @param levelIndex Only set this level index's icon. If null, set all.
+	 */
+	setLevelIcons(levelIndex?: number)
+	{
+		LevelSelect.levelsKey.forEach((value, index) =>
+		{
+			// level index skip
+			console.debug(levelIndex)
+			if (levelIndex != null)
+			{
+				if (levelIndex !== index)
+				{
+					// console.debug(`skipped level index ${index}`);
+					return;
+				}
+			}
+
+			console.debug(`setLevelIcons setting: ${value}`);
+
+			// locked check
+			if (!this.registry.get(`unlocked: ${value}`))
+			{
+				this.levelIcons[index].setIcon('locked');
 				return;
 			}
 
+			// played check
+			console.debug(value + this.registry.get(`top-score: ${value}`));
+			if (this.registry.get(`top-score: ${value}`) == null)
+			{
+				console.debug('unplayed')
+				this.levelIcons[index].setIcon('unplayed');
+				return;
+			}
+
+			// at this point it's safe to use top-score value
+
+			// award check
 			const award = getEarnedAward(value, this.registry.get(`top-score: ${value}`));
 			if (award === 'bronze')
 			{
@@ -797,66 +1691,6 @@ export default class LevelSelect extends Phaser.Scene {
 				this.levelIcons[index].setIcon('played');
 			}
 		});
-
-		this.levelIcons.forEach((value, index) =>
-		{
-			value.setSize(35, 45);
-			value.setInteractive();
-			value.on('pointerdown', () =>
-			{
-				if (this.lockInput)
-				{
-					console.debug('returned; `lockInput` is true');
-					return;
-				}
-
-				if (this.selectedLevel === index)
-				{
-					this.loadLevel();
-				}
-				else
-				{
-					this.selectedLevel = index;
-					this.setHighlightedLevel(index);
-				}
-			});
-		});
-
-		if (this.selectedLevel > -1)
-		{
-			this.setHighlightedLevel(this.selectedLevel);
-
-
-			this.time.delayedCall(1000, () =>
-			{
-				const award = getEarnedAward(LevelSelect.levelsKey[this.selectedLevel], this.registry.get(`top-score: ${LevelSelect.levelsKey[this.selectedLevel]}`));
-				if (award === 'bronze')
-				{
-					this.levelIcons[this.selectedLevel].setIcon('bronze');
-				}
-				else if (award === 'silver')
-				{
-					this.levelIcons[this.selectedLevel].setIcon('silver');
-				}
-				else if (award === 'gold')
-				{
-					this.levelIcons[this.selectedLevel].setIcon('gold');
-				}
-				else 
-				{
-					this.levelIcons[this.selectedLevel].setIcon('played');
-				}
-
-				this.levelIcons[this.selectedLevel].runAchieveTween();
-			});
-
-			this.time.delayedCall(1500, () =>
-			{
-				this.lockInput = false;
-			});
-		}
-
-
 	}
 
 	setHighlightedLevel(levelIndex: number)
@@ -871,6 +1705,69 @@ export default class LevelSelect extends Phaser.Scene {
 			else
 			{
 				value.setHighlight(false);
+			}
+		});
+	}
+
+	/**
+	 * Checks total awards and emits NG.io medal unlock if all of any type have been acheived.
+	 * 
+	 * To be called after new award sequence
+	 */
+	trophyMedalCheck()
+	{
+		const totalAwards = getTotalAwards(this);
+		if (totalAwards[1] === LevelSelect.levelsKey.length)
+		{
+			this.game.events.emit('unlock-medal: Bronze Trophy');
+		}
+		if (totalAwards[2] === LevelSelect.levelsKey.length)
+		{
+			this.game.events.emit('unlock-medal: Silver Trophy');
+		}
+		if (totalAwards[3] === LevelSelect.levelsKey.length)
+		{
+			this.game.events.emit('unlock-medal: Golden Trophy');
+		}
+	}
+
+	completionMedalCheck()
+	{
+		LevelSelect.levelsKey.forEach((value, index) =>
+		{
+			let tutorialLevels = 0;
+			let mainLevels = 0;
+			let hardLevels = 0;
+
+			// count
+			if (this.registry.get(`top-score: ${value}`) != null)
+			{
+				if (index < 9)
+				{
+					tutorialLevels++;
+				}
+				else if (index >= 9 && index < 18)
+				{
+					mainLevels++;
+				}
+				else
+				{
+					hardLevels++;
+				}
+			}
+
+			// check
+			if (tutorialLevels === 9)
+			{
+				this.game.events.emit('unlock-medal: Fish Splasher');
+			}
+			if (mainLevels === 9)
+			{
+				this.game.events.emit('unlock-medal: Seeing Double');
+			}
+			if (hardLevels === 6)
+			{
+				this.game.events.emit('unlock-medal: Thanks for playing!');
 			}
 		});
 	}
@@ -898,83 +1795,83 @@ export default class LevelSelect extends Phaser.Scene {
 	}
 
 	/** Also updates visual. */
-	setSelectedLevel(direction: 'up' | 'neutral' | 'down')
-	{
-		let indexChange = 0
-		if (direction === 'up')
-		{
-			indexChange = 1;
-		}
-		else if (direction === 'down')
-		{
-			indexChange = -1;
-		}
-		this.selectedLevel += indexChange;
+	// setSelectedLevel(direction: 'up' | 'neutral' | 'down')
+	// {
+	// 	let indexChange = 0
+	// 	if (direction === 'up')
+	// 	{
+	// 		indexChange = 1;
+	// 	}
+	// 	else if (direction === 'down')
+	// 	{
+	// 		indexChange = -1;
+	// 	}
+	// 	this.selectedLevel += indexChange;
 
-	// wrap variable to levelsKey array length
-		if (this.selectedLevel == LevelSelect.levelsKey.length)
-		{
-			this.selectedLevel = 0;
-		}
-		else if (this.selectedLevel == -1)
-		{
-			this.selectedLevel = LevelSelect.levelsKey.length - 1;
-		}
+	// // wrap variable to levelsKey array length
+	// 	if (this.selectedLevel == LevelSelect.levelsKey.length)
+	// 	{
+	// 		this.selectedLevel = 0;
+	// 	}
+	// 	else if (this.selectedLevel == -1)
+	// 	{
+	// 		this.selectedLevel = LevelSelect.levelsKey.length - 1;
+	// 	}
 
-	// update text
-		this.levelText.setText('Level ' + (this.selectedLevel + 1) 
-			// + (__DEV__ ? `- ${LevelSelect.levelsKey[this.selectedLevel]}` : ''));
-			+ (true ? `- ${LevelSelect.levelsKey[this.selectedLevel]}` : ''));
+	// // update text
+	// 	this.levelText.setText('Level ' + (this.selectedLevel + 1) 
+	// 		// + (__DEV__ ? `- ${LevelSelect.levelsKey[this.selectedLevel]}` : ''));
+	// 		+ (true ? `- ${LevelSelect.levelsKey[this.selectedLevel]}` : ''));
 
-		let score = this.game.registry.get
-		(
-			`top-score: ${LevelSelect.levelsKey[this.selectedLevel]}`
-		);
+	// 	let score = this.game.registry.get
+	// 	(
+	// 		`top-score: ${LevelSelect.levelsKey[this.selectedLevel]}`
+	// 	);
 
-		let awardString: 'none' | 'Bronze' | 'Silver' | 'Gold' = 'none';
-		let awardColour = 0;
+	// 	let awardString: 'none' | 'Bronze' | 'Silver' | 'Gold' = 'none';
+	// 	let awardColour = 0;
 
-		let milestones = levelScoreMilestones.get
-		(LevelSelect.levelsKey[this.selectedLevel]) as Array<number>;
-		if (milestones === undefined)
-		{
-			console.warn('No level score milestone data found for this level key.');
-			milestones = [9999, 9999, 9999]
-		}
-		if (score == null)
-		{
-			score = 0;
-		}
+	// 	let milestones = levelScoreMilestones.get
+	// 	(LevelSelect.levelsKey[this.selectedLevel]) as Array<number>;
+	// 	if (milestones === undefined)
+	// 	{
+	// 		console.warn('No level score milestone data found for this level key.');
+	// 		milestones = [9999, 9999, 9999]
+	// 	}
+	// 	if (score == null)
+	// 	{
+	// 		score = 0;
+	// 	}
 
-		if (score >= milestones[0]&& score < milestones[1])
-		{
-			awardString = 'Bronze';
-			awardColour = 10971430;
-		}
-		else if (score >= milestones[1]&& score < milestones[2])
-		{
-			awardString = 'Silver';
-			awardColour = 13816530;
-		}
-		else if (score >= milestones[2])
-		{
-			awardString = 'Gold';
-			awardColour = 16769358;
-		}
+	// 	if (score >= milestones[0]&& score < milestones[1])
+	// 	{
+	// 		awardString = 'Bronze';
+	// 		awardColour = 10971430;
+	// 	}
+	// 	else if (score >= milestones[1]&& score < milestones[2])
+	// 	{
+	// 		awardString = 'Silver';
+	// 		awardColour = 13816530;
+	// 	}
+	// 	else if (score >= milestones[2])
+	// 	{
+	// 		awardString = 'Gold';
+	// 		awardColour = 16769358;
+	// 	}
 
-			// this.levelInfoText.setText(
-			// `${(score !== 0) ? `` : `- LOCKED -`}\n
-			// Best: ${score}\n
-			// Award: ${awardString}`
+	// 		// this.levelInfoText.setText(
+	// 		// `${(score !== 0) ? `` : `- LOCKED -`}\n
+	// 		// Best: ${score}\n
+	// 		// Award: ${awardString}`
 
-			this.levelInfoText.setText(
-				`Best: ${score}\n
-				Award: ${awardString}`
-		);
+	// 		this.levelInfoText.setText(
+	// 			`Best: ${score}\n
+	// 			Award: ${awardString}`
+	// 	);
 
 		// preview
 		// this.levelPreviewImage.setTexture(`preview-${LevelSelect.levelsKey[this.selectedLevel]}`)
-	}
+	// }
 
 	loadLevel()
 	{
@@ -986,9 +1883,17 @@ export default class LevelSelect extends Phaser.Scene {
 		// 	return;
 		// }
 
+		// invalid level return
 		if (this.selectedLevel === -1)
 		{
 			console.debug('returned; no level selected');
+			return;
+		}
+
+		// level lock return
+		if (!this.registry.get(`unlocked: ${LevelSelect.levelsKey[this.selectedLevel]}`) && !__DEV__)
+		{
+			console.debug('returned; level is locked');
 			return;
 		}
 
@@ -1011,7 +1916,7 @@ export default class LevelSelect extends Phaser.Scene {
 		CameraUtil.configureMainCamera(this);
 		this.cameras.main.setBackgroundColor();
 		this.cameras.main.setOrigin(0, 0);
-		this.cameras.main.setBackgroundColor(0x808080);
+		this.cameras.main.setBackgroundColor(0x8d4049);
 		// this.cameras.main.ignore(this.uiLayer.getChildren());
 
 		// this.UICam = CameraUtil.createUICamera(this);

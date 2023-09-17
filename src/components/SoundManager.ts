@@ -6,9 +6,8 @@ export default class SoundManager {
     private static playMusicInDevMode = false;
 
 // music tracks
-	private static tracksKey = ['tutorial', 'main-game', 'tutorial']
-		// TODO: Replace this with 3rd track key
-	private static tracksFirstLevel = [0, 9, 19]
+	private static tracksKey = ['tutorial', 'main-game', 'hard-game']
+	private static tracksFirstLevel = [0, 9, 18]
 	private static tracksVolume = [.7, .7, .7]
 
 // sounds
