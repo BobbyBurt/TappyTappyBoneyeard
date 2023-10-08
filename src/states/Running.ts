@@ -41,7 +41,7 @@ export default class Running implements State {
 		else if (this.player.uppercutInput == 'just-down' && this.player.punchCharged 
 			&& this.player.punchCooldownTimer.getProgress() === 1)
 		{
-			this.stateController.setState('uppercut');
+			this.stateController.setState('punch');
 		}
 
 	// state transitions

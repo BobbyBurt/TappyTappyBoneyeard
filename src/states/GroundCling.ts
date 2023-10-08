@@ -42,7 +42,7 @@ export default class GroundCling implements State {
 		}
 		else if (this.player.uppercutInput == 'just-down' && this.player.punchCharged)
 		{
-			this.stateController.setState('uppercut');
+			this.stateController.setState('punch');
 		}
 
 		if (!this.player.onFloor)

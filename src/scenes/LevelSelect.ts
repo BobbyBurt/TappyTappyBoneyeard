@@ -341,11 +341,12 @@ export default class LevelSelect extends Phaser.Scene {
 		// levelIconPrefab_10
 		const levelIconPrefab_10 = new LevelIconPrefab(this, 420, 173);
 		this.add.existing(levelIconPrefab_10);
-		levelIconPrefab_10.visible = true;
+		levelIconPrefab_10.visible = false;
 
 		// levelIconPrefab_11
 		const levelIconPrefab_11 = new LevelIconPrefab(this, 375, 173);
 		this.add.existing(levelIconPrefab_11);
+		levelIconPrefab_11.visible = false;
 
 		// levelIconPrefab_12
 		const levelIconPrefab_12 = new LevelIconPrefab(this, 330, 173);
@@ -404,6 +405,11 @@ export default class LevelSelect extends Phaser.Scene {
 		// levelIconPrefab_26
 		const levelIconPrefab_26 = new LevelIconPrefab(this, 150, 223);
 		this.add.existing(levelIconPrefab_26);
+
+		// levelIconPrefab_21
+		const levelIconPrefab_21 = new LevelIconPrefab(this, 330, 223);
+		this.add.existing(levelIconPrefab_21);
+		levelIconPrefab_21.visible = false;
 
 		// lists
 		const levelBackList: Array<any> = [];
@@ -486,6 +492,9 @@ export default class LevelSelect extends Phaser.Scene {
 		// levelIconPrefab_26 (prefab fields)
 		levelIconPrefab_26.levelIndex = 20;
 
+		// levelIconPrefab_21 (prefab fields)
+		levelIconPrefab_21.levelIndex = 23;
+
 		this.levelPreviewImageOld = levelPreviewImageOld;
 		this.levelPreviewText = levelPreviewText;
 		this.levelPreviewImage = levelPreviewImage;
@@ -544,6 +553,7 @@ export default class LevelSelect extends Phaser.Scene {
 		this.levelIconPrefab_24 = levelIconPrefab_24;
 		this.levelIconPrefab_25 = levelIconPrefab_25;
 		this.levelIconPrefab_26 = levelIconPrefab_26;
+		this.levelIconPrefab_21 = levelIconPrefab_21;
 		this.levelBackList = levelBackList;
 
 		this.events.emit("scene-awake");
@@ -607,6 +617,7 @@ export default class LevelSelect extends Phaser.Scene {
 	private levelIconPrefab_24!: LevelIconPrefab;
 	private levelIconPrefab_25!: LevelIconPrefab;
 	private levelIconPrefab_26!: LevelIconPrefab;
+	private levelIconPrefab_21!: LevelIconPrefab;
 	private levelBackList!: Array<any>;
 
 	/* START-USER-CODE */
@@ -643,20 +654,21 @@ export default class LevelSelect extends Phaser.Scene {
 		'pogo-intro',
 		'umbrella-shield',
 
-		// MAIN 4
-		'grenade',
-		'pogo-ideas',
-
 		// HARD 1
 		'mine-intro',
-		/* mine enemy 2 */ 'pogo-challenge',
+		'pogo-ideas',
 
 		// HARD 2
-		'gun-intro',
+		'mine-enemy',
 		'mine-wall',
-		'bullet-ceiling',
 
+		// HARD 3
+		'gun-intro',
+
+		// HARD 3
 		'finale'
+
+		// 'mine-enemy',
 		];
 
 	public static levelSelectEntry: 'titlescreen' | 'return' | 'complete' = 'titlescreen';
@@ -693,6 +705,8 @@ export default class LevelSelect extends Phaser.Scene {
 	private justUnlockedLevel = 0;
 
 	private scoreMeterTween!: Phaser.Tweens.Tween;
+
+	private previewTween!: Phaser.Tweens.Tween;
 
 	create() {
 
@@ -981,17 +995,17 @@ export default class LevelSelect extends Phaser.Scene {
 		this.levelIcons.push(this.levelIconPrefab_15);
 		this.levelIcons.push(this.levelIconPrefab_14);
 		this.levelIcons.push(this.levelIconPrefab_12);
-		this.levelIcons.push(this.levelIconPrefab_11);
-		this.levelIcons.push(this.levelIconPrefab_10);
+		// this.levelIcons.push(this.levelIconPrefab_11);
+		// this.levelIcons.push(this.levelIconPrefab_10);
 		this.levelIcons.push(this.levelIconPrefab_22);
 		this.levelIcons.push(this.levelIconPrefab_18);
 		this.levelIcons.push(this.levelIconPrefab_26);
 		this.levelIcons.push(this.levelIconPrefab_25);
 		this.levelIcons.push(this.levelIconPrefab_24);
 		this.levelIcons.push(this.levelIconPrefab_23);
-		// this.levelIcons.push(this.levelIconPrefab_21);
 		this.levelIcons.push(this.levelIconPrefab_20);
 		this.levelIcons.push(this.levelIconPrefab_19);
+		// this.levelIcons.push(this.levelIconPrefab_21);
 		this.setLevelIcons();
 
 		// level icons pointer input
@@ -1091,13 +1105,28 @@ export default class LevelSelect extends Phaser.Scene {
 	 */
 	setPreview()
 	{
-		if (this.registry.get(`top-score: ${LevelSelect.levelsKey[this.selectedLevel]}`))
+		this.levelPreviewImage.setX(0);
+
+		if (this.registry.get(`top-score: ${LevelSelect.levelsKey[this.selectedLevel]}`) != undefined || __DEV__)
 		{
 			// level has been beat
 
 			if (this.game.textures.exists
 				(`preview-${LevelSelect.levelsKey[this.selectedLevel]}`))
 			{
+				// setup tween
+				if (this.previewTween)
+				{
+					this.previewTween.stop();
+				}
+				this.previewTween = this.add.tween
+				({
+					targets: this.levelPreviewImage,
+					duration: 500,
+					ease: Phaser.Math.Easing.Cubic.Out,
+					x: -20
+				});
+				
 				// set preview image
 				this.levelPreviewImage.setTexture
 					(`preview-${LevelSelect.levelsKey[this.selectedLevel]}`);
@@ -1733,14 +1762,15 @@ export default class LevelSelect extends Phaser.Scene {
 
 	completionMedalCheck()
 	{
+		let tutorialLevels = 0;
+		let mainLevels = 0;
+		let hardLevels = 0;
+
 		LevelSelect.levelsKey.forEach((value, index) =>
 		{
-			let tutorialLevels = 0;
-			let mainLevels = 0;
-			let hardLevels = 0;
 
 			// count
-			if (this.registry.get(`top-score: ${value}`) != null)
+			if (this.registry.get(`top-score: ${value}`) != undefined)
 			{
 				if (index < 9)
 				{
@@ -1755,21 +1785,23 @@ export default class LevelSelect extends Phaser.Scene {
 					hardLevels++;
 				}
 			}
-
-			// check
-			if (tutorialLevels === 9)
-			{
-				this.game.events.emit('unlock-medal: Fish Splasher');
-			}
-			if (mainLevels === 9)
-			{
-				this.game.events.emit('unlock-medal: Seeing Double');
-			}
-			if (hardLevels === 6)
-			{
-				this.game.events.emit('unlock-medal: Thanks for playing!');
-			}
 		});
+
+		// check
+		if (tutorialLevels === 9)
+		{
+			this.game.events.emit('unlock-medal: Fish Splasher');
+		}
+		if (mainLevels === 9)
+		{
+			this.game.events.emit('unlock-medal: Seeing Double');
+		}
+		if (hardLevels === 6)
+		{
+			this.game.events.emit('unlock-medal: Thanks for playing!');
+		}
+
+		console.debug(`count: tutorial: ${tutorialLevels}, main: ${mainLevels}, hard: ${hardLevels}`)
 	}
 
 	update(time: number, delta: number): void
@@ -1892,6 +1924,7 @@ export default class LevelSelect extends Phaser.Scene {
 
 		// level lock return
 		if (!this.registry.get(`unlocked: ${LevelSelect.levelsKey[this.selectedLevel]}`) && !__DEV__)
+		// if (false)
 		{
 			console.debug('returned; level is locked');
 			return;

@@ -14,7 +14,7 @@ window.addEventListener('load', function ()
 	{
 		title: 'Tappy Tappy Boneyard',
 		url: 'https://www.newgrounds.com/projects/games/1923225/preview',
-		version: '17',
+		version: '18 beta',
 		
 	// visuals
 		type: Phaser.AUTO,
@@ -120,6 +120,12 @@ class Boot extends Phaser.Scene
 			dataKeys.push(`top-score: ${value}`);
 			dataKeys.push(`unlocked: ${value}`);
 		});
+		
+		// eggs
+		// HARDCODED: new egg rooms need to be added manually
+		dataKeys.push(`got-egg: bomb-holder`);
+		dataKeys.push(`got-egg: umbrella-shield`);
+
 		cloudSaves.setDataKeys(dataKeys);
 		// cloudSaves.setDataKeys([
 		// 	'top-score: punch', 'top-score: airborne', 'top-score: dive', 'top-score: gunfire', 'top-score: uppercut', 'top-score: charge', 'top-score: combo', 'top-score: tutorial-finale',

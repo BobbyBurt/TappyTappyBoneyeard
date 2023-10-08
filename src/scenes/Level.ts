@@ -499,66 +499,53 @@ export default class Level extends Phaser.Scene {
 		// parallax_Cityscape111 (components)
 		const parallax_Cityscape111ScrollFactor = new ScrollFactor(parallax_Cityscape111);
 		parallax_Cityscape111ScrollFactor.factorX = 0.2;
-		parallax_Cityscape111ScrollFactor.factorY = 0.1;
 
 		// parallax_Cityscape_111 (components)
 		const parallax_Cityscape_111ScrollFactor = new ScrollFactor(parallax_Cityscape_111);
 		parallax_Cityscape_111ScrollFactor.factorX = 0.2;
-		parallax_Cityscape_111ScrollFactor.factorY = 0.1;
 
 		// parallax_Cityscape_21 (components)
 		const parallax_Cityscape_21ScrollFactor = new ScrollFactor(parallax_Cityscape_21);
 		parallax_Cityscape_21ScrollFactor.factorX = 0.2;
-		parallax_Cityscape_21ScrollFactor.factorY = 0.1;
 
 		// parallax_Cityscape_31 (components)
 		const parallax_Cityscape_31ScrollFactor = new ScrollFactor(parallax_Cityscape_31);
 		parallax_Cityscape_31ScrollFactor.factorX = 0.2;
-		parallax_Cityscape_31ScrollFactor.factorY = 0.1;
 
 		// parallax_Cityscape_41 (components)
 		const parallax_Cityscape_41ScrollFactor = new ScrollFactor(parallax_Cityscape_41);
 		parallax_Cityscape_41ScrollFactor.factorX = 0.2;
-		parallax_Cityscape_41ScrollFactor.factorY = 0.1;
 
 		// parallax_Cityscape_51 (components)
-		const parallax_Cityscape_51ScrollFactor = new ScrollFactor(parallax_Cityscape_51);
-		parallax_Cityscape_51ScrollFactor.factorY = 0.1;
+		new ScrollFactor(parallax_Cityscape_51);
 
 		// parallax_Cityscape_61 (components)
 		const parallax_Cityscape_61ScrollFactor = new ScrollFactor(parallax_Cityscape_61);
 		parallax_Cityscape_61ScrollFactor.factorX = 0.2;
-		parallax_Cityscape_61ScrollFactor.factorY = 0.1;
 
 		// parallax_Cityscape_151 (components)
 		const parallax_Cityscape_151ScrollFactor = new ScrollFactor(parallax_Cityscape_151);
 		parallax_Cityscape_151ScrollFactor.factorX = 0.25;
-		parallax_Cityscape_151ScrollFactor.factorY = 0.15;
 
 		// parallax_Cityscape_161 (components)
 		const parallax_Cityscape_161ScrollFactor = new ScrollFactor(parallax_Cityscape_161);
 		parallax_Cityscape_161ScrollFactor.factorX = 0.25;
-		parallax_Cityscape_161ScrollFactor.factorY = 0.15;
 
 		// parallax_Cityscape_171 (components)
 		const parallax_Cityscape_171ScrollFactor = new ScrollFactor(parallax_Cityscape_171);
 		parallax_Cityscape_171ScrollFactor.factorX = 0.25;
-		parallax_Cityscape_171ScrollFactor.factorY = 0.15;
 
 		// parallax_Cityscape_181 (components)
 		const parallax_Cityscape_181ScrollFactor = new ScrollFactor(parallax_Cityscape_181);
 		parallax_Cityscape_181ScrollFactor.factorX = 0.25;
-		parallax_Cityscape_181ScrollFactor.factorY = 0.15;
 
 		// parallax_Cityscape_1911 (components)
 		const parallax_Cityscape_1911ScrollFactor = new ScrollFactor(parallax_Cityscape_1911);
 		parallax_Cityscape_1911ScrollFactor.factorX = 0.25;
-		parallax_Cityscape_1911ScrollFactor.factorY = 0.15;
 
 		// parallax_Cityscape_201 (components)
 		const parallax_Cityscape_201ScrollFactor = new ScrollFactor(parallax_Cityscape_201);
 		parallax_Cityscape_201ScrollFactor.factorX = 0.25;
-		parallax_Cityscape_201ScrollFactor.factorY = 0.15;
 
 		// parallax_Backing (components)
 		new ScrollFactor(parallax_Backing);
@@ -566,66 +553,53 @@ export default class Level extends Phaser.Scene {
 		// parallax_Cityscape (components)
 		const parallax_CityscapeScrollFactor = new ScrollFactor(parallax_Cityscape);
 		parallax_CityscapeScrollFactor.factorX = 0.2;
-		parallax_CityscapeScrollFactor.factorY = 0.1;
 
 		// parallax_Cityscape_1 (components)
 		const parallax_Cityscape_1ScrollFactor = new ScrollFactor(parallax_Cityscape_1);
 		parallax_Cityscape_1ScrollFactor.factorX = 0.2;
-		parallax_Cityscape_1ScrollFactor.factorY = 0.1;
 
 		// parallax_Cityscape_2 (components)
 		const parallax_Cityscape_2ScrollFactor = new ScrollFactor(parallax_Cityscape_2);
 		parallax_Cityscape_2ScrollFactor.factorX = 0.2;
-		parallax_Cityscape_2ScrollFactor.factorY = 0.1;
 
 		// parallax_Cityscape_3 (components)
 		const parallax_Cityscape_3ScrollFactor = new ScrollFactor(parallax_Cityscape_3);
 		parallax_Cityscape_3ScrollFactor.factorX = 0.2;
-		parallax_Cityscape_3ScrollFactor.factorY = 0.1;
 
 		// parallax_Cityscape_4 (components)
 		const parallax_Cityscape_4ScrollFactor = new ScrollFactor(parallax_Cityscape_4);
 		parallax_Cityscape_4ScrollFactor.factorX = 0.2;
-		parallax_Cityscape_4ScrollFactor.factorY = 0.1;
 
 		// parallax_Cityscape_5 (components)
-		const parallax_Cityscape_5ScrollFactor = new ScrollFactor(parallax_Cityscape_5);
-		parallax_Cityscape_5ScrollFactor.factorY = 0.1;
+		new ScrollFactor(parallax_Cityscape_5);
 
 		// parallax_Cityscape_6 (components)
 		const parallax_Cityscape_6ScrollFactor = new ScrollFactor(parallax_Cityscape_6);
 		parallax_Cityscape_6ScrollFactor.factorX = 0.2;
-		parallax_Cityscape_6ScrollFactor.factorY = 0.1;
 
 		// parallax_Cityscape_15 (components)
 		const parallax_Cityscape_15ScrollFactor = new ScrollFactor(parallax_Cityscape_15);
 		parallax_Cityscape_15ScrollFactor.factorX = 0.25;
-		parallax_Cityscape_15ScrollFactor.factorY = 0.15;
 
 		// parallax_Cityscape_16 (components)
 		const parallax_Cityscape_16ScrollFactor = new ScrollFactor(parallax_Cityscape_16);
 		parallax_Cityscape_16ScrollFactor.factorX = 0.25;
-		parallax_Cityscape_16ScrollFactor.factorY = 0.15;
 
 		// parallax_Cityscape_17 (components)
 		const parallax_Cityscape_17ScrollFactor = new ScrollFactor(parallax_Cityscape_17);
 		parallax_Cityscape_17ScrollFactor.factorX = 0.25;
-		parallax_Cityscape_17ScrollFactor.factorY = 0.15;
 
 		// parallax_Cityscape_18 (components)
 		const parallax_Cityscape_18ScrollFactor = new ScrollFactor(parallax_Cityscape_18);
 		parallax_Cityscape_18ScrollFactor.factorX = 0.25;
-		parallax_Cityscape_18ScrollFactor.factorY = 0.15;
 
 		// parallax_Cityscape_19 (components)
 		const parallax_Cityscape_19ScrollFactor = new ScrollFactor(parallax_Cityscape_19);
 		parallax_Cityscape_19ScrollFactor.factorX = 0.25;
-		parallax_Cityscape_19ScrollFactor.factorY = 0.15;
 
 		// parallax_Cityscape_20 (components)
 		const parallax_Cityscape_20ScrollFactor = new ScrollFactor(parallax_Cityscape_20);
 		parallax_Cityscape_20ScrollFactor.factorX = 0.25;
-		parallax_Cityscape_20ScrollFactor.factorY = 0.15;
 
 		// parallax_Backing_2 (components)
 		new ScrollFactor(parallax_Backing_2);
@@ -633,91 +607,73 @@ export default class Level extends Phaser.Scene {
 		// parallax_Hills_1 (components)
 		const parallax_Hills_1ScrollFactor = new ScrollFactor(parallax_Hills_1);
 		parallax_Hills_1ScrollFactor.factorX = 0.2;
-		parallax_Hills_1ScrollFactor.factorY = 0.1;
 
 		// parallax_Hills_7 (components)
 		const parallax_Hills_7ScrollFactor = new ScrollFactor(parallax_Hills_7);
 		parallax_Hills_7ScrollFactor.factorX = 0.2;
-		parallax_Hills_7ScrollFactor.factorY = 0.1;
 
 		// parallax_Hills_9 (components)
 		const parallax_Hills_9ScrollFactor = new ScrollFactor(parallax_Hills_9);
 		parallax_Hills_9ScrollFactor.factorX = 0.2;
-		parallax_Hills_9ScrollFactor.factorY = 0.1;
 
 		// parallax_Hills_12 (components)
 		const parallax_Hills_12ScrollFactor = new ScrollFactor(parallax_Hills_12);
 		parallax_Hills_12ScrollFactor.factorX = 0.2;
-		parallax_Hills_12ScrollFactor.factorY = 0.1;
 
 		// parallax_Hills_14 (components)
 		const parallax_Hills_14ScrollFactor = new ScrollFactor(parallax_Hills_14);
 		parallax_Hills_14ScrollFactor.factorX = 0.2;
-		parallax_Hills_14ScrollFactor.factorY = 0.1;
 
 		// parallax_Hills_22 (components)
 		const parallax_Hills_22ScrollFactor = new ScrollFactor(parallax_Hills_22);
 		parallax_Hills_22ScrollFactor.factorX = 0.2;
-		parallax_Hills_22ScrollFactor.factorY = 0.1;
 
 		// parallax_Hills_24 (components)
 		const parallax_Hills_24ScrollFactor = new ScrollFactor(parallax_Hills_24);
 		parallax_Hills_24ScrollFactor.factorX = 0.2;
-		parallax_Hills_24ScrollFactor.factorY = 0.1;
 
 		// parallax_Hills_26 (components)
 		const parallax_Hills_26ScrollFactor = new ScrollFactor(parallax_Hills_26);
 		parallax_Hills_26ScrollFactor.factorX = 0.2;
-		parallax_Hills_26ScrollFactor.factorY = 0.1;
 
 		// parallax_Cityscape_big_5 (components)
-		const parallax_Cityscape_big_5ScrollFactor = new ScrollFactor(parallax_Cityscape_big_5);
-		parallax_Cityscape_big_5ScrollFactor.factorY = 0.1;
+		new ScrollFactor(parallax_Cityscape_big_5);
 
 		// parallax_Hills_20 (components)
 		const parallax_Hills_20ScrollFactor = new ScrollFactor(parallax_Hills_20);
 		parallax_Hills_20ScrollFactor.factorX = 0.25;
-		parallax_Hills_20ScrollFactor.factorY = 0.15;
 
 		// parallax_Hills_8 (components)
 		const parallax_Hills_8ScrollFactor = new ScrollFactor(parallax_Hills_8);
 		parallax_Hills_8ScrollFactor.factorX = 0.25;
-		parallax_Hills_8ScrollFactor.factorY = 0.15;
 
 		// parallax_Hills_10 (components)
 		const parallax_Hills_10ScrollFactor = new ScrollFactor(parallax_Hills_10);
 		parallax_Hills_10ScrollFactor.factorX = 0.25;
-		parallax_Hills_10ScrollFactor.factorY = 0.15;
 
 		// parallax_Hills_11 (components)
 		const parallax_Hills_11ScrollFactor = new ScrollFactor(parallax_Hills_11);
 		parallax_Hills_11ScrollFactor.factorX = 0.25;
-		parallax_Hills_11ScrollFactor.factorY = 0.15;
 
 		// parallax_Hills_13 (components)
 		const parallax_Hills_13ScrollFactor = new ScrollFactor(parallax_Hills_13);
 		parallax_Hills_13ScrollFactor.factorX = 0.25;
-		parallax_Hills_13ScrollFactor.factorY = 0.15;
 
 		// parallax_Hills_21 (components)
 		const parallax_Hills_21ScrollFactor = new ScrollFactor(parallax_Hills_21);
 		parallax_Hills_21ScrollFactor.factorX = 0.25;
-		parallax_Hills_21ScrollFactor.factorY = 0.15;
 
 		// parallax_Hills_23 (components)
 		const parallax_Hills_23ScrollFactor = new ScrollFactor(parallax_Hills_23);
 		parallax_Hills_23ScrollFactor.factorX = 0.25;
-		parallax_Hills_23ScrollFactor.factorY = 0.15;
 
 		// parallax_Hills_25 (components)
 		const parallax_Hills_25ScrollFactor = new ScrollFactor(parallax_Hills_25);
 		parallax_Hills_25ScrollFactor.factorX = 0.25;
-		parallax_Hills_25ScrollFactor.factorY = 0.15;
 
 		// parallax_Hills_27 (components)
 		const parallax_Hills_27ScrollFactor = new ScrollFactor(parallax_Hills_27);
 		parallax_Hills_27ScrollFactor.factorX = 0.25;
-		parallax_Hills_27ScrollFactor.factorY = 0.15;
 
 		this.bGLayerIndustry = bGLayerIndustry;
 		this.parallax_Backing111 = parallax_Backing111;
@@ -827,6 +783,9 @@ export default class Level extends Phaser.Scene {
 
 	private tapperDeadProp!:TapperDeadProp;
 
+	private eggZone: Phaser.Geom.Rectangle;
+	private gotEggZone = false;
+
 	create()
 	{
 		this.editorCreate();
@@ -841,6 +800,8 @@ export default class Level extends Phaser.Scene {
 		this.cameraFollow = new Phaser.Math.Vector2(this.player.x, this.player.y);
 		this.currentLevelIndex = this.registry.get('current-level-index');
 		this.goalEnemyIndex = undefined;
+		this.eggZone = new Phaser.Geom.Rectangle(0, 0, 0, 0);
+		this.gotEggZone = false;
 
 	// UI
 		this.uiScene = this.scene.get('LevelUI') as LevelUI;
@@ -953,6 +914,8 @@ export default class Level extends Phaser.Scene {
 		this.createMapEnemies();
 		this.createMapVisionPolys();
 		this.createCameraOffsetTriggers();
+
+		this.createEggZone();
 
 	// tilemap special elements
 		let startPoint = TilemapUtil.getObjectPositionByGID(38, this.tileMap);
@@ -1264,6 +1227,9 @@ export default class Level extends Phaser.Scene {
 		this.checkVisionPolys();
 		this.checkCameraOffsetTriggers();
 
+		this.checkEggZone()
+
+
 		// player-plane check
 		if (this.planeRect)
 		{
@@ -1530,7 +1496,7 @@ export default class Level extends Phaser.Scene {
 	{
 		let enemy1 = _enemy1 as EnemyPrefab;
 		let enemy2 = _enemy2 as EnemyPrefab;
-		
+
 		if (!enemy1.isFalling())
 		{
 			enemy1.hit(enemy2.body.velocity.x, enemy2.body.velocity.y);
@@ -1789,11 +1755,11 @@ export default class Level extends Phaser.Scene {
 		{
 			this.time.addEvent({ delay: 500, callback: ()=>
 			{
-				this.game.events.emit('unlock-medal: Plato');
+				this.game.events.emit('unlock-medal: Jailbroken');
 			}});
 		}
 
-		if (enemy.enemyListIndex === this.goalEnemyIndex)
+		if (enemy.enemyListIndex === this.goalEnemyIndex && (cause === 'dive' || cause === 'uppercut' || cause === 'punch'))
 		{
 			this.reachedGoal = true;
 
@@ -2224,7 +2190,7 @@ export default class Level extends Phaser.Scene {
 		// 	this.uiScene.setScore(this.score);
 		// }
 
-		
+
 		this.time.addEvent({ delay: 2900, callback: () =>
 		{
 			this.registry.set('last-score', this.score);
@@ -2574,10 +2540,15 @@ export default class Level extends Phaser.Scene {
 			{
 				let object = _object as any;
 
-				const trigger = new cameraOffsetTrigger(object.properties[0].value, 
-					object.properties[1].value, object.x, object.y, object.width, object.height);
-				this.cameraOffsetTriggers.push(trigger);
-				this.mapElementList[object.id] = trigger;
+				if (object.properties[0].value !== true)
+				{
+					// object is a camera offset trigger
+
+					const trigger = new cameraOffsetTrigger(object.properties[0].value, 
+						object.properties[1].value, object.x, object.y, object.width, object.height);
+					this.cameraOffsetTriggers.push(trigger);
+					this.mapElementList[object.id] = trigger;
+				}
 			}
 		});
 	}
@@ -2597,6 +2568,54 @@ export default class Level extends Phaser.Scene {
 				}
 			}
 		});
+	}
+
+	createEggZone()
+	{
+		let _mapObjects = this.tileMap.getObjectLayer('elements')
+		_mapObjects.objects.forEach((_object, index) =>
+		{
+			if (_object.rectangle)
+			{
+				let object = _object as any;
+
+				if (object.properties[0].value === true)
+				{
+					// object is an egg zone
+
+					this.eggZone = new Phaser.Geom.Rectangle
+						(object.x, object.y, object.width, object.height);
+					this.mapElementList[object.id] = this.eggZone;
+
+					// this.game.events.emit('unlock-medal: Killer egg');
+				}
+			}
+		});
+	}
+
+	checkEggZone()
+	{	
+		if (!this.eggZone.isEmpty() && !this.gotEggZone)
+		{
+			if (Phaser.Geom.Rectangle.ContainsPoint
+				(this.eggZone, new Phaser.Geom.Point(this.player.x, this.player.y)))
+			{
+				this.gotEggZone = true;
+
+				this.registry.set(`got-egg: ${this.registry.get('current-level')}`, true);
+
+				// HARDCODED: # off egs
+				console.log(`Easter egg found! Find both of them to unlock the secret NG medal.`);
+
+				// check egg zones
+				if (this.registry.get(`got-egg: bomb-holder`)
+					&& this.registry.get(`got-egg: umbrella-shield`))
+					//HARDCODED: add in levels with other eggs
+				{
+					this.game.events.emit('unlock-medal: Killer Egg');
+				}
+			}
+		}
 	}
 
 	createMapVisionPolys()
@@ -2691,17 +2710,17 @@ export default class Level extends Phaser.Scene {
 		this.uiScene.mobileButtonJump.on('pointerdown', () =>
 		{
 			this.player.jumpMobileButton = true;
-			this.uiScene.mobileButtonJump.setAlpha(.3, .01, .3, .01);
+			this.uiScene.mobileButtonJump.setAlpha(.4);
 		});
 		this.uiScene.mobileButtonJump.on('pointerup', () =>
 		{
 			this.player.jumpMobileButton = false;
-			this.uiScene.mobileButtonJump.setAlpha(.01, .01, .01, .01);
+			this.uiScene.mobileButtonJump.setAlpha(.2);
 		});
 		this.uiScene.mobileButtonJump.on('pointerout', () =>
 		{
 			this.player.jumpMobileButton = false;
-			this.uiScene.mobileButtonJump.setAlpha(.01, .01, .01, .01);
+			this.uiScene.mobileButtonJump.setAlpha(.2);
 		});
 
 		this.input.on('gameobjectdown', (pointer: any, gameobject: any) =>
@@ -2715,7 +2734,7 @@ export default class Level extends Phaser.Scene {
 		{
 			this.player.punchMobileButton = true;
 			// this.uiScene.mobileButtonPunch
-			this.uiScene.mobileButtonPunch.setAlpha(.01, .3, .01, .3);
+			this.uiScene.mobileButtonPunch.setAlpha(.4);
 		});
 
 	// For multitouch to work, I need to use the following event and compare the object
@@ -2727,12 +2746,12 @@ export default class Level extends Phaser.Scene {
 		this.uiScene.mobileButtonPunch.on('pointerup', () =>
 		{
 			this.player.punchMobileButton = false;
-			this.uiScene.mobileButtonPunch.setAlpha(.01, .01, .01, .01);
+			this.uiScene.mobileButtonPunch.setAlpha(.2);
 		});
 		this.uiScene.mobileButtonPunch.on('pointerout', () =>
 		{
 			this.player.punchMobileButton = false;
-			this.uiScene.mobileButtonPunch.setAlpha(.01, .01, .01, .01);
+			this.uiScene.mobileButtonPunch.setAlpha(.2);
 		});
 
 		// uppercut
@@ -2758,17 +2777,17 @@ export default class Level extends Phaser.Scene {
 		this.uiScene.mobileButtonDive.on('pointerdown', () =>
 		{
 			this.player.diveMobileButton = true;
-			this.uiScene.mobileButtonDive.setAlpha(.3, .01, .3, .01);
+			this.uiScene.mobileButtonDive.setAlpha(.4);
 		});
 		this.uiScene.mobileButtonDive.on('pointerup', () =>
 		{
 			this.player.diveMobileButton = false;
-			this.uiScene.mobileButtonDive.setAlpha(.01, .01, .01, .01);
+			this.uiScene.mobileButtonDive.setAlpha(.2);
 		});
 		this.uiScene.mobileButtonDive.on('pointerout', () =>
 		{
 			this.player.diveMobileButton = false;
-			this.uiScene.mobileButtonDive.setAlpha(.01, .01, .01, .01);
+			this.uiScene.mobileButtonDive.setAlpha(.2);
 		});
 
 		// level select

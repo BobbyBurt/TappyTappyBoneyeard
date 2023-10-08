@@ -71,6 +71,7 @@ export default class playerPrefab extends Phaser.Physics.Arcade.Sprite {
 	private jumpKey: Phaser.Input.Keyboard.Key 
 	= this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP);
 	private jumpButton: number = 1;
+	private jumpButton2: number = 2;
 	public jumpMobileButton: boolean = false;
 
 	/** applies to flaps */
@@ -107,7 +108,7 @@ export default class playerPrefab extends Phaser.Physics.Arcade.Sprite {
 	/** set based on key, gamepad or mobile input */
 	public uppercutInput: input = 'up';
 	private uppercutKey: Phaser.Input.Keyboard.Key 
-		= this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.U);
+		= this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Z);
 	private uppercutButton: number = 12;
 	public uppercutMobileButton: boolean = false;
 
@@ -224,6 +225,7 @@ export default class playerPrefab extends Phaser.Physics.Arcade.Sprite {
 
 	// jump
 		if (this.gamepad?.isButtonDown(this.jumpButton) 
+			|| this.gamepad?.isButtonDown(this.jumpButton2)
 			|| this.jumpKey.isDown || this.jumpMobileButton)
 		{
 			if (this.jumpInput != 'just-down' && this.jumpInput != 'down')

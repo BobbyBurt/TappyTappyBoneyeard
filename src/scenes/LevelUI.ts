@@ -150,13 +150,14 @@ export default class LevelUI extends Phaser.Scene {
 		// mobileButtonPunch
 		const mobileButtonPunch = this.add.image(746, 1082, "soldier-blood-2");
 		mobileButtonPunch.scaleX = 75;
-		mobileButtonPunch.scaleY = 135;
+		mobileButtonPunch.scaleY = 75;
+		mobileButtonPunch.angle = 45;
 		mobileButtonPunch.setOrigin(1, 1);
-		mobileButtonPunch.alpha = 0.01;
-		mobileButtonPunch.alphaTopLeft = 0.01;
-		mobileButtonPunch.alphaTopRight = 0.01;
-		mobileButtonPunch.alphaBottomLeft = 0.01;
-		mobileButtonPunch.alphaBottomRight = 0.01;
+		mobileButtonPunch.alpha = 0.2;
+		mobileButtonPunch.alphaTopLeft = 0.2;
+		mobileButtonPunch.alphaTopRight = 0.2;
+		mobileButtonPunch.alphaBottomLeft = 0.2;
+		mobileButtonPunch.alphaBottomRight = 0.2;
 		mobileButtonPunch.tintFill = true;
 		mobileButtonPunch.tintTopLeft = 5675510;
 		mobileButtonPunch.tintTopRight = 5675510;
@@ -166,13 +167,14 @@ export default class LevelUI extends Phaser.Scene {
 		// mobileButtonJump
 		const mobileButtonJump = this.add.image(337.44940185546875, 1081.0118408203125, "soldier-blood-2");
 		mobileButtonJump.scaleX = 75;
-		mobileButtonJump.scaleY = 60;
+		mobileButtonJump.scaleY = 75;
+		mobileButtonJump.angle = -45.00000000000006;
 		mobileButtonJump.setOrigin(0, 1);
-		mobileButtonJump.alpha = 0.01;
-		mobileButtonJump.alphaTopLeft = 0.01;
-		mobileButtonJump.alphaTopRight = 0.01;
-		mobileButtonJump.alphaBottomLeft = 0.01;
-		mobileButtonJump.alphaBottomRight = 0.01;
+		mobileButtonJump.alpha = 0.2;
+		mobileButtonJump.alphaTopLeft = 0.2;
+		mobileButtonJump.alphaTopRight = 0.2;
+		mobileButtonJump.alphaBottomLeft = 0.2;
+		mobileButtonJump.alphaBottomRight = 0.2;
 		mobileButtonJump.tintFill = true;
 		mobileButtonJump.tintTopLeft = 5675510;
 		mobileButtonJump.tintTopRight = 5675510;
@@ -185,11 +187,11 @@ export default class LevelUI extends Phaser.Scene {
 		mobileButtonUppercut.scaleY = 75;
 		mobileButtonUppercut.setOrigin(1, 1);
 		mobileButtonUppercut.visible = false;
-		mobileButtonUppercut.alpha = 0.01;
-		mobileButtonUppercut.alphaTopLeft = 0.01;
-		mobileButtonUppercut.alphaTopRight = 0.01;
-		mobileButtonUppercut.alphaBottomLeft = 0.01;
-		mobileButtonUppercut.alphaBottomRight = 0.01;
+		mobileButtonUppercut.alpha = 0.2;
+		mobileButtonUppercut.alphaTopLeft = 0.2;
+		mobileButtonUppercut.alphaTopRight = 0.2;
+		mobileButtonUppercut.alphaBottomLeft = 0.2;
+		mobileButtonUppercut.alphaBottomRight = 0.2;
 		mobileButtonUppercut.tintFill = true;
 		mobileButtonUppercut.tintTopLeft = 5675510;
 		mobileButtonUppercut.tintTopRight = 5675510;
@@ -200,12 +202,13 @@ export default class LevelUI extends Phaser.Scene {
 		const mobileButtonDive = this.add.image(593.4494018554688, 950.0119018554688, "soldier-blood-2");
 		mobileButtonDive.scaleX = 75;
 		mobileButtonDive.scaleY = 75;
+		mobileButtonDive.angle = 45;
 		mobileButtonDive.setOrigin(0, 1);
-		mobileButtonDive.alpha = 0.01;
-		mobileButtonDive.alphaTopLeft = 0.01;
-		mobileButtonDive.alphaTopRight = 0.01;
-		mobileButtonDive.alphaBottomLeft = 0.01;
-		mobileButtonDive.alphaBottomRight = 0.01;
+		mobileButtonDive.alpha = 0.2;
+		mobileButtonDive.alphaTopLeft = 0.2;
+		mobileButtonDive.alphaTopRight = 0.2;
+		mobileButtonDive.alphaBottomLeft = 0.2;
+		mobileButtonDive.alphaBottomRight = 0.2;
 		mobileButtonDive.tintFill = true;
 		mobileButtonDive.tintTopLeft = 5675510;
 		mobileButtonDive.tintTopRight = 5675510;
@@ -220,11 +223,16 @@ export default class LevelUI extends Phaser.Scene {
 		mobileButtonLevelSelect.fillColor = 13532397;
 
 		// punchChargeEmpty
-		const punchChargeEmpty = this.add.image(360, 694, "bird0fist");
+		const punchChargeEmpty = this.add.image(360, 694, "bird-fist-depleted");
 		punchChargeEmpty.scaleX = 2;
 		punchChargeEmpty.scaleY = 2;
 		punchChargeEmpty.angle = 90;
 		punchChargeEmpty.setOrigin(0, 0);
+		punchChargeEmpty.alpha = 0.7;
+		punchChargeEmpty.alphaTopLeft = 0.7;
+		punchChargeEmpty.alphaTopRight = 0.7;
+		punchChargeEmpty.alphaBottomLeft = 0.7;
+		punchChargeEmpty.alphaBottomRight = 0.7;
 
 		// punchChargeFull
 		const punchChargeFull = this.add.image(387, 682, "bird2fist");
@@ -724,12 +732,14 @@ export default class LevelUI extends Phaser.Scene {
 		const mobileButtonPunchAlign = new Align(mobileButtonPunch);
 		mobileButtonPunchAlign.down = true;
 		mobileButtonPunchAlign.right = true;
+		mobileButtonPunchAlign.verticalOffset = -20;
 		new MobileDependent(mobileButtonPunch);
 
 		// mobileButtonJump (components)
 		const mobileButtonJumpAlign = new Align(mobileButtonJump);
 		mobileButtonJumpAlign.down = true;
 		mobileButtonJumpAlign.left = true;
+		mobileButtonJumpAlign.verticalOffset = -20;
 		new MobileDependent(mobileButtonJump);
 
 		// mobileButtonUppercut (components)
@@ -743,7 +753,7 @@ export default class LevelUI extends Phaser.Scene {
 		const mobileButtonDiveAlign = new Align(mobileButtonDive);
 		mobileButtonDiveAlign.down = true;
 		mobileButtonDiveAlign.left = true;
-		mobileButtonDiveAlign.verticalOffset = -140;
+		mobileButtonDiveAlign.horizontalOffset = 20;
 		new MobileDependent(mobileButtonDive);
 
 		// mobileButtonLevelSelect (components)
@@ -1661,6 +1671,8 @@ export default class LevelUI extends Phaser.Scene {
 
 		const _camera = this.cameras.main as any;
 		_camera.preRender(1);
+
+		// this.cameras.main.setAlpha(0);
 	}
 
 	resize()

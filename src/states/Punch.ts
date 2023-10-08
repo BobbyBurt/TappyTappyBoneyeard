@@ -109,7 +109,8 @@ export default class Punch implements State {
 	{
 		// queue uppercut for after windup
 		if (this.pauseTimer.getProgress() < 1 && 
-			(this.player.jumpInput === 'down' || this.player.jumpInput === 'just-down'))
+			(this.player.jumpInput === 'down' || this.player.jumpInput === 'just-down' 
+			|| this.player.uppercutInput === 'down' || this.player.uppercutInput === 'just-up'))
 		{
 			console.debug('queuing uppercut');
 

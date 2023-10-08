@@ -42,7 +42,6 @@
                         "ScrollFactor"
                     ],
                     "ScrollFactor.factorX": 0.2,
-                    "ScrollFactor.factorY": 0.1,
                     "texture": {
                         "key": "Parallax-Industry"
                     },
@@ -62,7 +61,6 @@
                         "ScrollFactor"
                     ],
                     "ScrollFactor.factorX": 0.2,
-                    "ScrollFactor.factorY": 0.1,
                     "texture": {
                         "key": "Parallax-Industry"
                     },
@@ -82,7 +80,6 @@
                         "ScrollFactor"
                     ],
                     "ScrollFactor.factorX": 0.2,
-                    "ScrollFactor.factorY": 0.1,
                     "texture": {
                         "key": "Parallax-Industry"
                     },
@@ -102,7 +99,6 @@
                         "ScrollFactor"
                     ],
                     "ScrollFactor.factorX": 0.2,
-                    "ScrollFactor.factorY": 0.1,
                     "texture": {
                         "key": "Parallax-Industry"
                     },
@@ -122,7 +118,6 @@
                         "ScrollFactor"
                     ],
                     "ScrollFactor.factorX": 0.2,
-                    "ScrollFactor.factorY": 0.1,
                     "texture": {
                         "key": "Parallax-Industry"
                     },
@@ -141,7 +136,6 @@
                     "components": [
                         "ScrollFactor"
                     ],
-                    "ScrollFactor.factorY": 0.1,
                     "texture": {
                         "key": "Parallax-Industry"
                     },
@@ -165,7 +159,6 @@
                         "ScrollFactor"
                     ],
                     "ScrollFactor.factorX": 0.2,
-                    "ScrollFactor.factorY": 0.1,
                     "texture": {
                         "key": "Parallax-Industry"
                     },
@@ -185,7 +178,6 @@
                         "ScrollFactor"
                     ],
                     "ScrollFactor.factorX": 0.25,
-                    "ScrollFactor.factorY": 0.15,
                     "texture": {
                         "key": "Parallax-Industry"
                     },
@@ -205,7 +197,6 @@
                         "ScrollFactor"
                     ],
                     "ScrollFactor.factorX": 0.25,
-                    "ScrollFactor.factorY": 0.15,
                     "texture": {
                         "key": "Parallax-Industry"
                     },
@@ -225,7 +216,6 @@
                         "ScrollFactor"
                     ],
                     "ScrollFactor.factorX": 0.25,
-                    "ScrollFactor.factorY": 0.15,
                     "texture": {
                         "key": "Parallax-Industry"
                     },
@@ -245,7 +235,6 @@
                         "ScrollFactor"
                     ],
                     "ScrollFactor.factorX": 0.25,
-                    "ScrollFactor.factorY": 0.15,
                     "texture": {
                         "key": "Parallax-Industry"
                     },
@@ -265,7 +254,6 @@
                         "ScrollFactor"
                     ],
                     "ScrollFactor.factorX": 0.25,
-                    "ScrollFactor.factorY": 0.15,
                     "texture": {
                         "key": "Parallax-Industry"
                     },
@@ -285,7 +273,6 @@
                         "ScrollFactor"
                     ],
                     "ScrollFactor.factorX": 0.25,
-                    "ScrollFactor.factorY": 0.15,
                     "texture": {
                         "key": "Parallax-Industry"
                     },
@@ -330,7 +317,6 @@
                         "ScrollFactor"
                     ],
                     "ScrollFactor.factorX": 0.2,
-                    "ScrollFactor.factorY": 0.1,
                     "texture": {
                         "key": "Parallax-Cityscape"
                     },
@@ -350,7 +336,6 @@
                         "ScrollFactor"
                     ],
                     "ScrollFactor.factorX": 0.2,
-                    "ScrollFactor.factorY": 0.1,
                     "texture": {
                         "key": "Parallax-Cityscape"
                     },
@@ -370,7 +355,6 @@
                         "ScrollFactor"
                     ],
                     "ScrollFactor.factorX": 0.2,
-                    "ScrollFactor.factorY": 0.1,
                     "texture": {
                         "key": "Parallax-Cityscape"
                     },
@@ -390,7 +374,6 @@
                         "ScrollFactor"
                     ],
                     "ScrollFactor.factorX": 0.2,
-                    "ScrollFactor.factorY": 0.1,
                     "texture": {
                         "key": "Parallax-Cityscape"
                     },
@@ -410,7 +393,6 @@
                         "ScrollFactor"
                     ],
                     "ScrollFactor.factorX": 0.2,
-                    "ScrollFactor.factorY": 0.1,
                     "texture": {
                         "key": "Parallax-Cityscape"
                     },
@@ -429,7 +411,6 @@
                     "components": [
                         "ScrollFactor"
                     ],
-                    "ScrollFactor.factorY": 0.1,
                     "texture": {
                         "key": "Parallax-Cityscape"
                     },
@@ -453,7 +434,6 @@
                         "ScrollFactor"
                     ],
                     "ScrollFactor.factorX": 0.2,
-                    "ScrollFactor.factorY": 0.1,
                     "texture": {
                         "key": "Parallax-Cityscape"
                     },
@@ -473,7 +453,6 @@
                         "ScrollFactor"
                     ],
                     "ScrollFactor.factorX": 0.25,
-                    "ScrollFactor.factorY": 0.15,
                     "texture": {
                         "key": "Parallax-Cityscape"
                     },
@@ -493,7 +472,6 @@
                         "ScrollFactor"
                     ],
                     "ScrollFactor.factorX": 0.25,
-                    "ScrollFactor.factorY": 0.15,
                     "texture": {
                         "key": "Parallax-Cityscape"
                     },
@@ -513,7 +491,6 @@
                         "ScrollFactor"
                     ],
                     "ScrollFactor.factorX": 0.25,
-                    "ScrollFactor.factorY": 0.15,
                     "texture": {
                         "key": "Parallax-Cityscape"
                     },
@@ -533,7 +510,6 @@
                         "ScrollFactor"
                     ],
                     "ScrollFactor.factorX": 0.25,
-                    "ScrollFactor.factorY": 0.15,
                     "texture": {
                         "key": "Parallax-Cityscape"
                     },
@@ -553,7 +529,6 @@
                         "ScrollFactor"
                     ],
                     "ScrollFactor.factorX": 0.25,
-                    "ScrollFactor.factorY": 0.15,
                     "texture": {
                         "key": "Parallax-Cityscape"
                     },
@@ -573,7 +548,6 @@
                         "ScrollFactor"
                     ],
                     "ScrollFactor.factorX": 0.25,
-                    "ScrollFactor.factorY": 0.15,
                     "texture": {
                         "key": "Parallax-Cityscape"
                     },
@@ -618,7 +592,6 @@
                         "ScrollFactor"
                     ],
                     "ScrollFactor.factorX": 0.2,
-                    "ScrollFactor.factorY": 0.1,
                     "texture": {
                         "key": "Parallax-Forest"
                     },
@@ -638,7 +611,6 @@
                         "ScrollFactor"
                     ],
                     "ScrollFactor.factorX": 0.2,
-                    "ScrollFactor.factorY": 0.1,
                     "texture": {
                         "key": "Parallax-Forest"
                     },
@@ -658,7 +630,6 @@
                         "ScrollFactor"
                     ],
                     "ScrollFactor.factorX": 0.2,
-                    "ScrollFactor.factorY": 0.1,
                     "texture": {
                         "key": "Parallax-Forest"
                     },
@@ -678,7 +649,6 @@
                         "ScrollFactor"
                     ],
                     "ScrollFactor.factorX": 0.2,
-                    "ScrollFactor.factorY": 0.1,
                     "texture": {
                         "key": "Parallax-Forest"
                     },
@@ -698,7 +668,6 @@
                         "ScrollFactor"
                     ],
                     "ScrollFactor.factorX": 0.2,
-                    "ScrollFactor.factorY": 0.1,
                     "texture": {
                         "key": "Parallax-Forest"
                     },
@@ -718,7 +687,6 @@
                         "ScrollFactor"
                     ],
                     "ScrollFactor.factorX": 0.2,
-                    "ScrollFactor.factorY": 0.1,
                     "texture": {
                         "key": "Parallax-Forest"
                     },
@@ -738,7 +706,6 @@
                         "ScrollFactor"
                     ],
                     "ScrollFactor.factorX": 0.2,
-                    "ScrollFactor.factorY": 0.1,
                     "texture": {
                         "key": "Parallax-Forest"
                     },
@@ -758,7 +725,6 @@
                         "ScrollFactor"
                     ],
                     "ScrollFactor.factorX": 0.2,
-                    "ScrollFactor.factorY": 0.1,
                     "texture": {
                         "key": "Parallax-Forest"
                     },
@@ -777,7 +743,6 @@
                     "components": [
                         "ScrollFactor"
                     ],
-                    "ScrollFactor.factorY": 0.1,
                     "texture": {
                         "key": "Parallax-Cityscape"
                     },
@@ -801,7 +766,6 @@
                         "ScrollFactor"
                     ],
                     "ScrollFactor.factorX": 0.25,
-                    "ScrollFactor.factorY": 0.15,
                     "texture": {
                         "key": "Parallax-Forest"
                     },
@@ -821,7 +785,6 @@
                         "ScrollFactor"
                     ],
                     "ScrollFactor.factorX": 0.25,
-                    "ScrollFactor.factorY": 0.15,
                     "texture": {
                         "key": "Parallax-Forest"
                     },
@@ -841,7 +804,6 @@
                         "ScrollFactor"
                     ],
                     "ScrollFactor.factorX": 0.25,
-                    "ScrollFactor.factorY": 0.15,
                     "texture": {
                         "key": "Parallax-Forest"
                     },
@@ -861,7 +823,6 @@
                         "ScrollFactor"
                     ],
                     "ScrollFactor.factorX": 0.25,
-                    "ScrollFactor.factorY": 0.15,
                     "texture": {
                         "key": "Parallax-Forest"
                     },
@@ -881,7 +842,6 @@
                         "ScrollFactor"
                     ],
                     "ScrollFactor.factorX": 0.25,
-                    "ScrollFactor.factorY": 0.15,
                     "texture": {
                         "key": "Parallax-Forest"
                     },
@@ -901,7 +861,6 @@
                         "ScrollFactor"
                     ],
                     "ScrollFactor.factorX": 0.25,
-                    "ScrollFactor.factorY": 0.15,
                     "texture": {
                         "key": "Parallax-Forest"
                     },
@@ -921,7 +880,6 @@
                         "ScrollFactor"
                     ],
                     "ScrollFactor.factorX": 0.25,
-                    "ScrollFactor.factorY": 0.15,
                     "texture": {
                         "key": "Parallax-Forest"
                     },
@@ -941,7 +899,6 @@
                         "ScrollFactor"
                     ],
                     "ScrollFactor.factorX": 0.25,
-                    "ScrollFactor.factorY": 0.15,
                     "texture": {
                         "key": "Parallax-Forest"
                     },
@@ -961,7 +918,6 @@
                         "ScrollFactor"
                     ],
                     "ScrollFactor.factorX": 0.25,
-                    "ScrollFactor.factorY": 0.15,
                     "texture": {
                         "key": "Parallax-Forest"
                     },

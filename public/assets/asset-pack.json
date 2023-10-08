@@ -43,6 +43,11 @@
                 "key": "bird-egg-lay"
             },
             {
+                "url": "assets/bird-fist-depleted.png",
+                "type": "image",
+                "key": "bird-fist-depleted"
+            },
+            {
                 "url": [
                     "assets/sfx/bird flap.mp3"
                 ],
@@ -260,13 +265,6 @@
                 "key": "cool-combo"
             },
             {
-                "url": [
-                    "assets/music/Danny Baranowsky - Super Meat Boy! - Digital Special Edition Soundtrack - 10 Rocket Rider (Ch 3 Dark World).mp3"
-                ],
-                "type": "audio",
-                "key": "hard-game"
-            },
-            {
                 "url": "assets/levels/dive.json",
                 "type": "tilemapTiledJSON",
                 "key": "dive"
@@ -405,6 +403,20 @@
                 "key": "guns"
             },
             {
+                "url": [
+                    "assets/music/factory.mp3"
+                ],
+                "type": "audio",
+                "key": "hard-game"
+            },
+            {
+                "url": [
+                    "assets/music/Danny Baranowsky - Super Meat Boy! - Digital Special Edition Soundtrack - 10 Rocket Rider (Ch 3 Dark World).mp3"
+                ],
+                "type": "audio",
+                "key": "hard-game"
+            },
+            {
                 "url": "assets/hit-effect-diagonal.png",
                 "type": "image",
                 "key": "hit-effect-diagonal"
@@ -475,11 +487,6 @@
                 "key": "main-game"
             },
             {
-                "url": "assets/menu-bg.png",
-                "type": "image",
-                "key": "menu-bg"
-            },
-            {
                 "url": [
                     "assets/music/menu-TEMP.mp3"
                 ],
@@ -487,9 +494,19 @@
                 "key": "menu"
             },
             {
+                "url": "assets/menu-bg.png",
+                "type": "image",
+                "key": "menu-bg"
+            },
+            {
                 "url": "assets/levels/mine-combo.json",
                 "type": "tilemapTiledJSON",
                 "key": "mine-combo"
+            },
+            {
+                "url": "assets/levels/mine-enemy.json",
+                "type": "tilemapTiledJSON",
+                "key": "mine-enemy"
             },
             {
                 "url": "assets/levels/mine-intro.json",
@@ -594,6 +611,11 @@
                 "key": "pogo-mines"
             },
             {
+                "url": "assets/level-previews/preview-airborne.png",
+                "type": "image",
+                "key": "preview-airborne"
+            },
+            {
                 "url": "assets/level-previews/preview-blank.png",
                 "type": "image",
                 "key": "preview-blank"
@@ -612,6 +634,66 @@
                 "url": "assets/level-previews/preview-bomb-punch.png",
                 "type": "image",
                 "key": "preview-bomb-punch"
+            },
+            {
+                "url": "assets/level-previews/preview-charge.png",
+                "type": "image",
+                "key": "preview-charge"
+            },
+            {
+                "url": "assets/level-previews/preview-combo.png",
+                "type": "image",
+                "key": "preview-combo"
+            },
+            {
+                "url": "assets/level-previews/preview-dive.png",
+                "type": "image",
+                "key": "preview-dive"
+            },
+            {
+                "url": "assets/level-previews/preview-dive-practice.png",
+                "type": "image",
+                "key": "preview-dive-practice"
+            },
+            {
+                "url": "assets/level-previews/preview-flap.png",
+                "type": "image",
+                "key": "preview-flap"
+            },
+            {
+                "url": "assets/level-previews/preview-jump.png",
+                "type": "image",
+                "key": "preview-jump"
+            },
+            {
+                "url": "assets/level-previews/preview-pogo-intro.png",
+                "type": "image",
+                "key": "preview-pogo-intro"
+            },
+            {
+                "url": "assets/level-previews/preview-punch.png",
+                "type": "image",
+                "key": "preview-punch"
+            },
+            {
+                "url": "assets/level-previews/preview-tutorial-finale.png",
+                "type": "image",
+                "key": "preview-tutorial-finale"
+            },
+            {
+                "url": "assets/level-previews/preview-umbrella-intro.png",
+                "type": "image",
+                "key": "preview-umbrella-intro"
+            },
+            {
+                "url": "assets/level-previews/preview-umbrella-shield.png",
+                "type": "image",
+                "key": "preview-umbrella-shield"
+            },
+            {
+                "url": "assets/level-previews/preview-uppercut.png",
+                "type": "image",
+                "key": "preview-uppercut"
             },
             {
                 "url": "assets/levels/punch.json",

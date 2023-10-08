@@ -61,6 +61,17 @@
             "font": "nokia",
             "align": "right",
             "fontSize": -10
+        },
+        {
+            "type": "Image",
+            "id": "9c23faed-8e1a-41ec-8b07-169ec31ed485",
+            "label": "load_bg",
+            "components": [],
+            "texture": {
+                "key": "load-bg"
+            },
+            "originX": 0,
+            "originY": 0
         }
     ],
     "plainObjects": [],

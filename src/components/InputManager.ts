@@ -35,7 +35,7 @@ export default class InputManager {
 		]],
 		['tutorial-toggle',
 		[
-			'Z key' ,
+			'space' ,
 			`up button`,
 			'tap'
 		]],
@@ -130,7 +130,7 @@ export default class InputManager {
 		]],
 		['tutorial-toggle',
 		[
-			'Z' ,
+			'SPACE' ,
 			3,
 			null
 		]],

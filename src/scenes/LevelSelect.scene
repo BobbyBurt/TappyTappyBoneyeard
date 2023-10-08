@@ -700,7 +700,7 @@
             "components": [],
             "x": 420,
             "y": 173,
-            "visible": true,
+            "visible": false,
             "nestedPrefabs": [],
             "list": []
         },
@@ -710,7 +710,8 @@
             "unlock": [
                 "x",
                 "y",
-                "levelIndex"
+                "levelIndex",
+                "visible"
             ],
             "label": "levelIconPrefab_11",
             "scope": "CLASS",
@@ -718,6 +719,7 @@
             "components": [],
             "x": 375,
             "y": 173,
+            "visible": false,
             "nestedPrefabs": [],
             "list": []
         },
@@ -960,6 +962,25 @@
             "components": [],
             "x": 150,
             "y": 223,
+            "nestedPrefabs": [],
+            "list": []
+        },
+        {
+            "prefabId": "d4dbcb90-fe7e-4246-9d01-d1793779146b",
+            "id": "78a809eb-0d6e-40bc-b2fb-7e9c284f4ab6",
+            "unlock": [
+                "x",
+                "y",
+                "levelIndex",
+                "visible"
+            ],
+            "label": "levelIconPrefab_21",
+            "scope": "CLASS",
+            "levelIndex": 23,
+            "components": [],
+            "x": 330,
+            "y": 223,
+            "visible": false,
             "nestedPrefabs": [],
             "list": []
         }

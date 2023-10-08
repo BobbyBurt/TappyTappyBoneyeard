@@ -33,7 +33,7 @@ export default class tutorialManager {
 				`If you take out more than one enemy without landing, you get a combo!\n\nBe creative and look for ways to get big combos, as that's how you get really high scores.`,
 			
 			// level 7
-				`Hit the ${InputManager.getInputName('jump')} and the ${InputManager.getInputName('punch')} at the same time to perform an uppercut! This move can take care of enemies above and help you reach higher up.`,
+				`To perform an uppercut, ${scene.registry.get('mobile') ? `hit` : `hit the Z key. Alternatively, you can hit`} the ${InputManager.getInputName('jump')} and the ${InputManager.getInputName('punch')} at the same time. This move can take care of enemies above and help you reach higher up.`,
 
 			// level 8
 				`Punches and uppercuts take a lot out of you... Your charge is indicated by the icon in the top right corner.\n\nLanding on ground is one way to recharge, but you'll also automatically regain charge if you take out an enemy with your attack!`,

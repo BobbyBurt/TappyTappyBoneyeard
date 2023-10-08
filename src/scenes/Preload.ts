@@ -54,6 +54,10 @@ export default class Preload extends Phaser.Scene {
 		progress_1.fontSize = -10;
 		progress_1.align = NaN;
 
+		// load_bg
+		const load_bg = this.add.image(0, 0, "load-bg");
+		load_bg.setOrigin(0, 0);
+
 		// progress (components)
 		new PreloadText(progress);
 
@@ -98,7 +102,7 @@ export default class Preload extends Phaser.Scene {
 		// DEBUG: auto load
 			if (__DEV__)
 			{
-				// this.start();
+				this.start();
 					// mobile detection will not run if enabled
 			}
 		});
@@ -128,9 +132,7 @@ export default class Preload extends Phaser.Scene {
 		}
 		else if (event.type == 'click')
 		{
-			// this.registry.set('mobile', false);
-			this.registry.set('mobile', true);
-			InputManager.activeInputMode = 'touch';
+			this.registry.set('mobile', false);
 		}
 
 		if (this.loaded)

@@ -9,11 +9,11 @@ export let levelScoreMilestones = new Map<string, Array<number>>(
     // TUTORIAL 1
     ['jump',            [ 100, 200, 300 ]],
     ['flap',            [ 100, 200, 400 ]],
-    ['punch',           [ 200, 300, 400 ]],
+    ['punch',           [ 200, 400, 700 ]],
     
     // TUTORIAL 2
     ['airborne',        [ 200, 300, 400 ]],
-    ['dive',            [ 300, 400, 600 ]],
+    ['dive',            [ 200, 400, 600 ]],
     ['dive-practice',   [ 300, 500, 1000 ]],
 
     // TUTORIAL 3
@@ -29,27 +29,30 @@ export let levelScoreMilestones = new Map<string, Array<number>>(
     // MAIN 2
     ['umbrella-intro',  [ 600, 1200, 2400 ]],
     ['bomb-punch',      [ 600, 900, 1100 ]],
-    ['umbrella-shield', [ 700, 1400, 2800 ]],
     
     // MAIN 3
     ['pogo-intro',      [ 800, 1400, 1900 ]],
-    ['pogo-ideas',      [ 600, 1000, 1300 ]],
-    ['pogo-challenge',  [ 800, 1600, 2100 ]],
+    ['umbrella-shield', [ 700, 1400, 2800 ]],
     
     // HARD 1
-    ['gun-intro',       [ 400, 600, 700 ]],
-    ['bullet-ceiling',  [ 600, 700, 800 ]],
+    ['mine-intro',      [ 500, 800, 1100 ]],
+    ['pogo-ideas',      [ 600, 1000, 1300 ]],
     
     // HARD 2
-    ['mine-intro',      [ 500, 800, 1100 ]],
-    ['mine-wall',       [ 400, 700, 900 ]],
+    ['mine-enemy',      [ 800, 1800, 2000 ]],
+    ['mine-wall',       [ 1300, 1800, 2100 ]],
     
     // HARD 3
-    ['grenade',         [ 400, 900, 1100 ]],
-    ['finale',          [ 700, 1100, 1400 ]],
-    ['multi-move',       [ 400, 700, 1200 ]],
-
+    ['gun-intro',       [ 400, 600, 700 ]],
+    
     // FINALE
+    ['finale',          [ 800, 1300, 1600 ]],
+    
+    // OLD
+    ['grenade',         [ 400, 900, 1100 ]],
+    ['multi-move',      [ 400, 700, 1200 ]],
+    ['bullet-ceiling',  [ 600, 700, 800 ]],
+    ['pogo-challenge',  [ 800, 1600, 2100 ]],
 ]);
 
 /**
@@ -92,14 +95,16 @@ export let levelRequiredAwards = new Map<string, Array<number>>(
         // HARD 1
         ['mine-intro',      [ 0, 15, 6, 2 ]],
         ['pogo-challenge',  [ 0, 15, 6, 2 ]],
-        // mine enemy 2
         
         // HARD 2
-        ['gun-intro',       [ 0, 17, 8, 4 ]],
+        ['mine-enemy',      [ 0, 17, 8, 4 ]],
         ['mine-wall',       [ 0, 17, 8, 4 ]],
-        ['bullet-ceiling',  [ 0, 17, 8, 4 ]],
-
-        ['finale',          [ 0, 23, 18, 10 ]],
+        
+        // HARD 3
+        ['gun-intro',       [ 0, 19, 10, 6 ]],
+        
+        // FINALE
+        ['finale',          [ 0, 21, 15, 8 ]],
     ]);
 
 // MARKED FOR DELETION

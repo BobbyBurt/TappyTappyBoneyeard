@@ -217,6 +217,64 @@
                  "width":16,
                  "x":496,
                  "y":224
+                }, 
+                {
+                 "gid":37,
+                 "height":16,
+                 "id":99,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"Balloon",
+                         "type":"bool",
+                         "value":false
+                        }, 
+                        {
+                         "name":"Bomb",
+                         "type":"bool",
+                         "value":false
+                        }, 
+                        {
+                         "name":"Goal",
+                         "type":"bool",
+                         "value":false
+                        }, 
+                        {
+                         "name":"Gun Direction",
+                         "type":"string",
+                         "value":""
+                        }, 
+                        {
+                         "name":"Mine",
+                         "type":"bool",
+                         "value":false
+                        }, 
+                        {
+                         "name":"Parasol",
+                         "type":"bool",
+                         "value":false
+                        }, 
+                        {
+                         "name":"Pogo",
+                         "type":"bool",
+                         "value":false
+                        }, 
+                        {
+                         "name":"Shield Back",
+                         "type":"bool",
+                         "value":false
+                        }, 
+                        {
+                         "name":"Shield Front",
+                         "type":"bool",
+                         "value":false
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":16,
+                 "x":576,
+                 "y":368
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -225,7 +283,7 @@
          "y":0
         }],
  "nextlayerid":5,
- "nextobjectid":99,
+ "nextobjectid":100,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.7.1",
@@ -234,7 +292,7 @@
         {
          "columns":6,
          "firstgid":1,
-         "image":"..\/..\/..\/..\/levels\/Proscuitto\/tileset.png",
+         "image":"..\/..\/..\/..\/levels\/Proscuitto\/tutorial\/tileset.png",
          "imageheight":144,
          "imagewidth":96,
          "margin":0,
@@ -255,7 +313,7 @@
         {
          "columns":6,
          "firstgid":55,
-         "image":"..\/..\/..\/..\/levels\/Proscuitto\/tileset-bg.png",
+         "image":"..\/..\/..\/..\/levels\/Proscuitto\/tutorial\/tileset-bg.png",
          "imageheight":208,
          "imagewidth":96,
          "margin":0,

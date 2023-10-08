@@ -48,7 +48,7 @@ export default class Airborne implements State {
 		}
 		else if (this.player.uppercutInput == 'just-down' && this.player.punchCharged)
 		{
-			this.stateController.setState('uppercut');
+			this.stateController.setState('punch');
 		}
 		// else if (this.player.eggInput == 'just-down' && this.player.eggReady)
 		// {
