@@ -9,8 +9,8 @@ import Level from "~/scenes/Level";
 
 export default class BalloonEnemy extends EnemyPrefab {
 
-	constructor(scene: Phaser.Scene, x?: number, y?: number, gunDirection?: GunDirection, parasol?:  boolean, mine?: boolean, alwaysFire?: boolean, texture?: string, frame?: number | string) {
-		super(scene, x ?? 0, y ?? 0, gunDirection, parasol, mine, alwaysFire, texture || "soldiermid", frame);
+	constructor(scene: Phaser.Scene, x?: number, y?: number, gunDirection?: GunDirection, parasol?:  boolean, mine?: boolean, alwaysFire?: boolean, shieldFront?: boolean, shieldBack?:boolean, texture?: string, frame?: number | string) {
+		super(scene, x ?? 0, y ?? 0, gunDirection, parasol, mine, alwaysFire, shieldFront, shieldBack, 'goal', texture || "soldiermid", frame);
 
 		/* START-USER-CTR-CODE */
 
@@ -23,7 +23,7 @@ export default class BalloonEnemy extends EnemyPrefab {
 	/* START-USER-CODE */
 
 	private floatYTween!: Phaser.Tweens.Tween;
-	private originalPos = new Phaser.Geom.Point(0, 0);
+	private originalPosition = new Phaser.Geom.Point(0, 0);
 
 	public plane: Phaser.GameObjects.Image;
 

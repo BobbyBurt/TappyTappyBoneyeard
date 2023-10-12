@@ -1672,7 +1672,7 @@ export default class LevelUI extends Phaser.Scene {
 		const _camera = this.cameras.main as any;
 		_camera.preRender(1);
 
-		// this.cameras.main.setAlpha(0);
+		this.cameras.main.setAlpha(0);
 	}
 
 	resize()

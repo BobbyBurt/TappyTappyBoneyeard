@@ -3,13 +3,14 @@
 
 import Phaser from "phaser";
 import EnemyPrefab from "./EnemyPrefab";
+import SoundManager from "~/components/SoundManager";
 /* START-USER-IMPORTS */
 /* END-USER-IMPORTS */
 
 export default class PogoEnemy extends EnemyPrefab {
 
 	constructor(scene: Phaser.Scene, x?: number, y?: number, gunDirection?: GunDirection, parasol?: boolean, mine?: boolean, alwaysFire?: boolean, shieldFront?: boolean, shieldBack?:boolean, texture?: string, frame?: number | string) {
-		super(scene, x ?? 0, y ?? 0, gunDirection, parasol, mine, alwaysFire, shieldFront, shieldBack, texture || "soldiermid", frame);
+		super(scene, x ?? 0, y ?? 0, gunDirection, parasol, mine, alwaysFire, shieldFront, shieldBack, 'pogo', texture || "soldiermid", frame);
 
 		/* START-USER-CTR-CODE */
 
@@ -35,7 +36,14 @@ export default class PogoEnemy extends EnemyPrefab {
 			duration: 750,
 			yoyo: true,
 			ease: Phaser.Math.Easing.Quadratic.Out,
-			onstart: () => { this.play('idle') }
+			onstart: () => { this.play('idle') },
+			onRepeat: () => 
+			{ 
+				if (!super.isFalling())
+				{
+					SoundManager.play('boing', this.scene, .5)
+				}
+			}
 		})
 
 	// animation
@@ -73,10 +81,7 @@ export default class PogoEnemy extends EnemyPrefab {
 		}
 		else
 		{
-			if (super.hasParasol)
-			{
-				super.parasol.setY(this.y - 15);
-			}
+			super.offsetPropsFloat(this.floatYTween.getValue() - this.y);
 		}
 	}
 

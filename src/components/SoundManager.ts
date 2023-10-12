@@ -18,8 +18,12 @@ export default class SoundManager {
 		['bird-flap', 1],
 		['bird-die', 1],
 		['enemy-death', 1],
-		['explosion', .7],
+		['explosion', .8],
 		['fall', .8],
+		['boing', .8],
+		['shield-deflect', .8],
+		['bomb-drop', .4],
+		['bomb-fuse', .4],
 		['punch-swing', 1]
 	]);
 

@@ -1923,8 +1923,8 @@ export default class LevelSelect extends Phaser.Scene {
 		}
 
 		// level lock return
-		if (!this.registry.get(`unlocked: ${LevelSelect.levelsKey[this.selectedLevel]}`) && !__DEV__)
-		// if (false)
+		// if (!this.registry.get(`unlocked: ${LevelSelect.levelsKey[this.selectedLevel]}`) && !__DEV__)
+		if (false)
 		{
 			console.debug('returned; level is locked');
 			return;

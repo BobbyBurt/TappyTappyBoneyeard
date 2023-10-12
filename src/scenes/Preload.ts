@@ -30,11 +30,20 @@ export default class Preload extends Phaser.Scene {
 
 	editorCreate(): void {
 
+		// load_bg
+		const load_bg = this.add.image(0, 0, "load-bg");
+		load_bg.setOrigin(0, 0);
+
 		// progress
-		const progress = this.add.bitmapText(480, 270, "nokia", "0%");
+		const progress = this.add.bitmapText(240, 104, "nokia", "0%");
 		progress.setOrigin(0.5, 0.5);
+		progress.tintTopLeft = 9737364;
+		progress.tintTopRight = 9737364;
+		progress.tintBottomLeft = 9737364;
+		progress.tintBottomRight = 9737364;
 		progress.text = "0%";
 		progress.fontSize = -16;
+		progress.dropShadowColor = 9737364;
 
 		// fileText
 		const fileText = this.add.bitmapText(369, 324, "nokia", "New BitmapText");
@@ -48,15 +57,16 @@ export default class Preload extends Phaser.Scene {
 		fileText.maxWidth = 200;
 
 		// progress_1
-		const progress_1 = this.add.bitmapText(480, 302, "nokia", "Log into Newgrounds to earn medals and use cloud save data.");
+		const progress_1 = this.add.bitmapText(240, 197, "nokia", "Log into Newgrounds to earn medals \nand use cloud save data.");
 		progress_1.setOrigin(0.5, 0.5);
-		progress_1.text = "Log into Newgrounds to earn medals and use cloud save data.";
+		progress_1.tintTopLeft = 9737364;
+		progress_1.tintTopRight = 9737364;
+		progress_1.tintBottomLeft = 9737364;
+		progress_1.tintBottomRight = 9737364;
+		progress_1.text = "Log into Newgrounds to earn medals \nand use cloud save data.";
 		progress_1.fontSize = -10;
-		progress_1.align = NaN;
-
-		// load_bg
-		const load_bg = this.add.image(0, 0, "load-bg");
-		load_bg.setOrigin(0, 0);
+		progress_1.align = 1;
+		progress_1.dropShadowColor = 9737364;
 
 		// progress (components)
 		new PreloadText(progress);
@@ -86,6 +96,7 @@ export default class Preload extends Phaser.Scene {
 		this.game.registry.set('total-score', 0);
 
 	// camera
+		this.cameras.main.setOrigin(0, 0); 	
 		this.cameras.main.setViewport(0, 0, this.scale.width, this.scale.height);
 		this.cameras.main.setBackgroundColor(0x242424);
 		this.cameras.main.setZoom(CameraUtil.getAdaptiveZoom(this))

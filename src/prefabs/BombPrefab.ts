@@ -8,6 +8,7 @@ import Phaser from "phaser";
 
 import EnemyPrefab from "./EnemyPrefab";
 import Level from "~/scenes/Level";
+import SoundManager from "~/components/SoundManager";
 
 /* END-USER-IMPORTS */
 
@@ -116,6 +117,7 @@ export default class BombPrefab extends Phaser.GameObjects.Image {
 				else
 				{
 					this.setTintFill(0xffffff);
+					SoundManager.play('bomb-fuse', this.scene);
 				}
 			}
 		});

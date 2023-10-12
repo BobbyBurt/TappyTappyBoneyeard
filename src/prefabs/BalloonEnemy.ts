@@ -10,7 +10,7 @@ import Level from "~/scenes/Level";
 export default class BalloonEnemy extends EnemyPrefab {
 
 	constructor(scene: Phaser.Scene, x?: number, y?: number, gunDirection?: GunDirection, parasol?:  boolean, mine?: boolean, alwaysFire?: boolean, shieldFront?: boolean, shieldBack?:boolean, texture?: string, frame?: number | string) {
-		super(scene, x ?? 0, y ?? 0, gunDirection, parasol, mine, alwaysFire, shieldFront, shieldBack, texture || "soldiermid", frame);
+		super(scene, x ?? 0, y ?? 0, gunDirection, parasol, mine, alwaysFire, shieldFront, shieldBack, 'balloon', texture || "soldiermid", frame);
 
 		/* START-USER-CTR-CODE */
 
@@ -23,7 +23,7 @@ export default class BalloonEnemy extends EnemyPrefab {
 	/* START-USER-CODE */
 
 	private floatYTween!: Phaser.Tweens.Tween;
-	private originalPos = new Phaser.Geom.Point(0, 0);
+	private originalPosition = new Phaser.Geom.Point(0, 0);
 
 	public balloon!: Phaser.GameObjects.Image;
 
@@ -32,7 +32,7 @@ export default class BalloonEnemy extends EnemyPrefab {
 	{
 		this.body.allowGravity = false;
 
-		this.originalPos.setTo(this.x, this.y);
+		this.originalPosition.setTo(this.x, this.y);
 
 	// create balloon
 		this.balloon = this.scene.add.image(this.x, this.y - 30, 'balloon');
@@ -59,9 +59,9 @@ export default class BalloonEnemy extends EnemyPrefab {
 
 		this.floatYTween = this.scene.tweens.addCounter
 		({
-			from: 0,
-			to: 8,
-			duration: 2000,
+			from: -2,
+			to: 2,
+			duration: 1000,
 			ease: Phaser.Math.Easing.Quadratic.InOut,
 			yoyo: true,
 			repeat: -1
@@ -74,12 +74,9 @@ export default class BalloonEnemy extends EnemyPrefab {
 		{
 			/* This is disabled so that chains are consistent. What I should do is have the enemy move to it's origin on hit.
 			*/
-			// this.y = this.originalPos.y + this.floatYTween.getValue();
-			// this.balloon.setY((this.originalPos.y - 30) + this.floatYTween.getValue());
-			// if (super.hasParasol)
-			// {
-			// 	super.parasol.setY((this.originalPos.y - 15) + this.floatYTween.getValue());
-			// }
+			this.y = this.originalPosition.y + this.floatYTween.getValue();
+			this.balloon.setY((this.originalPosition.y - 30) + this.floatYTween.getValue());
+			super.offsetPropsFloat(this.floatYTween.getValue() / 2);
 		}
 		else
 		{

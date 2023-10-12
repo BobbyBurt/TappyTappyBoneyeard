@@ -10,7 +10,7 @@ export default class GroundEnemy extends EnemyPrefab {
 
 	constructor(scene: Phaser.Scene, x?: number, y?: number, gunDirection?: GunDirection, parasol?: boolean, mine?: boolean, alwaysFire?: boolean, shieldFront?: boolean, shieldBack?:boolean, texture?: string, frame?: number | string) {
 		console.debug(shieldFront);
-		super(scene, x ?? 0, y ?? 0, gunDirection, parasol, mine, alwaysFire, shieldFront, shieldBack, texture || "soldiermid", frame);
+		super(scene, x ?? 0, y ?? 0, gunDirection, parasol, mine, alwaysFire, shieldFront, shieldBack, 'ground', texture || "soldiermid", frame);
 
 		/* START-USER-CTR-CODE */
 
@@ -47,12 +47,38 @@ export default class GroundEnemy extends EnemyPrefab {
 			repeat: -1
 		});
 		this.play('idle');
+
+		let _this = this;
+		this.on(Phaser.Animations.Events.ANIMATION_UPDATE, function 
+			(anim: any, frame: any, sprite: any, framekey: any) 
+		{
+			_this.callOffset(frame.index);
+		});
 	}
 
 	update(): void
 	{
-
+		
 	}
+
+	callOffset(frame: number)
+	{
+		let offset = 1;
+
+		if (frame === 1 + offset)
+		{
+			super.offsetProps(0, 0);
+		}
+		else if (frame === 5 + offset)
+		{
+			super.offsetProps(0, 1);
+		}
+		else if (frame === 7 + offset)
+		{
+			super.offsetProps(0, -1);
+		}
+	}
+
 
 	/* END-USER-CODE */
 }

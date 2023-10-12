@@ -183,9 +183,30 @@
                 "key": "bird4punch"
             },
             {
+                "url": [
+                    "assets/sfx/boing.mp3"
+                ],
+                "type": "audio",
+                "key": "boing"
+            },
+            {
                 "url": "assets/bomb.png",
                 "type": "image",
                 "key": "bomb"
+            },
+            {
+                "url": [
+                    "assets/sfx/bomb-drop.mp3"
+                ],
+                "type": "audio",
+                "key": "bomb-drop"
+            },
+            {
+                "url": [
+                    "assets/sfx/bomb-fuse.mp3"
+                ],
+                "type": "audio",
+                "key": "bomb-fuse"
             },
             {
                 "url": "assets/levels/bomb-holder.json",
@@ -315,6 +336,11 @@
                 "key": "explosion"
             },
             {
+                "url": "assets/explosion-particle.png",
+                "type": "image",
+                "key": "explosion-particle"
+            },
+            {
                 "url": [
                     "assets/sfx/fall TEMP.wav"
                 ],
@@ -398,6 +424,13 @@
                 "key": "gunfire"
             },
             {
+                "url": [
+                    "assets/sfx/gunfire.mp3"
+                ],
+                "type": "audio",
+                "key": "gunfire"
+            },
+            {
                 "url": "assets/levels/guns.json",
                 "type": "tilemapTiledJSON",
                 "key": "guns"
@@ -473,11 +506,6 @@
                 },
                 "type": "spritesheet",
                 "key": "level-icons"
-            },
-            {
-                "url": "assets/load-bg.png",
-                "type": "image",
-                "key": "load-bg"
             },
             {
                 "url": [
@@ -557,6 +585,16 @@
                 "url": "assets/levels/parasol.json",
                 "type": "tilemapTiledJSON",
                 "key": "parasol"
+            },
+            {
+                "url": "assets/parasol-2.png",
+                "type": "image",
+                "key": "parasol-2"
+            },
+            {
+                "url": "assets/parasol-3.png",
+                "type": "image",
+                "key": "parasol-3"
             },
             {
                 "url": "assets/plane.png",
@@ -725,9 +763,21 @@
                 "key": "shield"
             },
             {
+                "url": [
+                    "assets/sfx/shield-deflect.mp3"
+                ],
+                "type": "audio",
+                "key": "shield-deflect"
+            },
+            {
                 "url": "assets/levels/shield-turn.json",
                 "type": "tilemapTiledJSON",
                 "key": "shield-turn"
+            },
+            {
+                "url": "assets/smoke.png",
+                "type": "image",
+                "key": "smoke"
             },
             {
                 "url": "assets/soldier-blood.png",

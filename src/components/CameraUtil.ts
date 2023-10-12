@@ -37,7 +37,7 @@ export default class CameraUtil {
         }
 
         // return zoom;
-        return 2;
+        return 1;
 
         // const zoom = (scene.scale.height / 315);
             // this can create jagged pixel alignment. But not always.

@@ -1,6 +1,7 @@
 /* START OF COMPILED CODE */
 
 import Phaser from "phaser";
+import SoundManager from "~/components/SoundManager";
 import Level from "~/scenes/Level";
 /* START-USER-IMPORTS */
 /* END-USER-IMPORTS */
@@ -12,7 +13,7 @@ export default interface EnemyPrefab {
 
 export default class EnemyPrefab extends Phaser.GameObjects.Sprite {
 
-	constructor(scene: Phaser.Scene, x?: number, y?: number, gunDirection?:GunDirection, parasol?: boolean, mine?: boolean, alwaysFire?: boolean, shieldFront?: boolean, shieldBack?:boolean, texture?: string, frame?: number | string) {
+	constructor(scene: Phaser.Scene, x?: number, y?: number, gunDirection?:GunDirection, parasol?: boolean, mine?: boolean, alwaysFire?: boolean, shieldFront?: boolean, shieldBack?:boolean, enemyType?: 'ground' | 'pogo' | 'balloon' | 'goal', texture?: string, frame?: number | string) {
 		super(scene, x ?? 0, y ?? 0, texture || "soldiermid", frame);
 
 		scene.physics.add.existing(this, false);
@@ -21,6 +22,10 @@ export default class EnemyPrefab extends Phaser.GameObjects.Sprite {
 		// this.body.setBounce(0, 1);
 
 		/* START-USER-CTR-CODE */
+
+		this.enemyType = enemyType;
+		
+		this.originalPos = new Phaser.Math.Vector2(x, y);
 
 		this.scene.events.once(Phaser.Scenes.Events.UPDATE, this.enemyStart, this);
 		this.scene.events.on(Phaser.Scenes.Events.UPDATE, this.enemyUpdate, this);
@@ -113,6 +118,12 @@ export default class EnemyPrefab extends Phaser.GameObjects.Sprite {
 
 	public isGoal = false;
 
+	private originalPos!: Phaser.Math.Vector2;
+
+	public enemyType: 'ground' | 'pogo' | 'balloon' | 'goal' | undefined;
+
+	public gunfireSFX!: Phaser.Sound.BaseSound;
+
 	public get _scene()
 	{
 		return this.scene as Level;
@@ -122,6 +133,9 @@ export default class EnemyPrefab extends Phaser.GameObjects.Sprite {
 	 *  setup */
 	private enemyStart()
 	{	
+		this.gunfireSFX = this.scene.sound.add('gunfire', {volume: .3});
+		this.gunfireSFX.stop();
+
 		this.setScale(1);
 		this.y -= 2;
 		this.body.setAllowGravity(false);
@@ -178,7 +192,7 @@ export default class EnemyPrefab extends Phaser.GameObjects.Sprite {
 			this.gun.rotation += this.spin * 3;
 			if (this.spin == 0)
 			{
-				this.gun.setPosition(this.x, this.y)
+				// this.gun.setPosition(this.x, this.y);
 			}
 		}
 		if (this.hasParasol)
@@ -189,12 +203,13 @@ export default class EnemyPrefab extends Phaser.GameObjects.Sprite {
 		if (this.hasShieldFront())
 		{
 			this.shieldFront.rotation += this.spin * 4;
-			this.shieldFront.setPosition(this.x + (this.flipX ? -10 : 10), this.y);
+			
+			// this.shieldFront.setPosition(this.x + (this.flipX ? -10 : 10), this.y);
 		}
 		if (this.hasShieldBack())
 		{
 			this.shieldBack.rotation += this.spin * 4;
-			this.shieldBack.setPosition(this.x + (this.flipX ? 10 : -10), this.y);
+			// this.shieldBack.setPosition(this.x + (this.flipX ? 10 : -10), this.y);
 		}
 
 		if (this.bombProp && this.spin === 0)
@@ -205,12 +220,74 @@ export default class EnemyPrefab extends Phaser.GameObjects.Sprite {
 		if (this.isMine)
 		{
 			this.grenadeProp.rotation += this.spin * 2;
+		}
+	}
 
-			if (!this.isFalling())
+	protected offsetProps(x: number, y: number)
+	{
+		if (this.isFalling())
+		{
+			return;
+		}
+
+		if (this.isMine)
+		{
+			this.grenadeProp.setPosition(this.x + x, this.y + (-3) + y);
+		}
+		if (this.gun)
+		{
+			this.gun.setPosition(this.x + (this.flipX ? 8 : -8) + x, this.y + (+5) + (this.gunDirection === 'down' ? 8 : 0) + y);
+		}
+		if (this.hasParasol)
+		{
+			this.parasol.setPosition(this.x + x, this.y + (-15) + y);
+		}
+		if (this.hasShieldFront())
+		{
+			this.shieldFront.setPosition(this.x + (this.flipX ? -8 : 8) + x, this.y + y);
+		}
+		if (this.hasShieldBack())
+		{
+			this.shieldBack.setPosition(this.x + (this.flipX ? 8 : -8) + x, this.y + y);
+		}
+	}
+
+	protected offsetPropsFloat(y: number)
+	{
+		if (this.isFalling())
+		{
+			return;
+		}
+
+		let x = 0;
+
+		if (this.isMine)
+		{
+			this.grenadeProp.setPosition(this.x + (this.flipX ? 2 : -2) + x, this.y + (-1) + y);
+		}
+		if (this.gun)
+		{
+			if (this.gunDirection === 'forward')
 			{
-				this.grenadeProp.setPosition(this.x, this.y - 4);
-					// TODO: move with idle animation
+				this.gun.setPosition(this.x + (this.flipX ? 8 : -8) + x, this.y + (+5) + y);
 			}
+			else
+			{
+
+				this.gun.setPosition(this.x + x, this.y + (+5) + (this.gunDirection === 'down' ? 8 : 0) + y);
+			}
+		}
+		if (this.hasParasol)
+		{
+			this.parasol.setPosition(this.x + x, this.y + (-15) + y);
+		}
+		if (this.hasShieldFront())
+		{
+			this.shieldFront.setPosition(this.x + (this.flipX ? -8 : 8) + x, this.y + y);
+		}
+		if (this.hasShieldBack())
+		{
+			this.shieldBack.setPosition(this.x + (this.flipX ? 8 : -8) + x, this.y + y);
 		}
 	}
 
@@ -219,11 +296,12 @@ export default class EnemyPrefab extends Phaser.GameObjects.Sprite {
 		this.gun = this.scene.add.image(this.x, this.y, 'gun');
 		this.scene.physics.add.existing(this.gun, false);
 		this._scene.mainLayer.add(this.gun);
-		this.gun.setDepth(-9);
+		this.gun.setDepth(-13);
 		let _gunBody = this.gun.body as Phaser.Physics.Arcade.Body;
 			// simply calling this.gun.body doesn't give me much to work with. There must be 
 			// a better way to do this
 		_gunBody.setAllowGravity(false);
+		this.gun.setPosition(this.x, this.y);
 		this.gun.flipX = this.flipX;
 		switch (this.gunDirection)
 		{
@@ -261,9 +339,24 @@ export default class EnemyPrefab extends Phaser.GameObjects.Sprite {
 		}
 	}
 
+	parasolBounce()
+	{
+		SoundManager.play('boing', this.scene);
+
+		this.parasol.setTexture('parasol-2');
+		this.scene.time.delayedCall(100, () =>
+		{
+			this.parasol.setTexture('parasol-3');
+		});
+		this.scene.time.delayedCall(200, () =>
+		{
+			this.parasol.setTexture('parasol');
+		});
+	}
+
 	createParasol()
 	{
-		this._parasol = this.scene.add.image(this.x, this.y - 15, 'parasol');
+		this._parasol = this.scene.add.sprite(this.x, this.y - 15, 'parasol');
 		// this.parasol.setDepth(this.depth - 1);
 		this.scene.physics.add.existing(this.parasol, false);
 		this._scene.mainLayer.add(this._parasol);
@@ -286,6 +379,9 @@ export default class EnemyPrefab extends Phaser.GameObjects.Sprite {
 			// simply calling this.gun.body doesn't give me much to work with. There must be 
 			// a better way to do this
 		_shieldFrontBody.setAllowGravity(false);
+		this.shieldFront.setPosition(this.x + (this.flipX ? -10 : 10), this.y);
+
+
 	}
 
 	createShieldBack()
@@ -300,6 +396,8 @@ export default class EnemyPrefab extends Phaser.GameObjects.Sprite {
 			// simply calling this.gun.body doesn't give me much to work with. There must be 
 			// a better way to do this
 		_shieldBackBody.setAllowGravity(false);
+		this.shieldBack.setPosition(this.x + (this.flipX ? 10 : -10), this.y);
+
 	}
 
 	createGrenade()
@@ -311,6 +409,7 @@ export default class EnemyPrefab extends Phaser.GameObjects.Sprite {
 		this.grenadeProp.setDepth(-8);
 		const grenadeBody = this.grenadeProp.body as Phaser.Physics.Arcade.Body;
 		grenadeBody.setAllowGravity(false);
+		this.grenadeProp.setPosition(this.x, this.y - 4);
 	}
 
 	createBombProp()
@@ -326,6 +425,14 @@ export default class EnemyPrefab extends Phaser.GameObjects.Sprite {
 	 */
 	public hit(directionX: number, directionY: number)
 	{
+		this.gunfireSFX.stop();
+
+		// reset balloon float offset
+		if (this.enemyType === 'balloon')
+		{
+			this.setY(this.originalPos.y);
+		}
+
 		this.body.allowGravity = true;
 			// since floating enemies have gravity disabled
 		this.body.setVelocity(directionX, (directionY < -300 ? -300 : -150));
@@ -379,9 +486,11 @@ export default class EnemyPrefab extends Phaser.GameObjects.Sprite {
 		}
 		if(this.isMine)
 		{
-			const grenadeBody = this.grenadeProp.body as Phaser.Physics.Arcade.Body;
-			grenadeBody.setAllowGravity(true);
-			grenadeBody.setVelocity(directionX * 1.5 , -100)
+			// const grenadeBody = this.grenadeProp.body as Phaser.Physics.Arcade.Body;
+			// grenadeBody.setAllowGravity(true);
+			// grenadeBody.setVelocity(directionX * 1.5 , -100)
+
+			this.grenadeProp.setVisible(false);
 		}
 	}
 

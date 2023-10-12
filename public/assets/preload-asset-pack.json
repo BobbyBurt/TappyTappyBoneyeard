@@ -2,6 +2,11 @@
     "section1": {
         "files": [
             {
+                "url": "assets/load-bg.png",
+                "type": "image",
+                "key": "load-bg"
+            },
+            {
                 "url": "assets/logo.png",
                 "type": "image",
                 "key": "logo"

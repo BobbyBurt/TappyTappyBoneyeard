@@ -741,6 +741,10 @@ export default class Level extends Phaser.Scene {
 	private enemyBloodEmitter: Phaser.GameObjects.Particles.ParticleEmitter;
 	private enemyBloodEmitterManager2: Phaser.GameObjects.Particles.ParticleEmitterManager;
 	private enemyBloodEmitter2: Phaser.GameObjects.Particles.ParticleEmitter;
+	private explosionEmitterManager: Phaser.GameObjects.Particles.ParticleEmitterManager;
+	private explosionEmitter: Phaser.GameObjects.Particles.ParticleEmitter;
+	private smokeEmitterManager: Phaser.GameObjects.Particles.ParticleEmitterManager;
+	private smokeEmitter: Phaser.GameObjects.Particles.ParticleEmitter;
 
 // debug
 	private debugVisionPolyGraphics: Phaser.GameObjects.Graphics;
@@ -837,7 +841,7 @@ export default class Level extends Phaser.Scene {
 
 
 		this.tileLayer.setCollision([1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18,
-			19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36], true);
+			19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90], true);
 
 		this.player.createFist();
 		this.mainLayer.add(this.player.fist);
@@ -850,7 +854,7 @@ export default class Level extends Phaser.Scene {
 			this.bGLayerHills.setVisible(true);
 			this.bGLayerIndustry.setVisible(false);
 		}
-		else if (levelIndex >= 9 && levelIndex < 18)
+		else if (levelIndex >= 9 && levelIndex < 16)
 		{
 			this.bGLayerCity.setVisible(true);
 			this.bGLayerHills.setVisible(false);
@@ -1195,6 +1199,16 @@ export default class Level extends Phaser.Scene {
 		this.enemyBloodEmitterManager2.setDepth(-13);
 		this.enemyBloodEmitter2 = this.enemyBloodEmitterManager2.createEmitter({ on: false });
 
+		this.explosionEmitterManager = this.add.particles('explosion-particle');
+		this.mainLayer.add(this.explosionEmitterManager);
+		this.explosionEmitterManager.setDepth(-13);
+		this.explosionEmitter = this.explosionEmitterManager.createEmitter({ on: false });
+
+		this.smokeEmitterManager = this.add.particles('smoke');
+		this.mainLayer.add(this.smokeEmitterManager);
+		this.smokeEmitterManager.setDepth(10);
+		this.smokeEmitter = this.smokeEmitterManager.createEmitter({ on: false });
+
 	// resize init
 		this.events.on('pre-resize', this.resize, this);
 		this.resize();
@@ -1419,6 +1433,8 @@ export default class Level extends Phaser.Scene {
 
 			if (_enemy.hasParasol)
 			{
+				_enemy.parasolBounce();
+				
 				return;
 			}
 
@@ -1469,6 +1485,7 @@ export default class Level extends Phaser.Scene {
 		{
 			this.player.setFlipX(!this.player.flipX);
 			this.player.punchDeflected = true;
+			SoundManager.play('shield-deflect', this, .7);
 			return;
 		}
 		if (this.player.stateController.currentState.name === 'punch'
@@ -1477,6 +1494,7 @@ export default class Level extends Phaser.Scene {
 		{
 			this.player.punchDeflected = true;
 			this.player.setFlipX(!this.player.flipX);
+			SoundManager.play('shield-deflect', this, .7);
 			return;
 		}
 
@@ -1784,7 +1802,7 @@ export default class Level extends Phaser.Scene {
 		if (this.combo > 1)
 		{
 			this.uiScene.showComboUI(this.combo);
-			SoundManager.play('combo-hit', this, .7);
+			this.sound.play('combo-hit', {volume: (((this.combo - 2) + 0) * 0.07) + 0.4, detune: (this.combo - 2) * 100})
 		}
 		else
 		{
@@ -1796,6 +1814,8 @@ export default class Level extends Phaser.Scene {
 	setBomb(x: number, y: number, enemy: EnemyPrefab, velocity?: Phaser.Math.Vector2, 
 		punched?: boolean)
 	{
+		SoundManager.play('bomb-drop', this);
+
 		let newBomb = this.bombGroup.get(x, y) as BombPrefab;
 		newBomb.appear(enemy);
 		this.mainLayer.add(newBomb);
@@ -1846,6 +1866,33 @@ export default class Level extends Phaser.Scene {
 	/** bomb behaviour, explosion setup */
 	public bombExplode(bomb: BombPrefab)
 	{
+		// explosion particles
+		this.explosionEmitter = this.explosionEmitterManager.createEmitter
+		({
+			lifespan: 5000,
+			speed: { min: 50, max: 200 },
+			angle: { min: 0, max: 360 },
+			// alpha: { start: 1, end: 0 },
+			scale: { start: .7, end: 0 },
+			gravityY: 500,
+			quantity: 100,
+			on: false
+		});
+		this.explosionEmitter.explode(30, bomb.x, bomb.y);
+
+		// smoke particles
+		this.smokeEmitter = this.smokeEmitterManager.createEmitter
+		({
+			lifespan: 2000,
+			speed: { min: 3, max: 20 },
+			angle: { min: 240, max: 300 },
+			alpha: { start: 1, end: 0 },
+			// gravityY: 200,
+			quantity: 100,
+			on: false
+		});
+		this.smokeEmitter.explode(10, bomb.x, bomb.y);
+
 		bomb.disappear();
 		bomb.fuseVisualTimer.paused = true;
 		bomb.fuseTimer.paused = true;
@@ -1875,6 +1922,33 @@ export default class Level extends Phaser.Scene {
 	 */
 	explode(x: number, y: number)
 	{	
+		// explosion particles
+		this.explosionEmitter = this.explosionEmitterManager.createEmitter
+		({
+			lifespan: 5000,
+			speed: { min: 50, max: 200 },
+			angle: { min: 0, max: 360 },
+			// alpha: { start: 1, end: 0 },
+			scale: { start: .7, end: 0 },
+			gravityY: 500,
+			quantity: 100,
+			on: false
+		});
+		this.explosionEmitter.explode(30, x, y);
+
+		// smoke particles
+		this.smokeEmitter = this.smokeEmitterManager.createEmitter
+		({
+			lifespan: 2000,
+			speed: { min: 3, max: 20 },
+			angle: { min: 240, max: 300 },
+			alpha: { start: 1, end: 0 },
+			// gravityY: 200,
+			quantity: 100,
+			on: false
+		});
+		this.smokeEmitter.explode(10, x, y);
+
 		let newExplosion = this.explosionGroup.get(x, y);
 		newExplosion.appear();
 		this.mainLayer.add(newExplosion);
@@ -1945,6 +2019,11 @@ export default class Level extends Phaser.Scene {
 
 		if (enemy.gunSprayTimer.getProgress() == 1 && enemy.gunCoolDownTimer.getProgress() == 1)
 		{
+			if (!enemy.isFalling())
+			{
+				enemy.gunfireSFX.play();
+			}
+
 			enemy.gunSprayTimer = this.time.addEvent({
 				delay: 100, repeat: bullets, callback: () =>
 				{
