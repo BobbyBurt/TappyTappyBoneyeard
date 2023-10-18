@@ -39,7 +39,7 @@ export default class PogoEnemy extends EnemyPrefab {
 			onstart: () => { this.play('idle') },
 			onRepeat: () => 
 			{ 
-				if (!super.isFalling())
+				if (!super.isFalling() && this.scene.cameras.main.worldView.contains(this.x, this.y))
 				{
 					SoundManager.play('boing', this.scene, .5)
 				}

@@ -148,9 +148,7 @@ export default class LevelUI extends Phaser.Scene {
 		buildText.dropShadowY = -100;
 
 		// mobileButtonPunch
-		const mobileButtonPunch = this.add.image(746, 1082, "soldier-blood-2");
-		mobileButtonPunch.scaleX = 75;
-		mobileButtonPunch.scaleY = 75;
+		const mobileButtonPunch = this.add.image(746, 1082, "mobile-button");
 		mobileButtonPunch.angle = 45;
 		mobileButtonPunch.setOrigin(1, 1);
 		mobileButtonPunch.alpha = 0.2;
@@ -199,11 +197,9 @@ export default class LevelUI extends Phaser.Scene {
 		mobileButtonUppercut.tintBottomRight = 5675510;
 
 		// mobileButtonDive
-		const mobileButtonDive = this.add.image(593.4494018554688, 950.0119018554688, "soldier-blood-2");
-		mobileButtonDive.scaleX = 75;
-		mobileButtonDive.scaleY = 75;
-		mobileButtonDive.angle = 45;
-		mobileButtonDive.setOrigin(0, 1);
+		const mobileButtonDive = this.add.image(593.4494460225105, 950.0119484066963, "mobile-button");
+		mobileButtonDive.angle = -135;
+		mobileButtonDive.setOrigin(1, 0);
 		mobileButtonDive.alpha = 0.2;
 		mobileButtonDive.alphaTopLeft = 0.2;
 		mobileButtonDive.alphaTopRight = 0.2;
@@ -1351,17 +1347,63 @@ export default class LevelUI extends Phaser.Scene {
 	 */
 	public setTutorialUI(show: boolean, tween: boolean, level?: number)
 	{
-		if (this.tutorialOffsetTween)
-		{
-			if (this.tutorialOffsetTween.progress < 1)
-			{
-				return;
-			}
-		}
+		// if (this.tutorialOffsetTween)
+		// {
+		// 	if (this.tutorialOffsetTween.progress < 1)
+		// 	{
+		// 		return;
+		// 	}
+		// }
 
 		if (this.tutorialText.text === '')
 		{
-			this.tutorialText.setText(tutorialManager.getTutorialText(level!, this)!);
+			if (this.registry.get('current-level') === 'uppercut')
+			{
+				this.tutorialText.setText(`To perform an uppercut, hit the ${InputManager.getInputName('jump')} and the ${InputManager.getInputName('punch')} at the same time.\n\nThis move can take care of enemies above and help you reach higher up.`,);
+			}
+			else
+			{
+				this.tutorialText.setText(tutorialManager.getTutorialText(level!, this)!);
+			}
+
+			// word highlighting
+			this.tutorialText.setWordTint('Up', -1, true, 0xFFE13D);
+			this.tutorialText.setWordTint('up.', -1, true, 0xFFE13D);
+			this.tutorialText.setWordTint('down', -1, true, 0xFFE13D);
+			this.tutorialText.setWordTint('X', -1, true, 0xFFE13D);
+			this.tutorialText.setWordTint('Z', -1, true, 0xFFE13D);
+			this.tutorialText.setWordTint('arrow', -1,  true, 0xFFE13D);
+			this.tutorialText.setWordTint('shift', -1, true, 0xFFE13D);
+			this.tutorialText.setWordTint('key.', -1, true, 0xFFE13D);
+			this.tutorialText.setWordTint('key', -1, true, 0xFFE13D);
+			this.tutorialText.setWordTint('right', -1, true, 0xFFE13D);
+			this.tutorialText.setWordTint('left', -1, true, 0xFFE13D);
+			this.tutorialText.setWordTint('top', -1, true, 0xFFE13D);
+			this.tutorialText.setWordTint('bottom', -1, true, 0xFFE13D);
+			this.tutorialText.setWordTint('button', -1, true, 0xFFE13D);
+			this.tutorialText.setWordTint('button.', -1, true, 0xFFE13D);
+			this.tutorialText.setWordTint('D-pad', -1, true, 0xFFE13D);
+			this.tutorialText.setWordTint('on-screen', -1, true, 0xFFE13D);
+
+			this.tutorialText.setWordTint('jump', -1, true, 0xFFE13D);
+			this.tutorialText.setWordTint('mid-air', -1, true, 0xFFE13D);
+			this.tutorialText.setWordTint('flaps.', -1, true, 0xFFE13D);
+			this.tutorialText.setWordTint('flap', -1, true, 0xFFE13D);
+			this.tutorialText.setWordTint('punch', -1, true, 0xFFE13D);
+			this.tutorialText.setWordTint('charge', -1, true, 0xFFE13D);
+			this.tutorialText.setWordTint('dive.', -1, true, 0xFFE13D);
+			this.tutorialText.setWordTint('uppercut,', -1, true, 0xFFE13D);
+			this.tutorialText.setWordTint('restart', -1, true, 0xFFE13D);
+
+			// this.tutorialText.setWordTint('enemies', -1, true, 0xFFE13D);
+			this.tutorialText.setWordTint('points', -1, true, 0xFFE13D);
+			this.tutorialText.setWordTint('change', -1, true, 0xFFE13D);
+			this.tutorialText.setWordTint('direction', -1, true, 0xFFE13D);
+			// this.tutorialText.setWordTint('without', -1, true, 0xFFE13D);
+			// this.tutorialText.setWordTint('landing,', -1, true, 0xFFE13D);
+			this.tutorialText.setWordTint('combo', -1, true, 0xFFE13D);
+			this.tutorialText.setWordTint('combo!', -1, true, 0xFFE13D);
+
 			this.tutorialCloseText.setText
 				(`- ${InputManager.getInputName('tutorial-toggle')?.toString().toUpperCase()} TO DISMISS -`);
 			this.tutorialContainer.setVisible(true);
@@ -1672,7 +1714,7 @@ export default class LevelUI extends Phaser.Scene {
 		const _camera = this.cameras.main as any;
 		_camera.preRender(1);
 
-		this.cameras.main.setAlpha(0);
+		// this.cameras.main.setAlpha(0);
 	}
 
 	resize()

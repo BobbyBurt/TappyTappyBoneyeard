@@ -745,6 +745,10 @@ export default class Level extends Phaser.Scene {
 	private explosionEmitter: Phaser.GameObjects.Particles.ParticleEmitter;
 	private smokeEmitterManager: Phaser.GameObjects.Particles.ParticleEmitterManager;
 	private smokeEmitter: Phaser.GameObjects.Particles.ParticleEmitter;
+	private dollarEmitterManager: Phaser.GameObjects.Particles.ParticleEmitterManager;
+	private dollarEmitter: Phaser.GameObjects.Particles.ParticleEmitter;
+	private comboEmitterManager: Phaser.GameObjects.Particles.ParticleEmitterManager;
+	private comboEmitter: Phaser.GameObjects.Particles.ParticleEmitter;
 
 // debug
 	private debugVisionPolyGraphics: Phaser.GameObjects.Graphics;
@@ -1209,6 +1213,16 @@ export default class Level extends Phaser.Scene {
 		this.smokeEmitterManager.setDepth(10);
 		this.smokeEmitter = this.smokeEmitterManager.createEmitter({ on: false });
 
+		this.dollarEmitterManager = this.add.particles('dollar-2');
+		this.mainLayer.add(this.dollarEmitterManager);
+		this.dollarEmitterManager.setDepth(10);
+		this.dollarEmitter = this.dollarEmitterManager.createEmitter({ on: false });
+
+		this.comboEmitterManager = this.add.particles('combo-particle');
+		this.mainLayer.add(this.comboEmitterManager);
+		this.comboEmitterManager.setDepth(10);
+		this.comboEmitter = this.comboEmitterManager.createEmitter({ on: false });
+
 	// resize init
 		this.events.on('pre-resize', this.resize, this);
 		this.resize();
@@ -1407,9 +1421,8 @@ export default class Level extends Phaser.Scene {
 			this.player.onFloor = true;
 
 			this.uiScene.setPunchCharge(true);
-
-			this.combo = 0;
-			this.updateCombo();
+			
+			this.updateCombo(true);
 			// this.airborneCombo = false;
 		}
 	}
@@ -1686,6 +1699,11 @@ export default class Level extends Phaser.Scene {
 			this.tapperDeadProp.startSequnce(tiredState);
 		}
 
+		NGIO.logEvent(`Level ${this.registry.get('current-level-index') + 1} Death`, (event) => 
+		{
+			console.debug(`logEvent: ${event}`);
+		});
+
 		this.uiScene.gameOverContainer.setVisible(true);
 		this.uiScene.scoreText.setVisible(false);
 		this.uiScene.mobileButtonDive.setVisible(false);
@@ -1792,7 +1810,7 @@ export default class Level extends Phaser.Scene {
 		// }
 	}
 
-	updateCombo()
+	updateCombo(end?: boolean)
 	{
 		if (this.combo > this.highestCombo)
 		{
@@ -1804,10 +1822,41 @@ export default class Level extends Phaser.Scene {
 			this.uiScene.showComboUI(this.combo);
 			this.sound.play('combo-hit', {volume: (((this.combo - 2) + 0) * 0.07) + 0.4, detune: (this.combo - 2) * 100})
 		}
-		else
+		// else
+		// {
+		// 	this.uiScene.hideComboUI();
+		// }
+
+		if (end)
 		{
-			this.uiScene.hideComboUI();
+			this.comboEnd();
 		}
+
+	}
+
+	comboEnd()
+	{
+		// if (this.combo > 1)
+		// {
+		// 	SoundManager.play('combo-hit', this);
+
+		// 	this.comboEmitter = this.comboEmitterManager.createEmitter
+		// 	({
+		// 		lifespan: 10000,
+		// 		speed: { min: 50, max: 200 },
+		// 		angle: { min: 240, max: 300 },
+		// 		// alpha: { start: 1, end: 0 },
+		// 		gravityY: 400,
+		// 		quantity: 100,
+		// 		on: false
+		// 	});
+		// 	this.comboEmitter.explode(this.combo, this.player.x, this.player.y);
+		// }
+
+
+		this.uiScene.hideComboUI();
+
+		this.combo = 0;
 	}
 
 	/** activates bomb in bombGroup pool */
@@ -2019,11 +2068,6 @@ export default class Level extends Phaser.Scene {
 
 		if (enemy.gunSprayTimer.getProgress() == 1 && enemy.gunCoolDownTimer.getProgress() == 1)
 		{
-			if (!enemy.isFalling())
-			{
-				enemy.gunfireSFX.play();
-			}
-
 			enemy.gunSprayTimer = this.time.addEvent({
 				delay: 100, repeat: bullets, callback: () =>
 				{
@@ -2044,12 +2088,30 @@ export default class Level extends Phaser.Scene {
 	 */
 	fireGun(enemy: EnemyPrefab): void
 	{
-		let _newBullet = this.bulletGroup.get(enemy.x, enemy.y) as BulletPrefab;
+		let _newBullet = this.bulletGroup.get(enemy.x, enemy.y + 2) as BulletPrefab;
 		if (_newBullet == undefined)
 		{
 			console.log('out of bullets')
 			return;
 		}
+
+		let worldV = this.cameras.main.worldView
+		if (this.cameras.main.worldView.contains(enemy.x, enemy.y))
+		{
+			SoundManager.play('enemy-shoot', this);
+		}
+		else if (Phaser.Geom.Rectangle.Inflate(worldV, 200, 100).contains(enemy.x, enemy.y))
+		{
+			SoundManager.play('enemy-shoot-far', this);
+			console.debug('far');
+		}
+
+		enemy.setGunSprite(true);
+		this.time.delayedCall(50, () =>
+		{
+			enemy.setGunSprite(false);
+		});
+
 		_newBullet.appear();
 		this.mainLayer.add(_newBullet);
 		_newBullet.setDepth(3);
@@ -2262,12 +2324,19 @@ export default class Level extends Phaser.Scene {
 		// this.uiScene.showLevelCompleteText();
 		this.uiScene.showSummaryUI();
 
+		this.comboEnd();
+
 		// +500pts on level 1 & 2
 		// if (this.registry.get('current-level-index') < 2)
 		// {
 		// 	this.score += 500;
 		// 	this.uiScene.setScore(this.score);
 		// }
+
+		NGIO.logEvent(`Level ${this.registry.get('current-level-index') + 1} Complete`, (event) => 
+		{
+			console.debug(`logEvent: ${event}`);
+		});
 
 
 		this.time.addEvent({ delay: 2900, callback: () =>
@@ -2352,27 +2421,27 @@ export default class Level extends Phaser.Scene {
 		// I'm doing this in the Level select now without all this redundant code.
 
 		// level medals
-		if (this.registry.get('current-level') === 'tutorial-finale')
-		{
-			this.time.addEvent({ delay: 1000, callback: ()=>
-			{
-				this.game.events.emit('unlock-medal: Fish Splasher');
-			}});
-		}
-		else if (this.registry.get('current-level') === 'parasol')
-		{
-			this.time.addEvent({ delay: 1000, callback: ()=>
-			{
-				this.game.events.emit('unlock-medal: Seeing Double');
-			}});
-		}
-		else if (this.registry.get('current-level') === 'finale')
-		{
-			this.time.addEvent({ delay: 1000, callback: ()=>
-			{
-				this.game.events.emit('unlock-medal: Thanks For Playing!');
-			}});
-		}
+		// if (this.registry.get('current-level') === 'tutorial-finale')
+		// {
+		// 	this.time.addEvent({ delay: 1000, callback: ()=>
+		// 	{
+		// 		this.game.events.emit('unlock-medal: Fish Splasher');
+		// 	}});
+		// }
+		// else if (this.registry.get('current-level') === 'parasol')
+		// {
+		// 	this.time.addEvent({ delay: 1000, callback: ()=>
+		// 	{
+		// 		this.game.events.emit('unlock-medal: Bomb Launcher');
+		// 	}});
+		// }
+		// else if (this.registry.get('current-level') === 'finale')
+		// {
+		// 	this.time.addEvent({ delay: 1000, callback: ()=>
+		// 	{
+		// 		this.game.events.emit('unlock-medal: Thanks For Playing!');
+		// 	}});
+		// }
 
 
 		// Plane fly away tween
@@ -2414,7 +2483,7 @@ export default class Level extends Phaser.Scene {
 
 		this.registry.set('completed-level-' + this.registry.get('current-level-index'), true);
 
-		SoundManager.play('victory', this);
+		SoundManager.play('combo-end', this);
 		this.music.pause();
 	}
 
@@ -2684,14 +2753,18 @@ export default class Level extends Phaser.Scene {
 				this.registry.set(`got-egg: ${this.registry.get('current-level')}`, true);
 
 				// HARDCODED: # off egs
-				console.log(`Easter egg found! Find both of them to unlock the secret NG medal.`);
+				console.log(`Easter egg found! Find all four of them to unlock the secret NG medal.`);
+
+				SoundManager.play('eagle', this);
 
 				// check egg zones
 				if (this.registry.get(`got-egg: bomb-holder`)
-					&& this.registry.get(`got-egg: umbrella-shield`))
+					&& this.registry.get(`got-egg: umbrella-shield`)
+					&& this.registry.get(`got-egg: mine-intro`)
+					&& this.registry.get(`got-egg: mine-wall`))
 					//HARDCODED: add in levels with other eggs
 				{
-					this.game.events.emit('unlock-medal: Killer Egg');
+					this.game.events.emit('unlock-medal: Plato');
 				}
 			}
 		}
@@ -2988,7 +3061,7 @@ export default class Level extends Phaser.Scene {
 			return;
 		}
 
-		if (this.uiScene.tutorialOffsetTween)
+		if (this.uiScene.tutorialOffsetTween && !initial)
 		{
 			if (this.uiScene.tutorialOffsetTween.progress < 1)
 			{
@@ -3058,7 +3131,10 @@ export default class Level extends Phaser.Scene {
 			// this.uiScene.setDebugText(0, `${this.player.stateController.currentState.name}`);
 			this.uiScene.setDebugText(0, `level completed: ${this.registry.get('completed-level-' + this.currentLevelIndex)}`);
 			this.uiScene.setDebugText(1, `combo : ${this.combo}`);
-			this.uiScene.setDebugText(2, `grace timer : ${this.player.fistGraceTimer.getProgress()}`);
+			if (this.uiScene.tutorialOffsetTween)
+			{
+				this.uiScene.setDebugText(2, `tutorial tween progress : ${this.uiScene.tutorialOffsetTween.progress}`);
+			}
 		}
 	}
 

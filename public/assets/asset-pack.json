@@ -275,10 +275,22 @@
             },
             {
                 "url": [
+                    "assets/sfx/combo-end.mp3"
+                ],
+                "type": "audio",
+                "key": "combo-end"
+            },
+            {
+                "url": [
                     "assets/sfx/combo-hit TEMP.mp3"
                 ],
                 "type": "audio",
                 "key": "combo-hit"
+            },
+            {
+                "url": "assets/combo-particle.png",
+                "type": "image",
+                "key": "combo-particle"
             },
             {
                 "url": "assets/levels/cool-combo.json",
@@ -301,6 +313,23 @@
                 "key": "dive-tec"
             },
             {
+                "url": "assets/dollar.png",
+                "type": "image",
+                "key": "dollar"
+            },
+            {
+                "url": "assets/dollar-2.png",
+                "type": "image",
+                "key": "dollar-2"
+            },
+            {
+                "url": [
+                    "assets/sfx/eagle.mp3"
+                ],
+                "type": "audio",
+                "key": "eagle"
+            },
+            {
                 "url": [
                     "assets/sfx/egg drop.mp3"
                 ],
@@ -320,6 +349,13 @@
                 ],
                 "type": "audio",
                 "key": "enemy-shoot"
+            },
+            {
+                "url": [
+                    "assets/sfx/enemy shoot far.mp3"
+                ],
+                "type": "audio",
+                "key": "enemy-shoot-far"
             },
             {
                 "url": [
@@ -409,6 +445,11 @@
                 "key": "gun"
             },
             {
+                "url": "assets/gun-fire.png",
+                "type": "image",
+                "key": "gun-fire"
+            },
+            {
                 "url": "assets/levels/gun-intro.json",
                 "type": "tilemapTiledJSON",
                 "key": "gun-intro"
@@ -421,13 +462,6 @@
             {
                 "url": "assets/levels/gunfire.json",
                 "type": "tilemapTiledJSON",
-                "key": "gunfire"
-            },
-            {
-                "url": [
-                    "assets/sfx/gunfire.mp3"
-                ],
-                "type": "audio",
                 "key": "gunfire"
             },
             {
@@ -545,6 +579,11 @@
                 "url": "assets/levels/mine-wall.json",
                 "type": "tilemapTiledJSON",
                 "key": "mine-wall"
+            },
+            {
+                "url": "assets/mobile-button.png",
+                "type": "image",
+                "key": "mobile-button"
             },
             {
                 "url": "assets/levels/multi-move.json",
@@ -694,14 +733,49 @@
                 "key": "preview-dive-practice"
             },
             {
+                "url": "assets/level-previews/preview-finale.png",
+                "type": "image",
+                "key": "preview-finale"
+            },
+            {
                 "url": "assets/level-previews/preview-flap.png",
                 "type": "image",
                 "key": "preview-flap"
             },
             {
+                "url": "assets/level-previews/preview-gun-intro.png",
+                "type": "image",
+                "key": "preview-gun-intro"
+            },
+            {
                 "url": "assets/level-previews/preview-jump.png",
                 "type": "image",
                 "key": "preview-jump"
+            },
+            {
+                "url": "assets/level-previews/preview-mine-enemy.png",
+                "type": "image",
+                "key": "preview-mine-enemy"
+            },
+            {
+                "url": "assets/level-previews/preview-mine-enemy-intro.png",
+                "type": "image",
+                "key": "preview-mine-enemy-intro"
+            },
+            {
+                "url": "assets/level-previews/preview-mine-intro.png",
+                "type": "image",
+                "key": "preview-mine-intro"
+            },
+            {
+                "url": "assets/level-previews/preview-mine-wall.png",
+                "type": "image",
+                "key": "preview-mine-wall"
+            },
+            {
+                "url": "assets/level-previews/preview-pogo-ideas.png",
+                "type": "image",
+                "key": "preview-pogo-ideas"
             },
             {
                 "url": "assets/level-previews/preview-pogo-intro.png",

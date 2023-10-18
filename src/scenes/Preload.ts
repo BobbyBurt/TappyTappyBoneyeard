@@ -140,10 +140,20 @@ export default class Preload extends Phaser.Scene {
 			this.registry.set('mobile', true);
 			InputManager.activeInputMode = 'touch';
 			this.input.addPointer(3);
+
+			NGIO.logEvent('Mobile Start', (event) => 
+			{
+				console.debug(`logEvent: ${event}`);
+			});
 		}
 		else if (event.type == 'click')
 		{
 			this.registry.set('mobile', false);
+
+			NGIO.logEvent('Desktop Start', (event) => 
+			{
+				console.debug(`logEvent: ${event}`);
+			});
 		}
 
 		if (this.loaded)

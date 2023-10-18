@@ -122,8 +122,6 @@ export default class EnemyPrefab extends Phaser.GameObjects.Sprite {
 
 	public enemyType: 'ground' | 'pogo' | 'balloon' | 'goal' | undefined;
 
-	public gunfireSFX!: Phaser.Sound.BaseSound;
-
 	public get _scene()
 	{
 		return this.scene as Level;
@@ -133,9 +131,6 @@ export default class EnemyPrefab extends Phaser.GameObjects.Sprite {
 	 *  setup */
 	private enemyStart()
 	{	
-		this.gunfireSFX = this.scene.sound.add('gunfire', {volume: .3});
-		this.gunfireSFX.stop();
-
 		this.setScale(1);
 		this.y -= 2;
 		this.body.setAllowGravity(false);
@@ -220,6 +215,14 @@ export default class EnemyPrefab extends Phaser.GameObjects.Sprite {
 		if (this.isMine)
 		{
 			this.grenadeProp.rotation += this.spin * 2;
+		}
+	}
+
+	public setGunSprite(fire: boolean)
+	{
+		if (this.gun)
+		{
+			this.gun.setTexture((fire ? 'gun-fire' : 'gun'));
 		}
 	}
 
@@ -425,8 +428,6 @@ export default class EnemyPrefab extends Phaser.GameObjects.Sprite {
 	 */
 	public hit(directionX: number, directionY: number)
 	{
-		this.gunfireSFX.stop();
-
 		// reset balloon float offset
 		if (this.enemyType === 'balloon')
 		{

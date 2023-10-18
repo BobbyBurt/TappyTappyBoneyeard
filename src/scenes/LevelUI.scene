@@ -311,12 +311,10 @@
             "Align.right": true,
             "Align.verticalOffset": -20,
             "texture": {
-                "key": "soldier-blood-2"
+                "key": "mobile-button"
             },
             "x": 746,
             "y": 1082,
-            "scaleX": 75,
-            "scaleY": 75,
             "angle": 45,
             "originX": 1,
             "originY": 1,
@@ -410,15 +408,13 @@
             "Align.left": true,
             "Align.horizontalOffset": 20,
             "texture": {
-                "key": "soldier-blood-2"
+                "key": "mobile-button"
             },
-            "x": 593.4494018554688,
-            "y": 950.0119018554688,
-            "scaleX": 75,
-            "scaleY": 75,
-            "angle": 45,
-            "originX": 0,
-            "originY": 1,
+            "x": 593.4494460225105,
+            "y": 950.0119484066963,
+            "angle": -135,
+            "originX": 1,
+            "originY": 0,
             "alpha": 0.2,
             "alphaTopLeft": 0.2,
             "alphaTopRight": 0.2,

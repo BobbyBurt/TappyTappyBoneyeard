@@ -469,7 +469,7 @@ export default class LevelSelect extends Phaser.Scene {
 		levelIconPrefab_17.levelIndex = 11;
 
 		// levelIconPrefab_18 (prefab fields)
-		levelIconPrefab_18.levelIndex = 19;
+		levelIconPrefab_18.levelIndex = 17;
 
 		// levelIconPrefab_19 (prefab fields)
 		levelIconPrefab_19.levelIndex = 26;
@@ -478,19 +478,19 @@ export default class LevelSelect extends Phaser.Scene {
 		levelIconPrefab_20.levelIndex = 25;
 
 		// levelIconPrefab_22 (prefab fields)
-		levelIconPrefab_22.levelIndex = 18;
+		levelIconPrefab_22.levelIndex = 16;
 
 		// levelIconPrefab_23 (prefab fields)
-		levelIconPrefab_23.levelIndex = 23;
+		levelIconPrefab_23.levelIndex = 21;
 
 		// levelIconPrefab_24 (prefab fields)
-		levelIconPrefab_24.levelIndex = 22;
+		levelIconPrefab_24.levelIndex = 20;
 
 		// levelIconPrefab_25 (prefab fields)
-		levelIconPrefab_25.levelIndex = 21;
+		levelIconPrefab_25.levelIndex = 19;
 
 		// levelIconPrefab_26 (prefab fields)
-		levelIconPrefab_26.levelIndex = 20;
+		levelIconPrefab_26.levelIndex = 18;
 
 		// levelIconPrefab_21 (prefab fields)
 		levelIconPrefab_21.levelIndex = 23;
@@ -1126,7 +1126,7 @@ export default class LevelSelect extends Phaser.Scene {
 					ease: Phaser.Math.Easing.Cubic.Out,
 					x: -20
 				});
-				
+
 				// set preview image
 				this.levelPreviewImage.setTexture
 					(`preview-${LevelSelect.levelsKey[this.selectedLevel]}`);
@@ -1776,7 +1776,7 @@ export default class LevelSelect extends Phaser.Scene {
 				{
 					tutorialLevels++;
 				}
-				else if (index >= 9 && index < 18)
+				else if (index >= 9 && index < 16)
 				{
 					mainLevels++;
 				}
@@ -1792,9 +1792,9 @@ export default class LevelSelect extends Phaser.Scene {
 		{
 			this.game.events.emit('unlock-medal: Fish Splasher');
 		}
-		if (mainLevels === 9)
+		if (mainLevels === 7)
 		{
-			this.game.events.emit('unlock-medal: Seeing Double');
+			this.game.events.emit('unlock-medal: Bomb Launcher');
 		}
 		if (hardLevels === 6)
 		{
@@ -1929,6 +1929,11 @@ export default class LevelSelect extends Phaser.Scene {
 			console.debug('returned; level is locked');
 			return;
 		}
+
+		NGIO.logEvent(`Level ${this.selectedLevel + 1} Start`, (event) => 
+		{
+			console.debug(`logEvent: ${event}`);
+		});
 
 		this.registry.set('last-scene', this.scene.key);
 

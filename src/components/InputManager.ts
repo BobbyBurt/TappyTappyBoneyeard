@@ -17,21 +17,27 @@ export default class InputManager {
 	([
 		['jump', 
 		[
-			'up arrow key',
+			'Up arrow key',
 			`right button`,
-			'top left corner of the screen'
+			'left on-screen button'
 		]],
 		['punch',
 		[
 			'X key',
 			`down button`,
-			'bottom left corner'
+			'right on-screen button'
 		]],
 		['dive',
 		[
 			'down arrow key',
 			`D-pad down`,
-			'bottom right corner'
+			'bottom on-screen button'
+		]],
+		['uppercut',
+		[
+			'Z key',
+			`D-pad up`,
+			null,
 		]],
 		['tutorial-toggle',
 		[

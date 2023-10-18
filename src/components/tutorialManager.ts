@@ -30,16 +30,16 @@ export default class tutorialManager {
 				`These enemies are protected from the sides, so you'll need another approach...\n\nTry using the ${InputManager.getInputName('dive')} to dive. If you hit an enemy, you'll take them out!`,
 
 			// level 6
-				`If you take out more than one enemy without landing, you get a combo!\n\nBe creative and look for ways to get big combos, as that's how you get really high scores.`,
+				`If you take out more than one enemy without landing, you get a combo multiplier!\n\nLook for ways to get big combos to earn really high scores.`,
 			
 			// level 7
-				`To perform an uppercut, ${scene.registry.get('mobile') ? `hit` : `hit the Z key. Alternatively, you can hit`} the ${InputManager.getInputName('jump')} and the ${InputManager.getInputName('punch')} at the same time. This move can take care of enemies above and help you reach higher up.`,
+				`To perform an uppercut, hit the ${InputManager.getInputName('uppercut')}. Alternatively, you can hit the ${InputManager.getInputName('jump')} and the ${InputManager.getInputName('punch')} at the same time.\n\nThis move can take care of enemies above and help you reach higher.`,
 
 			// level 8
-				`Punches and uppercuts take a lot out of you... Your charge is indicated by the icon in the top right corner.\n\nLanding on ground is one way to recharge, but you'll also automatically regain charge if you take out an enemy with your attack!`,
+				`Punches and uppercuts take a lot out of you... Your charge is indicated by the icon in the top right corner.\n\nLanding on ground is one way to recharge, but you'll also automatically recharge if you take out an enemy with your attack!`,
 				
 			// level 9
-				`There are a number of ways to approach each problem, and you'll often need to use more than one move.`
+				`There are a number of ways to approach each problem, and you'll often need to use more than one move.\n\nExperimenting is how you find ways to earn high scores!`
 		]
 
 		return texts[levelIndex];

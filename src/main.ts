@@ -14,7 +14,7 @@ window.addEventListener('load', function ()
 	{
 		title: 'Tappy Tappy Boneyard',
 		url: 'https://www.newgrounds.com/projects/games/1923225/preview',
-		version: '18 beta',
+		version: '19 beta',
 		
 	// visuals
 		type: Phaser.AUTO,
@@ -125,6 +125,8 @@ class Boot extends Phaser.Scene
 		// HARDCODED: new egg rooms need to be added manually
 		dataKeys.push(`got-egg: bomb-holder`);
 		dataKeys.push(`got-egg: umbrella-shield`);
+		dataKeys.push(`got-egg: mine-intro`);
+		dataKeys.push(`got-egg: mine-wall`);
 
 		cloudSaves.setDataKeys(dataKeys);
 		// cloudSaves.setDataKeys([

@@ -20,10 +20,14 @@ export default class SoundManager {
 		['enemy-death', 1],
 		['explosion', .8],
 		['fall', .8],
-		['boing', .8],
+		['boing', .6],
 		['shield-deflect', .8],
 		['bomb-drop', .4],
 		['bomb-fuse', .4],
+		['enemy-shoot', .4],
+		['enemy-shoot-far', .2],
+		['combo-end', 1],
+		['eagle', 1],
 		['punch-swing', 1]
 	]);
 
