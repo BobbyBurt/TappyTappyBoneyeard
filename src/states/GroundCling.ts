@@ -60,6 +60,8 @@ export default class GroundCling implements State {
 
 	jump()
 	{
+		console.debug('jumpo');
+
 		this.player.setVelocityY(-this.player.jumpForce);
 	}
 }

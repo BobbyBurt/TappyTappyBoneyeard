@@ -411,6 +411,69 @@ export default class LevelSelect extends Phaser.Scene {
 		this.add.existing(levelIconPrefab_21);
 		levelIconPrefab_21.visible = false;
 
+		// hintBack
+		const hintBack = this.add.rectangle(313, 205, 150, 128);
+		hintBack.setOrigin(0, 0);
+		hintBack.isFilled = true;
+		hintBack.fillColor = 8542833;
+
+		// hintText
+		const hintText = this.add.bitmapText(324, 215, "nokia", "");
+		hintText.fontSize = -8;
+		hintText.maxWidth = 130;
+
+		// fullscreenBack
+		const fullscreenBack = this.add.rectangle(360, 159, 75, 28);
+		fullscreenBack.setOrigin(0, 0);
+		fullscreenBack.isFilled = true;
+		fullscreenBack.fillColor = 10054789;
+
+		// hintText_1
+		const hintText_1 = this.add.bitmapText(372, 168, "nokia", "Fullscreen");
+		hintText_1.text = "Fullscreen";
+		hintText_1.fontSize = -8;
+		hintText_1.maxWidth = 130;
+
+		// hintBack_2
+		const hintBack_2 = this.add.rectangle(363, 162, 1, 4);
+		hintBack_2.setOrigin(0, 0);
+		hintBack_2.isFilled = true;
+
+		// hintBack_3
+		const hintBack_3 = this.add.rectangle(363, 162, 4, 1);
+		hintBack_3.setOrigin(0, 0);
+		hintBack_3.isFilled = true;
+
+		// hintBack_4
+		const hintBack_4 = this.add.rectangle(363, 180, 1, 4);
+		hintBack_4.setOrigin(0, 0);
+		hintBack_4.isFilled = true;
+
+		// hintBack_5
+		const hintBack_5 = this.add.rectangle(363, 183, 4, 1);
+		hintBack_5.setOrigin(0, 0);
+		hintBack_5.isFilled = true;
+
+		// hintBack_6
+		const hintBack_6 = this.add.rectangle(431, 162, 1, 4);
+		hintBack_6.setOrigin(0, 0);
+		hintBack_6.isFilled = true;
+
+		// hintBack_7
+		const hintBack_7 = this.add.rectangle(428, 183, 4, 1);
+		hintBack_7.setOrigin(0, 0);
+		hintBack_7.isFilled = true;
+
+		// hintBack_8
+		const hintBack_8 = this.add.rectangle(431, 180, 1, 4);
+		hintBack_8.setOrigin(0, 0);
+		hintBack_8.isFilled = true;
+
+		// hintBack_9
+		const hintBack_9 = this.add.rectangle(428, 162, 4, 1);
+		hintBack_9.setOrigin(0, 0);
+		hintBack_9.isFilled = true;
+
 		// lists
 		const levelBackList: Array<any> = [];
 
@@ -554,6 +617,9 @@ export default class LevelSelect extends Phaser.Scene {
 		this.levelIconPrefab_25 = levelIconPrefab_25;
 		this.levelIconPrefab_26 = levelIconPrefab_26;
 		this.levelIconPrefab_21 = levelIconPrefab_21;
+		this.hintText = hintText;
+		this.fullscreenBack = fullscreenBack;
+		this.hintText_1 = hintText_1;
 		this.levelBackList = levelBackList;
 
 		this.events.emit("scene-awake");
@@ -618,6 +684,9 @@ export default class LevelSelect extends Phaser.Scene {
 	private levelIconPrefab_25!: LevelIconPrefab;
 	private levelIconPrefab_26!: LevelIconPrefab;
 	private levelIconPrefab_21!: LevelIconPrefab;
+	private hintText!: Phaser.GameObjects.BitmapText;
+	private fullscreenBack!: Phaser.GameObjects.Rectangle;
+	private hintText_1!: Phaser.GameObjects.BitmapText;
 	private levelBackList!: Array<any>;
 
 	/* START-USER-CODE */
@@ -708,6 +777,10 @@ export default class LevelSelect extends Phaser.Scene {
 
 	private previewTween!: Phaser.Tweens.Tween;
 
+	private hints = [``];
+	private currentHint = 0;
+	private hintTween!: Phaser.Tweens.Tween;
+
 	create() {
 
 		this.editorCreate();
@@ -717,9 +790,32 @@ export default class LevelSelect extends Phaser.Scene {
 
 		this.justUnlockedLevel = 0;
 
+		this.currentHint = 0;
+
 		this.levelIndexUnlockQueue = new Array<number>();
 
 		// this.levelPreviewImage = this.add.image(this.titleText.x, this.titleText.y, `preview-${LevelSelect.levelsKey[this.selectedLevel]}`);
+
+		this.fullscreenBack.setInteractive();
+		this.fullscreenBack.on('pointerup', () =>
+		{
+			if (!this.scale.isFullscreen)
+			{
+				this.scale.startFullscreen();
+			}
+			else
+			{
+				this.scale.stopFullscreen();
+			}
+		});
+		this.fullscreenBack.on('pointerover', () =>
+		{
+			this.fullscreenBack.fillColor = 8542833;
+		});
+		this.fullscreenBack.on('pointerout', () =>
+		{
+			this.fullscreenBack.fillColor = 10054789;
+		});
 
 	// use previously selected level
 		if (this.registry.get('current-level-index'))
@@ -866,12 +962,14 @@ export default class LevelSelect extends Phaser.Scene {
 
 			// top row return
 			// HARDCODED; may need to be updated
-			if (this.selectedLevel < 9)
-			{
-				return;
-			}
-
-			this.setSelectedLevel(this.selectedLevel - 9);
+			if (this.selectedLevel > 8 && this.selectedLevel < 16)
+				{
+					this.setSelectedLevel(this.selectedLevel - 9);
+				}
+				else if (this.selectedLevel > 15)
+				{
+					this.setSelectedLevel(this.selectedLevel - 7);
+				}
 		});
 		// nav up input - gamepad
 		this.input.gamepad.on(`down`, (pad:Phaser.Input.Gamepad.Gamepad, 
@@ -888,12 +986,14 @@ export default class LevelSelect extends Phaser.Scene {
 			{
 				// top row return
 				// HARDCODED; may need to be updated
-				if (this.selectedLevel < 9)
+				if (this.selectedLevel > 8 && this.selectedLevel < 16)
 				{
-					return;
+					this.setSelectedLevel(this.selectedLevel - 9);
 				}
-
-				this.setSelectedLevel(this.selectedLevel - 9);
+				else if (this.selectedLevel > 15)
+				{
+					this.setSelectedLevel(this.selectedLevel - 7);
+				}
 			}
 		});
 
@@ -910,12 +1010,22 @@ export default class LevelSelect extends Phaser.Scene {
 
 			// bottom row return
 			// HARDCODED; may need to be updated
-			if (this.selectedLevel > 14)
-			{
-				return;
-			}
-
-			this.setSelectedLevel(this.selectedLevel + 9);
+			if (this.selectedLevel < 7)
+				{
+					this.setSelectedLevel(this.selectedLevel + 9);
+				}
+				else if (this.selectedLevel === 7 || this.selectedLevel === 8)
+				{
+					this.setSelectedLevel(15);
+				}
+				else if (this.selectedLevel > 8 && this.selectedLevel < 15)
+				{
+					this.setSelectedLevel(this.selectedLevel + 7);
+				}
+				else if (this.selectedLevel === 15)
+				{
+					this.setSelectedLevel(21);
+				}
 		});
 		// nav down input - gamepad
 		this.input.gamepad.on(`down`, (pad:Phaser.Input.Gamepad.Gamepad, 
@@ -932,12 +1042,22 @@ export default class LevelSelect extends Phaser.Scene {
 			{
 				// bottom row return
 				// HARDCODED; may need to be updated
-				if (this.selectedLevel > 14)
+				if (this.selectedLevel < 7)
 				{
-					return;
+					this.setSelectedLevel(this.selectedLevel + 9);
 				}
-
-				this.setSelectedLevel(this.selectedLevel + 9);
+				else if (this.selectedLevel === 7 || this.selectedLevel === 8)
+				{
+					this.setSelectedLevel(15);
+				}
+				else if (this.selectedLevel > 8 && this.selectedLevel < 15)
+				{
+					this.setSelectedLevel(this.selectedLevel + 7);
+				}
+				else if (this.selectedLevel === 15)
+				{
+					this.setSelectedLevel(21);
+				}
 			}
 		});
 
@@ -970,7 +1090,6 @@ export default class LevelSelect extends Phaser.Scene {
 				this.loadLevel();
 			}
 		});
-
 
 		// unlock first levels
 		this.registry.set(`unlocked: ${LevelSelect.levelsKey[0]}`, true);
@@ -1052,6 +1171,148 @@ export default class LevelSelect extends Phaser.Scene {
 			this.unlockCheck();
 			this.lastScoreSequence();
 		}
+		else
+		{
+			this.setupHints();
+		}
+	}
+
+	setupHints()
+	{
+		let hints1 = 
+		[
+			`Tap a level to select it, and tap again to start it`,
+			`Use the ${InputManager.getInputName('menu-navigate')} to select a level, and hit the ${InputManager.getInputName('menu-confirm')} to start it.`
+		]
+		let hints2 = 
+		[
+			`You'll need to earn awards to unlock levels. Try replaying levels for a better score!`,
+			`The meter above shows your top score for the level and each award milestone.`
+		]
+		let hints3 = 
+		[
+			`Your combo increases for every enemy you defeat while staying airborne.`,
+			`For each enemy you defeat you'll get 100 points multiplied by your combo number.`
+		]
+		let hints4 = 
+		[	
+			`Remember that you can dive to take out enemies below.`,
+			`Uppercut to handle enemies above.`,
+			`Big combos are how you get real high-scores!`
+		]
+		let hints5 = 
+		[	
+			`Bombs won't explode on contact with your fists.`,
+			`Try deflecting bombs!`,
+			`Experiment to find ways to rack up big combos.`,
+			`Each problem has multiple approaches you can take.`,
+			`Replay any of the tutorial levels if you ever need a refresher on something.`,
+			`Stuck on a level? You can always return to it later.`
+		]
+		let hints6 = 
+		[
+			`Umbrella enemies are protected from rain. And diving birds.`,
+			`Wait behind a wall to time your approach against bouncing pogo enemies.`,
+			`Heads up; You'll need <# award> to unlock the last level set.`,
+			`Every enemy is possible to defeat, even if not with direct attacks`,
+			`Use your new skills to get better scores on old levels!`
+		]
+		let hints7 = 
+		[
+			`True gamers have all the gold awards.`,
+			`Gold is awarded for a theoretically perfect run.`,
+			`There are eggs hidden in four of the levels.`,
+			`Look around level 11 for the first secret egg.`,
+			`A secret egg can be found far below a ceiling of mines.`,
+			`A secret egg can be found by flying right, underneath a big platform.`,
+			`Climb above a group of 5 floating enemies, then head left to find a secret egg.`
+		]
+
+		if (this.registry.get(`top-score: finale`))
+		{
+			// completed finale
+
+			this.hints = Phaser.Math.RND.shuffle(hints7);
+		}
+		else if (this.registry.get(`unlocked: mine-intro`))
+		{
+			// unlocked hard levels
+
+			this.hints = Phaser.Math.RND.shuffle(hints6);
+		}
+		else if (this.registry.get(`unlocked: umbrella-intro`))
+		{
+			// unlocked umbrella intro
+
+			this.hints = Phaser.Math.RND.shuffle(hints5);
+		}
+		else if (this.registry.get(`unlocked: bomb-intro`))
+		{
+			// unlocked first city levels
+
+			this.hints = Phaser.Math.RND.shuffle(hints4);
+		}
+		else if (this.registry.get(`unlocked: uppercut`))
+		{
+			// unlocked hard levels
+
+			this.hints = Phaser.Math.RND.shuffle(hints3);
+		}
+		else if (this.registry.get(`top-score: punch`) != undefined)
+		{
+			// unlocked hard levels
+
+			this.hints = hints2;
+		}
+		else
+		{
+			// nothing unlocked
+
+			if (this.registry.get('mobile'))
+			{
+				this.hints = [hints1[0]];
+			}
+			else
+			{
+				this.hints = [hints1[1]];
+			}
+		}
+
+		this.setHint();
+	}
+
+	setHint()
+	{
+		this.hintText.setText(this.hints[this.currentHint]);
+
+		this.hintText.setY(230);
+		this.hintText.setAlpha(0);
+		this.hintTween = this.tweens.add
+		({
+			targets: this.hintText,
+			alpha: 1,
+			y: 215,
+			duration: 300,
+			ease: Phaser.Math.Easing.Cubic.Out
+		});
+		this.hintTween = this.tweens.add
+		({
+			targets: this.hintText,
+			alpha: 0,
+			y: 230,
+			duration: 300,
+			delay: 8500,
+			ease: Phaser.Math.Easing.Cubic.In
+		});
+
+		this.currentHint++;
+		if (this.currentHint === this.hints.length)
+		{
+			this.currentHint = 0;
+		}
+
+		let _this = this;
+		this.time.delayedCall(10000, this.setHint, undefined, _this)
 	}
 
 	/**
@@ -1411,6 +1672,8 @@ export default class LevelSelect extends Phaser.Scene {
 					console.debug(`prog: ${_this.scoreMeterTween.progress}`);
 					_this.scoreText.setText
 						(`New score: ${Math.floor(_this.scoreMeterTween.progress * lastScore)}`);
+					// this.sound.play('reflect', { volume: .3, detune: ( this.scoreMeterTween.getValue() * 3) - 2000})
+					SoundManager.play('bird-egg-lay', this, .2, ( this.scoreMeterTween.getValue() * 10) + 1000);
 				}
 			});
 		}
@@ -1444,6 +1707,7 @@ export default class LevelSelect extends Phaser.Scene {
 			else
 			{
 				this.setLevelIcons(this.selectedLevel);
+				this.setupHints();
 			}
 		});
 	}
@@ -1508,7 +1772,8 @@ export default class LevelSelect extends Phaser.Scene {
 	{
 		if (this.levelIndexUnlockQueue.length === 0)
 		{
-			console.debug('return; nothing in queue')
+			console.debug('return; nothing in queue');
+			this.setupHints();
 			return;
 		}
 
@@ -1525,7 +1790,7 @@ export default class LevelSelect extends Phaser.Scene {
 				this.levelIndexUnlockQueue.shift();
 
 				// audio
-				this.sound.play('combo-hit');
+				this.sound.play('unlock', { volume: .7, detune: Phaser.Math.RND.between(-200, 100) });
 
 				// if end of sequence, unlock input
 				if (this.levelIndexUnlockQueue.length === 0)
@@ -1533,6 +1798,8 @@ export default class LevelSelect extends Phaser.Scene {
 					this.time.delayedCall(1000, () =>
 					{
 						this.setLockedWindow(false);
+
+						this.setupHints();
 
 						this.lockInput = false;
 					});

@@ -6,6 +6,7 @@ import LevelSelect from './scenes/LevelSelect';
 import LevelUI from './scenes/LevelUI';
 import Pause from './scenes/Pause';
 import Preload from './scenes/Preload';
+import Titlescreen from './scenes/Titlescreen';
 
 
 window.addEventListener('load', function ()
@@ -14,7 +15,7 @@ window.addEventListener('load', function ()
 	{
 		title: 'Tappy Tappy Boneyard',
 		url: 'https://www.newgrounds.com/projects/games/1923225/preview',
-		version: '19 beta',
+		version: '20 pre-release',
 		
 	// visuals
 		type: Phaser.AUTO,
@@ -46,6 +47,7 @@ window.addEventListener('load', function ()
 			default: 'arcade',
 			arcade: {
 				// debug: true,
+				fps: 120,
 				tileBias: 16,
 				gravity: {
 					y: 500,
@@ -78,6 +80,7 @@ window.addEventListener('load', function ()
 	game.scene.add("Preload", Preload);
 	game.scene.add("Level", Level);
 	game.scene.add("LevelSelect", LevelSelect);
+	game.scene.add("Titlescreen", Titlescreen);
 	game.scene.add("Boot", Boot, true);
 	game.scene.add("LevelUI", LevelUI);
 	game.scene.add("Pause", Pause);

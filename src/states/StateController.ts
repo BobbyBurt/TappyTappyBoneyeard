@@ -57,7 +57,7 @@ export default class StateController
 		
 		// if (this.debugShowTransitionKey.isDown)
 		// {
-			// console.log(`state transition: ${this.currentState.name} => ${name}`);
+			console.log(`state transition: ${this.currentState.name} => ${name}`);
 		// }
 		
 		if (this.currentState === this.states[name])

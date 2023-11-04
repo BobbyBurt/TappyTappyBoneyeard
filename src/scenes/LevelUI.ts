@@ -46,48 +46,6 @@ export default class LevelUI extends Phaser.Scene {
 		timerText.dropShadowAlpha = 1;
 		timerText.dropShadowColor = 2236962;
 
-		// tutorialContainer
-		const tutorialContainer = this.add.container(0, 0);
-		tutorialContainer.visible = false;
-
-		// tutorialOffsetContainer
-		const tutorialOffsetContainer = this.add.container(0, 0);
-		tutorialContainer.add(tutorialOffsetContainer);
-
-		// tutorialBox
-		const tutorialBox = this.add.rectangle(0, 2, 150, 230);
-		tutorialBox.scaleX = 1.2139552314624713;
-		tutorialBox.scaleY = 0.9107966439058469;
-		tutorialBox.isFilled = true;
-		tutorialBox.fillColor = 14383236;
-		tutorialOffsetContainer.add(tutorialBox);
-
-		// tutorialText
-		const tutorialText = this.add.bitmapText(0, -24, "nokia", "");
-		tutorialText.setOrigin(0.5, 0.5);
-		tutorialText.fontSize = -8;
-		tutorialText.maxWidth = 150;
-		tutorialText.dropShadowAlpha = 0;
-		tutorialOffsetContainer.add(tutorialText);
-
-		// tutorialCloseText
-		const tutorialCloseText = this.add.bitmapText(0, 93, "nokia", "- TAP TO CONTINUE -");
-		tutorialCloseText.setOrigin(0.5, 0.5);
-		tutorialCloseText.text = "- TAP TO CONTINUE -";
-		tutorialCloseText.fontSize = -8;
-		tutorialCloseText.maxWidth = 150;
-		tutorialCloseText.dropShadowAlpha = 0;
-		tutorialOffsetContainer.add(tutorialCloseText);
-
-		// tutorial_ipad
-		const tutorial_ipad = this.add.image(0, 0, "tutorial-ipad");
-		tutorialOffsetContainer.add(tutorial_ipad);
-
-		// inputHint
-		const inputHint = this.add.image(0, 59, "soldierpogosquash");
-		inputHint.visible = false;
-		tutorialOffsetContainer.add(inputHint);
-
 		// enemiesText
 		const enemiesText = this.add.bitmapText(957, 756.12646484375, "nokia", "5/6");
 		enemiesText.setOrigin(1, 0.5);
@@ -143,24 +101,58 @@ export default class LevelUI extends Phaser.Scene {
 		// buildText
 		const buildText = this.add.bitmapText(485, 820.12646484375, "nokia", "Tappy Tappy Boneyard v2");
 		buildText.setOrigin(0, 1);
+		buildText.visible = false;
 		buildText.text = "Tappy Tappy Boneyard v2";
 		buildText.fontSize = -8;
 		buildText.dropShadowY = -100;
 
 		// mobileButtonPunch
-		const mobileButtonPunch = this.add.image(746, 1082, "mobile-button");
+		const mobileButtonPunch = this.add.image(746, 1082, "soldier-blood-2");
+		mobileButtonPunch.scaleX = 75;
+		mobileButtonPunch.scaleY = 75;
 		mobileButtonPunch.angle = 45;
 		mobileButtonPunch.setOrigin(1, 1);
-		mobileButtonPunch.alpha = 0.2;
-		mobileButtonPunch.alphaTopLeft = 0.2;
-		mobileButtonPunch.alphaTopRight = 0.2;
-		mobileButtonPunch.alphaBottomLeft = 0.2;
-		mobileButtonPunch.alphaBottomRight = 0.2;
+		mobileButtonPunch.alpha = 0.01;
+		mobileButtonPunch.alphaTopLeft = 0.01;
+		mobileButtonPunch.alphaTopRight = 0.01;
+		mobileButtonPunch.alphaBottomLeft = 0.01;
+		mobileButtonPunch.alphaBottomRight = 0.01;
 		mobileButtonPunch.tintFill = true;
 		mobileButtonPunch.tintTopLeft = 5675510;
 		mobileButtonPunch.tintTopRight = 5675510;
 		mobileButtonPunch.tintBottomLeft = 5675510;
 		mobileButtonPunch.tintBottomRight = 5675510;
+
+		// mobileButtonPunchImage
+		const mobileButtonPunchImage = this.add.image(229.47415161132812, 1187.9794921875, "mobile-button");
+		mobileButtonPunchImage.angle = 90;
+		mobileButtonPunchImage.setOrigin(1, 1);
+		mobileButtonPunchImage.flipX = true;
+		mobileButtonPunchImage.alpha = 0.1;
+		mobileButtonPunchImage.alphaTopLeft = 0.1;
+		mobileButtonPunchImage.alphaTopRight = 0.1;
+		mobileButtonPunchImage.alphaBottomLeft = 0.1;
+		mobileButtonPunchImage.alphaBottomRight = 0.1;
+		mobileButtonPunchImage.tintFill = true;
+		mobileButtonPunchImage.tintTopLeft = 5675510;
+		mobileButtonPunchImage.tintTopRight = 5675510;
+		mobileButtonPunchImage.tintBottomLeft = 5675510;
+		mobileButtonPunchImage.tintBottomRight = 5675510;
+
+		// fist_icon
+		const fist_icon = this.add.image(721, 1074, "fist-icon");
+		fist_icon.scaleX = 2;
+		fist_icon.scaleY = 2;
+		fist_icon.setOrigin(1, 1);
+		fist_icon.alpha = 0.2;
+		fist_icon.alphaTopLeft = 0.2;
+		fist_icon.alphaTopRight = 0.2;
+		fist_icon.alphaBottomLeft = 0.2;
+		fist_icon.alphaBottomRight = 0.2;
+		fist_icon.tintTopLeft = 5675510;
+		fist_icon.tintTopRight = 5675510;
+		fist_icon.tintBottomLeft = 5675510;
+		fist_icon.tintBottomRight = 5675510;
 
 		// mobileButtonJump
 		const mobileButtonJump = this.add.image(337.44940185546875, 1081.0118408203125, "soldier-blood-2");
@@ -168,48 +160,110 @@ export default class LevelUI extends Phaser.Scene {
 		mobileButtonJump.scaleY = 75;
 		mobileButtonJump.angle = -45.00000000000006;
 		mobileButtonJump.setOrigin(0, 1);
-		mobileButtonJump.alpha = 0.2;
-		mobileButtonJump.alphaTopLeft = 0.2;
-		mobileButtonJump.alphaTopRight = 0.2;
-		mobileButtonJump.alphaBottomLeft = 0.2;
-		mobileButtonJump.alphaBottomRight = 0.2;
+		mobileButtonJump.alpha = 0.01;
+		mobileButtonJump.alphaTopLeft = 0.01;
+		mobileButtonJump.alphaTopRight = 0.01;
+		mobileButtonJump.alphaBottomLeft = 0.01;
+		mobileButtonJump.alphaBottomRight = 0.01;
 		mobileButtonJump.tintFill = true;
 		mobileButtonJump.tintTopLeft = 5675510;
 		mobileButtonJump.tintTopRight = 5675510;
 		mobileButtonJump.tintBottomLeft = 5675510;
 		mobileButtonJump.tintBottomRight = 5675510;
 
+		// mobileButtonJumpImage
+		const mobileButtonJumpImage = this.add.image(313.5, 1079, "mobile-button");
+		mobileButtonJumpImage.setOrigin(0, 1);
+		mobileButtonJumpImage.alpha = 0.1;
+		mobileButtonJumpImage.alphaTopLeft = 0.1;
+		mobileButtonJumpImage.alphaTopRight = 0.1;
+		mobileButtonJumpImage.alphaBottomLeft = 0.1;
+		mobileButtonJumpImage.alphaBottomRight = 0.1;
+		mobileButtonJumpImage.tintFill = true;
+		mobileButtonJumpImage.tintTopLeft = 5675510;
+		mobileButtonJumpImage.tintTopRight = 5675510;
+		mobileButtonJumpImage.tintBottomLeft = 5675510;
+		mobileButtonJumpImage.tintBottomRight = 5675510;
+
 		// mobileButtonUppercut
 		const mobileButtonUppercut = this.add.image(509, 967, "soldier-blood-2");
 		mobileButtonUppercut.scaleX = 75;
 		mobileButtonUppercut.scaleY = 75;
+		mobileButtonUppercut.angle = -45.00000000000006;
 		mobileButtonUppercut.setOrigin(1, 1);
 		mobileButtonUppercut.visible = false;
-		mobileButtonUppercut.alpha = 0.2;
-		mobileButtonUppercut.alphaTopLeft = 0.2;
-		mobileButtonUppercut.alphaTopRight = 0.2;
-		mobileButtonUppercut.alphaBottomLeft = 0.2;
-		mobileButtonUppercut.alphaBottomRight = 0.2;
+		mobileButtonUppercut.alpha = 0.01;
+		mobileButtonUppercut.alphaTopLeft = 0.01;
+		mobileButtonUppercut.alphaTopRight = 0.01;
+		mobileButtonUppercut.alphaBottomLeft = 0.01;
+		mobileButtonUppercut.alphaBottomRight = 0.01;
 		mobileButtonUppercut.tintFill = true;
 		mobileButtonUppercut.tintTopLeft = 5675510;
 		mobileButtonUppercut.tintTopRight = 5675510;
 		mobileButtonUppercut.tintBottomLeft = 5675510;
 		mobileButtonUppercut.tintBottomRight = 5675510;
 
+		// up_icon
+		const up_icon = this.add.image(339.82733154296875, 1182.267578125, "up-icon");
+		up_icon.scaleX = 2;
+		up_icon.scaleY = 2;
+		up_icon.setOrigin(0, 1);
+		up_icon.alpha = 0.2;
+		up_icon.alphaTopLeft = 0.2;
+		up_icon.alphaTopRight = 0.2;
+		up_icon.alphaBottomLeft = 0.2;
+		up_icon.alphaBottomRight = 0.2;
+		up_icon.tintTopLeft = 5675510;
+		up_icon.tintTopRight = 5675510;
+		up_icon.tintBottomLeft = 5675510;
+		up_icon.tintBottomRight = 5675510;
+
+		// dive_icon
+		const dive_icon = this.add.image(489, 1115, "dive-icon");
+		dive_icon.scaleX = 2;
+		dive_icon.scaleY = 2;
+		dive_icon.setOrigin(0, 1);
+		dive_icon.alpha = 0.2;
+		dive_icon.alphaTopLeft = 0.2;
+		dive_icon.alphaTopRight = 0.2;
+		dive_icon.alphaBottomLeft = 0.2;
+		dive_icon.alphaBottomRight = 0.2;
+		dive_icon.tintTopLeft = 5675510;
+		dive_icon.tintTopRight = 5675510;
+		dive_icon.tintBottomLeft = 5675510;
+		dive_icon.tintBottomRight = 5675510;
+
 		// mobileButtonDive
-		const mobileButtonDive = this.add.image(593.4494460225105, 950.0119484066963, "mobile-button");
+		const mobileButtonDive = this.add.image(593.4494460225105, 950.0119484066963, "soldier-blood-2");
+		mobileButtonDive.scaleX = 75;
+		mobileButtonDive.scaleY = 75;
 		mobileButtonDive.angle = -135;
 		mobileButtonDive.setOrigin(1, 0);
-		mobileButtonDive.alpha = 0.2;
-		mobileButtonDive.alphaTopLeft = 0.2;
-		mobileButtonDive.alphaTopRight = 0.2;
-		mobileButtonDive.alphaBottomLeft = 0.2;
-		mobileButtonDive.alphaBottomRight = 0.2;
+		mobileButtonDive.alpha = 0.01;
+		mobileButtonDive.alphaTopLeft = 0.01;
+		mobileButtonDive.alphaTopRight = 0.01;
+		mobileButtonDive.alphaBottomLeft = 0.01;
+		mobileButtonDive.alphaBottomRight = 0.01;
 		mobileButtonDive.tintFill = true;
 		mobileButtonDive.tintTopLeft = 5675510;
 		mobileButtonDive.tintTopRight = 5675510;
 		mobileButtonDive.tintBottomLeft = 5675510;
 		mobileButtonDive.tintBottomRight = 5675510;
+
+		// mobileButtonDiveImage
+		const mobileButtonDiveImage = this.add.image(701.100377258847, 1155.6614570496997, "mobile-button");
+		mobileButtonDiveImage.setOrigin(1, 1);
+		mobileButtonDiveImage.flipX = true;
+		mobileButtonDiveImage.alpha = 0.1;
+		mobileButtonDiveImage.alphaTopLeft = 0.1;
+		mobileButtonDiveImage.alphaTopRight = 0.1;
+		mobileButtonDiveImage.alphaBottomLeft = 0.1;
+		mobileButtonDiveImage.alphaBottomRight = 0.1;
+		mobileButtonDiveImage.tintFill = true;
+		mobileButtonDiveImage.tintTopLeft = 5675510;
+		mobileButtonDiveImage.tintTopRight = 5675510;
+		mobileButtonDiveImage.tintBottomLeft = 5675510;
+		mobileButtonDiveImage.tintBottomRight = 5675510;
 
 		// mobileButtonLevelSelect
 		const mobileButtonLevelSelect = this.add.rectangle(670.9039916992188, 635.8854370117188, 75, 75);
@@ -229,6 +283,48 @@ export default class LevelUI extends Phaser.Scene {
 		punchChargeEmpty.alphaTopRight = 0.7;
 		punchChargeEmpty.alphaBottomLeft = 0.7;
 		punchChargeEmpty.alphaBottomRight = 0.7;
+
+		// tutorialContainer
+		const tutorialContainer = this.add.container(0, 0);
+		tutorialContainer.visible = false;
+
+		// tutorialOffsetContainer
+		const tutorialOffsetContainer = this.add.container(0, 0);
+		tutorialContainer.add(tutorialOffsetContainer);
+
+		// tutorialBox
+		const tutorialBox = this.add.rectangle(0, 2, 150, 230);
+		tutorialBox.scaleX = 1.2139552314624713;
+		tutorialBox.scaleY = 0.9107966439058469;
+		tutorialBox.isFilled = true;
+		tutorialBox.fillColor = 14383236;
+		tutorialOffsetContainer.add(tutorialBox);
+
+		// tutorialText
+		const tutorialText = this.add.bitmapText(0, -24, "nokia", "");
+		tutorialText.setOrigin(0.5, 0.5);
+		tutorialText.fontSize = -8;
+		tutorialText.maxWidth = 150;
+		tutorialText.dropShadowAlpha = 0;
+		tutorialOffsetContainer.add(tutorialText);
+
+		// tutorialCloseText
+		const tutorialCloseText = this.add.bitmapText(0, 93, "nokia", "- TAP TO CONTINUE -");
+		tutorialCloseText.setOrigin(0.5, 0.5);
+		tutorialCloseText.text = "- TAP TO CONTINUE -";
+		tutorialCloseText.fontSize = -8;
+		tutorialCloseText.maxWidth = 150;
+		tutorialCloseText.dropShadowAlpha = 0;
+		tutorialOffsetContainer.add(tutorialCloseText);
+
+		// tutorial_ipad
+		const tutorial_ipad = this.add.image(0, 0, "tutorial-ipad");
+		tutorialOffsetContainer.add(tutorial_ipad);
+
+		// inputHint
+		const inputHint = this.add.image(0, 59, "soldierpogosquash");
+		inputHint.visible = false;
+		tutorialOffsetContainer.add(inputHint);
 
 		// punchChargeFull
 		const punchChargeFull = this.add.image(387, 682, "bird2fist");
@@ -556,8 +652,7 @@ export default class LevelUI extends Phaser.Scene {
 		const scoreContainer = this.add.container(0, 0);
 
 		// comboLabelText
-		const comboLabelText = this.add.bitmapText(0, 81, "nokia", "Combo");
-		comboLabelText.setOrigin(0, 0.5);
+		const comboLabelText = this.add.bitmapText(0, 70, "nokia", "Combo");
 		comboLabelText.tintTopLeft = 5675510;
 		comboLabelText.tintTopRight = 5675510;
 		comboLabelText.tintBottomLeft = 5675510;
@@ -569,8 +664,7 @@ export default class LevelUI extends Phaser.Scene {
 		scoreContainer.add(comboLabelText);
 
 		// airborneLabelText
-		const airborneLabelText = this.add.bitmapText(0, 67, "nokia", "Airborne");
-		airborneLabelText.setOrigin(0, 0.5);
+		const airborneLabelText = this.add.bitmapText(0, 59, "nokia", "Airborne");
 		airborneLabelText.tintTopLeft = 5675510;
 		airborneLabelText.tintTopRight = 5675510;
 		airborneLabelText.tintBottomLeft = 5675510;
@@ -617,31 +711,15 @@ export default class LevelUI extends Phaser.Scene {
 		scoreContainer.add(scoreAdditionText);
 
 		// scoreText
-		const scoreText = this.add.bitmapText(0, 0, "nokia", "999999");
+		const scoreText = this.add.bitmapText(0, 0, "nokia", "9999");
 		scoreText.tintFill = true;
 		scoreText.tintTopLeft = 5388102;
 		scoreText.tintTopRight = 5388102;
 		scoreText.tintBottomLeft = 5388102;
 		scoreText.tintBottomRight = 5388102;
-		scoreText.text = "999999";
+		scoreText.text = "9999";
 		scoreText.fontSize = -20;
 		scoreContainer.add(scoreText);
-
-		// touchscreenDividerLeft
-		const touchscreenDividerLeft = this.add.image(531.1637573242188, 898.9600219726562, "soldier-blood-2");
-		touchscreenDividerLeft.scaleX = 3;
-		touchscreenDividerLeft.scaleY = 10;
-		touchscreenDividerLeft.setOrigin(0, 1);
-		touchscreenDividerLeft.alpha = 0.3;
-		touchscreenDividerLeft.alphaTopLeft = 0.3;
-		touchscreenDividerLeft.alphaTopRight = 0.3;
-		touchscreenDividerLeft.alphaBottomLeft = 0.3;
-		touchscreenDividerLeft.alphaBottomRight = 0.3;
-		touchscreenDividerLeft.tintFill = true;
-		touchscreenDividerLeft.tintTopLeft = 5675510;
-		touchscreenDividerLeft.tintTopRight = 5675510;
-		touchscreenDividerLeft.tintBottomLeft = 5675510;
-		touchscreenDividerLeft.tintBottomRight = 5675510;
 
 		// completeText
 		const completeText = this.add.bitmapText(351.3484191894531, 106.2844467163086, "nokia", "Level complete!");
@@ -670,11 +748,6 @@ export default class LevelUI extends Phaser.Scene {
 		timerTextAlign.center = true;
 		timerTextAlign.horizontalOffset = -25;
 		timerTextAlign.verticalOffset = -90;
-
-		// tutorialContainer (components)
-		const tutorialContainerAlign = new Align(tutorialContainer);
-		tutorialContainerAlign.middle = true;
-		tutorialContainerAlign.center = true;
 
 		// enemiesText (components)
 		const enemiesTextAlign = new Align(enemiesText);
@@ -728,8 +801,25 @@ export default class LevelUI extends Phaser.Scene {
 		const mobileButtonPunchAlign = new Align(mobileButtonPunch);
 		mobileButtonPunchAlign.down = true;
 		mobileButtonPunchAlign.right = true;
+		mobileButtonPunchAlign.horizontalOffset = -5;
 		mobileButtonPunchAlign.verticalOffset = -20;
 		new MobileDependent(mobileButtonPunch);
+
+		// mobileButtonPunchImage (components)
+		const mobileButtonPunchImageAlign = new Align(mobileButtonPunchImage);
+		mobileButtonPunchImageAlign.down = true;
+		mobileButtonPunchImageAlign.left = true;
+		mobileButtonPunchImageAlign.horizontalOffset = 15;
+		mobileButtonPunchImageAlign.verticalOffset = 5;
+		new MobileDependent(mobileButtonPunchImage);
+
+		// fist_icon (components)
+		const fist_iconAlign = new Align(fist_icon);
+		fist_iconAlign.down = true;
+		fist_iconAlign.right = true;
+		fist_iconAlign.horizontalOffset = -40;
+		fist_iconAlign.verticalOffset = -110;
+		new MobileDependent(fist_icon);
 
 		// mobileButtonJump (components)
 		const mobileButtonJumpAlign = new Align(mobileButtonJump);
@@ -738,6 +828,14 @@ export default class LevelUI extends Phaser.Scene {
 		mobileButtonJumpAlign.verticalOffset = -20;
 		new MobileDependent(mobileButtonJump);
 
+		// mobileButtonJumpImage (components)
+		const mobileButtonJumpImageAlign = new Align(mobileButtonJumpImage);
+		mobileButtonJumpImageAlign.down = true;
+		mobileButtonJumpImageAlign.left = true;
+		mobileButtonJumpImageAlign.horizontalOffset = -5;
+		mobileButtonJumpImageAlign.verticalOffset = -15;
+		new MobileDependent(mobileButtonJumpImage);
+
 		// mobileButtonUppercut (components)
 		const mobileButtonUppercutAlign = new Align(mobileButtonUppercut);
 		mobileButtonUppercutAlign.down = true;
@@ -745,12 +843,35 @@ export default class LevelUI extends Phaser.Scene {
 		mobileButtonUppercutAlign.verticalOffset = -140;
 		new MobileDependent(mobileButtonUppercut);
 
+		// up_icon (components)
+		const up_iconAlign = new Align(up_icon);
+		up_iconAlign.down = true;
+		up_iconAlign.left = true;
+		up_iconAlign.horizontalOffset = 40;
+		up_iconAlign.verticalOffset = -110;
+		new MobileDependent(up_icon);
+
+		// dive_icon (components)
+		const dive_iconAlign = new Align(dive_icon);
+		dive_iconAlign.down = true;
+		dive_iconAlign.left = true;
+		dive_iconAlign.horizontalOffset = 115;
+		dive_iconAlign.verticalOffset = -35;
+		new MobileDependent(dive_icon);
+
 		// mobileButtonDive (components)
 		const mobileButtonDiveAlign = new Align(mobileButtonDive);
 		mobileButtonDiveAlign.down = true;
 		mobileButtonDiveAlign.left = true;
 		mobileButtonDiveAlign.horizontalOffset = 20;
 		new MobileDependent(mobileButtonDive);
+
+		// mobileButtonDiveImage (components)
+		const mobileButtonDiveImageAlign = new Align(mobileButtonDiveImage);
+		mobileButtonDiveImageAlign.down = true;
+		mobileButtonDiveImageAlign.right = true;
+		mobileButtonDiveImageAlign.verticalOffset = -15;
+		new MobileDependent(mobileButtonDiveImage);
 
 		// mobileButtonLevelSelect (components)
 		const mobileButtonLevelSelectAlign = new Align(mobileButtonLevelSelect);
@@ -765,6 +886,11 @@ export default class LevelUI extends Phaser.Scene {
 		punchChargeEmptyAlign.right = true;
 		punchChargeEmptyAlign.horizontalOffset = -15;
 		punchChargeEmptyAlign.verticalOffset = 15;
+
+		// tutorialContainer (components)
+		const tutorialContainerAlign = new Align(tutorialContainer);
+		tutorialContainerAlign.middle = true;
+		tutorialContainerAlign.center = true;
 
 		// punchChargeFull (components)
 		const punchChargeFullAlign = new Align(punchChargeFull);
@@ -853,13 +979,6 @@ export default class LevelUI extends Phaser.Scene {
 		scoreContainerAlign.horizontalOffset = 15;
 		scoreContainerAlign.verticalOffset = 15;
 
-		// touchscreenDividerLeft (components)
-		const touchscreenDividerLeftAlign = new Align(touchscreenDividerLeft);
-		touchscreenDividerLeftAlign.down = true;
-		touchscreenDividerLeftAlign.left = true;
-		touchscreenDividerLeftAlign.verticalOffset = -120;
-		new MobileDependent(touchscreenDividerLeft);
-
 		// completeText (components)
 		const completeTextAlign = new Align(completeText);
 		completeTextAlign.middle = true;
@@ -871,12 +990,6 @@ export default class LevelUI extends Phaser.Scene {
 		transitionBGAlign.center = true;
 
 		this.timerText = timerText;
-		this.tutorialContainer = tutorialContainer;
-		this.tutorialOffsetContainer = tutorialOffsetContainer;
-		this.tutorialBox = tutorialBox;
-		this.tutorialText = tutorialText;
-		this.tutorialCloseText = tutorialCloseText;
-		this.inputHint = inputHint;
 		this.enemiesText = enemiesText;
 		this.enemiesLabelText = enemiesLabelText;
 		this.winText = winText;
@@ -885,11 +998,23 @@ export default class LevelUI extends Phaser.Scene {
 		this.debugText = debugText;
 		this.buildText = buildText;
 		this.mobileButtonPunch = mobileButtonPunch;
+		this.mobileButtonPunchImage = mobileButtonPunchImage;
+		this.fist_icon = fist_icon;
 		this.mobileButtonJump = mobileButtonJump;
+		this.mobileButtonJumpImage = mobileButtonJumpImage;
 		this.mobileButtonUppercut = mobileButtonUppercut;
+		this.up_icon = up_icon;
+		this.dive_icon = dive_icon;
 		this.mobileButtonDive = mobileButtonDive;
+		this.mobileButtonDiveImage = mobileButtonDiveImage;
 		this.mobileButtonLevelSelect = mobileButtonLevelSelect;
 		this.punchChargeEmpty = punchChargeEmpty;
+		this.tutorialContainer = tutorialContainer;
+		this.tutorialOffsetContainer = tutorialOffsetContainer;
+		this.tutorialBox = tutorialBox;
+		this.tutorialText = tutorialText;
+		this.tutorialCloseText = tutorialCloseText;
+		this.inputHint = inputHint;
 		this.punchChargeFull = punchChargeFull;
 		this.fullscreenTestButton = fullscreenTestButton;
 		this.summaryContainer = summaryContainer;
@@ -940,12 +1065,6 @@ export default class LevelUI extends Phaser.Scene {
 	}
 
 	public timerText!: Phaser.GameObjects.BitmapText;
-	public tutorialContainer!: Phaser.GameObjects.Container;
-	private tutorialOffsetContainer!: Phaser.GameObjects.Container;
-	public tutorialBox!: Phaser.GameObjects.Rectangle;
-	public tutorialText!: Phaser.GameObjects.BitmapText;
-	public tutorialCloseText!: Phaser.GameObjects.BitmapText;
-	private inputHint!: Phaser.GameObjects.Image;
 	public enemiesText!: Phaser.GameObjects.BitmapText;
 	public enemiesLabelText!: Phaser.GameObjects.BitmapText;
 	public winText!: Phaser.GameObjects.BitmapText;
@@ -954,11 +1073,23 @@ export default class LevelUI extends Phaser.Scene {
 	public debugText!: Phaser.GameObjects.BitmapText;
 	public buildText!: Phaser.GameObjects.BitmapText;
 	public mobileButtonPunch!: Phaser.GameObjects.Image;
+	public mobileButtonPunchImage!: Phaser.GameObjects.Image;
+	private fist_icon!: Phaser.GameObjects.Image;
 	public mobileButtonJump!: Phaser.GameObjects.Image;
+	public mobileButtonJumpImage!: Phaser.GameObjects.Image;
 	public mobileButtonUppercut!: Phaser.GameObjects.Image;
+	private up_icon!: Phaser.GameObjects.Image;
+	private dive_icon!: Phaser.GameObjects.Image;
 	public mobileButtonDive!: Phaser.GameObjects.Image;
+	public mobileButtonDiveImage!: Phaser.GameObjects.Image;
 	public mobileButtonLevelSelect!: Phaser.GameObjects.Rectangle;
 	private punchChargeEmpty!: Phaser.GameObjects.Image;
+	public tutorialContainer!: Phaser.GameObjects.Container;
+	private tutorialOffsetContainer!: Phaser.GameObjects.Container;
+	public tutorialBox!: Phaser.GameObjects.Rectangle;
+	public tutorialText!: Phaser.GameObjects.BitmapText;
+	public tutorialCloseText!: Phaser.GameObjects.BitmapText;
+	private inputHint!: Phaser.GameObjects.Image;
 	private punchChargeFull!: Phaser.GameObjects.Image;
 	private fullscreenTestButton!: Phaser.GameObjects.Image;
 	public summaryContainer!: Phaser.GameObjects.Container;
@@ -1355,6 +1486,8 @@ export default class LevelUI extends Phaser.Scene {
 		// 	}
 		// }
 
+		this.tutorialContainer.setDepth(99)
+
 		if (this.tutorialText.text === '')
 		{
 			if (this.registry.get('current-level') === 'uppercut')
@@ -1422,6 +1555,15 @@ export default class LevelUI extends Phaser.Scene {
 	// hide
 		if (!show)
 		{
+
+		// show mobile buttons
+		// this.up_icon.setVisible(true);
+		// this.dive_icon.setVisible(true);
+		// this.fist_icon.setVisible(true);
+		// this.mobileButtonDiveImage.setVisible(true);
+		// this.mobileButtonPunchImage.setVisible(true);
+		// this.mobileButtonJumpImage.setVisible(true);
+
 			if (!this.tutorialVisible)
 			{
 				return;
@@ -1443,14 +1585,29 @@ export default class LevelUI extends Phaser.Scene {
 
 	// show
 
+
 		if (this.tutorialVisible)
 		{
 			return;
 		}
 
+		// show mobile buttons
+		// this.up_icon.setVisible(false);
+		// this.dive_icon.setVisible(false);
+		// this.fist_icon.setVisible(false);
+		// this.mobileButtonDiveImage.setVisible(false);
+		// this.mobileButtonPunchImage.setVisible(false);
+		// this.mobileButtonJumpImage.setVisible(false);
+
 		if (tween)
 		{
 			this.setTutorialTween(true);
+
+			this.tutorialCloseText.setVisible(false);
+			this.time.delayedCall(2000, () =>
+			{
+				this.tutorialCloseText.setVisible(true);
+			});
 		}
 		else
 		{

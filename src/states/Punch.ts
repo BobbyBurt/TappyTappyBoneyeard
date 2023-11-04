@@ -24,6 +24,18 @@ export default class Punch implements State {
 	
 	enter()
 	{
+		// frozen punch bug fix
+		if (this.timer)
+		{
+			console.debug(`timer ${this.timer.getProgress()}`);
+			this.timer.remove();
+		}
+		if (this.pauseTimer)
+		{
+			console.debug(`pause timer ${this.pauseTimer.getProgress()}`);
+			this.pauseTimer.remove();
+		}
+		
 		this.player.scene.game.events.emit('punch');
 
 		this.queueUppercut = false;

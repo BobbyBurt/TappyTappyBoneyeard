@@ -28,6 +28,7 @@ export default class SoundManager {
 		['enemy-shoot-far', .2],
 		['combo-end', 1],
 		['eagle', 1],
+		['bird-egg-lay', 1],
 		['punch-swing', 1]
 	]);
 
@@ -80,7 +81,7 @@ export default class SoundManager {
 	 * @param scene 
 	 * @param overrideVolume If not provided, the pre-set volume for this key will be used if it exists.
 	 */
-	public static play(key: string, scene: Phaser.Scene, overrideVolume?: number)
+	public static play(key: string, scene: Phaser.Scene, overrideVolume?: number, overrideDetune? : number)
 	{
 	// determine volume
 		let volume = 0;
@@ -101,6 +102,6 @@ export default class SoundManager {
 			}
 		}
 
-		scene.sound.play(key, {volume: volume})
+		scene.sound.play(key, {volume: volume, detune: (overrideDetune ? overrideDetune : 0)})
 	}
 }

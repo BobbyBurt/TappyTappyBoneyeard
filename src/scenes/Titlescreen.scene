@@ -1,0 +1,153 @@
+{
+    "id": "e6b387bd-9201-46d5-b925-221b2fd5a734",
+    "sceneType": "SCENE",
+    "settings": {
+        "exportClass": true,
+        "autoImport": true,
+        "preloadPackFiles": [],
+        "createMethodName": "editorCreate",
+        "sceneKey": "Titlescreen",
+        "compilerOutputLanguage": "TYPE_SCRIPT",
+        "borderWidth": 480,
+        "borderHeight": 270
+    },
+    "displayList": [
+        {
+            "type": "Image",
+            "id": "46e1bf6a-6924-47cb-bfde-d5b6556b8f2c",
+            "label": "parallax_Backing111",
+            "scope": "CLASS",
+            "components": [
+                "ScrollFactor"
+            ],
+            "texture": {
+                "key": "Parallax-Backing"
+            },
+            "x": 248,
+            "y": 128,
+            "scaleX": 8.415017240244449
+        },
+        {
+            "type": "Image",
+            "id": "51d41580-5b77-47f7-9d88-aeaba852f07c",
+            "label": "parallax_Cityscape",
+            "components": [],
+            "texture": {
+                "key": "Parallax-Cityscape"
+            },
+            "x": 156,
+            "y": 169,
+            "tintTopLeft": "#FFADB6",
+            "tintTopRight": "#FFADB6",
+            "tintBottomLeft": "#FFADB6",
+            "tintBottomRight": "#FFADB6",
+            "tintFill": true
+        },
+        {
+            "type": "Image",
+            "id": "23148903-f823-4b7f-89df-4614158f2a88",
+            "label": "parallax_Cityscape_20",
+            "components": [],
+            "texture": {
+                "key": "Parallax-Cityscape"
+            },
+            "x": 36,
+            "y": 224,
+            "tintTopLeft": "#F4919C",
+            "tintTopRight": "#F4919C",
+            "tintBottomLeft": "#F4919C",
+            "tintBottomRight": "#F4919C",
+            "tintFill": true
+        },
+        {
+            "type": "Image",
+            "id": "9c850b65-bcfa-4433-b0b0-84b3ef5b76d8",
+            "label": "parallax_Cityscape_1",
+            "components": [],
+            "texture": {
+                "key": "Parallax-Cityscape"
+            },
+            "x": 472,
+            "y": 169,
+            "tintTopLeft": "#FFADB6",
+            "tintTopRight": "#FFADB6",
+            "tintBottomLeft": "#FFADB6",
+            "tintBottomRight": "#FFADB6",
+            "tintFill": true
+        },
+        {
+            "type": "Image",
+            "id": "95c76fdf-f2c4-4c06-b152-adc333097e5f",
+            "label": "parallax_Cityscape_2",
+            "components": [],
+            "texture": {
+                "key": "Parallax-Cityscape"
+            },
+            "x": 355,
+            "y": 224,
+            "tintTopLeft": "#F4919C",
+            "tintTopRight": "#F4919C",
+            "tintBottomLeft": "#F4919C",
+            "tintBottomRight": "#F4919C",
+            "tintFill": true
+        },
+        {
+            "type": "Image",
+            "id": "d003db14-c05f-474b-9b30-bbaf3dffe39e",
+            "label": "logo",
+            "components": [],
+            "texture": {
+                "key": "logo"
+            },
+            "x": 240,
+            "y": 125,
+            "scaleX": 2,
+            "scaleY": 2
+        },
+        {
+            "type": "BitmapText",
+            "id": "ecbfddeb-b9c1-4680-b17e-b83a7227e156",
+            "label": "progress_2",
+            "components": [],
+            "x": 240,
+            "y": 234,
+            "originX": 0.5,
+            "originY": 0.5,
+            "tintTopLeft": "#523746",
+            "tintTopRight": "#523746",
+            "tintBottomLeft": "#523746",
+            "tintBottomRight": "#523746",
+            "text": "Click / tap to start",
+            "font": "nokia",
+            "align": 1,
+            "fontSize": -10,
+            "dropShadowColor": "#949494"
+        },
+        {
+            "type": "BitmapText",
+            "id": "d358b0c5-4da6-4238-bba2-d4b3b615f71e",
+            "label": "progress",
+            "components": [],
+            "x": 240,
+            "y": 30,
+            "originX": 0.5,
+            "originY": 0.5,
+            "tintTopLeft": "#523746",
+            "tintTopRight": "#523746",
+            "tintBottomLeft": "#523746",
+            "tintBottomRight": "#523746",
+            "text": "BobbyBurt - ProsciuttoMan - Dry - Shane Mesa",
+            "font": "nokia",
+            "align": 1,
+            "fontSize": -10,
+            "dropShadowColor": "#949494"
+        }
+    ],
+    "plainObjects": [],
+    "meta": {
+        "app": "Phaser Editor 2D - Scene Editor",
+        "url": "https://phasereditor2d.com",
+        "contentType": "phasereditor2d.core.scene.SceneContentType",
+        "version": 3
+    }
+}

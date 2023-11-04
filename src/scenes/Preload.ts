@@ -57,26 +57,33 @@ export default class Preload extends Phaser.Scene {
 		fileText.maxWidth = 200;
 
 		// progress_1
-		const progress_1 = this.add.bitmapText(240, 197, "nokia", "Log into Newgrounds to earn medals \nand use cloud save data.");
+		const progress_1 = this.add.bitmapText(240, 197, "nokia", "- PLEASE STAND BY -");
 		progress_1.setOrigin(0.5, 0.5);
 		progress_1.tintTopLeft = 9737364;
 		progress_1.tintTopRight = 9737364;
 		progress_1.tintBottomLeft = 9737364;
 		progress_1.tintBottomRight = 9737364;
-		progress_1.text = "Log into Newgrounds to earn medals \nand use cloud save data.";
+		progress_1.text = "- PLEASE STAND BY -";
 		progress_1.fontSize = -10;
 		progress_1.align = 1;
 		progress_1.dropShadowColor = 9737364;
+
+		// birdFade
+		const birdFade = this.add.rectangle(240, 132, 50, 40);
+		birdFade.alpha = 0.7;
+		birdFade.isFilled = true;
 
 		// progress (components)
 		new PreloadText(progress);
 
 		this.fileText = fileText;
+		this.birdFade = birdFade;
 
 		this.events.emit("scene-awake");
 	}
 
 	private fileText!: Phaser.GameObjects.BitmapText;
+	private birdFade!: Phaser.GameObjects.Rectangle;
 
 	/* START-USER-CODE */
 
@@ -102,8 +109,8 @@ export default class Preload extends Phaser.Scene {
 		this.cameras.main.setZoom(CameraUtil.getAdaptiveZoom(this))
 
 	// start input
-		window.addEventListener('touchstart', this.onPointer);
-		window.addEventListener('click', this.onPointer);
+		// window.addEventListener('touchstart', this.onPointer);
+		// window.addEventListener('click', this.onPointer);
 
 	// load event
 		this.load.on(Phaser.Loader.Events.COMPLETE, () => 
@@ -113,7 +120,7 @@ export default class Preload extends Phaser.Scene {
 		// DEBUG: auto load
 			if (__DEV__)
 			{
-				this.start();
+				// this.start();
 					// mobile detection will not run if enabled
 			}
 		});
@@ -124,7 +131,26 @@ export default class Preload extends Phaser.Scene {
 			this.fileText.setY(this.fileText.y - 10)
 		});
 
+		this.load.on('complete', (key: string, type: string, data: any) =>
+		{
+			this.cameras.main.fadeOut(200, 255, 255, 255);
+			this.time.delayedCall(1000, () =>
+			{
+				this.scene.stop(this);
+				this.scene.launch("Titlescreen");
+			});
+		});
+
 		this.scene.launch('medal-scene');
+
+		this.tweens.add({
+			targets: this.birdFade,
+			duration: 40,
+			repeat: -1,
+			alpha: .3,
+			yoyo: true,
+			ease: Phaser.Math.Easing.Bounce.InOut
+		});
 	}
 
 	/** 
@@ -132,52 +158,54 @@ export default class Preload extends Phaser.Scene {
 	 * 
 	 * Start the game if loaded.
 	 */
-	onPointer = (event:any) => 
-	{
-	// set registry's mobile value
-		if (event.type == 'touchstart')
-		{
-			this.registry.set('mobile', true);
-			InputManager.activeInputMode = 'touch';
-			this.input.addPointer(3);
+	// onPointer = (event:any) => 
+	// {
+	// // set registry's mobile value
+	// 	if (event.type == 'touchstart')
+	// 	{
+	// 		this.registry.set('mobile', true);
+	// 		InputManager.activeInputMode = 'touch';
+	// 		this.input.addPointer(3);
 
-			NGIO.logEvent('Mobile Start', (event) => 
-			{
-				console.debug(`logEvent: ${event}`);
-			});
-		}
-		else if (event.type == 'click')
-		{
-			this.registry.set('mobile', false);
+	// 		NGIO.logEvent('Mobile Start', (event) => 
+	// 		{
+	// 			console.debug(`logEvent: ${event}`);
+	// 		});
+	// 	}
+	// 	else if (event.type == 'click')
+	// 	{
+	// 		this.registry.set('mobile', false);
 
-			NGIO.logEvent('Desktop Start', (event) => 
-			{
-				console.debug(`logEvent: ${event}`);
-			});
-		}
+	// 		NGIO.logEvent('Desktop Start', (event) => 
+	// 		{
+	// 			console.debug(`logEvent: ${event}`);
+	// 		});
+	// 	}
 
-		if (this.loaded)
-		{
-			this.start();
-		}
-	}
+	// 	if (this.loaded)
+	// 	{
+	// 		this.start();
+	// 	}
+	// }
 
 	/**s
 	 * loads next scene
 	 */
-	start()
-	{
+	// start()
+	// {
 
 
-		window.removeEventListener('touchstart', this.onPointer);
-		window.removeEventListener('click', this.onPointer);
+	// 	window.removeEventListener('touchstart', this.onPointer);
+	// 	window.removeEventListener('click', this.onPointer);
 
-		// remove music here if applicable
+	// 	// remove music here if applicable
 
-		this.scene.stop(this);
-		LevelSelect.levelSelectEntry = 'titlescreen';
-		this.scene.launch("LevelSelect");
-	}
+	// 	this.scene.stop(this);
+	// 	this.scene.launch("Titlescreen");
+
+	// 	// LevelSelect.levelSelectEntry = 'titlescreen';
+	// 	// this.scene.launch("LevelSelect");
+	// }
 
 	resize()
 	{

@@ -303,6 +303,11 @@
                 "key": "dive"
             },
             {
+                "url": "assets/dive-icon.png",
+                "type": "image",
+                "key": "dive-icon"
+            },
+            {
                 "url": "assets/levels/dive-practice.json",
                 "type": "tilemapTiledJSON",
                 "key": "dive-practice"
@@ -392,6 +397,11 @@
                 "url": "assets/levels/finale.json",
                 "type": "tilemapTiledJSON",
                 "key": "finale"
+            },
+            {
+                "url": "assets/fist-icon.png",
+                "type": "image",
+                "key": "fist-icon"
             },
             {
                 "url": "assets/levels/flap.json",
@@ -991,6 +1001,18 @@
                 "url": "assets/levels/umbrella-trap.json",
                 "type": "tilemapTiledJSON",
                 "key": "umbrella-trap"
+            },
+            {
+                "url": [
+                    "assets/sfx/unlock.mp3"
+                ],
+                "type": "audio",
+                "key": "unlock"
+            },
+            {
+                "url": "assets/up-icon.png",
+                "type": "image",
+                "key": "up-icon"
             },
             {
                 "url": "assets/levels/uppercut.json",

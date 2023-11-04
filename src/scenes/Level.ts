@@ -749,6 +749,8 @@ export default class Level extends Phaser.Scene {
 	private dollarEmitter: Phaser.GameObjects.Particles.ParticleEmitter;
 	private comboEmitterManager: Phaser.GameObjects.Particles.ParticleEmitterManager;
 	private comboEmitter: Phaser.GameObjects.Particles.ParticleEmitter;
+	private confettiEmitterManager: Phaser.GameObjects.Particles.ParticleEmitterManager;
+	private confettiEmitter: Phaser.GameObjects.Particles.ParticleEmitter;
 
 // debug
 	private debugVisionPolyGraphics: Phaser.GameObjects.Graphics;
@@ -776,7 +778,7 @@ export default class Level extends Phaser.Scene {
 	private scorePopupGroup: Phaser.GameObjects.Group;
 	private levelScore: number;
 	private levelTimer: Phaser.Time.TimerEvent;
-	private score = 0;
+	public score = 0;
 	private airborneCombo = false;
 
 // pause
@@ -1218,10 +1220,10 @@ export default class Level extends Phaser.Scene {
 		this.dollarEmitterManager.setDepth(10);
 		this.dollarEmitter = this.dollarEmitterManager.createEmitter({ on: false });
 
-		this.comboEmitterManager = this.add.particles('combo-particle');
-		this.mainLayer.add(this.comboEmitterManager);
-		this.comboEmitterManager.setDepth(10);
-		this.comboEmitter = this.comboEmitterManager.createEmitter({ on: false });
+		this.confettiEmitterManager = this.add.particles('white-px');
+		this.mainLayer.add(this.confettiEmitterManager);
+		this.confettiEmitterManager.setDepth(10);
+		this.confettiEmitter = this.confettiEmitterManager.createEmitter({ on: false });
 
 	// resize init
 		this.events.on('pre-resize', this.resize, this);
@@ -1461,6 +1463,11 @@ export default class Level extends Phaser.Scene {
 		}
 		else
 		{
+			if (this.reachedGoal)
+			{
+				return;
+			}
+
 			// this.resetLevel();
 			this.killPlayer();
 
@@ -1802,6 +1809,20 @@ export default class Level extends Phaser.Scene {
 			this.levelEndFeedback();
 
 			this.player.putInPlane(this.plane.x, this.plane.y);
+
+			this.confettiEmitter = this.confettiEmitterManager.createEmitter
+			({
+				lifespan: 3000,
+				speed: { min: 25, max: 300 },
+				angle: { min: 240, max: 300 },
+				// alpha: { start: 1, end: 0 },
+				scaleX: 2,
+				scaleY: { start: 2, end: 0 },
+				tint: [ 0x5699F6, 0xFB659F, 0xFFE13D, 0xFF943D ],
+				gravityY: 200,
+				on: false
+			});
+			this.confettiEmitter.explode(50, this.plane.x, this.plane.y);
 		}
 
 		// if (this.player.stateController.currentState.name !== 'dive')
@@ -2303,21 +2324,22 @@ export default class Level extends Phaser.Scene {
 		// here is where the level end code would go
 	}
 
-	goalEnemyCheck(enemy: EnemyPrefab)
-	{
+	// DEPRECATED
+	// goalEnemyCheck(enemy: EnemyPrefab)
+	// {
 
-		if (enemy.isGoal)
-		{
-			if (!this.reachedGoal)
-			{
-				this.reachedGoal = true;
+	// 	if (enemy.isGoal)
+	// 	{
+	// 		if (!this.reachedGoal)
+	// 		{
+	// 			this.reachedGoal = true;
 
-				this.levelEndFeedback();
+	// 			this.levelEndFeedback();
 
-				this.player.putInPlane(this.plane.x, this.plane.y);
-			}
-		}
-	}
+	// 			this.player.putInPlane(this.plane.x, this.plane.y);
+	// 		}
+	// 	}
+	// }
 
 	levelEndFeedback()
 	{	
@@ -2662,6 +2684,20 @@ export default class Level extends Phaser.Scene {
 						this.levelEndFeedback();
 
 						this.player.putInPlane(this.plane.x, this.plane.y);
+
+						this.confettiEmitter = this.confettiEmitterManager.createEmitter
+						({
+							lifespan: 3000,
+							speed: { min: 25, max: 300 },
+							angle: { min: 240, max: 300 },
+							// alpha: { start: 1, end: 0 },
+							scaleX: 2,
+							scaleY: { start: 2, end: 0 },
+							tint: [ 0x5699F6, 0xFB659F, 0xFFE13D, 0xFF943D ],
+							gravityY: 200,
+							on: false
+						});
+						this.confettiEmitter.explode(50, this.plane.x, this.plane.y);
 					}
 				}
 				else
@@ -2674,6 +2710,20 @@ export default class Level extends Phaser.Scene {
 					this.levelEndFeedback();
 
 					this.player.putInPlane(this.plane.x, this.plane.y);
+
+					this.confettiEmitter = this.confettiEmitterManager.createEmitter
+						({
+							lifespan: 3000,
+							speed: { min: 25, max: 300 },
+							angle: { min: 240, max: 300 },
+							// alpha: { start: 1, end: 0 },
+							scaleX: 2,
+							scaleY: { start: 2, end: 0 },
+							tint: [ 0x5699F6, 0xFB659F, 0xFFE13D, 0xFF943D ],
+							gravityY: 200,
+							on: false
+						});
+						this.confettiEmitter.explode(50, this.plane.x, this.plane.y);
 				}
 			}
 		}
@@ -2862,17 +2912,17 @@ export default class Level extends Phaser.Scene {
 		this.uiScene.mobileButtonJump.on('pointerdown', () =>
 		{
 			this.player.jumpMobileButton = true;
-			this.uiScene.mobileButtonJump.setAlpha(.4);
+			this.uiScene.mobileButtonJump.setAlpha(.3);
 		});
 		this.uiScene.mobileButtonJump.on('pointerup', () =>
 		{
 			this.player.jumpMobileButton = false;
-			this.uiScene.mobileButtonJump.setAlpha(.2);
+			this.uiScene.mobileButtonJump.setAlpha(.01);
 		});
 		this.uiScene.mobileButtonJump.on('pointerout', () =>
 		{
 			this.player.jumpMobileButton = false;
-			this.uiScene.mobileButtonJump.setAlpha(.2);
+			this.uiScene.mobileButtonJump.setAlpha(.01);
 		});
 
 		this.input.on('gameobjectdown', (pointer: any, gameobject: any) =>
@@ -2886,7 +2936,7 @@ export default class Level extends Phaser.Scene {
 		{
 			this.player.punchMobileButton = true;
 			// this.uiScene.mobileButtonPunch
-			this.uiScene.mobileButtonPunch.setAlpha(.4);
+			this.uiScene.mobileButtonPunch.setAlpha(.3);
 		});
 
 	// For multitouch to work, I need to use the following event and compare the object
@@ -2898,12 +2948,12 @@ export default class Level extends Phaser.Scene {
 		this.uiScene.mobileButtonPunch.on('pointerup', () =>
 		{
 			this.player.punchMobileButton = false;
-			this.uiScene.mobileButtonPunch.setAlpha(.2);
+			this.uiScene.mobileButtonPunch.setAlpha(.01);
 		});
 		this.uiScene.mobileButtonPunch.on('pointerout', () =>
 		{
 			this.player.punchMobileButton = false;
-			this.uiScene.mobileButtonPunch.setAlpha(.2);
+			this.uiScene.mobileButtonPunch.setAlpha(.01);
 		});
 
 		// uppercut
@@ -2929,17 +2979,17 @@ export default class Level extends Phaser.Scene {
 		this.uiScene.mobileButtonDive.on('pointerdown', () =>
 		{
 			this.player.diveMobileButton = true;
-			this.uiScene.mobileButtonDive.setAlpha(.4);
+			this.uiScene.mobileButtonDive.setAlpha(.3);
 		});
 		this.uiScene.mobileButtonDive.on('pointerup', () =>
 		{
 			this.player.diveMobileButton = false;
-			this.uiScene.mobileButtonDive.setAlpha(.2);
+			this.uiScene.mobileButtonDive.setAlpha(.01);
 		});
 		this.uiScene.mobileButtonDive.on('pointerout', () =>
 		{
 			this.player.diveMobileButton = false;
-			this.uiScene.mobileButtonDive.setAlpha(.2);
+			this.uiScene.mobileButtonDive.setAlpha(.01);
 		});
 
 		// level select
@@ -3073,6 +3123,12 @@ export default class Level extends Phaser.Scene {
 		if (show && (!tutorialManager.doTutorialInDevMode && __DEV__))
 		{
 			show = false;
+		}
+
+		if (!show && !initial && !this.uiScene.tutorialCloseText.visible)
+		{
+			console.debug('returned; dismiss text hasnt appeared yet');
+			return;
 		}
 
 		if (!show || (this.registry.get('last-scene') === this.scene.key && initial))

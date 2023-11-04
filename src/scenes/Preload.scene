@@ -77,11 +77,24 @@
             "tintTopRight": "#949494",
             "tintBottomLeft": "#949494",
             "tintBottomRight": "#949494",
-            "text": "Log into Newgrounds to earn medals \nand use cloud save data.",
+            "text": "- PLEASE STAND BY -",
             "font": "nokia",
             "align": 1,
             "fontSize": -10,
             "dropShadowColor": "#949494"
+        },
+        {
+            "type": "Rectangle",
+            "id": "e3cef690-db91-41fd-8ee8-201c7d214bb7",
+            "label": "birdFade",
+            "scope": "CLASS",
+            "components": [],
+            "x": 240,
+            "y": 132,
+            "alpha": 0.7,
+            "isFilled": true,
+            "width": 50,
+            "height": 40
         }
     ],
     "plainObjects": [],

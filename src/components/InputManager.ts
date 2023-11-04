@@ -1,7 +1,7 @@
 
 type outPutName = 'jump' | 'punch' | 'uppercut' | 'dive' 
 	| 'tutorial-toggle' | 'pause' | 'quick-restart' | 'gameover-back'
-	| 'menu-up' | 'menu-down' | 'menu-left' | 'menu-right' | 'menu-confirm' | 'menu-back';
+	| 'menu-navigate' | 'menu-up' | 'menu-down' | 'menu-left' | 'menu-right' | 'menu-confirm' | 'menu-back';
 
 interface outputTest
 {
@@ -61,6 +61,12 @@ export default class InputManager {
 		[
 			'Z key',
 			`up button`,
+			null
+		]],
+		['menu-navigate',
+		[
+			'arrow keys',
+			`D-pad`,
 			null
 		]],
 		['menu-up',

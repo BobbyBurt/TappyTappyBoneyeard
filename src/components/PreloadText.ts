@@ -19,7 +19,7 @@ export default class PreloadText extends UserComponent {
 
 			if (p === 1)
 			{
-				this.gameObject.text = "Click / tap to start";
+				this.gameObject.text = "100%";
 			}
 			else 
 			{

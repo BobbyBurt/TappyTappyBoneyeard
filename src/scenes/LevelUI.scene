@@ -54,95 +54,6 @@
             "dropShadowColor": "#222222ff"
         },
         {
-            "type": "Container",
-            "id": "55c7007c-09ce-4496-ae56-49d5c08253b4",
-            "label": "tutorialContainer",
-            "scope": "PUBLIC",
-            "components": [
-                "Align"
-            ],
-            "Align.middle": true,
-            "Align.center": true,
-            "visible": false,
-            "list": [
-                {
-                    "type": "Container",
-                    "id": "438748ec-06e4-4f5c-a14e-deaa14216cdf",
-                    "label": "tutorialOffsetContainer",
-                    "scope": "CLASS",
-                    "components": [],
-                    "list": [
-                        {
-                            "type": "Rectangle",
-                            "id": "a32d9655-1177-45da-a9cf-d95e74e92049",
-                            "label": "tutorialBox",
-                            "scope": "PUBLIC",
-                            "components": [],
-                            "y": 2,
-                            "scaleX": 1.2139552314624713,
-                            "scaleY": 0.9107966439058469,
-                            "isFilled": true,
-                            "fillColor": "#DB7884",
-                            "width": 150,
-                            "height": 230
-                        },
-                        {
-                            "type": "BitmapText",
-                            "id": "1c0a373b-d34e-49cf-8094-c4b6c8e0b76c",
-                            "label": "tutorialText",
-                            "scope": "PUBLIC",
-                            "components": [],
-                            "y": -24,
-                            "originX": 0.5,
-                            "originY": 0.5,
-                            "font": "nokia",
-                            "fontSize": -8,
-                            "maxWidth": 150,
-                            "dropShadowAlpha": 0,
-                            "dropShadowColor": "#000000ff"
-                        },
-                        {
-                            "type": "BitmapText",
-                            "id": "642aa679-fdfd-4bd8-8ca4-e0d82d06b6a9",
-                            "label": "tutorialCloseText",
-                            "scope": "PUBLIC",
-                            "components": [],
-                            "y": 93,
-                            "originX": 0.5,
-                            "originY": 0.5,
-                            "text": "- TAP TO CONTINUE -",
-                            "font": "nokia",
-                            "fontSize": -8,
-                            "maxWidth": 150,
-                            "dropShadowAlpha": 0,
-                            "dropShadowColor": "#000000ff"
-                        },
-                        {
-                            "type": "Image",
-                            "id": "c670603f-abe5-4975-8d26-c3baebe8243f",
-                            "label": "tutorial_ipad",
-                            "components": [],
-                            "texture": {
-                                "key": "tutorial-ipad"
-                            }
-                        },
-                        {
-                            "type": "Image",
-                            "id": "99499f7e-6938-46cd-b515-c8c975028daa",
-                            "label": "inputHint",
-                            "scope": "CLASS",
-                            "components": [],
-                            "texture": {
-                                "key": "soldierpogosquash"
-                            },
-                            "y": 59,
-                            "visible": false
-                        }
-                    ]
-                }
-            ]
-        },
-        {
             "type": "BitmapText",
             "id": "3f3957ff-d03c-4674-a0bc-b8a1cee4747b",
             "label": "enemiesText",
@@ -292,6 +203,7 @@
             "x": 485,
             "y": 820.12646484375,
             "originY": 1,
+            "visible": false,
             "text": "Tappy Tappy Boneyard v2",
             "font": "nokia",
             "fontSize": -8,
@@ -309,13 +221,82 @@
             ],
             "Align.down": true,
             "Align.right": true,
+            "Align.horizontalOffset": -5,
             "Align.verticalOffset": -20,
             "texture": {
-                "key": "mobile-button"
+                "key": "soldier-blood-2"
             },
             "x": 746,
             "y": 1082,
+            "scaleX": 75,
+            "scaleY": 75,
             "angle": 45,
+            "originX": 1,
+            "originY": 1,
+            "alpha": 0.01,
+            "alphaTopLeft": 0.01,
+            "alphaTopRight": 0.01,
+            "alphaBottomLeft": 0.01,
+            "alphaBottomRight": 0.01,
+            "tintTopLeft": "#5699F6",
+            "tintTopRight": "#5699F6",
+            "tintBottomLeft": "#5699F6",
+            "tintBottomRight": "#5699F6",
+            "tintFill": true
+        },
+        {
+            "type": "Image",
+            "id": "63b81d00-2a03-40d2-8903-29495d60e40d",
+            "label": "mobileButtonPunchImage",
+            "scope": "PUBLIC",
+            "components": [
+                "Align",
+                "MobileDependent"
+            ],
+            "Align.down": true,
+            "Align.left": true,
+            "Align.horizontalOffset": 15,
+            "Align.verticalOffset": 5,
+            "texture": {
+                "key": "mobile-button"
+            },
+            "x": 229.47415161132812,
+            "y": 1187.9794921875,
+            "angle": 90,
+            "originX": 1,
+            "originY": 1,
+            "flipX": true,
+            "alpha": 0.1,
+            "alphaTopLeft": 0.1,
+            "alphaTopRight": 0.1,
+            "alphaBottomLeft": 0.1,
+            "alphaBottomRight": 0.1,
+            "tintTopLeft": "#5699F6",
+            "tintTopRight": "#5699F6",
+            "tintBottomLeft": "#5699F6",
+            "tintBottomRight": "#5699F6",
+            "tintFill": true
+        },
+        {
+            "type": "Image",
+            "id": "736d03d3-e4c1-40be-9fa7-e4698e2c1092",
+            "label": "fist_icon",
+            "scope": "CLASS",
+            "components": [
+                "Align",
+                "MobileDependent"
+            ],
+            "Align.down": true,
+            "Align.right": true,
+            "Align.horizontalOffset": -40,
+            "Align.verticalOffset": -110,
+            "texture": {
+                "key": "fist-icon"
+            },
+            "x": 721,
+            "y": 1074,
+            "scaleX": 2,
+            "scaleY": 2,
             "originX": 1,
             "originY": 1,
             "alpha": 0.2,
@@ -326,8 +307,7 @@
             "tintTopLeft": "#5699F6",
             "tintTopRight": "#5699F6",
             "tintBottomLeft": "#5699F6",
-            "tintBottomRight": "#5699F6",
-            "tintFill": true
+            "tintBottomRight": "#5699F6"
         },
         {
             "type": "Image",
@@ -351,11 +331,42 @@
             "angle": -45.00000000000006,
             "originX": 0,
             "originY": 1,
-            "alpha": 0.2,
-            "alphaTopLeft": 0.2,
-            "alphaTopRight": 0.2,
-            "alphaBottomLeft": 0.2,
-            "alphaBottomRight": 0.2,
+            "alpha": 0.01,
+            "alphaTopLeft": 0.01,
+            "alphaTopRight": 0.01,
+            "alphaBottomLeft": 0.01,
+            "alphaBottomRight": 0.01,
+            "tintTopLeft": "#5699F6",
+            "tintTopRight": "#5699F6",
+            "tintBottomLeft": "#5699F6",
+            "tintBottomRight": "#5699F6",
+            "tintFill": true
+        },
+        {
+            "type": "Image",
+            "id": "c6ecde9a-b4ee-4e0a-9b6a-574f54982e66",
+            "label": "mobileButtonJumpImage",
+            "scope": "PUBLIC",
+            "components": [
+                "Align",
+                "MobileDependent"
+            ],
+            "Align.down": true,
+            "Align.left": true,
+            "Align.horizontalOffset": -5,
+            "Align.verticalOffset": -15,
+            "texture": {
+                "key": "mobile-button"
+            },
+            "x": 313.5,
+            "y": 1079,
+            "originX": 0,
+            "originY": 1,
+            "alpha": 0.1,
+            "alphaTopLeft": 0.1,
+            "alphaTopRight": 0.1,
+            "alphaBottomLeft": 0.1,
+            "alphaBottomRight": 0.1,
             "tintTopLeft": "#5699F6",
             "tintTopRight": "#5699F6",
             "tintBottomLeft": "#5699F6",
@@ -381,9 +392,43 @@
             "y": 967,
             "scaleX": 75,
             "scaleY": 75,
+            "angle": -45.00000000000006,
             "originX": 1,
             "originY": 1,
             "visible": false,
+            "alpha": 0.01,
+            "alphaTopLeft": 0.01,
+            "alphaTopRight": 0.01,
+            "alphaBottomLeft": 0.01,
+            "alphaBottomRight": 0.01,
+            "tintTopLeft": "#5699F6",
+            "tintTopRight": "#5699F6",
+            "tintBottomLeft": "#5699F6",
+            "tintBottomRight": "#5699F6",
+            "tintFill": true
+        },
+        {
+            "type": "Image",
+            "id": "8c18a0ba-9bda-4a8a-a2e7-53d698e39b0e",
+            "label": "up_icon",
+            "scope": "CLASS",
+            "components": [
+                "Align",
+                "MobileDependent"
+            ],
+            "Align.down": true,
+            "Align.left": true,
+            "Align.horizontalOffset": 40,
+            "Align.verticalOffset": -110,
+            "texture": {
+                "key": "up-icon"
+            },
+            "x": 339.82733154296875,
+            "y": 1182.267578125,
+            "scaleX": 2,
+            "scaleY": 2,
+            "originX": 0,
+            "originY": 1,
             "alpha": 0.2,
             "alphaTopLeft": 0.2,
             "alphaTopRight": 0.2,
@@ -392,8 +437,39 @@
             "tintTopLeft": "#5699F6",
             "tintTopRight": "#5699F6",
             "tintBottomLeft": "#5699F6",
-            "tintBottomRight": "#5699F6",
-            "tintFill": true
+            "tintBottomRight": "#5699F6"
+        },
+        {
+            "type": "Image",
+            "id": "f7fb29af-0fad-4035-8276-0b4ee48bce93",
+            "label": "dive_icon",
+            "scope": "CLASS",
+            "components": [
+                "Align",
+                "MobileDependent"
+            ],
+            "Align.down": true,
+            "Align.left": true,
+            "Align.horizontalOffset": 115,
+            "Align.verticalOffset": -35,
+            "texture": {
+                "key": "dive-icon"
+            },
+            "x": 489,
+            "y": 1115,
+            "scaleX": 2,
+            "scaleY": 2,
+            "originX": 0,
+            "originY": 1,
+            "alpha": 0.2,
+            "alphaTopLeft": 0.2,
+            "alphaTopRight": 0.2,
+            "alphaBottomLeft": 0.2,
+            "alphaBottomRight": 0.2,
+            "tintTopLeft": "#5699F6",
+            "tintTopRight": "#5699F6",
+            "tintBottomLeft": "#5699F6",
+            "tintBottomRight": "#5699F6"
         },
         {
             "type": "Image",
@@ -408,18 +484,51 @@
             "Align.left": true,
             "Align.horizontalOffset": 20,
             "texture": {
-                "key": "mobile-button"
+                "key": "soldier-blood-2"
             },
             "x": 593.4494460225105,
             "y": 950.0119484066963,
+            "scaleX": 75,
+            "scaleY": 75,
             "angle": -135,
             "originX": 1,
             "originY": 0,
-            "alpha": 0.2,
-            "alphaTopLeft": 0.2,
-            "alphaTopRight": 0.2,
-            "alphaBottomLeft": 0.2,
-            "alphaBottomRight": 0.2,
+            "alpha": 0.01,
+            "alphaTopLeft": 0.01,
+            "alphaTopRight": 0.01,
+            "alphaBottomLeft": 0.01,
+            "alphaBottomRight": 0.01,
+            "tintTopLeft": "#5699F6",
+            "tintTopRight": "#5699F6",
+            "tintBottomLeft": "#5699F6",
+            "tintBottomRight": "#5699F6",
+            "tintFill": true
+        },
+        {
+            "type": "Image",
+            "id": "44bc5247-f508-4a7b-a22b-6b6b49ae96af",
+            "label": "mobileButtonDiveImage",
+            "scope": "PUBLIC",
+            "components": [
+                "Align",
+                "MobileDependent"
+            ],
+            "Align.down": true,
+            "Align.right": true,
+            "Align.verticalOffset": -15,
+            "texture": {
+                "key": "mobile-button"
+            },
+            "x": 701.100377258847,
+            "y": 1155.6614570496997,
+            "originX": 1,
+            "originY": 1,
+            "flipX": true,
+            "alpha": 0.1,
+            "alphaTopLeft": 0.1,
+            "alphaTopRight": 0.1,
+            "alphaBottomLeft": 0.1,
+            "alphaBottomRight": 0.1,
             "tintTopLeft": "#5699F6",
             "tintTopRight": "#5699F6",
             "tintBottomLeft": "#5699F6",
@@ -475,6 +584,95 @@
             "alphaTopRight": 0.7,
             "alphaBottomLeft": 0.7,
             "alphaBottomRight": 0.7
+        },
+        {
+            "type": "Container",
+            "id": "55c7007c-09ce-4496-ae56-49d5c08253b4",
+            "label": "tutorialContainer",
+            "scope": "PUBLIC",
+            "components": [
+                "Align"
+            ],
+            "Align.middle": true,
+            "Align.center": true,
+            "visible": false,
+            "list": [
+                {
+                    "type": "Container",
+                    "id": "438748ec-06e4-4f5c-a14e-deaa14216cdf",
+                    "label": "tutorialOffsetContainer",
+                    "scope": "CLASS",
+                    "components": [],
+                    "list": [
+                        {
+                            "type": "Rectangle",
+                            "id": "a32d9655-1177-45da-a9cf-d95e74e92049",
+                            "label": "tutorialBox",
+                            "scope": "PUBLIC",
+                            "components": [],
+                            "y": 2,
+                            "scaleX": 1.2139552314624713,
+                            "scaleY": 0.9107966439058469,
+                            "isFilled": true,
+                            "fillColor": "#DB7884",
+                            "width": 150,
+                            "height": 230
+                        },
+                        {
+                            "type": "BitmapText",
+                            "id": "1c0a373b-d34e-49cf-8094-c4b6c8e0b76c",
+                            "label": "tutorialText",
+                            "scope": "PUBLIC",
+                            "components": [],
+                            "y": -24,
+                            "originX": 0.5,
+                            "originY": 0.5,
+                            "font": "nokia",
+                            "fontSize": -8,
+                            "maxWidth": 150,
+                            "dropShadowAlpha": 0,
+                            "dropShadowColor": "#000000ff"
+                        },
+                        {
+                            "type": "BitmapText",
+                            "id": "642aa679-fdfd-4bd8-8ca4-e0d82d06b6a9",
+                            "label": "tutorialCloseText",
+                            "scope": "PUBLIC",
+                            "components": [],
+                            "y": 93,
+                            "originX": 0.5,
+                            "originY": 0.5,
+                            "text": "- TAP TO CONTINUE -",
+                            "font": "nokia",
+                            "fontSize": -8,
+                            "maxWidth": 150,
+                            "dropShadowAlpha": 0,
+                            "dropShadowColor": "#000000ff"
+                        },
+                        {
+                            "type": "Image",
+                            "id": "c670603f-abe5-4975-8d26-c3baebe8243f",
+                            "label": "tutorial_ipad",
+                            "components": [],
+                            "texture": {
+                                "key": "tutorial-ipad"
+                            }
+                        },
+                        {
+                            "type": "Image",
+                            "id": "99499f7e-6938-46cd-b515-c8c975028daa",
+                            "label": "inputHint",
+                            "scope": "CLASS",
+                            "components": [],
+                            "texture": {
+                                "key": "soldierpogosquash"
+                            },
+                            "y": 59,
+                            "visible": false
+                        }
+                    ]
+                }
+            ]
         },
         {
             "type": "Image",
@@ -1169,8 +1367,7 @@
                     "label": "comboLabelText",
                     "scope": "PUBLIC",
                     "components": [],
-                    "y": 81,
-                    "originY": 0.5,
+                    "y": 70,
                     "tintTopLeft": "#5699F6",
                     "tintTopRight": "#5699F6",
                     "tintBottomLeft": "#5699F6",
@@ -1187,8 +1384,7 @@
                     "label": "airborneLabelText",
                     "scope": "PUBLIC",
                     "components": [],
-                    "y": 67,
-                    "originY": 0.5,
+                    "y": 59,
                     "tintTopLeft": "#5699F6",
                     "tintTopRight": "#5699F6",
                     "tintBottomLeft": "#5699F6",
@@ -1256,43 +1452,12 @@
                     "tintBottomLeft": "#523746",
                     "tintBottomRight": "#523746",
                     "tintFill": true,
-                    "text": "999999",
+                    "text": "9999",
                     "font": "nokia",
                     "fontSize": -20,
                     "dropShadowColor": "#000000ff"
                 }
             ]
-        },
-        {
-            "type": "Image",
-            "id": "e03de040-1bdf-4f7f-95a9-18ac8992926b",
-            "label": "touchscreenDividerLeft",
-            "components": [
-                "Align",
-                "MobileDependent"
-            ],
-            "Align.down": true,
-            "Align.left": true,
-            "Align.verticalOffset": -120,
-            "texture": {
-                "key": "soldier-blood-2"
-            },
-            "x": 531.1637573242188,
-            "y": 898.9600219726562,
-            "scaleX": 3,
-            "scaleY": 10,
-            "originX": 0,
-            "originY": 1,
-            "alpha": 0.3,
-            "alphaTopLeft": 0.3,
-            "alphaTopRight": 0.3,
-            "alphaBottomLeft": 0.3,
-            "alphaBottomRight": 0.3,
-            "tintTopLeft": "#5699F6",
-            "tintTopRight": "#5699F6",
-            "tintBottomLeft": "#5699F6",
-            "tintBottomRight": "#5699F6",
-            "tintFill": true
         },
         {
             "type": "BitmapText",
