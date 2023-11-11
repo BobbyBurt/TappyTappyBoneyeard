@@ -157,7 +157,7 @@
                  "type":"",
                  "visible":true,
                  "width":16,
-                 "x":288,
+                 "x":280,
                  "y":432
                 }, 
                 {
@@ -336,7 +336,7 @@
         {
          "columns":6,
          "firstgid":1,
-         "image":"..\/..\/..\/..\/levels\/Proscuitto\/tileset.png",
+         "image":"..\/..\/..\/..\/levels\/Proscuitto\/tutorial\/tileset.png",
          "imageheight":144,
          "imagewidth":96,
          "margin":0,
@@ -357,7 +357,7 @@
         {
          "columns":6,
          "firstgid":55,
-         "image":"..\/..\/..\/..\/levels\/Proscuitto\/tileset-bg.png",
+         "image":"..\/..\/..\/..\/levels\/Proscuitto\/tutorial\/tileset-bg.png",
          "imageheight":208,
          "imagewidth":96,
          "margin":0,

@@ -24,29 +24,30 @@ export let levelScoreMilestones = new Map<string, Array<number>>(
     // MAIN 1
     ['bomb-intro',      [ 400, 500, 700 ]],
     ['combo',           [ 900, 1300, 2200 ]],
-    ['bomb-holder',     [ 600, 900, 1100 ]],
+    ['bomb-holder',     [ 600, 800, 1100 ]],
     
     // MAIN 2
     ['umbrella-intro',  [ 600, 1200, 2400 ]],
     ['bomb-punch',      [ 600, 900, 1100 ]],
     
     // MAIN 3
-    ['pogo-intro',      [ 800, 1400, 1900 ]],
-    ['umbrella-shield', [ 700, 1400, 2800 ]],
+    ['pogo-intro',      [ 800, 1900, 2700 ]],
+    ['umbrella-shield', [ 700, 1400, 2300 ]],  // 230
     
     // HARD 1
     ['mine-intro',      [ 500, 800, 1100 ]],
     ['pogo-ideas',      [ 600, 1000, 1300 ]],
     
     // HARD 2
-    ['mine-enemy',      [ 800, 1800, 2000 ]],
+    ['mine-enemy',      [ 800, 1700, 2000 ]],
     ['mine-wall',       [ 1300, 1800, 2100 ]],
     
     // HARD 3
-    ['gun-intro',       [ 400, 600, 700 ]],
+    ['gun-intro',       [ 800, 1200, 1600 ]],
+    // 1400
     
     // FINALE
-    ['finale',          [ 800, 1300, 1600 ]],
+    ['finale',          [ 2000, 2400, 2800 ]],
     
     // OLD
     ['grenade',         [ 400, 900, 1100 ]],
@@ -88,23 +89,17 @@ export let levelRequiredAwards = new Map<string, Array<number>>(
         ['pogo-intro',      [ 0, 11, 2, 0 ]],
         ['umbrella-shield', [ 0, 11, 2, 0 ]],
         
-        // MAIN 4
-        ['grenade',         [ 0, 13, 4, 0 ]],
-        ['pogo-ideas',      [ 0, 13, 4, 0 ]],
-        
         // HARD 1
-        ['mine-intro',      [ 0, 15, 6, 2 ]],
-        ['pogo-challenge',  [ 0, 15, 6, 2 ]],
+        ['mine-intro',      [ 0, 13, 5, 0 ]],
+        ['pogo-ideas',      [ 0, 13, 5, 0 ]],
         
         // HARD 2
-        ['mine-enemy',      [ 0, 17, 8, 4 ]],
-        ['mine-wall',       [ 0, 17, 8, 4 ]],
-        
-        // HARD 3
-        ['gun-intro',       [ 0, 19, 10, 6 ]],
+        ['mine-enemy',      [ 0, 15, 7, 4 ]],
+        ['mine-wall',       [ 0, 15, 7, 4 ]],
         
         // FINALE
-        ['finale',          [ 0, 21, 15, 8 ]],
+        ['gun-intro',       [ 0, 20, 15, 8 ]],
+        ['finale',          [ 0, 20, 15, 8 ]],
     ]);
 
 // MARKED FOR DELETION

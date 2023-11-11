@@ -606,7 +606,7 @@ export default class LevelUI extends Phaser.Scene {
 		mobileBackButton.fillColor = 16765919;
 		mobileBackButton.fillAlpha = 0.7;
 		mobileBackButton.isStroked = true;
-		mobileBackButton.strokeColor = 3158064;
+		mobileBackButton.strokeColor = 5388102;
 		mobileBackButton.lineWidth = 3;
 		gameOverContainer.add(mobileBackButton);
 
@@ -630,7 +630,7 @@ export default class LevelUI extends Phaser.Scene {
 		mobileRetryButton.fillColor = 16765919;
 		mobileRetryButton.fillAlpha = 0.7;
 		mobileRetryButton.isStroked = true;
-		mobileRetryButton.strokeColor = 3158064;
+		mobileRetryButton.strokeColor = 5388102;
 		mobileRetryButton.lineWidth = 3;
 		gameOverContainer.add(mobileRetryButton);
 
@@ -1131,7 +1131,7 @@ export default class LevelUI extends Phaser.Scene {
 	public comboLabelText!: Phaser.GameObjects.BitmapText;
 	public airborneLabelText!: Phaser.GameObjects.BitmapText;
 	public comboText!: Phaser.GameObjects.BitmapText;
-	private scoreAdditionText!: Phaser.GameObjects.BitmapText;
+	public scoreAdditionText!: Phaser.GameObjects.BitmapText;
 	public scoreText!: Phaser.GameObjects.BitmapText;
 	public completeText!: Phaser.GameObjects.BitmapText;
 	private transitionBG!: Phaser.GameObjects.Image;
@@ -1215,7 +1215,7 @@ export default class LevelUI extends Phaser.Scene {
 			// ease: Phaser.Math.Easing.Linear
 		});
 
-	// fullscreen testasdf
+	// fullscreen
 
 		this.fullscreenTestButton.setInteractive();
 		this.fullscreenTestButton.on('pointerdown', () =>

@@ -39,7 +39,8 @@ export default class tutorialManager {
 				`Punches and uppercuts take a lot out of you... Your charge is indicated by the icon in the top right corner.\n\nLanding on ground is one way to recharge, but you'll also automatically recharge if you take out an enemy with your attack!`,
 				
 			// level 9
-				`There are a number of ways to approach each problem, and you'll often need to use more than one move.\n\nExperimenting is how you find ways to earn high scores!`
+				// `There are a number of ways to approach each problem, and you'll often need to use more than one move.\n\nExperimenting is how you find ways to earn high scores!`
+				null
 		]
 
 		return texts[levelIndex];

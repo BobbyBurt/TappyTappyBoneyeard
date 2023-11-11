@@ -26,8 +26,20 @@ export default class cloudSaves {
     {
         this.cloudDataKeys = dataKeys;
     }
+
+    /**
+     * Sets all cloudDataKeys to null.
+     * @param scene 
+     */
+    public static clearData(scene: Phaser.Scene)
+    {
+        this.cloudDataKeys.forEach((key: string, index: number) =>
+        {
+            scene.registry.set(key, undefined);
+        });
+    }
     
-    public static loadData(scene: Phaser.Scene)
+    public static loadData(scene: Phaser.Scene): boolean
     {
         if (cloudSaves.cloud)
         {
@@ -39,10 +51,12 @@ export default class cloudSaves {
                 {
                     this.onDataGetComplete(stringData, scene)
                 });
+                return true;
             }
             else
             {
                 console.log('no cloud data exists yet.');
+                return false;
             }
         }
         else
@@ -52,11 +66,12 @@ export default class cloudSaves {
             {
                 this.onDataGetComplete(localSaveData, scene);
                 console.debug('loaded local save data');
-                return;
+                return true;
             }
             else
             {
                 console.log('no local save data exists yet.');
+                return false;
             }
         }
         

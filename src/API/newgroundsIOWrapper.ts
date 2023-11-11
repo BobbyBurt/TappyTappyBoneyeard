@@ -27,6 +27,8 @@ export class newgroundsIOWrapper
         NGIO.init(appID, encryptionKey, options);
 	    NGIO.getConnectionStatus(function (status) {});
     }
+
+    public static status: 'STATUS_LOGIN_REQUIRED' | 'STATUS_WAITING_FOR_USER' | 'STATUS_READY' | 'isWaitingStatus' | undefined
   
     /**
      * Call in game loop.
@@ -35,7 +37,7 @@ export class newgroundsIOWrapper
      * @param text 
      * @returns 
      */
-    public update()
+    public update(game: Phaser.Game)
     {
         // Note: the callback function only fires if there's a change in status
         NGIO.getConnectionStatus(function (status)
@@ -64,6 +66,7 @@ export class newgroundsIOWrapper
                         // Show a 'new version available' button that calls
                         // NGIO.loadOfficialUrl();
                         console.log("New version available");
+                        break;
                     }
     
                     if (!NGIO.legalHost)
@@ -84,8 +87,12 @@ export class newgroundsIOWrapper
         
                     // A "Log In" button that calls NGIO.openLoginPage();
                     // A "No Thanks: button that calls NGIO.skipLogin();.,
+                    game.events.emit(`STATUS_LOGIN_REQUIRED`);
                     console.log("user needs to log in");
-                    NGIO.openLoginPage();
+                    newgroundsIOWrapper.status = 'STATUS_LOGIN_REQUIRED';
+                    // return `STATUS_LOGIN_REQUIRED`;
+                    // NGIO.openLoginPage();
+    
   
                     break;
   
@@ -93,8 +100,10 @@ export class newgroundsIOWrapper
                 case NGIO.STATUS_WAITING_FOR_USER:
                     // It's possible the user may close the login page without signing in.
                     // Show a "Cancel Login" button that calls NGIO.cancelLogin();
+                    game.events.emit(`STATUS_WAITING_FOR_USER`);
                     console.log("Waiting for login...");
-        
+                    newgroundsIOWrapper.status = 'STATUS_WAITING_FOR_USER';
+                    // return `STATUS_WAITING_FOR_USER`;
                     break;
   
                 // user needs to log in
@@ -103,8 +112,10 @@ export class newgroundsIOWrapper
         
                     // If NGIO.hasUser is false, the user opted not to sign in, so you may
                     // need to do some special handling in your game.
+                    game.events.emit(`STATUS_READY`);
                     console.log("Status ready!");
-        
+                    newgroundsIOWrapper.status = 'STATUS_READY';
+                    // return `STATUS_READY`;
                     break;
             }
         });

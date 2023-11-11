@@ -59,8 +59,10 @@ export default class BalloonEnemy extends EnemyPrefab {
 
 		this.floatYTween = this.scene.tweens.addCounter
 		({
-			from: -2,
-			to: 2,
+			// from: -2,
+			// to: 2,
+			from: 0,
+			to: 0,
 			duration: 1000,
 			ease: Phaser.Math.Easing.Quadratic.InOut,
 			yoyo: true,

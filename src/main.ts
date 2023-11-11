@@ -15,7 +15,7 @@ window.addEventListener('load', function ()
 	{
 		title: 'Tappy Tappy Boneyard',
 		url: 'https://www.newgrounds.com/projects/games/1923225/preview',
-		version: '20 pre-release',
+		version: '23 release',
 		
 	// visuals
 		type: Phaser.AUTO,
@@ -113,7 +113,7 @@ class Boot extends Phaser.Scene
 			NGIO.keepSessionAlive();
 			if (NGIO.isInitialized)
 			{
-				this.ngWrap.update();
+				this.ngWrap.update(this.game);
 			}
 		});
 
@@ -130,6 +130,8 @@ class Boot extends Phaser.Scene
 		dataKeys.push(`got-egg: umbrella-shield`);
 		dataKeys.push(`got-egg: mine-intro`);
 		dataKeys.push(`got-egg: mine-wall`);
+
+		dataKeys.push(`no-more-unlocks`);
 
 		cloudSaves.setDataKeys(dataKeys);
 		// cloudSaves.setDataKeys([

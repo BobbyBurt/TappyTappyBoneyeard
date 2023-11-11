@@ -1358,6 +1358,8 @@ export default class Level extends Phaser.Scene {
 		this.scene.get('Pause').scene.stop();
 		this.manualPause = false;
 		this.scene.start('LevelSelect');
+
+		this.music.pause();
 	}
 
 	/** stops this scene, shutting down update listeners, and starts level select scene */
@@ -1497,6 +1499,12 @@ export default class Level extends Phaser.Scene {
 			return;
 		}
 
+		if (this.player.punchDeflected)
+		{
+			return;
+			// otherwise this collision callback is triggered again before the fist is moved, and the enemy is taken out.
+		}
+
 		const enemy = _enemy as EnemyPrefab;
 
 		if (this.player.stateController.currentState.name === 'punch'
@@ -1587,8 +1595,9 @@ export default class Level extends Phaser.Scene {
 
 	bombFistOverlap(_bomb: any, _fistBody: any)
 	{
+		
 		const bomb = _bomb as BombPrefab;
-
+		
 		if (!this.player.fist.active)
 		{
 			if (this.player.fistGraceTimer.getProgress() < 1)
@@ -1599,8 +1608,10 @@ export default class Level extends Phaser.Scene {
 			{
 				return;
 			}
-
+			
 		}
+		
+		console.debug('bomb fist');
 
 		_bomb.setBombFuse();
 		_bomb.setPosition(_bomb.x, _bomb.y - 3);
@@ -1658,7 +1669,7 @@ export default class Level extends Phaser.Scene {
 			// without this check, if the last bomb overlaped a tile and the player punched the enemy, it would explode immediately.
 		}
 
-		if (_bomb.punched)
+		if (_bomb.punched && _bomb.fuseTimer.getProgress() > 0)
 		{
 			console.debug(`bomb tilemap explode`);
 			this.bombExplode(_bomb);
@@ -1721,7 +1732,8 @@ export default class Level extends Phaser.Scene {
 		this.uiScene.comboLabelText.setVisible(false);
 		this.uiScene.comboText.setVisible(false);
 
-
+		this.uiScene.scoreText.setVisible(false);
+		this.uiScene.scoreAdditionText.setVisible(false);
 	}
 
 	/**
@@ -1838,7 +1850,7 @@ export default class Level extends Phaser.Scene {
 			this.highestCombo = this.combo;
 		}
 
-		if (this.combo > 1)
+		if (this.combo > 1 && !end)
 		{
 			this.uiScene.showComboUI(this.combo);
 			this.sound.play('combo-hit', {volume: (((this.combo - 2) + 0) * 0.07) + 0.4, detune: (this.combo - 2) * 100})
@@ -2346,7 +2358,7 @@ export default class Level extends Phaser.Scene {
 		// this.uiScene.showLevelCompleteText();
 		this.uiScene.showSummaryUI();
 
-		this.comboEnd();
+		// this.comboEnd();
 
 		// +500pts on level 1 & 2
 		// if (this.registry.get('current-level-index') < 2)
@@ -3186,7 +3198,7 @@ export default class Level extends Phaser.Scene {
 		{
 			// this.uiScene.setDebugText(0, `${this.player.stateController.currentState.name}`);
 			this.uiScene.setDebugText(0, `level completed: ${this.registry.get('completed-level-' + this.currentLevelIndex)}`);
-			this.uiScene.setDebugText(1, `combo : ${this.combo}`);
+			this.uiScene.setDebugText(1, `player vel x : ${this.player.body.velocity.x}`);
 			if (this.uiScene.tutorialOffsetTween)
 			{
 				this.uiScene.setDebugText(2, `tutorial tween progress : ${this.uiScene.tutorialOffsetTween.progress}`);

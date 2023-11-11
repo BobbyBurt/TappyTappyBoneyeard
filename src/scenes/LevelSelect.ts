@@ -3,7 +3,7 @@
 
 /* START OF COMPILED CODE */
 
-import Phaser from "phaser";
+import Phaser, { Sound } from "phaser";
 import LevelIconPrefab from "../prefabs/LevelIconPrefab";
 /* START-USER-IMPORTS */
 
@@ -781,6 +781,8 @@ export default class LevelSelect extends Phaser.Scene {
 	private currentHint = 0;
 	private hintTween!: Phaser.Tweens.Tween;
 
+	private music: Phaser.Sound.BaseSound;
+
 	create() {
 
 		this.editorCreate();
@@ -824,30 +826,30 @@ export default class LevelSelect extends Phaser.Scene {
 		}
 
 		// clear save data debug
-		this.input.keyboard.on('keydown-C', () =>
-		{
-			// if (!__DEV__)
-			// {
-			// 	console.debug('returned; dev only');
-			// 	return;
-			// }
+		// this.input.keyboard.on('keydown-C', () =>
+		// {
+		// 	// if (!__DEV__)
+		// 	// {
+		// 	// 	console.debug('returned; dev only');
+		// 	// 	return;
+		// 	// }
 
-			LevelSelect.levelsKey.forEach((value, index) =>
-			{
-				this.registry.set(`top-score: ${value}`, null);
-			});
-			cloudSaves.saveData(this);
-		});
+		// 	LevelSelect.levelsKey.forEach((value, index) =>
+		// 	{
+		// 		this.registry.set(`top-score: ${value}`, null);
+		// 	});
+		// 	cloudSaves.saveData(this);
+		// });
 
 		// load save data debug
-		this.input.keyboard.on('keydown-L', () =>
-		{
-			cloudSaves.loadData(this);
+		// this.input.keyboard.on('keydown-L', () =>
+		// {
+		// 	cloudSaves.loadData(this);
 
-			// this would be better with a status ready callback
+		// 	// this would be better with a status ready callback
 
-			this.setLevelIcons();
-		});
+		// 	this.setLevelIcons();
+		// });
 
 		// award gold debug
 		this.input.keyboard.on('keydown-G', () =>
@@ -863,14 +865,14 @@ export default class LevelSelect extends Phaser.Scene {
 		// unlock level debug
 		this.input.keyboard.on('keydown-U', () =>
 		{
-			// if (__DEV__)
-			// {
+			if (__DEV__)
+			{
 				this.registry.set
 					(`unlocked: ${LevelSelect.levelsKey[this.selectedLevel]}`, true);
 				this.registry.set
 					(`unlocked: ${LevelSelect.levelsKey[this.selectedLevel]}`, true);
 				this.levelIndexUnlockQueue.push(this.selectedLevel);
-			// }
+			}
 		});
 
 		// registry log debug
@@ -881,12 +883,32 @@ export default class LevelSelect extends Phaser.Scene {
 				console.debug(this.registry.list);
 			}
 		});
+		
 
 		// set medal debug
 		this.input.keyboard.on('keydown-Q', () =>
 		{
-			this.registry.set(`top-score: ${LevelSelect.levelsKey[this.selectedLevel]}`,
-			levelScoreMilestones.get(LevelSelect.levelsKey[this.selectedLevel])![0])
+			if (__DEV__)
+			{
+				this.registry.set(`top-score: ${LevelSelect.levelsKey[this.selectedLevel]}`,
+				levelScoreMilestones.get(LevelSelect.levelsKey[this.selectedLevel])![0])
+			}
+		});
+		this.input.keyboard.on('keydown-W', () =>
+		{
+			if (__DEV__)
+			{
+				this.registry.set(`top-score: ${LevelSelect.levelsKey[this.selectedLevel]}`,
+				levelScoreMilestones.get(LevelSelect.levelsKey[this.selectedLevel])![1])
+			}
+		});
+		this.input.keyboard.on('keydown-E', () =>
+		{
+			if (__DEV__)
+			{
+				this.registry.set(`top-score: ${LevelSelect.levelsKey[this.selectedLevel]}`,
+				levelScoreMilestones.get(LevelSelect.levelsKey[this.selectedLevel])![2])
+			}
 		});
 
 		// nav right input - keyboard
@@ -1170,10 +1192,17 @@ export default class LevelSelect extends Phaser.Scene {
 			this.topScoreCheck();
 			this.unlockCheck();
 			this.lastScoreSequence();
+
+			cloudSaves.saveData(this);
+
 		}
 		else
 		{
 			this.setupHints();
+			
+			// music
+			this.music = SoundManager.setLevelSelectMusic(this.music, this);
+
 		}
 	}
 
@@ -1204,7 +1233,7 @@ export default class LevelSelect extends Phaser.Scene {
 		[	
 			`Bombs won't explode on contact with your fists.`,
 			`Try deflecting bombs!`,
-			`Experiment to find ways to rack up big combos.`,
+			`Finding the route to get the highest score is a puzzle.`,
 			`Each problem has multiple approaches you can take.`,
 			`Replay any of the tutorial levels if you ever need a refresher on something.`,
 			`Stuck on a level? You can always return to it later.`
@@ -1213,8 +1242,8 @@ export default class LevelSelect extends Phaser.Scene {
 		[
 			`Umbrella enemies are protected from rain. And diving birds.`,
 			`Wait behind a wall to time your approach against bouncing pogo enemies.`,
-			`Heads up; You'll need <# award> to unlock the last level set.`,
-			`Every enemy is possible to defeat, even if not with direct attacks`,
+			`You'll need 15 silver and 8 gold awards to unlock the last level set.`,
+			`Every enemy is possible to defeat, even if not with direct attacks.`,
 			`Use your new skills to get better scores on old levels!`
 		]
 		let hints7 = 
@@ -1222,10 +1251,11 @@ export default class LevelSelect extends Phaser.Scene {
 			`True gamers have all the gold awards.`,
 			`Gold is awarded for a theoretically perfect run.`,
 			`There are eggs hidden in four of the levels.`,
-			`Look around level 11 for the first secret egg.`,
+			`Look around level 12 for the first secret egg.`,
 			`A secret egg can be found far below a ceiling of mines.`,
 			`A secret egg can be found by flying right, underneath a big platform.`,
-			`Climb above a group of 5 floating enemies, then head left to find a secret egg.`
+			`Climb above a group of 5 floating enemies, then head left to find a secret egg.`,
+			`On at least one level it's possible to score above the gold award milestone...`
 		]
 
 		if (this.registry.get(`top-score: finale`))
@@ -1366,7 +1396,17 @@ export default class LevelSelect extends Phaser.Scene {
 	 */
 	setPreview()
 	{
+		// some calls are redundant. Check if the current and intended image are the same, and return if so.
+		if (this.levelPreviewImage.texture.key === `preview-${LevelSelect.levelsKey[this.selectedLevel]}`)
+		{
+			return;
+		}
+		
 		this.levelPreviewImage.setX(0);
+		if (this.previewTween)
+		{
+			this.previewTween.stop();
+		}
 
 		if (this.registry.get(`top-score: ${LevelSelect.levelsKey[this.selectedLevel]}`) != undefined || __DEV__)
 		{
@@ -1376,10 +1416,6 @@ export default class LevelSelect extends Phaser.Scene {
 				(`preview-${LevelSelect.levelsKey[this.selectedLevel]}`))
 			{
 				// setup tween
-				if (this.previewTween)
-				{
-					this.previewTween.stop();
-				}
 				this.previewTween = this.add.tween
 				({
 					targets: this.levelPreviewImage,
@@ -1673,7 +1709,7 @@ export default class LevelSelect extends Phaser.Scene {
 					_this.scoreText.setText
 						(`New score: ${Math.floor(_this.scoreMeterTween.progress * lastScore)}`);
 					// this.sound.play('reflect', { volume: .3, detune: ( this.scoreMeterTween.getValue() * 3) - 2000})
-					SoundManager.play('bird-egg-lay', this, .2, ( this.scoreMeterTween.getValue() * 10) + 1000);
+					SoundManager.play('bird-egg-lay', this, .1, ( this.scoreMeterTween.getValue() * 10) + 1000);
 				}
 			});
 		}
@@ -1708,6 +1744,9 @@ export default class LevelSelect extends Phaser.Scene {
 			{
 				this.setLevelIcons(this.selectedLevel);
 				this.setupHints();
+
+				// music
+				this.music = SoundManager.setLevelSelectMusic(this.music, this);
 			}
 		});
 	}
@@ -1741,7 +1780,24 @@ export default class LevelSelect extends Phaser.Scene {
 			this.setPreview();
 
 			// this.unlockSequence();
-			this.updateLockedWindowSequence();
+			
+			
+			if (!this.registry.get(`no-more-unlocks`))
+			{
+				this.updateLockedWindowSequence();
+
+				if (this.registry.get(`unlocked: finale`))
+				{
+					this.registry.set(`no-more-unlocks`, true);
+				}
+			}
+			else
+			{
+				// no more unlocks
+
+				// music
+				this.music = SoundManager.setLevelSelectMusic(this.music, this);
+			}
 
 			this.trophyMedalCheck();
 		});
@@ -1774,6 +1830,10 @@ export default class LevelSelect extends Phaser.Scene {
 		{
 			console.debug('return; nothing in queue');
 			this.setupHints();
+
+			// music
+			this.music = SoundManager.setLevelSelectMusic(this.music, this);
+
 			return;
 		}
 
@@ -1800,6 +1860,9 @@ export default class LevelSelect extends Phaser.Scene {
 						this.setLockedWindow(false);
 
 						this.setupHints();
+
+						// music
+						this.music = SoundManager.setLevelSelectMusic(this.music, this);
 
 						this.lockInput = false;
 					});
@@ -1851,7 +1914,7 @@ export default class LevelSelect extends Phaser.Scene {
 	 * @param replacingTopscore or setting first top score (currently unused)
 	 */
 	topScoreGet(replacingTopscore: boolean)
-	{
+	{		
 		console.log('topscore get!');
 
 		// get last & top score
@@ -1882,10 +1945,15 @@ export default class LevelSelect extends Phaser.Scene {
 			console.debug(`new award achieved`);
 		}
 
+		if (lastScore > goldMilestone)
+		{
+			this.game.events.emit('unlock-medal: Muscly Arms');
+		}
+
 		// update registry & cloud save data
 		this.registry.set(`top-score: ${LevelSelect.levelsKey[this.selectedLevel]}`, 
 			lastScore);
-		cloudSaves.saveData(this);
+		// cloudSaves.saveData(this);
 	}
 
 	/**
@@ -2190,8 +2258,8 @@ export default class LevelSelect extends Phaser.Scene {
 		}
 
 		// level lock return
-		// if (!this.registry.get(`unlocked: ${LevelSelect.levelsKey[this.selectedLevel]}`) && !__DEV__)
-		if (false)
+		if (!this.registry.get(`unlocked: ${LevelSelect.levelsKey[this.selectedLevel]}`) && !__DEV__)
+		// if (false)
 		{
 			console.debug('returned; level is locked');
 			return;
@@ -2209,6 +2277,8 @@ export default class LevelSelect extends Phaser.Scene {
 		this.scene.stop(this);
 		this.scene.launch('LevelUI');
 		this.scene.launch('Level');
+
+		this.music.pause();
 	}
 
 	/**

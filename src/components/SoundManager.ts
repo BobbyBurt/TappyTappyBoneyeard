@@ -75,6 +75,33 @@ export default class SoundManager {
 		return musicBS;
 	}
 
+	public static setLevelSelectMusic
+		(musicBS: Phaser.Sound.BaseSound, scene: Phaser.Scene): Phaser.Sound.BaseSound
+	{	
+		// Resume or Destroy
+		if (musicBS !== undefined)
+		{
+			if (musicBS.isPlaying)
+			{
+				return musicBS;
+			}
+
+			musicBS.resume();
+			return musicBS;
+		}
+		else
+		{
+			// Add, Play, Return
+			musicBS = scene.sound.add('level-select', { volume: .7 });
+			if (!(__DEV__ && !this.playMusicInDevMode) && !scene.registry.get('muted'))
+			{
+				musicBS.play({loop: true});
+			}
+			return musicBS;
+		}
+
+	}
+
 	/**
 	 * 
 	 * @param key 

@@ -487,13 +487,6 @@
                 "key": "hard-game"
             },
             {
-                "url": [
-                    "assets/music/Danny Baranowsky - Super Meat Boy! - Digital Special Edition Soundtrack - 10 Rocket Rider (Ch 3 Dark World).mp3"
-                ],
-                "type": "audio",
-                "key": "hard-game"
-            },
-            {
                 "url": "assets/hit-effect-diagonal.png",
                 "type": "image",
                 "key": "hit-effect-diagonal"
@@ -553,17 +546,24 @@
             },
             {
                 "url": [
-                    "assets/music/main-game.mp3"
+                    "assets/music/Like_it_Should.mp3"
                 ],
                 "type": "audio",
                 "key": "main-game"
             },
             {
                 "url": [
-                    "assets/music/menu-TEMP.mp3"
+                    "assets/music/main-game.mp3"
                 ],
                 "type": "audio",
-                "key": "menu"
+                "key": "main-game-2"
+            },
+            {
+                "url": [
+                    "assets/music/menu.mp3"
+                ],
+                "type": "audio",
+                "key": "level-select"
             },
             {
                 "url": "assets/menu-bg.png",
@@ -972,7 +972,7 @@
             },
             {
                 "url": [
-                    "assets/music/tutorial.mp3"
+                    "assets/music/Natural_Infiltration.mp3"
                 ],
                 "type": "audio",
                 "key": "tutorial"
