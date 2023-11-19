@@ -1031,7 +1031,7 @@
             "label": "hintText_1",
             "scope": "CLASS",
             "components": [],
-            "x": 372,
+            "x": 373,
             "y": 168,
             "text": "Fullscreen",
             "font": "nokia",
@@ -1051,20 +1051,6 @@
             "fillColor": "#ffffff",
             "width": 1,
             "height": 4
-        },
-        {
-            "type": "Rectangle",
-            "id": "8c7b7a01-2947-410b-8f0d-920fe9c11015",
-            "label": "hintBack_3",
-            "components": [],
-            "x": 363,
-            "y": 162,
-            "originX": 0,
-            "originY": 0,
-            "isFilled": true,
-            "fillColor": "#ffffff",
-            "width": 4,
-            "height": 1
         },
         {
             "type": "Rectangle",
@@ -1149,6 +1135,52 @@
             "fillColor": "#ffffff",
             "width": 4,
             "height": 1
+        },
+        {
+            "type": "Rectangle",
+            "id": "4f783bd6-ffa5-4f7d-8e30-47624b08b81c",
+            "label": "hintBack_10",
+            "components": [],
+            "x": 363,
+            "y": 162,
+            "originX": 0,
+            "originY": 0,
+            "isFilled": true,
+            "fillColor": "#ffffff",
+            "width": 4,
+            "height": 1
+        },
+        {
+            "type": "Container",
+            "id": "f8d2459c-4eae-4a8f-9f02-194bdf67992e",
+            "label": "optionsMenuContainer",
+            "components": [],
+            "x": 240,
+            "y": 135,
+            "visible": false,
+            "list": [
+                {
+                    "type": "Rectangle",
+                    "id": "d6632c99-2355-425e-8fb5-0b0a32dbe455",
+                    "label": "optionsBgColour",
+                    "components": [],
+                    "isFilled": true,
+                    "fillColor": "#6a4c5d",
+                    "width": 200,
+                    "height": 270
+                },
+                {
+                    "type": "BitmapText",
+                    "id": "baa06b50-4695-4f9e-b1e0-0ce90caa52d1",
+                    "label": "bitmaptext_1",
+                    "components": [],
+                    "y": -111,
+                    "originX": 0.5,
+                    "text": "Options",
+                    "font": "nokia",
+                    "fontSize": -16
+                }
+            ]
         }
     ],
     "plainObjects": [],

@@ -269,6 +269,11 @@
                 "key": "climb"
             },
             {
+                "url": "assets/clown.png",
+                "type": "image",
+                "key": "clown"
+            },
+            {
                 "url": "assets/levels/combo.json",
                 "type": "tilemapTiledJSON",
                 "key": "combo"
@@ -296,6 +301,11 @@
                 "url": "assets/levels/cool-combo.json",
                 "type": "tilemapTiledJSON",
                 "key": "cool-combo"
+            },
+            {
+                "url": "assets/dead-bird.png",
+                "type": "image",
+                "key": "dead-bird"
             },
             {
                 "url": "assets/levels/dive.json",
@@ -387,6 +397,11 @@
                 ],
                 "type": "audio",
                 "key": "fall"
+            },
+            {
+                "url": "assets/fdfdsvsdf.png",
+                "type": "image",
+                "key": "fdfdsvsdf"
             },
             {
                 "url": "assets/levels/rapidfire.json",
@@ -546,6 +561,13 @@
             },
             {
                 "url": [
+                    "assets/music/menu.mp3"
+                ],
+                "type": "audio",
+                "key": "level-select"
+            },
+            {
+                "url": [
                     "assets/music/Like_it_Should.mp3"
                 ],
                 "type": "audio",
@@ -557,13 +579,6 @@
                 ],
                 "type": "audio",
                 "key": "main-game-2"
-            },
-            {
-                "url": [
-                    "assets/music/menu.mp3"
-                ],
-                "type": "audio",
-                "key": "level-select"
             },
             {
                 "url": "assets/menu-bg.png",
@@ -644,6 +659,16 @@
                 "url": "assets/parasol-3.png",
                 "type": "image",
                 "key": "parasol-3"
+            },
+            {
+                "url": "assets/peeing.png",
+                "type": "image",
+                "key": "peeing"
+            },
+            {
+                "url": "assets/phone.png",
+                "type": "image",
+                "key": "phone"
             },
             {
                 "url": "assets/plane.png",
@@ -837,6 +862,11 @@
                 "key": "reflect"
             },
             {
+                "url": "assets/sadfsda.png",
+                "type": "image",
+                "key": "sadfsda"
+            },
+            {
                 "url": "assets/levels/score.json",
                 "type": "tilemapTiledJSON",
                 "key": "score"
@@ -932,6 +962,11 @@
                 "key": "soldierstretch"
             },
             {
+                "url": "assets/svfddfdf.png",
+                "type": "image",
+                "key": "svfddfdf"
+            },
+            {
                 "url": "assets/tapper.png",
                 "frameConfig": {
                     "frameWidth": 32,
@@ -942,6 +977,13 @@
                     "margin": 0
                 },
                 "type": "spritesheet",
+                "key": "tapper"
+            },
+            {
+                "url": [
+                    "assets/music/Tapper-Instrumental.mp3"
+                ],
+                "type": "audio",
                 "key": "tapper"
             },
             {
@@ -959,6 +1001,16 @@
                 "url": "assets/levels/test-map-chain.json",
                 "type": "tilemapTiledJSON",
                 "key": "test-map-chain"
+            },
+            {
+                "url": "assets/textbox_hey.png",
+                "type": "image",
+                "key": "textbox_hey"
+            },
+            {
+                "url": "assets/textbox_wtf.png",
+                "type": "image",
+                "key": "textbox_wtf"
             },
             {
                 "url": "assets/tileset.png",

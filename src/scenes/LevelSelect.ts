@@ -3,7 +3,7 @@
 
 /* START OF COMPILED CODE */
 
-import Phaser, { Sound } from "phaser";
+import Phaser from "phaser";
 import LevelIconPrefab from "../prefabs/LevelIconPrefab";
 /* START-USER-IMPORTS */
 
@@ -429,7 +429,7 @@ export default class LevelSelect extends Phaser.Scene {
 		fullscreenBack.fillColor = 10054789;
 
 		// hintText_1
-		const hintText_1 = this.add.bitmapText(372, 168, "nokia", "Fullscreen");
+		const hintText_1 = this.add.bitmapText(373, 168, "nokia", "Fullscreen");
 		hintText_1.text = "Fullscreen";
 		hintText_1.fontSize = -8;
 		hintText_1.maxWidth = 130;
@@ -438,11 +438,6 @@ export default class LevelSelect extends Phaser.Scene {
 		const hintBack_2 = this.add.rectangle(363, 162, 1, 4);
 		hintBack_2.setOrigin(0, 0);
 		hintBack_2.isFilled = true;
-
-		// hintBack_3
-		const hintBack_3 = this.add.rectangle(363, 162, 4, 1);
-		hintBack_3.setOrigin(0, 0);
-		hintBack_3.isFilled = true;
 
 		// hintBack_4
 		const hintBack_4 = this.add.rectangle(363, 180, 1, 4);
@@ -473,6 +468,28 @@ export default class LevelSelect extends Phaser.Scene {
 		const hintBack_9 = this.add.rectangle(428, 162, 4, 1);
 		hintBack_9.setOrigin(0, 0);
 		hintBack_9.isFilled = true;
+
+		// hintBack_10
+		const hintBack_10 = this.add.rectangle(363, 162, 4, 1);
+		hintBack_10.setOrigin(0, 0);
+		hintBack_10.isFilled = true;
+
+		// optionsMenuContainer
+		const optionsMenuContainer = this.add.container(240, 135);
+		optionsMenuContainer.visible = false;
+
+		// optionsBgColour
+		const optionsBgColour = this.add.rectangle(0, 0, 200, 270);
+		optionsBgColour.isFilled = true;
+		optionsBgColour.fillColor = 6966365;
+		optionsMenuContainer.add(optionsBgColour);
+
+		// bitmaptext_1
+		const bitmaptext_1 = this.add.bitmapText(0, -111, "nokia", "Options");
+		bitmaptext_1.setOrigin(0.5, 0);
+		bitmaptext_1.text = "Options";
+		bitmaptext_1.fontSize = -16;
+		optionsMenuContainer.add(bitmaptext_1);
 
 		// lists
 		const levelBackList: Array<any> = [];
@@ -794,6 +811,8 @@ export default class LevelSelect extends Phaser.Scene {
 
 		this.currentHint = 0;
 
+		this.lockInput = false;
+
 		this.levelIndexUnlockQueue = new Array<number>();
 
 		// this.levelPreviewImage = this.add.image(this.titleText.x, this.titleText.y, `preview-${LevelSelect.levelsKey[this.selectedLevel]}`);
@@ -826,13 +845,16 @@ export default class LevelSelect extends Phaser.Scene {
 		}
 
 		// clear save data debug
-		// this.input.keyboard.on('keydown-C', () =>
-		// {
-		// 	// if (!__DEV__)
-		// 	// {
-		// 	// 	console.debug('returned; dev only');
-		// 	// 	return;
-		// 	// }
+		this.input.keyboard.on('keydown-C', () =>
+		{
+			// if (!__DEV__)
+			// {
+			// 	console.debug('returned; dev only');
+			// 	return;
+			// }
+
+			this.loadCredits();
+		});
 
 		// 	LevelSelect.levelsKey.forEach((value, index) =>
 		// 	{
@@ -883,7 +905,7 @@ export default class LevelSelect extends Phaser.Scene {
 				console.debug(this.registry.list);
 			}
 		});
-		
+
 
 		// set medal debug
 		this.input.keyboard.on('keydown-Q', () =>
@@ -1199,7 +1221,7 @@ export default class LevelSelect extends Phaser.Scene {
 		else
 		{
 			this.setupHints();
-			
+
 			// music
 			this.music = SoundManager.setLevelSelectMusic(this.music, this);
 
@@ -1255,6 +1277,7 @@ export default class LevelSelect extends Phaser.Scene {
 			`A secret egg can be found far below a ceiling of mines.`,
 			`A secret egg can be found by flying right, underneath a big platform.`,
 			`Climb above a group of 5 floating enemies, then head left to find a secret egg.`,
+			`Have you seen the credits sequence yet? Beat all levels to reveal it.`,
 			`On at least one level it's possible to score above the gold award milestone...`
 		]
 
@@ -1401,7 +1424,7 @@ export default class LevelSelect extends Phaser.Scene {
 		{
 			return;
 		}
-		
+
 		this.levelPreviewImage.setX(0);
 		if (this.previewTween)
 		{
@@ -1780,8 +1803,8 @@ export default class LevelSelect extends Phaser.Scene {
 			this.setPreview();
 
 			// this.unlockSequence();
-			
-			
+
+
 			if (!this.registry.get(`no-more-unlocks`))
 			{
 				this.updateLockedWindowSequence();
@@ -2136,6 +2159,18 @@ export default class LevelSelect extends Phaser.Scene {
 			this.game.events.emit('unlock-medal: Thanks for playing!');
 		}
 
+		if (hardLevels === 6 && mainLevels === 7 && tutorialLevels === 9)
+		{
+			if (!this.registry.get('played-credits'))
+			{
+				this.registry.set('played-credits', true);
+				cloudSaves.saveData(this);
+
+				this.loadCredits();
+			}
+		}
+
+
 		console.debug(`count: tutorial: ${tutorialLevels}, main: ${mainLevels}, hard: ${hardLevels}`)
 	}
 
@@ -2279,6 +2314,19 @@ export default class LevelSelect extends Phaser.Scene {
 		this.scene.launch('Level');
 
 		this.music.pause();
+	}
+
+	loadCredits()
+	{
+		this.cameras.main.fadeOut(1000, 255, 234, 240);
+
+		this.time.delayedCall(1500, () =>
+		{
+			this.scene.stop(this);
+			this.scene.launch('Credits');
+	
+			this.music.pause();
+		});
 	}
 
 	/**

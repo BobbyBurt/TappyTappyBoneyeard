@@ -1,0 +1,1331 @@
+{
+    "id": "4dabf918-9d79-418b-b9ad-ecb98d31c3b0",
+    "sceneType": "SCENE",
+    "settings": {
+        "exportClass": true,
+        "autoImport": true,
+        "preloadPackFiles": [],
+        "createMethodName": "editorCreate",
+        "sceneKey": "Credits",
+        "compilerOutputLanguage": "TYPE_SCRIPT",
+        "borderWidth": 480,
+        "borderHeight": 270
+    },
+    "displayList": [
+        {
+            "type": "Rectangle",
+            "id": "074a5567-5745-45ba-84ea-05d3394d6ba5",
+            "label": "bgColour",
+            "components": [],
+            "originX": 0,
+            "originY": 0,
+            "isFilled": true,
+            "fillColor": "#FFD3DF",
+            "width": 480,
+            "height": 2500
+        },
+        {
+            "type": "Image",
+            "id": "40be8d71-93f8-4698-adb9-30446dc627b8",
+            "label": "parallax_Forest",
+            "components": [],
+            "texture": {
+                "key": "Parallax-Forest"
+            },
+            "x": 96,
+            "y": 2245
+        },
+        {
+            "type": "Image",
+            "id": "e7466fd1-4476-45f1-99cb-d92a3035edc6",
+            "label": "parallax_Forest_1",
+            "components": [],
+            "texture": {
+                "key": "Parallax-Forest"
+            },
+            "x": 372,
+            "y": 2245
+        },
+        {
+            "type": "Image",
+            "id": "65705de5-89f9-4166-b29c-ff755ea9a290",
+            "label": "parallax_Backing",
+            "components": [],
+            "texture": {
+                "key": "Parallax-Backing"
+            },
+            "y": 475,
+            "scaleX": 2,
+            "originX": 0,
+            "originY": 0
+        },
+        {
+            "type": "Rectangle",
+            "id": "2090c040-0ba4-440d-9d0a-e2598218166b",
+            "label": "bgColour_1",
+            "components": [],
+            "originX": 0,
+            "originY": 0,
+            "isFilled": true,
+            "fillColor": "#FFEAF0FF",
+            "width": 480,
+            "height": 475
+        },
+        {
+            "type": "Image",
+            "id": "1ea6809b-4a06-4b50-a5a0-0cf9f1210f34",
+            "label": "preview_combo",
+            "components": [],
+            "texture": {
+                "key": "preview-combo"
+            },
+            "x": -3,
+            "y": 564,
+            "originX": 0,
+            "originY": 0
+        },
+        {
+            "type": "BitmapText",
+            "id": "ce133d41-d03b-44aa-ab8b-74cd53d3499a",
+            "label": "bitmaptext_1",
+            "components": [],
+            "x": 177,
+            "y": 543,
+            "tintTopLeft": "#523746",
+            "tintTopRight": "#523746",
+            "tintBottomLeft": "#523746",
+            "tintBottomRight": "#523746",
+            "text": "BobbyBurt",
+            "font": "nokia",
+            "fontSize": -32
+        },
+        {
+            "type": "BitmapText",
+            "id": "401a01a7-79b9-4cad-9704-755e927415fb",
+            "label": "bitmaptext",
+            "components": [],
+            "x": 177,
+            "y": 583,
+            "tintTopLeft": "#523746",
+            "tintTopRight": "#523746",
+            "tintBottomLeft": "#523746",
+            "tintBottomRight": "#523746",
+            "text": "Programming, game design, \nand level design",
+            "font": "nokia",
+            "fontSize": -8
+        },
+        {
+            "type": "Rectangle",
+            "id": "ea58f0e2-474d-4dd6-98ab-71fb1c2df76d",
+            "label": "rectangle_1",
+            "components": [],
+            "y": 561,
+            "originX": 0,
+            "originY": 0,
+            "isFilled": true,
+            "fillColor": "#523746",
+            "width": 162,
+            "height": 4
+        },
+        {
+            "type": "Rectangle",
+            "id": "512e8751-d5b1-4734-a3b0-df5d2b22069d",
+            "label": "rectangle",
+            "components": [],
+            "y": 675,
+            "originX": 0,
+            "originY": 0,
+            "isFilled": true,
+            "fillColor": "#523746",
+            "width": 480,
+            "height": 4
+        },
+        {
+            "type": "Image",
+            "id": "b38d55b2-7231-4bab-8aa2-b87a2cdc0215",
+            "label": "logo",
+            "components": [],
+            "texture": {
+                "key": "logo"
+            },
+            "x": 240,
+            "y": 369,
+            "scaleX": 2,
+            "scaleY": 2
+        },
+        {
+            "type": "Image",
+            "id": "1ab1e032-b5a4-478f-8fa3-4877f95443d4",
+            "label": "preview_combo_1",
+            "components": [],
+            "texture": {
+                "key": "preview-gun-intro"
+            },
+            "x": -3,
+            "y": 774,
+            "originX": 0,
+            "originY": 0
+        },
+        {
+            "type": "Rectangle",
+            "id": "d5e319e1-b271-4046-a9e3-cf8da48d21e2",
+            "label": "rectangle_2",
+            "components": [],
+            "y": 886,
+            "originX": 0,
+            "originY": 0,
+            "isFilled": true,
+            "fillColor": "#523746",
+            "width": 480,
+            "height": 4
+        },
+        {
+            "type": "Rectangle",
+            "id": "a725bcaf-c37d-4a7b-9221-df99e2e3edf1",
+            "label": "rectangle_3",
+            "components": [],
+            "y": 772,
+            "originX": 0,
+            "originY": 0,
+            "isFilled": true,
+            "fillColor": "#523746",
+            "width": 323,
+            "height": 4
+        },
+        {
+            "type": "BitmapText",
+            "id": "d9e3924e-a253-4f69-bcea-c79aee50daab",
+            "label": "bitmaptext_2",
+            "components": [],
+            "x": 50,
+            "y": 865,
+            "tintTopLeft": "#523746",
+            "tintTopRight": "#523746",
+            "tintBottomLeft": "#523746",
+            "tintBottomRight": "#523746",
+            "text": "Pixelart, animation, character design, and game design",
+            "font": "nokia",
+            "align": 2,
+            "fontSize": -8
+        },
+        {
+            "type": "BitmapText",
+            "id": "d7c37dd1-d1a6-4e0e-9442-058f93c54012",
+            "label": "bitmaptext_3",
+            "components": [],
+            "x": 45,
+            "y": 821,
+            "tintTopLeft": "#523746",
+            "tintTopRight": "#523746",
+            "tintBottomLeft": "#523746",
+            "tintBottomRight": "#523746",
+            "text": "ProsciuttoMan",
+            "font": "nokia",
+            "fontSize": -32
+        },
+        {
+            "type": "Rectangle",
+            "id": "b511d97c-8cb4-4ca1-ad35-7ec9026ccd94",
+            "label": "rectangle_4",
+            "components": [],
+            "x": 467,
+            "y": 772,
+            "originX": 0,
+            "originY": 0,
+            "isFilled": true,
+            "fillColor": "#523746",
+            "width": 321,
+            "height": 4
+        },
+        {
+            "type": "Rectangle",
+            "id": "5db9bedf-d115-4259-a5b7-891e0cb0d98c",
+            "label": "rectangle_5",
+            "components": [],
+            "x": 336,
+            "y": 775,
+            "originX": 0,
+            "originY": 0,
+            "isFilled": true,
+            "fillColor": "#FFD3DF",
+            "width": 120,
+            "height": 10
+        },
+        {
+            "type": "Image",
+            "id": "45be397e-1e2b-4533-8721-f6bd24e39c45",
+            "label": "balloon",
+            "components": [],
+            "texture": {
+                "key": "balloon"
+            },
+            "x": 340,
+            "y": 768,
+            "originX": 0,
+            "originY": 0
+        },
+        {
+            "type": "Image",
+            "id": "00b28473-891d-48c5-9c1d-1448e97b38c9",
+            "label": "balloon_1",
+            "components": [],
+            "texture": {
+                "key": "balloon"
+            },
+            "x": 436,
+            "y": 768,
+            "originX": 0,
+            "originY": 0
+        },
+        {
+            "type": "Image",
+            "id": "ee9cb8af-cc41-49d2-b4d9-efd31b9e1995",
+            "label": "preview_combo_2",
+            "components": [],
+            "texture": {
+                "key": "preview-umbrella-intro"
+            },
+            "x": -4,
+            "y": 1419,
+            "originX": 0,
+            "originY": 0
+        },
+        {
+            "type": "Rectangle",
+            "id": "210deeb5-1717-44dd-b32f-2dbdebd203f4",
+            "label": "rectangle_6",
+            "components": [],
+            "y": 1529,
+            "originX": 0,
+            "originY": 0,
+            "isFilled": true,
+            "fillColor": "#523746",
+            "width": 480,
+            "height": 4
+        },
+        {
+            "type": "Rectangle",
+            "id": "648802bc-43c4-4c56-8c06-c3a90a020c00",
+            "label": "rectangle_7",
+            "components": [],
+            "y": 1415,
+            "originX": 0,
+            "originY": 0,
+            "isFilled": true,
+            "fillColor": "#523746",
+            "width": 140,
+            "height": 4
+        },
+        {
+            "type": "BitmapText",
+            "id": "452f523a-8701-4b1b-a060-72455ce175e3",
+            "label": "bitmaptext_4",
+            "components": [],
+            "x": 177,
+            "y": 1434,
+            "tintTopLeft": "#523746",
+            "tintTopRight": "#523746",
+            "tintBottomLeft": "#523746",
+            "tintBottomRight": "#523746",
+            "text": "Promotional art \nand logo design",
+            "font": "nokia",
+            "fontSize": -8
+        },
+        {
+            "type": "BitmapText",
+            "id": "8dabbcb8-9556-4f98-b255-a5880f83cc80",
+            "label": "bitmaptext_5",
+            "components": [],
+            "x": 177,
+            "y": 1397,
+            "tintTopLeft": "#523746",
+            "tintTopRight": "#523746",
+            "tintBottomLeft": "#523746",
+            "tintBottomRight": "#523746",
+            "text": "Broly",
+            "font": "nokia",
+            "fontSize": -32
+        },
+        {
+            "type": "Image",
+            "id": "369c6afa-4e4d-463f-992c-0db51ab3fc9f",
+            "label": "preview_combo_3",
+            "components": [],
+            "texture": {
+                "key": "preview-uppercut"
+            },
+            "x": 245,
+            "y": 1045
+        },
+        {
+            "type": "Rectangle",
+            "id": "c814ee0c-257b-4e4e-8be6-c2e2d4ab58b7",
+            "label": "rectangle_8",
+            "components": [],
+            "y": 1100,
+            "originX": 0,
+            "originY": 0,
+            "isFilled": true,
+            "fillColor": "#523746",
+            "width": 480,
+            "height": 4
+        },
+        {
+            "type": "Rectangle",
+            "id": "7f3b8165-3dc5-4b06-9680-1bb04fb351cd",
+            "label": "rectangle_9",
+            "components": [],
+            "y": 986,
+            "originX": 0,
+            "originY": 0,
+            "isFilled": true,
+            "fillColor": "#523746",
+            "width": 480,
+            "height": 4
+        },
+        {
+            "type": "BitmapText",
+            "id": "a570aa30-66ac-4da0-906f-24441727178f",
+            "label": "bitmaptext_6",
+            "components": [],
+            "x": 26,
+            "y": 1041,
+            "tintTopLeft": "#523746",
+            "tintTopRight": "#523746",
+            "tintBottomLeft": "#523746",
+            "tintBottomRight": "#523746",
+            "text": "Sound Effects and Music:\n\"Natural Infiltration\" \n\"Like It Should\" \n\"Tapper\"\n\"Bird Title\"",
+            "font": "nokia",
+            "align": 1,
+            "fontSize": -8
+        },
+        {
+            "type": "BitmapText",
+            "id": "d368aed5-0df7-4582-bd28-8664e567f752",
+            "label": "bitmaptext_7",
+            "components": [],
+            "x": 49,
+            "y": 999,
+            "tintTopLeft": "#523746",
+            "tintTopRight": "#523746",
+            "tintBottomLeft": "#523746",
+            "tintBottomRight": "#523746",
+            "text": "Dry",
+            "font": "nokia",
+            "fontSize": -32
+        },
+        {
+            "type": "Image",
+            "id": "d4f65f6b-6f35-4d29-8816-6473a6412a6b",
+            "label": "preview_combo_4",
+            "components": [],
+            "texture": {
+                "key": "preview-dive-practice"
+            },
+            "x": -2,
+            "y": 1203,
+            "originX": 0,
+            "originY": 0
+        },
+        {
+            "type": "Rectangle",
+            "id": "3377591b-044e-4fd9-bcbf-400bcedbe3b9",
+            "label": "rectangle_10",
+            "components": [],
+            "y": 1315,
+            "originX": 0,
+            "originY": 0,
+            "isFilled": true,
+            "fillColor": "#523746",
+            "width": 480,
+            "height": 4
+        },
+        {
+            "type": "Rectangle",
+            "id": "1a451fde-c205-40df-9ad1-91304e389ee6",
+            "label": "rectangle_11",
+            "components": [],
+            "y": 1201,
+            "originX": 0,
+            "originY": 0,
+            "isFilled": true,
+            "fillColor": "#523746",
+            "width": 480,
+            "height": 4
+        },
+        {
+            "type": "BitmapText",
+            "id": "77424bdb-ea02-4660-86c2-b768653d16d1",
+            "label": "bitmaptext_8",
+            "components": [],
+            "x": 257,
+            "y": 1277,
+            "tintTopLeft": "#523746",
+            "tintTopRight": "#523746",
+            "tintBottomLeft": "#523746",
+            "tintBottomRight": "#523746",
+            "text": "Music: \n\"Crusher Machina\"",
+            "font": "nokia",
+            "fontSize": -8
+        },
+        {
+            "type": "BitmapText",
+            "id": "ecaa6cbc-aa5a-4da1-a89e-830917185cea",
+            "label": "bitmaptext_9",
+            "components": [],
+            "x": 20,
+            "y": 1263,
+            "tintTopLeft": "#523746",
+            "tintTopRight": "#523746",
+            "tintBottomLeft": "#523746",
+            "tintBottomRight": "#523746",
+            "text": "Shane Mesa",
+            "font": "nokia",
+            "fontSize": -32
+        },
+        {
+            "type": "Rectangle",
+            "id": "06a2d916-d6dc-45da-b9c9-81ad533356cf",
+            "label": "rectangle_12",
+            "components": [],
+            "x": 324,
+            "y": 1022,
+            "originX": 0,
+            "originY": 0,
+            "isFilled": true,
+            "fillColor": "#F4919CFF",
+            "width": 30,
+            "height": 35
+        },
+        {
+            "type": "Image",
+            "id": "45f6d6ab-c172-4f15-8bf7-201a16ac012c",
+            "label": "parallax_Industry",
+            "components": [],
+            "texture": {
+                "key": "Parallax-Industry"
+            },
+            "x": 337,
+            "y": 1694,
+            "tintTopLeft": "#FFADB6",
+            "tintTopRight": "#FFADB6",
+            "tintBottomLeft": "#FFADB6",
+            "tintBottomRight": "#FFADB6",
+            "tintFill": true
+        },
+        {
+            "type": "Image",
+            "id": "3d565e99-8c2b-42ae-ab9b-99f80338c210",
+            "label": "parallax_Industry_1",
+            "components": [],
+            "texture": {
+                "key": "Parallax-Industry"
+            },
+            "x": 17,
+            "y": 1694,
+            "tintTopLeft": "#FFADB6",
+            "tintTopRight": "#FFADB6",
+            "tintBottomLeft": "#FFADB6",
+            "tintBottomRight": "#FFADB6",
+            "tintFill": true
+        },
+        {
+            "type": "Image",
+            "id": "50d35a3e-562c-46b7-b83a-970ea8fcc519",
+            "label": "preview_combo_5",
+            "components": [],
+            "texture": {
+                "key": "preview-mine-enemy"
+            },
+            "x": 245,
+            "y": 1730
+        },
+        {
+            "type": "Rectangle",
+            "id": "e1d2f20c-4887-43c8-a1a6-f8fbef5780d3",
+            "label": "rectangle_13",
+            "components": [],
+            "y": 1785,
+            "originX": 0,
+            "originY": 0,
+            "isFilled": true,
+            "fillColor": "#523746",
+            "width": 480,
+            "height": 4
+        },
+        {
+            "type": "BitmapText",
+            "id": "72418d72-dcaf-4ea7-ba04-03ed59b9ac40",
+            "label": "bitmaptext_10",
+            "components": [],
+            "x": 205,
+            "y": 1726,
+            "tintTopLeft": "#523746",
+            "tintTopRight": "#523746",
+            "tintBottomLeft": "#523746",
+            "tintBottomRight": "#523746",
+            "text": "Concept art",
+            "font": "nokia",
+            "fontSize": -8
+        },
+        {
+            "type": "BitmapText",
+            "id": "e2cf6594-e394-4c1b-9188-02b516e2f0d7",
+            "label": "bitmaptext_11",
+            "components": [],
+            "x": 53,
+            "y": 1690,
+            "tintTopLeft": "#523746",
+            "tintTopRight": "#523746",
+            "tintBottomLeft": "#523746",
+            "tintBottomRight": "#523746",
+            "text": "Chupabara",
+            "font": "nokia",
+            "fontSize": -32
+        },
+        {
+            "type": "Image",
+            "id": "046f7540-c2a4-4c96-a73c-60ef54312962",
+            "label": "balloon_2",
+            "components": [],
+            "texture": {
+                "key": "balloon"
+            },
+            "x": 455,
+            "y": 1667,
+            "originX": 0,
+            "originY": 0
+        },
+        {
+            "type": "Rectangle",
+            "id": "b56ca649-a640-4184-b13d-7910694a98a2",
+            "label": "rectangle_14",
+            "components": [],
+            "x": 398,
+            "y": 1447,
+            "originX": 0,
+            "originY": 0,
+            "isFilled": true,
+            "fillColor": "#FFD3DF",
+            "width": 20,
+            "height": 20
+        },
+        {
+            "type": "BitmapText",
+            "id": "5ee9dd83-004a-44bd-b919-351606d121e3",
+            "label": "bitmaptext_12",
+            "components": [],
+            "x": 240,
+            "y": 1877,
+            "originX": 0.5,
+            "tintTopLeft": "#523746",
+            "tintTopRight": "#523746",
+            "tintBottomLeft": "#523746",
+            "tintBottomRight": "#523746",
+            "text": "Playtesting and feedback:",
+            "font": "nokia",
+            "fontSize": -8
+        },
+        {
+            "type": "BitmapText",
+            "id": "a680e0bd-d47c-46cd-9519-38e6dd160b23",
+            "label": "bitmaptext_13",
+            "components": [],
+            "x": 177,
+            "y": 1894,
+            "originX": 0.5,
+            "tintTopLeft": "#523746",
+            "tintTopRight": "#523746",
+            "tintBottomLeft": "#523746",
+            "tintBottomRight": "#523746",
+            "text": "DavidBurt\noctopus58\nzzox",
+            "font": "nokia",
+            "align": 1,
+            "fontSize": -16
+        },
+        {
+            "type": "BitmapText",
+            "id": "08d6a712-d390-4802-92c6-5f0bf13399fc",
+            "label": "bitmaptext_17",
+            "components": [],
+            "x": 240,
+            "y": 2112,
+            "originX": 0.5,
+            "text": "Thanks for playing!",
+            "font": "nokia",
+            "fontSize": -32
+        },
+        {
+            "type": "BitmapText",
+            "id": "6d4f672f-6ccd-43fe-b824-bbe8d7d75904",
+            "label": "bitmaptext_14",
+            "components": [],
+            "x": 240,
+            "y": 2108,
+            "originX": 0.5,
+            "tintTopLeft": "#523746",
+            "tintTopRight": "#523746",
+            "tintBottomLeft": "#523746",
+            "tintBottomRight": "#523746",
+            "text": "Thanks for playing!",
+            "font": "nokia",
+            "fontSize": -32
+        },
+        {
+            "type": "Image",
+            "id": "ac5025f8-65bf-45b8-a05b-5f2f3edc6bc4",
+            "label": "bird1victory",
+            "components": [],
+            "texture": {
+                "key": "bird1victory"
+            },
+            "x": 109,
+            "y": 1443,
+            "originX": 0,
+            "originY": 0
+        },
+        {
+            "type": "BitmapText",
+            "id": "df8eebe7-96be-4a18-83a8-81e7d45ed59b",
+            "label": "returnText",
+            "scope": "CLASS",
+            "components": [],
+            "x": 240,
+            "y": 2246,
+            "originX": 0.5,
+            "visible": false,
+            "tintTopLeft": "#523746",
+            "tintTopRight": "#523746",
+            "tintBottomLeft": "#523746",
+            "tintBottomRight": "#523746",
+            "text": "Click / tap to return",
+            "font": "nokia",
+            "fontSize": -8
+        },
+        {
+            "type": "BitmapText",
+            "id": "727cc276-718f-4b60-ae68-1c4895d29318",
+            "label": "bitmaptext_16",
+            "components": [],
+            "x": 301,
+            "y": 1894,
+            "originX": 0.5,
+            "tintTopLeft": "#523746",
+            "tintTopRight": "#523746",
+            "tintBottomLeft": "#523746",
+            "tintBottomRight": "#523746",
+            "text": "MigMoog\nMrPakoMan\nGeoKureli",
+            "font": "nokia",
+            "align": 1,
+            "fontSize": -16
+        },
+        {
+            "type": "Image",
+            "id": "af48baaf-9636-4847-b1db-2a6b57974d56",
+            "label": "peeing",
+            "components": [],
+            "texture": {
+                "key": "peeing"
+            },
+            "x": 252,
+            "y": 630
+        },
+        {
+            "type": "Rectangle",
+            "id": "ff4edf51-ebf2-4c89-991d-ea1892876e8c",
+            "label": "rectangle_16",
+            "components": [],
+            "x": 262,
+            "y": 610,
+            "originX": 0,
+            "originY": 0,
+            "isFilled": true,
+            "fillColor": "#FFD3DF",
+            "width": 11,
+            "height": 30
+        },
+        {
+            "type": "Image",
+            "id": "cd950af9-f5a8-4a80-a161-6634ee7e9791",
+            "label": "bird3cling_exhausted",
+            "components": [],
+            "texture": {
+                "key": "bird1cling-exhausted"
+            },
+            "x": 282,
+            "y": 631
+        },
+        {
+            "type": "Image",
+            "id": "ae2f6db4-7744-41f8-96cd-19a9803a6d7d",
+            "label": "svfddfdf",
+            "components": [],
+            "texture": {
+                "key": "svfddfdf"
+            },
+            "x": 162,
+            "y": 951
+        },
+        {
+            "type": "Image",
+            "id": "5d9205f6-5664-4496-937d-0d54ad99369d",
+            "label": "dead_bird",
+            "components": [],
+            "texture": {
+                "key": "dead-bird"
+            },
+            "x": 305,
+            "y": 1045
+        },
+        {
+            "type": "Rectangle",
+            "id": "5bc59e51-5cd1-48a9-b13a-41c608945d48",
+            "label": "rectangle_15",
+            "components": [],
+            "x": 247,
+            "y": 1211,
+            "originX": 0,
+            "originY": 0,
+            "isFilled": true,
+            "fillColor": "#F4919CFF",
+            "width": 30,
+            "height": 20
+        },
+        {
+            "type": "Image",
+            "id": "c714e375-631a-4573-a8d3-61d4a80faa28",
+            "label": "phone",
+            "components": [],
+            "texture": {
+                "key": "phone"
+            },
+            "x": 269,
+            "y": 1221
+        },
+        {
+            "type": "Rectangle",
+            "id": "633e98d7-c083-4c27-9a6f-2989041954e8",
+            "label": "rectangle_17",
+            "components": [],
+            "x": 260,
+            "y": 1211,
+            "originX": 0,
+            "originY": 0,
+            "isFilled": true,
+            "fillColor": "#F4919CFF",
+            "width": 15,
+            "height": 20
+        },
+        {
+            "type": "Image",
+            "id": "14edb4db-4b07-4f80-814e-dc6ca70ff6da",
+            "label": "textbox_hey",
+            "components": [],
+            "texture": {
+                "key": "textbox_hey"
+            },
+            "x": 379,
+            "y": 1234
+        },
+        {
+            "type": "Image",
+            "id": "5da856f6-926f-4269-9c3e-9293aa2eb420",
+            "label": "bomb",
+            "components": [],
+            "texture": {
+                "key": "bomb"
+            },
+            "x": 285,
+            "y": 1027
+        },
+        {
+            "type": "Image",
+            "id": "c68d291c-259d-4dde-ab1f-8a6a85a00f02",
+            "label": "bomb_1",
+            "components": [],
+            "texture": {
+                "key": "bomb"
+            },
+            "x": 305,
+            "y": 1013
+        },
+        {
+            "type": "Image",
+            "id": "cb5bbd2d-3826-4f48-bdd7-5a8628ef3a32",
+            "label": "bomb_2",
+            "components": [],
+            "texture": {
+                "key": "bomb"
+            },
+            "x": 326,
+            "y": 1029
+        },
+        {
+            "type": "Image",
+            "id": "42a0c0e6-dd9d-4525-bf5b-172b7920de4c",
+            "label": "dollar_1",
+            "components": [],
+            "texture": {
+                "key": "dollar-2"
+            },
+            "x": 25,
+            "y": 1810,
+            "originX": 0,
+            "originY": 0
+        },
+        {
+            "type": "Image",
+            "id": "d8719c79-4a3e-4e21-a0d7-bda59a24acb0",
+            "label": "dollar_2",
+            "components": [],
+            "texture": {
+                "key": "dollar-2"
+            },
+            "x": 25,
+            "y": 1841,
+            "originX": 0,
+            "originY": 0
+        },
+        {
+            "type": "Image",
+            "id": "ca2ea94b-1585-467a-a13d-70d19b259ed4",
+            "label": "dollar_3",
+            "components": [],
+            "texture": {
+                "key": "dollar-2"
+            },
+            "x": 25,
+            "y": 1872,
+            "originX": 0,
+            "originY": 0
+        },
+        {
+            "type": "Image",
+            "id": "ba654071-4a0d-4de4-bca0-cb4216ec5a37",
+            "label": "dollar_4",
+            "components": [],
+            "texture": {
+                "key": "dollar-2"
+            },
+            "x": 25,
+            "y": 1903,
+            "originX": 0,
+            "originY": 0
+        },
+        {
+            "type": "Image",
+            "id": "1e55e8a5-9e0c-4923-b1e8-ef48605773e7",
+            "label": "dollar_5",
+            "components": [],
+            "texture": {
+                "key": "dollar-2"
+            },
+            "x": 25,
+            "y": 1934,
+            "originX": 0,
+            "originY": 0
+        },
+        {
+            "type": "Image",
+            "id": "d36cc200-71f8-424e-933f-9631ee162731",
+            "label": "dollar_6",
+            "components": [],
+            "texture": {
+                "key": "dollar-2"
+            },
+            "x": 25,
+            "y": 1965,
+            "originX": 0,
+            "originY": 0
+        },
+        {
+            "type": "Image",
+            "id": "ac37725f-8209-4ea2-89a0-66e1cba248d7",
+            "label": "dollar",
+            "components": [],
+            "texture": {
+                "key": "dollar"
+            },
+            "x": 385,
+            "y": 1810,
+            "originX": 0,
+            "originY": 0
+        },
+        {
+            "type": "Image",
+            "id": "01bcf770-5c99-49c0-a47c-3ef3207f553d",
+            "label": "dollar_7",
+            "components": [],
+            "texture": {
+                "key": "dollar"
+            },
+            "x": 385,
+            "y": 1965,
+            "originX": 0,
+            "originY": 0
+        },
+        {
+            "type": "Image",
+            "id": "2222ade2-75c8-45fd-aee9-a7897a8d4515",
+            "label": "dollar_8",
+            "components": [],
+            "texture": {
+                "key": "dollar"
+            },
+            "x": 385,
+            "y": 1934,
+            "originX": 0,
+            "originY": 0
+        },
+        {
+            "type": "Image",
+            "id": "ba8492c5-fdb2-4021-a5c9-b94dd7a6e2bb",
+            "label": "dollar_9",
+            "components": [],
+            "texture": {
+                "key": "dollar"
+            },
+            "x": 385,
+            "y": 1903,
+            "originX": 0,
+            "originY": 0
+        },
+        {
+            "type": "Image",
+            "id": "5b7bb98d-70b4-4246-bcf6-4e651e14aee6",
+            "label": "dollar_10",
+            "components": [],
+            "texture": {
+                "key": "dollar"
+            },
+            "x": 385,
+            "y": 1872,
+            "originX": 0,
+            "originY": 0
+        },
+        {
+            "type": "Image",
+            "id": "373157ba-bfdf-4c53-a379-7d301e070f14",
+            "label": "dollar_11",
+            "components": [],
+            "texture": {
+                "key": "dollar"
+            },
+            "x": 385,
+            "y": 1841,
+            "originX": 0,
+            "originY": 0
+        },
+        {
+            "type": "BitmapText",
+            "id": "5cb44430-e47b-4b59-9b55-3988d21742c0",
+            "label": "bitmaptext_18",
+            "components": [],
+            "x": 240,
+            "y": 1955,
+            "originX": 0.5,
+            "tintTopLeft": "#523746",
+            "tintTopRight": "#523746",
+            "tintBottomLeft": "#523746",
+            "tintBottomRight": "#523746",
+            "text": "MSGhero",
+            "font": "nokia",
+            "align": 1,
+            "fontSize": -16
+        },
+        {
+            "type": "Image",
+            "id": "282dc410-741f-43dd-b879-817624ab9b4b",
+            "label": "soldierfalling",
+            "components": [],
+            "texture": {
+                "key": "soldierfalling"
+            },
+            "x": 271,
+            "y": 1769
+        },
+        {
+            "type": "Image",
+            "id": "544162c4-6959-4ff1-8aae-971a5de21451",
+            "label": "bomb_mask",
+            "components": [],
+            "texture": {
+                "key": "bomb-mask"
+            },
+            "x": 315,
+            "y": 1757
+        },
+        {
+            "type": "Image",
+            "id": "296d0115-cce5-4dfa-adf3-ffa8ce0ca0df",
+            "label": "bomb_mask_1",
+            "components": [],
+            "texture": {
+                "key": "bomb-mask"
+            },
+            "x": 312,
+            "y": 1745
+        },
+        {
+            "type": "Image",
+            "id": "6b838188-55bb-4c4d-b39a-ab71beaa27f0",
+            "label": "bomb_mask_2",
+            "components": [],
+            "texture": {
+                "key": "bomb-mask"
+            },
+            "x": 305,
+            "y": 1734
+        },
+        {
+            "type": "Image",
+            "id": "e9c01a33-258a-45d8-a03c-524c4f31b3c4",
+            "label": "textbox_wtf",
+            "components": [],
+            "texture": {
+                "key": "textbox_wtf"
+            },
+            "x": 283,
+            "y": 1745
+        },
+        {
+            "type": "Image",
+            "id": "446b5981-526f-4f1a-9e47-5a8898b1ad22",
+            "label": "dive_icon",
+            "components": [],
+            "texture": {
+                "key": "dive-icon"
+            },
+            "x": 12,
+            "y": 1332,
+            "originX": 0,
+            "originY": 0
+        },
+        {
+            "type": "Image",
+            "id": "fcb8cce0-0222-4654-bb8f-e0462eff42b1",
+            "label": "bomb_mask_3",
+            "components": [],
+            "texture": {
+                "key": "bomb-mask"
+            },
+            "x": 316,
+            "y": 1756
+        },
+        {
+            "type": "Image",
+            "id": "4f57c74b-1a3e-4701-bad2-c95e4200ed1d",
+            "label": "dive_icon_1",
+            "components": [],
+            "texture": {
+                "key": "dive-icon"
+            },
+            "x": 31,
+            "y": 1332,
+            "originX": 0,
+            "originY": 0
+        },
+        {
+            "type": "Image",
+            "id": "998744f3-ef5b-4633-a65c-2ca859663f76",
+            "label": "dive_icon_2",
+            "components": [],
+            "texture": {
+                "key": "dive-icon"
+            },
+            "x": 50,
+            "y": 1332,
+            "originX": 0,
+            "originY": 0
+        },
+        {
+            "type": "Image",
+            "id": "7fe5a43f-a18e-4388-a2fb-25c4f2763235",
+            "label": "dive_icon_3",
+            "components": [],
+            "texture": {
+                "key": "dive-icon"
+            },
+            "x": 69,
+            "y": 1332,
+            "originX": 0,
+            "originY": 0
+        },
+        {
+            "type": "Image",
+            "id": "6a06e1e9-0d38-462f-933a-2aa749cd4d79",
+            "label": "fist_icon",
+            "components": [],
+            "texture": {
+                "key": "fist-icon"
+            },
+            "x": 16,
+            "y": 1386,
+            "originX": 0,
+            "originY": 0
+        },
+        {
+            "type": "Image",
+            "id": "b8b0ab74-ad48-400c-8c29-a539c668ad19",
+            "label": "up_icon",
+            "components": [],
+            "texture": {
+                "key": "up-icon"
+            },
+            "x": 452,
+            "y": 1384,
+            "originX": 0,
+            "originY": 0
+        },
+        {
+            "type": "Image",
+            "id": "a648a96f-41c1-4655-a76b-1b9cba32f5a5",
+            "label": "up_icon_1",
+            "components": [],
+            "texture": {
+                "key": "up-icon"
+            },
+            "x": 452,
+            "y": 1363,
+            "originX": 0,
+            "originY": 0
+        },
+        {
+            "type": "Image",
+            "id": "ecc2b14b-163c-4a81-9a9e-731c38ea73cb",
+            "label": "up_icon_2",
+            "components": [],
+            "texture": {
+                "key": "up-icon"
+            },
+            "x": 452,
+            "y": 1342,
+            "originX": 0,
+            "originY": 0
+        },
+        {
+            "type": "Image",
+            "id": "b06316eb-8f73-43d2-87f6-1dba3269c79d",
+            "label": "clown",
+            "components": [],
+            "texture": {
+                "key": "clown"
+            },
+            "x": 357,
+            "y": 2093,
+            "originX": 0,
+            "originY": 0
+        },
+        {
+            "type": "Image",
+            "id": "363fb075-c010-466b-96e4-add273c350ae",
+            "label": "balloon_3",
+            "components": [],
+            "texture": {
+                "key": "balloon"
+            },
+            "x": 353,
+            "y": 2064,
+            "originX": 0,
+            "originY": 0
+        },
+        {
+            "type": "Image",
+            "id": "b115f97a-ecc1-4133-b654-09237c52c982",
+            "label": "balloon_4",
+            "components": [],
+            "texture": {
+                "key": "balloon"
+            },
+            "x": 363,
+            "y": 2069,
+            "originX": 0,
+            "originY": 0
+        },
+        {
+            "type": "Image",
+            "id": "3291648a-df2b-4df4-8993-8c413f04b370",
+            "label": "balloon_5",
+            "components": [],
+            "texture": {
+                "key": "balloon"
+            },
+            "x": 357,
+            "y": 2073,
+            "originX": 0,
+            "originY": 0
+        },
+        {
+            "type": "Image",
+            "id": "94f775c4-eeb2-46c9-ad8b-60f131fab223",
+            "label": "sadfsda",
+            "components": [],
+            "texture": {
+                "key": "sadfsda"
+            },
+            "x": 20,
+            "y": 1148,
+            "originX": 0,
+            "originY": 0
+        },
+        {
+            "type": "Image",
+            "id": "68a0ef3a-265d-4a94-808c-5a98107460eb",
+            "label": "sadfsda_1",
+            "components": [],
+            "texture": {
+                "key": "sadfsda"
+            },
+            "x": 40,
+            "y": 1148,
+            "originX": 0,
+            "originY": 0
+        },
+        {
+            "type": "Image",
+            "id": "d8f32426-6846-49ce-bc1a-66db189c8d2a",
+            "label": "sadfsda_2",
+            "components": [],
+            "texture": {
+                "key": "fdfdsvsdf"
+            },
+            "x": 60,
+            "y": 1148,
+            "originX": 0,
+            "originY": 0
+        },
+        {
+            "type": "Image",
+            "id": "c7764dfe-6eda-4ef2-8106-096ec4c281e5",
+            "label": "sadfsda_3",
+            "components": [],
+            "texture": {
+                "key": "fdfdsvsdf"
+            },
+            "x": 80,
+            "y": 1148,
+            "originX": 0,
+            "originY": 0
+        },
+        {
+            "type": "Image",
+            "id": "d21e0f1c-7582-4e0b-807b-85a56adfb53e",
+            "label": "sadfsda_4",
+            "components": [],
+            "texture": {
+                "key": "fdfdsvsdf"
+            },
+            "x": 100,
+            "y": 1148,
+            "originX": 0,
+            "originY": 0
+        }
+    ],
+    "plainObjects": [],
+    "meta": {
+        "app": "Phaser Editor 2D - Scene Editor",
+        "url": "https://phasereditor2d.com",
+        "contentType": "phasereditor2d.core.scene.SceneContentType",
+        "version": 3
+    }
+}

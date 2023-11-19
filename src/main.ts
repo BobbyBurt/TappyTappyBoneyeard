@@ -1,6 +1,7 @@
 import cloudSaves from './API/cloudSaves';
 import medalScene from './API/medalScene';
 import { newgroundsIOWrapper } from './API/newgroundsIOWrapper';
+import Credits from './scenes/Credits';
 import Level from './scenes/Level';
 import LevelSelect from './scenes/LevelSelect';
 import LevelUI from './scenes/LevelUI';
@@ -15,7 +16,7 @@ window.addEventListener('load', function ()
 	{
 		title: 'Tappy Tappy Boneyard',
 		url: 'https://www.newgrounds.com/projects/games/1923225/preview',
-		version: '23 release',
+		version: '24 release',
 		
 	// visuals
 		type: Phaser.AUTO,
@@ -78,6 +79,7 @@ window.addEventListener('load', function ()
 	});
 	
 	game.scene.add("Preload", Preload);
+	game.scene.add("Credits", Credits);
 	game.scene.add("Level", Level);
 	game.scene.add("LevelSelect", LevelSelect);
 	game.scene.add("Titlescreen", Titlescreen);
