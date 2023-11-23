@@ -18,3 +18,9 @@ Thanks to NG commentors for calling attention to these issues.
 
 - Added a credits sequence with new music and visuals.
 - Added a hint about the credits sequence.
+
+## Version 25 (patch 2) - Nov 18 2023
+
+### Fixed
+
+- Fixed an issue that caused the credits sequence to replay.

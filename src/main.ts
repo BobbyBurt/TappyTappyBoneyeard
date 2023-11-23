@@ -16,7 +16,7 @@ window.addEventListener('load', function ()
 	{
 		title: 'Tappy Tappy Boneyard',
 		url: 'https://www.newgrounds.com/projects/games/1923225/preview',
-		version: '24 release',
+		version: '25 release',
 		
 	// visuals
 		type: Phaser.AUTO,
@@ -134,6 +134,7 @@ class Boot extends Phaser.Scene
 		dataKeys.push(`got-egg: mine-wall`);
 
 		dataKeys.push(`no-more-unlocks`);
+		dataKeys.push('played-credits');
 
 		cloudSaves.setDataKeys(dataKeys);
 		// cloudSaves.setDataKeys([
