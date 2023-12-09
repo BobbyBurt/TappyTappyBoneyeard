@@ -24,3 +24,7 @@ Thanks to NG commentors for calling attention to these issues.
 ### Fixed
 
 - Fixed an issue that caused the credits sequence to replay.
+
+## Version 26 (update 2)
+
+- Updated tutorial highlighting 

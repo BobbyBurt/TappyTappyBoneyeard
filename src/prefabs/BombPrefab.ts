@@ -31,6 +31,8 @@ export default class BombPrefab extends Phaser.GameObjects.Image {
 
 		/* START-USER-CTR-CODE */
 
+		this.ninja = (this.scene.registry.get('ninja') ? '_1' : '');
+
 		/* END-USER-CTR-CODE */
 	}
 
@@ -47,6 +49,8 @@ export default class BombPrefab extends Phaser.GameObjects.Image {
 	/** If true, tilemap collisions trigger explosion. */
 	public punched: boolean;
 
+	private ninja = '';
+
 	/** asdf */
 	appear(enemy: EnemyPrefab): void
 	{
@@ -57,7 +61,7 @@ export default class BombPrefab extends Phaser.GameObjects.Image {
 		this.fuseVisualTimer = this.scene.time.addEvent({delay: 1})
 		this.ignoreTimer = this.scene.time.addEvent({delay: 400});
 
-		this.setTexture('bomb');
+		this.setTexture('bomb' + this.ninja);
 		this.clearTint();
 
 		this.setActive(true);

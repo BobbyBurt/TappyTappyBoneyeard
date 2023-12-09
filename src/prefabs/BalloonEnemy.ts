@@ -34,8 +34,10 @@ export default class BalloonEnemy extends EnemyPrefab {
 
 		this.originalPosition.setTo(this.x, this.y);
 
+		let ninja = (this.scene.game.registry.get('ninja') ? '_1' : '');
+
 	// create balloon
-		this.balloon = this.scene.add.image(this.x, this.y - 30, 'balloon');
+		this.balloon = this.scene.add.image(this.x, this.y - 30, 'balloon' + ninja);
 		this.scene.physics.add.existing(this.balloon);
 		this._scene.mainLayer.add(this.balloon);
 		this.balloon.setDepth(-11);
@@ -50,7 +52,7 @@ export default class BalloonEnemy extends EnemyPrefab {
 			key: 'idle',
 			frames:
 			[
-				{ key: 'soldieronballoon' }
+				{ key: 'soldieronballoon' + ninja }
 			],
 			frameRate: 16,
 			repeat: -1

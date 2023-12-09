@@ -6,7 +6,9 @@
         "autoImport": true,
         "preloadMethodName": "editorPreload",
         "preloadPackFiles": [
-            "starter-template-basic-typescript/assets/asset-pack.json"
+            "TappyTappyBoneyeard-source/public/assets/level-pack/ninja-level-visuals-asset-pack.json",
+            "TappyTappyBoneyeard-source/public/assets/asset-pack.json",
+            "TappyTappyBoneyeard-source/public/assets/main-level-visuals-asset-pack.json"
         ],
         "createMethodName": "editorCreate",
         "sceneKey": "Preload",
@@ -68,6 +70,7 @@
             "type": "BitmapText",
             "id": "4328f21b-07e1-4f13-abb7-8f792f3223c6",
             "label": "progress_1",
+            "scope": "CLASS",
             "components": [],
             "x": 240,
             "y": 197,

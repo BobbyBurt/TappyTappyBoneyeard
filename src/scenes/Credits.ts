@@ -88,7 +88,7 @@ export default class Credits extends Phaser.Scene {
 		preview_combo_1.setOrigin(0, 0);
 
 		// rectangle_2
-		const rectangle_2 = this.add.rectangle(0, 886, 480, 4);
+		const rectangle_2 = this.add.rectangle(0, 885, 480, 4);
 		rectangle_2.setOrigin(0, 0);
 		rectangle_2.isFilled = true;
 		rectangle_2.fillColor = 5388102;
@@ -211,7 +211,7 @@ export default class Credits extends Phaser.Scene {
 		preview_combo_4.setOrigin(0, 0);
 
 		// rectangle_10
-		const rectangle_10 = this.add.rectangle(0, 1315, 480, 4);
+		const rectangle_10 = this.add.rectangle(0, 1312, 480, 4);
 		rectangle_10.setOrigin(0, 0);
 		rectangle_10.isFilled = true;
 		rectangle_10.fillColor = 5388102;
@@ -611,7 +611,7 @@ export default class Credits extends Phaser.Scene {
 
 		LevelSelect.levelSelectEntry = 'titlescreen';
 		this.scene.launch('LevelSelect');
-		
+
 	}
 
 	/* END-USER-CODE */

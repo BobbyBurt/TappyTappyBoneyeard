@@ -127,10 +127,14 @@ export default class EnemyPrefab extends Phaser.GameObjects.Sprite {
 		return this.scene as Level;
 	}
 
+	private ninja = '';
+
 	/** update which runs on all enemy classes. Each enemy class has it's own start() for specific
 	 *  setup */
 	private enemyStart()
 	{	
+		this.ninja = (this.scene.game.registry.get('ninja') ? '_1' : '');
+		
 		this.setScale(1);
 		this.y -= 2;
 		this.body.setAllowGravity(false);
@@ -346,20 +350,20 @@ export default class EnemyPrefab extends Phaser.GameObjects.Sprite {
 	{
 		SoundManager.play('boing', this.scene);
 
-		this.parasol.setTexture('parasol-2');
+		this.parasol.setTexture('parasol-2' + this.ninja);
 		this.scene.time.delayedCall(100, () =>
 		{
-			this.parasol.setTexture('parasol-3');
+			this.parasol.setTexture('parasol-3' + this.ninja);
 		});
 		this.scene.time.delayedCall(200, () =>
 		{
-			this.parasol.setTexture('parasol');
+			this.parasol.setTexture('parasol' + this.ninja);
 		});
 	}
 
 	createParasol()
 	{
-		this._parasol = this.scene.add.sprite(this.x, this.y - 15, 'parasol');
+		this._parasol = this.scene.add.sprite(this.x, this.y - 15, 'parasol' + this.ninja);
 		// this.parasol.setDepth(this.depth - 1);
 		this.scene.physics.add.existing(this.parasol, false);
 		this._scene.mainLayer.add(this._parasol);
@@ -405,7 +409,7 @@ export default class EnemyPrefab extends Phaser.GameObjects.Sprite {
 
 	createGrenade()
 	{
-		this.grenadeProp = this.scene.add.image(this.x, this.y, 'bomb-mask');
+		this.grenadeProp = this.scene.add.image(this.x, this.y, 'bomb-mask' + this.ninja);
 		this.grenadeProp.setFlipX(this.flipX);
 		this.scene.physics.add.existing(this.grenadeProp, false);
 		this._scene.mainLayer.add(this.grenadeProp);
@@ -441,7 +445,7 @@ export default class EnemyPrefab extends Phaser.GameObjects.Sprite {
 		this.body.setAllowGravity(true);
 
 		this.stop();
-		this.setTexture('soldierfalling');
+		this.setTexture('soldierfalling' + this.ninja);
 			// i suppose this should be its own animation
 		this.spin = (directionX > 0? .1 : -.1);
 

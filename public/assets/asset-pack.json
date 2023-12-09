@@ -17,6 +17,11 @@
                 "key": "balloon"
             },
             {
+                "url": "assets/level-pack/balloon.png",
+                "type": "image",
+                "key": "balloon_1"
+            },
+            {
                 "url": "assets/tileset-bg.png",
                 "type": "image",
                 "key": "bg-tileset"
@@ -195,6 +200,11 @@
                 "key": "bomb"
             },
             {
+                "url": "assets/level-pack/bomb.png",
+                "type": "image",
+                "key": "bomb_1"
+            },
+            {
                 "url": [
                     "assets/sfx/bomb-drop.mp3"
                 ],
@@ -227,6 +237,11 @@
                 "url": "assets/bomb-mask.png",
                 "type": "image",
                 "key": "bomb-mask"
+            },
+            {
+                "url": "assets/level-pack/mine.png",
+                "type": "image",
+                "key": "bomb-mask_1"
             },
             {
                 "url": "assets/levels/bomb-punch.json",
@@ -621,9 +636,19 @@
                 "key": "multipath"
             },
             {
+                "url": "assets/level-pack/Paralax-Mountains.png",
+                "type": "image",
+                "key": "Paralax-Mountains"
+            },
+            {
                 "url": "assets/Parallax-Backing.png",
                 "type": "image",
                 "key": "Parallax-Backing"
+            },
+            {
+                "url": "assets/level-pack/Parallax-Backing.png",
+                "type": "image",
+                "key": "Parallax-Backing_1"
             },
             {
                 "url": "assets/Parallax-Cityscape.png",
@@ -651,14 +676,29 @@
                 "key": "parasol"
             },
             {
+                "url": "assets/level-pack/parasol.png",
+                "type": "image",
+                "key": "parasol_1"
+            },
+            {
                 "url": "assets/parasol-2.png",
                 "type": "image",
                 "key": "parasol-2"
             },
             {
+                "url": "assets/level-pack/parasol-2.png",
+                "type": "image",
+                "key": "parasol-2_1"
+            },
+            {
                 "url": "assets/parasol-3.png",
                 "type": "image",
                 "key": "parasol-3"
+            },
+            {
+                "url": "assets/level-pack/parasol-3.png",
+                "type": "image",
+                "key": "parasol-3_1"
             },
             {
                 "url": "assets/peeing.png",
@@ -927,9 +967,19 @@
                 "key": "soldierfalling"
             },
             {
+                "url": "assets/level-pack/soldierdead.png",
+                "type": "image",
+                "key": "soldierfalling_1"
+            },
+            {
                 "url": "assets/soldiermid.png",
                 "type": "image",
                 "key": "soldiermid"
+            },
+            {
+                "url": "assets/level-pack/soldiermid.png",
+                "type": "image",
+                "key": "soldiermid_1"
             },
             {
                 "url": "assets/soldieronballoon.png",
@@ -937,9 +987,19 @@
                 "key": "soldieronballoon"
             },
             {
+                "url": "assets/level-pack/soldier-onballoon.png",
+                "type": "image",
+                "key": "soldieronballoon_1"
+            },
+            {
                 "url": "assets/soldierpogomid.png",
                 "type": "image",
                 "key": "soldierpogomid"
+            },
+            {
+                "url": "assets/level-pack/pogo.png",
+                "type": "image",
+                "key": "soldierpogomid_1"
             },
             {
                 "url": "assets/soldierpogosquash.png",
@@ -947,9 +1007,19 @@
                 "key": "soldierpogosquash"
             },
             {
+                "url": "assets/level-pack/pogosquash.png",
+                "type": "image",
+                "key": "soldierpogosquash_1"
+            },
+            {
                 "url": "assets/soldierpogostretch.png",
                 "type": "image",
                 "key": "soldierpogostretch"
+            },
+            {
+                "url": "assets/level-pack/pogostretch.png",
+                "type": "image",
+                "key": "soldierpogostretch_1"
             },
             {
                 "url": "assets/soldiersquash.png",
@@ -957,9 +1027,19 @@
                 "key": "soldiersquash"
             },
             {
+                "url": "assets/level-pack/soldiersquash.png",
+                "type": "image",
+                "key": "soldiersquash_1"
+            },
+            {
                 "url": "assets/soldierstretch.png",
                 "type": "image",
                 "key": "soldierstretch"
+            },
+            {
+                "url": "assets/level-pack/soldierstretch.png",
+                "type": "image",
+                "key": "soldierstretch_1"
             },
             {
                 "url": "assets/svfddfdf.png",
@@ -987,10 +1067,34 @@
                 "key": "tapper"
             },
             {
+                "url": "assets/level-pack/tapper.png",
+                "type": "image",
+                "key": "tapper_1"
+            },
+            {
+                "url": "assets/tapper_1.png",
+                "frameConfig": {
+                    "frameWidth": 32,
+                    "frameHeight": 32,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "tapper_1"
+            },
+            {
                 "type": "multiatlas",
                 "url": "assets/tapper.json",
                 "path": "assets",
                 "key": "tapper-atlas"
+            },
+            {
+                "type": "multiatlas",
+                "url": "assets/tapper_1.json",
+                "path": "assets",
+                "key": "tapper-atlas_1"
             },
             {
                 "url": "assets/levels/test-map-bomb-vision.json",
@@ -1018,9 +1122,19 @@
                 "key": "tileset"
             },
             {
+                "url": "assets/level-pack/Tileset.png",
+                "type": "image",
+                "key": "tileset_1"
+            },
+            {
                 "url": "assets/levels/tileset.png",
                 "type": "image",
                 "key": "tileset_1"
+            },
+            {
+                "url": "assets/level-pack/Tileset-BG.png",
+                "type": "image",
+                "key": "bg-tilese_1"
             },
             {
                 "url": [

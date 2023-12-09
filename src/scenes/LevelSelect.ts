@@ -933,6 +933,18 @@ export default class LevelSelect extends Phaser.Scene {
 			}
 		});
 
+		// ninja mode
+		// this.registry.set(`ninja`, false);
+		this.input.keyboard.on('keydown-N', () =>
+		{
+			if (__DEV__)
+			{
+				let ninja = this.registry.get(`ninja`);
+				this.registry.set(`ninja`, !ninja);
+				console.log('ninja: ' + !ninja);
+			}
+		});
+
 		// nav right input - keyboard
 		this.input.keyboard.on
 			(`keydown-${InputManager.getInput('menu-right', 'keyboard')}`, () =>

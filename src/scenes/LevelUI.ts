@@ -1536,6 +1536,7 @@ export default class LevelUI extends Phaser.Scene {
 			// this.tutorialText.setWordTint('landing,', -1, true, 0xFFE13D);
 			this.tutorialText.setWordTint('combo', -1, true, 0xFFE13D);
 			this.tutorialText.setWordTint('combo!', -1, true, 0xFFE13D);
+			this.tutorialText.setWordTint('twice', -1, true, 0xFFE13D);
 
 			this.tutorialCloseText.setText
 				(`- ${InputManager.getInputName('tutorial-toggle')?.toString().toUpperCase()} TO DISMISS -`);

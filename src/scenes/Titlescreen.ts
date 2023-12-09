@@ -564,7 +564,7 @@ export default class Titlescreen extends Phaser.Scene {
 			window.removeEventListener('click', this.onPointer);
 
 		}
-		
+
 		if (this.cache.audio.exists('main-game-2'))
 		{
 			this.sound.play('main-game-2', { volume: .7 });

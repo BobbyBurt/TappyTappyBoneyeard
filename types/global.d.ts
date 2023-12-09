@@ -15,4 +15,6 @@ declare global
     type inputMode = 'keyboard' | 'gamepad' | 'touch';
 
     var __DEV__: boolean;
+
+    var __LEVEL_TEST__: boolean;
 }

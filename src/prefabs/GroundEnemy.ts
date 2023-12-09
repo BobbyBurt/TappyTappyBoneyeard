@@ -28,20 +28,22 @@ export default class GroundEnemy extends EnemyPrefab {
 	{
 		this.body.allowGravity = false;
 
+		let ninja = (this.scene.game.registry.get('ninja') ? '_1' : '');
+
 	// animation
 		this.anims.create
 		({
 			key: 'idle',
 			frames:
 			[
-				{ key: 'soldiermid' },
-				{ key: 'soldiermid' },
-				{ key: 'soldiermid' },
-				{ key: 'soldiermid' },
-				{ key: 'soldiersquash' },
-				{ key: 'soldiersquash' },
-				{ key: 'soldierstretch' },
-				{ key: 'soldierstretch' }
+				{ key: 'soldiermid' + ninja },
+				{ key: 'soldiermid' + ninja },
+				{ key: 'soldiermid' + ninja },
+				{ key: 'soldiermid' + ninja },
+				{ key: 'soldiersquash' + ninja },
+				{ key: 'soldiersquash' + ninja },
+				{ key: 'soldierstretch' + ninja },
+				{ key: 'soldierstretch' + ninja }
 			],
 			frameRate: 16,
 			repeat: -1

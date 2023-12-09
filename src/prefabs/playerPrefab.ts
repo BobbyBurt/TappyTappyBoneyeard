@@ -147,9 +147,13 @@ export default class playerPrefab extends Phaser.Physics.Arcade.Sprite {
 	private fistoffset: Phaser.Math.Vector2;
 	private fistUppercutoffset: Phaser.Math.Vector2;
 
+	private ninja = '';
+
 	start()
 	{
 		this.levelScene = this.scene as Level;
+
+		this.ninja = (this.levelScene.registry.get('ninja') ? '_1' : '');
 
 		this.setName('player');
 
@@ -556,114 +560,114 @@ export default class playerPrefab extends Phaser.Physics.Arcade.Sprite {
 	{
 	// airborne
 		this.anims.create({key: 'airborne', repeat: -1,
-			frames: this.anims.generateFrameNames('tapper-atlas', 
+			frames: this.anims.generateFrameNames(`tapper-atlas` + this.ninja, 
 			{ prefix: 'airborne/', zeroPad: 2, end: 0 })});
 
 		this.anims.create({key: 'airborne-tired', repeat: -1,
-			frames: this.anims.generateFrameNames('tapper-atlas', 
+			frames: this.anims.generateFrameNames('tapper-atlas' + this.ninja, 
 			{ prefix: 'airborne-tired/', zeroPad: 2, end: 0 })});
 
 		this.anims.create({key: 'airborne-very-tired', repeat: -1,
-			frames: this.anims.generateFrameNames('tapper-atlas', 
+			frames: this.anims.generateFrameNames('tapper-atlas' + this.ninja, 
 			{ prefix: 'airborne-very-tired/', zeroPad: 2, end: 0 })});
 
 	// blush flap
 		this.anims.create({key: 'blush-flap', repeat: 0,
-			frames: this.anims.generateFrameNames('tapper-atlas', 
+			frames: this.anims.generateFrameNames('tapper-atlas'  + this.ninja, 
 			{ prefix: 'blush-flap/', zeroPad: 2, end: 5 })});
 
 		this.anims.create({key: 'blush-flap-tired', repeat: 0,
-			frames: this.anims.generateFrameNames('tapper-atlas', 
+			frames: this.anims.generateFrameNames('tapper-atlas' + this.ninja, 
 			{ prefix: 'blush-flap-tired/', zeroPad: 2, end: 5 })});
 
 		this.anims.create({key: 'blush-flap-very-tired', repeat: 0,
-			frames: this.anims.generateFrameNames('tapper-atlas', 
+			frames: this.anims.generateFrameNames('tapper-atlas' + this.ninja, 
 			{ prefix: 'blush-flap-very-tired/', zeroPad: 2, end: 5 })});
 
 	// cling
 		this.anims.create({key: 'cling', repeat: -1,
-			frames: this.anims.generateFrameNames('tapper-atlas', 
+			frames: this.anims.generateFrameNames('tapper-atlas' + this.ninja, 
 			{ prefix: 'cling/', zeroPad: 2, end: 0 })});
 
 		this.anims.create({key: 'cling-tired', repeat: -1,
-			frames: this.anims.generateFrameNames('tapper-atlas', 
+			frames: this.anims.generateFrameNames('tapper-atlas' + this.ninja, 
 			{ prefix: 'cling-tired/', zeroPad: 2, end: 0 })});
 
 		this.anims.create({key: 'cling-very-tired', repeat: -1,
-			frames: this.anims.generateFrameNames('tapper-atlas', 
+			frames: this.anims.generateFrameNames('tapper-atlas' + this.ninja, 
 			{ prefix: 'cling-very-tired/', zeroPad: 2, end: 0 })});
 
 	// dive
 		this.anims.create({key: 'dive', repeat: -1,
-			frames: this.anims.generateFrameNames('tapper-atlas', 
+			frames: this.anims.generateFrameNames('tapper-atlas' + this.ninja, 
 			{ prefix: 'dive/', zeroPad: 2, end: 0 })});
 
 		this.anims.create({key: 'dive-tired', repeat: -1,
-			frames: this.anims.generateFrameNames('tapper-atlas', 
+			frames: this.anims.generateFrameNames('tapper-atlas' + this.ninja, 
 			{ prefix: 'dive-tired/', zeroPad: 2, end: 0 })});
 
 		this.anims.create({key: 'dive-very-tired', repeat: -1,
-			frames: this.anims.generateFrameNames('tapper-atlas', 
+			frames: this.anims.generateFrameNames('tapper-atlas' + this.ninja, 
 			{ prefix: 'dive-very-tired/', zeroPad: 2, end: 0 })});
 
 	// flap
 		this.anims.create({key: 'flap', repeat: 0,
-			frames: this.anims.generateFrameNames('tapper-atlas', 
+			frames: this.anims.generateFrameNames('tapper-atlas' + this.ninja, 
 			{ prefix: 'flap/', zeroPad: 2, end: 5 })});
 
 		this.anims.create({key: 'flap-tired', repeat: 0,
-			frames: this.anims.generateFrameNames('tapper-atlas', 
+			frames: this.anims.generateFrameNames('tapper-atlas' + this.ninja, 
 			{ prefix: 'flap-tired/', zeroPad: 2, end: 5 })});
 
 		this.anims.create({key: 'flap-very-tired', repeat: 0,
-			frames: this.anims.generateFrameNames('tapper-atlas', 
+			frames: this.anims.generateFrameNames('tapper-atlas' + this.ninja, 
 			{ prefix: 'flap-very-tired/', zeroPad: 2, end: 5 })});
 
 	// jump
 		this.anims.create({key: 'jump', repeat: 0,
-			frames: this.anims.generateFrameNames('tapper-atlas', 
+			frames: this.anims.generateFrameNames('tapper-atlas' + this.ninja, 
 			{ prefix: 'jump/', zeroPad: 2, end: 4 })});
 
 	// jump
 		this.anims.create({key: 'idle', repeat: -1,
-			frames: this.anims.generateFrameNames('tapper-atlas', 
+			frames: this.anims.generateFrameNames('tapper-atlas' + this.ninja, 
 			{ prefix: 'run/', zeroPad: 2, start: 3, end: 3 })});
 				// TODO: add idle animation to sprite folder
 
 	// punch
 		this.anims.create({key: 'punch', repeat: 0,
-			frames: this.anims.generateFrameNames('tapper-atlas', 
+			frames: this.anims.generateFrameNames('tapper-atlas' + this.ninja, 
 			{ prefix: 'punch/', zeroPad: 2, end: 0 })});
 
 		this.anims.create({key: 'punch-tired', repeat: 0,
-			frames: this.anims.generateFrameNames('tapper-atlas', 
+			frames: this.anims.generateFrameNames('tapper-atlas' + this.ninja, 
 			{ prefix: 'punch-tired/', zeroPad: 2, end: 0 })});
 
 		this.anims.create({key: 'punch-very-tired', repeat: 0,
-			frames: this.anims.generateFrameNames('tapper-atlas', 
+			frames: this.anims.generateFrameNames('tapper-atlas' + this.ninja, 
 			{ prefix: 'punch-very-tired/', zeroPad: 2, end: 0 })});
 
 	// run
 		this.anims.create({key: 'run', repeat: -1,
-			frames: this.anims.generateFrameNames('tapper-atlas', 
+			frames: this.anims.generateFrameNames('tapper-atlas' + this.ninja, 
 			{ prefix: 'run/', zeroPad: 2, end: 11 })});
 
 	// uppercut
 		this.anims.create({key: 'uppercut', repeat: 0,
-			frames: this.anims.generateFrameNames('tapper-atlas', 
+			frames: this.anims.generateFrameNames('tapper-atlas' + this.ninja, 
 			{ prefix: 'uppercut/', zeroPad: 2, end: 0 })});
 
 		this.anims.create({key: 'uppercut-tired', repeat: 0,
-			frames: this.anims.generateFrameNames('tapper-atlas', 
+			frames: this.anims.generateFrameNames('tapper-atlas' + this.ninja, 
 			{ prefix: 'uppercut-tired/', zeroPad: 2, end: 0 })});
 
 		this.anims.create({key: 'uppercut-very-tired', repeat: 0,
-			frames: this.anims.generateFrameNames('tapper-atlas', 
+			frames: this.anims.generateFrameNames('tapper-atlas' + this.ninja, 
 			{ prefix: 'uppercut-very-tired/', zeroPad: 2, end: 0 })});
 
 	// victory
 		this.anims.create({key: 'victory', repeat: 0,
-			frames: this.anims.generateFrameNames('tapper-atlas', 
+			frames: this.anims.generateFrameNames('tapper-atlas' + this.ninja, 
 			{ prefix: 'victory/', zeroPad: 2, end: 0 })});
 	}
 

@@ -25,7 +25,10 @@ export default class Preload extends Phaser.Scene {
 
 	editorPreload(): void {
 
+		this.load.pack("ninja-level-visuals-asset-pack", "assets/level-pack/ninja-level-visuals-asset-pack.json");
 		this.load.pack("asset-pack", "assets/asset-pack.json");
+		this.load.pack("main-level-visuals-asset-pack", "assets/main-level-visuals-asset-pack.json");
+		
 	}
 
 	editorCreate(): void {
@@ -77,12 +80,14 @@ export default class Preload extends Phaser.Scene {
 		new PreloadText(progress);
 
 		this.fileText = fileText;
+		this.progress_1 = progress_1;
 		this.birdFade = birdFade;
 
 		this.events.emit("scene-awake");
 	}
 
 	private fileText!: Phaser.GameObjects.BitmapText;
+	private progress_1!: Phaser.GameObjects.BitmapText;
 	private birdFade!: Phaser.GameObjects.Rectangle;
 
 	/* START-USER-CODE */
@@ -95,12 +100,20 @@ export default class Preload extends Phaser.Scene {
 
 		this.editorPreload();
 
+		// this.load.pack("main-level-visuals-asset-pack", "assets/main-level-visuals-asset-pack.json");
+		// this.load.pack("ninja-level-visuals-asset-pack", "assets/ninja-level-visuals-asset-pack.json");
+
 		this.resize();
 
 		this.scale.autoRound = true;
 
 		// TEMP 
 		this.game.registry.set('total-score', 0);
+
+		if (__LEVEL_TEST__)
+		{
+			this.progress_1.setText('Loading level for testing...');
+		}
 
 	// camera
 		this.cameras.main.setOrigin(0, 0); 	
@@ -132,7 +145,20 @@ export default class Preload extends Phaser.Scene {
 		});
 
 		this.load.on('complete', (key: string, type: string, data: any) =>
-		{
+		{	
+			if (__LEVEL_TEST__)
+			{	
+				this.registry.set('last-scene', this.scene.key);
+
+				this.registry.set('current-level', 'jump');
+				this.registry.set('current-level-index', 0)
+				this.scene.stop(this);
+				this.scene.launch('LevelUI');
+				this.scene.launch('Level');
+
+				return;
+			}
+
 			this.cameras.main.fadeOut(200, 255, 255, 255);
 			this.time.delayedCall(1000, () =>
 			{

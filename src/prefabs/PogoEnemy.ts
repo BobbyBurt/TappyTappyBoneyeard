@@ -46,17 +46,19 @@ export default class PogoEnemy extends EnemyPrefab {
 			}
 		})
 
-	// animation
+		// animation
+		let ninja = (this.scene.game.registry.get('ninja') ? '_1' : '');
+	
 		this.anims.create
 		({
 			key: 'idle',
 			frames:
 			[
-				{ key: 'soldierpogosquash' },
-				{ key: 'soldierpogomid' },
-				{ key: 'soldierpogostretch' },
-				{ key: 'soldierpogostretch' },
-				{ key: 'soldierpogomid' },
+				{ key: 'soldierpogosquash' + ninja},
+				{ key: 'soldierpogomid' + ninja },
+				{ key: 'soldierpogostretch' + ninja },
+				{ key: 'soldierpogostretch' + ninja },
+				{ key: 'soldierpogomid' + ninja },
 			],
 			frameRate: 16,
 			repeat: 0

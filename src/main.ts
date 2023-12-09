@@ -16,7 +16,7 @@ window.addEventListener('load', function ()
 	{
 		title: 'Tappy Tappy Boneyard',
 		url: 'https://www.newgrounds.com/projects/games/1923225/preview',
-		version: '25 release',
+		version: '26 release',
 		
 	// visuals
 		type: Phaser.AUTO,
