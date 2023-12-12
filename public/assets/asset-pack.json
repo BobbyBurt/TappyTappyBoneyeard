@@ -27,6 +27,11 @@
                 "key": "bg-tileset"
             },
             {
+                "url": "assets/level-pack/Tileset-BG.png",
+                "type": "image",
+                "key": "bg-tileset_1"
+            },
+            {
                 "url": [
                     "assets/sfx/bird drop.mp3"
                 ],
@@ -716,6 +721,11 @@
                 "key": "plane"
             },
             {
+                "url": "assets/level-pack/plane.png",
+                "type": "image",
+                "key": "plane_1"
+            },
+            {
                 "url": "assets/levels/platforming.json",
                 "type": "tilemapTiledJSON",
                 "key": "platforming"
@@ -1130,11 +1140,6 @@
                 "url": "assets/levels/tileset.png",
                 "type": "image",
                 "key": "tileset_1"
-            },
-            {
-                "url": "assets/level-pack/Tileset-BG.png",
-                "type": "image",
-                "key": "bg-tilese_1"
             },
             {
                 "url": [
