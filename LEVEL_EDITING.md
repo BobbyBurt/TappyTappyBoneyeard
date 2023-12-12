@@ -1,15 +1,15 @@
 ### Bird Tapper: Purple Platoon Panic
 # Level Editing guide
 
-This guide is for contributors to the planned community map pack or anyone else who's interested. Custom level creation & loading is not an officially public feature, but it's possible through the same process that the official levels were made by. The game and it's level loading code aren't foolproof, and plenty of edgecases exist. **Carefully follow bold instructions to avoid game errors or crashes.** If you have any issues or questions, reach out! <https://www.newgrounds.com/pm/send/bobbyburt>
+This guide is for contributors to the planned community map pack or anyone else who's interested. Custom level creation & loading is not an officially public feature, but it's possible through the same process that the official levels were made by. The game and it's level loading code aren't foolproof, and plenty of edgecases exist. **Carefully follow bold instructions to avoid game errors or crashes.** If you have any issues or questions, [reach out!](https://www.newgrounds.com/pm/send/bobbyburt)
 
 ## Getting Started
 
-First, download the level editing kit here <link>
+First, download the level editing kit here **INSERT LINK**
 
-Included in this folder is a special build of the game which automatically loads a level for testing and includes the assets unique to the community level pack. To test your levels, you'll need to host this build on a local server. You can do that easily with the included in the folder called miniweb.exe<https://miniweb.sourceforge.net/>. Once you run it, you'll see beside 'host:' an IP address / port. Copy and paste that into a web browser to run the game.
+Included in this folder is a special build of the game which automatically loads a level for testing and includes the assets unique to the community level pack. To test your levels, you'll need to host this build on a local server. You can do that easily with the included in the folder called [miniweb.exe](https://miniweb.sourceforge.net/). Once you run it, you'll see beside 'host:' an IP address / port. Copy and paste that into a web browser to run the game.
 
-Install the Tiled map Editor<https://www.mapeditor.org/>. Each level is a `.tmx` file. `example.tmx` can be used as a template, so copy / paste it whenever you want to make a new level. Open the file for the level you want to edit.
+Install the [Tiled map Editor](https://www.mapeditor.org/). Each level is a `.tmx` file. `example.tmx` can be used as a template, so copy / paste it whenever you want to make a new level. Open the file for the level you want to edit.
 
 Tiled may be intimating, but for this you only need to know a few of the tools. While editing a tile layer, you just need the Stamp Brush, Shape Fill tool and Eraser. While editing an object layer, you just need the Select Objects tool to copy / paste objects from the example map. All these tools are at the top toolbar.
 
