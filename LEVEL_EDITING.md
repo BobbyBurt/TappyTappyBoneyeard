@@ -5,9 +5,9 @@ This guide is for contributors to the planned community map pack or anyone else 
 
 ## Getting Started
 
-First, download the level editing [kit here](https://www.newgrounds.com/dump/item/d845da010a05d23f4ae6b3af63c7c539)
+First, download the level editing kit [here](https://www.newgrounds.com/dump/item/d845da010a05d23f4ae6b3af63c7c539)
 
-Included in this folder is a special build of the game which automatically loads a level for testing and includes the assets unique to the community level pack. To test your levels, you'll need to host this build on a local server. You can do that easily with the included in the folder called [miniweb.exe](https://miniweb.sourceforge.net/). Once you run it, beside `host:` you'll see an IP address / port. Copy and paste that into a web browser to run the game.
+Included in this folder is a special build of the game which automatically loads a level for testing and includes the assets unique to the community level pack. To test your levels, you'll need to host this build on a local server. You can do that easily with a program included in the folder called [miniweb.exe](https://miniweb.sourceforge.net/). Once you run it, beside `host:` you'll see an IP address / port. Copy and paste that into a web browser to run the game.
 
 Install the [Tiled map Editor](https://www.mapeditor.org/). Each level is a `.tmx` file. `example.tmx` can be used as a template, so copy / paste it whenever you want to make a new level. Open the file for the level you want to edit.
 
