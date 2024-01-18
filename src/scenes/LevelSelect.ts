@@ -2304,6 +2304,15 @@ export default class LevelSelect extends Phaser.Scene {
 			return;
 		}
 
+		if (__LEVEL_TEST__ && this.selectedLevel === 0)
+		{
+			this.registry.set(`ninja`, true);
+		}
+		else
+		{
+			this.registry.set(`ninja`, false);
+		}
+
 		// level lock return
 		if (!this.registry.get(`unlocked: ${LevelSelect.levelsKey[this.selectedLevel]}`) && !__DEV__)
 		// if (false)
@@ -2325,7 +2334,10 @@ export default class LevelSelect extends Phaser.Scene {
 		this.scene.launch('LevelUI');
 		this.scene.launch('Level');
 
-		this.music.pause();
+		if (this.music)
+		{
+			this.music.pause();
+		}
 	}
 
 	loadCredits()
@@ -2337,7 +2349,10 @@ export default class LevelSelect extends Phaser.Scene {
 			this.scene.stop(this);
 			this.scene.launch('Credits');
 	
-			this.music.pause();
+			if (this.music)
+			{
+				this.music.pause();
+			}
 		});
 	}
 

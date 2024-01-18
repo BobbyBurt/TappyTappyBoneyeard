@@ -515,13 +515,6 @@
                 "key": "guns"
             },
             {
-                "url": [
-                    "assets/music/factory.mp3"
-                ],
-                "type": "audio",
-                "key": "hard-game"
-            },
-            {
                 "url": "assets/hit-effect-diagonal.png",
                 "type": "image",
                 "key": "hit-effect-diagonal"
@@ -578,27 +571,6 @@
                 },
                 "type": "spritesheet",
                 "key": "level-icons"
-            },
-            {
-                "url": [
-                    "assets/music/menu.mp3"
-                ],
-                "type": "audio",
-                "key": "level-select"
-            },
-            {
-                "url": [
-                    "assets/music/Like_it_Should.mp3"
-                ],
-                "type": "audio",
-                "key": "main-game"
-            },
-            {
-                "url": [
-                    "assets/music/main-game.mp3"
-                ],
-                "type": "audio",
-                "key": "main-game-2"
             },
             {
                 "url": "assets/menu-bg.png",
@@ -1070,13 +1042,6 @@
                 "key": "tapper"
             },
             {
-                "url": [
-                    "assets/music/Tapper-Instrumental.mp3"
-                ],
-                "type": "audio",
-                "key": "tapper"
-            },
-            {
                 "url": "assets/level-pack/tapper.png",
                 "type": "image",
                 "key": "tapper_1"
@@ -1140,13 +1105,6 @@
                 "url": "assets/levels/tileset.png",
                 "type": "image",
                 "key": "tileset_1"
-            },
-            {
-                "url": [
-                    "assets/music/Natural_Infiltration.mp3"
-                ],
-                "type": "audio",
-                "key": "tutorial"
             },
             {
                 "url": "assets/levels/tutorial-finale.json",

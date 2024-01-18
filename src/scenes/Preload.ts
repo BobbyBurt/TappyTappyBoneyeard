@@ -25,10 +25,7 @@ export default class Preload extends Phaser.Scene {
 
 	editorPreload(): void {
 
-		this.load.pack("ninja-level-visuals-asset-pack", "assets/level-pack/ninja-level-visuals-asset-pack.json");
 		this.load.pack("asset-pack", "assets/asset-pack.json");
-		this.load.pack("main-level-visuals-asset-pack", "assets/main-level-visuals-asset-pack.json");
-		
 	}
 
 	editorCreate(): void {
@@ -100,8 +97,10 @@ export default class Preload extends Phaser.Scene {
 
 		this.editorPreload();
 
-		// this.load.pack("main-level-visuals-asset-pack", "assets/main-level-visuals-asset-pack.json");
-		// this.load.pack("ninja-level-visuals-asset-pack", "assets/ninja-level-visuals-asset-pack.json");
+		if (!__LEVEL_TEST__)
+		{
+			this.load.pack("music-pack", "assets/music-pack.json");
+		}
 
 		this.resize();
 
@@ -113,6 +112,7 @@ export default class Preload extends Phaser.Scene {
 		if (__LEVEL_TEST__)
 		{
 			this.progress_1.setText('Loading level for testing...');
+			this.registry.set(`ninja`, true);
 		}
 
 	// camera

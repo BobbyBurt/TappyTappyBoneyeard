@@ -16,7 +16,7 @@ window.addEventListener('load', function ()
 	{
 		title: 'Tappy Tappy Boneyard',
 		url: 'https://www.newgrounds.com/projects/games/1923225/preview',
-		version: '26 release',
+		version: '26.2 level test',
 		
 	// visuals
 		type: Phaser.AUTO,
@@ -98,6 +98,7 @@ class Boot extends Phaser.Scene
 	 */
 	preload()
 	{
+
 		this.load.pack("pack", "assets/preload-asset-pack.json");
 		this.load.on(Phaser.Loader.Events.COMPLETE, () => this.scene.start("Preload"));
 	}

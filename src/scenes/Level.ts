@@ -1468,7 +1468,7 @@ export default class Level extends Phaser.Scene {
 		// console.debug(this.uiScene);
 		this.uiScene.setAirborneLabelAlpha(this.player.onFloor ? .2 : 1);
 
-		if (__DEV__)
+		if (__DEV__ || __LEVEL_TEST__)
 		{
 			this.setDebugUI();
 		}
@@ -1591,7 +1591,10 @@ export default class Level extends Phaser.Scene {
 		this.manualPause = false;
 		this.scene.start('LevelSelect');
 
-		this.music.pause();
+		if (this.music)
+		{
+			this.music.pause();
+		}
 	}
 
 	/** stops this scene, shutting down update listeners, and starts level select scene */
@@ -2767,7 +2770,10 @@ export default class Level extends Phaser.Scene {
 		this.registry.set('completed-level-' + this.registry.get('current-level-index'), true);
 
 		SoundManager.play('combo-end', this);
-		this.music.pause();
+		if (this.music)
+		{
+			this.music.pause();
+		}
 	}
 
 	/** iterates through everything in the 'elements' object layer of the map and creates enemies 

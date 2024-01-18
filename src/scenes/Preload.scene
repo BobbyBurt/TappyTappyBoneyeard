@@ -6,9 +6,7 @@
         "autoImport": true,
         "preloadMethodName": "editorPreload",
         "preloadPackFiles": [
-            "TappyTappyBoneyeard-source/public/assets/level-pack/ninja-level-visuals-asset-pack.json",
-            "TappyTappyBoneyeard-source/public/assets/asset-pack.json",
-            "TappyTappyBoneyeard-source/public/assets/main-level-visuals-asset-pack.json"
+            "TappyTappyBoneyeard-source/public/assets/asset-pack.json"
         ],
         "createMethodName": "editorCreate",
         "sceneKey": "Preload",

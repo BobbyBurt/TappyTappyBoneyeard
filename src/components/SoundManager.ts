@@ -43,6 +43,11 @@ export default class SoundManager {
 		(musicBS: Phaser.Sound.BaseSound, levelIndex: number, levelScene: Level): Phaser.Sound.BaseSound
 	{
 
+		if (__LEVEL_TEST__)
+		{
+			return musicBS;
+		}
+
 	// Which track
 		let trackToPlayKey = this.tracksKey[0];
 		if (levelIndex >= this.tracksFirstLevel[1] && levelIndex < this.tracksFirstLevel[2])
@@ -78,6 +83,11 @@ export default class SoundManager {
 	public static setLevelSelectMusic
 		(musicBS: Phaser.Sound.BaseSound, scene: Phaser.Scene): Phaser.Sound.BaseSound
 	{	
+		if (__LEVEL_TEST__)
+		{
+			return musicBS;
+		}
+
 		// Resume or Destroy
 		if (musicBS !== undefined)
 		{

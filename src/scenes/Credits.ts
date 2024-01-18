@@ -575,7 +575,10 @@ export default class Credits extends Phaser.Scene {
 		this.cameras.main.fadeIn(200, 255, 255, 255);
 
 		// music
-		this.sound.play('tapper');
+		if (!__LEVEL_TEST__)
+		{
+			this.sound.play('tapper');
+		}
 
 		// camera scroll tween
 		this.cameraTween = this.tweens.addCounter
