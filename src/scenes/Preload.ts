@@ -97,9 +97,30 @@ export default class Preload extends Phaser.Scene {
 
 		this.editorPreload();
 
-		if (!__LEVEL_TEST__)
+		// main / mp conditional loading
+		if (__MAP_PACK__)
 		{
-			this.load.pack("music-pack", "assets/music-pack.json");
+			if (!__LEVEL_TEST__)
+			{
+				this.load.pack("mp-music-pack", "assets/music/map-pack/mp-music-pack.json");
+			}
+			this.load.pack("mp-level-previews-pack", "assets/level-previews/map-pack/level-previews-pack.json");
+			this.load.pack("map-pack-levels-pack", "assets/levels/map-pack/map-pack-levels-pack.json"); 
+		}
+		else
+		{
+			if (!__LEVEL_TEST__)
+			{
+				this.load.pack("music-pack", "assets/music/music-pack.json");
+			}
+			this.load.pack("level-previews-pack", "assets/level-previews/level-previews-pack.json");
+			this.load.pack("main-levels-pack", "assets/levels/main-levels-pack.json"); 
+		}
+
+		// set ninja mode
+		if (__MAP_PACK__)
+		{
+			this.registry.set(`ninja`, true);
 		}
 
 		this.resize();
@@ -112,7 +133,7 @@ export default class Preload extends Phaser.Scene {
 		if (__LEVEL_TEST__)
 		{
 			this.progress_1.setText('Loading level for testing...');
-			this.registry.set(`ninja`, true);
+			// this.registry.set(`ninja`, true);
 		}
 
 	// camera

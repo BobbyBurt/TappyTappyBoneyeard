@@ -7,11 +7,6 @@
                 "key": "20-test"
             },
             {
-                "url": "assets/levels/airborne.json",
-                "type": "tilemapTiledJSON",
-                "key": "airborne"
-            },
-            {
                 "url": "assets/balloon.png",
                 "type": "image",
                 "key": "balloon"
@@ -73,6 +68,11 @@
                 "url": "assets/bird1cling.png",
                 "type": "image",
                 "key": "bird1cling"
+            },
+            {
+                "url": "assets/bird1cling-exhausted.png",
+                "type": "image",
+                "key": "bird1cling-exhausted"
             },
             {
                 "url": "assets/bird1cling-exhausted.png",
@@ -224,21 +224,6 @@
                 "key": "bomb-fuse"
             },
             {
-                "url": "assets/levels/bomb-holder.json",
-                "type": "tilemapTiledJSON",
-                "key": "bomb-holder"
-            },
-            {
-                "url": "assets/levels/bomb-intro.json",
-                "type": "tilemapTiledJSON",
-                "key": "bomb-intro"
-            },
-            {
-                "url": "assets/levels/bomb-launch.json",
-                "type": "tilemapTiledJSON",
-                "key": "bomb-launch"
-            },
-            {
                 "url": "assets/bomb-mask.png",
                 "type": "image",
                 "key": "bomb-mask"
@@ -249,54 +234,14 @@
                 "key": "bomb-mask_1"
             },
             {
-                "url": "assets/levels/bomb-punch.json",
-                "type": "tilemapTiledJSON",
-                "key": "bomb-punch"
-            },
-            {
-                "url": "assets/levels/bomb-uppercut.json",
-                "type": "tilemapTiledJSON",
-                "key": "bomb-uppercut"
-            },
-            {
-                "url": "assets/levels/bombs.json",
-                "type": "tilemapTiledJSON",
-                "key": "bombs"
-            },
-            {
                 "url": "assets/bullet.png",
                 "type": "image",
                 "key": "bullet"
             },
             {
-                "url": "assets/levels/bullet-ceiling.json",
-                "type": "tilemapTiledJSON",
-                "key": "bullet-ceiling"
-            },
-            {
-                "url": "assets/levels/celeste.json",
-                "type": "tilemapTiledJSON",
-                "key": "celeste"
-            },
-            {
-                "url": "assets/levels/charge.json",
-                "type": "tilemapTiledJSON",
-                "key": "charge"
-            },
-            {
-                "url": "assets/levels/climb.json",
-                "type": "tilemapTiledJSON",
-                "key": "climb"
-            },
-            {
                 "url": "assets/clown.png",
                 "type": "image",
                 "key": "clown"
-            },
-            {
-                "url": "assets/levels/combo.json",
-                "type": "tilemapTiledJSON",
-                "key": "combo"
             },
             {
                 "url": [
@@ -318,34 +263,14 @@
                 "key": "combo-particle"
             },
             {
-                "url": "assets/levels/cool-combo.json",
-                "type": "tilemapTiledJSON",
-                "key": "cool-combo"
-            },
-            {
                 "url": "assets/dead-bird.png",
                 "type": "image",
                 "key": "dead-bird"
             },
             {
-                "url": "assets/levels/dive.json",
-                "type": "tilemapTiledJSON",
-                "key": "dive"
-            },
-            {
                 "url": "assets/dive-icon.png",
                 "type": "image",
                 "key": "dive-icon"
-            },
-            {
-                "url": "assets/levels/dive-practice.json",
-                "type": "tilemapTiledJSON",
-                "key": "dive-practice"
-            },
-            {
-                "url": "assets/levels/dive-tec.json",
-                "type": "tilemapTiledJSON",
-                "key": "dive-tec"
             },
             {
                 "url": "assets/dollar.png",
@@ -424,24 +349,9 @@
                 "key": "fdfdsvsdf"
             },
             {
-                "url": "assets/levels/rapidfire.json",
-                "type": "tilemapTiledJSON",
-                "key": "final"
-            },
-            {
-                "url": "assets/levels/finale.json",
-                "type": "tilemapTiledJSON",
-                "key": "finale"
-            },
-            {
                 "url": "assets/fist-icon.png",
                 "type": "image",
                 "key": "fist-icon"
-            },
-            {
-                "url": "assets/levels/flap.json",
-                "type": "tilemapTiledJSON",
-                "key": "flap"
             },
             {
                 "url": "assets/flap-exhausted-sprites.png",
@@ -480,11 +390,6 @@
                 "key": "grenade"
             },
             {
-                "url": "assets/levels/grenade.json",
-                "type": "tilemapTiledJSON",
-                "key": "grenade"
-            },
-            {
                 "url": "assets/gun.png",
                 "type": "image",
                 "key": "gun"
@@ -495,24 +400,9 @@
                 "key": "gun-fire"
             },
             {
-                "url": "assets/levels/gun-intro.json",
-                "type": "tilemapTiledJSON",
-                "key": "gun-intro"
-            },
-            {
                 "url": "assets/gundiagonal.png",
                 "type": "image",
                 "key": "gundiagonal"
-            },
-            {
-                "url": "assets/levels/gunfire.json",
-                "type": "tilemapTiledJSON",
-                "key": "gunfire"
-            },
-            {
-                "url": "assets/levels/guns.json",
-                "type": "tilemapTiledJSON",
-                "key": "guns"
             },
             {
                 "url": "assets/hit-effect-diagonal.png",
@@ -523,16 +413,6 @@
                 "url": "assets/hit-effect-horizontal.png",
                 "type": "image",
                 "key": "hit-effect-horizontal"
-            },
-            {
-                "url": "assets/levels/intro.json",
-                "type": "tilemapTiledJSON",
-                "key": "intro"
-            },
-            {
-                "url": "assets/levels/jump.json",
-                "type": "tilemapTiledJSON",
-                "key": "jump"
             },
             {
                 "url": "assets/level-icon-selected.png",
@@ -573,44 +453,9 @@
                 "key": "level-icons"
             },
             {
-                "url": "assets/menu-bg.png",
-                "type": "image",
-                "key": "menu-bg"
-            },
-            {
-                "url": "assets/levels/mine-combo.json",
-                "type": "tilemapTiledJSON",
-                "key": "mine-combo"
-            },
-            {
-                "url": "assets/levels/mine-enemy.json",
-                "type": "tilemapTiledJSON",
-                "key": "mine-enemy"
-            },
-            {
-                "url": "assets/levels/mine-intro.json",
-                "type": "tilemapTiledJSON",
-                "key": "mine-intro"
-            },
-            {
-                "url": "assets/levels/mine-wall.json",
-                "type": "tilemapTiledJSON",
-                "key": "mine-wall"
-            },
-            {
                 "url": "assets/mobile-button.png",
                 "type": "image",
                 "key": "mobile-button"
-            },
-            {
-                "url": "assets/levels/multi-move.json",
-                "type": "tilemapTiledJSON",
-                "key": "multi-move"
-            },
-            {
-                "url": "assets/levels/multipath.json",
-                "type": "tilemapTiledJSON",
-                "key": "multipath"
             },
             {
                 "url": "assets/level-pack/Paralax-Mountains.png",
@@ -645,11 +490,6 @@
             {
                 "url": "assets/parasol.png",
                 "type": "image",
-                "key": "parasol"
-            },
-            {
-                "url": "assets/levels/parasol.json",
-                "type": "tilemapTiledJSON",
                 "key": "parasol"
             },
             {
@@ -698,18 +538,8 @@
                 "key": "plane_1"
             },
             {
-                "url": "assets/levels/platforming.json",
-                "type": "tilemapTiledJSON",
-                "key": "platforming"
-            },
-            {
                 "url": "assets/pogo.png",
                 "type": "image",
-                "key": "pogo"
-            },
-            {
-                "url": "assets/levels/pogo.json",
-                "type": "tilemapTiledJSON",
                 "key": "pogo"
             },
             {
@@ -720,154 +550,19 @@
                 "key": "Pogo stick"
             },
             {
-                "url": "assets/levels/pogo-challenge.json",
-                "type": "tilemapTiledJSON",
-                "key": "pogo-challenge"
-            },
-            {
-                "url": "assets/levels/pogo-ideas.json",
-                "type": "tilemapTiledJSON",
-                "key": "pogo-ideas"
-            },
-            {
-                "url": "assets/levels/pogo-intro.json",
-                "type": "tilemapTiledJSON",
-                "key": "pogo-intro"
-            },
-            {
-                "url": "assets/levels/pogo-mine.json",
-                "type": "tilemapTiledJSON",
-                "key": "pogo-mine"
-            },
-            {
-                "url": "assets/levels/pogo-mines.json",
-                "type": "tilemapTiledJSON",
-                "key": "pogo-mines"
-            },
-            {
-                "url": "assets/level-previews/preview-airborne.png",
-                "type": "image",
-                "key": "preview-airborne"
-            },
-            {
                 "url": "assets/level-previews/preview-blank.png",
                 "type": "image",
                 "key": "preview-blank"
             },
             {
-                "url": "assets/level-previews/preview-bomb-holder.png",
+                "url": "assets/previewKFC.png",
                 "type": "image",
-                "key": "preview-bomb-holder"
+                "key": "previewKFC"
             },
             {
-                "url": "assets/level-previews/preview-bomb-intro.png",
+                "url": "assets/previewPPP.png",
                 "type": "image",
-                "key": "preview-bomb-intro"
-            },
-            {
-                "url": "assets/level-previews/preview-bomb-punch.png",
-                "type": "image",
-                "key": "preview-bomb-punch"
-            },
-            {
-                "url": "assets/level-previews/preview-charge.png",
-                "type": "image",
-                "key": "preview-charge"
-            },
-            {
-                "url": "assets/level-previews/preview-combo.png",
-                "type": "image",
-                "key": "preview-combo"
-            },
-            {
-                "url": "assets/level-previews/preview-dive.png",
-                "type": "image",
-                "key": "preview-dive"
-            },
-            {
-                "url": "assets/level-previews/preview-dive-practice.png",
-                "type": "image",
-                "key": "preview-dive-practice"
-            },
-            {
-                "url": "assets/level-previews/preview-finale.png",
-                "type": "image",
-                "key": "preview-finale"
-            },
-            {
-                "url": "assets/level-previews/preview-flap.png",
-                "type": "image",
-                "key": "preview-flap"
-            },
-            {
-                "url": "assets/level-previews/preview-gun-intro.png",
-                "type": "image",
-                "key": "preview-gun-intro"
-            },
-            {
-                "url": "assets/level-previews/preview-jump.png",
-                "type": "image",
-                "key": "preview-jump"
-            },
-            {
-                "url": "assets/level-previews/preview-mine-enemy.png",
-                "type": "image",
-                "key": "preview-mine-enemy"
-            },
-            {
-                "url": "assets/level-previews/preview-mine-enemy-intro.png",
-                "type": "image",
-                "key": "preview-mine-enemy-intro"
-            },
-            {
-                "url": "assets/level-previews/preview-mine-intro.png",
-                "type": "image",
-                "key": "preview-mine-intro"
-            },
-            {
-                "url": "assets/level-previews/preview-mine-wall.png",
-                "type": "image",
-                "key": "preview-mine-wall"
-            },
-            {
-                "url": "assets/level-previews/preview-pogo-ideas.png",
-                "type": "image",
-                "key": "preview-pogo-ideas"
-            },
-            {
-                "url": "assets/level-previews/preview-pogo-intro.png",
-                "type": "image",
-                "key": "preview-pogo-intro"
-            },
-            {
-                "url": "assets/level-previews/preview-punch.png",
-                "type": "image",
-                "key": "preview-punch"
-            },
-            {
-                "url": "assets/level-previews/preview-tutorial-finale.png",
-                "type": "image",
-                "key": "preview-tutorial-finale"
-            },
-            {
-                "url": "assets/level-previews/preview-umbrella-intro.png",
-                "type": "image",
-                "key": "preview-umbrella-intro"
-            },
-            {
-                "url": "assets/level-previews/preview-umbrella-shield.png",
-                "type": "image",
-                "key": "preview-umbrella-shield"
-            },
-            {
-                "url": "assets/level-previews/preview-uppercut.png",
-                "type": "image",
-                "key": "preview-uppercut"
-            },
-            {
-                "url": "assets/levels/punch.json",
-                "type": "tilemapTiledJSON",
-                "key": "punch"
+                "key": "previewPPP"
             },
             {
                 "url": [
@@ -889,11 +584,6 @@
                 "key": "sadfsda"
             },
             {
-                "url": "assets/levels/score.json",
-                "type": "tilemapTiledJSON",
-                "key": "score"
-            },
-            {
                 "url": "assets/shield.png",
                 "type": "image",
                 "key": "shield"
@@ -904,11 +594,6 @@
                 ],
                 "type": "audio",
                 "key": "shield-deflect"
-            },
-            {
-                "url": "assets/levels/shield-turn.json",
-                "type": "tilemapTiledJSON",
-                "key": "shield-turn"
             },
             {
                 "url": "assets/smoke.png",
@@ -1072,16 +757,6 @@
                 "key": "tapper-atlas_1"
             },
             {
-                "url": "assets/levels/test-map-bomb-vision.json",
-                "type": "tilemapTiledJSON",
-                "key": "test-map-bomb-vision"
-            },
-            {
-                "url": "assets/levels/test-map-chain.json",
-                "type": "tilemapTiledJSON",
-                "key": "test-map-chain"
-            },
-            {
                 "url": "assets/textbox_hey.png",
                 "type": "image",
                 "key": "textbox_hey"
@@ -1107,29 +782,9 @@
                 "key": "tileset_1"
             },
             {
-                "url": "assets/levels/tutorial-finale.json",
-                "type": "tilemapTiledJSON",
-                "key": "tutorial-finale"
-            },
-            {
                 "url": "assets/tutorial-ipad.png",
                 "type": "image",
                 "key": "tutorial-ipad"
-            },
-            {
-                "url": "assets/levels/umbrella-intro.json",
-                "type": "tilemapTiledJSON",
-                "key": "umbrella-intro"
-            },
-            {
-                "url": "assets/levels/umbrella-shield.json",
-                "type": "tilemapTiledJSON",
-                "key": "umbrella-shield"
-            },
-            {
-                "url": "assets/levels/umbrella-trap.json",
-                "type": "tilemapTiledJSON",
-                "key": "umbrella-trap"
             },
             {
                 "url": [
@@ -1142,11 +797,6 @@
                 "url": "assets/up-icon.png",
                 "type": "image",
                 "key": "up-icon"
-            },
-            {
-                "url": "assets/levels/uppercut.json",
-                "type": "tilemapTiledJSON",
-                "key": "uppercut"
             },
             {
                 "url": [

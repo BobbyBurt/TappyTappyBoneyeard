@@ -13,7 +13,7 @@ import CameraUtil from "~/components/CameraUtil";
 import InputManager from "~/components/InputManager";
 import tutorialManager from "~/components/tutorialManager";
 import Level from "./Level";
-import { levelScoreMilestones, arcadeScoreMilestones } from "~/components/LevelScores";
+import { levelScoreMilestones } from "~/components/LevelScores";
 import cloudSaves from "~/API/cloudSaves";
 import LevelSelect from "./LevelSelect";
 
@@ -588,14 +588,14 @@ export default class LevelUI extends Phaser.Scene {
 		gameOverContainer.add(gameOverText);
 
 		// gameOverInstructionText
-		const gameOverInstructionText = this.add.bitmapText(135.4416046142578, 393.039794921875, "nokia", "X key to retry\nZ key to return to menu");
+		const gameOverInstructionText = this.add.bitmapText(135.4416046142578, 393.039794921875, "nokia", "Shift key to retry\nZ key to return to menu");
 		gameOverInstructionText.setOrigin(0, 1);
 		gameOverInstructionText.tintFill = true;
 		gameOverInstructionText.tintTopLeft = 5388102;
 		gameOverInstructionText.tintTopRight = 5388102;
 		gameOverInstructionText.tintBottomLeft = 5388102;
 		gameOverInstructionText.tintBottomRight = 5388102;
-		gameOverInstructionText.text = "X key to retry\nZ key to return to menu";
+		gameOverInstructionText.text = "Shift key to retry\nZ key to return to menu";
 		gameOverInstructionText.fontSize = -12;
 		gameOverInstructionText.dropShadowColor = 3487029;
 		gameOverContainer.add(gameOverInstructionText);
@@ -1178,7 +1178,7 @@ export default class LevelUI extends Phaser.Scene {
 
 		this.scoreText.setText('0');
 
-		this.gameOverInstructionText.setText(`${InputManager.getInputName('menu-confirm')} to retry\n${InputManager.getInputName('gameover-back')} to return to level select`)
+		this.gameOverInstructionText.setText(`${(InputManager.activeInputMode === 'gamepad' ? InputManager.getInputName('menu-confirm') : InputManager.getInputName('quick-restart'))} to retry\n${InputManager.getInputName('gameover-back')} to return to level select`)
 		this.gameOverText.setText(`Tapped ${(this.registry.get('mobile'))? '\n' : ''}out!`)
 
 		this.scoreText.setVisible(false);
@@ -1492,7 +1492,14 @@ export default class LevelUI extends Phaser.Scene {
 		{
 			if (this.registry.get('current-level') === 'uppercut')
 			{
-				this.tutorialText.setText(`To perform an uppercut, hit the ${InputManager.getInputName('jump')} and the ${InputManager.getInputName('punch')} at the same time.\n\nThis move can take care of enemies above and help you reach higher up.`,);
+				if (this.registry.get('mobile'))
+				{
+					this.tutorialText.setText(`To perform an uppercut, hit the ${InputManager.getInputName('jump')} and the ${InputManager.getInputName('punch')} at the same time!\n\nThis move can take care of enemies above and help you reach higher up.`,);
+				}
+				else
+				{
+					this.tutorialText.setText(`To perform an uppercut, hit the ${InputManager.getInputName('uppercut')}!\n\nThis move can take care of enemies above and help you reach higher up.`,);
+				}
 			}
 			else
 			{
@@ -1502,6 +1509,7 @@ export default class LevelUI extends Phaser.Scene {
 			// word highlighting
 			this.tutorialText.setWordTint('Up', -1, true, 0xFFE13D);
 			this.tutorialText.setWordTint('up.', -1, true, 0xFFE13D);
+			this.tutorialText.setWordTint('up!', -1, true, 0xFFE13D);
 			this.tutorialText.setWordTint('down', -1, true, 0xFFE13D);
 			this.tutorialText.setWordTint('X', -1, true, 0xFFE13D);
 			this.tutorialText.setWordTint('Z', -1, true, 0xFFE13D);
@@ -1686,14 +1694,15 @@ export default class LevelUI extends Phaser.Scene {
 	{
 		let milestone = 0;
 
-		arcadeScoreMilestones.forEach((value, index) =>
-		{
-			let totalScore = this.registry.get('total-score');
-			if (totalScore > value)
-			{
-				milestone++;
-			}
-		});
+		// arcadeScoreMilestones.forEach((value, index) =>
+		// {
+		// 	let totalScore = this.registry.get('total-score');
+		// 	if (totalScore > value)
+		// 	{
+		// 		milestone++;
+		// 	}
+		// });
+		// DEPRECATED
 
 		const milestones = ['F- grade', 'E grade', 'D grade', 'C grade', 'B grade', 'A grade', 'S+ grade'];
 

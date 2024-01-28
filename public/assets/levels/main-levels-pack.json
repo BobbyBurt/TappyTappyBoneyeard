@@ -1,0 +1,128 @@
+{
+    "section1": {
+        "files": [
+            {
+                "url": "assets/levels/airborne.json",
+                "type": "tilemapTiledJSON",
+                "key": "airborne"
+            },
+            {
+                "url": "assets/levels/bomb-holder.json",
+                "type": "tilemapTiledJSON",
+                "key": "bomb-holder"
+            },
+            {
+                "url": "assets/levels/bomb-intro.json",
+                "type": "tilemapTiledJSON",
+                "key": "bomb-intro"
+            },
+            {
+                "url": "assets/levels/bomb-punch.json",
+                "type": "tilemapTiledJSON",
+                "key": "bomb-punch"
+            },
+            {
+                "url": "assets/levels/bombs.json",
+                "type": "tilemapTiledJSON",
+                "key": "bombs"
+            },
+            {
+                "url": "assets/levels/charge.json",
+                "type": "tilemapTiledJSON",
+                "key": "charge"
+            },
+            {
+                "url": "assets/levels/combo.json",
+                "type": "tilemapTiledJSON",
+                "key": "combo"
+            },
+            {
+                "url": "assets/levels/dive.json",
+                "type": "tilemapTiledJSON",
+                "key": "dive"
+            },
+            {
+                "url": "assets/levels/dive-practice.json",
+                "type": "tilemapTiledJSON",
+                "key": "dive-practice"
+            },
+            {
+                "url": "assets/levels/finale.json",
+                "type": "tilemapTiledJSON",
+                "key": "finale"
+            },
+            {
+                "url": "assets/levels/flap.json",
+                "type": "tilemapTiledJSON",
+                "key": "flap"
+            },
+            {
+                "url": "assets/levels/gun-intro.json",
+                "type": "tilemapTiledJSON",
+                "key": "gun-intro"
+            },
+            {
+                "url": "assets/levels/intro.json",
+                "type": "tilemapTiledJSON",
+                "key": "intro"
+            },
+            {
+                "url": "assets/levels/jump.json",
+                "type": "tilemapTiledJSON",
+                "key": "jump"
+            },
+            {
+                "url": "assets/levels/mine-enemy.json",
+                "type": "tilemapTiledJSON",
+                "key": "mine-enemy"
+            },
+            {
+                "url": "assets/levels/mine-intro.json",
+                "type": "tilemapTiledJSON",
+                "key": "mine-intro"
+            },
+            {
+                "url": "assets/levels/pogo-ideas.json",
+                "type": "tilemapTiledJSON",
+                "key": "pogo-ideas"
+            },
+            {
+                "url": "assets/levels/pogo-intro.json",
+                "type": "tilemapTiledJSON",
+                "key": "pogo-intro"
+            },
+            {
+                "url": "assets/levels/punch.json",
+                "type": "tilemapTiledJSON",
+                "key": "punch"
+            },
+            {
+                "url": "assets/levels/tutorial-finale.json",
+                "type": "tilemapTiledJSON",
+                "key": "tutorial-finale"
+            },
+            {
+                "url": "assets/levels/umbrella-intro.json",
+                "type": "tilemapTiledJSON",
+                "key": "umbrella-intro"
+            },
+            {
+                "url": "assets/levels/umbrella-shield.json",
+                "type": "tilemapTiledJSON",
+                "key": "umbrella-shield"
+            },
+            {
+                "url": "assets/levels/uppercut.json",
+                "type": "tilemapTiledJSON",
+                "key": "uppercut"
+            }
+        ]
+    },
+    "meta": {
+        "app": "Phaser Editor 2D - Asset Pack Editor",
+        "contentType": "phasereditor2d.pack.core.AssetContentType",
+        "url": "https://phasereditor2d.com",
+        "version": 2,
+        "showAllFilesInBlocks": false
+    }
+}

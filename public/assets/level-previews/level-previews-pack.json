@@ -1,0 +1,128 @@
+{
+    "section1": {
+        "files": [
+            {
+                "url": "assets/level-previews/preview-airborne.png",
+                "type": "image",
+                "key": "preview-airborne"
+            },
+            {
+                "url": "assets/level-previews/preview-blank.png",
+                "type": "image",
+                "key": "preview-blank"
+            },
+            {
+                "url": "assets/level-previews/preview-bomb-holder.png",
+                "type": "image",
+                "key": "preview-bomb-holder"
+            },
+            {
+                "url": "assets/level-previews/preview-bomb-intro.png",
+                "type": "image",
+                "key": "preview-bomb-intro"
+            },
+            {
+                "url": "assets/level-previews/preview-bomb-punch.png",
+                "type": "image",
+                "key": "preview-bomb-punch"
+            },
+            {
+                "url": "assets/level-previews/preview-charge.png",
+                "type": "image",
+                "key": "preview-charge"
+            },
+            {
+                "url": "assets/level-previews/preview-combo.png",
+                "type": "image",
+                "key": "preview-combo"
+            },
+            {
+                "url": "assets/level-previews/preview-dive.png",
+                "type": "image",
+                "key": "preview-dive"
+            },
+            {
+                "url": "assets/level-previews/preview-dive-practice.png",
+                "type": "image",
+                "key": "preview-dive-practice"
+            },
+            {
+                "url": "assets/level-previews/preview-finale.png",
+                "type": "image",
+                "key": "preview-finale"
+            },
+            {
+                "url": "assets/level-previews/preview-flap.png",
+                "type": "image",
+                "key": "preview-flap"
+            },
+            {
+                "url": "assets/level-previews/preview-gun-intro.png",
+                "type": "image",
+                "key": "preview-gun-intro"
+            },
+            {
+                "url": "assets/level-previews/preview-jump.png",
+                "type": "image",
+                "key": "preview-jump"
+            },
+            {
+                "url": "assets/level-previews/preview-mine-enemy.png",
+                "type": "image",
+                "key": "preview-mine-enemy"
+            },
+            {
+                "url": "assets/level-previews/preview-mine-intro.png",
+                "type": "image",
+                "key": "preview-mine-intro"
+            },
+            {
+                "url": "assets/level-previews/preview-mine-wall.png",
+                "type": "image",
+                "key": "preview-mine-wall"
+            },
+            {
+                "url": "assets/level-previews/preview-pogo-ideas.png",
+                "type": "image",
+                "key": "preview-pogo-ideas"
+            },
+            {
+                "url": "assets/level-previews/preview-pogo-intro.png",
+                "type": "image",
+                "key": "preview-pogo-intro"
+            },
+            {
+                "url": "assets/level-previews/preview-punch.png",
+                "type": "image",
+                "key": "preview-punch"
+            },
+            {
+                "url": "assets/level-previews/preview-tutorial-finale.png",
+                "type": "image",
+                "key": "preview-tutorial-finale"
+            },
+            {
+                "url": "assets/level-previews/preview-umbrella-intro.png",
+                "type": "image",
+                "key": "preview-umbrella-intro"
+            },
+            {
+                "url": "assets/level-previews/preview-umbrella-shield.png",
+                "type": "image",
+                "key": "preview-umbrella-shield"
+            },
+            {
+                "url": "assets/level-previews/preview-uppercut.png",
+                "type": "image",
+                "key": "preview-uppercut"
+            }
+        ]
+    },
+    "meta": {
+        "app": "Phaser Editor 2D - Asset Pack Editor",
+        "contentType": "phasereditor2d.pack.core.AssetContentType",
+        "url": "https://phasereditor2d.com",
+        "version": 2,
+        "showAllFilesInBlocks": false
+    }
+}

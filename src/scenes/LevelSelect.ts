@@ -9,7 +9,7 @@ import LevelIconPrefab from "../prefabs/LevelIconPrefab";
 
 import CameraUtil from "~/components/CameraUtil";
 import InputManager from "~/components/InputManager";
-import { getEarnedAward, getTotalAwards, levelRequiredAwards, levelScoreMilestones } from "~/components/LevelScores";
+import { getEarnedAward, getTotalAwards, levelRequiredAwards, levelScoreMilestones, mapPackDataSwap, mpLevelRequiredAwards } from "~/components/LevelScores";
 import SoundManager from "~/components/SoundManager";
 import cloudSaves from "~/API/cloudSaves";
 
@@ -757,6 +757,52 @@ export default class LevelSelect extends Phaser.Scene {
 		// 'mine-enemy',
 		];
 
+	public static mpLevelsKey = 
+		[
+		// TUTORIAL 1
+		'refresher', 
+		'stann', 
+		'dry-madngtl',
+		'flipping-the-bird',
+		
+		'dive',
+		'dive-practice',
+
+		// TUTORIAL 3
+		'uppercut',
+		'charge',
+		'tutorial-finale', 
+
+		// MAIN 1
+		'bomb-intro',
+		'combo',
+		'bomb-holder', 
+
+		// MAIN 2
+		'umbrella-intro',
+		'bomb-punch',
+
+		// MAIN 3
+		'pogo-intro',
+		'umbrella-shield',
+
+		// HARD 1
+		'mine-intro',
+		'pogo-ideas',
+
+		// HARD 2
+		'mine-enemy',
+		'mine-wall',
+
+		// HARD 3
+		'gun-intro',
+
+		// HARD 3
+		'finale'
+
+		// 'mine-enemy',
+		];
+
 	public static levelSelectEntry: 'titlescreen' | 'return' | 'complete' = 'titlescreen';
 
 	private gamepad:Phaser.Input.Gamepad.Gamepad | undefined;
@@ -814,6 +860,13 @@ export default class LevelSelect extends Phaser.Scene {
 		this.lockInput = false;
 
 		this.levelIndexUnlockQueue = new Array<number>();
+
+		// MP TEST
+		if (__MAP_PACK__)
+		{
+			LevelSelect.levelsKey = LevelSelect.mpLevelsKey;
+			mapPackDataSwap();
+		}
 
 		// this.levelPreviewImage = this.add.image(this.titleText.x, this.titleText.y, `preview-${LevelSelect.levelsKey[this.selectedLevel]}`);
 
@@ -2308,7 +2361,7 @@ export default class LevelSelect extends Phaser.Scene {
 		{
 			this.registry.set(`ninja`, true);
 		}
-		else
+		else if (__LEVEL_TEST__)
 		{
 			this.registry.set(`ninja`, false);
 		}

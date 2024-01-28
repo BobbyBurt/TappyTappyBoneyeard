@@ -44,8 +44,10 @@ export default class cloudSaves {
         if (cloudSaves.cloud)
         {
             console.log('Loading NGIO cloud save data...')
+            console.debug(NGIO.getSaveSlot(this.saveSlot));
     
-            if (NGIO.getSaveSlot(this.saveSlot) !== undefined)
+            if (NGIO.getSaveSlot(this.saveSlot).size > 0)
+            // this doesn't return undefined in the case of a nonexistant save. This works instead.
             {
                 NGIO.getSaveSlotData(this.saveSlot, (stringData) =>
                 {

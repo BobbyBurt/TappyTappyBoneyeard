@@ -1,3 +1,16 @@
+## Version 24 - 2024
+
+### Changed
+
+- Added option to disable uppercutting with the jump and punch key on desktop. This set by default on new save files.
+- Changed the gameover restart key from X to Shift. Suggested by STANN.co.
+- Some unused assets are no longer loaded.
+
+### Fixed
+
+- Disabled the ability to show the tutorial during the level complete sequence which caused the wrong score to be saved. Spotted by FutureCopLGF.
+- Fixed cloud save data being detected when non exist. Spotted by FutureCopLGF.
+
 ## Version 23 (patch 1) - Nov 10 2023
 
 ### Changed

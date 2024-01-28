@@ -133,6 +133,7 @@ class Boot extends Phaser.Scene
 		dataKeys.push(`got-egg: umbrella-shield`);
 		dataKeys.push(`got-egg: mine-intro`);
 		dataKeys.push(`got-egg: mine-wall`);
+		dataKeys.push(`new-uppercut-input`);
 
 		dataKeys.push(`no-more-unlocks`);
 		dataKeys.push('played-credits');

@@ -2,29 +2,22 @@
   "name": "tappy-tappy-boneyard",
   "version": "1.0.0",
   "description": "cool game",
-  "main": "webpack.config.js",
+  "main": "",
   "scripts": {
-    "dev": "esbuild src/main.ts --serve=3000 --servedir=public --bundle --sourcemap --target=es6 --define:__DEV__=true --outfile=public/main.js --define:__LEVEL_TEST__=false",
-    "prod": "esbuild src/main.ts --serve=3000 --servedir=public --bundle --minify --target=es6 --define:__DEV__=false --outfile=public/main.js --define:__LEVEL_TEST__=false",
-    "build": "esbuild src/main.ts --bundle --minify --target=es6 --define:__DEV__=false --outfile=public/main.js --define:__LEVEL_TEST__=false",
-    "level-test": "esbuild src/main.ts --bundle --minify --target=es6 --define:__DEV__=false --outfile=public/main.js --define:__LEVEL_TEST__=true",
-    "editor": "phasereditor2d-launcher -project . -port 1959",
-    "editor-remote": "phasereditor2d-launcher -project . -disable-open-browser -public -port 1959"
+    "dev": "esbuild src/main.ts --serve=3000 --servedir=public --bundle --sourcemap --target=es6 --define:__DEV__=true --outfile=public/main.js --define:__LEVEL_TEST__=false --define:__MAP_PACK__=false",
+    "dev-mp": "esbuild src/main.ts --serve=3000 --servedir=public --bundle --sourcemap --target=es6 --define:__DEV__=true --outfile=public/main.js --define:__LEVEL_TEST__=false --define:__MAP_PACK__=true",
+    "prod": "esbuild src/main.ts --serve=3000 --servedir=public --bundle --minify --target=es6 --define:__DEV__=false --outfile=public/main.js --define:__LEVEL_TEST__=false --define:__MAP_PACK__=false",
+    "prod-mp": "esbuild src/main.ts --serve=3000 --servedir=public --bundle --minify --target=es6 --define:__DEV__=false --outfile=public/main.js --define:__LEVEL_TEST__=false --define:__MAP_PACK__=true",
+    "build": "esbuild src/main.ts --bundle --minify --target=es6 --define:__DEV__=false --outfile=public/main.js --define:__LEVEL_TEST__=false --define:__MAP_PACK__=false",
+    "build-mp": "esbuild src/main.ts --bundle --minify --target=es6 --define:__DEV__=false --outfile=public/main.js --define:__LEVEL_TEST__=false --define:__MAP_PACK__=true",
+    "level-test": "esbuild src/main.ts --bundle --minify --target=es6 --define:__DEV__=false --outfile=public/main.js --define:__LEVEL_TEST__=true --define:__MAP_PACK__=true"
   },
   "author": "Phaser Editor 2D <developers@phasereditor2d.com> (https://phasereditor2d.com/)",
   "license": "MIT",
   "devDependencies": {
-    "clean-webpack-plugin": "^3.0.0",
-    "copy-webpack-plugin": "^8.1.0",
-    "html-webpack-plugin": "^5.3.1",
-    "phaser": "^3.60.0",
+    "phaser": "3.55.2",
     "phaser-asset-pack-hashing": "^1.0.5",
     "phasereditor2d-launcher": "^3.32.0",
-    "ts-loader": "^8.0.18",
-    "typescript": "^4.2.3",
-    "webpack": "^5.28.0",
-    "webpack-clean-plugin": "^0.2.3",
-    "webpack-cli": "^4.9.1",
-    "webpack-dev-server": "^4.4.0"
+    "typescript": "^4.2.3"
   }
 }

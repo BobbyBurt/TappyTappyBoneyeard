@@ -17,4 +17,6 @@ declare global
     var __DEV__: boolean;
 
     var __LEVEL_TEST__: boolean;
+
+    var __MAP_PACK__: boolean;
 }

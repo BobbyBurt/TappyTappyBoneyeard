@@ -15,6 +15,17 @@ export default class Punch implements State {
 
 	/** Set true if up is held on entry. Will enter uppercut state after windup. */
 	queueUppercut = false;
+
+	get allowUppercut()
+	{
+		let value = false;
+		if (this.player.scene.registry.get('mobile'))
+			return true;
+		else if (this.player.scene.registry.get('new-uppercut-input'))
+			return false;
+		else
+			return true;
+	}
 	
 	constructor(_player:playerPrefab, _stateController:StateController)
 	{
@@ -121,8 +132,15 @@ export default class Punch implements State {
 	{
 		// queue uppercut for after windup
 		if (this.pauseTimer.getProgress() < 1 && 
-			(this.player.jumpInput === 'down' || this.player.jumpInput === 'just-down' 
-			|| this.player.uppercutInput === 'down' || this.player.uppercutInput === 'just-up'))
+			(this.player.jumpInput === 'down' || this.player.jumpInput === 'just-down') && this.allowUppercut)
+		{
+			console.debug('queuing uppercut');
+
+			this.queueUppercut = true;
+		}
+
+		if (this.pauseTimer.getProgress() < 1 && 
+			(this.player.uppercutInput === 'down' || this.player.uppercutInput === 'just-up'))
 		{
 			console.debug('queuing uppercut');
 
@@ -133,7 +151,8 @@ export default class Punch implements State {
 			&& this.uppercutAllowTimer.getProgress() !== 1 
 			&& this.pauseTimer.getProgress() > 0)
 		{
-			this.uppercut();
+			if (this.allowUppercut)
+				this.uppercut();
 		}
 
 		if (this.player.onWallFacing(true))

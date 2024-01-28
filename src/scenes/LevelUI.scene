@@ -1242,7 +1242,7 @@
                     "tintBottomLeft": "#523746",
                     "tintBottomRight": "#523746",
                     "tintFill": true,
-                    "text": "X key to retry\nZ key to return to menu",
+                    "text": "Shift key to retry\nZ key to return to menu",
                     "font": "nokia",
                     "fontSize": -12,
                     "dropShadowColor": "#353535ff"

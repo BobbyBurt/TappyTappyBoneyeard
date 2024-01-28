@@ -1023,7 +1023,7 @@ export default class Level extends Phaser.Scene {
 		this.updateEnemiesUI(true);
 		this.time.addEvent({ delay: 300, callback: () => 
 		{
-			if (!__LEVEL_TEST__)
+			if (!__LEVEL_TEST__ && !__MAP_PACK__)
 			{
 				this.setTutorialUI(true, true);
 			}
@@ -1105,6 +1105,7 @@ export default class Level extends Phaser.Scene {
 		this.mineList = new Array<MinePrefab>();
 		this.createMines();
 
+		
 	// physics callbacks
 		// playerTilemapCollider
 		this.physics.add.collider(this.player, this.tileLayer, this.playerTilemapCollide, undefined, this);
@@ -1228,7 +1229,7 @@ export default class Level extends Phaser.Scene {
 
 	// gameover retry
 
-		this.input.keyboard.on('keydown-' + InputManager.getInput('menu-confirm', 'keyboard'), () =>
+		this.input.keyboard.on('keydown-' + InputManager.getInput('quick-restart', 'keyboard'), () =>
 		{
 			if (this.uiScene.gameOverContainer.visible)
 			{
@@ -3354,6 +3355,12 @@ export default class Level extends Phaser.Scene {
 	{
 		console.debug(show, initial);
 
+		if (this.reachedGoal === true)
+		{
+			return;
+			// BUG FIX: If the player does this during the level complete sequence then the delay before saving their score doesn't finish.
+		}
+		
 		if (!tutorialManager.getTutorialText(this.currentLevelIndex, this))
 		{
 			console.debug('returned; no tutorial for this level');
