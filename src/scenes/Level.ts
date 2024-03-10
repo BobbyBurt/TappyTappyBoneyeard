@@ -41,6 +41,148 @@ export default class Level extends Phaser.Scene {
 
 	editorCreate(): void {
 
+		// BGLayerPuck
+		const bGLayerPuck = this.add.layer();
+		bGLayerPuck.visible = false;
+
+		// rectangle_11
+		const rectangle_11 = this.add.rectangle(480, 299, 1000, 1000);
+		rectangle_11.isFilled = true;
+		rectangle_11.fillColor = 9546999;
+		bGLayerPuck.add(rectangle_11);
+
+		// parallax_Backing11111
+		const parallax_Backing11111 = this.add.image(352, 293, "Parallax-Backing-kid");
+		parallax_Backing11111.scaleX = 8.415017240244449;
+		bGLayerPuck.add(parallax_Backing11111);
+
+		// parallax_Cityscape11111
+		const parallax_Cityscape11111 = this.add.image(480, 305, "Paralax-Mountains");
+		parallax_Cityscape11111.flipX = true;
+		parallax_Cityscape11111.tintFill = true;
+		parallax_Cityscape11111.tintTopLeft = 6518725;
+		parallax_Cityscape11111.tintTopRight = 6518725;
+		parallax_Cityscape11111.tintBottomLeft = 6518725;
+		parallax_Cityscape11111.tintBottomRight = 6518725;
+		bGLayerPuck.add(parallax_Cityscape11111);
+
+		// parallax_Cityscape_11111
+		const parallax_Cityscape_11111 = this.add.image(160, 305, "Paralax-Mountains");
+		parallax_Cityscape_11111.flipX = true;
+		parallax_Cityscape_11111.tintFill = true;
+		parallax_Cityscape_11111.tintTopLeft = 6518725;
+		parallax_Cityscape_11111.tintTopRight = 6518725;
+		parallax_Cityscape_11111.tintBottomLeft = 6518725;
+		parallax_Cityscape_11111.tintBottomRight = 6518725;
+		bGLayerPuck.add(parallax_Cityscape_11111);
+
+		// parallax_Cityscape_2111
+		const parallax_Cityscape_2111 = this.add.image(800, 305, "Paralax-Mountains");
+		parallax_Cityscape_2111.flipX = true;
+		parallax_Cityscape_2111.tintFill = true;
+		parallax_Cityscape_2111.tintTopLeft = 6518725;
+		parallax_Cityscape_2111.tintTopRight = 6518725;
+		parallax_Cityscape_2111.tintBottomLeft = 6518725;
+		parallax_Cityscape_2111.tintBottomRight = 6518725;
+		bGLayerPuck.add(parallax_Cityscape_2111);
+
+		// parallax_Cityscape_3111
+		const parallax_Cityscape_3111 = this.add.image(-160, 305, "Paralax-Mountains");
+		parallax_Cityscape_3111.flipX = true;
+		parallax_Cityscape_3111.tintFill = true;
+		parallax_Cityscape_3111.tintTopLeft = 6518725;
+		parallax_Cityscape_3111.tintTopRight = 6518725;
+		parallax_Cityscape_3111.tintBottomLeft = 6518725;
+		parallax_Cityscape_3111.tintBottomRight = 6518725;
+		bGLayerPuck.add(parallax_Cityscape_3111);
+
+		// parallax_Cityscape_4111
+		const parallax_Cityscape_4111 = this.add.image(1119, 305, "Paralax-Mountains");
+		parallax_Cityscape_4111.flipX = true;
+		parallax_Cityscape_4111.tintFill = true;
+		parallax_Cityscape_4111.tintTopLeft = 6518725;
+		parallax_Cityscape_4111.tintTopRight = 6518725;
+		parallax_Cityscape_4111.tintBottomLeft = 6518725;
+		parallax_Cityscape_4111.tintBottomRight = 6518725;
+		bGLayerPuck.add(parallax_Cityscape_4111);
+
+		// parallax_Cityscape_6111
+		const parallax_Cityscape_6111 = this.add.image(1439, 306, "Paralax-Mountains");
+		parallax_Cityscape_6111.flipX = true;
+		parallax_Cityscape_6111.tintFill = true;
+		parallax_Cityscape_6111.tintTopLeft = 6518725;
+		parallax_Cityscape_6111.tintTopRight = 6518725;
+		parallax_Cityscape_6111.tintBottomLeft = 6518725;
+		parallax_Cityscape_6111.tintBottomRight = 6518725;
+		bGLayerPuck.add(parallax_Cityscape_6111);
+
+		// parallax_Cityscape_5111
+		const parallax_Cityscape_5111 = this.add.image(357, 378, "Paralax-Mountains");
+		parallax_Cityscape_5111.scaleX = 9.144642541425284;
+		parallax_Cityscape_5111.scaleY = 9.144642541425284;
+		parallax_Cityscape_5111.setOrigin(0.5, 0);
+		parallax_Cityscape_5111.flipY = true;
+		parallax_Cityscape_5111.tintFill = true;
+		parallax_Cityscape_5111.tintTopLeft = 5334191;
+		parallax_Cityscape_5111.tintTopRight = 5334191;
+		parallax_Cityscape_5111.tintBottomLeft = 5334191;
+		parallax_Cityscape_5111.tintBottomRight = 5334191;
+		bGLayerPuck.add(parallax_Cityscape_5111);
+
+		// parallax_Cityscape_15111
+		const parallax_Cityscape_15111 = this.add.image(1328, 327, "Paralax-Mountains");
+		parallax_Cityscape_15111.tintFill = true;
+		parallax_Cityscape_15111.tintTopLeft = 5334191;
+		parallax_Cityscape_15111.tintTopRight = 5334191;
+		parallax_Cityscape_15111.tintBottomLeft = 5334191;
+		parallax_Cityscape_15111.tintBottomRight = 5334191;
+		bGLayerPuck.add(parallax_Cityscape_15111);
+
+		// parallax_Cityscape_16111
+		const parallax_Cityscape_16111 = this.add.image(1008, 327, "Paralax-Mountains");
+		parallax_Cityscape_16111.tintFill = true;
+		parallax_Cityscape_16111.tintTopLeft = 5334191;
+		parallax_Cityscape_16111.tintTopRight = 5334191;
+		parallax_Cityscape_16111.tintBottomLeft = 5334191;
+		parallax_Cityscape_16111.tintBottomRight = 5334191;
+		bGLayerPuck.add(parallax_Cityscape_16111);
+
+		// parallax_Cityscape_17111
+		const parallax_Cityscape_17111 = this.add.image(-271, 327, "Paralax-Mountains");
+		parallax_Cityscape_17111.tintFill = true;
+		parallax_Cityscape_17111.tintTopLeft = 5334191;
+		parallax_Cityscape_17111.tintTopRight = 5334191;
+		parallax_Cityscape_17111.tintBottomLeft = 5334191;
+		parallax_Cityscape_17111.tintBottomRight = 5334191;
+		bGLayerPuck.add(parallax_Cityscape_17111);
+
+		// parallax_Cityscape_18111
+		const parallax_Cityscape_18111 = this.add.image(689, 327, "Paralax-Mountains");
+		parallax_Cityscape_18111.tintFill = true;
+		parallax_Cityscape_18111.tintTopLeft = 5334191;
+		parallax_Cityscape_18111.tintTopRight = 5334191;
+		parallax_Cityscape_18111.tintBottomLeft = 5334191;
+		parallax_Cityscape_18111.tintBottomRight = 5334191;
+		bGLayerPuck.add(parallax_Cityscape_18111);
+
+		// parallax_Cityscape_191111
+		const parallax_Cityscape_191111 = this.add.image(49, 327, "Paralax-Mountains");
+		parallax_Cityscape_191111.tintFill = true;
+		parallax_Cityscape_191111.tintTopLeft = 5334191;
+		parallax_Cityscape_191111.tintTopRight = 5334191;
+		parallax_Cityscape_191111.tintBottomLeft = 5334191;
+		parallax_Cityscape_191111.tintBottomRight = 5334191;
+		bGLayerPuck.add(parallax_Cityscape_191111);
+
+		// parallax_Cityscape_20111
+		const parallax_Cityscape_20111 = this.add.image(369, 327, "Paralax-Mountains");
+		parallax_Cityscape_20111.tintFill = true;
+		parallax_Cityscape_20111.tintTopLeft = 5334191;
+		parallax_Cityscape_20111.tintTopRight = 5334191;
+		parallax_Cityscape_20111.tintBottomLeft = 5334191;
+		parallax_Cityscape_20111.tintBottomRight = 5334191;
+		bGLayerPuck.add(parallax_Cityscape_20111);
+
 		// BGLayerNinja
 		const bGLayerNinja = this.add.layer();
 
@@ -637,6 +779,60 @@ export default class Level extends Phaser.Scene {
 		const bulletList: Array<any> = [];
 		const hiddenByTutorialList: Array<any> = [];
 
+		// parallax_Backing11111 (components)
+		new ScrollFactor(parallax_Backing11111);
+
+		// parallax_Cityscape11111 (components)
+		const parallax_Cityscape11111ScrollFactor = new ScrollFactor(parallax_Cityscape11111);
+		parallax_Cityscape11111ScrollFactor.factorX = 0.2;
+
+		// parallax_Cityscape_11111 (components)
+		const parallax_Cityscape_11111ScrollFactor = new ScrollFactor(parallax_Cityscape_11111);
+		parallax_Cityscape_11111ScrollFactor.factorX = 0.2;
+
+		// parallax_Cityscape_2111 (components)
+		const parallax_Cityscape_2111ScrollFactor = new ScrollFactor(parallax_Cityscape_2111);
+		parallax_Cityscape_2111ScrollFactor.factorX = 0.2;
+
+		// parallax_Cityscape_3111 (components)
+		const parallax_Cityscape_3111ScrollFactor = new ScrollFactor(parallax_Cityscape_3111);
+		parallax_Cityscape_3111ScrollFactor.factorX = 0.2;
+
+		// parallax_Cityscape_4111 (components)
+		const parallax_Cityscape_4111ScrollFactor = new ScrollFactor(parallax_Cityscape_4111);
+		parallax_Cityscape_4111ScrollFactor.factorX = 0.2;
+
+		// parallax_Cityscape_6111 (components)
+		const parallax_Cityscape_6111ScrollFactor = new ScrollFactor(parallax_Cityscape_6111);
+		parallax_Cityscape_6111ScrollFactor.factorX = 0.2;
+
+		// parallax_Cityscape_5111 (components)
+		new ScrollFactor(parallax_Cityscape_5111);
+
+		// parallax_Cityscape_15111 (components)
+		const parallax_Cityscape_15111ScrollFactor = new ScrollFactor(parallax_Cityscape_15111);
+		parallax_Cityscape_15111ScrollFactor.factorX = 0.25;
+
+		// parallax_Cityscape_16111 (components)
+		const parallax_Cityscape_16111ScrollFactor = new ScrollFactor(parallax_Cityscape_16111);
+		parallax_Cityscape_16111ScrollFactor.factorX = 0.25;
+
+		// parallax_Cityscape_17111 (components)
+		const parallax_Cityscape_17111ScrollFactor = new ScrollFactor(parallax_Cityscape_17111);
+		parallax_Cityscape_17111ScrollFactor.factorX = 0.25;
+
+		// parallax_Cityscape_18111 (components)
+		const parallax_Cityscape_18111ScrollFactor = new ScrollFactor(parallax_Cityscape_18111);
+		parallax_Cityscape_18111ScrollFactor.factorX = 0.25;
+
+		// parallax_Cityscape_191111 (components)
+		const parallax_Cityscape_191111ScrollFactor = new ScrollFactor(parallax_Cityscape_191111);
+		parallax_Cityscape_191111ScrollFactor.factorX = 0.25;
+
+		// parallax_Cityscape_20111 (components)
+		const parallax_Cityscape_20111ScrollFactor = new ScrollFactor(parallax_Cityscape_20111);
+		parallax_Cityscape_20111ScrollFactor.factorX = 0.25;
+
 		// parallax_Backing1111 (components)
 		new ScrollFactor(parallax_Backing1111);
 
@@ -873,6 +1069,8 @@ export default class Level extends Phaser.Scene {
 		const parallax_Hills_27ScrollFactor = new ScrollFactor(parallax_Hills_27);
 		parallax_Hills_27ScrollFactor.factorX = 0.25;
 
+		this.bGLayerPuck = bGLayerPuck;
+		this.parallax_Backing11111 = parallax_Backing11111;
 		this.bGLayerNinja = bGLayerNinja;
 		this.parallax_Backing1111 = parallax_Backing1111;
 		this.bGLayerIndustry = bGLayerIndustry;
@@ -894,6 +1092,8 @@ export default class Level extends Phaser.Scene {
 		this.events.emit("scene-awake");
 	}
 
+	private bGLayerPuck!: Phaser.GameObjects.Layer;
+	private parallax_Backing11111!: Phaser.GameObjects.Image;
 	private bGLayerNinja!: Phaser.GameObjects.Layer;
 	private parallax_Backing1111!: Phaser.GameObjects.Image;
 	private bGLayerIndustry!: Phaser.GameObjects.Layer;
@@ -999,6 +1199,7 @@ export default class Level extends Phaser.Scene {
 	private gotEggZone = false;
 
 	private ninja = '';
+	private tilesetPostfix: '' | '-ninja' | '-puck' | '-gappy' | '-kid' = '';
 
 	create()
 	{
@@ -1006,6 +1207,12 @@ export default class Level extends Phaser.Scene {
 
 	// reset properties
 		this.ninja = (this.registry.get('ninja') ? '_1' : '');
+
+		if (this.registry.get('selected-tileset') !== undefined)
+		{
+			this.tilesetPostfix = this.registry.get('selected-tileset');
+		}
+
 		this.reachedGoal = false;
 		this.restarting = false;
 		this.combo = 0;
@@ -1037,8 +1244,8 @@ export default class Level extends Phaser.Scene {
 
 	// tilemap
 		this.tileMap = this.add.tilemap(this.registry.get('current-level'));
-		this.tileMap.addTilesetImage("tilleset", "tileset" + this.ninja);
-		this.tileMap.addTilesetImage("bg-tileset", "bg-tileset" + this.ninja);
+		this.tileMap.addTilesetImage("tilleset", "tileset" + this.tilesetPostfix);
+		this.tileMap.addTilesetImage("bg-tileset", "bg-tileset" + this.tilesetPostfix);
 
 
 
@@ -1055,15 +1262,29 @@ export default class Level extends Phaser.Scene {
 			this.bgTileLayer.setDepth(10);
 		}
 
-		if (this.ninja === '_1')
+		if (this.tilesetPostfix == '')
+		{
+			this.tileLayer.setCollision([1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18,
+				19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90], true);
+		}
+		else if (this.tilesetPostfix === '-ninja')
 		{
 			this.tileLayer.setCollision([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18,
 				19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90], true);
 		}
-		else
+		else if (this.tilesetPostfix === '-kid')
 		{
-			this.tileLayer.setCollision([1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18,
+			this.tileLayer.setCollision([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18,
 				19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90], true);
+		}
+		else if (this.tilesetPostfix === '-gappy')
+		{
+			this.tileLayer.setCollision([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18,
+				19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90], true);
+		}
+		else if (this.tilesetPostfix === '-puck')
+		{
+			this.tileLayer.setCollision([1, 2, 3, 7, 8, 9, 10], true);
 		}
 
 
@@ -1072,19 +1293,43 @@ export default class Level extends Phaser.Scene {
 
 	// BG
 		const levelIndex = this.registry.get('current-level-index');
-		if (this.ninja === '_1')
+		if (this.tilesetPostfix === '-ninja')
 		{
 			this.bGLayerCity.setVisible(false);
 			this.bGLayerHills.setVisible(false);
 			this.bGLayerIndustry.setVisible(false);
 			this.bGLayerNinja.setVisible(true);
+			this.bGLayerPuck.setVisible(false);
 		}
+		else if (this.tilesetPostfix === '-puck' || this.tilesetPostfix === '-kid' || this.tilesetPostfix === '-gappy')
+		{
+			this.bGLayerCity.setVisible(false);
+			this.bGLayerHills.setVisible(false);
+			this.bGLayerIndustry.setVisible(false);
+			this.bGLayerNinja.setVisible(false);
+			this.bGLayerPuck.setVisible(true);
+		}
+		// else if (this.tilesetPostfix === '-kid')
+		// {
+		// 	this.bGLayerCity.setVisible(false);
+		// 	this.bGLayerHills.setVisible(false);
+		// 	this.bGLayerIndustry.setVisible(false);
+		// 	this.bGLayerNinja.setVisible(true);
+		// }
+		// else if (this.tilesetPostfix === '-gappy')
+		// {
+		// 	this.bGLayerCity.setVisible(false);
+		// 	this.bGLayerHills.setVisible(false);
+		// 	this.bGLayerIndustry.setVisible(false);
+		// 	this.bGLayerNinja.setVisible(true);
+		// }
 		else if (levelIndex < 9)
 		{
 			this.bGLayerCity.setVisible(false);
 			this.bGLayerHills.setVisible(true);
 			this.bGLayerIndustry.setVisible(false);
 			this.bGLayerNinja.setVisible(false);
+			this.bGLayerPuck.setVisible(false);
 		}
 		else if (levelIndex >= 9 && levelIndex < 16)
 		{
@@ -1092,6 +1337,7 @@ export default class Level extends Phaser.Scene {
 			this.bGLayerHills.setVisible(false);
 			this.bGLayerIndustry.setVisible(false);
 			this.bGLayerNinja.setVisible(false);
+			this.bGLayerPuck.setVisible(false);
 		}
 		else
 		{
@@ -1099,13 +1345,14 @@ export default class Level extends Phaser.Scene {
 			this.bGLayerHills.setVisible(false);
 			this.bGLayerIndustry.setVisible(true);
 			this.bGLayerNinja.setVisible(false);
+			this.bGLayerPuck.setVisible(false);
 		}
 
 	//mines
 		this.mineList = new Array<MinePrefab>();
 		this.createMines();
 
-		
+
 	// physics callbacks
 		// playerTilemapCollider
 		this.physics.add.collider(this.player, this.tileLayer, this.playerTilemapCollide, undefined, this);
@@ -1272,7 +1519,7 @@ export default class Level extends Phaser.Scene {
 		// level select input
 		this.input.keyboard.on('keydown-A', () =>
 		{
-			if (__DEV__)
+			if (__DEV__ || __LEVEL_TEST__)
 			{
 				LevelSelect.levelSelectEntry = 'return';
 				this.LoadLevelSelect();
@@ -1950,7 +2197,7 @@ export default class Level extends Phaser.Scene {
 				tiredState = 'tired';
 			else if (this.player.flapCharge === 0)
 				tiredState = 'exhausted';
-			this.tapperDeadProp.startSequnce(tiredState);
+			this.tapperDeadProp.startSequnce(tiredState, this.player.character);
 		}
 
 		NGIO.logEvent(`Level ${this.registry.get('current-level-index') + 1} Death`, (event) => 
@@ -2896,7 +3143,17 @@ export default class Level extends Phaser.Scene {
 			}
 
 			let mine: MinePrefab;
-			mine = new MinePrefab(this, object.x! + 8, object.y! - 8, 'bomb-mask' + this.ninja);
+			mine = new MinePrefab(this, object.x! + 8, object.y! - 8, (this.tilesetPostfix === '' || this.tilesetPostfix === '-ninja'), 'bomb-mask' + this.ninja);
+			if (this.tilesetPostfix === '-kid' || this.tilesetPostfix === '-gappy')
+			{
+				mine.angle = object.rotation!;
+				mine.flipY = object.flippedVertical!;
+				mine.setTexture('mine-kid');
+			}
+			if (this.tilesetPostfix === '-puck')
+			{
+				mine.setTexture('mine-puck');
+			}
 			this.mineList.push(mine);
 			this.mainLayer.add(mine);
 			mine.setDepth(5);
@@ -3360,7 +3617,7 @@ export default class Level extends Phaser.Scene {
 			return;
 			// BUG FIX: If the player does this during the level complete sequence then the delay before saving their score doesn't finish.
 		}
-		
+
 		if (!tutorialManager.getTutorialText(this.currentLevelIndex, this))
 		{
 			console.debug('returned; no tutorial for this level');
@@ -3458,20 +3715,20 @@ export default class Level extends Phaser.Scene {
 	{
 		if (this.uiScene.scene.isActive())
 		{
-			if (__LEVEL_TEST__)
-			{
-				this.uiScene.setDebugText(2, `Bird Tapper PPP v${this.game.config.gameVersion} - LEVEL TEST BUILD`);
+			// if (__LEVEL_TEST__)
+			// {
+			// 	this.uiScene.setDebugText(2, `Bird Tapper PPP v${this.game.config.gameVersion} - LEVEL TEST BUILD`);
 
-				return;
-			}
+			// 	return;
+			// }
 
 			// this.uiScene.setDebugText(0, `${this.player.stateController.currentState.name}`);
-			this.uiScene.setDebugText(0, `level completed: ${this.registry.get('completed-level-' + this.currentLevelIndex)}`);
-			this.uiScene.setDebugText(1, `player vel x : ${this.player.body.velocity.x}`);
-			if (this.uiScene.tutorialOffsetTween)
-			{
-				this.uiScene.setDebugText(2, `tutorial tween progress : ${this.uiScene.tutorialOffsetTween.progress}`);
-			}
+			// this.uiScene.setDebugText(0, `level completed: ${this.registry.get('completed-level-' + this.currentLevelIndex)}`);
+			// this.uiScene.setDebugText(1, `player vel x : ${this.player.body.velocity.x}`);
+			// if (this.uiScene.tutorialOffsetTween)
+			// {
+			// 	this.uiScene.setDebugText(2, `tutorial tween progress : ${this.uiScene.tutorialOffsetTween.progress}`);
+			// }
 		}
 	}
 

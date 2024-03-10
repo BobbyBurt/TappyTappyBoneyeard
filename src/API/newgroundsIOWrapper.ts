@@ -1,5 +1,7 @@
 import { a as appID } from 'API/credentials';
 import { e as encryptionKey } from 'API/credentials';
+import { a_mp as appIDMP } from 'API/credentials';
+import { e_mp as encryptionKeyMP } from 'API/credentials';
 
 /**
  * Start & update functions to initialize NGIO.
@@ -24,7 +26,14 @@ export class newgroundsIOWrapper
             debugMode: __DEV__
         };
 
-        NGIO.init(appID, encryptionKey, options);
+        if (__MAP_PACK__)
+        {
+            NGIO.init(appIDMP, encryptionKeyMP, options);
+        }
+        else
+        {
+            NGIO.init(appID, encryptionKey, options);
+        }
 	    NGIO.getConnectionStatus(function (status) {});
     }
 
@@ -39,6 +48,8 @@ export class newgroundsIOWrapper
      */
     public update(game: Phaser.Game)
     {
+        let _this = this;
+
         // Note: the callback function only fires if there's a change in status
         NGIO.getConnectionStatus(function (status)
         {
@@ -116,10 +127,104 @@ export class newgroundsIOWrapper
                     console.log("Status ready!");
                     newgroundsIOWrapper.status = 'STATUS_READY';
                     // return `STATUS_READY`;
+
+                    // EXTERNAL SAVE DATA LOAD
+
+                    NGIO.ngioCore.executeComponent(_this.component, _this.onExternalSaveSlotsLoaded);
+
+
                     break;
+                
             }
         });
   
         NGIO.keepSessionAlive();
     }
+    
+    // we'll fill this in when we execute our component
+    private externalSaveSlots:any = [0, 0, 0];
+
+    // function to get slots by slot numer
+    getExternalSaveSlot(app_id: string, slot_id: number)
+    {
+        if (typeof(this.externalSaveSlots[app_id]) === 'undefined') return null;
+
+        for(var i=0; i<this.externalSaveSlots.length; i++) {
+            if (this.externalSaveSlots[i].id === slot_id) return this.externalSaveSlots[i];
+        }
+        return null;
+    }
+
+    // function to load save data from a slot
+    public loadExternalSaveData(app_id: string, slot_id: number, callback: (data: any, app_id: string, slot: number | null) => void)
+    {
+        // slot is a NewgroundsIO.objects.SaveSlot instance
+        var slot = this.getExternalSaveSlot(app_id, slot_id);
+
+        // if the slots aren't loaded yet, or the slot has no save data, pass null to the callback
+        if (!slot || !slot.hasData) {
+            callback(null, app_id, null);
+
+        // load the slot data and pass it to the callback
+        } else {
+            slot.getData(function(data: any) {
+                callback(data, app_id, slot);
+            });
+
+        }
+    }
+
+    // create the component, and pass in an external App ID
+    private component = new NewgroundsIO.components.CloudSave.loadSlots({
+        app_id: (__MAP_PACK__ ? '55003:7XXBXFge' : '57584:YRUg4prp'), // in "12345:UvWXyZ" format
+    });
+
+    // execute the component on the server
+
+    // serverResponse will be a NewgroundsIO.objects.Response instance
+    onExternalSaveSlotsLoaded(serverResponse: any)
+    {
+        if (serverResponse.success) {
+
+            // result will be an instance of NewgroundsIO.results.CloudSave.loadSlots
+            var result = serverResponse.result;
+
+            if (result.success) {
+
+                // store the save slot
+                // this.externalSaveSlots = new Array([0, 0, 0]);
+                // this.externalSaveSlots[result.app_id] = result.slots;
+
+                // console.debug(result.slots[1].data);
+
+                // You can get the app id that was used with result.app_id
+
+            } else {
+                // the component failed
+                console.error(result.error.message);
+            }
+
+        } else {
+
+            // something went wrong
+            console.error(serverResponse.error.message);
+        }
+    }
+
+
+    // ... when you are ready to load an external slot ...
+
+
+    // loadExternalSaveData(SOME_OTHER_APP_ID, SLOT_NUMBER, onSaveDataLoaded);
+
+    onSaveDataLoaded(data: any, app_id: string, slot: number)
+    {
+        // data is the loaded data, app_id is the app id you used
+        // and slot is a NewgroundsIO.objects.SaveSlot instance
+
+        console.debug(data, app_id, slot);
+
+        // do your thing!
+    }
+
 }

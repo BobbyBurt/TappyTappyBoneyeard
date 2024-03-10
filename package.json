@@ -10,7 +10,7 @@
     "prod-mp": "esbuild src/main.ts --serve=3000 --servedir=public --bundle --minify --target=es6 --define:__DEV__=false --outfile=public/main.js --define:__LEVEL_TEST__=false --define:__MAP_PACK__=true",
     "build": "esbuild src/main.ts --bundle --minify --target=es6 --define:__DEV__=false --outfile=public/main.js --define:__LEVEL_TEST__=false --define:__MAP_PACK__=false",
     "build-mp": "esbuild src/main.ts --bundle --minify --target=es6 --define:__DEV__=false --outfile=public/main.js --define:__LEVEL_TEST__=false --define:__MAP_PACK__=true",
-    "level-test": "esbuild src/main.ts --bundle --minify --target=es6 --define:__DEV__=false --outfile=public/main.js --define:__LEVEL_TEST__=true --define:__MAP_PACK__=true"
+    "level-test": "esbuild src/main.ts --bundle --target=es6 --define:__DEV__=false --outfile=public/main.js --define:__LEVEL_TEST__=true --define:__MAP_PACK__=true"
   },
   "author": "Phaser Editor 2D <developers@phasereditor2d.com> (https://phasereditor2d.com/)",
   "license": "MIT",

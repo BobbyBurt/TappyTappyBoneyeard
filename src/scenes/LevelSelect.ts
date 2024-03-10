@@ -422,57 +422,22 @@ export default class LevelSelect extends Phaser.Scene {
 		hintText.fontSize = -8;
 		hintText.maxWidth = 130;
 
-		// fullscreenBack
-		const fullscreenBack = this.add.rectangle(360, 159, 75, 28);
-		fullscreenBack.setOrigin(0, 0);
-		fullscreenBack.isFilled = true;
-		fullscreenBack.fillColor = 10054789;
+		// menuBack
+		const menuBack = this.add.rectangle(360, 159, 75, 28);
+		menuBack.setOrigin(0, 0);
+		menuBack.isFilled = true;
+		menuBack.fillColor = 10054789;
 
 		// hintText_1
-		const hintText_1 = this.add.bitmapText(373, 168, "nokia", "Fullscreen");
-		hintText_1.text = "Fullscreen";
+		const hintText_1 = this.add.bitmapText(388, 168, "nokia", "Menu");
+		hintText_1.text = "Menu";
 		hintText_1.fontSize = -8;
 		hintText_1.maxWidth = 130;
 
-		// hintBack_2
-		const hintBack_2 = this.add.rectangle(363, 162, 1, 4);
-		hintBack_2.setOrigin(0, 0);
-		hintBack_2.isFilled = true;
-
-		// hintBack_4
-		const hintBack_4 = this.add.rectangle(363, 180, 1, 4);
-		hintBack_4.setOrigin(0, 0);
-		hintBack_4.isFilled = true;
-
 		// hintBack_5
-		const hintBack_5 = this.add.rectangle(363, 183, 4, 1);
+		const hintBack_5 = this.add.rectangle(379, 170, 6, 1);
 		hintBack_5.setOrigin(0, 0);
 		hintBack_5.isFilled = true;
-
-		// hintBack_6
-		const hintBack_6 = this.add.rectangle(431, 162, 1, 4);
-		hintBack_6.setOrigin(0, 0);
-		hintBack_6.isFilled = true;
-
-		// hintBack_7
-		const hintBack_7 = this.add.rectangle(428, 183, 4, 1);
-		hintBack_7.setOrigin(0, 0);
-		hintBack_7.isFilled = true;
-
-		// hintBack_8
-		const hintBack_8 = this.add.rectangle(431, 180, 1, 4);
-		hintBack_8.setOrigin(0, 0);
-		hintBack_8.isFilled = true;
-
-		// hintBack_9
-		const hintBack_9 = this.add.rectangle(428, 162, 4, 1);
-		hintBack_9.setOrigin(0, 0);
-		hintBack_9.isFilled = true;
-
-		// hintBack_10
-		const hintBack_10 = this.add.rectangle(363, 162, 4, 1);
-		hintBack_10.setOrigin(0, 0);
-		hintBack_10.isFilled = true;
 
 		// optionsMenuContainer
 		const optionsMenuContainer = this.add.container(240, 135);
@@ -490,6 +455,121 @@ export default class LevelSelect extends Phaser.Scene {
 		bitmaptext_1.text = "Options";
 		bitmaptext_1.fontSize = -16;
 		optionsMenuContainer.add(bitmaptext_1);
+
+		// hintBack_1
+		const hintBack_1 = this.add.rectangle(379, 172, 6, 1);
+		hintBack_1.setOrigin(0, 0);
+		hintBack_1.isFilled = true;
+
+		// hintBack_3
+		const hintBack_3 = this.add.rectangle(379, 174, 6, 1);
+		hintBack_3.setOrigin(0, 0);
+		hintBack_3.isFilled = true;
+
+		// menuContainer
+		const menuContainer = this.add.container(0, 0);
+
+		// characterSelectContainer
+		const characterSelectContainer = this.add.container(0, 0);
+		characterSelectContainer.visible = false;
+
+		// characterSelectBack
+		const characterSelectBack = this.add.rectangle(240, 135, 250, 150);
+		characterSelectBack.isFilled = true;
+		characterSelectBack.fillColor = 10054789;
+		characterSelectBack.isStroked = true;
+		characterSelectBack.strokeAlpha = 0.7;
+		characterSelectBack.lineWidth = 2;
+		characterSelectContainer.add(characterSelectBack);
+
+		// characterSelectLabel
+		const characterSelectLabel = this.add.bitmapText(202, 69, "nokia", "Character Select");
+		characterSelectLabel.text = "Character Select";
+		characterSelectLabel.fontSize = -8;
+		characterSelectContainer.add(characterSelectLabel);
+
+		// characterDescText
+		const characterDescText = this.add.bitmapText(129, 154, "nokia", "doesn’t move on the ground, but has 5 or 6 jumps which he uses to move around");
+		characterDescText.text = "doesn’t move on the ground, but has 5 or 6 jumps which he uses to move around";
+		characterDescText.fontSize = -8;
+		characterDescText.maxWidth = 135;
+		characterSelectContainer.add(characterDescText);
+
+		// characterDescText2
+		const characterDescText2 = this.add.bitmapText(268, 154, "nokia", "- More jumps!\n- Eats babies. . .");
+		characterDescText2.text = "- More jumps!\n- Eats babies. . .";
+		characterDescText2.fontSize = -8;
+		characterDescText2.maxWidth = 200;
+		characterSelectContainer.add(characterDescText2);
+
+		// characterSelectBack_1
+		const characterSelectBack_1 = this.add.rectangle(116, 85, 248, 60);
+		characterSelectBack_1.setOrigin(0, 0);
+		characterSelectBack_1.isFilled = true;
+		characterSelectBack_1.fillColor = 6966365;
+		characterSelectContainer.add(characterSelectBack_1);
+
+		// characterNameText
+		const characterNameText = this.add.bitmapText(212, 130, "nokia", "Bird Tapper");
+		characterNameText.text = "Bird Tapper";
+		characterNameText.fontSize = -8;
+		characterSelectContainer.add(characterNameText);
+
+		// bird1mid
+		const bird1mid = this.add.image(158, 99, "bird1mid");
+		bird1mid.setOrigin(0, 0);
+		characterSelectContainer.add(bird1mid);
+
+		// bird1mid_1
+		const bird1mid_1 = this.add.image(206, 99, "bird1mid");
+		bird1mid_1.setOrigin(0, 0);
+		characterSelectContainer.add(bird1mid_1);
+
+		// bird1mid_2
+		const bird1mid_2 = this.add.image(254, 99, "bird1mid");
+		bird1mid_2.setOrigin(0, 0);
+		characterSelectContainer.add(bird1mid_2);
+
+		// bird1mid_3
+		const bird1mid_3 = this.add.image(302, 99, "bird1mid");
+		bird1mid_3.setOrigin(0, 0);
+		characterSelectContainer.add(bird1mid_3);
+
+		// rectangle_1
+		const rectangle_1 = this.add.rectangle(152, 94, 30, 30);
+		rectangle_1.setOrigin(0, 0);
+		rectangle_1.isFilled = true;
+		rectangle_1.fillAlpha = 0;
+		rectangle_1.isStroked = true;
+		rectangle_1.lineWidth = 2;
+		characterSelectContainer.add(rectangle_1);
+
+		// rectangle
+		const rectangle = this.add.rectangle(201, 93, 30, 30);
+		rectangle.setOrigin(0, 0);
+		rectangle.isFilled = true;
+		rectangle.fillAlpha = 0;
+		rectangle.isStroked = true;
+		rectangle.lineWidth = 2;
+		characterSelectContainer.add(rectangle);
+
+		// rectangle_2
+		const rectangle_2 = this.add.rectangle(249, 94, 30, 30);
+		rectangle_2.setOrigin(0, 0);
+		rectangle_2.isFilled = true;
+		rectangle_2.fillAlpha = 0;
+		rectangle_2.isStroked = true;
+		rectangle_2.lineWidth = 2;
+		characterSelectContainer.add(rectangle_2);
+
+		// rectangle_3
+		const rectangle_3 = this.add.rectangle(295, 94, 30, 30);
+		rectangle_3.setOrigin(0, 0);
+		rectangle_3.isFilled = true;
+		rectangle_3.fillAlpha = 0;
+		rectangle_3.isStroked = true;
+		rectangle_3.lineWidth = 2;
+		characterSelectContainer.add(rectangle_3);
 
 		// lists
 		const levelBackList: Array<any> = [];
@@ -635,8 +715,13 @@ export default class LevelSelect extends Phaser.Scene {
 		this.levelIconPrefab_26 = levelIconPrefab_26;
 		this.levelIconPrefab_21 = levelIconPrefab_21;
 		this.hintText = hintText;
-		this.fullscreenBack = fullscreenBack;
+		this.menuBack = menuBack;
 		this.hintText_1 = hintText_1;
+		this.menuContainer = menuContainer;
+		this.characterSelectContainer = characterSelectContainer;
+		this.characterDescText = characterDescText;
+		this.characterDescText2 = characterDescText2;
+		this.characterNameText = characterNameText;
 		this.levelBackList = levelBackList;
 
 		this.events.emit("scene-awake");
@@ -702,8 +787,13 @@ export default class LevelSelect extends Phaser.Scene {
 	private levelIconPrefab_26!: LevelIconPrefab;
 	private levelIconPrefab_21!: LevelIconPrefab;
 	private hintText!: Phaser.GameObjects.BitmapText;
-	private fullscreenBack!: Phaser.GameObjects.Rectangle;
+	private menuBack!: Phaser.GameObjects.Rectangle;
 	private hintText_1!: Phaser.GameObjects.BitmapText;
+	private menuContainer!: Phaser.GameObjects.Container;
+	private characterSelectContainer!: Phaser.GameObjects.Container;
+	private characterDescText!: Phaser.GameObjects.BitmapText;
+	private characterDescText2!: Phaser.GameObjects.BitmapText;
+	private characterNameText!: Phaser.GameObjects.BitmapText;
 	private levelBackList!: Array<any>;
 
 	/* START-USER-CODE */
@@ -764,13 +854,14 @@ export default class LevelSelect extends Phaser.Scene {
 		'stann', 
 		'dry-madngtl',
 		'flipping-the-bird',
-		
-		'dive',
-		'dive-practice',
+		'tinas-tower',
+		'Puck_Level1',
+		'Puck_Level2',
+		'TheKid_Level1',
+		'TheKid_Level2',
+
 
 		// TUTORIAL 3
-		'uppercut',
-		'charge',
 		'tutorial-finale', 
 
 		// MAIN 1
@@ -870,25 +961,31 @@ export default class LevelSelect extends Phaser.Scene {
 
 		// this.levelPreviewImage = this.add.image(this.titleText.x, this.titleText.y, `preview-${LevelSelect.levelsKey[this.selectedLevel]}`);
 
-		this.fullscreenBack.setInteractive();
-		this.fullscreenBack.on('pointerup', () =>
+
+		this.menuBack.setInteractive();
+		this.menuBack.on('pointerup', () =>
 		{
-			if (!this.scale.isFullscreen)
-			{
-				this.scale.startFullscreen();
-			}
-			else
-			{
-				this.scale.stopFullscreen();
-			}
+
 		});
-		this.fullscreenBack.on('pointerover', () =>
+		// this.fullscreenBack.setInteractive();
+		// this.fullscreenBack.on('pointerup', () =>
+		// {
+		// 	if (!this.scale.isFullscreen)
+		// 	{
+		// 		this.scale.startFullscreen();
+		// 	}
+		// 	else
+		// 	{
+		// 		this.scale.stopFullscreen();
+		// 	}
+		// });
+		this.menuBack.on('pointerover', () =>
 		{
-			this.fullscreenBack.fillColor = 8542833;
+			this.menuBack.fillColor = 8542833;
 		});
-		this.fullscreenBack.on('pointerout', () =>
+		this.menuBack.on('pointerout', () =>
 		{
-			this.fullscreenBack.fillColor = 10054789;
+			this.menuBack.fillColor = 10054789;
 		});
 
 	// use previously selected level
@@ -995,6 +1092,72 @@ export default class LevelSelect extends Phaser.Scene {
 				let ninja = this.registry.get(`ninja`);
 				this.registry.set(`ninja`, !ninja);
 				console.log('ninja: ' + !ninja);
+			}
+		});
+
+		// dev character select
+		if (this.registry.get(`selected-character`) == undefined)
+		{
+			this.registry.set(`selected-character`, 'kid');
+			// this.registry.set(`selected-character`, 'tapper');
+		}
+		this.input.keyboard.on('keydown-P', () =>
+		{
+			if (__DEV__ || __LEVEL_TEST__)
+			{
+				if (this.registry.get(`selected-character`) === 'tapper')
+				{
+					this.registry.set(`selected-character`, 'puck');
+					this.hintText.setText('CHARACTER SELECTED: PUCK. His jump isnt as high, but Puck has an extra air-jump.');
+				}
+				else if (this.registry.get(`selected-character`) === 'puck')
+				{
+					this.registry.set(`selected-character`, 'gappy');
+					this.hintText.setText('CHARACTER SELECTED: GAPPY. Gappy moves faster.');
+				}
+				else if (this.registry.get(`selected-character`) === 'gappy')
+				{
+					this.registry.set(`selected-character`, 'kid');
+					this.hintText.setText('CHARACTER SELECTED: KID');
+				}
+				else if (this.registry.get(`selected-character`) === 'kid')
+				{
+					this.registry.set(`selected-character`, 'tapper');
+					this.hintText.setText('CHARACTER SELECTED: TAPPER');
+				}
+			}
+		});
+
+		// dev tileset select
+		if (this.registry.get(`selected-tileset`) == undefined)
+		{
+			this.registry.set(`selected-tileset`, '-kid');
+			// this.registry.set(`selected-tileset`, '-ninja');
+		}
+		this.input.keyboard.on('keydown-O', () =>
+		{
+			if (__DEV__ || __LEVEL_TEST__)
+			{
+				if (this.registry.get(`selected-tileset`) === '-ninja')
+				{
+					this.registry.set(`selected-tileset`, '-puck');
+					this.hintText.setText('TILSET SELECTED: puck');
+				}
+				else if (this.registry.get(`selected-tileset`) === '-puck')
+				{
+					this.registry.set(`selected-tileset`, '-gappy');
+					this.hintText.setText('TILSET SELECTED: gappy');
+				}
+				else if (this.registry.get(`selected-tileset`) === '-gappy')
+				{
+					this.registry.set(`selected-tileset`, '-kid');
+					this.hintText.setText('TILSET SELECTED: kid');
+				}
+				else if (this.registry.get(`selected-tileset`) === '-kid')
+				{
+					this.registry.set(`selected-tileset`, '-ninja');
+					this.hintText.setText('TILSET SELECTED: ninja (map pack default)');
+				}
 			}
 		});
 
@@ -2401,7 +2564,7 @@ export default class LevelSelect extends Phaser.Scene {
 		{
 			this.scene.stop(this);
 			this.scene.launch('Credits');
-	
+
 			if (this.music)
 			{
 				this.music.pause();

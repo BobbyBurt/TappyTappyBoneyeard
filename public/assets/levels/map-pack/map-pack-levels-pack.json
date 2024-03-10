@@ -87,6 +87,16 @@
                 "key": "pogo-intro"
             },
             {
+                "url": "assets/levels/map-pack/Puck_Level1.json",
+                "type": "tilemapTiledJSON",
+                "key": "Puck_Level1"
+            },
+            {
+                "url": "assets/levels/map-pack/Puck_Level2.json",
+                "type": "tilemapTiledJSON",
+                "key": "Puck_Level2"
+            },
+            {
                 "url": "assets/levels/map-pack/refresher.json",
                 "type": "tilemapTiledJSON",
                 "key": "refresher"
@@ -95,6 +105,21 @@
                 "url": "assets/levels/map-pack/stann.json",
                 "type": "tilemapTiledJSON",
                 "key": "stann"
+            },
+            {
+                "url": "assets/levels/map-pack/TheKid_Level1.json",
+                "type": "tilemapTiledJSON",
+                "key": "TheKid_Level1"
+            },
+            {
+                "url": "assets/levels/map-pack/TheKid_Level2.json",
+                "type": "tilemapTiledJSON",
+                "key": "TheKid_Level2"
+            },
+            {
+                "url": "assets/levels/map-pack/tinas-tower.json",
+                "type": "tilemapTiledJSON",
+                "key": "tinas-tower"
             },
             {
                 "url": "assets/levels/tutorial-finale.json",

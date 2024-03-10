@@ -361,6 +361,8 @@ export default class Titlescreen extends Phaser.Scene {
 	private selectTitleTween!: Phaser.Tweens.Tween;
 
 	private selectedGame: undefined | 'PPP' | 'KFC';
+	/** Set true on first pointer up. Pointer event for game select is ignored until then. */
+	private titlescreenUp = false;
 
 	private activePopup: undefined | 'file' | 'clear-file' | 'logging-in' | 'info' | 'wait' | 'loading';
 
@@ -372,14 +374,14 @@ export default class Titlescreen extends Phaser.Scene {
 
 		this.editorCreate();
 
+		this.setupGameSelectMenu();
+
 		// camera
 		this.cameras.main.setOrigin(0, 0); 	
 		this.cameras.main.setViewport(0, 0, this.scale.width, this.scale.height);
 		this.cameras.main.setBackgroundColor(0x242424);
 		this.cameras.main.setZoom(CameraUtil.getAdaptiveZoom(this));
 		this.cameras.main.fadeIn(200, 255, 255, 255);
-
-		this.setupGameSelectMenu();
 
 		// start input
 		window.addEventListener('touchstart', this.onPointer);
@@ -414,6 +416,11 @@ export default class Titlescreen extends Phaser.Scene {
 		this.middleButton.on('pointerout', () =>
 		{
 			this.middleButton.fillAlpha = .7
+		});
+
+		this.input.on('pointerup', () =>
+		{
+			this.titlescreenUp = true;
 		});
 
 		this.game.events.on(`STATUS_READY`, () =>
@@ -535,6 +542,9 @@ export default class Titlescreen extends Phaser.Scene {
 		this.leftButton.off('pointerdown');
 		this.middleButton.off('pointerdown');
 		this.rightButton.off('pointerdown');
+		this.leftButton.off('pointerup');
+		this.middleButton.off('pointerup');
+		this.rightButton.off('pointerup');
 	}
 
 	showLoadingFilePopup()
@@ -620,25 +630,21 @@ export default class Titlescreen extends Phaser.Scene {
 	{
 		this.activePopup = 'logging-in';
 
-		this.setPopup('Logging in... Please wait.', 'Cancel', undefined, 'Help', true);
+		this.setPopup('Logging in...\n\nThe Newgrounds Passport will open in another tab.', undefined, 'Cancel', undefined, true);
 
 		NGIO.openLoginPage();
 
 		this.clearButtonEvents();
-		this.leftButton.on('pointerdown', () =>
+		this.middleButton.on('pointerdown', () =>
 		{
 			NGIO.cancelLogin();
 
 			this.showFilePopup();
 		});
-		this.rightButton.on('pointerdown', () =>
-		{
-			this.setPopup('Logging in...\nThe Newgrounds Passport should open in a new tab. On iOS, you may need to disable pop-up blocking in settings.', 'Cancel', undefined, undefined, true);
-		});
 	}
 
 	showInfoPopup()
-	{
+	{		
 		console.debug('this is the info popup starting');
 
 		this.activePopup = 'info';
@@ -654,7 +660,7 @@ export default class Titlescreen extends Phaser.Scene {
 
 			this.showFilePopup();
 		});
-		this.rightButton.on('pointerdown', () =>
+		this.rightButton.on('pointerup', () =>
 		{
 			this.showLoggingInPopup();
 		});
@@ -740,49 +746,90 @@ export default class Titlescreen extends Phaser.Scene {
 
 	setupGameSelectMenu()
 	{
+		if (__MAP_PACK__)
+		{
+			this.anotherTabText.setX(30);
+		}
+
 		this.previewPPP_1.setInteractive();
 		this.previewKFC_1.setInteractive();
-		this.previewPPP_1.on('pointerdown', () =>
+		this.previewPPP_1.on('pointerup', () =>
 		{
+			
+
+			if (!this.titlescreenUp)
+				return;
+
 			this.titlePPP.setTint(0xB05FA9);
 			this.titleKFC.setTint(0x523746);
 			this.selectPPP.setFillStyle(0xB05FA9);
 			this.selectKFC.setFillStyle(0x523746);
-			this.anotherTabText.setVisible(false);
+			this.anotherTabText.setVisible(__MAP_PACK__);
 
 			if (this.selectedGame === 'PPP')
 			{
-				this.startNGIOMenu();
-
-				this.gameSelectContainer.setVisible(false);
+				if (__MAP_PACK__)
+				{
+					window.open('https://www.newgrounds.com/portal/view/906110', '_blank');
+				}
+				else
+				{
+					this.startNGIOMenu();
+	
+					this.gameSelectContainer.setVisible(false);
+				}
 			}
 
 			this.selectedGame = 'PPP';
 
 			this.tweenSelectTitle(this.titlePPP);
 
+			SoundManager.play('bird-egg-lay', this);
+
+
 		});
-		this.previewKFC_1.on('pointerdown', () =>
+		this.previewKFC_1.on('pointerup', () =>
 		{
+			if (!this.titlescreenUp)
+				return;
+
 			this.titleKFC.setTint(0xB05FA9);
 			this.titlePPP.setTint(0x523746);
 			this.selectKFC.setFillStyle(0xB05FA9);
 			this.selectPPP.setFillStyle(0x523746);
-			this.anotherTabText.setVisible(true);
+			this.anotherTabText.setVisible(!__MAP_PACK__);
 
 			if (this.selectedGame === 'KFC')
 			{
-				window.open('https://www.newgrounds.com/portal/view/project/5153570')
+				if (!__MAP_PACK__)
+				{
+					window.open('https://www.newgrounds.com/portal/view/5153570', '_blank');
+				}
+				else
+				{
+					this.startNGIOMenu();
+	
+					this.gameSelectContainer.setVisible(false);
+				}
 			}
 
 			this.selectedGame = 'KFC';
 
 			this.tweenSelectTitle(this.titleKFC);
+
+			SoundManager.play('bird-egg-lay', this);
+
 		});
 	}
 
-	tweenSelectTitle(target: Phaser.GameObjects.GameObject)
+	tweenSelectTitle(target: Phaser.GameObjects.BitmapText)
 	{
+		if (this.selectTitleTween)
+		{
+			this.selectTitleTween.stop();
+		}
+		this.titleKFC.setY(42);
+		this.titlePPP.setY(42);
 		this.selectTitleTween = this.tweens.add({
 			targets: target,
 			duration: 200,
@@ -832,7 +879,9 @@ export default class Titlescreen extends Phaser.Scene {
 		if (newFile)
 		{
 			this.registry.set('new-uppercut-input', true);
-
+		}
+		if (newFile && !__MAP_PACK__)
+		{
 			this.registry.set('last-scene', this.scene.key);
 
 			this.registry.set('current-level', 'jump');

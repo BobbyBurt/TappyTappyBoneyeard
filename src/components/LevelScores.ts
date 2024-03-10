@@ -112,6 +112,11 @@ export let levelRequiredAwards = new Map<string, Array<number>>(
             ['stann',           [ 1000, 3000, 7800 ]],
             ['dry-madngtl',     [ 1400, 2100, 3900 ]],
             ['flipping-the-bird',[ 200, 300, 6000 ]],
+            ['tinas-tower',     [ 1600, 3700, 7900 ]],
+            ['Puck_Level1',     [ 100, 1000, 10000 ]],
+            ['Puck_Level2',     [ 100, 1000, 10000 ]],
+            ['TheKid_Level1',     [ 100, 1000, 10000 ]],
+            ['TheKid_Level2',     [ 100, 1000, 10000 ]],
             
             ['dive',            [ 200, 400, 600 ]],
             ['dive-practice',   [ 300, 500, 1000 ]],
@@ -165,10 +170,12 @@ export let mpLevelRequiredAwards = new Map<string, Array<number>>(
         ['refresher',       [ 0, 0, 0, 0 ]],
         ['stann',           [ 0, 0, 0, 0 ]],
         ['dry-madngtl',     [ 0, 0, 0, 0 ]],
-        ['flipping-the-bird',[ 3, 1, 0, 0 ]],
-
-        ['dive',            [ 3, 1, 0, 0 ]],
-        ['dive-practice',   [ 3, 1, 0, 0 ]],
+        ['flipping-the-bird',[ 0, 0, 0, 0 ]],
+        ['tinas-tower',     [ 0, 0, 0, 0 ]],
+        ['Puck_Level1',     [ 0, 0, 0, 0 ]],
+        ['Puck_Level2',     [ 0, 0, 0, 0 ]],
+        ['TheKid_Level1',     [ 0, 0, 0, 0 ]],
+        ['TheKid_Level2',     [ 0, 0, 0, 0 ]],
     
         // TUTORIAL 3
         ['uppercut',        [ 6, 4, 0, 0 ]],

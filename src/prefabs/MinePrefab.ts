@@ -14,7 +14,7 @@ export default interface MinePrefab {
 
 export default class MinePrefab extends Phaser.GameObjects.Image {
 
-	constructor(scene: Phaser.Scene, x?: number, y?: number, texture?: string, frame?: number | string) {
+	constructor(scene: Phaser.Scene, x?: number, y?: number, randomFlip?: boolean, texture?: string, frame?: number | string) {
 		super(scene, x ?? 0, y ?? 0, texture || "bomb-mask", frame);
 
 		scene.physics.add.existing(this, false);
@@ -25,7 +25,8 @@ export default class MinePrefab extends Phaser.GameObjects.Image {
 
 		/* START-USER-CTR-CODE */
 
-		this.setFlip(Math.random() < .5, Math.random() < .5)
+		if (randomFlip)
+			this.setFlip(Math.random() < .5, Math.random() < .5)
 
 		/* END-USER-CTR-CODE */
 	}

@@ -7,6 +7,11 @@
                 "key": "20-test"
             },
             {
+                "url": "assets/fist.png",
+                "type": "image",
+                "key": "apple"
+            },
+            {
                 "url": "assets/balloon.png",
                 "type": "image",
                 "key": "balloon"
@@ -22,9 +27,19 @@
                 "key": "bg-tileset"
             },
             {
+                "url": "assets/level-pack/Tileset-BG-kid.png",
+                "type": "image",
+                "key": "bg-tileset-kid"
+            },
+            {
                 "url": "assets/level-pack/Tileset-BG.png",
                 "type": "image",
-                "key": "bg-tileset_1"
+                "key": "bg-tileset-ninja"
+            },
+            {
+                "url": "assets/level-pack/Tileset-BG-puck.png",
+                "type": "image",
+                "key": "bg-tileset-puck"
             },
             {
                 "url": [
@@ -385,6 +400,17 @@
                 "key": "fuel-test"
             },
             {
+                "type": "multiatlas",
+                "url": "assets/gappy.json",
+                "path": "assets",
+                "key": "gappy"
+            },
+            {
+                "url": "assets/gappy-fist.png",
+                "type": "image",
+                "key": "gappy-fist"
+            },
+            {
                 "url": "assets/grenade.png",
                 "type": "image",
                 "key": "grenade"
@@ -413,6 +439,12 @@
                 "url": "assets/hit-effect-horizontal.png",
                 "type": "image",
                 "key": "hit-effect-horizontal"
+            },
+            {
+                "type": "multiatlas",
+                "url": "assets/kid.json",
+                "path": "assets",
+                "key": "kid"
             },
             {
                 "url": "assets/level-icon-selected.png",
@@ -453,6 +485,16 @@
                 "key": "level-icons"
             },
             {
+                "url": "assets/level-pack/mine-kid.png",
+                "type": "image",
+                "key": "mine-kid"
+            },
+            {
+                "url": "assets/level-pack/mine-puck.png",
+                "type": "image",
+                "key": "mine-puck"
+            },
+            {
                 "url": "assets/mobile-button.png",
                 "type": "image",
                 "key": "mobile-button"
@@ -471,6 +513,11 @@
                 "url": "assets/level-pack/Parallax-Backing.png",
                 "type": "image",
                 "key": "Parallax-Backing_1"
+            },
+            {
+                "url": "assets/level-pack/Parallax-Backing-kid.png",
+                "type": "image",
+                "key": "Parallax-Backing-kid"
             },
             {
                 "url": "assets/Parallax-Cityscape.png",
@@ -563,6 +610,17 @@
                 "url": "assets/previewPPP.png",
                 "type": "image",
                 "key": "previewPPP"
+            },
+            {
+                "type": "multiatlas",
+                "url": "assets/pucamuc.json",
+                "path": "assets",
+                "key": "pucamuc"
+            },
+            {
+                "url": "assets/puck-blood.png",
+                "type": "image",
+                "key": "puck-blood"
             },
             {
                 "url": [
@@ -772,14 +830,29 @@
                 "key": "tileset"
             },
             {
-                "url": "assets/level-pack/Tileset.png",
+                "url": "assets/level-pack/Tileset-BG-gappy.png",
                 "type": "image",
-                "key": "tileset_1"
+                "key": "bg-tileset-gappy"
             },
             {
-                "url": "assets/levels/tileset.png",
+                "url": "assets/level-pack/Tileset-gappy.png",
                 "type": "image",
-                "key": "tileset_1"
+                "key": "tileset-gappy"
+            },
+            {
+                "url": "assets/level-pack/Tileset-kid.png",
+                "type": "image",
+                "key": "tileset-kid"
+            },
+            {
+                "url": "assets/level-pack/Tileset.png",
+                "type": "image",
+                "key": "tileset-ninja"
+            },
+            {
+                "url": "assets/level-pack/Tileset-puck.png",
+                "type": "image",
+                "key": "tileset-puck"
             },
             {
                 "url": "assets/tutorial-ipad.png",

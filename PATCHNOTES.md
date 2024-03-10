@@ -10,6 +10,7 @@
 
 - Disabled the ability to show the tutorial during the level complete sequence which caused the wrong score to be saved. Spotted by FutureCopLGF.
 - Fixed cloud save data being detected when non exist. Spotted by FutureCopLGF.
+- Fixed Newgrounds.io passport login page not opening on devices like iOS.
 
 ## Version 23 (patch 1) - Nov 10 2023
 

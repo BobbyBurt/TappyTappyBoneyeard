@@ -46,6 +46,18 @@ export default class Punch implements State {
 			console.debug(`pause timer ${this.pauseTimer.getProgress()}`);
 			this.pauseTimer.remove();
 		}
+
+		this.player.puckBloodEmitter = this.player.puckBloodEmitterManager.createEmitter
+		({
+			lifespan: 1000,
+			speed: { min: 0, max: 100 },
+			angle: { min: 0, max: 360 },
+			// alpha: { start: 1, end: 0 },
+			scale: { start: 1, end: 0 },
+			gravityY: 200,
+			quantity: 100,
+			on: false
+		});
 		
 		this.player.scene.game.events.emit('punch');
 
@@ -155,6 +167,12 @@ export default class Punch implements State {
 				this.uppercut();
 		}
 
+		if (this.pauseTimer.getProgress() >= 1 && this.player.character === 'puck')
+		{
+			this.player.puckBloodEmitter.explode(1, this.player.x, this.player.y);
+		}
+
+
 		if (this.player.onWallFacing(true))
 		{
 			if (this.player.onFloor)
@@ -183,8 +201,9 @@ export default class Punch implements State {
 		}
 		else if (this.pauseTimer.getProgress() === 1)
 		{
+
 			this.player.body.setVelocity((this.player.flipX? 
-				this.player.variablePunchSpeed : -this.player.variablePunchSpeed), 0);
+				this.player.variablePunchSpeed * this.player.punchSpeedMultiplier : -this.player.variablePunchSpeed * this.player.punchSpeedMultiplier), 0);
 		}
 
 	}

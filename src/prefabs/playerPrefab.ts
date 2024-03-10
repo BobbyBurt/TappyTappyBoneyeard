@@ -149,11 +149,37 @@ export default class playerPrefab extends Phaser.Physics.Arcade.Sprite {
 
 	private ninja = '';
 
+	public character: 'tapper' | 'puck' | 'gappy' | 'kid' = 'puck';
+	private kidJumpForce = 300;
+	private gappyMoveSpeed = 140;
+	public punchSpeedMultiplier = 1;
+	public puckBloodEmitter: Phaser.GameObjects.Particles.ParticleEmitter;
+	public puckBloodEmitterManager: Phaser.GameObjects.Particles.ParticleEmitterManager;
+
 	start()
 	{
 		this.levelScene = this.scene as Level;
 
-		this.ninja = (this.levelScene.registry.get('ninja') ? '_1' : '');
+		this.ninja = (this.levelScene.registry.get('ninja') && this.character === 'tapper' ? '_1' : '');
+
+		this.character = this.scene.registry.get('selected-character');
+
+		if (this.character === 'kid')
+		{
+			// this.maxFlaps = 1;
+			// this.jumpForce = this.kidJumpForce;
+			this.punchSpeedMultiplier = 0;
+		}
+		else if (this.character === 'gappy')
+		{
+			this.moveSpeed = this.gappyMoveSpeed;
+			this.punchSpeedMultiplier = 1.2
+		}
+		else if (this.character === 'puck')
+		{
+			this.maxFlaps = 3;
+			this.jumpForce =200;
+		}
 
 		this.setName('player');
 
@@ -182,7 +208,12 @@ export default class playerPrefab extends Phaser.Physics.Arcade.Sprite {
 		});
 		this.debugWallDetectGraphics.setDepth(100);
 
-		// DEBUG
+		// particles
+		this.puckBloodEmitterManager = this.scene.add.particles('puck-blood');
+		let _scene = this.scene as Level
+		_scene.mainLayer.add(this.puckBloodEmitterManager);
+		this.puckBloodEmitterManager.setDepth(-30);
+		this.puckBloodEmitter = this.puckBloodEmitterManager.createEmitter({ on: false });
 	}
 
 	update()
@@ -403,7 +434,6 @@ export default class playerPrefab extends Phaser.Physics.Arcade.Sprite {
 		// 	}
 		// }
 	}
-
 	/** resets the player to starting state
 	 * 
 	 * currently unused because it's done automatically by restarting the scene.
@@ -471,7 +501,17 @@ export default class playerPrefab extends Phaser.Physics.Arcade.Sprite {
 	{
 		this.fistoffset = new Phaser.Math.Vector2(14, 4);
 		this.fistUppercutoffset = new Phaser.Math.Vector2(0, -10);
-		this.fist = this.scene.add.image(this.x, this.y, 'bird1fist');
+		let fist = 'bird1fist';
+		if (this.character === 'kid')
+		{
+			fist = 'apple';
+		}
+		else if (this.character === 'gappy')
+		{
+			fist = 'gappy-fist';
+		}
+		
+		this.fist = this.scene.add.image(this.x, this.y, fist);
 		this.fist.setDepth(this.depth - 1);
 		this.setFist(false, false);
 		this.setFistPosition();
@@ -502,7 +542,20 @@ export default class playerPrefab extends Phaser.Physics.Arcade.Sprite {
 		this.fist.setActive(active);
 		this.fist.setVisible(active);
 
+		if (this.character === 'puck' || this.character === 'gappy')
+		{
+			this.fist.setVisible(false);
+		}
+
 		this.fist.setTexture('bird' + this.flapCharge + 'fist');
+		if (this.character === 'kid')
+		{
+			this.fist.setTexture('apple');
+		}
+		if (this.character === 'gappy')
+		{
+			this.fist.setTexture('gappy-fist');
+		}
 
 		if (above)
 		{
@@ -558,116 +611,131 @@ export default class playerPrefab extends Phaser.Physics.Arcade.Sprite {
 
 	private createAnimations()
 	{
+		let key = 'tapper-atlas'
+
+		if (this.character === 'puck')
+		{
+			key = 'pucamuc';
+		}
+		else if (this.character === 'kid')
+		{
+			key = 'kid';
+		}
+		else if (this.character === 'gappy')
+		{
+			key = 'gappy';
+		}
+
 	// airborne
 		this.anims.create({key: 'airborne', repeat: -1,
-			frames: this.anims.generateFrameNames(`tapper-atlas` + this.ninja, 
+			frames: this.anims.generateFrameNames(key + this.ninja, 
 			{ prefix: 'airborne/', zeroPad: 2, end: 0 })});
 
 		this.anims.create({key: 'airborne-tired', repeat: -1,
-			frames: this.anims.generateFrameNames('tapper-atlas' + this.ninja, 
+			frames: this.anims.generateFrameNames(key + this.ninja, 
 			{ prefix: 'airborne-tired/', zeroPad: 2, end: 0 })});
 
 		this.anims.create({key: 'airborne-very-tired', repeat: -1,
-			frames: this.anims.generateFrameNames('tapper-atlas' + this.ninja, 
+			frames: this.anims.generateFrameNames(key + this.ninja, 
 			{ prefix: 'airborne-very-tired/', zeroPad: 2, end: 0 })});
 
 	// blush flap
 		this.anims.create({key: 'blush-flap', repeat: 0,
-			frames: this.anims.generateFrameNames('tapper-atlas'  + this.ninja, 
+			frames: this.anims.generateFrameNames(key  + this.ninja, 
 			{ prefix: 'blush-flap/', zeroPad: 2, end: 5 })});
 
 		this.anims.create({key: 'blush-flap-tired', repeat: 0,
-			frames: this.anims.generateFrameNames('tapper-atlas' + this.ninja, 
+			frames: this.anims.generateFrameNames(key + this.ninja, 
 			{ prefix: 'blush-flap-tired/', zeroPad: 2, end: 5 })});
 
 		this.anims.create({key: 'blush-flap-very-tired', repeat: 0,
-			frames: this.anims.generateFrameNames('tapper-atlas' + this.ninja, 
+			frames: this.anims.generateFrameNames(key + this.ninja, 
 			{ prefix: 'blush-flap-very-tired/', zeroPad: 2, end: 5 })});
 
 	// cling
 		this.anims.create({key: 'cling', repeat: -1,
-			frames: this.anims.generateFrameNames('tapper-atlas' + this.ninja, 
+			frames: this.anims.generateFrameNames(key + this.ninja, 
 			{ prefix: 'cling/', zeroPad: 2, end: 0 })});
 
 		this.anims.create({key: 'cling-tired', repeat: -1,
-			frames: this.anims.generateFrameNames('tapper-atlas' + this.ninja, 
+			frames: this.anims.generateFrameNames(key + this.ninja, 
 			{ prefix: 'cling-tired/', zeroPad: 2, end: 0 })});
 
 		this.anims.create({key: 'cling-very-tired', repeat: -1,
-			frames: this.anims.generateFrameNames('tapper-atlas' + this.ninja, 
+			frames: this.anims.generateFrameNames(key + this.ninja, 
 			{ prefix: 'cling-very-tired/', zeroPad: 2, end: 0 })});
 
 	// dive
 		this.anims.create({key: 'dive', repeat: -1,
-			frames: this.anims.generateFrameNames('tapper-atlas' + this.ninja, 
+			frames: this.anims.generateFrameNames(key + this.ninja, 
 			{ prefix: 'dive/', zeroPad: 2, end: 0 })});
 
 		this.anims.create({key: 'dive-tired', repeat: -1,
-			frames: this.anims.generateFrameNames('tapper-atlas' + this.ninja, 
+			frames: this.anims.generateFrameNames(key + this.ninja, 
 			{ prefix: 'dive-tired/', zeroPad: 2, end: 0 })});
 
 		this.anims.create({key: 'dive-very-tired', repeat: -1,
-			frames: this.anims.generateFrameNames('tapper-atlas' + this.ninja, 
+			frames: this.anims.generateFrameNames(key + this.ninja, 
 			{ prefix: 'dive-very-tired/', zeroPad: 2, end: 0 })});
 
 	// flap
 		this.anims.create({key: 'flap', repeat: 0,
-			frames: this.anims.generateFrameNames('tapper-atlas' + this.ninja, 
+			frames: this.anims.generateFrameNames(key + this.ninja, 
 			{ prefix: 'flap/', zeroPad: 2, end: 5 })});
 
 		this.anims.create({key: 'flap-tired', repeat: 0,
-			frames: this.anims.generateFrameNames('tapper-atlas' + this.ninja, 
+			frames: this.anims.generateFrameNames(key + this.ninja, 
 			{ prefix: 'flap-tired/', zeroPad: 2, end: 5 })});
 
 		this.anims.create({key: 'flap-very-tired', repeat: 0,
-			frames: this.anims.generateFrameNames('tapper-atlas' + this.ninja, 
+			frames: this.anims.generateFrameNames(key + this.ninja, 
 			{ prefix: 'flap-very-tired/', zeroPad: 2, end: 5 })});
 
 	// jump
 		this.anims.create({key: 'jump', repeat: 0,
-			frames: this.anims.generateFrameNames('tapper-atlas' + this.ninja, 
+			frames: this.anims.generateFrameNames(key + this.ninja, 
 			{ prefix: 'jump/', zeroPad: 2, end: 4 })});
 
 	// jump
 		this.anims.create({key: 'idle', repeat: -1,
-			frames: this.anims.generateFrameNames('tapper-atlas' + this.ninja, 
+			frames: this.anims.generateFrameNames(key + this.ninja, 
 			{ prefix: 'run/', zeroPad: 2, start: 3, end: 3 })});
 				// TODO: add idle animation to sprite folder
 
 	// punch
 		this.anims.create({key: 'punch', repeat: 0,
-			frames: this.anims.generateFrameNames('tapper-atlas' + this.ninja, 
+			frames: this.anims.generateFrameNames(key + this.ninja, 
 			{ prefix: 'punch/', zeroPad: 2, end: 0 })});
 
 		this.anims.create({key: 'punch-tired', repeat: 0,
-			frames: this.anims.generateFrameNames('tapper-atlas' + this.ninja, 
+			frames: this.anims.generateFrameNames(key + this.ninja, 
 			{ prefix: 'punch-tired/', zeroPad: 2, end: 0 })});
 
 		this.anims.create({key: 'punch-very-tired', repeat: 0,
-			frames: this.anims.generateFrameNames('tapper-atlas' + this.ninja, 
+			frames: this.anims.generateFrameNames(key + this.ninja, 
 			{ prefix: 'punch-very-tired/', zeroPad: 2, end: 0 })});
 
 	// run
 		this.anims.create({key: 'run', repeat: -1,
-			frames: this.anims.generateFrameNames('tapper-atlas' + this.ninja, 
+			frames: this.anims.generateFrameNames(key + this.ninja, 
 			{ prefix: 'run/', zeroPad: 2, end: 11 })});
 
 	// uppercut
 		this.anims.create({key: 'uppercut', repeat: 0,
-			frames: this.anims.generateFrameNames('tapper-atlas' + this.ninja, 
+			frames: this.anims.generateFrameNames(key + this.ninja, 
 			{ prefix: 'uppercut/', zeroPad: 2, end: 0 })});
 
 		this.anims.create({key: 'uppercut-tired', repeat: 0,
-			frames: this.anims.generateFrameNames('tapper-atlas' + this.ninja, 
+			frames: this.anims.generateFrameNames(key + this.ninja, 
 			{ prefix: 'uppercut-tired/', zeroPad: 2, end: 0 })});
 
 		this.anims.create({key: 'uppercut-very-tired', repeat: 0,
-			frames: this.anims.generateFrameNames('tapper-atlas' + this.ninja, 
+			frames: this.anims.generateFrameNames(key + this.ninja, 
 			{ prefix: 'uppercut-very-tired/', zeroPad: 2, end: 0 })});
 
 	// victory
 		this.anims.create({key: 'victory', repeat: 0,
-			frames: this.anims.generateFrameNames('tapper-atlas' + this.ninja, 
+			frames: this.anims.generateFrameNames(key + this.ninja, 
 			{ prefix: 'victory/', zeroPad: 2, end: 0 })});
 	}
 

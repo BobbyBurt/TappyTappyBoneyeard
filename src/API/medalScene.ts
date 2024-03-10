@@ -3,7 +3,8 @@
 import Phaser from "phaser";
 /* START-USER-IMPORTS */
 
-import { medalData } from './medalData.json'
+import { medalData as medalDataMain } from './medalData.json'
+import { medalData as medalDataMP } from './medalDataMP.json'
 
 // Class Doc
 /** On `unlock-medal: MEDAL NAME` game event, this scene unlocks it through NG.io. AV popup sequence happens if the medal hasn't been unlocked before. Each medal's listener is removed when it's triggered.
@@ -155,6 +156,8 @@ export default class medalScene extends Phaser.Scene {
 
 	private queue: Array<medal>;
 
+	private medalData: any;
+
 	/** key is medal points. (5, 10, 25, 50, 100)
 	 * 
 	 * value is the colour tint. [0] is the lighter & upper colour of gradient.
@@ -201,14 +204,16 @@ export default class medalScene extends Phaser.Scene {
 	create() {
 
 		this.editorCreate();
+			
+		this.medalData = (__MAP_PACK__ ? medalDataMP : medalDataMain);
 
 		this.cameras.main.setViewport(700, 460, 250, 70);
 		this.cameras.main.setRoundPixels(false);
 
 		this.queue = new Array(0);
 
-		console.debug(medalData)
-		medalData.forEach((medal: any) =>
+		console.debug(this.medalData)
+		this.medalData.forEach((medal: any) =>
 		{
 			this.game.events.on('unlock-medal: ' + medal.name, () =>
 			{

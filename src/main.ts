@@ -14,9 +14,9 @@ window.addEventListener('load', function ()
 {
 	var game = new Phaser.Game( 
 	{
-		title: 'Tappy Tappy Boneyard',
+		title: 'Bird Tapper',
 		url: 'https://www.newgrounds.com/projects/games/1923225/preview',
-		version: '26.2 level test',
+		version: '27 update',
 		
 	// visuals
 		type: Phaser.AUTO,
@@ -56,6 +56,10 @@ window.addEventListener('load', function ()
 				}
 			}
 		},
+		// parent: ''
+		dom: {
+			createContainer: true
+		}
 
 		// plugins:
 		// {
@@ -105,6 +109,8 @@ class Boot extends Phaser.Scene
 
 	create()
 	{
+		console.clear();
+
 		this.game.events.once(Phaser.Core.Events.STEP, () => 
 		{
 			this.ngWrap = new newgroundsIOWrapper();

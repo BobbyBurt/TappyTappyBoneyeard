@@ -25,6 +25,11 @@ export default class Running implements State {
 		{
 			this.player.playAnimation('run');
 		}
+
+		if (this.player.character === 'puck')
+		{
+			this.player.body.setVelocityX(0);
+		}
 	}
 	
 	update()
@@ -72,6 +77,11 @@ export default class Running implements State {
 	jump()
 	{
 		this.player.setVelocityY(-this.player.jumpForce);
+
+		if (this.player.character === 'puck')
+		{
+			this.player.body.setVelocityX((this.player.flipX? this.player.moveSpeed : -this.player.moveSpeed));
+		}
 
 		this.player.playAnimation('jump');
 		this.stateController.setState('airborne');

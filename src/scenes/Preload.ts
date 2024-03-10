@@ -171,7 +171,11 @@ export default class Preload extends Phaser.Scene {
 			{	
 				this.registry.set('last-scene', this.scene.key);
 
-				this.registry.set('current-level', 'jump');
+				this.registry.set(`selected-character`, 'gappy');
+				this.registry.set(`selected-tileset`, '-gappy');
+
+
+				this.registry.set('current-level', 'refresher');
 				this.registry.set('current-level-index', 0)
 				this.scene.stop(this);
 				this.scene.launch('LevelUI');

@@ -82,6 +82,11 @@
                 "key": "mine-intro"
             },
             {
+                "url": "assets/levels/mine-wall.json",
+                "type": "tilemapTiledJSON",
+                "key": "mine-wall"
+            },
+            {
                 "url": "assets/levels/pogo-ideas.json",
                 "type": "tilemapTiledJSON",
                 "key": "pogo-ideas"

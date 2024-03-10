@@ -23,6 +23,19 @@ export default class Uppercut implements State {
 	{
 		this.player.scene.game.events.emit('uppercut');
 
+		this.player.puckBloodEmitter = this.player.puckBloodEmitterManager.createEmitter
+		({
+			lifespan: 1000,
+			speed: { min: 0, max: 100 },
+			angle: { min: 0, max: 360 },
+			// alpha: { start: 1, end: 0 },
+			scale: { start: 1, end: 0 },
+			gravityY: 200,
+			quantity: 100,
+			on: false
+		});
+		
+
 		// last move
 		this.player.lastFistMove = 'uppercut';
 
@@ -72,6 +85,11 @@ export default class Uppercut implements State {
 		// }
 			// as velocity x is now set to 0, this transition is no longer possible
 
-		this.player.body.setVelocity(0, -this.player.variableUppercutSpeed);
+		this.player.body.setVelocity(0, -this.player.variableUppercutSpeed * this.player.punchSpeedMultiplier);
+
+		if (this.player.character === 'puck')
+		{
+			this.player.puckBloodEmitter.explode(1, this.player.x, this.player.y);
+		}
 	}
 }
