@@ -1,6 +1,7 @@
 import playerPrefab from "~/prefabs/playerPrefab";
 import State from "states/State";
 import StateController from "./StateController";
+import SoundManager from "~/components/SoundManager";
 
 /** player is airborne */
 export default class Airborne implements State {
@@ -86,7 +87,7 @@ export default class Airborne implements State {
 
 		this.player.flapCharge--;
 
-		this.player.scene.sound.play('bird-flap');
+		this.player.scene.sound.play(SoundManager.getCharacterSFX('bird-flap', this.player.character));
 
 	}
 }

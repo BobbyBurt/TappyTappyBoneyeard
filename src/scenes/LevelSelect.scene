@@ -1208,58 +1208,6 @@
                     "fontSize": -8
                 },
                 {
-                    "type": "Image",
-                    "id": "a4a462fa-db98-4876-8d56-b6d272cb3179",
-                    "label": "bird1mid",
-                    "components": [],
-                    "texture": {
-                        "key": "bird1mid"
-                    },
-                    "x": 158,
-                    "y": 99,
-                    "originX": 0,
-                    "originY": 0
-                },
-                {
-                    "type": "Image",
-                    "id": "5a5a19ed-7eed-4c1b-8a82-e7d89b55f47b",
-                    "label": "bird1mid_1",
-                    "components": [],
-                    "texture": {
-                        "key": "bird1mid"
-                    },
-                    "x": 206,
-                    "y": 99,
-                    "originX": 0,
-                    "originY": 0
-                },
-                {
-                    "type": "Image",
-                    "id": "78416303-841b-40c6-bcc1-5d0aa7b013c1",
-                    "label": "bird1mid_2",
-                    "components": [],
-                    "texture": {
-                        "key": "bird1mid"
-                    },
-                    "x": 254,
-                    "y": 99,
-                    "originX": 0,
-                    "originY": 0
-                },
-                {
-                    "type": "Image",
-                    "id": "3608e229-764d-4d83-9a39-a03ce717b0c9",
-                    "label": "bird1mid_3",
-                    "components": [],
-                    "texture": {
-                        "key": "bird1mid"
-                    },
-                    "x": 302,
-                    "y": 99,
-                    "originX": 0,
-                    "originY": 0
-                },
-                {
                     "type": "Rectangle",
                     "id": "79b60a0b-5ced-4371-a8c7-8c346e2fe73d",
                     "label": "rectangle_1",
@@ -1322,8 +1270,178 @@
                     "isStroked": true,
                     "width": 30,
                     "height": 30
+                },
+                {
+                    "type": "Rectangle",
+                    "id": "242c6d38-8df2-4dae-9a9e-b9190ba84665",
+                    "label": "bgColour_1",
+                    "components": [],
+                    "originX": 0,
+                    "originY": 0,
+                    "isFilled": true,
+                    "fillColor": "#6a4c5d",
+                    "width": 480,
+                    "height": 270
+                },
+                {
+                    "type": "Rectangle",
+                    "id": "52a163dd-b60e-454f-9977-c85ee4ad5171",
+                    "label": "bgColour_2",
+                    "components": [],
+                    "x": 65,
+                    "y": 55,
+                    "originX": 0,
+                    "originY": 0,
+                    "isFilled": true,
+                    "fillColor": "#996C85",
+                    "width": 180,
+                    "height": 200
+                },
+                {
+                    "type": "Image",
+                    "id": "6e795d09-1b9c-488c-8bee-a87ecbcd74c9",
+                    "label": "illustraion_thebird",
+                    "components": [],
+                    "texture": {
+                        "key": "illustraion-thebird"
+                    },
+                    "x": 155,
+                    "y": 157,
+                    "scaleX": 0.1,
+                    "scaleY": 0.1
+                },
+                {
+                    "type": "BitmapText",
+                    "id": "38a59464-b444-47e4-8139-fdfd66d6f287",
+                    "label": "bitmaptext_2",
+                    "components": [],
+                    "x": 240,
+                    "y": 27,
+                    "originX": 0.5,
+                    "originY": 0.5,
+                    "text": "Character Select",
+                    "font": "nokia",
+                    "fontSize": -12
+                },
+                {
+                    "type": "BitmapText",
+                    "id": "180be951-1635-4026-9781-1093fbf771b5",
+                    "label": "bitmaptext",
+                    "components": [],
+                    "x": 275,
+                    "y": 58,
+                    "text": "Bird Tapper",
+                    "font": "nokia",
+                    "fontSize": -20
+                },
+                {
+                    "type": "BitmapText",
+                    "id": "1875befd-ac09-4102-8335-0dc0f7a00a6b",
+                    "label": "bitmaptext_5",
+                    "components": [],
+                    "x": 275,
+                    "y": 89,
+                    "text": "Doesn’t move on the ground, but has 5 or 6 jumps which he uses to move around.\n\n- More jumps!\n- Eats babies…\n",
+                    "font": "nokia",
+                    "fontSize": -10,
+                    "maxWidth": 180
+                },
+                {
+                    "type": "Rectangle",
+                    "id": "8925c6a6-1e25-4ef7-a562-bc843530ad52",
+                    "label": "bgColour_3",
+                    "components": [],
+                    "x": 275,
+                    "y": 208,
+                    "originX": 0,
+                    "originY": 0,
+                    "isFilled": true,
+                    "fillColor": "#996C85",
+                    "fillAlpha": 0,
+                    "strokeColor": "#996C85",
+                    "lineWidth": 3,
+                    "isStroked": true,
+                    "width": 160,
+                    "height": 35
+                },
+                {
+                    "type": "Image",
+                    "id": "a4a462fa-db98-4876-8d56-b6d272cb3179",
+                    "label": "bird1mid",
+                    "components": [],
+                    "texture": {
+                        "key": "bird1mid"
+                    },
+                    "x": 297,
+                    "y": 216,
+                    "originX": 0,
+                    "originY": 0
+                },
+                {
+                    "type": "Image",
+                    "id": "5a5a19ed-7eed-4c1b-8a82-e7d89b55f47b",
+                    "label": "bird1mid_1",
+                    "components": [],
+                    "texture": {
+                        "key": "pucamuc",
+                        "frame": "airborne/00"
+                    },
+                    "x": 330,
+                    "y": 216,
+                    "originX": 0,
+                    "originY": 0
+                },
+                {
+                    "type": "Image",
+                    "id": "78416303-841b-40c6-bcc1-5d0aa7b013c1",
+                    "label": "bird1mid_2",
+                    "components": [],
+                    "texture": {
+                        "key": "gappy",
+                        "frame": "airborne/00"
+                    },
+                    "x": 363,
+                    "y": 216,
+                    "originX": 0,
+                    "originY": 0
+                },
+                {
+                    "type": "Image",
+                    "id": "3608e229-764d-4d83-9a39-a03ce717b0c9",
+                    "label": "bird1mid_3",
+                    "components": [],
+                    "texture": {
+                        "key": "kid",
+                        "frame": "flap/03"
+                    },
+                    "x": 396,
+                    "y": 216,
+                    "originX": 0,
+                    "originY": 0
                 }
             ]
+        },
+        {
+            "type": "BitmapText",
+            "id": "431148d7-1758-4ea0-bc48-f905b243727a",
+            "label": "levelNameText",
+            "scope": "CLASS",
+            "components": [],
+            "x": 43,
+            "y": 244,
+            "font": "nokia",
+            "fontSize": -8
+        },
+        {
+            "type": "BitmapText",
+            "id": "554ac981-e396-48d1-968e-205bdfdab8a8",
+            "label": "levelAuthorText",
+            "scope": "CLASS",
+            "components": [],
+            "x": 43,
+            "y": 254,
+            "font": "nokia",
+            "fontSize": -8
         }
     ],
     "plainObjects": [],

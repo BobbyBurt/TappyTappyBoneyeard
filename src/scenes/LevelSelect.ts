@@ -9,7 +9,7 @@ import LevelIconPrefab from "../prefabs/LevelIconPrefab";
 
 import CameraUtil from "~/components/CameraUtil";
 import InputManager from "~/components/InputManager";
-import { getEarnedAward, getTotalAwards, levelRequiredAwards, levelScoreMilestones, mapPackDataSwap, mpLevelRequiredAwards } from "~/components/LevelScores";
+import { getEarnedAward, getTotalAwards, levelRequiredAwards, levelScoreMilestones, mapPackDataSwap, mpLevelNames, mpLevelRequiredAwards } from "~/components/LevelScores";
 import SoundManager from "~/components/SoundManager";
 import cloudSaves from "~/API/cloudSaves";
 
@@ -515,26 +515,6 @@ export default class LevelSelect extends Phaser.Scene {
 		characterNameText.fontSize = -8;
 		characterSelectContainer.add(characterNameText);
 
-		// bird1mid
-		const bird1mid = this.add.image(158, 99, "bird1mid");
-		bird1mid.setOrigin(0, 0);
-		characterSelectContainer.add(bird1mid);
-
-		// bird1mid_1
-		const bird1mid_1 = this.add.image(206, 99, "bird1mid");
-		bird1mid_1.setOrigin(0, 0);
-		characterSelectContainer.add(bird1mid_1);
-
-		// bird1mid_2
-		const bird1mid_2 = this.add.image(254, 99, "bird1mid");
-		bird1mid_2.setOrigin(0, 0);
-		characterSelectContainer.add(bird1mid_2);
-
-		// bird1mid_3
-		const bird1mid_3 = this.add.image(302, 99, "bird1mid");
-		bird1mid_3.setOrigin(0, 0);
-		characterSelectContainer.add(bird1mid_3);
-
 		// rectangle_1
 		const rectangle_1 = this.add.rectangle(152, 94, 30, 30);
 		rectangle_1.setOrigin(0, 0);
@@ -570,6 +550,85 @@ export default class LevelSelect extends Phaser.Scene {
 		rectangle_3.isStroked = true;
 		rectangle_3.lineWidth = 2;
 		characterSelectContainer.add(rectangle_3);
+
+		// bgColour_1
+		const bgColour_1 = this.add.rectangle(0, 0, 480, 270);
+		bgColour_1.setOrigin(0, 0);
+		bgColour_1.isFilled = true;
+		bgColour_1.fillColor = 6966365;
+		characterSelectContainer.add(bgColour_1);
+
+		// bgColour_2
+		const bgColour_2 = this.add.rectangle(65, 55, 180, 200);
+		bgColour_2.setOrigin(0, 0);
+		bgColour_2.isFilled = true;
+		bgColour_2.fillColor = 10054789;
+		characterSelectContainer.add(bgColour_2);
+
+		// illustraion_thebird
+		const illustraion_thebird = this.add.image(155, 157, "illustraion-thebird");
+		illustraion_thebird.scaleX = 0.1;
+		illustraion_thebird.scaleY = 0.1;
+		characterSelectContainer.add(illustraion_thebird);
+
+		// bitmaptext_2
+		const bitmaptext_2 = this.add.bitmapText(240, 27, "nokia", "Character Select");
+		bitmaptext_2.setOrigin(0.5, 0.5);
+		bitmaptext_2.text = "Character Select";
+		bitmaptext_2.fontSize = -12;
+		characterSelectContainer.add(bitmaptext_2);
+
+		// bitmaptext
+		const bitmaptext = this.add.bitmapText(275, 58, "nokia", "Bird Tapper");
+		bitmaptext.text = "Bird Tapper";
+		bitmaptext.fontSize = -20;
+		characterSelectContainer.add(bitmaptext);
+
+		// bitmaptext_5
+		const bitmaptext_5 = this.add.bitmapText(275, 89, "nokia", "Doesn’t move on the ground, but has 5 or 6 jumps which he uses to move around.\n\n- More jumps!\n- Eats babies…\n");
+		bitmaptext_5.text = "Doesn’t move on the ground, but has 5 or 6 jumps which he uses to move around.\n\n- More jumps!\n- Eats babies…\n";
+		bitmaptext_5.fontSize = -10;
+		bitmaptext_5.maxWidth = 180;
+		characterSelectContainer.add(bitmaptext_5);
+
+		// bgColour_3
+		const bgColour_3 = this.add.rectangle(275, 208, 160, 35);
+		bgColour_3.setOrigin(0, 0);
+		bgColour_3.isFilled = true;
+		bgColour_3.fillColor = 10054789;
+		bgColour_3.fillAlpha = 0;
+		bgColour_3.isStroked = true;
+		bgColour_3.strokeColor = 10054789;
+		bgColour_3.lineWidth = 3;
+		characterSelectContainer.add(bgColour_3);
+
+		// bird1mid
+		const bird1mid = this.add.image(297, 216, "bird1mid");
+		bird1mid.setOrigin(0, 0);
+		characterSelectContainer.add(bird1mid);
+
+		// bird1mid_1
+		const bird1mid_1 = this.add.image(330, 216, "pucamuc", "airborne/00");
+		bird1mid_1.setOrigin(0, 0);
+		characterSelectContainer.add(bird1mid_1);
+
+		// bird1mid_2
+		const bird1mid_2 = this.add.image(363, 216, "gappy", "airborne/00");
+		bird1mid_2.setOrigin(0, 0);
+		characterSelectContainer.add(bird1mid_2);
+
+		// bird1mid_3
+		const bird1mid_3 = this.add.image(396, 216, "kid", "flap/03");
+		bird1mid_3.setOrigin(0, 0);
+		characterSelectContainer.add(bird1mid_3);
+
+		// levelNameText
+		const levelNameText = this.add.bitmapText(43, 244, "nokia", "");
+		levelNameText.fontSize = -8;
+
+		// levelAuthorText
+		const levelAuthorText = this.add.bitmapText(43, 254, "nokia", "");
+		levelAuthorText.fontSize = -8;
 
 		// lists
 		const levelBackList: Array<any> = [];
@@ -722,6 +781,8 @@ export default class LevelSelect extends Phaser.Scene {
 		this.characterDescText = characterDescText;
 		this.characterDescText2 = characterDescText2;
 		this.characterNameText = characterNameText;
+		this.levelNameText = levelNameText;
+		this.levelAuthorText = levelAuthorText;
 		this.levelBackList = levelBackList;
 
 		this.events.emit("scene-awake");
@@ -794,6 +855,8 @@ export default class LevelSelect extends Phaser.Scene {
 	private characterDescText!: Phaser.GameObjects.BitmapText;
 	private characterDescText2!: Phaser.GameObjects.BitmapText;
 	private characterNameText!: Phaser.GameObjects.BitmapText;
+	private levelNameText!: Phaser.GameObjects.BitmapText;
+	private levelAuthorText!: Phaser.GameObjects.BitmapText;
 	private levelBackList!: Array<any>;
 
 	/* START-USER-CODE */
@@ -851,47 +914,30 @@ export default class LevelSelect extends Phaser.Scene {
 		[
 		// TUTORIAL 1
 		'refresher', 
+
 		'stann', 
-		'dry-madngtl',
+		'MadChicks',
 		'flipping-the-bird',
+		'dry-madngtl',
+		'DemolitionBirdSquad',
+		'Roverkibb_Berry_Pie',
+		'JohnTappington',
+		'Spirosenjo',
+		'TweetTowers',
 		'tinas-tower',
+		'Koffy',
+		'likeadick',
+		'The Perplex Plan',
+
+
 		'Puck_Level1',
 		'Puck_Level2',
 		'TheKid_Level1',
 		'TheKid_Level2',
-
-
-		// TUTORIAL 3
-		'tutorial-finale', 
-
-		// MAIN 1
-		'bomb-intro',
-		'combo',
-		'bomb-holder', 
-
-		// MAIN 2
-		'umbrella-intro',
-		'bomb-punch',
-
-		// MAIN 3
-		'pogo-intro',
-		'umbrella-shield',
-
-		// HARD 1
-		'mine-intro',
-		'pogo-ideas',
-
-		// HARD 2
-		'mine-enemy',
-		'mine-wall',
-
-		// HARD 3
-		'gun-intro',
-
-		// HARD 3
-		'finale'
-
-		// 'mine-enemy',
+		'TheKid_Level3',		
+		'TheKid_Level3',		
+		'TheKid_Level3',		
+		'TheKid_Level3',		
 		];
 
 	public static levelSelectEntry: 'titlescreen' | 'return' | 'complete' = 'titlescreen';
@@ -965,7 +1011,8 @@ export default class LevelSelect extends Phaser.Scene {
 		this.menuBack.setInteractive();
 		this.menuBack.on('pointerup', () =>
 		{
-
+			this.scene.launch('menu-scene');
+			this.scene.pause();
 		});
 		// this.fullscreenBack.setInteractive();
 		// this.fullscreenBack.on('pointerup', () =>
@@ -995,16 +1042,17 @@ export default class LevelSelect extends Phaser.Scene {
 		}
 
 		// clear save data debug
-		this.input.keyboard.on('keydown-C', () =>
-		{
-			// if (!__DEV__)
-			// {
-			// 	console.debug('returned; dev only');
-			// 	return;
-			// }
+		// this.input.keyboard.on('keydown-C', () =>
+		// {
+		// 	// if (!__DEV__)
+		// 	// {
+		// 	// 	console.debug('returned; dev only');
+		// 	// 	return;
+		// 	// }
 
-			this.loadCredits();
-		});
+
+		// 	this.loadCredits();
+		// });
 
 		// 	LevelSelect.levelsKey.forEach((value, index) =>
 		// 	{
@@ -1098,7 +1146,7 @@ export default class LevelSelect extends Phaser.Scene {
 		// dev character select
 		if (this.registry.get(`selected-character`) == undefined)
 		{
-			this.registry.set(`selected-character`, 'kid');
+			this.registry.set(`selected-character`, 'tapper');
 			// this.registry.set(`selected-character`, 'tapper');
 		}
 		this.input.keyboard.on('keydown-P', () =>
@@ -1129,10 +1177,10 @@ export default class LevelSelect extends Phaser.Scene {
 		});
 
 		// dev tileset select
-		if (this.registry.get(`selected-tileset`) == undefined)
+		if (this.registry.get(`selected-tileset`) == undefined && __MAP_PACK__)
 		{
-			this.registry.set(`selected-tileset`, '-kid');
-			// this.registry.set(`selected-tileset`, '-ninja');
+			// this.registry.set(`selected-tileset`, '-gappy');
+			this.registry.set(`selected-tileset`, '-ninja');
 		}
 		this.input.keyboard.on('keydown-O', () =>
 		{
@@ -1364,9 +1412,16 @@ export default class LevelSelect extends Phaser.Scene {
 		});
 
 		// unlock first levels
-		this.registry.set(`unlocked: ${LevelSelect.levelsKey[0]}`, true);
-		this.registry.set(`unlocked: ${LevelSelect.levelsKey[1]}`, true);
-		this.registry.set(`unlocked: ${LevelSelect.levelsKey[2]}`, true);
+		if (__MAP_PACK__)
+		{
+			this.registry.set(`unlocked: ${LevelSelect.levelsKey[0]}`, true);
+		}
+		else
+		{
+			this.registry.set(`unlocked: ${LevelSelect.levelsKey[0]}`, true);
+			this.registry.set(`unlocked: ${LevelSelect.levelsKey[1]}`, true);
+			this.registry.set(`unlocked: ${LevelSelect.levelsKey[2]}`, true);
+		}
 
 		// level icons setup
 		this.levelIcons = new Array<LevelIconPrefab>();
@@ -1638,6 +1693,42 @@ export default class LevelSelect extends Phaser.Scene {
 
 		// set preview
 		this.setPreview();
+
+		if (__MAP_PACK__)
+		{
+			// set text (map pack)
+			if (this.registry.get(`unlocked: ${LevelSelect.levelsKey[levelIndex]}`) || __LEVEL_TEST__ || __DEV__)
+			{
+				this.levelNameText.setText(mpLevelNames.get(LevelSelect.levelsKey[levelIndex])![0]);
+				this.levelAuthorText.setText('by ' + mpLevelNames.get(LevelSelect.levelsKey[levelIndex])![1]);
+			}
+			else
+			{
+				this.levelNameText.setText('LOCKED');
+				this.levelAuthorText.setText('');
+			}
+
+			// set tilemap
+			if (LevelSelect.levelsKey[levelIndex] === 'Puck_Level1' || LevelSelect.levelsKey[levelIndex] === 'Puck_Level2' || LevelSelect.levelsKey[levelIndex] === 'Puck_Level3')
+			{
+				this.registry.set(`selected-tileset`, '-puck');
+			}
+			else if (LevelSelect.levelsKey[levelIndex] === 'TheKid_Level1' || LevelSelect.levelsKey[levelIndex] === 'TheKid_Level2' || LevelSelect.levelsKey[levelIndex] === 'TheKid_Level3')
+			{
+				this.registry.set(`selected-tileset`, '-kid');
+			}
+			else if (LevelSelect.levelsKey[levelIndex] === 'Gappy_Level1' || LevelSelect.levelsKey[levelIndex] === 'Gappy_Level2' || LevelSelect.levelsKey[levelIndex] === 'Gappy_Level3')
+			{
+				this.registry.set(`selected-tileset`, '-gappy');
+			}
+			else
+			{
+				this.registry.set(`selected-tileset`, '-ninja');
+			}
+
+			// TODO: set character for first time playing these levels
+		}
+
 	}
 
 	/**
@@ -2530,7 +2621,7 @@ export default class LevelSelect extends Phaser.Scene {
 		}
 
 		// level lock return
-		if (!this.registry.get(`unlocked: ${LevelSelect.levelsKey[this.selectedLevel]}`) && !__DEV__)
+		if (!this.registry.get(`unlocked: ${LevelSelect.levelsKey[this.selectedLevel]}`) && !__DEV__ && !__LEVEL_TEST__)
 		// if (false)
 		{
 			console.debug('returned; level is locked');

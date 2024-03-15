@@ -1,44 +1,97 @@
-{"section1":{"files":[
-    {
-        "url": [
-            "assets/music/factory.mp3"
-        ],
-        "type": "audio",
-        "key": "hard-game"
+{
+    "section1": {
+        "files": [
+            {
+                "url": [
+                    "assets/music/map-pack/Jolly_Green_Homewrecker.mp3"
+                ],
+                "type": "audio",
+                "key": "gappy-music-1"
+            },
+            {
+                "url": [
+                    "assets/music/map-pack/Coin_Carnage.mp3"
+                ],
+                "type": "audio",
+                "key": "gappy-music-2"
+            },
+            {
+                "url": [
+                    "assets/music/factory.mp3"
+                ],
+                "type": "audio",
+                "key": "hard-game"
+            },
+            {
+                "url": [
+                    "assets/music/menu.mp3"
+                ],
+                "type": "audio",
+                "key": "level-select"
+            },
+            {
+                "url": [
+                    "assets/music/Like_it_Should.mp3"
+                ],
+                "type": "audio",
+                "key": "main-game"
+            },
+            {
+                "url": [
+                    "assets/music/main-game.mp3"
+                ],
+                "type": "audio",
+                "key": "main-game-2"
+            },
+            {
+                "url": [
+                    "assets/music/map-pack/Blod_for_fone_W1.mp3"
+                ],
+                "type": "audio",
+                "key": "puck-music-1"
+            },
+            {
+                "url": [
+                    "assets/music/map-pack/Chimkn_Chicanery.mp3"
+                ],
+                "type": "audio",
+                "key": "puck-music-2"
+            },
+            {
+                "url": [
+                    "assets/music/map-pack/High_Jumper_Low_Blood_Pressure.mp3"
+                ],
+                "type": "audio",
+                "key": "puck-music-3"
+            },
+            {
+                "url": [
+                    "assets/music/map-pack/Suicidal_Scavenger.mp3"
+                ],
+                "type": "audio",
+                "key": "gappy-music-3"
+            },
+            {
+                "url": [
+                    "assets/music/Tapper-Instrumental.mp3"
+                ],
+                "type": "audio",
+                "key": "tapper"
+            },
+            {
+                "url": [
+                    "assets/music/Natural_Infiltration.mp3"
+                ],
+                "type": "audio",
+                "key": "tutorial"
+            }
+        ]
     },
-    {
-        "url": [
-            "assets/music/menu.mp3"
-        ],
-        "type": "audio",
-        "key": "level-select"
-    },
-    {
-        "url": [
-            "assets/music/Like_it_Should.mp3"
-        ],
-        "type": "audio",
-        "key": "main-game"
-    },
-    {
-        "url": [
-            "assets/music/main-game.mp3"
-        ],
-        "type": "audio",
-        "key": "main-game-2"
-    },
-    {
-        "url": [
-            "assets/music/Tapper-Instrumental.mp3"
-        ],
-        "type": "audio",
-        "key": "tapper"
-    },
-    {
-        "url": [
-            "assets/music/Natural_Infiltration.mp3"
-        ],
-        "type": "audio",
-        "key": "tutorial"
-    }  
-]},"meta":{"app":"Phaser Editor 2D - Asset Pack Editor","url":"https://phasereditor2d.com","contentType":"phasereditor2d.pack.core.AssetContentType","version":2}}
+    "meta": {
+        "app": "Phaser Editor 2D - Asset Pack Editor",
+        "contentType": "phasereditor2d.pack.core.AssetContentType",
+        "url": "https://phasereditor2d.com",
+        "version": 2,
+        "showAllFilesInBlocks": false
+    }
+}

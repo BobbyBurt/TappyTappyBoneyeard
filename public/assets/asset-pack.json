@@ -27,6 +27,11 @@
                 "key": "bg-tileset"
             },
             {
+                "url": "assets/level-pack/Tileset-BG-gappy.png",
+                "type": "image",
+                "key": "bg-tileset-gappy"
+            },
+            {
                 "url": "assets/level-pack/Tileset-BG-kid.png",
                 "type": "image",
                 "key": "bg-tileset-kid"
@@ -406,9 +411,19 @@
                 "key": "gappy"
             },
             {
+                "url": "assets/gappy-fist-exhausted.png",
+                "type": "image",
+                "key": "gappy0fist"
+            },
+            {
+                "url": "assets/gappy-fist-tired.png",
+                "type": "image",
+                "key": "gappy1fist"
+            },
+            {
                 "url": "assets/gappy-fist.png",
                 "type": "image",
-                "key": "gappy-fist"
+                "key": "gappy2fist"
             },
             {
                 "url": "assets/grenade.png",
@@ -441,10 +456,51 @@
                 "key": "hit-effect-horizontal"
             },
             {
+                "url": "assets/illustraion-thegreen.png",
+                "type": "image",
+                "key": "illustration-gappy"
+            },
+            {
+                "url": "assets/illustraion-thekid.png",
+                "type": "image",
+                "key": "illustration-kid"
+            },
+            {
+                "url": "assets/illustraion-thepink.png",
+                "type": "image",
+                "key": "illustration-puck"
+            },
+            {
+                "url": "assets/illustraion-thebird.png",
+                "type": "image",
+                "key": "illustration-tapper"
+            },
+            {
                 "type": "multiatlas",
                 "url": "assets/kid.json",
                 "path": "assets",
                 "key": "kid"
+            },
+            {
+                "url": [
+                    "assets/sfx/KirbyAirRideBowaah.wav"
+                ],
+                "type": "audio",
+                "key": "menu-confirm"
+            },
+            {
+                "url": [
+                    "assets/sfx/KirbyAirRideEww.wav"
+                ],
+                "type": "audio",
+                "key": "menu-back"
+            },
+            {
+                "url": [
+                    "assets/sfx/KirbyAirRideTick.wav"
+                ],
+                "type": "audio",
+                "key": "menu-tick"
             },
             {
                 "url": "assets/level-icon-selected.png",
@@ -616,6 +672,34 @@
                 "url": "assets/pucamuc.json",
                 "path": "assets",
                 "key": "pucamuc"
+            },
+            {
+                "url": [
+                    "assets/sfx/special-characters/puck_death.mp3"
+                ],
+                "type": "audio",
+                "key": "puck_death"
+            },
+            {
+                "url": [
+                    "assets/sfx/special-characters/puck_jump.mp3"
+                ],
+                "type": "audio",
+                "key": "puck_jump"
+            },
+            {
+                "url": [
+                    "assets/sfx/special-characters/puck_punch.mp3"
+                ],
+                "type": "audio",
+                "key": "puck_punch"
+            },
+            {
+                "url": [
+                    "assets/sfx/special-characters/puck_win.mp3"
+                ],
+                "type": "audio",
+                "key": "puck_win"
             },
             {
                 "url": "assets/puck-blood.png",
@@ -825,14 +909,30 @@
                 "key": "textbox_wtf"
             },
             {
+                "url": [
+                    "assets/sfx/special-characters/thekid_death.mp3"
+                ],
+                "type": "audio",
+                "key": "thekid_death"
+            },
+            {
+                "url": [
+                    "assets/sfx/special-characters/thekid_jump.mp3"
+                ],
+                "type": "audio",
+                "key": "thekid_jump"
+            },
+            {
+                "url": [
+                    "assets/sfx/special-characters/thekid_punch.mp3"
+                ],
+                "type": "audio",
+                "key": "thekid_punch"
+            },
+            {
                 "url": "assets/tileset.png",
                 "type": "image",
                 "key": "tileset"
-            },
-            {
-                "url": "assets/level-pack/Tileset-BG-gappy.png",
-                "type": "image",
-                "key": "bg-tileset-gappy"
             },
             {
                 "url": "assets/level-pack/Tileset-gappy.png",

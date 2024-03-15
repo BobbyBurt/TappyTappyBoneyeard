@@ -149,7 +149,7 @@ export default class playerPrefab extends Phaser.Physics.Arcade.Sprite {
 
 	private ninja = '';
 
-	public character: 'tapper' | 'puck' | 'gappy' | 'kid' = 'puck';
+	public character: 'tapper' | 'puck' | 'gappy' | 'kid';
 	private kidJumpForce = 300;
 	private gappyMoveSpeed = 140;
 	public punchSpeedMultiplier = 1;
@@ -173,12 +173,14 @@ export default class playerPrefab extends Phaser.Physics.Arcade.Sprite {
 		else if (this.character === 'gappy')
 		{
 			this.moveSpeed = this.gappyMoveSpeed;
-			this.punchSpeedMultiplier = 1.2
+			this.punchSpeedMultiplier = 1.1;
+			this.jumpForce = 200;
 		}
 		else if (this.character === 'puck')
 		{
 			this.maxFlaps = 3;
 			this.jumpForce =200;
+			this.punchSpeedMultiplier = 1.1;
 		}
 
 		this.setName('player');
@@ -528,7 +530,7 @@ export default class playerPrefab extends Phaser.Physics.Arcade.Sprite {
 			((this.flipX? this.fistoffset.x : -this.fistoffset.x), this.fistoffset.y);
 		if (this.stateController.currentState.name === 'uppercut')
 		{
-			offset.set(this.fistUppercutoffset.x, this.fistUppercutoffset.y);
+			offset.set(this.fistUppercutoffset.x, this.fistUppercutoffset.y + (this.character === 'gappy' ? 3 : 0));
 				// TODO: Add flipx ternary conditional if I set uppercut offset to anything other than 0.
 		}
 		let position = new Phaser.Math.Vector2((this.body.x + 6) + offset.x, this.body.y + offset.y);
@@ -542,19 +544,21 @@ export default class playerPrefab extends Phaser.Physics.Arcade.Sprite {
 		this.fist.setActive(active);
 		this.fist.setVisible(active);
 
-		if (this.character === 'puck' || this.character === 'gappy')
+		if (this.character === 'puck')
 		{
 			this.fist.setVisible(false);
 		}
-
-		this.fist.setTexture('bird' + this.flapCharge + 'fist');
-		if (this.character === 'kid')
+		else if (this.character === 'tapper')
+		{
+			this.fist.setTexture('bird' + this.flapCharge + 'fist');
+		}
+		else if (this.character === 'gappy')
+		{
+			this.fist.setTexture('gappy' + this.flapCharge + 'fist');
+		}
+		else if (this.character === 'kid')
 		{
 			this.fist.setTexture('apple');
-		}
-		if (this.character === 'gappy')
-		{
-			this.fist.setTexture('gappy-fist');
 		}
 
 		if (above)

@@ -2134,9 +2134,16 @@ export default class Level extends Phaser.Scene {
 	{
 		// this.resetLevel();
 		// this.killPlayer();
-		this.explode(mine.x, mine.y);
-		console.debug(`player mine overlap`);
-		mine.setVisible(false);
+		if (this.tilesetPostfix === '-kid' || this.tilesetPostfix === '-puck' || this.tilesetPostfix === '-gappy')
+		{
+			this.killPlayer();
+		}
+		else
+		{
+			this.explode(mine.x, mine.y);
+			console.debug(`player mine overlap`);
+			mine.setVisible(false);
+		}
 	}
 
 	bombTilemapCollide(bomb: any, tileLayer: any)
@@ -2184,7 +2191,7 @@ export default class Level extends Phaser.Scene {
 		if (pit)
 			SoundManager.play('fall', this);
 		else
-			SoundManager.play('bird-die', this);
+			SoundManager.play(SoundManager.getCharacterSFX('bird-die', this.player.character), this);
 
 		if (!pit)
 		{
@@ -3017,7 +3024,7 @@ export default class Level extends Phaser.Scene {
 
 		this.registry.set('completed-level-' + this.registry.get('current-level-index'), true);
 
-		SoundManager.play('combo-end', this);
+		SoundManager.play(SoundManager.getCharacterSFX('combo-end', this.player.character), this);
 		if (this.music)
 		{
 			this.music.pause();

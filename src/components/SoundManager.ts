@@ -29,8 +29,65 @@ export default class SoundManager {
 		['combo-end', 1],
 		['eagle', 1],
 		['bird-egg-lay', 1],
-		['punch-swing', 1]
+		['punch-swing', 1],
+
+		['puck_punch', 1],
+		['puck_win', 1],
+		['puck_death', 1],
+		['puck_jump', 1],
+
 	]);
+
+	public static getCharacterSFX(originalKey: string, character: 'tapper' | 'puck' | 'gappy' | 'kid'): string
+	{
+		if (character === 'puck')
+		{
+			switch (originalKey)
+			{
+				case 'bird-flap':
+					return 'puck_jump';
+				case 'punch-swing':
+					return 'puck_punch';
+				case 'combo-end':
+					return 'puck_win';
+				case 'bird-die':
+					return 'puck_death';
+			}
+		}
+		else if (character === 'kid')
+		{
+			switch (originalKey)
+			{
+				case 'bird-flap':
+					return 'thekid_jump';
+				case 'punch-swing':
+					return 'thekid_punch';
+				// case 'combo-end':
+				// 	return 'puck_win';
+				case 'bird-die':
+					return 'thekid_death';
+			}
+		}
+		
+		return originalKey;
+	}
+
+	static getTrack(world: 1 | 2 | 3, levelScene: Level): string
+	{
+		let character = levelScene.registry.get('selected-character');
+
+		if (character !== 'tapper')
+		{
+			if (levelScene.cache.audio.has(character + '-music-' + world))
+			{
+				return character + '-music-' + world;
+			}
+		}
+		
+		// TODO: check if loaded. if not, play a loaded fallback.
+
+		return SoundManager.tracksKey[world - 1];
+	}
 
 	/**
 	 * Returns instance of BaseSound with level music that's updated if necessary.
@@ -49,14 +106,14 @@ export default class SoundManager {
 		}
 
 	// Which track
-		let trackToPlayKey = this.tracksKey[0];
+		let trackToPlayKey = this.getTrack(1, levelScene)
 		if (levelIndex >= this.tracksFirstLevel[1] && levelIndex < this.tracksFirstLevel[2])
 		{
-			trackToPlayKey = this.tracksKey[1];
+			trackToPlayKey = this.getTrack(2, levelScene)
 		}
 		else if (levelIndex >= this.tracksFirstLevel[2])
 		{
-			trackToPlayKey = this.tracksKey[2];
+			trackToPlayKey = this.getTrack(3, levelScene);
 		}
 
 	// Resume or Destroy
@@ -118,9 +175,9 @@ export default class SoundManager {
 	 * @param scene 
 	 * @param overrideVolume If not provided, the pre-set volume for this key will be used if it exists.
 	 */
-	public static play(key: string, scene: Phaser.Scene, overrideVolume?: number, overrideDetune? : number)
+	public static play(key: string, scene: Phaser.Scene, overrideVolume?: number, overrideDetune? : number,)
 	{
-	// determine volume
+		// determine volume
 		let volume = 0;
 		if (overrideVolume != null)
 		{

@@ -1,10 +1,12 @@
 import cloudSaves from './API/cloudSaves';
 import medalScene from './API/medalScene';
 import { newgroundsIOWrapper } from './API/newgroundsIOWrapper';
+import CharacterSelectScene from './scenes/CharacterSelectScene';
 import Credits from './scenes/Credits';
 import Level from './scenes/Level';
 import LevelSelect from './scenes/LevelSelect';
 import LevelUI from './scenes/LevelUI';
+import MenuScene from './scenes/MenuScene';
 import Pause from './scenes/Pause';
 import Preload from './scenes/Preload';
 import Titlescreen from './scenes/Titlescreen';
@@ -47,7 +49,7 @@ window.addEventListener('load', function ()
 		physics: {
 			default: 'arcade',
 			arcade: {
-				// debug: true,
+				// debug: tsrue,
 				fps: 120,
 				tileBias: 16,
 				gravity: {
@@ -91,6 +93,8 @@ window.addEventListener('load', function ()
 	game.scene.add("LevelUI", LevelUI);
 	game.scene.add("Pause", Pause);
 	game.scene.add('medal-scene', medalScene);
+	game.scene.add('menu-scene', MenuScene);
+	game.scene.add('character-select-scene', CharacterSelectScene);
 });
 
 class Boot extends Phaser.Scene

@@ -2208,7 +2208,7 @@
         {
          "columns":6,
          "firstgid":1,
-         "image":"Tinas_Tower_Rev_1\/TTB-v26.2 - leveltest\/editor\/tileset.png",
+         "image":"..\/..\/..\/..\/..\/levels\/ninja\/Tinas_Tower_Rev_1\/TTB-v26.2 - leveltest\/editor\/tileset.png",
          "imageheight":160,
          "imagewidth":96,
          "margin":0,
@@ -2281,7 +2281,7 @@
         {
          "columns":6,
          "firstgid":61,
-         "image":"Tinas_Tower_Rev_1\/TTB-v26.2 - leveltest\/editor\/tileset-bg.png",
+         "image":"..\/..\/..\/..\/..\/levels\/ninja\/Tinas_Tower_Rev_1\/TTB-v26.2 - leveltest\/editor\/tileset-bg.png",
          "imageheight":160,
          "imagewidth":96,
          "margin":0,

@@ -32,6 +32,11 @@
                 "key": "combo"
             },
             {
+                "url": "assets/levels/map-pack/DemolitionBirdSquad.json",
+                "type": "tilemapTiledJSON",
+                "key": "DemolitionBirdSquad"
+            },
+            {
                 "url": "assets/levels/dive.json",
                 "type": "tilemapTiledJSON",
                 "key": "dive"
@@ -65,6 +70,31 @@
                 "url": "assets/levels/intro.json",
                 "type": "tilemapTiledJSON",
                 "key": "intro"
+            },
+            {
+                "url": "assets/levels/map-pack/JohnTappington.json",
+                "type": "tilemapTiledJSON",
+                "key": "JohnTappington"
+            },
+            {
+                "url": "assets/levels/map-pack/kid-level-3.json",
+                "type": "tilemapTiledJSON",
+                "key": "TheKid_Level3"
+            },
+            {
+                "url": "assets/levels/map-pack/Koffy.json",
+                "type": "tilemapTiledJSON",
+                "key": "Koffy"
+            },
+            {
+                "url": "assets/levels/map-pack/likeadick.json",
+                "type": "tilemapTiledJSON",
+                "key": "likeadick"
+            },
+            {
+                "url": "assets/levels/map-pack/MadChicks.json",
+                "type": "tilemapTiledJSON",
+                "key": "MadChicks"
             },
             {
                 "url": "assets/levels/mine-enemy.json",
@@ -102,9 +132,24 @@
                 "key": "refresher"
             },
             {
+                "url": "assets/levels/map-pack/Roverkibb_Berry_Pie.json",
+                "type": "tilemapTiledJSON",
+                "key": "Roverkibb_Berry_Pie"
+            },
+            {
+                "url": "assets/levels/map-pack/Spirosenjo.json",
+                "type": "tilemapTiledJSON",
+                "key": "Spirosenjo"
+            },
+            {
                 "url": "assets/levels/map-pack/stann.json",
                 "type": "tilemapTiledJSON",
                 "key": "stann"
+            },
+            {
+                "url": "assets/levels/map-pack/The Perplex Plan.json",
+                "type": "tilemapTiledJSON",
+                "key": "The Perplex Plan"
             },
             {
                 "url": "assets/levels/map-pack/TheKid_Level1.json",
@@ -125,6 +170,11 @@
                 "url": "assets/levels/tutorial-finale.json",
                 "type": "tilemapTiledJSON",
                 "key": "tutorial-finale"
+            },
+            {
+                "url": "assets/levels/map-pack/TweetTowers.json",
+                "type": "tilemapTiledJSON",
+                "key": "TweetTowers"
             },
             {
                 "url": "assets/levels/umbrella-intro.json",

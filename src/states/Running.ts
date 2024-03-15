@@ -1,6 +1,7 @@
 import playerPrefab from "~/prefabs/playerPrefab";
 import State from "states/State";
 import StateController from "./StateController";
+import SoundManager from "~/components/SoundManager";
 
 /** player is grounded, moving in either direction */
 export default class Running implements State {
@@ -85,7 +86,7 @@ export default class Running implements State {
 
 		this.player.playAnimation('jump');
 		this.stateController.setState('airborne');
-		this.player.scene.sound.play('bird-flap');
+		this.player.scene.sound.play(SoundManager.getCharacterSFX('bird-flap', this.player.character));
 
 		if (!this.player.started)
 		{

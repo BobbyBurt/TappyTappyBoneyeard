@@ -1,6 +1,7 @@
 import playerPrefab from "~/prefabs/playerPrefab";
 import State from "states/State";
 import StateController from "./StateController";
+import SoundManager from "~/components/SoundManager";
 
 /** player flies forward hitting enemies in it's path */
 export default class Uppercut implements State {
@@ -51,7 +52,8 @@ export default class Uppercut implements State {
 
 		this.player.setPosition(this.player.x, this.player.y - 5);
 
-		this.player.scene.sound.play('punch-swing');
+		this.player.scene.sound.play(SoundManager.getCharacterSFX('punch-swing', this.player.character));
+
 
 		this.player.punchCharged = false;
 
@@ -75,16 +77,6 @@ export default class Uppercut implements State {
 	
 	update()
 	{	
-		// if (this.player.onWallFacing(true))
-		// {
-		// 	this.player.body.setVelocity(0, 0);
-		// 	this.player.setRotation(0);
-		// 	this.stateController.setState('cling');
-		// 	this.timer?.remove();
-		// 	return;
-		// }
-			// as velocity x is now set to 0, this transition is no longer possible
-
 		this.player.body.setVelocity(0, -this.player.variableUppercutSpeed * this.player.punchSpeedMultiplier);
 
 		if (this.player.character === 'puck')

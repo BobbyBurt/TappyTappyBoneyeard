@@ -1,6 +1,7 @@
 import playerPrefab from "~/prefabs/playerPrefab";
 import State from "states/State";
 import StateController from "./StateController";
+import SoundManager from "~/components/SoundManager";
 
 /** player flies forward hitting enemies in it's path */
 export default class Punch implements State {
@@ -85,7 +86,7 @@ export default class Punch implements State {
 			}
 
 			this.player.playAnimation('punch');
-			this.player.scene.sound.play('punch-swing');
+			this.player.scene.sound.play(SoundManager.getCharacterSFX('punch-swing', this.player.character));
 	
 			this.player.variablePunchSpeed = this.player.punchSpeed;
 	

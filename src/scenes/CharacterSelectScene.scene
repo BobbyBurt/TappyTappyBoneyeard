@@ -1,0 +1,241 @@
+{
+    "id": "2e341358-390f-46c0-b58c-bd3d7a65c4e2",
+    "sceneType": "SCENE",
+    "settings": {
+        "exportClass": true,
+        "autoImport": true,
+        "preloadPackFiles": [],
+        "createMethodName": "editorCreate",
+        "sceneKey": "character-select-scene",
+        "compilerOutputLanguage": "TYPE_SCRIPT",
+        "borderWidth": 480,
+        "borderHeight": 270
+    },
+    "displayList": [
+        {
+            "type": "Container",
+            "id": "fd64637f-7d03-4e42-b989-85e0af28af4c",
+            "label": "characterSelectContainer",
+            "scope": "CLASS",
+            "components": [],
+            "list": [
+                {
+                    "type": "Rectangle",
+                    "id": "223751db-7e4f-4980-ae4a-4d0b8fcb0411",
+                    "label": "bgColour_1",
+                    "components": [],
+                    "originX": 0,
+                    "originY": 0,
+                    "isFilled": true,
+                    "fillColor": "#6a4c5d",
+                    "width": 480,
+                    "height": 270
+                },
+                {
+                    "type": "BitmapText",
+                    "id": "01d419f1-2c34-4a37-8d39-e6e4aa5597f0",
+                    "label": "bitmaptext",
+                    "components": [],
+                    "x": 65,
+                    "y": 9,
+                    "tintTopLeft": "#996C85",
+                    "tintTopRight": "#996C85",
+                    "tintBottomLeft": "#996C85",
+                    "tintBottomRight": "#996C85",
+                    "text": "Character Select",
+                    "font": "nokia",
+                    "fontSize": -30
+                },
+                {
+                    "type": "Rectangle",
+                    "id": "7e345afe-6ec6-4f6f-9160-1730d5f27e4d",
+                    "label": "bgColour_2",
+                    "components": [],
+                    "x": 65,
+                    "y": 46.7,
+                    "originX": 0,
+                    "originY": 0,
+                    "isFilled": true,
+                    "fillColor": "#996C85",
+                    "width": 180,
+                    "height": 200
+                },
+                {
+                    "type": "Image",
+                    "id": "a92e2d60-2767-4888-b923-9dad92a280b8",
+                    "label": "characterIllustration",
+                    "scope": "CLASS",
+                    "components": [],
+                    "texture": {
+                        "key": "illustration-kid"
+                    },
+                    "x": 50,
+                    "y": 66,
+                    "scaleX": 0.1,
+                    "scaleY": 0.1,
+                    "originX": 0,
+                    "originY": 0
+                },
+                {
+                    "type": "BitmapText",
+                    "id": "6319d0ac-c4eb-4a71-bfb2-1ca0ed247028",
+                    "label": "characterNameText",
+                    "scope": "CLASS",
+                    "components": [],
+                    "x": 275,
+                    "y": 58,
+                    "text": "Bird Tapper",
+                    "font": "nokia",
+                    "fontSize": -20
+                },
+                {
+                    "type": "BitmapText",
+                    "id": "b3573115-4ced-434a-9f82-e7fdefc9e233",
+                    "label": "characterDescriptionText",
+                    "scope": "CLASS",
+                    "components": [],
+                    "x": 275,
+                    "y": 115,
+                    "text": "Doesn’t move on the ground, but has 5 or 6 jumps which he uses to move around.\n\n- More jumps!\n- Eats babies…\n",
+                    "font": "nokia",
+                    "fontSize": -10,
+                    "maxWidth": 180
+                },
+                {
+                    "type": "Rectangle",
+                    "id": "aaa1b1ef-0519-4547-908b-6d7c031ff397",
+                    "label": "bgColour",
+                    "components": [],
+                    "x": 275,
+                    "y": 216,
+                    "originX": 0,
+                    "originY": 0,
+                    "isFilled": true,
+                    "fillColor": "#996C85",
+                    "width": 190,
+                    "height": 200
+                },
+                {
+                    "type": "Rectangle",
+                    "id": "5c618f6f-dca1-4764-9629-1272f42cdc9c",
+                    "label": "selectedRect",
+                    "scope": "CLASS",
+                    "components": [],
+                    "x": 289,
+                    "y": 231,
+                    "originX": 0,
+                    "originY": 0,
+                    "fillColor": "#ffffff",
+                    "strokeColor": "#ffffff",
+                    "lineWidth": 3,
+                    "isStroked": true,
+                    "width": 30,
+                    "height": 30
+                },
+                {
+                    "type": "Image",
+                    "id": "73d31164-7f61-4695-9c1d-640909a302f7",
+                    "label": "tapperIcon",
+                    "scope": "CLASS",
+                    "components": [],
+                    "texture": {
+                        "key": "bird1mid"
+                    },
+                    "x": 283,
+                    "y": 226,
+                    "scaleX": 2,
+                    "scaleY": 2,
+                    "originX": 0,
+                    "originY": 0
+                },
+                {
+                    "type": "Image",
+                    "id": "ac8bd5a9-a719-4241-888a-b0f8fed91a9c",
+                    "label": "gappyIcon",
+                    "scope": "CLASS",
+                    "components": [],
+                    "texture": {
+                        "key": "gappy",
+                        "frame": "airborne/00"
+                    },
+                    "x": 326,
+                    "y": 221,
+                    "scaleX": 2,
+                    "scaleY": 2,
+                    "originX": 0,
+                    "originY": 0
+                },
+                {
+                    "type": "Image",
+                    "id": "87460a4b-d0f2-4706-867f-607e37cba621",
+                    "label": "puckIcon",
+                    "scope": "CLASS",
+                    "components": [],
+                    "texture": {
+                        "key": "pucamuc",
+                        "frame": "airborne/00"
+                    },
+                    "x": 372,
+                    "y": 221,
+                    "scaleX": 2,
+                    "scaleY": 2,
+                    "originX": 0,
+                    "originY": 0
+                },
+                {
+                    "type": "Image",
+                    "id": "b25df69b-2451-4c7b-927c-bd946647f5cc",
+                    "label": "kidIcon",
+                    "scope": "CLASS",
+                    "components": [],
+                    "texture": {
+                        "key": "kid",
+                        "frame": "flap/03"
+                    },
+                    "x": 417,
+                    "y": 222,
+                    "scaleX": 2,
+                    "scaleY": 2,
+                    "originX": 0,
+                    "originY": 0
+                },
+                {
+                    "type": "BitmapText",
+                    "id": "87b66dfd-aee2-40ee-bc39-f8ecd19f64c9",
+                    "label": "characterTaglineText",
+                    "scope": "CLASS",
+                    "components": [],
+                    "x": 291,
+                    "y": 84,
+                    "tintTopLeft": "#996C85",
+                    "tintTopRight": "#996C85",
+                    "tintBottomLeft": "#996C85",
+                    "tintBottomRight": "#996C85",
+                    "text": "the bird",
+                    "font": "nokia",
+                    "fontSize": -12,
+                    "maxWidth": 180
+                },
+                {
+                    "type": "Rectangle",
+                    "id": "f935e73b-2dfc-40a1-8d21-2d58bb08635d",
+                    "label": "bgColour_3",
+                    "components": [],
+                    "originX": 0,
+                    "originY": 0,
+                    "isFilled": true,
+                    "fillColor": "#996C85",
+                    "width": 25,
+                    "height": 270
+                }
+            ]
+        }
+    ],
+    "plainObjects": [],
+    "meta": {
+        "app": "Phaser Editor 2D - Scene Editor",
+        "url": "https://phasereditor2d.com",
+        "contentType": "phasereditor2d.core.scene.SceneContentType",
+        "version": 3
+    }
+}

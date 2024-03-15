@@ -224,10 +224,10 @@ export default class Titlescreen extends Phaser.Scene {
 		// anotherTabText
 		const anotherTabText = this.add.bitmapText(270, 249, "nokia", "(Game will open in another tab)");
 		anotherTabText.visible = false;
-		anotherTabText.tintTopLeft = 5388102;
-		anotherTabText.tintTopRight = 5388102;
-		anotherTabText.tintBottomLeft = 5388102;
-		anotherTabText.tintBottomRight = 5388102;
+		anotherTabText.tintTopLeft = 11558825;
+		anotherTabText.tintTopRight = 11558825;
+		anotherTabText.tintBottomLeft = 11558825;
+		anotherTabText.tintBottomRight = 11558825;
 		anotherTabText.text = "(Game will open in another tab)";
 		anotherTabText.fontSize = -8;
 		gameSelectContainer.add(anotherTabText);
@@ -755,7 +755,7 @@ export default class Titlescreen extends Phaser.Scene {
 		this.previewKFC_1.setInteractive();
 		this.previewPPP_1.on('pointerup', () =>
 		{
-			
+
 
 			if (!this.titlescreenUp)
 				return;
@@ -775,7 +775,7 @@ export default class Titlescreen extends Phaser.Scene {
 				else
 				{
 					this.startNGIOMenu();
-	
+
 					this.gameSelectContainer.setVisible(false);
 				}
 			}
@@ -808,7 +808,7 @@ export default class Titlescreen extends Phaser.Scene {
 				else
 				{
 					this.startNGIOMenu();
-	
+
 					this.gameSelectContainer.setVisible(false);
 				}
 			}

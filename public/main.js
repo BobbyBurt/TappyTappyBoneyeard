@@ -74214,66 +74214,72 @@
   );
   var mpLevelScoreMilestones = /* @__PURE__ */ new Map(
     [
-      ["refresher", [100, 200, 300]],
+      ["refresher", [600, 1e3, 1400]],
       ["stann", [1e3, 3e3, 7800]],
       ["dry-madngtl", [1400, 2100, 3900]],
-      ["flipping-the-bird", [200, 300, 6e3]],
+      ["flipping-the-bird", [200, 4600, 6e3]],
       ["tinas-tower", [1600, 3700, 7900]],
-      ["Puck_Level1", [100, 1e3, 1e4]],
-      ["Puck_Level2", [100, 1e3, 1e4]],
-      ["TheKid_Level1", [100, 1e3, 1e4]],
-      ["TheKid_Level2", [100, 1e3, 1e4]],
-      ["dive", [200, 400, 600]],
-      ["dive-practice", [300, 500, 1e3]],
-      ["uppercut", [400, 500, 700]],
-      ["charge", [600, 900, 1300]],
-      ["tutorial-finale", [800, 1200, 1800]],
-      ["bomb-intro", [400, 500, 700]],
-      ["combo", [900, 1300, 2200]],
-      ["bomb-holder", [600, 800, 1100]],
-      ["umbrella-intro", [600, 1200, 2400]],
-      ["bomb-punch", [600, 900, 1100]],
-      ["pogo-intro", [800, 1900, 2700]],
-      ["umbrella-shield", [700, 1400, 2300]],
-      ["mine-intro", [500, 800, 1100]],
-      ["pogo-ideas", [600, 1e3, 1300]],
-      ["mine-enemy", [800, 1700, 2e3]],
-      ["mine-wall", [1300, 1800, 2100]],
-      ["gun-intro", [800, 1200, 1600]],
-      ["finale", [2e3, 2400, 2800]],
-      ["grenade", [400, 900, 1100]],
-      ["multi-move", [400, 700, 1200]],
-      ["bullet-ceiling", [600, 700, 800]],
-      ["pogo-challenge", [800, 1600, 2100]]
+      ["The Perplex Plan", [3600, 11400, 21100]],
+      ["DemolitionBirdSquad", [6300, 8400, 10600]],
+      ["JohnTappington", [6900, 8e3, 9500]],
+      ["MadChicks", [12400, 18600, 24900]],
+      ["TweetTowers", [7200, 12600, 17400]],
+      ["Roverkibb_Berry_Pie", [4800, 12100, 14600]],
+      ["Spirosenjo", [1, 2, 5800]],
+      ["Koffy", [1, 8001, 13500]],
+      ["likeadick", [7e3, 18e3, 21e3]],
+      ["Puck_Level1", [1500, 1700, 1800]],
+      ["Puck_Level2", [1e3, 1900, 2500]],
+      ["TheKid_Level1", [500, 1300, 1500]],
+      ["TheKid_Level2", [600, 700, 800]],
+      ["TheKid_Level3", [200, 500, 800]]
     ]
   );
   var mpLevelRequiredAwards = /* @__PURE__ */ new Map(
     [
       ["refresher", [0, 0, 0, 0]],
-      ["stann", [0, 0, 0, 0]],
-      ["dry-madngtl", [0, 0, 0, 0]],
-      ["flipping-the-bird", [0, 0, 0, 0]],
-      ["tinas-tower", [0, 0, 0, 0]],
-      ["Puck_Level1", [0, 0, 0, 0]],
-      ["Puck_Level2", [0, 0, 0, 0]],
-      ["TheKid_Level1", [0, 0, 0, 0]],
-      ["TheKid_Level2", [0, 0, 0, 0]],
-      ["uppercut", [6, 4, 0, 0]],
-      ["charge", [6, 4, 0, 0]],
-      ["tutorial-finale", [6, 4, 0, 0]],
-      ["bomb-intro", [9, 6, 0, 0]],
-      ["combo", [9, 6, 0, 0]],
-      ["bomb-holder", [9, 6, 0, 0]],
-      ["umbrella-intro", [0, 9, 0, 0]],
-      ["bomb-punch", [0, 9, 0, 0]],
-      ["pogo-intro", [0, 11, 2, 0]],
-      ["umbrella-shield", [0, 11, 2, 0]],
-      ["mine-intro", [0, 13, 5, 0]],
-      ["pogo-ideas", [0, 13, 5, 0]],
-      ["mine-enemy", [0, 15, 7, 4]],
-      ["mine-wall", [0, 15, 7, 4]],
-      ["gun-intro", [0, 20, 15, 8]],
-      ["finale", [0, 20, 15, 8]]
+      ["stann", [1, 0, 0, 0]],
+      ["dry-madngtl", [1, 0, 0, 0]],
+      ["flipping-the-bird", [1, 0, 0, 0]],
+      ["tinas-tower", [1, 0, 0, 0]],
+      ["The Perplex Plan", [1, 0, 0, 0]],
+      ["DemolitionBirdSquad", [1, 0, 0, 0]],
+      ["JohnTappington", [1, 0, 0, 0]],
+      ["MadChicks", [1, 0, 0, 0]],
+      ["TweetTowers", [1, 0, 0, 0]],
+      ["Roverkibb_Berry_Pie", [1, 0, 0, 0]],
+      ["Spirosenjo", [1, 0, 0, 0]],
+      ["Koffy", [1, 0, 0, 0]],
+      ["likeadick", [1, 0, 0, 0]],
+      ["Puck_Level1", [4, 0, 0, 0]],
+      ["Puck_Level2", [4, 0, 0, 0]],
+      ["Gappy_Level1", [7, 0, 0, 0]],
+      ["TheKid_Level1", [10, 0, 0, 0]],
+      ["TheKid_Level2", [10, 0, 0, 0]],
+      ["TheKid_Level3", [10, 0, 0, 0]]
+    ]
+  );
+  var mpLevelNames = /* @__PURE__ */ new Map(
+    [
+      ["refresher", ["Refresher", "BobbyBurt"]],
+      ["Puck_Level1", ["Chckan Soft", "ProsciuttoMan"]],
+      ["Puck_Level2", ["Babie Blod", "ProsciuttoMan"]],
+      ["TheKid_Level1", ["Fruity", "ProsciuttoMan"]],
+      ["TheKid_Level2", ["Castlevanioid", "ProsciuttoMan"]],
+      ["TheKid_Level3", ["I Wanna Save The Kids", "Bobo"]],
+      ["stann", ["The Book of Mormon - Abridged", "STANN.co"]],
+      ["dry-madngtl", ["My awesome Dryest Ng Tribute Level by Dryest NG (its his tribute to himself)", "Dry"]],
+      ["flipping-the-bird", ["Flipping The Bird", "Starturbo"]],
+      ["tinas-tower", ["Tina's Tower", "Bobo"]],
+      ["The Perplex Plan", ["The Perplex Plan", "Bobo"]],
+      ["DemolitionBirdSquad", ["Demolition Bird Squad", "Paytonio"]],
+      ["JohnTappington", ["John Tappington", "Paytonio"]],
+      ["MadChicks", ["Mad Chicks", "Paytonio"]],
+      ["TweetTowers", ["Tweet Towers", "Paytonio"]],
+      ["Roverkibb_Berry_Pie", ["Berry Pie", "Roverkibb"]],
+      ["Spirosenjo", ["Spirosenjo", "Dungeonation"]],
+      ["Koffy", ["Heritage for The Past", "Koffy"]],
+      ["likeadick", ["Like a Dickcissel", "Bobo"]]
     ]
   );
   function mapPackDataSwap() {
@@ -74783,6 +74789,10 @@
       rectangle_3.isStroked = true;
       rectangle_3.lineWidth = 2;
       characterSelectContainer.add(rectangle_3);
+      const levelNameText = this.add.bitmapText(43, 244, "nokia", "");
+      levelNameText.fontSize = -8;
+      const levelAuthorText = this.add.bitmapText(43, 254, "nokia", "");
+      levelAuthorText.fontSize = -8;
       const levelBackList = [];
       levelIconPrefab.levelIndex = 0;
       levelIconPrefab_1.levelIndex = 1;
@@ -74878,6 +74888,8 @@
       this.characterDescText = characterDescText;
       this.characterDescText2 = characterDescText2;
       this.characterNameText = characterNameText;
+      this.levelNameText = levelNameText;
+      this.levelAuthorText = levelAuthorText;
       this.levelBackList = levelBackList;
       this.events.emit("scene-awake");
     }
@@ -74959,7 +74971,7 @@
         }
       });
       if (this.registry.get(`selected-character`) == void 0) {
-        this.registry.set(`selected-character`, "kid");
+        this.registry.set(`selected-character`, "tapper");
       }
       this.input.keyboard.on("keydown-P", () => {
         if (true) {
@@ -74978,8 +74990,8 @@
           }
         }
       });
-      if (this.registry.get(`selected-tileset`) == void 0) {
-        this.registry.set(`selected-tileset`, "-kid");
+      if (this.registry.get(`selected-tileset`) == void 0 && true) {
+        this.registry.set(`selected-tileset`, "-ninja");
       }
       this.input.keyboard.on("keydown-O", () => {
         if (true) {
@@ -75102,9 +75114,13 @@
           this.loadLevel();
         }
       });
-      this.registry.set(`unlocked: ${_LevelSelect.levelsKey[0]}`, true);
-      this.registry.set(`unlocked: ${_LevelSelect.levelsKey[1]}`, true);
-      this.registry.set(`unlocked: ${_LevelSelect.levelsKey[2]}`, true);
+      if (true) {
+        this.registry.set(`unlocked: ${_LevelSelect.levelsKey[0]}`, true);
+      } else {
+        this.registry.set(`unlocked: ${_LevelSelect.levelsKey[0]}`, true);
+        this.registry.set(`unlocked: ${_LevelSelect.levelsKey[1]}`, true);
+        this.registry.set(`unlocked: ${_LevelSelect.levelsKey[2]}`, true);
+      }
       this.levelIcons = new Array();
       this.levelIcons.push(this.levelIconPrefab);
       this.levelIcons.push(this.levelIconPrefab_1);
@@ -75264,6 +75280,24 @@
         this.setLockedWindow(false);
       }
       this.setPreview();
+      if (true) {
+        if (this.registry.get(`unlocked: ${_LevelSelect.levelsKey[levelIndex]}`) || true) {
+          this.levelNameText.setText(mpLevelNames.get(_LevelSelect.levelsKey[levelIndex])[0]);
+          this.levelAuthorText.setText("by " + mpLevelNames.get(_LevelSelect.levelsKey[levelIndex])[1]);
+        } else {
+          this.levelNameText.setText("LOCKED");
+          this.levelAuthorText.setText("");
+        }
+        if (_LevelSelect.levelsKey[levelIndex] === "Puck_Level1" || _LevelSelect.levelsKey[levelIndex] === "Puck_Level2" || _LevelSelect.levelsKey[levelIndex] === "Puck_Level3") {
+          this.registry.set(`selected-tileset`, "-puck");
+        } else if (_LevelSelect.levelsKey[levelIndex] === "TheKid_Level1" || _LevelSelect.levelsKey[levelIndex] === "TheKid_Level2" || _LevelSelect.levelsKey[levelIndex] === "TheKid_Level3") {
+          this.registry.set(`selected-tileset`, "-kid");
+        } else if (_LevelSelect.levelsKey[levelIndex] === "Gappy_Level1" || _LevelSelect.levelsKey[levelIndex] === "Gappy_Level2" || _LevelSelect.levelsKey[levelIndex] === "Gappy_Level3") {
+          this.registry.set(`selected-tileset`, "-gappy");
+        } else {
+          this.registry.set(`selected-tileset`, "-ninja");
+        }
+      }
     }
     setPreview() {
       if (this.levelPreviewImage.texture.key === `preview-${_LevelSelect.levelsKey[this.selectedLevel]}`) {
@@ -75657,7 +75691,7 @@
       } else if (true) {
         this.registry.set(`ninja`, false);
       }
-      if (!this.registry.get(`unlocked: ${_LevelSelect.levelsKey[this.selectedLevel]}`) && true) {
+      if (!this.registry.get(`unlocked: ${_LevelSelect.levelsKey[this.selectedLevel]}`) && true && false) {
         console.debug("returned; level is locked");
         return;
       }
@@ -75721,27 +75755,26 @@
   LevelSelect.mpLevelsKey = [
     "refresher",
     "stann",
-    "dry-madngtl",
+    "MadChicks",
     "flipping-the-bird",
+    "dry-madngtl",
+    "DemolitionBirdSquad",
+    "Roverkibb_Berry_Pie",
+    "JohnTappington",
+    "Spirosenjo",
+    "TweetTowers",
     "tinas-tower",
+    "Koffy",
+    "likeadick",
+    "The Perplex Plan",
     "Puck_Level1",
     "Puck_Level2",
     "TheKid_Level1",
     "TheKid_Level2",
-    "tutorial-finale",
-    "bomb-intro",
-    "combo",
-    "bomb-holder",
-    "umbrella-intro",
-    "bomb-punch",
-    "pogo-intro",
-    "umbrella-shield",
-    "mine-intro",
-    "pogo-ideas",
-    "mine-enemy",
-    "mine-wall",
-    "gun-intro",
-    "finale"
+    "TheKid_Level3",
+    "TheKid_Level3",
+    "TheKid_Level3",
+    "TheKid_Level3"
   ];
   LevelSelect.levelSelectEntry = "titlescreen";
 
@@ -76655,7 +76688,6 @@
       this.leftWallChecksOffset = [new import_phaser5.default.Math.Vector2(-1, 8), new import_phaser5.default.Math.Vector2(-1, 1)];
       this.rightWallChecksOffset = [new import_phaser5.default.Math.Vector2(14, 8), new import_phaser5.default.Math.Vector2(14, 1)];
       this.ninja = "";
-      this.character = "puck";
       this.kidJumpForce = 300;
       this.gappyMoveSpeed = 140;
       this.punchSpeedMultiplier = 1;
@@ -76681,10 +76713,12 @@
         this.punchSpeedMultiplier = 0;
       } else if (this.character === "gappy") {
         this.moveSpeed = this.gappyMoveSpeed;
-        this.punchSpeedMultiplier = 1.2;
+        this.punchSpeedMultiplier = 1.1;
+        this.jumpForce = 200;
       } else if (this.character === "puck") {
         this.maxFlaps = 3;
         this.jumpForce = 200;
+        this.punchSpeedMultiplier = 1.1;
       }
       this.setName("player");
       this.fistGraceTimer = this.scene.time.addEvent({ delay: 1 });
@@ -76837,7 +76871,7 @@
     setFistPosition() {
       let offset = new import_phaser5.default.Math.Vector2(this.flipX ? this.fistoffset.x : -this.fistoffset.x, this.fistoffset.y);
       if (this.stateController.currentState.name === "uppercut") {
-        offset.set(this.fistUppercutoffset.x, this.fistUppercutoffset.y);
+        offset.set(this.fistUppercutoffset.x, this.fistUppercutoffset.y + (this.character === "gappy" ? 3 : 0));
       }
       let position = new import_phaser5.default.Math.Vector2(this.body.x + 6 + offset.x, this.body.y + offset.y);
       this.fist.flipX = this.flipX;
@@ -76846,15 +76880,14 @@
     setFist(active, above) {
       this.fist.setActive(active);
       this.fist.setVisible(active);
-      if (this.character === "puck" || this.character === "gappy") {
+      if (this.character === "puck") {
         this.fist.setVisible(false);
-      }
-      this.fist.setTexture("bird" + this.flapCharge + "fist");
-      if (this.character === "kid") {
+      } else if (this.character === "tapper") {
+        this.fist.setTexture("bird" + this.flapCharge + "fist");
+      } else if (this.character === "gappy") {
+        this.fist.setTexture("gappy" + this.flapCharge + "fist");
+      } else if (this.character === "kid") {
         this.fist.setTexture("apple");
-      }
-      if (this.character === "gappy") {
-        this.fist.setTexture("gappy-fist");
       }
       if (above) {
         this.fist.setRotation(this.flipX ? -1.5 : 1.5);
@@ -79875,9 +79908,13 @@ Landing on ground is one way to recharge, but you'll also automatically recharge
       this.bombExplode(bomb);
     }
     playerMineOverlap(player, mine) {
-      this.explode(mine.x, mine.y);
-      console.debug(`player mine overlap`);
-      mine.setVisible(false);
+      if (this.tilesetPostfix === "-kid" || this.tilesetPostfix === "-puck" || this.tilesetPostfix === "-gappy") {
+        this.killPlayer();
+      } else {
+        this.explode(mine.x, mine.y);
+        console.debug(`player mine overlap`);
+        mine.setVisible(false);
+      }
     }
     bombTilemapCollide(bomb, tileLayer) {
       let _bomb = bomb;
