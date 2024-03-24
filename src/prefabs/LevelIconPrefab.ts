@@ -76,6 +76,7 @@ export default class LevelIconPrefab extends Phaser.GameObjects.Container {
 	private highlight: Phaser.GameObjects.Image;
 	private numberText: Phaser.GameObjects.BitmapText;
 	public levelIndex: number = 0;
+	public levelIndexMP: string = "";
 
 	/* START-USER-CODE */
 
@@ -94,7 +95,14 @@ export default class LevelIconPrefab extends Phaser.GameObjects.Container {
 
 	start()
 	{
-		this.numberText.setText(`${this.levelIndex + 1}`);
+		if (__MAP_PACK__)
+		{
+			this.numberText.setText(`${this.levelIndexMP}`);
+		}
+		else
+		{
+			this.numberText.setText(`${this.levelIndex + 1}`);
+		}
 	}
 
 	public setIcon(state: levelState)

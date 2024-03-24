@@ -465,6 +465,7 @@
                     "type": "Image",
                     "id": "d003db14-c05f-474b-9b30-bbaf3dffe39e",
                     "label": "logo",
+                    "scope": "CLASS",
                     "components": [],
                     "texture": {
                         "key": "logo"

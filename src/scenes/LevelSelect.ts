@@ -60,8 +60,13 @@ export default class LevelSelect extends Phaser.Scene {
 		levelPreviewText.fontSize = -8;
 
 		// levelPreviewImage
-		const levelPreviewImage = this.add.image(0, 0, "preview-blank");
+		const levelPreviewImage = this.add.image(0, -23, "preview-dry-madngtl");
 		levelPreviewImage.setOrigin(0, 0);
+
+		// levelPreviewImage_1
+		const levelPreviewImage_1 = this.add.image(0, -23, "preview-refresher");
+		levelPreviewImage_1.setOrigin(0, 0);
+		levelPreviewImage_1.visible = false;
 
 		// highscoreWindowContainer
 		const highscoreWindowContainer = this.add.container(0, 0);
@@ -369,50 +374,50 @@ export default class LevelSelect extends Phaser.Scene {
 		this.add.existing(levelIconPrefab_16);
 
 		// levelIconPrefab_17
-		const levelIconPrefab_17 = new LevelIconPrefab(this, 150, 173);
+		const levelIconPrefab_17 = new LevelIconPrefab(this, 150, 174);
 		this.add.existing(levelIconPrefab_17);
 
 		// levelIconPrefab_18
-		const levelIconPrefab_18 = new LevelIconPrefab(this, 105, 223);
+		const levelIconPrefab_18 = new LevelIconPrefab(this, 105, 221);
 		this.add.existing(levelIconPrefab_18);
 
 		// levelIconPrefab_19
-		const levelIconPrefab_19 = new LevelIconPrefab(this, 420, 223);
+		const levelIconPrefab_19 = new LevelIconPrefab(this, 420, 221);
 		this.add.existing(levelIconPrefab_19);
-		levelIconPrefab_19.visible = false;
+		levelIconPrefab_19.visible = true;
 
 		// levelIconPrefab_20
-		const levelIconPrefab_20 = new LevelIconPrefab(this, 375, 223);
+		const levelIconPrefab_20 = new LevelIconPrefab(this, 375, 221);
 		this.add.existing(levelIconPrefab_20);
-		levelIconPrefab_20.visible = false;
+		levelIconPrefab_20.visible = true;
 
 		// levelIconPrefab_22
-		const levelIconPrefab_22 = new LevelIconPrefab(this, 60, 223);
+		const levelIconPrefab_22 = new LevelIconPrefab(this, 60, 221);
 		this.add.existing(levelIconPrefab_22);
 
 		// levelIconPrefab_23
-		const levelIconPrefab_23 = new LevelIconPrefab(this, 285, 223);
+		const levelIconPrefab_23 = new LevelIconPrefab(this, 285, 221);
 		this.add.existing(levelIconPrefab_23);
 
 		// levelIconPrefab_24
-		const levelIconPrefab_24 = new LevelIconPrefab(this, 240, 223);
+		const levelIconPrefab_24 = new LevelIconPrefab(this, 240, 221);
 		this.add.existing(levelIconPrefab_24);
 
 		// levelIconPrefab_25
-		const levelIconPrefab_25 = new LevelIconPrefab(this, 195, 223);
+		const levelIconPrefab_25 = new LevelIconPrefab(this, 195, 221);
 		this.add.existing(levelIconPrefab_25);
 
 		// levelIconPrefab_26
-		const levelIconPrefab_26 = new LevelIconPrefab(this, 150, 223);
+		const levelIconPrefab_26 = new LevelIconPrefab(this, 150, 221);
 		this.add.existing(levelIconPrefab_26);
 
 		// levelIconPrefab_21
-		const levelIconPrefab_21 = new LevelIconPrefab(this, 330, 223);
+		const levelIconPrefab_21 = new LevelIconPrefab(this, 330, 221);
 		this.add.existing(levelIconPrefab_21);
-		levelIconPrefab_21.visible = false;
+		levelIconPrefab_21.visible = true;
 
 		// hintBack
-		const hintBack = this.add.rectangle(313, 205, 150, 128);
+		const hintBack = this.add.rectangle(311, 201, 150, 128);
 		hintBack.setOrigin(0, 0);
 		hintBack.isFilled = true;
 		hintBack.fillColor = 8542833;
@@ -421,23 +426,6 @@ export default class LevelSelect extends Phaser.Scene {
 		const hintText = this.add.bitmapText(324, 215, "nokia", "");
 		hintText.fontSize = -8;
 		hintText.maxWidth = 130;
-
-		// menuBack
-		const menuBack = this.add.rectangle(360, 159, 75, 28);
-		menuBack.setOrigin(0, 0);
-		menuBack.isFilled = true;
-		menuBack.fillColor = 10054789;
-
-		// hintText_1
-		const hintText_1 = this.add.bitmapText(388, 168, "nokia", "Menu");
-		hintText_1.text = "Menu";
-		hintText_1.fontSize = -8;
-		hintText_1.maxWidth = 130;
-
-		// hintBack_5
-		const hintBack_5 = this.add.rectangle(379, 170, 6, 1);
-		hintBack_5.setOrigin(0, 0);
-		hintBack_5.isFilled = true;
 
 		// optionsMenuContainer
 		const optionsMenuContainer = this.add.container(240, 135);
@@ -455,16 +443,6 @@ export default class LevelSelect extends Phaser.Scene {
 		bitmaptext_1.text = "Options";
 		bitmaptext_1.fontSize = -16;
 		optionsMenuContainer.add(bitmaptext_1);
-
-		// hintBack_1
-		const hintBack_1 = this.add.rectangle(379, 172, 6, 1);
-		hintBack_1.setOrigin(0, 0);
-		hintBack_1.isFilled = true;
-
-		// hintBack_3
-		const hintBack_3 = this.add.rectangle(379, 174, 6, 1);
-		hintBack_3.setOrigin(0, 0);
-		hintBack_3.isFilled = true;
 
 		// menuContainer
 		const menuContainer = this.add.container(0, 0);
@@ -622,46 +600,238 @@ export default class LevelSelect extends Phaser.Scene {
 		bird1mid_3.setOrigin(0, 0);
 		characterSelectContainer.add(bird1mid_3);
 
+		// levelNameText_2
+		const levelNameText_2 = this.add.bitmapText(42, -15, "nokia", "Awsome Level");
+		levelNameText_2.text = "Awsome Level";
+		levelNameText_2.fontSize = -16;
+		levelNameText_2.dropShadowX = 2;
+		levelNameText_2.dropShadowY = 2;
+		levelNameText_2.dropShadowAlpha = 1;
+		levelNameText_2.dropShadowColor = 16777215;
+
+		// levelNameText_1
+		const levelNameText_1 = this.add.bitmapText(42, -13, "nokia", "Awsome Level");
+		levelNameText_1.text = "Awsome Level";
+		levelNameText_1.fontSize = -16;
+		levelNameText_1.dropShadowX = 2;
+		levelNameText_1.dropShadowY = -2;
+		levelNameText_1.dropShadowAlpha = 1;
+		levelNameText_1.dropShadowColor = 16777215;
+
 		// levelNameText
-		const levelNameText = this.add.bitmapText(43, 244, "nokia", "");
-		levelNameText.fontSize = -8;
+		const levelNameText = this.add.bitmapText(43, -14, "nokia", "Awsome Level");
+		levelNameText.tintTopLeft = 5388102;
+		levelNameText.tintTopRight = 5388102;
+		levelNameText.tintBottomLeft = 5388102;
+		levelNameText.tintBottomRight = 5388102;
+		levelNameText.text = "Awsome Level";
+		levelNameText.fontSize = -16;
+		levelNameText.dropShadowColor = 5388102;
+
+		// levelAuthorText_1
+		const levelAuthorText_1 = this.add.bitmapText(42, 6, "nokia", "by BobbyBurt");
+		levelAuthorText_1.text = "by BobbyBurt";
+		levelAuthorText_1.fontSize = -8;
+		levelAuthorText_1.dropShadowX = 2;
+		levelAuthorText_1.dropShadowY = -2;
+		levelAuthorText_1.dropShadowAlpha = 1;
+		levelAuthorText_1.dropShadowColor = 16777215;
+
+		// levelAuthorText_2
+		const levelAuthorText_2 = this.add.bitmapText(42, 4, "nokia", "by BobbyBurt");
+		levelAuthorText_2.text = "by BobbyBurt";
+		levelAuthorText_2.fontSize = -8;
+		levelAuthorText_2.dropShadowX = 2;
+		levelAuthorText_2.dropShadowY = 2;
+		levelAuthorText_2.dropShadowAlpha = 1;
+		levelAuthorText_2.dropShadowColor = 16777215;
 
 		// levelAuthorText
-		const levelAuthorText = this.add.bitmapText(43, 254, "nokia", "");
+		const levelAuthorText = this.add.bitmapText(43, 5, "nokia", "by BobbyBurt");
+		levelAuthorText.tintTopLeft = 5388102;
+		levelAuthorText.tintTopRight = 5388102;
+		levelAuthorText.tintBottomLeft = 5388102;
+		levelAuthorText.tintBottomRight = 5388102;
+		levelAuthorText.text = "by BobbyBurt";
 		levelAuthorText.fontSize = -8;
+
+		// selectedCharacterBack
+		const selectedCharacterBack = this.add.rectangle(360, 112, 150, 30);
+		selectedCharacterBack.setOrigin(0, 0);
+		selectedCharacterBack.isFilled = true;
+		selectedCharacterBack.fillColor = 8542833;
+		selectedCharacterBack.lineWidth = 3;
+
+		// selectedCharacterText
+		const selectedCharacterText = this.add.bitmapText(366, 120, "nokia", "Selected:");
+		selectedCharacterText.tintTopLeft = 11833764;
+		selectedCharacterText.tintTopRight = 11833764;
+		selectedCharacterText.tintBottomLeft = 11833764;
+		selectedCharacterText.tintBottomRight = 11833764;
+		selectedCharacterText.text = "Selected:";
+		selectedCharacterText.fontSize = -8;
+
+		// selectedCharacterSprite
+		const selectedCharacterSprite = this.add.image(424, 125, "pucamuc", "flap/02");
+
+		// menuButtonContainer
+		const menuButtonContainer = this.add.container(360, 159);
+
+		// menuBack
+		const menuBack = this.add.rectangle(0, 0, 75, 28);
+		menuBack.setOrigin(0, 0);
+		menuBack.isFilled = true;
+		menuBack.fillColor = 10054789;
+		menuBack.lineWidth = 3;
+		menuButtonContainer.add(menuBack);
+
+		// hintText_1
+		const hintText_1 = this.add.bitmapText(30, 9, "nokia", "Menu");
+		hintText_1.text = "Menu";
+		hintText_1.fontSize = -8;
+		hintText_1.maxWidth = 130;
+		menuButtonContainer.add(hintText_1);
+
+		// hintBack_5
+		const hintBack_5 = this.add.rectangle(14, 11, 6, 1);
+		hintBack_5.setOrigin(0, 0);
+		hintBack_5.isFilled = true;
+		menuButtonContainer.add(hintBack_5);
+
+		// hintBack_1
+		const hintBack_1 = this.add.rectangle(14, 13, 6, 1);
+		hintBack_1.setOrigin(0, 0);
+		hintBack_1.isFilled = true;
+		menuButtonContainer.add(hintBack_1);
+
+		// hintBack_3
+		const hintBack_3 = this.add.rectangle(14, 15, 6, 1);
+		hintBack_3.setOrigin(0, 0);
+		hintBack_3.isFilled = true;
+		menuButtonContainer.add(hintBack_3);
+
+		// mysteryCharacterContainer
+		const mysteryCharacterContainer = this.add.container(380, 28);
+
+		// rectangle_4
+		const rectangle_4 = this.add.rectangle(4, 2, 128, 128);
+		rectangle_4.scaleX = 0.4106142086997706;
+		rectangle_4.scaleY = 0.4106142086997706;
+		rectangle_4.isFilled = true;
+		mysteryCharacterContainer.add(rectangle_4);
+
+		// specialCharacterImage
+		const specialCharacterImage = this.add.image(3, 0, "illustration-kid");
+		specialCharacterImage.scaleX = 0.0319044655113218;
+		specialCharacterImage.scaleY = 0.0319044655113218;
+		specialCharacterImage.alpha = 0.4;
+		specialCharacterImage.alphaTopLeft = 0.4;
+		specialCharacterImage.alphaTopRight = 0.4;
+		specialCharacterImage.alphaBottomLeft = 0.4;
+		specialCharacterImage.alphaBottomRight = 0.4;
+		specialCharacterImage.tintTopLeft = 0;
+		specialCharacterImage.tintTopRight = 0;
+		specialCharacterImage.tintBottomLeft = 0;
+		specialCharacterImage.tintBottomRight = 0;
+		mysteryCharacterContainer.add(specialCharacterImage);
+
+		// specialCharacterQuestionMark
+		const specialCharacterQuestionMark = this.add.bitmapText(-7, -18, "nokia", "?");
+		specialCharacterQuestionMark.text = "?";
+		specialCharacterQuestionMark.fontSize = -16;
+		mysteryCharacterContainer.add(specialCharacterQuestionMark);
+
+		// characterUnlockedContainer
+		const characterUnlockedContainer = this.add.container(0, 0);
+		characterUnlockedContainer.visible = false;
+
+		// rectangle_5
+		const rectangle_5 = this.add.rectangle(240, 139, 350, 150);
+		rectangle_5.isFilled = true;
+		rectangle_5.fillColor = 10369080;
+		rectangle_5.isStroked = true;
+		rectangle_5.strokeColor = 12669779;
+		rectangle_5.lineWidth = 2;
+		characterUnlockedContainer.add(rectangle_5);
+
+		// bitmaptext_3
+		const bitmaptext_3 = this.add.bitmapText(82, 110, "nokia", "You can play as him in any regular level! He'll also be available in Purple Platoon Panic if you're signed into Newgrounds.io in both games.\n\nGo the the character select in the menu to switch characters.");
+		bitmaptext_3.text = "You can play as him in any regular level! He'll also be available in Purple Platoon Panic if you're signed into Newgrounds.io in both games.\n\nGo the the character select in the menu to switch characters.";
+		bitmaptext_3.fontSize = -8;
+		bitmaptext_3.maxWidth = 200;
+		characterUnlockedContainer.add(bitmaptext_3);
+
+		// unlockedCharacterIllustration
+		const unlockedCharacterIllustration = this.add.image(362, 165, "illustration-gappy");
+		unlockedCharacterIllustration.scaleX = 0.06991574805378897;
+		unlockedCharacterIllustration.scaleY = 0.06991574805378897;
+		characterUnlockedContainer.add(unlockedCharacterIllustration);
+
+		// unlockedCharacterText
+		const unlockedCharacterText = this.add.bitmapText(240, 87, "nokia", "You've unlocked Gappy!");
+		unlockedCharacterText.setOrigin(0.5, 0.5);
+		unlockedCharacterText.text = "You've unlocked Gappy!";
+		unlockedCharacterText.fontSize = -16;
+		characterUnlockedContainer.add(unlockedCharacterText);
+
+		// characterUnlockedDismissButton
+		const characterUnlockedDismissButton = this.add.rectangle(188, 208, 70, 30);
+		characterUnlockedDismissButton.isFilled = true;
+		characterUnlockedDismissButton.fillColor = 11813699;
+		characterUnlockedDismissButton.isStroked = true;
+		characterUnlockedDismissButton.lineWidth = 2;
+		characterUnlockedContainer.add(characterUnlockedDismissButton);
+
+		// bitmaptext_4
+		const bitmaptext_4 = this.add.bitmapText(171, 204, "nokia", "Return");
+		bitmaptext_4.text = "Return";
+		bitmaptext_4.fontSize = -8;
+		bitmaptext_4.align = 1;
+		bitmaptext_4.maxWidth = 250;
+		characterUnlockedContainer.add(bitmaptext_4);
 
 		// lists
 		const levelBackList: Array<any> = [];
 
 		// levelIconPrefab (prefab fields)
 		levelIconPrefab.levelIndex = 0;
+		levelIconPrefab.levelIndexMP = "1";
 
 		// levelIconPrefab_1 (prefab fields)
 		levelIconPrefab_1.levelIndex = 1;
+		levelIconPrefab_1.levelIndexMP = "2";
 
 		// levelIconPrefab_2 (prefab fields)
 		levelIconPrefab_2.levelIndex = 2;
+		levelIconPrefab_2.levelIndexMP = "3";
 
 		// levelIconPrefab_3 (prefab fields)
 		levelIconPrefab_3.levelIndex = 3;
+		levelIconPrefab_3.levelIndexMP = "4";
 
 		// levelIconPrefab_4 (prefab fields)
 		levelIconPrefab_4.levelIndex = 4;
+		levelIconPrefab_4.levelIndexMP = "5";
 
 		// levelIconPrefab_5 (prefab fields)
 		levelIconPrefab_5.levelIndex = 5;
+		levelIconPrefab_5.levelIndexMP = "6";
 
 		// levelIconPrefab_6 (prefab fields)
 		levelIconPrefab_6.levelIndex = 6;
+		levelIconPrefab_6.levelIndexMP = "7";
 
 		// levelIconPrefab_7 (prefab fields)
 		levelIconPrefab_7.levelIndex = 7;
+		levelIconPrefab_7.levelIndexMP = "8";
 
 		// levelIconPrefab_8 (prefab fields)
 		levelIconPrefab_8.levelIndex = 8;
+		levelIconPrefab_8.levelIndexMP = "";
 
 		// levelIconPrefab_9 (prefab fields)
 		levelIconPrefab_9.levelIndex = 10;
+		levelIconPrefab_9.levelIndexMP = "9";
 
 		// levelIconPrefab_10 (prefab fields)
 		levelIconPrefab_10.levelIndex = 17;
@@ -671,52 +841,68 @@ export default class LevelSelect extends Phaser.Scene {
 
 		// levelIconPrefab_12 (prefab fields)
 		levelIconPrefab_12.levelIndex = 15;
+		levelIconPrefab_12.levelIndexMP = "14";
 
 		// levelIconPrefab_13 (prefab fields)
 		levelIconPrefab_13.levelIndex = 9;
+		levelIconPrefab_13.levelIndexMP = "8";
 
 		// levelIconPrefab_14 (prefab fields)
 		levelIconPrefab_14.levelIndex = 14;
+		levelIconPrefab_14.levelIndexMP = "13";
 
 		// levelIconPrefab_15 (prefab fields)
 		levelIconPrefab_15.levelIndex = 13;
+		levelIconPrefab_15.levelIndexMP = "12";
 
 		// levelIconPrefab_16 (prefab fields)
 		levelIconPrefab_16.levelIndex = 12;
+		levelIconPrefab_16.levelIndexMP = "11";
 
 		// levelIconPrefab_17 (prefab fields)
 		levelIconPrefab_17.levelIndex = 11;
+		levelIconPrefab_17.levelIndexMP = "10";
 
 		// levelIconPrefab_18 (prefab fields)
 		levelIconPrefab_18.levelIndex = 17;
+		levelIconPrefab_18.levelIndexMP = "p2";
 
 		// levelIconPrefab_19 (prefab fields)
 		levelIconPrefab_19.levelIndex = 26;
+		levelIconPrefab_19.levelIndexMP = "k3";
 
 		// levelIconPrefab_20 (prefab fields)
 		levelIconPrefab_20.levelIndex = 25;
+		levelIconPrefab_20.levelIndexMP = "k2";
 
 		// levelIconPrefab_22 (prefab fields)
 		levelIconPrefab_22.levelIndex = 16;
+		levelIconPrefab_22.levelIndexMP = "p1";
 
 		// levelIconPrefab_23 (prefab fields)
 		levelIconPrefab_23.levelIndex = 21;
+		levelIconPrefab_23.levelIndexMP = "g3";
 
 		// levelIconPrefab_24 (prefab fields)
 		levelIconPrefab_24.levelIndex = 20;
+		levelIconPrefab_24.levelIndexMP = "g2";
 
 		// levelIconPrefab_25 (prefab fields)
 		levelIconPrefab_25.levelIndex = 19;
+		levelIconPrefab_25.levelIndexMP = "g1";
 
 		// levelIconPrefab_26 (prefab fields)
 		levelIconPrefab_26.levelIndex = 18;
+		levelIconPrefab_26.levelIndexMP = "p3";
 
 		// levelIconPrefab_21 (prefab fields)
 		levelIconPrefab_21.levelIndex = 23;
+		levelIconPrefab_21.levelIndexMP = "k1";
 
 		this.levelPreviewImageOld = levelPreviewImageOld;
 		this.levelPreviewText = levelPreviewText;
 		this.levelPreviewImage = levelPreviewImage;
+		this.levelPreviewImage_1 = levelPreviewImage_1;
 		this.highscoreWindowContainer = highscoreWindowContainer;
 		this.highscoreMeter = highscoreMeter;
 		this.scoreMeter = scoreMeter;
@@ -773,16 +959,32 @@ export default class LevelSelect extends Phaser.Scene {
 		this.levelIconPrefab_25 = levelIconPrefab_25;
 		this.levelIconPrefab_26 = levelIconPrefab_26;
 		this.levelIconPrefab_21 = levelIconPrefab_21;
+		this.hintBack = hintBack;
 		this.hintText = hintText;
-		this.menuBack = menuBack;
-		this.hintText_1 = hintText_1;
 		this.menuContainer = menuContainer;
 		this.characterSelectContainer = characterSelectContainer;
 		this.characterDescText = characterDescText;
 		this.characterDescText2 = characterDescText2;
 		this.characterNameText = characterNameText;
+		this.levelNameText_2 = levelNameText_2;
+		this.levelNameText_1 = levelNameText_1;
 		this.levelNameText = levelNameText;
+		this.levelAuthorText_1 = levelAuthorText_1;
+		this.levelAuthorText_2 = levelAuthorText_2;
 		this.levelAuthorText = levelAuthorText;
+		this.selectedCharacterBack = selectedCharacterBack;
+		this.selectedCharacterText = selectedCharacterText;
+		this.selectedCharacterSprite = selectedCharacterSprite;
+		this.menuButtonContainer = menuButtonContainer;
+		this.menuBack = menuBack;
+		this.hintText_1 = hintText_1;
+		this.mysteryCharacterContainer = mysteryCharacterContainer;
+		this.specialCharacterImage = specialCharacterImage;
+		this.specialCharacterQuestionMark = specialCharacterQuestionMark;
+		this.characterUnlockedContainer = characterUnlockedContainer;
+		this.unlockedCharacterIllustration = unlockedCharacterIllustration;
+		this.unlockedCharacterText = unlockedCharacterText;
+		this.characterUnlockedDismissButton = characterUnlockedDismissButton;
 		this.levelBackList = levelBackList;
 
 		this.events.emit("scene-awake");
@@ -791,6 +993,7 @@ export default class LevelSelect extends Phaser.Scene {
 	private levelPreviewImageOld!: Phaser.GameObjects.Image;
 	private levelPreviewText!: Phaser.GameObjects.BitmapText;
 	private levelPreviewImage!: Phaser.GameObjects.Image;
+	private levelPreviewImage_1!: Phaser.GameObjects.Image;
 	private highscoreWindowContainer!: Phaser.GameObjects.Container;
 	private highscoreMeter!: Phaser.GameObjects.Image;
 	private scoreMeter!: Phaser.GameObjects.Image;
@@ -847,16 +1050,32 @@ export default class LevelSelect extends Phaser.Scene {
 	private levelIconPrefab_25!: LevelIconPrefab;
 	private levelIconPrefab_26!: LevelIconPrefab;
 	private levelIconPrefab_21!: LevelIconPrefab;
+	private hintBack!: Phaser.GameObjects.Rectangle;
 	private hintText!: Phaser.GameObjects.BitmapText;
-	private menuBack!: Phaser.GameObjects.Rectangle;
-	private hintText_1!: Phaser.GameObjects.BitmapText;
 	private menuContainer!: Phaser.GameObjects.Container;
 	private characterSelectContainer!: Phaser.GameObjects.Container;
 	private characterDescText!: Phaser.GameObjects.BitmapText;
 	private characterDescText2!: Phaser.GameObjects.BitmapText;
 	private characterNameText!: Phaser.GameObjects.BitmapText;
+	private levelNameText_2!: Phaser.GameObjects.BitmapText;
+	private levelNameText_1!: Phaser.GameObjects.BitmapText;
 	private levelNameText!: Phaser.GameObjects.BitmapText;
+	private levelAuthorText_1!: Phaser.GameObjects.BitmapText;
+	private levelAuthorText_2!: Phaser.GameObjects.BitmapText;
 	private levelAuthorText!: Phaser.GameObjects.BitmapText;
+	private selectedCharacterBack!: Phaser.GameObjects.Rectangle;
+	private selectedCharacterText!: Phaser.GameObjects.BitmapText;
+	private selectedCharacterSprite!: Phaser.GameObjects.Image;
+	private menuButtonContainer!: Phaser.GameObjects.Container;
+	private menuBack!: Phaser.GameObjects.Rectangle;
+	private hintText_1!: Phaser.GameObjects.BitmapText;
+	private mysteryCharacterContainer!: Phaser.GameObjects.Container;
+	private specialCharacterImage!: Phaser.GameObjects.Image;
+	private specialCharacterQuestionMark!: Phaser.GameObjects.BitmapText;
+	private characterUnlockedContainer!: Phaser.GameObjects.Container;
+	private unlockedCharacterIllustration!: Phaser.GameObjects.Image;
+	private unlockedCharacterText!: Phaser.GameObjects.BitmapText;
+	private characterUnlockedDismissButton!: Phaser.GameObjects.Rectangle;
 	private levelBackList!: Array<any>;
 
 	/* START-USER-CODE */
@@ -930,14 +1149,20 @@ export default class LevelSelect extends Phaser.Scene {
 		'The Perplex Plan',
 
 
+
 		'Puck_Level1',
 		'Puck_Level2',
-		'TheKid_Level1',
-		'TheKid_Level2',
+		'Puck_Level3',		
+
+		// gappy
+		'fully rested',
+		'Playground',
+		'A side',
+
+		'TheKid_Level1',		
+		'TheKid_Level2',		
 		'TheKid_Level3',		
-		'TheKid_Level3',		
-		'TheKid_Level3',		
-		'TheKid_Level3',		
+		// 'An Apple a Day',
 		];
 
 	public static levelSelectEntry: 'titlescreen' | 'return' | 'complete' = 'titlescreen';
@@ -983,12 +1208,16 @@ export default class LevelSelect extends Phaser.Scene {
 
 	private music: Phaser.Sound.BaseSound;
 
+	private menuFocused = false;
+
 	create() {
 
 		this.editorCreate();
 		this.createCameras();
 
 		this.newAwardAchieved = false;
+
+		this.menuFocused = false;
 
 		this.justUnlockedLevel = 0;
 
@@ -998,11 +1227,23 @@ export default class LevelSelect extends Phaser.Scene {
 
 		this.levelIndexUnlockQueue = new Array<number>();
 
-		// MP TEST
 		if (__MAP_PACK__)
 		{
 			LevelSelect.levelsKey = LevelSelect.mpLevelsKey;
 			mapPackDataSwap();
+
+			// this.menuButtonContainer.setY(70);
+			this.levelPreviewImage.setY(-23);
+		}
+		else
+		{
+			this.levelAuthorText.setVisible(false);
+			this.levelAuthorText_1.setVisible(false);
+			this.levelAuthorText_2.setVisible(false);
+			this.levelNameText.setVisible(false);
+			this.levelNameText_1.setVisible(false);
+			this.levelNameText_2.setVisible(false);
+			this.levelPreviewImage.setY(0);
 		}
 
 		// this.levelPreviewImage = this.add.image(this.titleText.x, this.titleText.y, `preview-${LevelSelect.levelsKey[this.selectedLevel]}`);
@@ -1149,32 +1390,32 @@ export default class LevelSelect extends Phaser.Scene {
 			this.registry.set(`selected-character`, 'tapper');
 			// this.registry.set(`selected-character`, 'tapper');
 		}
-		this.input.keyboard.on('keydown-P', () =>
-		{
-			if (__DEV__ || __LEVEL_TEST__)
-			{
-				if (this.registry.get(`selected-character`) === 'tapper')
-				{
-					this.registry.set(`selected-character`, 'puck');
-					this.hintText.setText('CHARACTER SELECTED: PUCK. His jump isnt as high, but Puck has an extra air-jump.');
-				}
-				else if (this.registry.get(`selected-character`) === 'puck')
-				{
-					this.registry.set(`selected-character`, 'gappy');
-					this.hintText.setText('CHARACTER SELECTED: GAPPY. Gappy moves faster.');
-				}
-				else if (this.registry.get(`selected-character`) === 'gappy')
-				{
-					this.registry.set(`selected-character`, 'kid');
-					this.hintText.setText('CHARACTER SELECTED: KID');
-				}
-				else if (this.registry.get(`selected-character`) === 'kid')
-				{
-					this.registry.set(`selected-character`, 'tapper');
-					this.hintText.setText('CHARACTER SELECTED: TAPPER');
-				}
-			}
-		});
+		// this.input.keyboard.on('keydown-P', () =>
+		// {
+		// 	if (__DEV__ || __LEVEL_TEST__)
+		// 	{
+		// 		if (this.registry.get(`selected-character`) === 'tapper')
+		// 		{
+		// 			this.registry.set(`selected-character`, 'puck');
+		// 			this.hintText.setText('CHARACTER SELECTED: PUCK. His jump isnt as high, but Puck has an extra air-jump.');
+		// 		}
+		// 		else if (this.registry.get(`selected-character`) === 'puck')
+		// 		{
+		// 			this.registry.set(`selected-character`, 'gappy');
+		// 			this.hintText.setText('CHARACTER SELECTED: GAPPY. Gappy moves faster.');
+		// 		}
+		// 		else if (this.registry.get(`selected-character`) === 'gappy')
+		// 		{
+		// 			this.registry.set(`selected-character`, 'kid');
+		// 			this.hintText.setText('CHARACTER SELECTED: KID');
+		// 		}
+		// 		else if (this.registry.get(`selected-character`) === 'kid')
+		// 		{
+		// 			this.registry.set(`selected-character`, 'tapper');
+		// 			this.hintText.setText('CHARACTER SELECTED: TAPPER');
+		// 		}
+		// 	}
+		// });
 
 		// dev tileset select
 		if (this.registry.get(`selected-tileset`) == undefined && __MAP_PACK__)
@@ -1220,7 +1461,7 @@ export default class LevelSelect extends Phaser.Scene {
 				return;
 			}
 
-			this.setSelectedLevel(this.selectedLevel + 1);
+			this.menuNavigate('right');
 		});
 		// nav right input - gamepad
 		this.input.gamepad.on(`down`, (pad:Phaser.Input.Gamepad.Gamepad, 
@@ -1235,7 +1476,7 @@ export default class LevelSelect extends Phaser.Scene {
 
 			if (button.index == InputManager.getInput('menu-right', 'gamepad'))
 			{
-				this.setSelectedLevel(this.selectedLevel + 1);
+				this.menuNavigate('right');
 			}
 		});
 
@@ -1250,7 +1491,7 @@ export default class LevelSelect extends Phaser.Scene {
 				return;
 			}
 
-			this.setSelectedLevel(this.selectedLevel - 1);
+			this.menuNavigate('left');
 		});
 		// nav left input - gamepad
 		this.input.gamepad.on(`down`, (pad:Phaser.Input.Gamepad.Gamepad, 
@@ -1265,7 +1506,7 @@ export default class LevelSelect extends Phaser.Scene {
 
 			if (button.index == InputManager.getInput('menu-left', 'gamepad'))
 			{
-				this.setSelectedLevel(this.selectedLevel - 1);
+				this.menuNavigate('left');
 			}
 		});
 
@@ -1280,16 +1521,7 @@ export default class LevelSelect extends Phaser.Scene {
 				return;
 			}
 
-			// top row return
-			// HARDCODED; may need to be updated
-			if (this.selectedLevel > 8 && this.selectedLevel < 16)
-				{
-					this.setSelectedLevel(this.selectedLevel - 9);
-				}
-				else if (this.selectedLevel > 15)
-				{
-					this.setSelectedLevel(this.selectedLevel - 7);
-				}
+			this.menuNavigate('up')
 		});
 		// nav up input - gamepad
 		this.input.gamepad.on(`down`, (pad:Phaser.Input.Gamepad.Gamepad, 
@@ -1304,16 +1536,7 @@ export default class LevelSelect extends Phaser.Scene {
 
 			if (button.index == InputManager.getInput('menu-up', 'gamepad'))
 			{
-				// top row return
-				// HARDCODED; may need to be updated
-				if (this.selectedLevel > 8 && this.selectedLevel < 16)
-				{
-					this.setSelectedLevel(this.selectedLevel - 9);
-				}
-				else if (this.selectedLevel > 15)
-				{
-					this.setSelectedLevel(this.selectedLevel - 7);
-				}
+				this.menuNavigate('up');
 			}
 		});
 
@@ -1328,24 +1551,7 @@ export default class LevelSelect extends Phaser.Scene {
 				return;
 			}
 
-			// bottom row return
-			// HARDCODED; may need to be updated
-			if (this.selectedLevel < 7)
-				{
-					this.setSelectedLevel(this.selectedLevel + 9);
-				}
-				else if (this.selectedLevel === 7 || this.selectedLevel === 8)
-				{
-					this.setSelectedLevel(15);
-				}
-				else if (this.selectedLevel > 8 && this.selectedLevel < 15)
-				{
-					this.setSelectedLevel(this.selectedLevel + 7);
-				}
-				else if (this.selectedLevel === 15)
-				{
-					this.setSelectedLevel(21);
-				}
+			this.menuNavigate('down');
 		});
 		// nav down input - gamepad
 		this.input.gamepad.on(`down`, (pad:Phaser.Input.Gamepad.Gamepad, 
@@ -1360,24 +1566,7 @@ export default class LevelSelect extends Phaser.Scene {
 
 			if (button.index == InputManager.getInput('menu-down', 'gamepad'))
 			{
-				// bottom row return
-				// HARDCODED; may need to be updated
-				if (this.selectedLevel < 7)
-				{
-					this.setSelectedLevel(this.selectedLevel + 9);
-				}
-				else if (this.selectedLevel === 7 || this.selectedLevel === 8)
-				{
-					this.setSelectedLevel(15);
-				}
-				else if (this.selectedLevel > 8 && this.selectedLevel < 15)
-				{
-					this.setSelectedLevel(this.selectedLevel + 7);
-				}
-				else if (this.selectedLevel === 15)
-				{
-					this.setSelectedLevel(21);
-				}
+				this.menuNavigate('down');
 			}
 		});
 
@@ -1385,29 +1574,49 @@ export default class LevelSelect extends Phaser.Scene {
 		this.input.keyboard.on
 			(`keydown-${InputManager.getInput('menu-confirm', 'keyboard')}`, () =>
 		{
-			// input lock return
-			if (this.lockInput)
-			{
-				console.debug('returned; `lockInput` is true');
-				return;
-			}
-
-			this.loadLevel();
+			if (this.characterUnlockedContainer.visible) {
+        this.setUnlockedCharacterPopup(false);
+        this.music = SoundManager.setLevelSelectMusic(this.music, this);
+      }
+      else if (this.lockInput)
+      {
+        console.debug('returned; `lockInput` is true');
+        return;
+      }
+      else if (this.menuFocused)
+      {
+        this.scene.launch('menu-scene');
+        this.scene.pause();
+      }
+      else
+      {
+        this.loadLevel();
+      }
 		});
-		// nav down input - gamepad
+		// confirm input - gamepad
 		this.input.gamepad.on(`down`, (pad:Phaser.Input.Gamepad.Gamepad, 
 			button:Phaser.Input.Gamepad.Button, index:number) =>
 		{
-			// input lock return
-			if (this.lockInput)
-			{
-				console.debug('returned; `lockInput` is true');
-				return;
-			}
-
 			if (button.index == InputManager.getInput('menu-confirm', 'gamepad'))
 			{
-				this.loadLevel();
+        if (this.characterUnlockedContainer.visible) {
+          this.setUnlockedCharacterPopup(false);
+          this.music = SoundManager.setLevelSelectMusic(this.music, this);
+        }
+        else if (this.lockInput)
+        {
+          console.debug('returned; `lockInput` is true');
+          return;
+        }
+        else if (this.menuFocused)
+        {
+          this.scene.launch('menu-scene');
+          this.scene.pause();
+        }
+				else
+				{
+					this.loadLevel();
+				}
 			}
 		});
 
@@ -1432,8 +1641,11 @@ export default class LevelSelect extends Phaser.Scene {
 		this.levelIcons.push(this.levelIconPrefab_4);
 		this.levelIcons.push(this.levelIconPrefab_5);
 		this.levelIcons.push(this.levelIconPrefab_6);
-		this.levelIcons.push(this.levelIconPrefab_7);
-		this.levelIcons.push(this.levelIconPrefab_8);
+		if (!__MAP_PACK__) {
+
+			this.levelIcons.push(this.levelIconPrefab_7);
+			this.levelIcons.push(this.levelIconPrefab_8);
+    }
 		this.levelIcons.push(this.levelIconPrefab_13);
 		this.levelIcons.push(this.levelIconPrefab_9);
 		this.levelIcons.push(this.levelIconPrefab_17);
@@ -1449,10 +1661,22 @@ export default class LevelSelect extends Phaser.Scene {
 		this.levelIcons.push(this.levelIconPrefab_25);
 		this.levelIcons.push(this.levelIconPrefab_24);
 		this.levelIcons.push(this.levelIconPrefab_23);
+		this.levelIcons.push(this.levelIconPrefab_21);
 		this.levelIcons.push(this.levelIconPrefab_20);
 		this.levelIcons.push(this.levelIconPrefab_19);
-		// this.levelIcons.push(this.levelIconPrefab_21);
 		this.setLevelIcons();
+
+		if (__MAP_PACK__)
+		{
+			this.levelIconPrefab_8.setVisible(false);
+			this.levelIconPrefab_7.setVisible(false);
+		}
+		else
+		{
+			this.levelIconPrefab_21.setVisible(false);
+			this.levelIconPrefab_20.setVisible(false);
+			this.levelIconPrefab_19.setVisible(false);
+		}
 
 		// level icons pointer input
 		this.levelIcons.forEach((value, index) =>
@@ -1477,14 +1701,14 @@ export default class LevelSelect extends Phaser.Scene {
 				// select level
 				else
 				{
-					this.setSelectedLevel(index);
+					this.setSelectedLevel(index, true);
 				}
 			});
 		});
 
 		if (this.selectedLevel > -1)
 		{
-			this.setSelectedLevel(this.selectedLevel);
+			this.setSelectedLevel(this.selectedLevel, true);
 		}
 
 		if (LevelSelect.levelSelectEntry === 'complete')
@@ -1509,7 +1733,79 @@ export default class LevelSelect extends Phaser.Scene {
 			this.music = SoundManager.setLevelSelectMusic(this.music, this);
 
 		}
+
+		if (__MAP_PACK__)
+		{
+			// change UI
+			this.hintText.setVisible(false);
+			this.hintBack.setVisible(false)
+
+      this.selectedCharacterText.setVisible(true);
+      this.selectedCharacterSprite.setVisible(true);
+      this.selectedCharacterBack.setVisible(true);
+      this.updateSelectedCharacter();
+		}
+    else
+    {
+      this.selectedCharacterBack.setVisible(false);
+      this.selectedCharacterText.setVisible(false);
+      this.selectedCharacterSprite.setVisible(false);
+    }
+
+    this.characterUnlockedDismissButton.setInteractive();
+    this.characterUnlockedDismissButton.on('pointerdown', () => {
+      this.setUnlockedCharacterPopup(false);
+      this.music = SoundManager.setLevelSelectMusic(this.music, this);
+    });
 	}
+
+  public updateSelectedCharacter()
+  {
+    if (this.registry.get('selected-character') === 'tapper') {
+      if (__MAP_PACK__) {
+        this.selectedCharacterSprite.setTexture("tapper-atlas_1", "run/04");
+        this.selectedCharacterSprite.clearTint();
+        this.selectedCharacterSprite.setAlpha(1);
+      }
+      else {
+        this.selectedCharacterSprite.setTexture("tapper-atlas", "run/04");
+        this.selectedCharacterSprite.clearTint();
+        this.selectedCharacterSprite.setAlpha(1);
+      }
+    }
+    else if (this.registry.get('selected-character') === 'puck') {
+      this.selectedCharacterSprite.setTexture("pucamuc", "airborne/00");
+      if (this.registry.get('unlocked-character: puck')) {
+        this.selectedCharacterSprite.clearTint();
+        this.selectedCharacterSprite.setAlpha(1);
+      }
+      else {
+        this.selectedCharacterSprite.setTint(0x000000, 0x000000, 0x000000, 0x000000);
+        this.selectedCharacterSprite.setAlpha(.4);
+      }
+    }
+    else if (this.registry.get('selected-character') === 'gappy') {
+      this.selectedCharacterSprite.setTexture("gappy", "airborne/00");
+      if (this.registry.get('unlocked-character: gappy')) {
+        this.selectedCharacterSprite.clearTint();
+        this.selectedCharacterSprite.setAlpha(1);
+      }
+      else {
+        this.selectedCharacterSprite.setTint(0x000000, 0x000000, 0x000000, 0x000000);
+        this.selectedCharacterSprite.setAlpha(.4);
+      }
+    }
+    else if (this.registry.get('selected-character') === 'kid') {
+      this.selectedCharacterSprite.setTexture("kid", "flap/03");
+      if (this.registry.get('unlocked-character: kid')) {
+        this.selectedCharacterSprite.clearTint();
+        this.selectedCharacterSprite.setAlpha(1);
+      }
+      else {
+        this.selectedCharacterSprite.setTint(0x000000, 0x000000, 0x000000, 0x000000);
+        this.selectedCharacterSprite.setAlpha(.4);
+      }}
+  }
 
 	setupHints()
 	{
@@ -1562,6 +1858,13 @@ export default class LevelSelect extends Phaser.Scene {
 			`Climb above a group of 5 floating enemies, then head left to find a secret egg.`,
 			`Have you seen the credits sequence yet? Beat all levels to reveal it.`,
 			`On at least one level it's possible to score above the gold award milestone...`
+		]
+
+		let hintsMP = 
+		[
+			`Using a special character may make a level easier, harder, or impossible!`,
+			`True gamers have all the gold awards.`,
+			`Gold is awarded for a theoretically perfect run.`,
 		]
 
 		if (this.registry.get(`top-score: finale`))
@@ -1660,9 +1963,17 @@ export default class LevelSelect extends Phaser.Scene {
 	 * 
 	 * @param levelIndex For navigation, this can be the current selected input + 1 or so. Out of range indexes will be handled.
 	 */
-	setSelectedLevel(levelIndex: number)
+	setSelectedLevel(levelIndex: number, initial?: boolean)
 	{
+    if (!initial) {
+      this.sound.play('menu-tick');
+    }
+
+
 		console.debug(levelIndex);
+
+		this.menuFocused = false;
+		this.setMenuFocus(false);
 
 		// clamp
 		// if (levelIndex < 0)
@@ -1700,7 +2011,23 @@ export default class LevelSelect extends Phaser.Scene {
 			if (this.registry.get(`unlocked: ${LevelSelect.levelsKey[levelIndex]}`) || __LEVEL_TEST__ || __DEV__)
 			{
 				this.levelNameText.setText(mpLevelNames.get(LevelSelect.levelsKey[levelIndex])![0]);
+				this.levelNameText_1.setText(mpLevelNames.get(LevelSelect.levelsKey[levelIndex])![0]);
+				this.levelNameText_2.setText(mpLevelNames.get(LevelSelect.levelsKey[levelIndex])![0]);
 				this.levelAuthorText.setText('by ' + mpLevelNames.get(LevelSelect.levelsKey[levelIndex])![1]);
+				this.levelAuthorText_1.setText('by ' + mpLevelNames.get(LevelSelect.levelsKey[levelIndex])![1]);
+				this.levelAuthorText_2.setText('by ' + mpLevelNames.get(LevelSelect.levelsKey[levelIndex])![1]);
+				if (this.selectedLevel === 4)
+				{
+					this.levelNameText.setFontSize(-9);
+					this.levelNameText_1.setFontSize(-9);
+					this.levelNameText_2.setFontSize(-9);
+				}
+				else
+				{
+					this.levelNameText.setFontSize(-16);
+					this.levelNameText_1.setFontSize(-16);
+					this.levelNameText_2.setFontSize(-16);
+				}
 			}
 			else
 			{
@@ -1712,22 +2039,39 @@ export default class LevelSelect extends Phaser.Scene {
 			if (LevelSelect.levelsKey[levelIndex] === 'Puck_Level1' || LevelSelect.levelsKey[levelIndex] === 'Puck_Level2' || LevelSelect.levelsKey[levelIndex] === 'Puck_Level3')
 			{
 				this.registry.set(`selected-tileset`, '-puck');
+        this.registry.set(`selected-character`, 'puck');
 			}
-			else if (LevelSelect.levelsKey[levelIndex] === 'TheKid_Level1' || LevelSelect.levelsKey[levelIndex] === 'TheKid_Level2' || LevelSelect.levelsKey[levelIndex] === 'TheKid_Level3')
+			else if (LevelSelect.levelsKey[levelIndex] === 'TheKid_Level1' || LevelSelect.levelsKey[levelIndex] === 'TheKid_Level2' || LevelSelect.levelsKey[levelIndex] === 'TheKid_Level3'  || LevelSelect.levelsKey[levelIndex] === 'An Apple a Day')
 			{
 				this.registry.set(`selected-tileset`, '-kid');
+        this.registry.set(`selected-character`, 'kid');
 			}
-			else if (LevelSelect.levelsKey[levelIndex] === 'Gappy_Level1' || LevelSelect.levelsKey[levelIndex] === 'Gappy_Level2' || LevelSelect.levelsKey[levelIndex] === 'Gappy_Level3')
+			else if (LevelSelect.levelsKey[levelIndex] === 'fully rested' || LevelSelect.levelsKey[levelIndex] === 'Playground' || LevelSelect.levelsKey[levelIndex] === 'A side')
 			{
 				this.registry.set(`selected-tileset`, '-gappy');
+        this.registry.set(`selected-character`, 'gappy');
 			}
 			else
 			{
 				this.registry.set(`selected-tileset`, '-ninja');
+        this.registry.set(`selected-character`, this.registry.get('manually-selected-character'));
 			}
 
-			// TODO: set character for first time playing these levels
+			this.updateSelectedCharacter();
 		}
+	}
+
+	/**
+	 * Sets focus to menu button rather than level icon
+	 */
+	setMenuFocus(value: boolean)
+	{
+		this.menuBack.isStroked = value;
+		this.setHighlightedLevel(-1);
+		this.menuFocused = value;
+    if (value) {
+      this.sound.play('menu-tick');
+    }
 
 	}
 
@@ -1738,6 +2082,8 @@ export default class LevelSelect extends Phaser.Scene {
 	 */
 	setPreview()
 	{
+		this.mysteryCharacterContainer.setVisible(false);
+
 		// some calls are redundant. Check if the current and intended image are the same, and return if so.
 		if (this.levelPreviewImage.texture.key === `preview-${LevelSelect.levelsKey[this.selectedLevel]}`)
 		{
@@ -1788,6 +2134,32 @@ export default class LevelSelect extends Phaser.Scene {
 			// set blank
 			this.levelPreviewImage.setTexture('preview-blank');
 			this.levelPreviewText.setText('Level not beat');
+
+      if (__MAP_PACK__)
+      {
+        if (this.selectedLevel > 13 && this.selectedLevel < 17)
+        {
+          this.specialCharacterImage.setTexture('illustration-puck');
+          this.mysteryCharacterContainer.setVisible(true);
+          this.specialCharacterQuestionMark.setPosition(378, 10);
+        }
+        else if (this.selectedLevel > 16 && this.selectedLevel < 20)
+        {
+          this.specialCharacterImage.setTexture('illustration-gappy');
+          this.mysteryCharacterContainer.setVisible(true);
+          this.specialCharacterQuestionMark.setPosition(378, 19);
+        }
+        else if (this.selectedLevel > 19)
+        {
+          this.specialCharacterImage.setTexture('illustration-kid');
+          this.mysteryCharacterContainer.setVisible(true);
+          this.specialCharacterQuestionMark.setPosition(373, 10);
+        }
+        else
+        {
+          this.mysteryCharacterContainer.setVisible(false);
+        }
+      }
 		}
 		else
 		{
@@ -1796,6 +2168,33 @@ export default class LevelSelect extends Phaser.Scene {
 			// set blank
 			this.levelPreviewImage.setTexture('preview-blank');
 			this.levelPreviewText.setText('Level locked');
+
+
+			if (__MAP_PACK__)
+      {
+        if (this.selectedLevel > 13 && this.selectedLevel < 17)
+        {
+          this.specialCharacterImage.setTexture('illustration-puck');
+          this.mysteryCharacterContainer.setVisible(true);
+          this.specialCharacterQuestionMark.setPosition(378, 10);
+        }
+        else if (this.selectedLevel > 16 && this.selectedLevel < 20)
+        {
+          this.specialCharacterImage.setTexture('illustration-gappy');
+          this.mysteryCharacterContainer.setVisible(true);
+          this.specialCharacterQuestionMark.setPosition(378, 19);
+        }
+        else if (this.selectedLevel > 19)
+        {
+          this.specialCharacterImage.setTexture('illustration-kid');
+          this.mysteryCharacterContainer.setVisible(true);
+          this.specialCharacterQuestionMark.setPosition(373, 10);
+        }
+        else
+        {
+          this.mysteryCharacterContainer.setVisible(false);
+        }
+      }
 		}
 	}
 
@@ -1834,10 +2233,17 @@ export default class LevelSelect extends Phaser.Scene {
 			return;
 		}
 
+		let _levelRequiredAwards = 0 as any;
+		if (__MAP_PACK__)
+			_levelRequiredAwards = mpLevelRequiredAwards;
+		else
+			_levelRequiredAwards = levelRequiredAwards;
+
 		console.debug(levelRequiredAwards.get(LevelSelect.levelsKey[this.justUnlockedLevel]));
 
+
 		const requiredAwards = 
-			levelRequiredAwards.get(LevelSelect.levelsKey
+			_levelRequiredAwards.get(LevelSelect.levelsKey
 			[((justUnlockedLevel && this.justUnlockedLevel != 0) ? 
 			this.justUnlockedLevel : firstLockedLevel)]);
 		let remainingPlayed = requiredAwards![0];
@@ -1944,6 +2350,32 @@ export default class LevelSelect extends Phaser.Scene {
 		// // this.goldCount.setTintFill(remainingGold > 0 ? 0xffffff : 0x84e467);
 		// this.goldCount.setAlpha(remainingGold > 0 ? 1 : .5);
 		// this.level_icon_small_gold.setAlpha(remainingGold > 0 ? 1 : .5);
+
+		// if (__MAP_PACK__)
+		// {
+		// 	if (this.selectedLevel > 14 && this.selectedLevel < 18)
+		// 	{
+		// 		this.specialCharacterImage.setTexture('illustration-puck');
+		// 		this.mysteryCharacterContainer.setVisible(true);
+		// 		this.specialCharacterQuestionMark.setPosition(378, 10);
+		// 	}
+		// 	else if (this.selectedLevel > 17 && this.selectedLevel < 21)
+		// 	{
+		// 		this.specialCharacterImage.setTexture('illustration-gappy');
+		// 		this.mysteryCharacterContainer.setVisible(true);
+		// 		this.specialCharacterQuestionMark.setPosition(378, 19);
+		// 	}
+		// 	else if (this.selectedLevel > 20)
+		// 	{
+		// 		this.specialCharacterImage.setTexture('illustration-kid');
+		// 		this.mysteryCharacterContainer.setVisible(true);
+		// 		this.specialCharacterQuestionMark.setPosition(373, 10);
+		// 	}
+		// 	else
+		// 	{
+		// 		this.mysteryCharacterContainer.setVisible(false);
+		// 	}
+		// }
 	}
 
 	setScoreWindow()
@@ -2138,11 +2570,62 @@ export default class LevelSelect extends Phaser.Scene {
 				// no more unlocks
 
 				// music
-				this.music = SoundManager.setLevelSelectMusic(this.music, this);
+
+        if (!this.setUnlockedCharacterPopup(true))
+        {
+          this.music = SoundManager.setLevelSelectMusic(this.music, this);
+        }
 			}
 
 			this.trophyMedalCheck();
 		});
+	}
+
+	setUnlockedCharacterPopup(value: boolean): boolean {
+		let character: 'puck' | 'gappy' | 'kid' = 'puck';
+    if (value) {
+      if (LevelSelect.levelsKey[this.selectedLevel] === 'Puck_Level1') {
+        if (this.registry.get('unlocked-character: puck')) {
+          return false;
+        }
+
+        character = 'puck';
+        this.unlockedCharacterIllustration.setTexture('illustration-puck');
+        this.unlockedCharacterText.setText("You've unlocked Puck!");
+        this.registry.set('unlocked-character: puck', true);
+      }
+      else if (LevelSelect.levelsKey[this.selectedLevel] === 'fully rested') {
+        if (this.registry.get('unlocked-character: gappy')) {
+          return false;
+        }
+
+        character = 'gappy';
+        this.unlockedCharacterIllustration.setTexture('illustration-gappy');
+        this.unlockedCharacterText.setText("You've unlocked Gappy!");
+        this.registry.set('unlocked-character: gappy', true);
+      }
+      else if (LevelSelect.levelsKey[this.selectedLevel] === 'TheKid_Level1') {
+        if (this.registry.get('unlocked-character: kid')) {
+          return false;
+        }
+
+        character = 'kid';
+        this.unlockedCharacterText.setText("You've unlocked the Kid!");
+        this.unlockedCharacterIllustration.setTexture('illustration-kid');
+        this.registry.set('unlocked-character: kid', true);
+      }
+      else {
+        return false;
+      }
+
+      this.sound.play(SoundManager.getCharacterSFX('combo-end', character));
+
+    }
+    this.characterUnlockedContainer.setVisible(value);
+    this.lockInput = value;
+    this.sound.play('menu-back');
+
+    return true;
 	}
 
 	updateLockedWindowSequence()
@@ -2174,7 +2657,10 @@ export default class LevelSelect extends Phaser.Scene {
 			this.setupHints();
 
 			// music
-			this.music = SoundManager.setLevelSelectMusic(this.music, this);
+			if (!this.setUnlockedCharacterPopup(true))
+        {
+          this.music = SoundManager.setLevelSelectMusic(this.music, this);
+        }
 
 			return;
 		}
@@ -2628,10 +3114,13 @@ export default class LevelSelect extends Phaser.Scene {
 			return;
 		}
 
-		NGIO.logEvent(`Level ${this.selectedLevel + 1} Start`, (event) => 
-		{
-			console.debug(`logEvent: ${event}`);
-		});
+    if (!__MAP_PACK__)
+    {
+      NGIO.logEvent(`Level ${this.selectedLevel + 1} Start`, (event) => 
+      {
+        console.debug(`logEvent: ${event}`);
+      });
+    }
 
 		this.registry.set('last-scene', this.scene.key);
 
@@ -2673,16 +3162,170 @@ export default class LevelSelect extends Phaser.Scene {
 		CameraUtil.configureMainCamera(this);
 		this.cameras.main.setBackgroundColor();
 		this.cameras.main.setOrigin(0, 0);
-		this.cameras.main.setBackgroundColor(0x8d4049);
+		this.cameras.main.setBackgroundColor(0xffffff);
 		// this.cameras.main.ignore(this.uiLayer.getChildren());
 
 		// this.UICam = CameraUtil.createUICamera(this);
 		// this.UICam.ignore(this.mainLayer.getChildren());
+		if (__MAP_PACK__)
+		{
+			this.cameras.main.setScroll(0, -20)
+		}
 	}
 
 	resize()
 	{
 
+	}
+
+	menuNavigate(direction: 'up' | 'right' | 'down' | 'left')
+	{
+		// console.debug('menu focused: ' + this.menuFocused);
+		// console.debug('direction: ' + direction);
+		// console.debug('prev selected level: ' + this.selectedLevel);
+
+		if (this.menuFocused)
+		{
+			if (__MAP_PACK__)
+			{
+				switch (direction)
+				{
+					case 'down':
+						this.setSelectedLevel(22);
+						break;
+					case 'left':
+						this.setSelectedLevel(13);
+						break;
+					case 'right':
+						this.setSelectedLevel(14);
+						break;
+					case 'up':
+						this.setSelectedLevel(6);
+						break;
+				}
+			}
+			else
+			{
+				switch (direction)
+				{
+					case 'up':
+						this.setSelectedLevel(8);
+						break;
+					case 'right':
+						this.setSelectedLevel(16);
+						break;
+					case 'down':
+						this.setSelectedLevel(22);
+						break;
+					case 'left':
+						this.setSelectedLevel(15);
+						break;
+				}
+			}
+		}
+		else
+		{
+			if (__MAP_PACK__)
+			{
+				switch (direction)
+				{
+					case 'right':
+						if (this.selectedLevel === 13)
+							this.setMenuFocus(true);
+						else
+							this.setSelectedLevel(this.selectedLevel + 1);
+						break;
+					case 'down':
+            if (this.selectedLevel < 7)
+							this.setSelectedLevel(this.selectedLevel + 7);
+						else if (this.selectedLevel < 15)
+							this.setSelectedLevel(this.selectedLevel + 7);
+						break;
+					case 'left':
+						this.setSelectedLevel(this.selectedLevel - 1);
+						break;
+					case 'up':
+						if (this.selectedLevel > 20)
+						{
+							this.setMenuFocus(true);
+						}
+						else if (this.selectedLevel > 6 && this.selectedLevel < 14)
+						{
+							this.setSelectedLevel(this.selectedLevel - 7);
+						}
+						else if (this.selectedLevel > 13)
+						{
+							this.setSelectedLevel(this.selectedLevel - 7);
+						}
+						break;
+				}
+			}
+			else
+			{
+				switch (direction)
+				{
+					case 'right':
+						if (this.selectedLevel === 15 || this.selectedLevel === 21)
+						{
+							this.setMenuFocus(true);
+						}
+						else
+						{
+							this.setSelectedLevel(this.selectedLevel + 1);
+						}
+						break;
+					case 'down':
+						if (this.selectedLevel === 7 || this.selectedLevel === 8)
+						{
+							this.setMenuFocus(true);
+						}
+						else
+						{
+							// bottom row return
+							// HARDCODED; may need to be updated
+							if (this.selectedLevel < 7)
+							{
+								this.setSelectedLevel(this.selectedLevel + 9);
+							}
+							else if (this.selectedLevel === 7 || this.selectedLevel === 8)
+							{
+								this.setSelectedLevel(15);
+							}
+							else if (this.selectedLevel > 8 && this.selectedLevel < 15)
+							{
+								this.setSelectedLevel(this.selectedLevel + 7);
+							}
+							else if (this.selectedLevel === 15)
+							{
+								this.setSelectedLevel(21);
+							}
+						}
+						break;
+					case 'left':
+						if (this.selectedLevel === 16)
+						{
+							this.setMenuFocus(true);
+						}
+						else
+						{
+							this.setSelectedLevel(this.selectedLevel - 1);
+						}
+						break;
+					case 'up':
+						// top row return
+						// HARDCODED; may need to be updated
+						if (this.selectedLevel > 8 && this.selectedLevel < 16)
+						{
+							this.setSelectedLevel(this.selectedLevel - 9);
+						}
+						else if (this.selectedLevel > 15)
+						{
+							this.setSelectedLevel(this.selectedLevel - 7);
+						}
+						break;
+				}
+			}
+		}
 	}
 
 	/* END-USER-CODE */

@@ -121,9 +121,14 @@ export let levelRequiredAwards = new Map<string, Array<number>>(
             ['Spirosenjo',              [ 1, 2, 5800 ]],
             ['Koffy',                   [ 1, 8001, 13500 ]],
             ['likeadick',               [ 7000, 18000, 21000 ]],
+            ['An Apple a Day',          [ 1, 2, 11000 ]],
+            ['fully rested',            [ 1500, 5000, 6500 ]],
+            ['Playground',              [ 6800, 8500, 11300 ]],
+            ['A side',                  [ 5500, 7400, 9600 ]],
 
             ['Puck_Level1',             [ 1500, 1700, 1800 ]],
             ['Puck_Level2',             [ 1000, 1900, 2500 ]],
+            ['Puck_Level3',             [ 9900, 15600, 19200 ]],
             ['TheKid_Level1',           [ 500, 1300, 1500 ]],
             ['TheKid_Level2',           [ 600, 700, 800 ]],
             ['TheKid_Level3',           [ 200, 500, 800 ]],
@@ -152,12 +157,16 @@ export let mpLevelRequiredAwards = new Map<string, Array<number>>(
         
         ['Puck_Level1',             [ 4, 0, 0, 0 ]],
         ['Puck_Level2',             [ 4, 0, 0, 0 ]],
-
-        ['Gappy_Level1',            [ 7, 0, 0, 0 ]],
-
+        ['Puck_Level3',             [ 4, 0, 0, 0 ]],
+        
+        ['fully rested',            [ 7, 0, 0, 0 ]],
+        ['Playground',              [ 7, 0, 0, 0 ]],
+        ['A side',                  [ 7, 0, 0, 0 ]],
+        
         ['TheKid_Level1',           [ 10, 0, 0, 0 ]],
         ['TheKid_Level2',           [ 10, 0, 0, 0 ]],
         ['TheKid_Level3',           [ 10, 0, 0, 0 ]],
+        ['An Apple a Day',          [ 10, 0, 0, 0 ]],
     ]);
 
     export let mpLevelNames = new Map<string, Array<string>>(
@@ -165,8 +174,9 @@ export let mpLevelRequiredAwards = new Map<string, Array<number>>(
             ['refresher',               [ 'Refresher', 'BobbyBurt' ]],        
             ['Puck_Level1',             [ 'Chckan Soft', 'ProsciuttoMan' ]],
             ['Puck_Level2',             [ 'Babie Blod', 'ProsciuttoMan' ]],  
-            ['TheKid_Level1',           [ 'Fruity', 'ProsciuttoMan' ]],
-            ['TheKid_Level2',           [ 'Castlevanioid', 'ProsciuttoMan' ]],
+            ['Puck_Level3',             [ 'ifone stor', 'Bobo' ]],  
+            ['TheKid_Level1',           [ 'Fruity', 'ProsciuttoMan + Bobo' ]],
+            ['TheKid_Level2',           [ 'Castlevanioid', 'ProsciuttoMan + Bobo' ]],
             ['TheKid_Level3',           [ 'I Wanna Save The Kids', 'Bobo' ]],
 
             ['stann',                   [ "The Book of Mormon - Abridged", 'STANN.co' ]],
@@ -182,6 +192,10 @@ export let mpLevelRequiredAwards = new Map<string, Array<number>>(
             ['Spirosenjo',              [ 'Spirosenjo', 'Dungeonation' ]],
             ['Koffy',                   [ 'Heritage for The Past', 'Koffy' ]],
             ['likeadick',               [ 'Like a Dickcissel', 'Bobo' ]],
+            ['An Apple a Day',          [ 'An Apple a Day', 'Bobo' ]],
+            ['fully rested',            [ 'Fully Rested', 'Paytonio' ]],
+            ['Playground',              [ 'Playground', 'Paytonio' ]],
+            ['A side',                  [ 'A Side', 'Paytonio' ]],
 
         ]);
 
@@ -236,7 +250,14 @@ export function getTotalAwards(scene: Phaser.Scene): Array<number>
 
 export function getEarnedAward(levelKey: string, score: number): 'none' | 'played' | 'bronze' | 'silver' | 'gold'
 {
-    let milestones: Array<number> = levelScoreMilestones.get(levelKey)!;
+    let _levelScoreMilestones = 0 as any;
+    if (__MAP_PACK__)
+        _levelScoreMilestones = mpLevelScoreMilestones;
+    else
+        _levelScoreMilestones = levelScoreMilestones;
+
+
+    let milestones: Array<number> = _levelScoreMilestones.get(levelKey)!;
     if (milestones === undefined)
     {
         console.warn(`No level score milestone data found for level key: ${levelKey}`);

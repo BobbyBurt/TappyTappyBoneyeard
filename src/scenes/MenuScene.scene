@@ -24,11 +24,15 @@
                     "label": "rectangle_4",
                     "components": [],
                     "x": 240,
+                    "y": -5,
                     "originY": 0,
                     "isFilled": true,
                     "fillColor": "#825a71",
+                    "strokeColor": "#b986a3",
+                    "lineWidth": 3,
+                    "isStroked": true,
                     "width": 250,
-                    "height": 270
+                    "height": 300
                 },
                 {
                     "type": "Rectangle",

@@ -615,7 +615,7 @@ export default class playerPrefab extends Phaser.Physics.Arcade.Sprite {
 
 	private createAnimations()
 	{
-		let key = 'tapper-atlas'
+		let key = 'tapper-atlas_1'
 
 		if (this.character === 'puck')
 		{

@@ -2,6 +2,16 @@
     "section1": {
         "files": [
             {
+                "url": "assets/levels/map-pack/A side.json",
+                "type": "tilemapTiledJSON",
+                "key": "A side"
+            },
+            {
+                "url": "assets/levels/map-pack/An Apple a Day.json",
+                "type": "tilemapTiledJSON",
+                "key": "An Apple a Day"
+            },
+            {
                 "url": "assets/levels/bomb-holder.json",
                 "type": "tilemapTiledJSON",
                 "key": "bomb-holder"
@@ -62,6 +72,11 @@
                 "key": "flipping-the-bird"
             },
             {
+                "url": "assets/levels/map-pack/fully rested.json",
+                "type": "tilemapTiledJSON",
+                "key": "fully rested"
+            },
+            {
                 "url": "assets/levels/gun-intro.json",
                 "type": "tilemapTiledJSON",
                 "key": "gun-intro"
@@ -75,11 +90,6 @@
                 "url": "assets/levels/map-pack/JohnTappington.json",
                 "type": "tilemapTiledJSON",
                 "key": "JohnTappington"
-            },
-            {
-                "url": "assets/levels/map-pack/kid-level-3.json",
-                "type": "tilemapTiledJSON",
-                "key": "TheKid_Level3"
             },
             {
                 "url": "assets/levels/map-pack/Koffy.json",
@@ -107,6 +117,11 @@
                 "key": "mine-intro"
             },
             {
+                "url": "assets/levels/map-pack/Playground.json",
+                "type": "tilemapTiledJSON",
+                "key": "Playground"
+            },
+            {
                 "url": "assets/levels/pogo-ideas.json",
                 "type": "tilemapTiledJSON",
                 "key": "pogo-ideas"
@@ -125,6 +140,11 @@
                 "url": "assets/levels/map-pack/Puck_Level2.json",
                 "type": "tilemapTiledJSON",
                 "key": "Puck_Level2"
+            },
+            {
+                "url": "assets/levels/map-pack/puck level 3 rev 1.json",
+                "type": "tilemapTiledJSON",
+                "key": "Puck_Level3"
             },
             {
                 "url": "assets/levels/map-pack/refresher.json",
@@ -160,6 +180,11 @@
                 "url": "assets/levels/map-pack/TheKid_Level2.json",
                 "type": "tilemapTiledJSON",
                 "key": "TheKid_Level2"
+            },
+            {
+                "url": "assets/levels/map-pack/TheKid_Level3.json",
+                "type": "tilemapTiledJSON",
+                "key": "TheKid_Level3"
             },
             {
                 "url": "assets/levels/map-pack/tinas-tower.json",

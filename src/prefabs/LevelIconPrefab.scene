@@ -69,6 +69,16 @@
             "type": {
                 "id": "number"
             }
+        },
+        {
+            "name": "levelIndexMP",
+            "label": "levelIndexMP",
+            "tooltip": "levelIndexMP",
+            "defValue": "",
+            "customDefinition": false,
+            "type": {
+                "id": "string"
+            }
         }
     ]
 }

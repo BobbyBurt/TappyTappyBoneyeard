@@ -1230,7 +1230,7 @@ export default class Level extends Phaser.Scene {
 		this.updateEnemiesUI(true);
 		this.time.addEvent({ delay: 300, callback: () => 
 		{
-			if (!__LEVEL_TEST__ && !__MAP_PACK__)
+			if (!__LEVEL_TEST__)
 			{
 				this.setTutorialUI(true, true);
 			}
@@ -3619,13 +3619,19 @@ export default class Level extends Phaser.Scene {
 	{
 		console.debug(show, initial);
 
+		let _getTutorialText = tutorialManager.getTutorialText(this.currentLevelIndex, this);
+		if (__MAP_PACK__)
+		{
+			_getTutorialText = tutorialManager.getTutorialText(this.currentLevelIndex, this);
+		}
+
 		if (this.reachedGoal === true)
 		{
 			return;
 			// BUG FIX: If the player does this during the level complete sequence then the delay before saving their score doesn't finish.
 		}
 
-		if (!tutorialManager.getTutorialText(this.currentLevelIndex, this))
+		if (!_getTutorialText)
 		{
 			console.debug('returned; no tutorial for this level');
 			return;

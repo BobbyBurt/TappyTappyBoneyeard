@@ -67,14 +67,12 @@
                     "scope": "CLASS",
                     "components": [],
                     "texture": {
-                        "key": "illustration-kid"
+                        "key": "illustration-tapper"
                     },
-                    "x": 50,
-                    "y": 66,
-                    "scaleX": 0.1,
-                    "scaleY": 0.1,
-                    "originX": 0,
-                    "originY": 0
+                    "x": 136.271605335176,
+                    "y": 153.19600704684854,
+                    "scaleX": 0.11421804694748702,
+                    "scaleY": 0.11421804694748702
                 },
                 {
                     "type": "BitmapText",
@@ -98,7 +96,7 @@
                     "y": 115,
                     "text": "Doesn’t move on the ground, but has 5 or 6 jumps which he uses to move around.\n\n- More jumps!\n- Eats babies…\n",
                     "font": "nokia",
-                    "fontSize": -10,
+                    "fontSize": -8,
                     "maxWidth": 180
                 },
                 {
@@ -227,6 +225,26 @@
                     "fillColor": "#996C85",
                     "width": 25,
                     "height": 270
+                },
+                {
+                    "type": "Image",
+                    "id": "85b34694-9470-43d5-abf2-6a922f9d931c",
+                    "label": "characterIllustration_1",
+                    "scope": "CLASS",
+                    "components": [],
+                    "texture": {
+                        "key": "illustration-tapper"
+                    },
+                    "x": 136.2716064453125,
+                    "y": 153.19601440429688,
+                    "scaleX": 0.11421804694748702,
+                    "scaleY": 0.11421804694748702,
+                    "visible": false,
+                    "alpha": 0.7,
+                    "alphaTopLeft": 0.7,
+                    "alphaTopRight": 0.7,
+                    "alphaBottomLeft": 0.7,
+                    "alphaBottomRight": 0.7
                 }
             ]
         }

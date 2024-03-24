@@ -8,6 +8,7 @@ export default class SoundManager {
 // music tracks
 	private static tracksKey = ['tutorial', 'main-game', 'hard-game']
 	private static tracksFirstLevel = [0, 9, 16]
+	// private static tracksFirstLevelMP = [0, 9, 16]
 	private static tracksVolume = [.7, .7, .7]
 
 // sounds
@@ -81,6 +82,12 @@ export default class SoundManager {
 			if (levelScene.cache.audio.has(character + '-music-' + world))
 			{
 				return character + '-music-' + world;
+			}
+		}
+		else {
+			if (levelScene.cache.audio.has('ninja-music-' + world)) {
+				return 'ninja-music-1';
+				// return 'ninja-music-' + world;
 			}
 		}
 		

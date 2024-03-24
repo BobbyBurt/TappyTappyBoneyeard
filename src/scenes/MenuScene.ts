@@ -25,10 +25,13 @@ export default class MenuScene extends Phaser.Scene {
 		const menuContainer = this.add.container(0, 0);
 
 		// rectangle_4
-		const rectangle_4 = this.add.rectangle(240, 0, 250, 270);
+		const rectangle_4 = this.add.rectangle(240, -5, 250, 300);
 		rectangle_4.setOrigin(0.5, 0);
 		rectangle_4.isFilled = true;
 		rectangle_4.fillColor = 8542833;
+		rectangle_4.isStroked = true;
+		rectangle_4.strokeColor = 12158627;
+		rectangle_4.lineWidth = 3;
 		menuContainer.add(rectangle_4);
 
 		// characterSelectRect
@@ -144,27 +147,140 @@ export default class MenuScene extends Phaser.Scene {
 	private selectedOption: 'character' | 'controls' | 'fullscreen' | 'credits' | 'level' = 'character';
 	private activeMenu: 'menu' | 'character' | 'controls' | 'fullscreen' = 'menu';
 
-	create() {
+	create()
+	{
 
 		this.editorCreate();
 
 		this.setupCamera();
 
-	// input
-	this.input.keyboard.on
-		(`keydown-${InputManager.getInput('menu-down', 'keyboard')}`, () =>
-	{
-		this.setSelected(false);
-	});
-	this.input.keyboard.on
-		(`keydown-${InputManager.getInput('menu-up', 'keyboard')}`, () =>
-	{
-		this.setSelected(true);
-	});
+		this.sound.play('menu-confirm');
+
+		this.selectedOption = 'character';
+
+		// input
+		this.input.keyboard.on
+			(`keydown-${InputManager.getInput('menu-down', 'keyboard')}`, () =>
+		{
+			this.setSelected(false);
+		});
+		this.input.gamepad.on(`down`, (pad:Phaser.Input.Gamepad.Gamepad, 
+			button:Phaser.Input.Gamepad.Button, index:number) =>
+		{
+			if (button.index == InputManager.getInput('menu-down', 'gamepad'))
+			{
+				this.setSelected(false);
+			}
+		});
+
+		this.input.keyboard.on
+			(`keydown-${InputManager.getInput('menu-up', 'keyboard')}`, () =>
+		{
+			this.setSelected(true);
+		});
+		this.input.gamepad.on(`down`, (pad:Phaser.Input.Gamepad.Gamepad, 
+			button:Phaser.Input.Gamepad.Button, index:number) =>
+		{
+			if (button.index == InputManager.getInput('menu-up', 'gamepad'))
+			{
+				this.setSelected(true);
+			}
+		});
+
 		this.input.keyboard.on
 			(`keydown-${InputManager.getInput('menu-confirm', 'keyboard')}`, () =>
 		{
 			this.setMenu(true)
+		});
+		this.input.gamepad.on(`down`, (pad:Phaser.Input.Gamepad.Gamepad, 
+			button:Phaser.Input.Gamepad.Button, index:number) =>
+		{
+			if (button.index == InputManager.getInput('menu-confirm', 'gamepad'))
+			{
+				this.setMenu(true);
+			}
+		});
+
+		this.input.keyboard.on
+			(`keydown-${InputManager.getInput('menu-back', 'keyboard')}`, () =>
+		{
+			this.sound.play('menu-back');
+
+			this.scene.stop();
+			this.scene.resume('LevelSelect');
+		});
+		this.input.gamepad.on(`down`, (pad:Phaser.Input.Gamepad.Gamepad, 
+			button:Phaser.Input.Gamepad.Button, index:number) =>
+		{
+			if (button.index == InputManager.getInput('menu-back', 'gamepad'))
+			{
+				this.sound.play('menu-back');
+
+				this.scene.stop();
+				this.scene.resume('LevelSelect');
+			}
+		});
+
+		// pointer input
+		this.characterSelectRect.setInteractive();
+		this.characterSelectRect.on('pointerup', () =>
+		{
+			if (this.selectedOption !== 'character')
+			{
+				this.setSelected(true, 'character');
+			}
+			else
+			{
+				this.setMenu(true);
+			}
+		});
+		this.controlsRect.setInteractive();
+		this.controlsRect.on('pointerup', () =>
+		{
+			if (this.selectedOption !== 'controls')
+			{
+				this.setSelected(true, 'controls');
+			}
+			else
+			{
+				this.setMenu(true);
+			}
+		});
+		this.fullscreenRect.setInteractive();
+		this.fullscreenRect.on('pointerup', () =>
+		{
+			if (this.selectedOption !== 'fullscreen')
+			{
+				this.setSelected(true, 'fullscreen');
+			}
+			else
+			{
+				this.setMenu(true);
+			}
+		});
+		this.creditsRect.setInteractive();
+		this.creditsRect.on('pointerup', () =>
+		{
+			if (this.selectedOption !== 'credits')
+			{
+				this.setSelected(true, 'credits');
+			}
+			else
+			{
+				this.setMenu(true);
+			}
+		});
+		this.levelSelectRect.setInteractive();
+		this.levelSelectRect.on('pointerup', () =>
+		{
+			if (this.selectedOption !== 'level')
+			{
+				this.setSelected(true, 'level');
+			}
+			else
+			{
+				this.setMenu(true);
+			}
 		});
 	}
 
@@ -173,10 +289,22 @@ export default class MenuScene extends Phaser.Scene {
 		switch (this.selectedOption)
 		{
 			case 'character':
+				this.sound.play('menu-confirm');
+
 				this.scene.pause();	
 				this.scene.launch('character-select-scene');
 				break;
+
+			case 'controls':
+				this.sound.play('menu-confirm');
+
+				this.scene.pause();	
+				this.scene.launch('control-guide-scene');
+				break;
+
 			case 'credits':
+				this.sound.play('menu-confirm');	
+
 				this.cameras.main.fadeOut(1000, 255, 234, 240);
 
 				this.time.delayedCall(1500, () =>
@@ -184,36 +312,54 @@ export default class MenuScene extends Phaser.Scene {
 					this.scene.stop(this);
 					this.scene.stop('LevelSelect')
 					this.scene.launch('Credits');
-					this.sound.stopAll();
+					this.sound.pauseAll();
 				});
 				break;
 
+			case 'fullscreen':
+				this.sound.play('menu-confirm')	;
+
+				this.scene.pause();
+				this.scene.launch('fullscreen-popup-scene');
+				break;
+
 			case 'level':
+				this.sound.play('menu-back');
+
 				this.scene.stop();
 				this.scene.resume('LevelSelect');
+				break;
+
 		}
 	}
 
-	setSelected(increase: boolean)
+	setSelected(increase: boolean, option?: 'character' | 'controls' | 'fullscreen' | 'credits' | 'level')
 	{
 		// increase / decrease
-		switch (this.selectedOption)
+		if (option == undefined)
 		{
-			case 'character':
-				this.selectedOption = (increase ? 'level' : 'controls');
-				break;
-			case 'controls':
-				this.selectedOption = (increase ? 'character' : 'fullscreen');
-				break;
-			case 'fullscreen':
-				this.selectedOption = (increase ? 'controls' : 'credits');
-				break;
-			case 'credits':
-				this.selectedOption = (increase ? 'fullscreen' : 'level');
-				break;
-			case 'level':
-				this.selectedOption = (increase ? 'credits' : 'character');
-				break;
+			switch (this.selectedOption)
+			{
+				case 'character':
+					this.selectedOption = (increase ? 'level' : 'controls');
+					break;
+				case 'controls':
+					this.selectedOption = (increase ? 'character' : 'fullscreen');
+					break;
+				case 'fullscreen':
+					this.selectedOption = (increase ? 'controls' : 'credits');
+					break;
+				case 'credits':
+					this.selectedOption = (increase ? 'fullscreen' : 'level');
+					break;
+				case 'level':
+					this.selectedOption = (increase ? 'credits' : 'character');
+					break;
+			}
+		}
+		else
+		{
+			this.selectedOption = option;
 		}
 
 		// visual feedback
@@ -222,6 +368,8 @@ export default class MenuScene extends Phaser.Scene {
 		this.fullscreenRect.strokeColor = (this.selectedOption === 'fullscreen' ? 0xffffff : 0x996C85 );
 		this.creditsRect.strokeColor = (this.selectedOption === 'credits' ? 0xffffff : 0x996C85 );
 		this.levelSelectRect.strokeColor = (this.selectedOption === 'level' ? 0xffffff : 0x996C85 );
+
+		this.sound.play('menu-tick');
 	}
 
 	setupCamera()

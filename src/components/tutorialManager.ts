@@ -45,4 +45,15 @@ export default class tutorialManager {
 
 		return texts[levelIndex];
 	}
+
+	public static getTutorialTextMP(levelIndex: number, scene: Phaser.Scene): string | null
+	{
+		let texts =
+		[
+			// level 1
+				`\nWelcome back! You took out the Purple Platoon like they were nothing, but the Krampus Fellowship Clan is hardcore!\n\nRemember your training: You can jump and flap midair with the ${InputManager.getInputName('jump')}. Hit the ${InputManager.getInputName('punch')} to punch forward, and the ${InputManager.getInputName('uppercut')} to uppercut above. Don't forget to use the ${InputManager.getInputName('dive')} to take care of enemies below!`
+			]
+
+			return texts[levelIndex];
+		}
 }

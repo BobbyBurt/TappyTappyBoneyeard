@@ -19,6 +19,7 @@
             "type": "Image",
             "id": "9c23faed-8e1a-41ec-8b07-169ec31ed485",
             "label": "load_bg",
+            "scope": "CLASS",
             "components": [],
             "texture": {
                 "key": "load-bg"
@@ -30,6 +31,7 @@
             "type": "BitmapText",
             "id": "2ce42443-5227-4c9b-b498-e81f9a21cde3",
             "label": "progress",
+            "scope": "CLASS",
             "components": [
                 "PreloadText"
             ],

@@ -2,9 +2,129 @@
     "section1": {
         "files": [
             {
+                "url": "assets/level-previews/map-pack/preview-A side.png",
+                "type": "image",
+                "key": "preview-A side"
+            },
+            {
+                "url": "assets/level-previews/map-pack/preview-An Apple a Day.png",
+                "type": "image",
+                "key": "preview-An Apple a Day"
+            },
+            {
                 "url": "assets/level-previews/map-pack/preview-blank.png",
                 "type": "image",
                 "key": "preview-blank"
+            },
+            {
+                "url": "assets/level-previews/map-pack/preview-DemolitionBirdSquad.png",
+                "type": "image",
+                "key": "preview-DemolitionBirdSquad"
+            },
+            {
+                "url": "assets/level-previews/map-pack/preview-dry-madngtl.png",
+                "type": "image",
+                "key": "preview-dry-madngtl"
+            },
+            {
+                "url": "assets/level-previews/map-pack/preview-flipping-the-bird.png",
+                "type": "image",
+                "key": "preview-flipping-the-bird"
+            },
+            {
+                "url": "assets/level-previews/map-pack/preview-fully rested.png",
+                "type": "image",
+                "key": "preview-fully rested"
+            },
+            {
+                "url": "assets/level-previews/map-pack/preview-JohnTappington.png",
+                "type": "image",
+                "key": "preview-JohnTappington"
+            },
+            {
+                "url": "assets/level-previews/map-pack/preview-Koffy.png",
+                "type": "image",
+                "key": "preview-Koffy"
+            },
+            {
+                "url": "assets/level-previews/map-pack/preview-likeadick.png",
+                "type": "image",
+                "key": "preview-likeadick"
+            },
+            {
+                "url": "assets/level-previews/map-pack/preview-MadChicks.png",
+                "type": "image",
+                "key": "preview-MadChicks"
+            },
+            {
+                "url": "assets/level-previews/map-pack/preview-Playground.png",
+                "type": "image",
+                "key": "preview-Playground"
+            },
+            {
+                "url": "assets/level-previews/map-pack/preview-Puck_Level1.png",
+                "type": "image",
+                "key": "preview-Puck_Level1"
+            },
+            {
+                "url": "assets/level-previews/map-pack/preview-Puck_Level2.png",
+                "type": "image",
+                "key": "preview-Puck_Level2"
+            },
+            {
+                "url": "assets/level-previews/map-pack/preview-Puck_Level3.png",
+                "type": "image",
+                "key": "preview-Puck_Level3"
+            },
+            {
+                "url": "assets/level-previews/map-pack/preview-refresher.png",
+                "type": "image",
+                "key": "preview-refresher"
+            },
+            {
+                "url": "assets/level-previews/map-pack/preview-Roverkibb_Berry_Pie.png",
+                "type": "image",
+                "key": "preview-Roverkibb_Berry_Pie"
+            },
+            {
+                "url": "assets/level-previews/map-pack/preview-Spirosenjo.png",
+                "type": "image",
+                "key": "preview-Spirosenjo"
+            },
+            {
+                "url": "assets/level-previews/map-pack/preview-stann.png",
+                "type": "image",
+                "key": "preview-stann"
+            },
+            {
+                "url": "assets/level-previews/map-pack/preview-The Perplex Plan.png",
+                "type": "image",
+                "key": "preview-The Perplex Plan"
+            },
+            {
+                "url": "assets/level-previews/map-pack/preview-TheKid_Level1.png",
+                "type": "image",
+                "key": "preview-TheKid_Level1"
+            },
+            {
+                "url": "assets/level-previews/map-pack/preview-TheKid_Level2.png",
+                "type": "image",
+                "key": "preview-TheKid_Level2"
+            },
+            {
+                "url": "assets/level-previews/map-pack/preview-TheKid_Level3.png",
+                "type": "image",
+                "key": "preview-TheKid_Level3"
+            },
+            {
+                "url": "assets/level-previews/map-pack/preview-tinas-tower.png",
+                "type": "image",
+                "key": "preview-tinas-tower"
+            },
+            {
+                "url": "assets/level-previews/map-pack/preview-TweetTowers.png",
+                "type": "image",
+                "key": "preview-TweetTowers"
             }
         ]
     },

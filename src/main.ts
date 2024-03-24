@@ -2,7 +2,9 @@ import cloudSaves from './API/cloudSaves';
 import medalScene from './API/medalScene';
 import { newgroundsIOWrapper } from './API/newgroundsIOWrapper';
 import CharacterSelectScene from './scenes/CharacterSelectScene';
+import ControlsGuideScene from './scenes/ControlsGuideScene';
 import Credits from './scenes/Credits';
+import FullscreenPopupScene from './scenes/FullscreenPopupScene';
 import Level from './scenes/Level';
 import LevelSelect from './scenes/LevelSelect';
 import LevelUI from './scenes/LevelUI';
@@ -95,6 +97,8 @@ window.addEventListener('load', function ()
 	game.scene.add('medal-scene', medalScene);
 	game.scene.add('menu-scene', MenuScene);
 	game.scene.add('character-select-scene', CharacterSelectScene);
+	game.scene.add('fullscreen-popup-scene', FullscreenPopupScene);
+	game.scene.add('control-guide-scene', ControlsGuideScene);
 });
 
 class Boot extends Phaser.Scene
@@ -131,11 +135,19 @@ class Boot extends Phaser.Scene
 		});
 
 		let dataKeys = new Array<string>();
-		LevelSelect.levelsKey.forEach((value, index) =>
-		{
-			dataKeys.push(`top-score: ${value}`);
-			dataKeys.push(`unlocked: ${value}`);
-		});
+		if (__MAP_PACK__) {
+			LevelSelect.mpLevelsKey.forEach((value, index) => {
+				dataKeys.push(`top-score: ${value}`);
+				dataKeys.push(`unlocked: ${value}`);
+			});	
+		}
+		else {
+			LevelSelect.levelsKey.forEach((value, index) =>
+			{
+				dataKeys.push(`top-score: ${value}`);
+				dataKeys.push(`unlocked: ${value}`);
+			});
+		}
 		
 		// eggs
 		// HARDCODED: new egg rooms need to be added manually
@@ -144,6 +156,9 @@ class Boot extends Phaser.Scene
 		dataKeys.push(`got-egg: mine-intro`);
 		dataKeys.push(`got-egg: mine-wall`);
 		dataKeys.push(`new-uppercut-input`);
+		dataKeys.push(`unlocked-character: puck`);
+		dataKeys.push(`unlocked-character: gappy`);
+		dataKeys.push(`unlocked-character: kid`);
 
 		dataKeys.push(`no-more-unlocks`);
 		dataKeys.push('played-credits');
@@ -154,6 +169,7 @@ class Boot extends Phaser.Scene
 		// 	'top-score'
 		// ]);
 		// TODO: add all level key topscores
+		this.registry.set('manually-selected-character', 'tapper');
 	}
 
 	/**

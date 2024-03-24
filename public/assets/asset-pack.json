@@ -405,6 +405,11 @@
                 "key": "fuel-test"
             },
             {
+                "url": "assets/gamepad.png",
+                "type": "image",
+                "key": "gamepad"
+            },
+            {
                 "type": "multiatlas",
                 "url": "assets/gappy.json",
                 "path": "assets",
@@ -476,31 +481,15 @@
                 "key": "illustration-tapper"
             },
             {
+                "url": "assets/keyboard.png",
+                "type": "image",
+                "key": "keyboard"
+            },
+            {
                 "type": "multiatlas",
                 "url": "assets/kid.json",
                 "path": "assets",
                 "key": "kid"
-            },
-            {
-                "url": [
-                    "assets/sfx/KirbyAirRideBowaah.wav"
-                ],
-                "type": "audio",
-                "key": "menu-confirm"
-            },
-            {
-                "url": [
-                    "assets/sfx/KirbyAirRideEww.wav"
-                ],
-                "type": "audio",
-                "key": "menu-back"
-            },
-            {
-                "url": [
-                    "assets/sfx/KirbyAirRideTick.wav"
-                ],
-                "type": "audio",
-                "key": "menu-tick"
             },
             {
                 "url": "assets/level-icon-selected.png",
@@ -541,6 +530,32 @@
                 "key": "level-icons"
             },
             {
+                "url": "assets/logoKFC.png",
+                "type": "image",
+                "key": "logoKFC"
+            },
+            {
+                "url": [
+                    "assets/sfx/KirbyAirRideEww.wav"
+                ],
+                "type": "audio",
+                "key": "menu-back"
+            },
+            {
+                "url": [
+                    "assets/sfx/KirbyAirRideBowaah.wav"
+                ],
+                "type": "audio",
+                "key": "menu-confirm"
+            },
+            {
+                "url": [
+                    "assets/sfx/KirbyAirRideTick.wav"
+                ],
+                "type": "audio",
+                "key": "menu-tick"
+            },
+            {
                 "url": "assets/level-pack/mine-kid.png",
                 "type": "image",
                 "key": "mine-kid"
@@ -554,6 +569,11 @@
                 "url": "assets/mobile-button.png",
                 "type": "image",
                 "key": "mobile-button"
+            },
+            {
+                "url": "assets/mobile-gameplay.png",
+                "type": "image",
+                "key": "mobile-gameplay"
             },
             {
                 "url": "assets/level-pack/Paralax-Mountains.png",

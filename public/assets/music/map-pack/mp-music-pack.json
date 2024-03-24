@@ -17,6 +17,20 @@
             },
             {
                 "url": [
+                    "assets/music/map-pack/Suicidal_Scavenger.mp3"
+                ],
+                "type": "audio",
+                "key": "gappy-music-3"
+            },
+            {
+                "url": [
+                    "assets/music/Grasslands_Bop_Metal_Version.mp3"
+                ],
+                "type": "audio",
+                "key": "ninja-music-1"
+            },
+            {
+                "url": [
                     "assets/music/factory.mp3"
                 ],
                 "type": "audio",
@@ -63,13 +77,6 @@
                 ],
                 "type": "audio",
                 "key": "puck-music-3"
-            },
-            {
-                "url": [
-                    "assets/music/map-pack/Suicidal_Scavenger.mp3"
-                ],
-                "type": "audio",
-                "key": "gappy-music-3"
             },
             {
                 "url": [

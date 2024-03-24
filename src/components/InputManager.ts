@@ -197,7 +197,7 @@ export default class InputManager {
 		['menu-back',
 		[
 			'Z',
-			2,
+			0,
 			'back button'
 		]]
 	]);

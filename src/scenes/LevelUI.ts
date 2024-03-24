@@ -1206,6 +1206,11 @@ export default class LevelUI extends Phaser.Scene {
 			this.soldiermid_3, this.soldiermid_4, this.soldiermid_5, this.soldiermid_6, 
 			this.soldiermid_7, this.soldiermid_8, this.soldiermid, this.soldiermid_9];
 
+		if (__MAP_PACK__)
+		{
+			this.transitionBG.setTexture('loading-mp');
+		}
+
 		this.tweens.add({
 			targets: this.transitionBG,
 			delay: 50,
@@ -1503,7 +1508,14 @@ export default class LevelUI extends Phaser.Scene {
 			}
 			else
 			{
-				this.tutorialText.setText(tutorialManager.getTutorialText(level!, this)!);
+				if (__MAP_PACK__)
+				{
+					this.tutorialText.setText(tutorialManager.getTutorialTextMP(level!, this)!);
+				}
+				else
+				{
+					this.tutorialText.setText(tutorialManager.getTutorialText(level!, this)!);
+				}
 			}
 
 			// word highlighting

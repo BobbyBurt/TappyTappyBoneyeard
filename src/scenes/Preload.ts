@@ -76,6 +76,8 @@ export default class Preload extends Phaser.Scene {
 		// progress (components)
 		new PreloadText(progress);
 
+		this.load_bg = load_bg;
+		this.progress = progress;
 		this.fileText = fileText;
 		this.progress_1 = progress_1;
 		this.birdFade = birdFade;
@@ -83,6 +85,8 @@ export default class Preload extends Phaser.Scene {
 		this.events.emit("scene-awake");
 	}
 
+	private load_bg!: Phaser.GameObjects.Image;
+	private progress!: Phaser.GameObjects.BitmapText;
 	private fileText!: Phaser.GameObjects.BitmapText;
 	private progress_1!: Phaser.GameObjects.BitmapText;
 	private birdFade!: Phaser.GameObjects.Rectangle;
@@ -104,8 +108,8 @@ export default class Preload extends Phaser.Scene {
 			{
 				this.load.pack("mp-music-pack", "assets/music/map-pack/mp-music-pack.json");
 			}
-			this.load.pack("mp-level-previews-pack", "assets/level-previews/map-pack/level-previews-pack.json");
-			this.load.pack("map-pack-levels-pack", "assets/levels/map-pack/map-pack-levels-pack.json"); 
+			this.load.pack("mp-level-previews-pack", "assets/level-previews/map-pack/mp-level-previews-pack.json");
+			this.load.pack("mp-levels-pack", "assets/levels/map-pack/map-pack-levels-pack.json");
 		}
 		else
 		{
@@ -202,6 +206,15 @@ export default class Preload extends Phaser.Scene {
 			yoyo: true,
 			ease: Phaser.Math.Easing.Bounce.InOut
 		});
+
+		if (__MAP_PACK__)
+		{
+			this.load_bg.setTexture('loading-mp');
+
+			this.birdFade.setPosition(290, 104);
+			this.progress.setVisible(false);
+			this.progress_1.setVisible(false);
+		}
 	}
 
 	/** 

@@ -7,6 +7,7 @@ import Phaser from "phaser";
 /* START-USER-IMPORTS */
 import CameraUtil from "~/components/CameraUtil";
 import InputManager from "~/components/InputManager";
+import LevelSelect from "./LevelSelect";
 /* END-USER-IMPORTS */
 
 export default class CharacterSelectScene extends Phaser.Scene {
@@ -49,10 +50,9 @@ export default class CharacterSelectScene extends Phaser.Scene {
 		characterSelectContainer.add(bgColour_2);
 
 		// characterIllustration
-		const characterIllustration = this.add.image(50, 66, "illustration-kid");
-		characterIllustration.scaleX = 0.1;
-		characterIllustration.scaleY = 0.1;
-		characterIllustration.setOrigin(0, 0);
+		const characterIllustration = this.add.image(136.271605335176, 153.19600704684854, "illustration-tapper");
+		characterIllustration.scaleX = 0.11421804694748702;
+		characterIllustration.scaleY = 0.11421804694748702;
 		characterSelectContainer.add(characterIllustration);
 
 		// characterNameText
@@ -64,7 +64,7 @@ export default class CharacterSelectScene extends Phaser.Scene {
 		// characterDescriptionText
 		const characterDescriptionText = this.add.bitmapText(275, 115, "nokia", "Doesn’t move on the ground, but has 5 or 6 jumps which he uses to move around.\n\n- More jumps!\n- Eats babies…\n");
 		characterDescriptionText.text = "Doesn’t move on the ground, but has 5 or 6 jumps which he uses to move around.\n\n- More jumps!\n- Eats babies…\n";
-		characterDescriptionText.fontSize = -10;
+		characterDescriptionText.fontSize = -8;
 		characterDescriptionText.maxWidth = 180;
 		characterSelectContainer.add(characterDescriptionText);
 
@@ -128,6 +128,18 @@ export default class CharacterSelectScene extends Phaser.Scene {
 		bgColour_3.fillColor = 10054789;
 		characterSelectContainer.add(bgColour_3);
 
+		// characterIllustration_1
+		const characterIllustration_1 = this.add.image(136.2716064453125, 153.19601440429688, "illustration-tapper");
+		characterIllustration_1.scaleX = 0.11421804694748702;
+		characterIllustration_1.scaleY = 0.11421804694748702;
+		characterIllustration_1.visible = false;
+		characterIllustration_1.alpha = 0.7;
+		characterIllustration_1.alphaTopLeft = 0.7;
+		characterIllustration_1.alphaTopRight = 0.7;
+		characterIllustration_1.alphaBottomLeft = 0.7;
+		characterIllustration_1.alphaBottomRight = 0.7;
+		characterSelectContainer.add(characterIllustration_1);
+
 		this.characterSelectContainer = characterSelectContainer;
 		this.characterIllustration = characterIllustration;
 		this.characterNameText = characterNameText;
@@ -138,6 +150,7 @@ export default class CharacterSelectScene extends Phaser.Scene {
 		this.puckIcon = puckIcon;
 		this.kidIcon = kidIcon;
 		this.characterTaglineText = characterTaglineText;
+		this.characterIllustration_1 = characterIllustration_1;
 
 		this.events.emit("scene-awake");
 	}
@@ -152,6 +165,7 @@ export default class CharacterSelectScene extends Phaser.Scene {
 	private puckIcon!: Phaser.GameObjects.Image;
 	private kidIcon!: Phaser.GameObjects.Image;
 	private characterTaglineText!: Phaser.GameObjects.BitmapText;
+	private characterIllustration_1!: Phaser.GameObjects.Image;
 
 	/* START-USER-CODE */
 
@@ -168,14 +182,14 @@ export default class CharacterSelectScene extends Phaser.Scene {
 		[ 'tapper', 'the bird' ],
 		[ 'gappy', 'the green' ],
 		[ 'puck', 'the pink' ],
-		[ 'kid', 'the guy (hopefully)' ]
+		[ 'kid', 'the movie: the game' ]
 	]);
 	private characterDescription = new Map<'tapper' | 'puck' | 'gappy' | 'kid', string>( 
 	[
-		[ 'tapper', "The original Bird Tapper you know and love!\n- The OG!\n- but stale..." ],
-		[ 'gappy', "Faster movement and punches, but a lower jump.\n- Faster!\n- Retro…" ],
-		[ 'puck', "Doesn’t move on the ground, but has 5 or 6 jumps which he uses to move around.\n- More jumps!\nEats babies…" ],
-		[ 'kid', "His punches do not propel him forward or upward)\n- Better jumps!\n- Copyright nightmare…" ]
+		[ 'tapper', "The original Bird Tapper you know and love! All non-special stages are designed for him." ],
+		[ 'gappy', "Faster movement and punches! But he has a lower jump to contend with.\n\nFrom the Gappy series by LeviRamirez." ],
+		[ 'puck', "The problem is that he cannot walk, only jump. His jumps are short, but he has an extra one. Fuelled by blood, his punches go farther.\n\nFrom Pucamuc by Mors." ],
+		[ 'kid', "His punches don't propel him forward or upward, but impact a slightly larger area. Do YOU have what it takes to be The Guy?\n\nFrom I Wanna Be the Guy by Kayin" ]
 	]);
 	private characterUnlockHint = new Map<'tapper' | 'puck' | 'gappy' | 'kid', string>( 
 		[
@@ -194,7 +208,11 @@ export default class CharacterSelectScene extends Phaser.Scene {
 
 	private illustrationTween: Phaser.Tweens.Tween;
 
+	private returning = false;
+
 	create() {
+
+		this.returning = false;
 
 		this.editorCreate();
 
@@ -214,41 +232,121 @@ export default class CharacterSelectScene extends Phaser.Scene {
 			(`keydown-${InputManager.getInput('menu-right', 'keyboard')}`, () =>
 		{
 			this.setSelected(true);
-			this.sound.play('menu-tick');
 		});
+		this.input.gamepad.on(`down`, (pad:Phaser.Input.Gamepad.Gamepad, 
+			button:Phaser.Input.Gamepad.Button, index:number) =>
+		{
+			if (button.index == InputManager.getInput('menu-right', 'gamepad'))
+			{
+				this.setSelected(true);
+			}
+		});
+
 		this.input.keyboard.on
 			(`keydown-${InputManager.getInput('menu-left', 'keyboard')}`, () =>
 		{
 			this.setSelected(false);
-			this.sound.play('menu-tick');
 		});
+		this.input.gamepad.on(`down`, (pad:Phaser.Input.Gamepad.Gamepad, 
+			button:Phaser.Input.Gamepad.Button, index:number) =>
+		{
+			if (button.index == InputManager.getInput('menu-left', 'gamepad'))
+			{
+				this.setSelected(false);
+			}
+		});
+
 		this.input.keyboard.on
 			(`keydown-${InputManager.getInput('menu-confirm', 'keyboard')}`, () =>
 		{
 			this.setCharacter();
-			this.sound.play('menu-confirm');
+		});
+		this.input.gamepad.on(`down`, (pad:Phaser.Input.Gamepad.Gamepad, 
+			button:Phaser.Input.Gamepad.Button, index:number) =>
+		{
+			if (button.index == InputManager.getInput('menu-confirm', 'gamepad'))
+			{
+				this.setCharacter();
+			}
+		});
+
+		this.tapperIcon.setInteractive();
+		this.tapperIcon.on('pointerup', () =>
+		{
+			if (this.selectedCharacter === 'tapper')
+			{
+				this.setCharacter();
+			}
+			else
+			{
+				this.setSelected(true, 'tapper')
+			}
+		});
+		this.gappyIcon.setInteractive();
+		this.gappyIcon.on('pointerup', () =>
+		{
+			if (this.selectedCharacter === 'gappy')
+			{
+				this.setCharacter();
+			}
+			else
+			{
+				this.setSelected(true, 'gappy');
+			}
+		});
+		this.puckIcon.setInteractive();
+		this.puckIcon.on('pointerup', () =>
+		{
+			if (this.selectedCharacter === 'puck')
+			{
+				this.setCharacter();
+			}
+			else
+			{
+				this.setSelected(true, 'puck');
+			}
+		});
+		this.kidIcon.setInteractive();
+		this.kidIcon.on('pointerup', () =>
+		{
+			if (this.selectedCharacter === 'kid')
+			{
+				this.setCharacter();
+			}
+			else
+			{
+				this.setSelected(true, 'kid');
+			}
 		});
 	}
 
-	setSelected(increase: boolean)
+	setSelected(increase: boolean, character?: 'tapper' | 'puck' | 'gappy' | 'kid')
 	{
-		switch (this.selectedCharacter)
+		if (character == undefined)
 		{
-			case 'tapper':
-				this.selectedCharacter = (increase ? 'gappy' : 'kid');
-				break;
-			case 'gappy':
-				this.selectedCharacter = (increase ? 'puck' : 'tapper');
-				break;
-			case 'puck':
-				this.selectedCharacter = (increase ? 'kid' : 'gappy');
-				break;
-			case 'kid':
-				this.selectedCharacter = (increase ? 'tapper' : 'puck');
-				break;
+			switch (this.selectedCharacter)
+			{
+				case 'tapper':
+					this.selectedCharacter = (increase ? 'gappy' : 'kid');
+					break;
+				case 'gappy':
+					this.selectedCharacter = (increase ? 'puck' : 'tapper');
+					break;
+				case 'puck':
+					this.selectedCharacter = (increase ? 'kid' : 'gappy');
+					break;
+				case 'kid':
+					this.selectedCharacter = (increase ? 'tapper' : 'puck');
+					break;
 			}
+		}
+		else
+		{
+			this.selectedCharacter = character;
+		}
 
 			this.characterIllustration.setTexture('illustration-' + this.selectedCharacter);
+			this.characterIllustration_1.setTexture('illustration-' + this.selectedCharacter);
 			this.selectedRect.setX(this.characterIconRectX.get(this.selectedCharacter));
 
 			if (this.registry.get('unlocked-character: ' + this.selectedCharacter) || this.selectedCharacter === 'tapper')
@@ -270,7 +368,7 @@ export default class CharacterSelectScene extends Phaser.Scene {
 			}
 
 			// tween
-			this.characterIllustration.setX(increase ? 75 : 25);
+			this.characterIllustration.setX(increase ? 40 : -10);
 			if (this.illustrationTween)
 			{
 				this.illustrationTween.stop();
@@ -280,16 +378,56 @@ export default class CharacterSelectScene extends Phaser.Scene {
 				targets: this.characterIllustration,
 				duration: 150,
 				ease: Phaser.Math.Easing.Circular.Out,
-				x: 50
+				x: 15
 			});
+
+			this.sound.play('menu-tick');
 	}
 
 	setCharacter()
 	{
-		this.registry.set(`selected-character`, this.selectedCharacter);
+		if (this.returning) {
+			return;
+		}
 
-		this.scene.stop();
-		this.scene.resume('menu-scene');
+		this.registry.set(`selected-character`, this.selectedCharacter);
+		this.registry.set(`manually-selected-character`, this.selectedCharacter);
+
+		let levelselect = this.scene.get('LevelSelect') as LevelSelect;
+		levelselect.updateSelectedCharacter();
+
+		this.sound.play('menu-confirm');
+
+		if (this.selectedCharacter === 'tapper') {
+			this.tapperIcon.setTexture('tapper-atlas', 'victory/00');
+		}
+		else if (this.selectedCharacter === 'gappy') {
+			this.gappyIcon.setTexture('gappy', 'victory/00');
+		}
+		else if (this.selectedCharacter === 'puck') {
+			this.puckIcon.setTexture('puck', 'victory/00');
+		}
+		else if (this.selectedCharacter === 'kid') {
+			this.kidIcon.setTexture('kid', 'victory/00');
+		}
+
+
+		this.characterIllustration_1.setVisible(true);
+		let FadeTween = this.tweens.add({
+			targets: this.characterIllustration_1,
+			duration: 500,
+			ease: Phaser.Math.Easing.Quintic.Out,
+			scaleX: 0.15,
+			scaleY: 0.15,
+			alpha: 0
+		});
+
+		this.returning = true;
+		this.time.delayedCall(1000, () => {
+
+			this.scene.stop();
+			this.scene.resume('menu-scene');
+		});
 	}
 
 	setLockedIcons()

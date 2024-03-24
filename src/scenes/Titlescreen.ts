@@ -328,6 +328,7 @@ export default class Titlescreen extends Phaser.Scene {
 		this.titleKFC = titleKFC;
 		this.titlePPP = titlePPP;
 		this.titleContainer = titleContainer;
+		this.logo = logo;
 		this.startText = startText;
 
 		this.events.emit("scene-awake");
@@ -353,6 +354,7 @@ export default class Titlescreen extends Phaser.Scene {
 	private titleKFC!: Phaser.GameObjects.BitmapText;
 	private titlePPP!: Phaser.GameObjects.BitmapText;
 	private titleContainer!: Phaser.GameObjects.Container;
+	private logo!: Phaser.GameObjects.Image;
 	private startText!: Phaser.GameObjects.BitmapText;
 
 	/* START-USER-CODE */
@@ -456,6 +458,11 @@ export default class Titlescreen extends Phaser.Scene {
 		});
 
 		this.startTextBlink();
+
+		if (__MAP_PACK__)
+		{
+			this.logo.setTexture('logoKFC');
+		}
 	}
 
 	startTextBlink()
