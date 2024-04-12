@@ -39,26 +39,54 @@ export default class TapperDeadProp extends Phaser.GameObjects.Sprite {
 
 	public startSequnce(state: 'normal' | 'tired' | 'exhausted', playerCharacter: 'tapper' | 'puck' | 'gappy' | 'kid')
 	{
-		this.anims.create({key:'normal', repeat: 0,
-		frames: this.anims.generateFrameNumbers('flap-exhausted-sprites', { frames: [2, 2, 0, 0, 1, 1, 2]})});
-		this.anims.create({key:'tired', repeat: 0,
-		frames: this.anims.generateFrameNumbers('flap-exhausted-sprites', { frames: [5, 5, 3, 3, 4, 4, 5]})});
-		this.anims.create({key:'exhausted', repeat: 0,
-		frames: this.anims.generateFrameNumbers('flap-exhausted-sprites', { frames: [8, 8, 6, 6, 7, 7, 8]})});
+		let alt = this.scene.registry.get('character-alt');
+		
+		if (__MAP_PACK__) {
+			this.anims.create({key: 'normal', repeat: 0,
+			frames: this.anims.generateFrameNames('tapper-atlas_1', 
+			{ prefix: 'blush-flap/', zeroPad: 2, end: 5 })});
+
+		this.anims.create({key: 'tired', repeat: 0,
+			frames: this.anims.generateFrameNames('tapper-atlas_1', 
+			{ prefix: 'blush-flap-tired/', zeroPad: 2, end: 5 })});
+
+		this.anims.create({key: 'exhausted', repeat: 0,
+			frames: this.anims.generateFrameNames('tapper-atlas_1', 
+			{ prefix: 'blush-flap-very-tired/', zeroPad: 2, end: 5 })});
+		} else {
+			this.anims.create({key:'normal', repeat: 0,
+			frames: this.anims.generateFrameNumbers('flap-exhausted-sprites', { frames: [2, 2, 0, 0, 1, 1, 2]})});
+			this.anims.create({key:'tired', repeat: 0,
+			frames: this.anims.generateFrameNumbers('flap-exhausted-sprites', { frames: [5, 5, 3, 3, 4, 4, 5]})});
+			this.anims.create({key:'exhausted', repeat: 0,
+			frames: this.anims.generateFrameNumbers('flap-exhausted-sprites', { frames: [8, 8, 6, 6, 7, 7, 8]})});
+		}
 
 		this.anims.create({key:'puck', repeat: 0,
 		frames: this.anims.generateFrameNames('pucamuc', { prefix: 'flap-very-tired/', zeroPad: 2, end: 5})});
+		this.anims.create({key:'puck-alt', repeat: 0,
+		frames: this.anims.generateFrameNames('pucamuc-alt', { prefix: 'flap-very-tired/', zeroPad: 2, end: 5})});
 
 		this.anims.create({key:'gappy', repeat: 0,
 		frames: this.anims.generateFrameNames('gappy', { prefix: 'blush-flap-very-tired/', zeroPad: 2, end: 5})});
+		this.anims.create({key:'gappy-alt', repeat: 0,
+		frames: this.anims.generateFrameNames('gappy-alt', { prefix: 'blush-flap-very-tired/', zeroPad: 2, end: 5})});
 		
 		if (playerCharacter === 'tapper')
 		{
 			this.play(state);
 		}
+		else if (playerCharacter === 'puck' && alt)
+		{
+			this.play('puck-alt');
+		}
 		else if (playerCharacter === 'puck')
 		{
 			this.play('puck');
+		}
+		else if (playerCharacter === 'gappy' && alt)
+		{
+			this.play('gappy-alt');
 		}
 		else if (playerCharacter === 'gappy')
 		{
@@ -71,7 +99,7 @@ export default class TapperDeadProp extends Phaser.GameObjects.Sprite {
 			this.kidProp = new Array();
 			for (let i = 0; i < 6; i++)
 			{
-				this.kidProp.push(this._scene.add.sprite(this._scene.player.x, this._scene.player.y, 'kid', 'blush-flap-tired/0' + i));
+				this.kidProp.push(this._scene.add.sprite(this._scene.player.x, this._scene.player.y, 'kid' + (alt ? '-alt' : ''), 'blush-flap-tired/0' + i));
 				this._scene.physics.add.existing(this.kidProp[i], false);
 				this._scene.mainLayer.add(this.kidProp[i]);
 				let body = this.kidProp[i].body as Phaser.Physics.Arcade.Body;

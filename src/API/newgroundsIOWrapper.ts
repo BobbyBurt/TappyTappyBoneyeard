@@ -38,7 +38,14 @@ export class newgroundsIOWrapper
     }
 
     public static status: 'STATUS_LOGIN_REQUIRED' | 'STATUS_WAITING_FOR_USER' | 'STATUS_READY' | 'isWaitingStatus' | undefined
-  
+
+    public static KFCUnlocks = { 
+        kid: false, puck: false, gappy: false,
+        kidAlt: false, puckAlt: false, gappyAlt: false
+    }
+
+    private _this = this;
+
     /**
      * Call in game loop.
      * 
@@ -130,7 +137,14 @@ export class newgroundsIOWrapper
 
                     // EXTERNAL SAVE DATA LOAD
 
-                    NGIO.ngioCore.executeComponent(_this.component, _this.onExternalSaveSlotsLoaded);
+                    if (!__MAP_PACK__) {
+                        window.addEventListener('loadKFCSave', () => {
+                            console.debug('it worked!');
+                            NGIO.ngioCore.executeComponent(_this.component, _this.onExternalSaveSlotsLoaded);
+                        })
+
+                        // _this.loadExternalSaveData(appID, 1, _this.onSaveDataLoaded);
+                    }
 
 
                     break;
@@ -142,7 +156,9 @@ export class newgroundsIOWrapper
     }
     
     // we'll fill this in when we execute our component
-    private externalSaveSlots:any = [0, 0, 0];
+    private externalSaveSlots:any;
+
+    private externalSaveData: Map<string, any>;
 
     // function to get slots by slot numer
     getExternalSaveSlot(app_id: string, slot_id: number)
@@ -176,7 +192,7 @@ export class newgroundsIOWrapper
 
     // create the component, and pass in an external App ID
     private component = new NewgroundsIO.components.CloudSave.loadSlots({
-        app_id: (__MAP_PACK__ ? '55003:7XXBXFge' : '57584:YRUg4prp'), // in "12345:UvWXyZ" format
+        app_id: appIDMP, // in "12345:UvWXyZ" format
     });
 
     // execute the component on the server
@@ -184,6 +200,9 @@ export class newgroundsIOWrapper
     // serverResponse will be a NewgroundsIO.objects.Response instance
     onExternalSaveSlotsLoaded(serverResponse: any)
     {
+
+        console.debug('onExternalSaveSlotsLoaded');
+
         if (serverResponse.success) {
 
             // result will be an instance of NewgroundsIO.results.CloudSave.loadSlots
@@ -191,11 +210,50 @@ export class newgroundsIOWrapper
 
             if (result.success) {
 
+                let jsonData:Array<Array<any>> = [[]];
+                try
+                {
+                    result.slots[1].getData(function(data: any) {
+                        // console.debug(data)
+                        jsonData = JSON.parse(data);
+                        jsonData.forEach(function (value, index) {
+                            // console.debug(value)
+                            if (value[0] === 'unlocked-character: puck' && value[1] === true) {
+                                newgroundsIOWrapper.KFCUnlocks.puck = true;
+                                console.log('Puck is unlocked!');
+                            }
+                            if (value[0] === 'unlocked-character: kid' && value[1] === true) {
+                                newgroundsIOWrapper.KFCUnlocks.kid = true;
+                                console.log('The Kid is unlocked!');
+                            }
+                            if (value[0] === 'unlocked-character: gappy' && value[1] === true) {
+                                newgroundsIOWrapper.KFCUnlocks.gappy = true;
+                                console.log('Gappy is unlocked!');
+                            }
+                            if (value[0] === 'unlocked-alt: kid' && value[1] === true) {
+                                newgroundsIOWrapper.KFCUnlocks.kidAlt = true;
+                                console.log('The Kid alt is unlocked!');
+                            }
+                            if (value[0] === 'unlocked-alt: gappy' && value[1] === true) {
+                                newgroundsIOWrapper.KFCUnlocks.gappyAlt = true;
+                                console.log('Gappy alt is unlocked!');
+                            }
+                            if (value[0] === 'unlocked-alt: puck' && value[1] === true) {
+                                newgroundsIOWrapper.KFCUnlocks.puckAlt = true;
+                                console.log('Puck alt is unlocked!');
+                            }
+                        });
+                    });
+                } 
+                catch (error) 
+                {
+                    console.warn('save slot data does not exist.')
+                }
+
+                    
                 // store the save slot
-                // this.externalSaveSlots = new Array([0, 0, 0]);
                 // this.externalSaveSlots[result.app_id] = result.slots;
 
-                // console.debug(result.slots[1].data);
 
                 // You can get the app id that was used with result.app_id
 
@@ -217,7 +275,7 @@ export class newgroundsIOWrapper
 
     // loadExternalSaveData(SOME_OTHER_APP_ID, SLOT_NUMBER, onSaveDataLoaded);
 
-    onSaveDataLoaded(data: any, app_id: string, slot: number)
+    onSaveDataLoaded(data: any, app_id: string, slot: number | null)
     {
         // data is the loaded data, app_id is the app id you used
         // and slot is a NewgroundsIO.objects.SaveSlot instance

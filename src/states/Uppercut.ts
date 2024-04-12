@@ -79,7 +79,7 @@ export default class Uppercut implements State {
 	{	
 		this.player.body.setVelocity(0, -this.player.variableUppercutSpeed * this.player.punchSpeedMultiplier);
 
-		if (this.player.character === 'puck')
+		if (this.player.character === 'puck' && !this.player.lockInput)
 		{
 			this.player.puckBloodEmitter.explode(1, this.player.x, this.player.y);
 		}

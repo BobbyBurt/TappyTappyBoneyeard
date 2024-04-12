@@ -46,7 +46,7 @@ export default class Level extends Phaser.Scene {
 		bGLayerPuck.visible = false;
 
 		// rectangle_11
-		const rectangle_11 = this.add.rectangle(480, 299, 1000, 1000);
+		const rectangle_11 = this.add.rectangle(480, 299, 3000, 1000);
 		rectangle_11.isFilled = true;
 		rectangle_11.fillColor = 9546999;
 		bGLayerPuck.add(rectangle_11);
@@ -195,7 +195,7 @@ export default class Level extends Phaser.Scene {
 
 		// parallax_Backing1111
 		const parallax_Backing1111 = this.add.image(352, 199, "Parallax-Backing_1");
-		parallax_Backing1111.scaleX = 8.415017240244449;
+		parallax_Backing1111.scaleX = 12;
 		parallax_Backing1111.flipY = true;
 		bGLayerNinja.add(parallax_Backing1111);
 
@@ -1630,35 +1630,13 @@ export default class Level extends Phaser.Scene {
 		// 	this.toggleManualPause();
 		// });
 
-	// mute
-		this.input.keyboard.on('keydown-M', () =>
-		{
-			// currently this causes an error
-			return;
-
-			if (this.registry.get('muted'))
-			{
-				this.music.play();
-				this.environmentAudio.play();
-				this.registry.set('muted', false);
-			}
-			else
-			{
-				this.music.stop();
-				this.environmentAudio.stop();
-				this.registry.set('muted', true);
-			}
+	// dev insta win
+		this.input.keyboard.on('keydown-W', () => {
+      if (__DEV__) {
+		this.score = 10000;
+        this.levelEndFeedback();
+      }
 		});
-			// TEMP: this will eventually be replaced with a menu option.
-
-	// DEBUG: console clear key
-		if (__DEV__)
-		{
-			this.input.keyboard.on('keydown-C', () =>
-			{
-				console.clear();
-			});
-		}
 
 	// level timer
 		this.events.once('player-start', () =>	
@@ -1712,6 +1690,12 @@ export default class Level extends Phaser.Scene {
 
 	update(time: number, delta: number): void
 	{
+		SoundManager.keyPlayedCurrentFrame.set('explosion', false);
+		SoundManager.keyPlayedCurrentFrame.set('enemy-shoot', false);
+		SoundManager.keyPlayedCurrentFrame.set('enemy-shoot-far', false);
+		SoundManager.keyPlayedCurrentFrame.set('enemy-death', false);
+		SoundManager.keyPlayedCurrentFrame.set('boing', false);
+		
 		// update airborne level ui
 		// console.debug(this.uiScene);
 		this.uiScene.setAirborneLabelAlpha(this.player.onFloor ? .2 : 1);
@@ -1907,7 +1891,7 @@ export default class Level extends Phaser.Scene {
 		{
 			this.player.onFloor = true;
 
-			this.uiScene.setPunchCharge(true);
+			// this.uiScene.setPunchCharge(true);
 
 			this.updateCombo(true);
 			// this.airborneCombo = false;
@@ -1918,6 +1902,8 @@ export default class Level extends Phaser.Scene {
 		enemy: Phaser.Types.Physics.Arcade.GameObjectWithBody)
 	// TODO: specify type annotation
 	{
+		console.debug('player ouch');
+
 		let _enemy = enemy as EnemyPrefab;
 
 		if (_enemy.isFalling())
@@ -1962,6 +1948,10 @@ export default class Level extends Phaser.Scene {
 
 	fistEnemyOverlap(_fist: any, _enemy: any)
 	{
+		if (this.uiScene.gameOverContainer.visible) {
+			return;
+		}
+
 		if (!this.player.fist.active)
 		{
 			if (this.player.fistGraceTimer)
@@ -2009,6 +1999,9 @@ export default class Level extends Phaser.Scene {
 			return;
 		}
 
+		if (this.player.stateController.currentState.name !== 'punch' && this.player.stateController.currentState.name !== 'uppercut') {
+			return;
+		}
 		this.takeoutEnemy(_enemy, 
 			(this.player.stateController.currentState.name === 'punch'? 'punch' : 'uppercut'));
 			// TODO: this isn't foolproof. Not sure how to recreate it, but sometimes it passes uppercut during a punch.
@@ -2222,6 +2215,9 @@ export default class Level extends Phaser.Scene {
 		this.uiScene.comboLabelText.setVisible(false);
 		this.uiScene.comboText.setVisible(false);
 
+		this.uiScene.mobileButtonRestart.setVisible(false);
+		this.uiScene.restartText.setVisible(false);
+		
 		this.uiScene.scoreText.setVisible(false);
 		this.uiScene.scoreAdditionText.setVisible(false);
 	}
@@ -2343,7 +2339,7 @@ export default class Level extends Phaser.Scene {
 		if (this.combo > 1 && !end)
 		{
 			this.uiScene.showComboUI(this.combo);
-			this.sound.play('combo-hit', {volume: (((this.combo - 2) + 0) * 0.07) + 0.4, detune: (this.combo - 2) * 100})
+			this.sound.play('combo-hit', {volume: (((this.combo - 2) + 0) * 0.07) + 0.4, detune: ((this.combo < 12 ? this.combo : 12) - 2) * 100})
 		}
 		// else
 		// {
@@ -2856,6 +2852,9 @@ export default class Level extends Phaser.Scene {
 		// 	this.score += 500;
 		// 	this.uiScene.setScore(this.score);
 		// }
+
+		this.uiScene.restartText.setVisible(false); 
+		this.uiScene.mobileButtonRestart.setVisible(false); 
 
 		NGIO.logEvent(`Level ${this.registry.get('current-level-index') + 1} Complete`, (event) => 
 		{
@@ -3531,6 +3530,13 @@ export default class Level extends Phaser.Scene {
 			LevelSelect.levelSelectEntry = 'return';
 			this.LoadLevelSelect();
 		});
+
+		this.uiScene.mobileButtonRestart.setInteractive();
+		this.uiScene.mobileButtonRestart.on('pointerdown', () => {
+			if (!this.uiScene.tutorialVisible) {
+				this.resetLevel();
+			}
+		});
 	}
 
 	/** Uncontional manual pause.
@@ -3622,7 +3628,7 @@ export default class Level extends Phaser.Scene {
 		let _getTutorialText = tutorialManager.getTutorialText(this.currentLevelIndex, this);
 		if (__MAP_PACK__)
 		{
-			_getTutorialText = tutorialManager.getTutorialText(this.currentLevelIndex, this);
+			_getTutorialText = tutorialManager.getTutorialTextMP(this.currentLevelIndex, this);
 		}
 
 		if (this.reachedGoal === true)

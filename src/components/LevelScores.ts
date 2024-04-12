@@ -110,7 +110,7 @@ export let levelRequiredAwards = new Map<string, Array<number>>(
             ['refresher',               [ 600, 1000, 1400 ]],
             ['stann',                   [ 1000, 3000, 7800 ]],
             ['dry-madngtl',             [ 1400, 2100, 3900 ]],
-            ['flipping-the-bird',       [ 200, 4600, 6000 ]],
+            ['flipping-the-bird',       [ 2000, 4600, 6000 ]],
             ['tinas-tower',             [ 1600, 3700, 7900 ]],
             ['The Perplex Plan',        [ 3600, 11400, 21100 ]],
             ['DemolitionBirdSquad',     [ 6300, 8400, 10600 ]],
@@ -118,15 +118,15 @@ export let levelRequiredAwards = new Map<string, Array<number>>(
             ['MadChicks',               [ 12400, 18600, 24900 ]],
             ['TweetTowers',             [ 7200, 12600, 17400 ]],
             ['Roverkibb_Berry_Pie',     [ 4800, 12100, 14600 ]],
-            ['Spirosenjo',              [ 1, 2, 5800 ]],
-            ['Koffy',                   [ 1, 8001, 13500 ]],
+            ['Spirosenjo',              [ 2700, 4500, 5800 ]],
+            ['Koffy',                   [ 8000, 11000, 13500 ]],
             ['likeadick',               [ 7000, 18000, 21000 ]],
             ['An Apple a Day',          [ 1, 2, 11000 ]],
             ['fully rested',            [ 1500, 5000, 6500 ]],
             ['Playground',              [ 6800, 8500, 11300 ]],
             ['A side',                  [ 5500, 7400, 9600 ]],
 
-            ['Puck_Level1',             [ 1500, 1700, 1800 ]],
+            ['Puck_Level1',             [ 1400, 1600, 1800 ]],
             ['Puck_Level2',             [ 1000, 1900, 2500 ]],
             ['Puck_Level3',             [ 9900, 15600, 19200 ]],
             ['TheKid_Level1',           [ 500, 1300, 1500 ]],
@@ -159,14 +159,14 @@ export let mpLevelRequiredAwards = new Map<string, Array<number>>(
         ['Puck_Level2',             [ 4, 0, 0, 0 ]],
         ['Puck_Level3',             [ 4, 0, 0, 0 ]],
         
-        ['fully rested',            [ 7, 0, 0, 0 ]],
-        ['Playground',              [ 7, 0, 0, 0 ]],
-        ['A side',                  [ 7, 0, 0, 0 ]],
+        ['fully rested',            [ 8, 0, 0, 0 ]],
+        ['Playground',              [ 8, 0, 0, 0 ]],
+        ['A side',                  [ 8, 0, 0, 0 ]],
         
-        ['TheKid_Level1',           [ 10, 0, 0, 0 ]],
-        ['TheKid_Level2',           [ 10, 0, 0, 0 ]],
-        ['TheKid_Level3',           [ 10, 0, 0, 0 ]],
-        ['An Apple a Day',          [ 10, 0, 0, 0 ]],
+        ['TheKid_Level1',           [ 12, 0, 0, 0 ]],
+        ['TheKid_Level2',           [ 12, 0, 0, 0 ]],
+        ['TheKid_Level3',           [ 12, 0, 0, 0 ]],
+        ['An Apple a Day',          [ 12, 0, 0, 0 ]],
     ]);
 
     export let mpLevelNames = new Map<string, Array<string>>(
@@ -210,38 +210,40 @@ export function mapPackDataSwap()
  * @param scene 
  * @returns [ `# of played, # of bronze`, `# of silver`, `# of gold`, ]
  */
-export function getTotalAwards(scene: Phaser.Scene): Array<number>
+export function getTotalAwards(scene: Phaser.Scene, onlyMainMPLevels?: boolean): Array<number>
 {
     let medalCount = [0, 0, 0, 0];
-
+    
     LevelSelect.levelsKey.forEach((value, index) =>
     {
-        let levelAward = getEarnedAward(value, scene.registry.get(`top-score: ${value}`));
-        if (levelAward === 'played')
-        {
-            console.debug(`played ${value}`);
-            medalCount[0]++;
-        }
-        if (levelAward === 'bronze')
-        {
-            console.debug(`bronze on ${value}`);
-            medalCount[0]++;
-            medalCount[1]++;
-        }
-        else if (levelAward === 'silver')
-        {
-            console.debug(`silver on ${value}`);
-            medalCount[0]++;
-            medalCount[1]++;
-            medalCount[2]++;
-        }
-        else if (levelAward === 'gold')
-        {
-            console.debug(`gold on ${value}`);
-            medalCount[0]++;
-            medalCount[1]++;
-            medalCount[2]++;
-            medalCount[3]++;
+        if (!onlyMainMPLevels || index < 14) {
+            let levelAward = getEarnedAward(value, scene.registry.get(`top-score: ${value}`));
+            if (levelAward === 'played')
+            {
+                console.debug(`played ${value}`);
+                medalCount[0]++;
+            }
+            if (levelAward === 'bronze')
+            {
+                console.debug(`bronze on ${value}`);
+                medalCount[0]++;
+                medalCount[1]++;
+            }
+            else if (levelAward === 'silver')
+            {
+                console.debug(`silver on ${value}`);
+                medalCount[0]++;
+                medalCount[1]++;
+                medalCount[2]++;
+            }
+            else if (levelAward === 'gold')
+            {
+                console.debug(`gold on ${value}`);
+                medalCount[0]++;
+                medalCount[1]++;
+                medalCount[2]++;
+                medalCount[3]++;
+            }
         }
     });
 
@@ -258,9 +260,12 @@ export function getEarnedAward(levelKey: string, score: number): 'none' | 'playe
 
 
     let milestones: Array<number> = _levelScoreMilestones.get(levelKey)!;
-    if (milestones === undefined)
+    if (milestones === null)
     {
         console.warn(`No level score milestone data found for level key: ${levelKey}`);
+        return 'none';
+    }
+    else if (score == null) {
         return 'none';
     }
     else if (score < milestones[0])

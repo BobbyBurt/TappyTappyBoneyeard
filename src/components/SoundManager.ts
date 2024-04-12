@@ -11,6 +11,14 @@ export default class SoundManager {
 	// private static tracksFirstLevelMP = [0, 9, 16]
 	private static tracksVolume = [.7, .7, .7]
 
+	public static keyPlayedCurrentFrame = new Map<string, boolean>([
+		['enemy-shoot-far', false],
+		['enemy-shoot', false],
+		['explosion', false],
+		['enemy-death', false],
+		['boing', false],
+	]);
+
 // sounds
 	private static soundsVolume = new Map<string, number>([
 		['victory', 1],
@@ -25,8 +33,8 @@ export default class SoundManager {
 		['shield-deflect', .8],
 		['bomb-drop', .4],
 		['bomb-fuse', .4],
-		['enemy-shoot', .4],
-		['enemy-shoot-far', .2],
+		['enemy-shoot', .3],
+		['enemy-shoot-far', .15],
 		['combo-end', 1],
 		['eagle', 1],
 		['bird-egg-lay', 1],
@@ -63,37 +71,56 @@ export default class SoundManager {
 					return 'thekid_jump';
 				case 'punch-swing':
 					return 'thekid_punch';
-				// case 'combo-end':
-				// 	return 'puck_win';
+				case 'combo-end':
+					return 'The_Kid_Win';
 				case 'bird-die':
 					return 'thekid_death';
+			}
+		}
+		else if (character === 'gappy') {
+			switch (originalKey) {
+				case 'bird-flap':
+					return 'gappy-jump';
+				case 'punch-swing':
+					return 'gappy-swing';
+				case 'combo-end':
+					return 'gappy-win';
+				case 'bird-die':
+					return 'gappy-dead';
 			}
 		}
 		
 		return originalKey;
 	}
 
-	static getTrack(world: 1 | 2 | 3, levelScene: Level): string
+	static getTrack(world: 0 | 1 | 2 | 3, levelScene: Level): string
 	{
 		let character = levelScene.registry.get('selected-character');
 
-		if (character !== 'tapper')
+		if (world === 0)
 		{
-			if (levelScene.cache.audio.has(character + '-music-' + world))
+			if (levelScene.cache.audio.has(character + '-music-ninja'))
 			{
-				return character + '-music-' + world;
+				return character + '-music-ninja';
+			} else {
+				if (levelScene.cache.audio.has('tapper-music-ninja')) {
+					return 'tapper-music-ninja';
+				}
 			}
-		}
-		else {
-			if (levelScene.cache.audio.has('ninja-music-' + world)) {
-				return 'ninja-music-1';
-				// return 'ninja-music-' + world;
-			}
+		} else if (character !== 'tapper'){
+			if (levelScene.cache.audio.has(character + '-music-' + world))
+				{
+					return character + '-music-' + world;
+				}
 		}
 		
-		// TODO: check if loaded. if not, play a loaded fallback.
+		if (levelScene.cache.audio.has(SoundManager.tracksKey[world - 1])) {
+			return SoundManager.tracksKey[world - 1];
+			// return 'ninja-music-' + world;
+		}
 
-		return SoundManager.tracksKey[world - 1];
+		// fallback
+		return (__MAP_PACK__ ? 'tapper-music-ninja' : 'main-game-2');
 	}
 
 	/**
@@ -113,7 +140,8 @@ export default class SoundManager {
 		}
 
 	// Which track
-		let trackToPlayKey = this.getTrack(1, levelScene)
+	let trackToPlayKey = this.getTrack(1, levelScene)
+	if (!__MAP_PACK__)	{
 		if (levelIndex >= this.tracksFirstLevel[1] && levelIndex < this.tracksFirstLevel[2])
 		{
 			trackToPlayKey = this.getTrack(2, levelScene)
@@ -122,6 +150,41 @@ export default class SoundManager {
 		{
 			trackToPlayKey = this.getTrack(3, levelScene);
 		}
+	} else {
+		switch (levelIndex) {
+			case 14:
+				trackToPlayKey = this.getTrack(1, levelScene);
+				break;
+			case 15:
+				trackToPlayKey = this.getTrack(2, levelScene);
+				break;
+			case 16:
+				trackToPlayKey = this.getTrack(3, levelScene);
+				break;
+			case 17:
+				trackToPlayKey = this.getTrack(1, levelScene);
+				break;
+			case 18:
+				trackToPlayKey = this.getTrack(2, levelScene);
+				break;
+			case 19:
+				trackToPlayKey = this.getTrack(3, levelScene);
+				break;
+			case 20:
+				trackToPlayKey = this.getTrack(1, levelScene);
+				break;
+			case 21:
+				trackToPlayKey = this.getTrack(2, levelScene);
+				break;
+			case 22:
+				trackToPlayKey = this.getTrack(3, levelScene);
+				break;
+			default: 
+				trackToPlayKey = this.getTrack(0, levelScene);
+				// TODO: add fallback
+				break;
+		}
+	}
 
 	// Resume or Destroy
 		if (musicBS !== undefined)
@@ -166,7 +229,7 @@ export default class SoundManager {
 		else
 		{
 			// Add, Play, Return
-			musicBS = scene.sound.add('level-select', { volume: .7 });
+			musicBS = scene.sound.add((__MAP_PACK__ ? 'level-select-mp' : 'level-select'), { volume: .7 });
 			if (!(__DEV__ && !this.playMusicInDevMode) && !scene.registry.get('muted'))
 			{
 				musicBS.play({loop: true});
@@ -201,6 +264,16 @@ export default class SoundManager {
 			{
 				volume = 1;
 			}
+		}
+
+		if (key === 'explosion' || key === 'enemy-shoot' || key === 'enemy-shoot-far' || key === 'enemy-death' || key === 'boing') {
+
+			if (SoundManager.keyPlayedCurrentFrame.get(key)) {
+				console.debug('play() return; Overlapping sfx');
+				return;
+			}
+
+			SoundManager.keyPlayedCurrentFrame.set(key, true);
 		}
 
 		scene.sound.play(key, {volume: volume, detune: (overrideDetune ? overrideDetune : 0)})

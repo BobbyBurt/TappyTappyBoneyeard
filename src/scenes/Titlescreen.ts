@@ -26,9 +26,169 @@ export default class Titlescreen extends Phaser.Scene {
 
 	editorCreate(): void {
 
+		// BGLayerNinja
+		const bGLayerNinja = this.add.layer();
+
+		// parallax_Backing1111
+		const parallax_Backing1111 = this.add.image(253, 50, "Parallax-Backing_1");
+		parallax_Backing1111.scaleX = 8.415017240244449;
+		parallax_Backing1111.flipY = true;
+		bGLayerNinja.add(parallax_Backing1111);
+
+		// parallax_Backing
+		const parallax_Backing = this.add.image(324, 301, "Parallax-Backing_1");
+		parallax_Backing.scaleX = 8.415017240244449;
+		parallax_Backing.angle = -180;
+		parallax_Backing.flipY = true;
+		bGLayerNinja.add(parallax_Backing);
+
+		// parallax_Cityscape1111
+		const parallax_Cityscape1111 = this.add.image(297, 144, "Paralax-Mountains");
+		parallax_Cityscape1111.flipX = true;
+		parallax_Cityscape1111.tintFill = true;
+		parallax_Cityscape1111.tintTopLeft = 15497347;
+		parallax_Cityscape1111.tintTopRight = 15497347;
+		parallax_Cityscape1111.tintBottomLeft = 15497347;
+		parallax_Cityscape1111.tintBottomRight = 15497347;
+		bGLayerNinja.add(parallax_Cityscape1111);
+
+		// parallax_Cityscape_1111
+		const parallax_Cityscape_1111 = this.add.image(19, 148, "Paralax-Mountains");
+		parallax_Cityscape_1111.flipX = true;
+		parallax_Cityscape_1111.tintFill = true;
+		parallax_Cityscape_1111.tintTopLeft = 15497347;
+		parallax_Cityscape_1111.tintTopRight = 15497347;
+		parallax_Cityscape_1111.tintBottomLeft = 15497347;
+		parallax_Cityscape_1111.tintBottomRight = 15497347;
+		bGLayerNinja.add(parallax_Cityscape_1111);
+
+		// parallax_Cityscape_211
+		const parallax_Cityscape_211 = this.add.image(481, 129, "Paralax-Mountains");
+		parallax_Cityscape_211.flipX = true;
+		parallax_Cityscape_211.tintFill = true;
+		parallax_Cityscape_211.tintTopLeft = 15497347;
+		parallax_Cityscape_211.tintTopRight = 15497347;
+		parallax_Cityscape_211.tintBottomLeft = 15497347;
+		parallax_Cityscape_211.tintBottomRight = 15497347;
+		bGLayerNinja.add(parallax_Cityscape_211);
+
+		// parallax_Cityscape_311
+		const parallax_Cityscape_311 = this.add.image(-343, 144, "Paralax-Mountains");
+		parallax_Cityscape_311.flipX = true;
+		parallax_Cityscape_311.tintFill = true;
+		parallax_Cityscape_311.tintTopLeft = 15497347;
+		parallax_Cityscape_311.tintTopRight = 15497347;
+		parallax_Cityscape_311.tintBottomLeft = 15497347;
+		parallax_Cityscape_311.tintBottomRight = 15497347;
+		bGLayerNinja.add(parallax_Cityscape_311);
+
+		// parallax_Cityscape_411
+		const parallax_Cityscape_411 = this.add.image(936, 144, "Paralax-Mountains");
+		parallax_Cityscape_411.flipX = true;
+		parallax_Cityscape_411.tintFill = true;
+		parallax_Cityscape_411.tintTopLeft = 15497347;
+		parallax_Cityscape_411.tintTopRight = 15497347;
+		parallax_Cityscape_411.tintBottomLeft = 15497347;
+		parallax_Cityscape_411.tintBottomRight = 15497347;
+		bGLayerNinja.add(parallax_Cityscape_411);
+
+		// parallax_Cityscape_4
+		const parallax_Cityscape_4 = this.add.image(235, 330, "Paralax-Mountains");
+		parallax_Cityscape_4.scaleX = 2;
+		parallax_Cityscape_4.scaleY = 2;
+		parallax_Cityscape_4.angle = -180;
+		parallax_Cityscape_4.flipX = true;
+		parallax_Cityscape_4.tintFill = true;
+		parallax_Cityscape_4.tintTopLeft = 15497347;
+		parallax_Cityscape_4.tintTopRight = 15497347;
+		parallax_Cityscape_4.tintBottomLeft = 15497347;
+		parallax_Cityscape_4.tintBottomRight = 15497347;
+		bGLayerNinja.add(parallax_Cityscape_4);
+
+		// parallax_Cityscape_611
+		const parallax_Cityscape_611 = this.add.image(1256, 158, "Paralax-Mountains");
+		parallax_Cityscape_611.flipX = true;
+		parallax_Cityscape_611.tintFill = true;
+		parallax_Cityscape_611.tintTopLeft = 15497347;
+		parallax_Cityscape_611.tintTopRight = 15497347;
+		parallax_Cityscape_611.tintBottomLeft = 15497347;
+		parallax_Cityscape_611.tintBottomRight = 15497347;
+		bGLayerNinja.add(parallax_Cityscape_611);
+
+		// parallax_Cityscape_1511
+		const parallax_Cityscape_1511 = this.add.image(1145, 191, "Paralax-Mountains");
+		parallax_Cityscape_1511.tintFill = true;
+		parallax_Cityscape_1511.tintTopLeft = 15294573;
+		parallax_Cityscape_1511.tintTopRight = 15294573;
+		parallax_Cityscape_1511.tintBottomLeft = 15294573;
+		parallax_Cityscape_1511.tintBottomRight = 15294573;
+		bGLayerNinja.add(parallax_Cityscape_1511);
+
+		// parallax_Cityscape_1611
+		const parallax_Cityscape_1611 = this.add.image(1058, 182, "Paralax-Mountains");
+		parallax_Cityscape_1611.tintFill = true;
+		parallax_Cityscape_1611.tintTopLeft = 15294573;
+		parallax_Cityscape_1611.tintTopRight = 15294573;
+		parallax_Cityscape_1611.tintBottomLeft = 15294573;
+		parallax_Cityscape_1611.tintBottomRight = 15294573;
+		bGLayerNinja.add(parallax_Cityscape_1611);
+
+		// parallax_Cityscape_1711
+		const parallax_Cityscape_1711 = this.add.image(-221, 182, "Paralax-Mountains");
+		parallax_Cityscape_1711.tintFill = true;
+		parallax_Cityscape_1711.tintTopLeft = 15294573;
+		parallax_Cityscape_1711.tintTopRight = 15294573;
+		parallax_Cityscape_1711.tintBottomLeft = 15294573;
+		parallax_Cityscape_1711.tintBottomRight = 15294573;
+		bGLayerNinja.add(parallax_Cityscape_1711);
+
+		// parallax_Cityscape_1811
+		const parallax_Cityscape_1811 = this.add.image(739, 182, "Paralax-Mountains");
+		parallax_Cityscape_1811.tintFill = true;
+		parallax_Cityscape_1811.tintTopLeft = 15294573;
+		parallax_Cityscape_1811.tintTopRight = 15294573;
+		parallax_Cityscape_1811.tintBottomLeft = 15294573;
+		parallax_Cityscape_1811.tintBottomRight = 15294573;
+		bGLayerNinja.add(parallax_Cityscape_1811);
+
+		// parallax_Cityscape_19111
+		const parallax_Cityscape_19111 = this.add.image(99, 182, "Paralax-Mountains");
+		parallax_Cityscape_19111.tintFill = true;
+		parallax_Cityscape_19111.tintTopLeft = 15294573;
+		parallax_Cityscape_19111.tintTopRight = 15294573;
+		parallax_Cityscape_19111.tintBottomLeft = 15294573;
+		parallax_Cityscape_19111.tintBottomRight = 15294573;
+		bGLayerNinja.add(parallax_Cityscape_19111);
+
+		// parallax_Cityscape_2011
+		const parallax_Cityscape_2011 = this.add.image(419, 181, "Paralax-Mountains");
+		parallax_Cityscape_2011.tintFill = true;
+		parallax_Cityscape_2011.tintTopLeft = 15294573;
+		parallax_Cityscape_2011.tintTopRight = 15294573;
+		parallax_Cityscape_2011.tintBottomLeft = 15294573;
+		parallax_Cityscape_2011.tintBottomRight = 15294573;
+		bGLayerNinja.add(parallax_Cityscape_2011);
+
+		// parallax_Cityscape_3
+		const parallax_Cityscape_3 = this.add.image(253, 378, "Paralax-Mountains");
+		parallax_Cityscape_3.scaleX = 2;
+		parallax_Cityscape_3.scaleY = 2;
+		parallax_Cityscape_3.angle = -180;
+		parallax_Cityscape_3.tintFill = true;
+		parallax_Cityscape_3.tintTopLeft = 15294573;
+		parallax_Cityscape_3.tintTopRight = 15294573;
+		parallax_Cityscape_3.tintBottomLeft = 15294573;
+		parallax_Cityscape_3.tintBottomRight = 15294573;
+		bGLayerNinja.add(parallax_Cityscape_3);
+
+		// pppBGContainer
+		const pppBGContainer = this.add.container(0, 0);
+		pppBGContainer.visible = false;
+
 		// parallax_Backing111
 		const parallax_Backing111 = this.add.image(248, 128, "Parallax-Backing");
 		parallax_Backing111.scaleX = 8.415017240244449;
+		pppBGContainer.add(parallax_Backing111);
 
 		// parallax_Cityscape
 		const parallax_Cityscape = this.add.image(156, 169, "Parallax-Cityscape");
@@ -37,6 +197,7 @@ export default class Titlescreen extends Phaser.Scene {
 		parallax_Cityscape.tintTopRight = 16756150;
 		parallax_Cityscape.tintBottomLeft = 16756150;
 		parallax_Cityscape.tintBottomRight = 16756150;
+		pppBGContainer.add(parallax_Cityscape);
 
 		// parallax_Cityscape_20
 		const parallax_Cityscape_20 = this.add.image(36, 224, "Parallax-Cityscape");
@@ -45,6 +206,7 @@ export default class Titlescreen extends Phaser.Scene {
 		parallax_Cityscape_20.tintTopRight = 16028060;
 		parallax_Cityscape_20.tintBottomLeft = 16028060;
 		parallax_Cityscape_20.tintBottomRight = 16028060;
+		pppBGContainer.add(parallax_Cityscape_20);
 
 		// parallax_Cityscape_1
 		const parallax_Cityscape_1 = this.add.image(472, 169, "Parallax-Cityscape");
@@ -53,6 +215,7 @@ export default class Titlescreen extends Phaser.Scene {
 		parallax_Cityscape_1.tintTopRight = 16756150;
 		parallax_Cityscape_1.tintBottomLeft = 16756150;
 		parallax_Cityscape_1.tintBottomRight = 16756150;
+		pppBGContainer.add(parallax_Cityscape_1);
 
 		// parallax_Cityscape_2
 		const parallax_Cityscape_2 = this.add.image(355, 224, "Parallax-Cityscape");
@@ -61,6 +224,7 @@ export default class Titlescreen extends Phaser.Scene {
 		parallax_Cityscape_2.tintTopRight = 16028060;
 		parallax_Cityscape_2.tintBottomLeft = 16028060;
 		parallax_Cityscape_2.tintBottomRight = 16028060;
+		pppBGContainer.add(parallax_Cityscape_2);
 
 		// ngioContainer
 		const ngioContainer = this.add.container(240, 135);
@@ -166,27 +330,27 @@ export default class Titlescreen extends Phaser.Scene {
 		gameSelectContainer.visible = false;
 
 		// selectPPP
-		const selectPPP = this.add.rectangle(26, 82, 188, 138);
+		const selectPPP = this.add.rectangle(26, 72, 188, 138);
 		selectPPP.setOrigin(0, 0);
 		selectPPP.isFilled = true;
 		selectPPP.fillColor = 5388102;
 		gameSelectContainer.add(selectPPP);
 
 		// preview_1
-		const preview_1 = this.add.rectangle(0, 331, 240, 128);
+		const preview_1 = this.add.rectangle(0, 321, 240, 128);
 		preview_1.setOrigin(0, 0);
 		preview_1.isFilled = true;
 		gameSelectContainer.add(preview_1);
 
 		// selectKFC
-		const selectKFC = this.add.rectangle(266, 82, 188, 138);
+		const selectKFC = this.add.rectangle(266, 72, 188, 138);
 		selectKFC.setOrigin(0, 0);
 		selectKFC.isFilled = true;
 		selectKFC.fillColor = 5388102;
 		gameSelectContainer.add(selectKFC);
 
 		// bitmaptext_3
-		const bitmaptext_3 = this.add.bitmapText(211, 23, "nokia", "Select Game");
+		const bitmaptext_3 = this.add.bitmapText(211, 18, "nokia", "Select Game");
 		bitmaptext_3.tintTopLeft = 5388102;
 		bitmaptext_3.tintTopRight = 5388102;
 		bitmaptext_3.tintBottomLeft = 5388102;
@@ -196,60 +360,49 @@ export default class Titlescreen extends Phaser.Scene {
 		gameSelectContainer.add(bitmaptext_3);
 
 		// desc1
-		const desc1 = this.add.bitmapText(270, 224, "nokia", "Challenging and unique levels made by the community.");
+		const desc1 = this.add.bitmapText(270, 214, "nokia", "Sadistic community-made levels. A ninja clan has stolen the Iconic and Priceless Bird Tapper Mobile!");
 		desc1.tintTopLeft = 5388102;
 		desc1.tintTopRight = 5388102;
 		desc1.tintBottomLeft = 5388102;
 		desc1.tintBottomRight = 5388102;
-		desc1.text = "Challenging and unique levels made by the community.";
+		desc1.text = "Sadistic community-made levels. A ninja clan has stolen the Iconic and Priceless Bird Tapper Mobile!";
 		desc1.fontSize = -8;
 		desc1.maxWidth = 180;
 		gameSelectContainer.add(desc1);
 
 		// bitmaptext_5
-		const bitmaptext_5 = this.add.bitmapText(30, 224, "nokia", "The original levels. Learn Tapper's moves and beat the violet army.");
+		const bitmaptext_5 = this.add.bitmapText(30, 214, "nokia", "The original autorunner campaign. Beat the tar out of the violet army and master the controls!");
 		bitmaptext_5.tintTopLeft = 5388102;
 		bitmaptext_5.tintTopRight = 5388102;
 		bitmaptext_5.tintBottomLeft = 5388102;
 		bitmaptext_5.tintBottomRight = 5388102;
-		bitmaptext_5.text = "The original levels. Learn Tapper's moves and beat the violet army.";
+		bitmaptext_5.text = "The original autorunner campaign. Beat the tar out of the violet army and master the controls!";
 		bitmaptext_5.fontSize = -8;
 		bitmaptext_5.maxWidth = 180;
 		gameSelectContainer.add(bitmaptext_5);
 
 		// preview_combo
-		const preview_combo = this.add.image(721, 480, "preview-combo");
+		const preview_combo = this.add.image(721, 470, "preview-combo");
 		gameSelectContainer.add(preview_combo);
 
-		// anotherTabText
-		const anotherTabText = this.add.bitmapText(270, 249, "nokia", "(Game will open in another tab)");
-		anotherTabText.visible = false;
-		anotherTabText.tintTopLeft = 11558825;
-		anotherTabText.tintTopRight = 11558825;
-		anotherTabText.tintBottomLeft = 11558825;
-		anotherTabText.tintBottomRight = 11558825;
-		anotherTabText.text = "(Game will open in another tab)";
-		anotherTabText.fontSize = -8;
-		gameSelectContainer.add(anotherTabText);
-
 		// preview_3
-		const preview_3 = this.add.rectangle(240, 321, 240, 128);
+		const preview_3 = this.add.rectangle(240, 311, 240, 128);
 		preview_3.setOrigin(0, 0);
 		preview_3.isFilled = true;
 		gameSelectContainer.add(preview_3);
 
 		// previewKFC_1
-		const previewKFC_1 = this.add.image(270, 86, "previewKFC");
+		const previewKFC_1 = this.add.image(270, 76, "previewKFC");
 		previewKFC_1.setOrigin(0, 0);
 		gameSelectContainer.add(previewKFC_1);
 
 		// previewPPP_1
-		const previewPPP_1 = this.add.image(30, 86, "previewPPP");
+		const previewPPP_1 = this.add.image(30, 76, "previewPPP");
 		previewPPP_1.setOrigin(0, 0);
 		gameSelectContainer.add(previewPPP_1);
 
 		// titleKFC
-		const titleKFC = this.add.bitmapText(284, 42, "nokia", "Krampus \nFellowship Clan");
+		const titleKFC = this.add.bitmapText(284, 32, "nokia", "Krampus \nFellowship Clan");
 		titleKFC.tintTopLeft = 5388102;
 		titleKFC.tintTopRight = 5388102;
 		titleKFC.tintBottomLeft = 5388102;
@@ -260,7 +413,7 @@ export default class Titlescreen extends Phaser.Scene {
 		gameSelectContainer.add(titleKFC);
 
 		// titlePPP
-		const titlePPP = this.add.bitmapText(54, 42, "nokia", "Purple \nPlatoon Panic");
+		const titlePPP = this.add.bitmapText(54, 32, "nokia", "Purple \nPlatoon Panic");
 		titlePPP.tintTopLeft = 5388102;
 		titlePPP.tintTopRight = 5388102;
 		titlePPP.tintBottomLeft = 5388102;
@@ -270,17 +423,41 @@ export default class Titlescreen extends Phaser.Scene {
 		titlePPP.align = 1;
 		gameSelectContainer.add(titlePPP);
 
+		// anotherTabText
+		const anotherTabText = this.add.container(266, 247);
+		anotherTabText.visible = false;
+		gameSelectContainer.add(anotherTabText);
+
+		// rectangle
+		const rectangle = this.add.rectangle(0, 0, 171, 16);
+		rectangle.setOrigin(0, 0);
+		rectangle.isFilled = true;
+		rectangle.fillColor = 5388102;
+		rectangle.isStroked = true;
+		rectangle.strokeColor = 11558825;
+		anotherTabText.add(rectangle);
+
+		// anotherTabTextReal_1
+		const anotherTabTextReal_1 = this.add.bitmapText(9, 3, "nokia", "!  Game will open in another tab");
+		anotherTabTextReal_1.tintTopLeft = 11558825;
+		anotherTabTextReal_1.tintTopRight = 11558825;
+		anotherTabTextReal_1.tintBottomLeft = 11558825;
+		anotherTabTextReal_1.tintBottomRight = 11558825;
+		anotherTabTextReal_1.text = "!  Game will open in another tab";
+		anotherTabTextReal_1.fontSize = -8;
+		anotherTabText.add(anotherTabTextReal_1);
+
 		// titleContainer
 		const titleContainer = this.add.container(0, 0);
 
 		// logo
-		const logo = this.add.image(240, 125, "logo");
+		const logo = this.add.image(240, 116, "logo");
 		logo.scaleX = 2;
 		logo.scaleY = 2;
 		titleContainer.add(logo);
 
 		// startText
-		const startText = this.add.bitmapText(240, 234, "nokia", "Click / tap to start");
+		const startText = this.add.bitmapText(240, 238, "nokia", "Click / tap to start");
 		startText.setOrigin(0.5, 0.5);
 		startText.tintTopLeft = 5388102;
 		startText.tintTopRight = 5388102;
@@ -292,22 +469,101 @@ export default class Titlescreen extends Phaser.Scene {
 		startText.dropShadowColor = 9737364;
 		titleContainer.add(startText);
 
-		// progress
-		const progress = this.add.bitmapText(240, 30, "nokia", "BobbyBurt - ProsciuttoMan - Dry - Shane Mesa");
-		progress.setOrigin(0.5, 0.5);
-		progress.tintTopLeft = 5388102;
-		progress.tintTopRight = 5388102;
-		progress.tintBottomLeft = 5388102;
-		progress.tintBottomRight = 5388102;
-		progress.text = "BobbyBurt - ProsciuttoMan - Dry - Shane Mesa";
-		progress.fontSize = -10;
-		progress.align = 1;
-		progress.dropShadowColor = 9737364;
-		titleContainer.add(progress);
+		// creditsText
+		const creditsText = this.add.bitmapText(240, 30, "nokia", "BobbyBurt - ProsciuttoMan - Dry - Shane Mesa");
+		creditsText.setOrigin(0.5, 0.5);
+		creditsText.tintTopLeft = 5388102;
+		creditsText.tintTopRight = 5388102;
+		creditsText.tintBottomLeft = 5388102;
+		creditsText.tintBottomRight = 5388102;
+		creditsText.text = "BobbyBurt - ProsciuttoMan - Dry - Shane Mesa";
+		creditsText.fontSize = -10;
+		creditsText.align = 1;
+		creditsText.dropShadowColor = 9737364;
+		titleContainer.add(creditsText);
+
+		// KFCSub2
+		const kFCSub2 = this.add.rectangle(243, 201, 170, 20);
+		kFCSub2.isFilled = true;
+		kFCSub2.fillColor = 5388102;
+		titleContainer.add(kFCSub2);
+
+		// KFCSub
+		const kFCSub = this.add.bitmapText(243, 197, "nokia", "vs the Krampus Fellowship Clan");
+		kFCSub.setOrigin(0.5, 0);
+		kFCSub.text = "vs the Krampus Fellowship Clan";
+		kFCSub.fontSize = -8;
+		titleContainer.add(kFCSub);
+
+		// parallax_Backing1111 (components)
+		new ScrollFactor(parallax_Backing1111);
+
+		// parallax_Backing (components)
+		new ScrollFactor(parallax_Backing);
+
+		// parallax_Cityscape1111 (components)
+		const parallax_Cityscape1111ScrollFactor = new ScrollFactor(parallax_Cityscape1111);
+		parallax_Cityscape1111ScrollFactor.factorX = 0.2;
+
+		// parallax_Cityscape_1111 (components)
+		const parallax_Cityscape_1111ScrollFactor = new ScrollFactor(parallax_Cityscape_1111);
+		parallax_Cityscape_1111ScrollFactor.factorX = 0.2;
+
+		// parallax_Cityscape_211 (components)
+		const parallax_Cityscape_211ScrollFactor = new ScrollFactor(parallax_Cityscape_211);
+		parallax_Cityscape_211ScrollFactor.factorX = 0.2;
+
+		// parallax_Cityscape_311 (components)
+		const parallax_Cityscape_311ScrollFactor = new ScrollFactor(parallax_Cityscape_311);
+		parallax_Cityscape_311ScrollFactor.factorX = 0.2;
+
+		// parallax_Cityscape_411 (components)
+		const parallax_Cityscape_411ScrollFactor = new ScrollFactor(parallax_Cityscape_411);
+		parallax_Cityscape_411ScrollFactor.factorX = 0.2;
+
+		// parallax_Cityscape_4 (components)
+		const parallax_Cityscape_4ScrollFactor = new ScrollFactor(parallax_Cityscape_4);
+		parallax_Cityscape_4ScrollFactor.factorX = 0.2;
+
+		// parallax_Cityscape_611 (components)
+		const parallax_Cityscape_611ScrollFactor = new ScrollFactor(parallax_Cityscape_611);
+		parallax_Cityscape_611ScrollFactor.factorX = 0.2;
+
+		// parallax_Cityscape_1511 (components)
+		const parallax_Cityscape_1511ScrollFactor = new ScrollFactor(parallax_Cityscape_1511);
+		parallax_Cityscape_1511ScrollFactor.factorX = 0.25;
+
+		// parallax_Cityscape_1611 (components)
+		const parallax_Cityscape_1611ScrollFactor = new ScrollFactor(parallax_Cityscape_1611);
+		parallax_Cityscape_1611ScrollFactor.factorX = 0.25;
+
+		// parallax_Cityscape_1711 (components)
+		const parallax_Cityscape_1711ScrollFactor = new ScrollFactor(parallax_Cityscape_1711);
+		parallax_Cityscape_1711ScrollFactor.factorX = 0.25;
+
+		// parallax_Cityscape_1811 (components)
+		const parallax_Cityscape_1811ScrollFactor = new ScrollFactor(parallax_Cityscape_1811);
+		parallax_Cityscape_1811ScrollFactor.factorX = 0.25;
+
+		// parallax_Cityscape_19111 (components)
+		const parallax_Cityscape_19111ScrollFactor = new ScrollFactor(parallax_Cityscape_19111);
+		parallax_Cityscape_19111ScrollFactor.factorX = 0.25;
+
+		// parallax_Cityscape_2011 (components)
+		const parallax_Cityscape_2011ScrollFactor = new ScrollFactor(parallax_Cityscape_2011);
+		parallax_Cityscape_2011ScrollFactor.factorX = 0.25;
+
+		// parallax_Cityscape_3 (components)
+		const parallax_Cityscape_3ScrollFactor = new ScrollFactor(parallax_Cityscape_3);
+		parallax_Cityscape_3ScrollFactor.factorX = 0.25;
 
 		// parallax_Backing111 (components)
 		new ScrollFactor(parallax_Backing111);
 
+		this.bGLayerNinja = bGLayerNinja;
+		this.parallax_Backing1111 = parallax_Backing1111;
+		this.parallax_Backing = parallax_Backing;
+		this.pppBGContainer = pppBGContainer;
 		this.parallax_Backing111 = parallax_Backing111;
 		this.ngioContainer = ngioContainer;
 		this.logInButton_2 = logInButton_2;
@@ -322,18 +578,26 @@ export default class Titlescreen extends Phaser.Scene {
 		this.selectPPP = selectPPP;
 		this.selectKFC = selectKFC;
 		this.desc1 = desc1;
-		this.anotherTabText = anotherTabText;
 		this.previewKFC_1 = previewKFC_1;
 		this.previewPPP_1 = previewPPP_1;
 		this.titleKFC = titleKFC;
 		this.titlePPP = titlePPP;
+		this.anotherTabText = anotherTabText;
+		this.anotherTabTextReal_1 = anotherTabTextReal_1;
 		this.titleContainer = titleContainer;
 		this.logo = logo;
 		this.startText = startText;
+		this.creditsText = creditsText;
+		this.kFCSub2 = kFCSub2;
+		this.kFCSub = kFCSub;
 
 		this.events.emit("scene-awake");
 	}
 
+	private bGLayerNinja!: Phaser.GameObjects.Layer;
+	private parallax_Backing1111!: Phaser.GameObjects.Image;
+	private parallax_Backing!: Phaser.GameObjects.Image;
+	private pppBGContainer!: Phaser.GameObjects.Container;
 	private parallax_Backing111!: Phaser.GameObjects.Image;
 	private ngioContainer!: Phaser.GameObjects.Container;
 	private logInButton_2!: Phaser.GameObjects.Rectangle;
@@ -348,14 +612,18 @@ export default class Titlescreen extends Phaser.Scene {
 	private selectPPP!: Phaser.GameObjects.Rectangle;
 	private selectKFC!: Phaser.GameObjects.Rectangle;
 	private desc1!: Phaser.GameObjects.BitmapText;
-	private anotherTabText!: Phaser.GameObjects.BitmapText;
 	private previewKFC_1!: Phaser.GameObjects.Image;
 	private previewPPP_1!: Phaser.GameObjects.Image;
 	private titleKFC!: Phaser.GameObjects.BitmapText;
 	private titlePPP!: Phaser.GameObjects.BitmapText;
+	private anotherTabText!: Phaser.GameObjects.Container;
+	private anotherTabTextReal_1!: Phaser.GameObjects.BitmapText;
 	private titleContainer!: Phaser.GameObjects.Container;
 	private logo!: Phaser.GameObjects.Image;
 	private startText!: Phaser.GameObjects.BitmapText;
+	private creditsText!: Phaser.GameObjects.BitmapText;
+	private kFCSub2!: Phaser.GameObjects.Rectangle;
+	private kFCSub!: Phaser.GameObjects.BitmapText;
 
 	/* START-USER-CODE */
 
@@ -384,6 +652,13 @@ export default class Titlescreen extends Phaser.Scene {
 		this.cameras.main.setBackgroundColor(0x242424);
 		this.cameras.main.setZoom(CameraUtil.getAdaptiveZoom(this));
 		this.cameras.main.fadeIn(200, 255, 255, 255);
+
+		this.setupBG();
+
+		this.kFCSub.setVisible(__MAP_PACK__);
+		this.kFCSub2.setVisible(__MAP_PACK__);
+
+    this.creditsText.setVisible(!__MAP_PACK__);
 
 		// start input
 		window.addEventListener('touchstart', this.onPointer);
@@ -720,13 +995,24 @@ export default class Titlescreen extends Phaser.Scene {
 
 		}
 
-		if (this.cache.audio.exists('main-game-2'))
-		{
-			this.sound.play('main-game-2', { volume: .7 });
-		}
-		else
-		{
-			console.log('main-game-2 music not found!');
+		if (__MAP_PACK__) {
+			if (this.cache.audio.exists('main-theme-mp'))
+			{
+				this.sound.play('main-theme-mp', { volume: 1 });
+			}
+			else
+			{
+				console.log('titlescreen music not found!');
+			}	
+		} else {
+			if (this.cache.audio.exists('main-game-2'))
+			{
+				this.sound.play('main-game-2', { volume: .7 });
+			}
+			else
+			{
+				console.log('titlescreen music not found!');
+			}
 		}
 
 		// this.startText.setAlpha(0);
@@ -835,14 +1121,14 @@ export default class Titlescreen extends Phaser.Scene {
 		{
 			this.selectTitleTween.stop();
 		}
-		this.titleKFC.setY(42);
-		this.titlePPP.setY(42);
+		this.titleKFC.setY(32);
+		this.titlePPP.setY(32);
 		this.selectTitleTween = this.tweens.add({
 			targets: target,
 			duration: 200,
 			ease: Phaser.Math.Easing.Cubic.Out,
 			yoyo: true,
-			y: 30
+			y: 20
 		});
 	}
 
@@ -901,6 +1187,14 @@ export default class Titlescreen extends Phaser.Scene {
 
 		LevelSelect.levelSelectEntry = 'titlescreen';
 		this.scene.launch("LevelSelect");
+	}
+
+  /**
+   * Sets visible BG for PPP or KFC
+   */
+	setupBG() {
+    this.bGLayerNinja.setVisible(__MAP_PACK__);
+    this.pppBGContainer.setVisible(!__MAP_PACK__);
 	}
 
 	/* END-USER-CODE */

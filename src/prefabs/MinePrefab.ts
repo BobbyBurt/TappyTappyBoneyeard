@@ -21,7 +21,8 @@ export default class MinePrefab extends Phaser.GameObjects.Image {
 		this.body.moves = false;
 		this.body.allowGravity = false;
 		this.body.pushable = false;
-		this.body.setSize(15, 15, false);
+		this.body.setOffset(2, 2);
+		this.body.setSize(11, 11, false);
 
 		/* START-USER-CTR-CODE */
 

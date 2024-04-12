@@ -7,6 +7,7 @@ import Phaser from "phaser";
 /* START-USER-IMPORTS */
 import CameraUtil from "~/components/CameraUtil";
 import LevelSelect from "./LevelSelect";
+import InputManager from "~/components/InputManager";
 /* END-USER-IMPORTS */
 
 export default class Credits extends Phaser.Scene {
@@ -28,10 +29,10 @@ export default class Credits extends Phaser.Scene {
 		bgColour.fillColor = 16765919;
 
 		// parallax_Forest
-		this.add.image(96, 2245, "Parallax-Forest");
+		this.add.image(96, 2434, "Parallax-Forest");
 
 		// parallax_Forest_1
-		this.add.image(372, 2245, "Parallax-Forest");
+		this.add.image(372, 2434, "Parallax-Forest");
 
 		// parallax_Backing
 		const parallax_Backing = this.add.image(0, 475, "Parallax-Backing");
@@ -321,13 +322,13 @@ export default class Credits extends Phaser.Scene {
 		bitmaptext_13.align = 1;
 
 		// bitmaptext_17
-		const bitmaptext_17 = this.add.bitmapText(240, 2112, "nokia", "Thanks for playing!");
+		const bitmaptext_17 = this.add.bitmapText(240, 2301, "nokia", "Thanks for playing!");
 		bitmaptext_17.setOrigin(0.5, 0);
 		bitmaptext_17.text = "Thanks for playing!";
 		bitmaptext_17.fontSize = -32;
 
 		// bitmaptext_14
-		const bitmaptext_14 = this.add.bitmapText(240, 2108, "nokia", "Thanks for playing!");
+		const bitmaptext_14 = this.add.bitmapText(240, 2297, "nokia", "Thanks for playing!");
 		bitmaptext_14.setOrigin(0.5, 0);
 		bitmaptext_14.tintTopLeft = 5388102;
 		bitmaptext_14.tintTopRight = 5388102;
@@ -341,7 +342,7 @@ export default class Credits extends Phaser.Scene {
 		bird1victory.setOrigin(0, 0);
 
 		// returnText
-		const returnText = this.add.bitmapText(240, 2246, "nokia", "Click / tap to return");
+		const returnText = this.add.bitmapText(240, 2435, "nokia", "Click / tap to return");
 		returnText.setOrigin(0.5, 0);
 		returnText.visible = false;
 		returnText.tintTopLeft = 5388102;
@@ -517,19 +518,19 @@ export default class Credits extends Phaser.Scene {
 		up_icon_2.setOrigin(0, 0);
 
 		// clown
-		const clown = this.add.image(357, 2093, "clown");
+		const clown = this.add.image(357, 2282, "clown");
 		clown.setOrigin(0, 0);
 
 		// balloon_3
-		const balloon_3 = this.add.image(353, 2064, "balloon");
+		const balloon_3 = this.add.image(353, 2253, "balloon");
 		balloon_3.setOrigin(0, 0);
 
 		// balloon_4
-		const balloon_4 = this.add.image(363, 2069, "balloon");
+		const balloon_4 = this.add.image(363, 2258, "balloon");
 		balloon_4.setOrigin(0, 0);
 
 		// balloon_5
-		const balloon_5 = this.add.image(357, 2073, "balloon");
+		const balloon_5 = this.add.image(357, 2262, "balloon");
 		balloon_5.setOrigin(0, 0);
 
 		// sadfsda
@@ -552,12 +553,65 @@ export default class Credits extends Phaser.Scene {
 		const sadfsda_4 = this.add.image(100, 1148, "fdfdsvsdf");
 		sadfsda_4.setOrigin(0, 0);
 
+		// kidText_1
+		const kidText_1 = this.add.bitmapText(240, 2130, "nokia", "Powered by");
+		kidText_1.setOrigin(0.5, 0);
+		kidText_1.tintTopLeft = 5388102;
+		kidText_1.tintTopRight = 5388102;
+		kidText_1.tintBottomLeft = 5388102;
+		kidText_1.tintBottomRight = 5388102;
+		kidText_1.text = "Powered by";
+		kidText_1.fontSize = -16;
+
+		// phaser_pixel_medium_shaded
+		const phaser_pixel_medium_shaded = this.add.image(240, 2156, "phaser-pixel-medium-shaded");
+		phaser_pixel_medium_shaded.setOrigin(0.5, 0);
+
+		// kidText_2
+		const kidText_2 = this.add.bitmapText(240, 2047, "nokia", "Phaser Editor v3");
+		kidText_2.setOrigin(0.5, 0);
+		kidText_2.tintTopLeft = 5388102;
+		kidText_2.tintTopRight = 5388102;
+		kidText_2.tintBottomLeft = 5388102;
+		kidText_2.tintBottomRight = 5388102;
+		kidText_2.text = "Phaser Editor v3";
+		kidText_2.fontSize = -16;
+
+		// kidText_3
+		const kidText_3 = this.add.bitmapText(240, 2069, "nokia", "Tiled level editor");
+		kidText_3.setOrigin(0.5, 0);
+		kidText_3.tintTopLeft = 5388102;
+		kidText_3.tintTopRight = 5388102;
+		kidText_3.tintBottomLeft = 5388102;
+		kidText_3.tintBottomRight = 5388102;
+		kidText_3.text = "Tiled level editor";
+		kidText_3.fontSize = -16;
+		kidText_3.align = 1;
+
+		// kidText_4
+		const kidText_4 = this.add.bitmapText(240, 2023, "nokia", "Software:");
+		kidText_4.setOrigin(0.5, 0);
+		kidText_4.tintTopLeft = 5388102;
+		kidText_4.tintTopRight = 5388102;
+		kidText_4.tintBottomLeft = 5388102;
+		kidText_4.tintBottomRight = 5388102;
+		kidText_4.text = "Software:";
+		kidText_4.fontSize = -16;
+
 		this.returnText = returnText;
+		this.kidText_1 = kidText_1;
+		this.kidText_2 = kidText_2;
+		this.kidText_3 = kidText_3;
+		this.kidText_4 = kidText_4;
 
 		this.events.emit("scene-awake");
 	}
 
 	private returnText!: Phaser.GameObjects.BitmapText;
+	private kidText_1!: Phaser.GameObjects.BitmapText;
+	private kidText_2!: Phaser.GameObjects.BitmapText;
+	private kidText_3!: Phaser.GameObjects.BitmapText;
+	private kidText_4!: Phaser.GameObjects.BitmapText;
 
 	/* START-USER-CODE */
 
@@ -584,8 +638,8 @@ export default class Credits extends Phaser.Scene {
 		this.cameraTween = this.tweens.addCounter
 		({
 			from: 0,
-			to: 2000,
-			duration: 50000,
+			to: 2200,
+			duration: 52000,
 			ease: Phaser.Math.Easing.Linear,
 
 			onComplete: () =>
@@ -598,6 +652,14 @@ export default class Credits extends Phaser.Scene {
 		this.input.on('pointerdown', () =>
 		{
 			this.endScene();
+		});
+		this.input.gamepad.on(`down`, (pad:Phaser.Input.Gamepad.Gamepad, 
+			button:Phaser.Input.Gamepad.Button, index:number) =>
+		{
+			if (button.index == InputManager.getInput('menu-confirm', 'gamepad') || button.index == InputManager.getInput('menu-back', 'gamepad'))
+			{
+				this.endScene();
+			}
 		});
 	}
 

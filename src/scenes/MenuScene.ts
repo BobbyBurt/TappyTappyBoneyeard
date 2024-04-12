@@ -305,15 +305,15 @@ export default class MenuScene extends Phaser.Scene {
 			case 'credits':
 				this.sound.play('menu-confirm');	
 
-				this.cameras.main.fadeOut(1000, 255, 234, 240);
+				// this.cameras.main.fadeOut(1000, 255, 234, 240);
 
-				this.time.delayedCall(1500, () =>
-				{
+				// this.time.delayedCall(1500, () =>
+				// {
 					this.scene.stop(this);
 					this.scene.stop('LevelSelect')
-					this.scene.launch('Credits');
+					this.scene.launch(__MAP_PACK__ ? 'CreditsMP' : 'Credits');
 					this.sound.pauseAll();
-				});
+				// });
 				break;
 
 			case 'fullscreen':

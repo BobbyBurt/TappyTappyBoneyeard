@@ -66,7 +66,7 @@
             "scope": "CLASS",
             "components": [],
             "texture": {
-                "key": "preview-dry-madngtl"
+                "key": "preview-blank"
             },
             "y": -23,
             "originX": 0,
@@ -85,6 +85,86 @@
             "originX": 0,
             "originY": 0,
             "visible": false
+        },
+        {
+            "type": "Container",
+            "id": "53467920-a4f8-4f15-a211-3961161f1b73",
+            "label": "menuButtonContainer",
+            "scope": "CLASS",
+            "components": [],
+            "x": 360,
+            "y": 159,
+            "list": [
+                {
+                    "type": "Rectangle",
+                    "id": "b63fc466-f4b4-430e-b65b-9b05c1390918",
+                    "label": "menuBack",
+                    "scope": "CLASS",
+                    "components": [],
+                    "originX": 0,
+                    "originY": 0,
+                    "isFilled": true,
+                    "fillColor": "#996C85",
+                    "lineWidth": 3,
+                    "width": 75,
+                    "height": 28
+                },
+                {
+                    "type": "BitmapText",
+                    "id": "f866621f-1cdb-469f-88d2-b6dac096acd7",
+                    "label": "hintText_1",
+                    "scope": "CLASS",
+                    "components": [],
+                    "x": 30,
+                    "y": 9,
+                    "text": "Menu",
+                    "font": "nokia",
+                    "fontSize": -8,
+                    "maxWidth": 130
+                },
+                {
+                    "type": "Rectangle",
+                    "id": "ceb74926-b44d-4312-bd4c-4d8611e02a31",
+                    "label": "hintBack_5",
+                    "components": [],
+                    "x": 14,
+                    "y": 11,
+                    "originX": 0,
+                    "originY": 0,
+                    "isFilled": true,
+                    "fillColor": "#ffffff",
+                    "width": 6,
+                    "height": 1
+                },
+                {
+                    "type": "Rectangle",
+                    "id": "778f8e03-e096-42e4-9767-8d0a0c569cb7",
+                    "label": "hintBack_1",
+                    "components": [],
+                    "x": 14,
+                    "y": 13,
+                    "originX": 0,
+                    "originY": 0,
+                    "isFilled": true,
+                    "fillColor": "#ffffff",
+                    "width": 6,
+                    "height": 1
+                },
+                {
+                    "type": "Rectangle",
+                    "id": "26ee544b-bea2-4e3d-b5e8-ba7f7e27aa2a",
+                    "label": "hintBack_3",
+                    "components": [],
+                    "x": 14,
+                    "y": 15,
+                    "originX": 0,
+                    "originY": 0,
+                    "isFilled": true,
+                    "fillColor": "#ffffff",
+                    "width": 6,
+                    "height": 1
+                }
+            ]
         },
         {
             "type": "Container",
@@ -1561,86 +1641,6 @@
         },
         {
             "type": "Container",
-            "id": "53467920-a4f8-4f15-a211-3961161f1b73",
-            "label": "menuButtonContainer",
-            "scope": "CLASS",
-            "components": [],
-            "x": 360,
-            "y": 159,
-            "list": [
-                {
-                    "type": "Rectangle",
-                    "id": "b63fc466-f4b4-430e-b65b-9b05c1390918",
-                    "label": "menuBack",
-                    "scope": "CLASS",
-                    "components": [],
-                    "originX": 0,
-                    "originY": 0,
-                    "isFilled": true,
-                    "fillColor": "#996C85",
-                    "lineWidth": 3,
-                    "width": 75,
-                    "height": 28
-                },
-                {
-                    "type": "BitmapText",
-                    "id": "f866621f-1cdb-469f-88d2-b6dac096acd7",
-                    "label": "hintText_1",
-                    "scope": "CLASS",
-                    "components": [],
-                    "x": 30,
-                    "y": 9,
-                    "text": "Menu",
-                    "font": "nokia",
-                    "fontSize": -8,
-                    "maxWidth": 130
-                },
-                {
-                    "type": "Rectangle",
-                    "id": "ceb74926-b44d-4312-bd4c-4d8611e02a31",
-                    "label": "hintBack_5",
-                    "components": [],
-                    "x": 14,
-                    "y": 11,
-                    "originX": 0,
-                    "originY": 0,
-                    "isFilled": true,
-                    "fillColor": "#ffffff",
-                    "width": 6,
-                    "height": 1
-                },
-                {
-                    "type": "Rectangle",
-                    "id": "778f8e03-e096-42e4-9767-8d0a0c569cb7",
-                    "label": "hintBack_1",
-                    "components": [],
-                    "x": 14,
-                    "y": 13,
-                    "originX": 0,
-                    "originY": 0,
-                    "isFilled": true,
-                    "fillColor": "#ffffff",
-                    "width": 6,
-                    "height": 1
-                },
-                {
-                    "type": "Rectangle",
-                    "id": "26ee544b-bea2-4e3d-b5e8-ba7f7e27aa2a",
-                    "label": "hintBack_3",
-                    "components": [],
-                    "x": 14,
-                    "y": 15,
-                    "originX": 0,
-                    "originY": 0,
-                    "isFilled": true,
-                    "fillColor": "#ffffff",
-                    "width": 6,
-                    "height": 1
-                }
-            ]
-        },
-        {
-            "type": "Container",
             "id": "a05458a3-7e6c-43a7-a585-4f195197eb89",
             "label": "mysteryCharacterContainer",
             "scope": "CLASS",
@@ -1653,8 +1653,8 @@
                     "id": "85a4b796-290b-49f7-983e-d8a143ec31a7",
                     "label": "rectangle_4",
                     "components": [],
-                    "x": 4,
-                    "y": 2,
+                    "x": 21,
+                    "y": 13,
                     "scaleX": 0.4106142086997706,
                     "scaleY": 0.4106142086997706,
                     "isFilled": true,
@@ -1670,7 +1670,8 @@
                     "texture": {
                         "key": "illustration-kid"
                     },
-                    "x": 3,
+                    "x": 20,
+                    "y": 11,
                     "scaleX": 0.0319044655113218,
                     "scaleY": 0.0319044655113218,
                     "alpha": 0.4,
@@ -1689,8 +1690,8 @@
                     "label": "specialCharacterQuestionMark",
                     "scope": "CLASS",
                     "components": [],
-                    "x": -7,
-                    "y": -18,
+                    "x": 10,
+                    "y": -7,
                     "text": "?",
                     "font": "nokia",
                     "fontSize": -16
@@ -1711,26 +1712,27 @@
                     "label": "rectangle_5",
                     "components": [],
                     "x": 240,
-                    "y": 139,
+                    "y": 23,
+                    "originY": 0,
                     "isFilled": true,
-                    "fillColor": "#9e3838",
-                    "strokeColor": "#c15353",
-                    "lineWidth": 2,
+                    "fillColor": "#825a71",
+                    "strokeColor": "#b986a3",
+                    "lineWidth": 3,
                     "isStroked": true,
                     "width": 350,
-                    "height": 150
+                    "height": 200
                 },
                 {
                     "type": "BitmapText",
                     "id": "cf1fb5aa-0691-4861-b0c3-45ce00391c2f",
                     "label": "bitmaptext_3",
                     "components": [],
-                    "x": 82,
-                    "y": 110,
-                    "text": "You can play as him in any regular level! He'll also be available in Purple Platoon Panic if you're signed into Newgrounds.io in both games.\n\nGo the the character select in the menu to switch characters.",
+                    "x": 80,
+                    "y": 88,
+                    "text": "You can play as him in any regular level! He's now also unlocked in Purple Platoon Panic.\n\nBut be warned: Some levels may be more difficult or even impossible!\n\nGo to the Character Select menu to switch characters.",
                     "font": "nokia",
                     "fontSize": -8,
-                    "maxWidth": 200
+                    "maxWidth": 180
                 },
                 {
                     "type": "Image",
@@ -1741,22 +1743,22 @@
                     "texture": {
                         "key": "illustration-gappy"
                     },
-                    "x": 362,
-                    "y": 165,
+                    "x": 331,
+                    "y": 151,
                     "scaleX": 0.06991574805378897,
                     "scaleY": 0.06991574805378897
                 },
                 {
                     "type": "BitmapText",
                     "id": "687cd815-825d-4e76-b69d-5a1a277d773d",
-                    "label": "unlockedCharacterText",
+                    "label": "unlockedText",
                     "scope": "CLASS",
                     "components": [],
-                    "x": 240,
-                    "y": 87,
+                    "x": 160,
+                    "y": 67,
                     "originX": 0.5,
                     "originY": 0.5,
-                    "text": "You've unlocked Gappy!",
+                    "text": "You've unlocked",
                     "font": "nokia",
                     "fontSize": -16
                 },
@@ -1766,28 +1768,135 @@
                     "label": "characterUnlockedDismissButton",
                     "scope": "CLASS",
                     "components": [],
-                    "x": 188,
-                    "y": 208,
+                    "x": 167,
+                    "y": 215,
                     "isFilled": true,
-                    "fillColor": "#b44343",
+                    "fillColor": "#b986a3",
                     "strokeColor": "#ffffff",
                     "lineWidth": 2,
                     "isStroked": true,
-                    "width": 70,
-                    "height": 30
+                    "width": 80,
+                    "height": 25
                 },
                 {
                     "type": "BitmapText",
                     "id": "10b4a992-1627-4adb-a2fa-1014fd5eec34",
                     "label": "bitmaptext_4",
                     "components": [],
-                    "x": 171,
-                    "y": 204,
+                    "x": 150,
+                    "y": 211,
                     "text": "Return",
                     "font": "nokia",
                     "align": 1,
                     "fontSize": -8,
                     "maxWidth": 250
+                },
+                {
+                    "type": "BitmapText",
+                    "id": "dd38c7cc-b007-40ce-a7e6-5bae7d790c0f",
+                    "label": "unlockedCharacterNameText",
+                    "scope": "CLASS",
+                    "components": [],
+                    "x": 247,
+                    "y": 43,
+                    "text": "The Kid!",
+                    "font": "nokia",
+                    "fontSize": -30
+                }
+            ]
+        },
+        {
+            "type": "Container",
+            "id": "600fe1c0-1fdd-4ada-bfe0-510bc43c7471",
+            "label": "altUnlockedContainer",
+            "scope": "CLASS",
+            "components": [],
+            "visible": false,
+            "list": [
+                {
+                    "type": "Rectangle",
+                    "id": "6c442410-1f7a-4c93-9671-ba77154b7ad2",
+                    "label": "rectangle_51",
+                    "components": [],
+                    "x": 240,
+                    "y": 107,
+                    "isFilled": true,
+                    "fillColor": "#825a71",
+                    "strokeColor": "#b986a3",
+                    "lineWidth": 3,
+                    "isStroked": true,
+                    "width": 300,
+                    "height": 110
+                },
+                {
+                    "type": "BitmapText",
+                    "id": "be9f993e-24d7-4a92-a057-d0fb6c69a7fe",
+                    "label": "bitmaptext_31",
+                    "components": [],
+                    "x": 117,
+                    "y": 113,
+                    "text": "You can choose it in the Character Select menu.",
+                    "font": "nokia",
+                    "fontSize": -8,
+                    "maxWidth": 200
+                },
+                {
+                    "type": "BitmapText",
+                    "id": "95856339-a737-4ada-bf57-6be30b2a3f33",
+                    "label": "unlockedCharacterText1",
+                    "scope": "CLASS",
+                    "components": [],
+                    "x": 240,
+                    "y": 87,
+                    "originX": 0.5,
+                    "originY": 0.5,
+                    "text": "You've unlocked Gappy's \nalternate costume!",
+                    "font": "nokia",
+                    "fontSize": -16
+                },
+                {
+                    "type": "Rectangle",
+                    "id": "bed502de-8e60-4331-a45e-1845e72164ee",
+                    "label": "characterUnlockedDismissButton1",
+                    "scope": "CLASS",
+                    "components": [],
+                    "x": 240,
+                    "y": 155,
+                    "isFilled": true,
+                    "fillColor": "#b986a3",
+                    "strokeColor": "#ffffff",
+                    "lineWidth": 2,
+                    "isStroked": true,
+                    "width": 80,
+                    "height": 25
+                },
+                {
+                    "type": "BitmapText",
+                    "id": "cf7af04a-3253-416e-8368-7f3e48be069c",
+                    "label": "bitmaptext_41",
+                    "components": [],
+                    "x": 223.5,
+                    "y": 151,
+                    "text": "Return",
+                    "font": "nokia",
+                    "align": 1,
+                    "fontSize": -8,
+                    "maxWidth": 250
+                },
+                {
+                    "type": "Image",
+                    "id": "423c5883-44ae-45b0-94ad-9fadd228e9e2",
+                    "label": "unlockedAltIcon",
+                    "scope": "CLASS",
+                    "components": [],
+                    "texture": {
+                        "key": "kid-alt",
+                        "frame": "airborne/00"
+                    },
+                    "x": 346,
+                    "y": 121,
+                    "scaleX": 2,
+                    "scaleY": 2
                 }
             ]
         }

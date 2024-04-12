@@ -63,7 +63,7 @@ export default class cloudSaves {
         }
         else
         {            
-            let localSaveData = localStorage.getItem('save-data');
+            let localSaveData = localStorage.getItem('save-data' + (__MAP_PACK__ ? '-mp' : ''));
             if (localSaveData)
             {
                 this.onDataGetComplete(localSaveData, scene);
@@ -123,6 +123,7 @@ export default class cloudSaves {
         const dataToSaveString = 
         JSON.stringify(Array.from(dataToSave.entries()));
         // JSON.stringify doesn't work for Maps. This solution is the second answer from https://stackoverflow.com/questions/29085197/how-do-you-json-stringify-an-es6-map. It's not the best solution, but I believe it works for my purposes.
+        console.debug(dataToSaveString);
         
         if (__DEV__)
         {
@@ -140,7 +141,7 @@ export default class cloudSaves {
         else
         {
             // local
-            localStorage.setItem('save-data', dataToSaveString);
+            localStorage.setItem('save-data' + (__MAP_PACK__ ? '-mp' : ''), dataToSaveString);
             console.log('local save data saved.');
         }
         

@@ -4,6 +4,7 @@ import { newgroundsIOWrapper } from './API/newgroundsIOWrapper';
 import CharacterSelectScene from './scenes/CharacterSelectScene';
 import ControlsGuideScene from './scenes/ControlsGuideScene';
 import Credits from './scenes/Credits';
+import CreditsMP from './scenes/CreditsMP';
 import FullscreenPopupScene from './scenes/FullscreenPopupScene';
 import Level from './scenes/Level';
 import LevelSelect from './scenes/LevelSelect';
@@ -16,11 +17,13 @@ import Titlescreen from './scenes/Titlescreen';
 
 window.addEventListener('load', function ()
 {
+	console.clear();
+
 	var game = new Phaser.Game( 
 	{
 		title: 'Bird Tapper',
 		url: 'https://www.newgrounds.com/projects/games/1923225/preview',
-		version: '27 update',
+		version: '31 update',
 		
 	// visuals
 		type: Phaser.AUTO,
@@ -99,6 +102,7 @@ window.addEventListener('load', function ()
 	game.scene.add('character-select-scene', CharacterSelectScene);
 	game.scene.add('fullscreen-popup-scene', FullscreenPopupScene);
 	game.scene.add('control-guide-scene', ControlsGuideScene);
+	game.scene.add('CreditsMP', CreditsMP);
 });
 
 class Boot extends Phaser.Scene
@@ -117,7 +121,12 @@ class Boot extends Phaser.Scene
 
 	create()
 	{
-		console.clear();
+		// chrome prevent arrow key scrolling
+		window.addEventListener("keydown", function(e) {
+			if(["Space","ArrowUp","ArrowDown","ArrowLeft","ArrowRight"].indexOf(e.code) > -1) {
+					e.preventDefault();
+			}
+	}, false);
 
 		this.game.events.once(Phaser.Core.Events.STEP, () => 
 		{
@@ -155,10 +164,13 @@ class Boot extends Phaser.Scene
 		dataKeys.push(`got-egg: umbrella-shield`);
 		dataKeys.push(`got-egg: mine-intro`);
 		dataKeys.push(`got-egg: mine-wall`);
-		dataKeys.push(`new-uppercut-input`);
+		// dataKeys.push(`new-uppercut-input`);
 		dataKeys.push(`unlocked-character: puck`);
 		dataKeys.push(`unlocked-character: gappy`);
 		dataKeys.push(`unlocked-character: kid`);
+		dataKeys.push(`unlocked-alt: puck`);
+		dataKeys.push(`unlocked-alt: gappy`);
+		dataKeys.push(`unlocked-alt: kid`);
 
 		dataKeys.push(`no-more-unlocks`);
 		dataKeys.push('played-credits');
@@ -170,6 +182,7 @@ class Boot extends Phaser.Scene
 		// ]);
 		// TODO: add all level key topscores
 		this.registry.set('manually-selected-character', 'tapper');
+		this.registry.set('character-alt', false);
 	}
 
 	/**

@@ -33,7 +33,7 @@
                 "key": "Parallax-Forest"
             },
             "x": 96,
-            "y": 2245
+            "y": 2434
         },
         {
             "type": "Image",
@@ -44,7 +44,7 @@
                 "key": "Parallax-Forest"
             },
             "x": 372,
-            "y": 2245
+            "y": 2434
         },
         {
             "type": "Image",
@@ -649,7 +649,7 @@
             "label": "bitmaptext_17",
             "components": [],
             "x": 240,
-            "y": 2112,
+            "y": 2301,
             "originX": 0.5,
             "text": "Thanks for playing!",
             "font": "nokia",
@@ -661,7 +661,7 @@
             "label": "bitmaptext_14",
             "components": [],
             "x": 240,
-            "y": 2108,
+            "y": 2297,
             "originX": 0.5,
             "tintTopLeft": "#523746",
             "tintTopRight": "#523746",
@@ -691,7 +691,7 @@
             "scope": "CLASS",
             "components": [],
             "x": 240,
-            "y": 2246,
+            "y": 2435,
             "originX": 0.5,
             "visible": false,
             "tintTopLeft": "#523746",
@@ -1212,7 +1212,7 @@
                 "key": "clown"
             },
             "x": 357,
-            "y": 2093,
+            "y": 2282,
             "originX": 0,
             "originY": 0
         },
@@ -1225,7 +1225,7 @@
                 "key": "balloon"
             },
             "x": 353,
-            "y": 2064,
+            "y": 2253,
             "originX": 0,
             "originY": 0
         },
@@ -1238,7 +1238,7 @@
                 "key": "balloon"
             },
             "x": 363,
-            "y": 2069,
+            "y": 2258,
             "originX": 0,
             "originY": 0
         },
@@ -1251,7 +1251,7 @@
                 "key": "balloon"
             },
             "x": 357,
-            "y": 2073,
+            "y": 2262,
             "originX": 0,
             "originY": 0
         },
@@ -1319,6 +1319,87 @@
             "y": 1148,
             "originX": 0,
             "originY": 0
+        },
+        {
+            "type": "BitmapText",
+            "id": "8a8a318b-31be-4f72-9e68-68a06f3d9a93",
+            "label": "kidText_1",
+            "scope": "CLASS",
+            "components": [],
+            "x": 240,
+            "y": 2130,
+            "originX": 0.5,
+            "tintTopLeft": "#523746",
+            "tintTopRight": "#523746",
+            "tintBottomLeft": "#523746",
+            "tintBottomRight": "#523746",
+            "text": "Powered by",
+            "font": "nokia",
+            "fontSize": -16
+        },
+        {
+            "type": "Image",
+            "id": "98a86c7f-e60f-442f-a0d2-21aa2793778a",
+            "label": "phaser_pixel_medium_shaded",
+            "components": [],
+            "texture": {
+                "key": "phaser-pixel-medium-shaded"
+            },
+            "x": 240,
+            "y": 2156,
+            "originY": 0
+        },
+        {
+            "type": "BitmapText",
+            "id": "e628cdaa-adcf-4a5f-a179-8b7661368632",
+            "label": "kidText_2",
+            "scope": "CLASS",
+            "components": [],
+            "x": 240,
+            "y": 2047,
+            "originX": 0.5,
+            "tintTopLeft": "#523746",
+            "tintTopRight": "#523746",
+            "tintBottomLeft": "#523746",
+            "tintBottomRight": "#523746",
+            "text": "Phaser Editor v3",
+            "font": "nokia",
+            "fontSize": -16
+        },
+        {
+            "type": "BitmapText",
+            "id": "2407c214-2027-45bc-9947-48d14dd428d3",
+            "label": "kidText_3",
+            "scope": "CLASS",
+            "components": [],
+            "x": 240,
+            "y": 2069,
+            "originX": 0.5,
+            "tintTopLeft": "#523746",
+            "tintTopRight": "#523746",
+            "tintBottomLeft": "#523746",
+            "tintBottomRight": "#523746",
+            "text": "Tiled level editor",
+            "font": "nokia",
+            "align": 1,
+            "fontSize": -16
+        },
+        {
+            "type": "BitmapText",
+            "id": "b3d9b897-f3ee-4cd5-87df-036f6f9c9ea6",
+            "label": "kidText_4",
+            "scope": "CLASS",
+            "components": [],
+            "x": 240,
+            "y": 2023,
+            "originX": 0.5,
+            "tintTopLeft": "#523746",
+            "tintTopRight": "#523746",
+            "tintBottomLeft": "#523746",
+            "tintBottomRight": "#523746",
+            "text": "Software:",
+            "font": "nokia",
+            "fontSize": -16
         }
     ],
     "plainObjects": [],

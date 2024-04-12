@@ -1197,6 +1197,50 @@
             "list": [
                 {
                     "type": "BitmapText",
+                    "id": "ad0a5a12-d39b-4b9c-896b-ebd8b5f95ed2",
+                    "label": "gameOverText_1",
+                    "scope": "CLASS",
+                    "components": [
+                        "Align"
+                    ],
+                    "Align.up": true,
+                    "Align.left": true,
+                    "Align.horizontalOffset": 13,
+                    "Align.verticalOffset": 17,
+                    "x": 418,
+                    "y": 498,
+                    "tintFill": true,
+                    "text": "Tapped out!",
+                    "font": "nokia",
+                    "fontSize": -32,
+                    "dropShadowX": 4,
+                    "dropShadowAlpha": 1,
+                    "dropShadowColor": "#ffffffff"
+                },
+                {
+                    "type": "BitmapText",
+                    "id": "c5c15562-8f32-475b-a818-de8a5b5b6282",
+                    "label": "gameOverText_2",
+                    "scope": "CLASS",
+                    "components": [
+                        "Align"
+                    ],
+                    "Align.up": true,
+                    "Align.left": true,
+                    "Align.horizontalOffset": 13,
+                    "Align.verticalOffset": 13,
+                    "x": 418,
+                    "y": 494,
+                    "tintFill": true,
+                    "text": "Tapped out!",
+                    "font": "nokia",
+                    "fontSize": -32,
+                    "dropShadowX": 4,
+                    "dropShadowAlpha": 1,
+                    "dropShadowColor": "#ffffffff"
+                },
+                {
+                    "type": "BitmapText",
                     "id": "0be6bd23-341c-4923-8de8-e68ae01d29c8",
                     "label": "gameOverText",
                     "scope": "CLASS",
@@ -1218,6 +1262,58 @@
                     "font": "nokia",
                     "fontSize": -32,
                     "dropShadowColor": "#353535ff"
+                },
+                {
+                    "type": "BitmapText",
+                    "id": "6e768bf9-b9c7-4240-aa04-ed766289fda9",
+                    "label": "gameOverInstructionText_1",
+                    "scope": "CLASS",
+                    "components": [
+                        "Align",
+                        "MobileDependent"
+                    ],
+                    "Align.down": true,
+                    "Align.left": true,
+                    "Align.horizontalOffset": 14,
+                    "Align.verticalOffset": -14,
+                    "MobileDependent.activeIfMobile": false,
+                    "MobileDependent.visibleIfMobile": false,
+                    "x": 134,
+                    "y": 394,
+                    "originY": 1,
+                    "tintFill": true,
+                    "text": "Shift key to retry\nZ key to return to menu",
+                    "font": "nokia",
+                    "fontSize": -12,
+                    "dropShadowX": 2,
+                    "dropShadowAlpha": 1,
+                    "dropShadowColor": "#ffffffff"
+                },
+                {
+                    "type": "BitmapText",
+                    "id": "254fb587-3415-4c41-89f9-b84ab8b304d2",
+                    "label": "gameOverInstructionText_2",
+                    "scope": "CLASS",
+                    "components": [
+                        "Align",
+                        "MobileDependent"
+                    ],
+                    "Align.down": true,
+                    "Align.left": true,
+                    "Align.horizontalOffset": 14,
+                    "Align.verticalOffset": -16,
+                    "MobileDependent.activeIfMobile": false,
+                    "MobileDependent.visibleIfMobile": false,
+                    "x": 134,
+                    "y": 392,
+                    "originY": 1,
+                    "tintFill": true,
+                    "text": "Shift key to retry\nZ key to return to menu",
+                    "font": "nokia",
+                    "fontSize": -12,
+                    "dropShadowX": 2,
+                    "dropShadowAlpha": 1,
+                    "dropShadowColor": "#ffffffff"
                 },
                 {
                     "type": "BitmapText",
@@ -1499,6 +1595,56 @@
             },
             "x": 1028,
             "y": 398
+        },
+        {
+            "type": "Image",
+            "id": "f07f167f-d231-4f8d-b325-92dae5b65b22",
+            "label": "mobileButtonRestart",
+            "scope": "PUBLIC",
+            "components": [
+                "Align",
+                "MobileDependent"
+            ],
+            "Align.up": true,
+            "Align.center": true,
+            "texture": {
+                "key": "soldier-blood-2"
+            },
+            "x": 534,
+            "y": 731,
+            "scaleX": 25,
+            "scaleY": 14,
+            "originY": 0,
+            "alpha": 0.3,
+            "alphaTopLeft": 0.3,
+            "alphaTopRight": 0.3,
+            "alphaBottomLeft": 0.3,
+            "alphaBottomRight": 0.3,
+            "tintFill": true
+        },
+        {
+            "type": "BitmapText",
+            "id": "ba11f05d-46f1-4324-920f-b5871aa5c8cb",
+            "label": "restartText",
+            "scope": "PUBLIC",
+            "components": [
+                "Align",
+                "MobileDependent"
+            ],
+            "Align.up": true,
+            "Align.center": true,
+            "Align.verticalOffset": 10,
+            "x": 535,
+            "y": 741,
+            "originX": 0.5,
+            "tintTopLeft": "#523746",
+            "tintTopRight": "#523746",
+            "tintBottomLeft": "#523746",
+            "tintBottomRight": "#523746",
+            "text": "restart",
+            "font": "nokia",
+            "align": 1,
+            "fontSize": -8
         }
     ],
     "plainObjects": [],
@@ -1507,5 +1653,19 @@
         "url": "https://phasereditor2d.com",
         "contentType": "phasereditor2d.core.scene.SceneContentType",
         "version": 3
-    }
+    },
+    "lists": [
+        {
+            "id": "b76af5d6-868e-4904-b46e-ed048c8ccd50",
+            "label": "mobileButtonsList",
+            "objectIds": [
+                "44bc5247-f508-4a7b-a22b-6b6b49ae96af",
+                "f7fb29af-0fad-4035-8276-0b4ee48bce93",
+                "8c18a0ba-9bda-4a8a-a2e7-53d698e39b0e",
+                "736d03d3-e4c1-40be-9fa7-e4698e2c1092",
+                "c6ecde9a-b4ee-4e0a-9b6a-574f54982e66",
+                "63b81d00-2a03-40d2-8903-29495d60e40d"
+            ]
+        }
+    ]
 }

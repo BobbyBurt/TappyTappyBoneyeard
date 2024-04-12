@@ -575,6 +575,26 @@ export default class LevelUI extends Phaser.Scene {
 		const gameOverContainer = this.add.container(0, 0);
 		gameOverContainer.visible = false;
 
+		// gameOverText_1
+		const gameOverText_1 = this.add.bitmapText(418, 498, "nokia", "Tapped out!");
+		gameOverText_1.tintFill = true;
+		gameOverText_1.text = "Tapped out!";
+		gameOverText_1.fontSize = -32;
+		gameOverText_1.dropShadowX = 4;
+		gameOverText_1.dropShadowAlpha = 1;
+		gameOverText_1.dropShadowColor = 16777215;
+		gameOverContainer.add(gameOverText_1);
+
+		// gameOverText_2
+		const gameOverText_2 = this.add.bitmapText(418, 494, "nokia", "Tapped out!");
+		gameOverText_2.tintFill = true;
+		gameOverText_2.text = "Tapped out!";
+		gameOverText_2.fontSize = -32;
+		gameOverText_2.dropShadowX = 4;
+		gameOverText_2.dropShadowAlpha = 1;
+		gameOverText_2.dropShadowColor = 16777215;
+		gameOverContainer.add(gameOverText_2);
+
 		// gameOverText
 		const gameOverText = this.add.bitmapText(419.85675048828125, 496.0970153808594, "nokia", "Tapped out!");
 		gameOverText.tintFill = true;
@@ -586,6 +606,28 @@ export default class LevelUI extends Phaser.Scene {
 		gameOverText.fontSize = -32;
 		gameOverText.dropShadowColor = 3487029;
 		gameOverContainer.add(gameOverText);
+
+		// gameOverInstructionText_1
+		const gameOverInstructionText_1 = this.add.bitmapText(134, 394, "nokia", "Shift key to retry\nZ key to return to menu");
+		gameOverInstructionText_1.setOrigin(0, 1);
+		gameOverInstructionText_1.tintFill = true;
+		gameOverInstructionText_1.text = "Shift key to retry\nZ key to return to menu";
+		gameOverInstructionText_1.fontSize = -12;
+		gameOverInstructionText_1.dropShadowX = 2;
+		gameOverInstructionText_1.dropShadowAlpha = 1;
+		gameOverInstructionText_1.dropShadowColor = 16777215;
+		gameOverContainer.add(gameOverInstructionText_1);
+
+		// gameOverInstructionText_2
+		const gameOverInstructionText_2 = this.add.bitmapText(134, 392, "nokia", "Shift key to retry\nZ key to return to menu");
+		gameOverInstructionText_2.setOrigin(0, 1);
+		gameOverInstructionText_2.tintFill = true;
+		gameOverInstructionText_2.text = "Shift key to retry\nZ key to return to menu";
+		gameOverInstructionText_2.fontSize = -12;
+		gameOverInstructionText_2.dropShadowX = 2;
+		gameOverInstructionText_2.dropShadowAlpha = 1;
+		gameOverInstructionText_2.dropShadowColor = 16777215;
+		gameOverContainer.add(gameOverInstructionText_2);
 
 		// gameOverInstructionText
 		const gameOverInstructionText = this.add.bitmapText(135.4416046142578, 393.039794921875, "nokia", "Shift key to retry\nZ key to return to menu");
@@ -735,6 +777,32 @@ export default class LevelUI extends Phaser.Scene {
 
 		// transitionBG
 		const transitionBG = this.add.image(1028, 398, "load-bg");
+
+		// mobileButtonRestart
+		const mobileButtonRestart = this.add.image(534, 731, "soldier-blood-2");
+		mobileButtonRestart.scaleX = 25;
+		mobileButtonRestart.scaleY = 14;
+		mobileButtonRestart.setOrigin(0.5, 0);
+		mobileButtonRestart.alpha = 0.3;
+		mobileButtonRestart.alphaTopLeft = 0.3;
+		mobileButtonRestart.alphaTopRight = 0.3;
+		mobileButtonRestart.alphaBottomLeft = 0.3;
+		mobileButtonRestart.alphaBottomRight = 0.3;
+		mobileButtonRestart.tintFill = true;
+
+		// restartText
+		const restartText = this.add.bitmapText(535, 741, "nokia", "restart");
+		restartText.setOrigin(0.5, 0);
+		restartText.tintTopLeft = 5388102;
+		restartText.tintTopRight = 5388102;
+		restartText.tintBottomLeft = 5388102;
+		restartText.tintBottomRight = 5388102;
+		restartText.text = "restart";
+		restartText.fontSize = -8;
+		restartText.align = 1;
+
+		// lists
+		const mobileButtonsList = [mobileButtonDiveImage, dive_icon, up_icon, fist_icon, mobileButtonJumpImage, mobileButtonPunchImage];
 
 		// timerBox (components)
 		const timerBoxAlign = new Align(timerBox);
@@ -927,12 +995,46 @@ export default class LevelUI extends Phaser.Scene {
 		parallax_BackingAlign.middle = true;
 		parallax_BackingAlign.right = true;
 
+		// gameOverText_1 (components)
+		const gameOverText_1Align = new Align(gameOverText_1);
+		gameOverText_1Align.up = true;
+		gameOverText_1Align.left = true;
+		gameOverText_1Align.horizontalOffset = 13;
+		gameOverText_1Align.verticalOffset = 17;
+
+		// gameOverText_2 (components)
+		const gameOverText_2Align = new Align(gameOverText_2);
+		gameOverText_2Align.up = true;
+		gameOverText_2Align.left = true;
+		gameOverText_2Align.horizontalOffset = 13;
+		gameOverText_2Align.verticalOffset = 13;
+
 		// gameOverText (components)
 		const gameOverTextAlign = new Align(gameOverText);
 		gameOverTextAlign.up = true;
 		gameOverTextAlign.left = true;
 		gameOverTextAlign.horizontalOffset = 15;
 		gameOverTextAlign.verticalOffset = 15;
+
+		// gameOverInstructionText_1 (components)
+		const gameOverInstructionText_1Align = new Align(gameOverInstructionText_1);
+		gameOverInstructionText_1Align.down = true;
+		gameOverInstructionText_1Align.left = true;
+		gameOverInstructionText_1Align.horizontalOffset = 14;
+		gameOverInstructionText_1Align.verticalOffset = -14;
+		const gameOverInstructionText_1MobileDependent = new MobileDependent(gameOverInstructionText_1);
+		gameOverInstructionText_1MobileDependent.activeIfMobile = false;
+		gameOverInstructionText_1MobileDependent.visibleIfMobile = false;
+
+		// gameOverInstructionText_2 (components)
+		const gameOverInstructionText_2Align = new Align(gameOverInstructionText_2);
+		gameOverInstructionText_2Align.down = true;
+		gameOverInstructionText_2Align.left = true;
+		gameOverInstructionText_2Align.horizontalOffset = 14;
+		gameOverInstructionText_2Align.verticalOffset = -16;
+		const gameOverInstructionText_2MobileDependent = new MobileDependent(gameOverInstructionText_2);
+		gameOverInstructionText_2MobileDependent.activeIfMobile = false;
+		gameOverInstructionText_2MobileDependent.visibleIfMobile = false;
 
 		// gameOverInstructionText (components)
 		const gameOverInstructionTextAlign = new Align(gameOverInstructionText);
@@ -988,6 +1090,19 @@ export default class LevelUI extends Phaser.Scene {
 		const transitionBGAlign = new Align(transitionBG);
 		transitionBGAlign.middle = true;
 		transitionBGAlign.center = true;
+
+		// mobileButtonRestart (components)
+		const mobileButtonRestartAlign = new Align(mobileButtonRestart);
+		mobileButtonRestartAlign.up = true;
+		mobileButtonRestartAlign.center = true;
+		new MobileDependent(mobileButtonRestart);
+
+		// restartText (components)
+		const restartTextAlign = new Align(restartText);
+		restartTextAlign.up = true;
+		restartTextAlign.center = true;
+		restartTextAlign.verticalOffset = 10;
+		new MobileDependent(restartText);
 
 		this.timerText = timerText;
 		this.enemiesText = enemiesText;
@@ -1047,7 +1162,11 @@ export default class LevelUI extends Phaser.Scene {
 		this.arcadeSummaryHeader = arcadeSummaryHeader;
 		this.arcadeTotalScore = arcadeTotalScore;
 		this.gameOverContainer = gameOverContainer;
+		this.gameOverText_1 = gameOverText_1;
+		this.gameOverText_2 = gameOverText_2;
 		this.gameOverText = gameOverText;
+		this.gameOverInstructionText_1 = gameOverInstructionText_1;
+		this.gameOverInstructionText_2 = gameOverInstructionText_2;
 		this.gameOverInstructionText = gameOverInstructionText;
 		this.mobileBackButton = mobileBackButton;
 		this.mobileBackText = mobileBackText;
@@ -1060,6 +1179,9 @@ export default class LevelUI extends Phaser.Scene {
 		this.scoreText = scoreText;
 		this.completeText = completeText;
 		this.transitionBG = transitionBG;
+		this.mobileButtonRestart = mobileButtonRestart;
+		this.restartText = restartText;
+		this.mobileButtonsList = mobileButtonsList;
 
 		this.events.emit("scene-awake");
 	}
@@ -1122,7 +1244,11 @@ export default class LevelUI extends Phaser.Scene {
 	private arcadeSummaryHeader!: Phaser.GameObjects.BitmapText;
 	private arcadeTotalScore!: Phaser.GameObjects.BitmapText;
 	public gameOverContainer!: Phaser.GameObjects.Container;
+	private gameOverText_1!: Phaser.GameObjects.BitmapText;
+	private gameOverText_2!: Phaser.GameObjects.BitmapText;
 	private gameOverText!: Phaser.GameObjects.BitmapText;
+	private gameOverInstructionText_1!: Phaser.GameObjects.BitmapText;
+	private gameOverInstructionText_2!: Phaser.GameObjects.BitmapText;
 	private gameOverInstructionText!: Phaser.GameObjects.BitmapText;
 	private mobileBackButton!: Phaser.GameObjects.Rectangle;
 	private mobileBackText!: Phaser.GameObjects.BitmapText;
@@ -1135,6 +1261,9 @@ export default class LevelUI extends Phaser.Scene {
 	public scoreText!: Phaser.GameObjects.BitmapText;
 	public completeText!: Phaser.GameObjects.BitmapText;
 	private transitionBG!: Phaser.GameObjects.Image;
+	public mobileButtonRestart!: Phaser.GameObjects.Image;
+	public restartText!: Phaser.GameObjects.BitmapText;
+	private mobileButtonsList!: Phaser.GameObjects.Image[];
 
 	/* START-USER-CODE */
 
@@ -1164,6 +1293,10 @@ export default class LevelUI extends Phaser.Scene {
 
 		this.editorCreate();
 
+		if (__MAP_PACK__) {
+			this.punchChargeFull.setTexture('bird2fist_1');
+		}
+
 		this.setupCamera();
 
 		this.levelScene = this.scene.get('Level') as Level;
@@ -1179,7 +1312,29 @@ export default class LevelUI extends Phaser.Scene {
 		this.scoreText.setText('0');
 
 		this.gameOverInstructionText.setText(`${(InputManager.activeInputMode === 'gamepad' ? InputManager.getInputName('menu-confirm') : InputManager.getInputName('quick-restart'))} to retry\n${InputManager.getInputName('gameover-back')} to return to level select`)
-		this.gameOverText.setText(`Tapped ${(this.registry.get('mobile'))? '\n' : ''}out!`)
+		this.gameOverInstructionText_1.setText(`${(InputManager.activeInputMode === 'gamepad' ? InputManager.getInputName('menu-confirm') : InputManager.getInputName('quick-restart'))} to retry\n${InputManager.getInputName('gameover-back')} to return to level select`)
+		this.gameOverInstructionText_2.setText(`${(InputManager.activeInputMode === 'gamepad' ? InputManager.getInputName('menu-confirm') : InputManager.getInputName('quick-restart'))} to retry\n${InputManager.getInputName('gameover-back')} to return to level select`)
+
+		if (this.registry.get('selected-character') === 'tapper') {
+			this.gameOverText.setText(`Tapped ${(this.registry.get('mobile'))? '\n' : ''}out!`);
+			this.gameOverText_1.setText(`Tapped ${(this.registry.get('mobile'))? '\n' : ''}out!`);
+			this.gameOverText_2.setText(`Tapped ${(this.registry.get('mobile'))? '\n' : ''}out!`);
+		} else if (this.registry.get('selected-character') === 'puck') {
+			this.gameOverText.setText(`ded`);
+			this.gameOverText_1.setText(`ded`);
+			this.gameOverText_2.setText(`ded`);
+		} else if (this.registry.get('selected-character') === 'gappy') {
+			this.gameOverText.setText(`Game ${(this.registry.get('mobile'))? '\n' : ''}Over`);
+			this.gameOverText_1.setText(`Game ${(this.registry.get('mobile'))? '\n' : ''}Over`);
+			this.gameOverText_2.setText(`Game ${(this.registry.get('mobile'))? '\n' : ''}Over`);
+		} else if (this.registry.get('selected-character') === 'kid') {
+			this.gameOverText.setText(`You jumped ${(this.registry.get('mobile'))? '\n' : ''}into a hazard. \nYou dumbass!`);
+			this.gameOverText_1.setText(`You jumped ${(this.registry.get('mobile'))? '\n' : ''}into a hazard. \nYou dumbass!`);
+			this.gameOverText_2.setText(`You jumped ${(this.registry.get('mobile'))? '\n' : ''}into a hazard. \nYou dumbass!`);
+			this.gameOverText.setFontSize(-16);
+			this.gameOverText_1.setFontSize(-16);
+			this.gameOverText_2.setFontSize(-16);
+		}
 
 		this.scoreText.setVisible(false);
 
@@ -1260,6 +1415,10 @@ export default class LevelUI extends Phaser.Scene {
 	 */
 	public setScore(levelScore: number, addedScore: number)
 	{
+		if (this.gameOverContainer.visible) {
+			return;
+		}
+
 		this.scoreText.setVisible(true);
 		this.scoreText.setText(`${levelScore}`);
 
@@ -1490,6 +1649,9 @@ export default class LevelUI extends Phaser.Scene {
 		// 		return;
 		// 	}
 		// }
+
+		this.restartText.setVisible(!show && this.registry.get('mobile'));
+		this.mobileButtonRestart.setVisible(!show && this.registry.get('mobile'));
 
 		this.tutorialContainer.setDepth(99)
 

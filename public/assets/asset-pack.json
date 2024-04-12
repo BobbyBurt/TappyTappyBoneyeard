@@ -12,6 +12,11 @@
                 "key": "apple"
             },
             {
+                "url": "assets/fist-alt.png",
+                "type": "image",
+                "key": "apple-alt"
+            },
+            {
                 "url": "assets/balloon.png",
                 "type": "image",
                 "key": "balloon"
@@ -85,6 +90,11 @@
                 "key": "bird0fist"
             },
             {
+                "url": "assets/bird3fist_1.png",
+                "type": "image",
+                "key": "bird0fist_1"
+            },
+            {
                 "url": "assets/bird1cling.png",
                 "type": "image",
                 "key": "bird1cling"
@@ -118,6 +128,11 @@
                 "url": "assets/bird3fist.png",
                 "type": "image",
                 "key": "bird1fist"
+            },
+            {
+                "url": "assets/bird2fist_1.png",
+                "type": "image",
+                "key": "bird1fist_1"
             },
             {
                 "url": "assets/bird1mid.png",
@@ -161,6 +176,11 @@
                 "url": "assets/bird1fist.png",
                 "type": "image",
                 "key": "bird2fist"
+            },
+            {
+                "url": "assets/bird1fist_1.png",
+                "type": "image",
+                "key": "bird2fist_1"
             },
             {
                 "url": "assets/bird3cling.png",
@@ -416,9 +436,48 @@
                 "key": "gappy"
             },
             {
+                "type": "multiatlas",
+                "url": "assets/gappy-alt.json",
+                "path": "assets",
+                "key": "gappy-alt"
+            },
+            {
+                "url": [
+                    "assets/sfx/gappy-dead.mp3"
+                ],
+                "type": "audio",
+                "key": "gappy-dead"
+            },
+            {
+                "url": [
+                    "assets/sfx/gappy-jump.mp3"
+                ],
+                "type": "audio",
+                "key": "gappy-jump"
+            },
+            {
+                "url": [
+                    "assets/sfx/gappy-swing.mp3"
+                ],
+                "type": "audio",
+                "key": "gappy-swing"
+            },
+            {
+                "url": [
+                    "assets/sfx/gappy-win.mp3"
+                ],
+                "type": "audio",
+                "key": "gappy-win"
+            },
+            {
                 "url": "assets/gappy-fist-exhausted.png",
                 "type": "image",
                 "key": "gappy0fist"
+            },
+            {
+                "url": "assets/gappy-fist-exhausted-alt.png",
+                "type": "image",
+                "key": "gappy0fist-alt"
             },
             {
                 "url": "assets/gappy-fist-tired.png",
@@ -426,9 +485,19 @@
                 "key": "gappy1fist"
             },
             {
+                "url": "assets/gappy-fist-tired-alt.png",
+                "type": "image",
+                "key": "gappy1fist-alt"
+            },
+            {
                 "url": "assets/gappy-fist.png",
                 "type": "image",
                 "key": "gappy2fist"
+            },
+            {
+                "url": "assets/gappy-fist-alt.png",
+                "type": "image",
+                "key": "gappy2fist-alt"
             },
             {
                 "url": "assets/grenade.png",
@@ -492,6 +561,12 @@
                 "key": "kid"
             },
             {
+                "type": "multiatlas",
+                "url": "assets/kid-alt.json",
+                "path": "assets",
+                "key": "kid-alt"
+            },
+            {
                 "url": "assets/level-icon-selected.png",
                 "type": "image",
                 "key": "level-icon-selected"
@@ -536,6 +611,13 @@
             },
             {
                 "url": [
+                    "assets/sfx/Menu_Back.mp3"
+                ],
+                "type": "audio",
+                "key": "menu-back"
+            },
+            {
+                "url": [
                     "assets/sfx/KirbyAirRideEww.wav"
                 ],
                 "type": "audio",
@@ -543,10 +625,24 @@
             },
             {
                 "url": [
+                    "assets/sfx/Menu_Confirm.mp3"
+                ],
+                "type": "audio",
+                "key": "menu-confirm"
+            },
+            {
+                "url": [
                     "assets/sfx/KirbyAirRideBowaah.wav"
                 ],
                 "type": "audio",
                 "key": "menu-confirm"
+            },
+            {
+                "url": [
+                    "assets/sfx/Menu_Select.mp3"
+                ],
+                "type": "audio",
+                "key": "menu-tick"
             },
             {
                 "url": [
@@ -646,6 +742,11 @@
                 "key": "peeing"
             },
             {
+                "url": "assets/phaser-pixel-medium-shaded.png",
+                "type": "image",
+                "key": "phaser-pixel-medium-shaded"
+            },
+            {
                 "url": "assets/phone.png",
                 "type": "image",
                 "key": "phone"
@@ -673,11 +774,6 @@
                 "key": "Pogo stick"
             },
             {
-                "url": "assets/level-previews/preview-blank.png",
-                "type": "image",
-                "key": "preview-blank"
-            },
-            {
                 "url": "assets/previewKFC.png",
                 "type": "image",
                 "key": "previewKFC"
@@ -692,6 +788,12 @@
                 "url": "assets/pucamuc.json",
                 "path": "assets",
                 "key": "pucamuc"
+            },
+            {
+                "type": "multiatlas",
+                "url": "assets/pucamuc-alt.json",
+                "path": "assets",
+                "key": "pucamuc-alt"
             },
             {
                 "url": [
@@ -739,6 +841,11 @@
                 ],
                 "type": "audio",
                 "key": "reflect"
+            },
+            {
+                "url": "assets/restart-icon.png",
+                "type": "image",
+                "key": "restart-icon"
             },
             {
                 "url": "assets/sadfsda.png",
@@ -927,6 +1034,13 @@
                 "url": "assets/textbox_wtf.png",
                 "type": "image",
                 "key": "textbox_wtf"
+            },
+            {
+                "url": [
+                    "assets/sfx/The_Kid_Win.mp3"
+                ],
+                "type": "audio",
+                "key": "The_Kid_Win"
             },
             {
                 "url": [

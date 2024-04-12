@@ -22,7 +22,8 @@ export default class Punch implements State {
 		let value = false;
 		if (this.player.scene.registry.get('mobile'))
 			return true;
-		else if (this.player.scene.registry.get('new-uppercut-input'))
+		// else if (this.player.scene.registry.get('new-uppercut-input'))
+		else if (true)
 			return false;
 		else
 			return true;
@@ -168,7 +169,7 @@ export default class Punch implements State {
 				this.uppercut();
 		}
 
-		if (this.pauseTimer.getProgress() >= 1 && this.player.character === 'puck')
+		if (this.pauseTimer.getProgress() >= 1 && this.player.character === 'puck' && !this.player.lockInput)
 		{
 			this.player.puckBloodEmitter.explode(1, this.player.x, this.player.y);
 		}

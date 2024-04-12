@@ -104,22 +104,29 @@ export default class Preload extends Phaser.Scene {
 		// main / mp conditional loading
 		if (__MAP_PACK__)
 		{
-			if (!__LEVEL_TEST__)
-			{
-				this.load.pack("mp-music-pack", "assets/music/map-pack/mp-music-pack.json");
-			}
 			this.load.pack("mp-level-previews-pack", "assets/level-previews/map-pack/mp-level-previews-pack.json");
 			this.load.pack("mp-levels-pack", "assets/levels/map-pack/map-pack-levels-pack.json");
+			this.load.audio('level-select-mp', "assets/music/map-pack/Orange_Chicken.mp3");
+			this.load.audio('main-theme-mp', "assets/music/map-pack/Tap_Tap_Fever.mp3");
+			
+			this.load.audio("tapper-music-ninja", "assets/music/map-pack/bird_tapper_track.mp3");
+			
 		}
 		else
 		{
 			if (!__LEVEL_TEST__)
 			{
-				this.load.pack("music-pack", "assets/music/music-pack.json");
+				this.load.audio("tutorial", "assets/music/Natural_Infiltration.mp3");
 			}
 			this.load.pack("level-previews-pack", "assets/level-previews/level-previews-pack.json");
 			this.load.pack("main-levels-pack", "assets/levels/main-levels-pack.json"); 
+			
+			this.load.audio("main-game-2", "assets/music/main-game.mp3");
+			this.load.audio("tapper", "assets/music/Tapper-Instrumental.mp3");
+			this.load.audio("level-select", "assets/music/menu.mp3");
 		}
+
+
 
 		// set ninja mode
 		if (__MAP_PACK__)
@@ -170,14 +177,13 @@ export default class Preload extends Phaser.Scene {
 		});
 
 		this.load.on('complete', (key: string, type: string, data: any) =>
-		{	
+		{
 			if (__LEVEL_TEST__)
 			{	
 				this.registry.set('last-scene', this.scene.key);
 
 				this.registry.set(`selected-character`, 'gappy');
 				this.registry.set(`selected-tileset`, '-gappy');
-
 
 				this.registry.set('current-level', 'refresher');
 				this.registry.set('current-level-index', 0)

@@ -33,7 +33,7 @@ export default class BulletPrefab extends Phaser.GameObjects.Image {
 
 	startTimer()
 	{
-		this.timer = new Phaser.Time.TimerEvent({ delay: 10000, loop: false, callback: () =>
+		this.timer = new Phaser.Time.TimerEvent({ delay: (this.scene.registry.get('current-level') === 'The Perplex Plan' ? 3000 : 10000), loop: false, callback: () =>
 		{	
 			this.setActive(false);
 			this.setVisible(false);
@@ -61,6 +61,8 @@ export default class BulletPrefab extends Phaser.GameObjects.Image {
 		this.body.setEnable(false);
 
 		this.timer?.remove();
+
+		console.debug('bullet disappear');
 	}
 
 	/* END-USER-CODE */

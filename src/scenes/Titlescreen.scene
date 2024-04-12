@@ -13,83 +13,414 @@
     },
     "displayList": [
         {
-            "type": "Image",
-            "id": "46e1bf6a-6924-47cb-bfde-d5b6556b8f2c",
-            "label": "parallax_Backing111",
+            "type": "Layer",
+            "id": "e9ded9b7-224e-447e-bec8-ef9f5455fdee",
+            "label": "BGLayerNinja",
             "scope": "CLASS",
-            "components": [
-                "ScrollFactor"
-            ],
-            "texture": {
-                "key": "Parallax-Backing"
-            },
-            "x": 248,
-            "y": 128,
-            "scaleX": 8.415017240244449
+            "components": [],
+            "list": [
+                {
+                    "type": "Image",
+                    "id": "caf0c6aa-5dbe-4abb-847d-140ec43b8158",
+                    "label": "parallax_Backing1111",
+                    "scope": "CLASS",
+                    "components": [
+                        "ScrollFactor"
+                    ],
+                    "texture": {
+                        "key": "Parallax-Backing_1"
+                    },
+                    "x": 253,
+                    "y": 50,
+                    "scaleX": 8.415017240244449,
+                    "flipY": true
+                },
+                {
+                    "type": "Image",
+                    "id": "485cc292-76bb-47bf-a67d-2890aae2de14",
+                    "label": "parallax_Backing",
+                    "scope": "CLASS",
+                    "components": [
+                        "ScrollFactor"
+                    ],
+                    "texture": {
+                        "key": "Parallax-Backing_1"
+                    },
+                    "x": 324,
+                    "y": 301,
+                    "scaleX": 8.415017240244449,
+                    "angle": -180,
+                    "flipY": true
+                },
+                {
+                    "type": "Image",
+                    "id": "7bb07a38-cbfc-4877-8fad-7b29080c96a8",
+                    "label": "parallax_Cityscape1111",
+                    "components": [
+                        "ScrollFactor"
+                    ],
+                    "ScrollFactor.factorX": 0.2,
+                    "texture": {
+                        "key": "Paralax-Mountains"
+                    },
+                    "x": 297,
+                    "y": 144,
+                    "flipX": true,
+                    "tintTopLeft": "#ec7883",
+                    "tintTopRight": "#ec7883",
+                    "tintBottomLeft": "#ec7883",
+                    "tintBottomRight": "#ec7883",
+                    "tintFill": true
+                },
+                {
+                    "type": "Image",
+                    "id": "9239ffbe-15cc-41b5-9b71-298694faa0f9",
+                    "label": "parallax_Cityscape_1111",
+                    "components": [
+                        "ScrollFactor"
+                    ],
+                    "ScrollFactor.factorX": 0.2,
+                    "texture": {
+                        "key": "Paralax-Mountains"
+                    },
+                    "x": 19,
+                    "y": 148,
+                    "flipX": true,
+                    "tintTopLeft": "#ec7883",
+                    "tintTopRight": "#ec7883",
+                    "tintBottomLeft": "#ec7883",
+                    "tintBottomRight": "#ec7883",
+                    "tintFill": true
+                },
+                {
+                    "type": "Image",
+                    "id": "1e87b05f-ba71-407c-bce7-19059db3d05e",
+                    "label": "parallax_Cityscape_211",
+                    "components": [
+                        "ScrollFactor"
+                    ],
+                    "ScrollFactor.factorX": 0.2,
+                    "texture": {
+                        "key": "Paralax-Mountains"
+                    },
+                    "x": 481,
+                    "y": 129,
+                    "flipX": true,
+                    "tintTopLeft": "#ec7883",
+                    "tintTopRight": "#ec7883",
+                    "tintBottomLeft": "#ec7883",
+                    "tintBottomRight": "#ec7883",
+                    "tintFill": true
+                },
+                {
+                    "type": "Image",
+                    "id": "1a4b8733-07bd-412a-85bb-ab1a1e8da313",
+                    "label": "parallax_Cityscape_311",
+                    "components": [
+                        "ScrollFactor"
+                    ],
+                    "ScrollFactor.factorX": 0.2,
+                    "texture": {
+                        "key": "Paralax-Mountains"
+                    },
+                    "x": -343,
+                    "y": 144,
+                    "flipX": true,
+                    "tintTopLeft": "#ec7883",
+                    "tintTopRight": "#ec7883",
+                    "tintBottomLeft": "#ec7883",
+                    "tintBottomRight": "#ec7883",
+                    "tintFill": true
+                },
+                {
+                    "type": "Image",
+                    "id": "912c5f0b-ef23-45ef-915e-f226a4be919d",
+                    "label": "parallax_Cityscape_411",
+                    "components": [
+                        "ScrollFactor"
+                    ],
+                    "ScrollFactor.factorX": 0.2,
+                    "texture": {
+                        "key": "Paralax-Mountains"
+                    },
+                    "x": 936,
+                    "y": 144,
+                    "flipX": true,
+                    "tintTopLeft": "#ec7883",
+                    "tintTopRight": "#ec7883",
+                    "tintBottomLeft": "#ec7883",
+                    "tintBottomRight": "#ec7883",
+                    "tintFill": true
+                },
+                {
+                    "type": "Image",
+                    "id": "983acb68-8ead-49f3-919e-9f89eaa03176",
+                    "label": "parallax_Cityscape_4",
+                    "components": [
+                        "ScrollFactor"
+                    ],
+                    "ScrollFactor.factorX": 0.2,
+                    "texture": {
+                        "key": "Paralax-Mountains"
+                    },
+                    "x": 235,
+                    "y": 330,
+                    "scaleX": 2,
+                    "scaleY": 2,
+                    "angle": -180,
+                    "flipX": true,
+                    "tintTopLeft": "#ec7883",
+                    "tintTopRight": "#ec7883",
+                    "tintBottomLeft": "#ec7883",
+                    "tintBottomRight": "#ec7883",
+                    "tintFill": true
+                },
+                {
+                    "type": "Image",
+                    "id": "78048a18-2800-4fea-802f-a62c22280a56",
+                    "label": "parallax_Cityscape_611",
+                    "components": [
+                        "ScrollFactor"
+                    ],
+                    "ScrollFactor.factorX": 0.2,
+                    "texture": {
+                        "key": "Paralax-Mountains"
+                    },
+                    "x": 1256,
+                    "y": 158,
+                    "flipX": true,
+                    "tintTopLeft": "#ec7883",
+                    "tintTopRight": "#ec7883",
+                    "tintBottomLeft": "#ec7883",
+                    "tintBottomRight": "#ec7883",
+                    "tintFill": true
+                },
+                {
+                    "type": "Image",
+                    "id": "ca5c9e3a-0017-447e-9314-5d616b9c315b",
+                    "label": "parallax_Cityscape_1511",
+                    "components": [
+                        "ScrollFactor"
+                    ],
+                    "ScrollFactor.factorX": 0.25,
+                    "texture": {
+                        "key": "Paralax-Mountains"
+                    },
+                    "x": 1145,
+                    "y": 191,
+                    "tintTopLeft": "#e9606d",
+                    "tintTopRight": "#e9606d",
+                    "tintBottomLeft": "#e9606d",
+                    "tintBottomRight": "#e9606d",
+                    "tintFill": true
+                },
+                {
+                    "type": "Image",
+                    "id": "8c50e66f-3acc-471e-b721-3e16db242029",
+                    "label": "parallax_Cityscape_1611",
+                    "components": [
+                        "ScrollFactor"
+                    ],
+                    "ScrollFactor.factorX": 0.25,
+                    "texture": {
+                        "key": "Paralax-Mountains"
+                    },
+                    "x": 1058,
+                    "y": 182,
+                    "tintTopLeft": "#e9606d",
+                    "tintTopRight": "#e9606d",
+                    "tintBottomLeft": "#e9606d",
+                    "tintBottomRight": "#e9606d",
+                    "tintFill": true
+                },
+                {
+                    "type": "Image",
+                    "id": "bd258821-765a-4b7d-955d-a9cac8f1a026",
+                    "label": "parallax_Cityscape_1711",
+                    "components": [
+                        "ScrollFactor"
+                    ],
+                    "ScrollFactor.factorX": 0.25,
+                    "texture": {
+                        "key": "Paralax-Mountains"
+                    },
+                    "x": -221,
+                    "y": 182,
+                    "tintTopLeft": "#e9606d",
+                    "tintTopRight": "#e9606d",
+                    "tintBottomLeft": "#e9606d",
+                    "tintBottomRight": "#e9606d",
+                    "tintFill": true
+                },
+                {
+                    "type": "Image",
+                    "id": "24a396d3-a9e1-44af-8dae-0e37ab6e3f23",
+                    "label": "parallax_Cityscape_1811",
+                    "components": [
+                        "ScrollFactor"
+                    ],
+                    "ScrollFactor.factorX": 0.25,
+                    "texture": {
+                        "key": "Paralax-Mountains"
+                    },
+                    "x": 739,
+                    "y": 182,
+                    "tintTopLeft": "#e9606d",
+                    "tintTopRight": "#e9606d",
+                    "tintBottomLeft": "#e9606d",
+                    "tintBottomRight": "#e9606d",
+                    "tintFill": true
+                },
+                {
+                    "type": "Image",
+                    "id": "636a5bab-3a52-4a0f-9d19-4f07120206a0",
+                    "label": "parallax_Cityscape_19111",
+                    "components": [
+                        "ScrollFactor"
+                    ],
+                    "ScrollFactor.factorX": 0.25,
+                    "texture": {
+                        "key": "Paralax-Mountains"
+                    },
+                    "x": 99,
+                    "y": 182,
+                    "tintTopLeft": "#e9606d",
+                    "tintTopRight": "#e9606d",
+                    "tintBottomLeft": "#e9606d",
+                    "tintBottomRight": "#e9606d",
+                    "tintFill": true
+                },
+                {
+                    "type": "Image",
+                    "id": "1f7e79cd-d16e-495f-a0bb-f58d6c640f06",
+                    "label": "parallax_Cityscape_2011",
+                    "components": [
+                        "ScrollFactor"
+                    ],
+                    "ScrollFactor.factorX": 0.25,
+                    "texture": {
+                        "key": "Paralax-Mountains"
+                    },
+                    "x": 419,
+                    "y": 181,
+                    "tintTopLeft": "#e9606d",
+                    "tintTopRight": "#e9606d",
+                    "tintBottomLeft": "#e9606d",
+                    "tintBottomRight": "#e9606d",
+                    "tintFill": true
+                },
+                {
+                    "type": "Image",
+                    "id": "d11c2f30-56e9-4020-95fa-604ac299a05f",
+                    "label": "parallax_Cityscape_3",
+                    "components": [
+                        "ScrollFactor"
+                    ],
+                    "ScrollFactor.factorX": 0.25,
+                    "texture": {
+                        "key": "Paralax-Mountains"
+                    },
+                    "x": 253,
+                    "y": 378,
+                    "scaleX": 2,
+                    "scaleY": 2,
+                    "angle": -180,
+                    "tintTopLeft": "#e9606d",
+                    "tintTopRight": "#e9606d",
+                    "tintBottomLeft": "#e9606d",
+                    "tintBottomRight": "#e9606d",
+                    "tintFill": true
+                }
+            ]
         },
         {
-            "type": "Image",
-            "id": "51d41580-5b77-47f7-9d88-aeaba852f07c",
-            "label": "parallax_Cityscape",
+            "type": "Container",
+            "id": "c6851bc4-df61-48a0-a005-386043ebdb8b",
+            "label": "pppBGContainer",
+            "scope": "CLASS",
             "components": [],
-            "texture": {
-                "key": "Parallax-Cityscape"
-            },
-            "x": 156,
-            "y": 169,
-            "tintTopLeft": "#FFADB6",
-            "tintTopRight": "#FFADB6",
-            "tintBottomLeft": "#FFADB6",
-            "tintBottomRight": "#FFADB6",
-            "tintFill": true
-        },
-        {
-            "type": "Image",
-            "id": "23148903-f823-4b7f-89df-4614158f2a88",
-            "label": "parallax_Cityscape_20",
-            "components": [],
-            "texture": {
-                "key": "Parallax-Cityscape"
-            },
-            "x": 36,
-            "y": 224,
-            "tintTopLeft": "#F4919C",
-            "tintTopRight": "#F4919C",
-            "tintBottomLeft": "#F4919C",
-            "tintBottomRight": "#F4919C",
-            "tintFill": true
-        },
-        {
-            "type": "Image",
-            "id": "9c850b65-bcfa-4433-b0b0-84b3ef5b76d8",
-            "label": "parallax_Cityscape_1",
-            "components": [],
-            "texture": {
-                "key": "Parallax-Cityscape"
-            },
-            "x": 472,
-            "y": 169,
-            "tintTopLeft": "#FFADB6",
-            "tintTopRight": "#FFADB6",
-            "tintBottomLeft": "#FFADB6",
-            "tintBottomRight": "#FFADB6",
-            "tintFill": true
-        },
-        {
-            "type": "Image",
-            "id": "95c76fdf-f2c4-4c06-b152-adc333097e5f",
-            "label": "parallax_Cityscape_2",
-            "components": [],
-            "texture": {
-                "key": "Parallax-Cityscape"
-            },
-            "x": 355,
-            "y": 224,
-            "tintTopLeft": "#F4919C",
-            "tintTopRight": "#F4919C",
-            "tintBottomLeft": "#F4919C",
-            "tintBottomRight": "#F4919C",
-            "tintFill": true
+            "visible": false,
+            "list": [
+                {
+                    "type": "Image",
+                    "id": "46e1bf6a-6924-47cb-bfde-d5b6556b8f2c",
+                    "label": "parallax_Backing111",
+                    "scope": "CLASS",
+                    "components": [
+                        "ScrollFactor"
+                    ],
+                    "texture": {
+                        "key": "Parallax-Backing"
+                    },
+                    "x": 248,
+                    "y": 128,
+                    "scaleX": 8.415017240244449
+                },
+                {
+                    "type": "Image",
+                    "id": "51d41580-5b77-47f7-9d88-aeaba852f07c",
+                    "label": "parallax_Cityscape",
+                    "components": [],
+                    "texture": {
+                        "key": "Parallax-Cityscape"
+                    },
+                    "x": 156,
+                    "y": 169,
+                    "tintTopLeft": "#FFADB6",
+                    "tintTopRight": "#FFADB6",
+                    "tintBottomLeft": "#FFADB6",
+                    "tintBottomRight": "#FFADB6",
+                    "tintFill": true
+                },
+                {
+                    "type": "Image",
+                    "id": "23148903-f823-4b7f-89df-4614158f2a88",
+                    "label": "parallax_Cityscape_20",
+                    "components": [],
+                    "texture": {
+                        "key": "Parallax-Cityscape"
+                    },
+                    "x": 36,
+                    "y": 224,
+                    "tintTopLeft": "#F4919C",
+                    "tintTopRight": "#F4919C",
+                    "tintBottomLeft": "#F4919C",
+                    "tintBottomRight": "#F4919C",
+                    "tintFill": true
+                },
+                {
+                    "type": "Image",
+                    "id": "9c850b65-bcfa-4433-b0b0-84b3ef5b76d8",
+                    "label": "parallax_Cityscape_1",
+                    "components": [],
+                    "texture": {
+                        "key": "Parallax-Cityscape"
+                    },
+                    "x": 472,
+                    "y": 169,
+                    "tintTopLeft": "#FFADB6",
+                    "tintTopRight": "#FFADB6",
+                    "tintBottomLeft": "#FFADB6",
+                    "tintBottomRight": "#FFADB6",
+                    "tintFill": true
+                },
+                {
+                    "type": "Image",
+                    "id": "95c76fdf-f2c4-4c06-b152-adc333097e5f",
+                    "label": "parallax_Cityscape_2",
+                    "components": [],
+                    "texture": {
+                        "key": "Parallax-Cityscape"
+                    },
+                    "x": 355,
+                    "y": 224,
+                    "tintTopLeft": "#F4919C",
+                    "tintTopRight": "#F4919C",
+                    "tintBottomLeft": "#F4919C",
+                    "tintBottomRight": "#F4919C",
+                    "tintFill": true
+                }
+            ]
         },
         {
             "type": "Container",
@@ -266,7 +597,7 @@
                     "scope": "CLASS",
                     "components": [],
                     "x": 26,
-                    "y": 82,
+                    "y": 72,
                     "originX": 0,
                     "originY": 0,
                     "isFilled": true,
@@ -279,7 +610,7 @@
                     "id": "f9231ea3-4ad6-4249-b2d5-2a039682621b",
                     "label": "preview_1",
                     "components": [],
-                    "y": 331,
+                    "y": 321,
                     "originX": 0,
                     "originY": 0,
                     "isFilled": true,
@@ -293,7 +624,7 @@
                     "scope": "CLASS",
                     "components": [],
                     "x": 266,
-                    "y": 82,
+                    "y": 72,
                     "originX": 0,
                     "originY": 0,
                     "isFilled": true,
@@ -307,7 +638,7 @@
                     "label": "bitmaptext_3",
                     "components": [],
                     "x": 211,
-                    "y": 23,
+                    "y": 18,
                     "tintTopLeft": "#523746",
                     "tintTopRight": "#523746",
                     "tintBottomLeft": "#523746",
@@ -323,12 +654,12 @@
                     "scope": "CLASS",
                     "components": [],
                     "x": 270,
-                    "y": 224,
+                    "y": 214,
                     "tintTopLeft": "#523746",
                     "tintTopRight": "#523746",
                     "tintBottomLeft": "#523746",
                     "tintBottomRight": "#523746",
-                    "text": "Challenging and unique levels made by the community.",
+                    "text": "Sadistic community-made levels. A ninja clan has stolen the Iconic and Priceless Bird Tapper Mobile!",
                     "font": "nokia",
                     "fontSize": -8,
                     "maxWidth": 180
@@ -339,12 +670,12 @@
                     "label": "bitmaptext_5",
                     "components": [],
                     "x": 30,
-                    "y": 224,
+                    "y": 214,
                     "tintTopLeft": "#523746",
                     "tintTopRight": "#523746",
                     "tintBottomLeft": "#523746",
                     "tintBottomRight": "#523746",
-                    "text": "The original levels. Learn Tapper's moves and beat the violet army.",
+                    "text": "The original autorunner campaign. Beat the tar out of the violet army and master the controls!",
                     "font": "nokia",
                     "fontSize": -8,
                     "maxWidth": 180
@@ -358,24 +689,7 @@
                         "key": "preview-combo"
                     },
                     "x": 721,
-                    "y": 480
-                },
-                {
-                    "type": "BitmapText",
-                    "id": "83d2b903-45b6-4a3b-ab7e-d57170be8c32",
-                    "label": "anotherTabText",
-                    "scope": "CLASS",
-                    "components": [],
-                    "x": 270,
-                    "y": 249,
-                    "visible": false,
-                    "tintTopLeft": "#B05FA9",
-                    "tintTopRight": "#B05FA9",
-                    "tintBottomLeft": "#B05FA9",
-                    "tintBottomRight": "#B05FA9",
-                    "text": "(Game will open in another tab)",
-                    "font": "nokia",
-                    "fontSize": -8
+                    "y": 470
                 },
                 {
                     "type": "Rectangle",
@@ -383,7 +697,7 @@
                     "label": "preview_3",
                     "components": [],
                     "x": 240,
-                    "y": 321,
+                    "y": 311,
                     "originX": 0,
                     "originY": 0,
                     "isFilled": true,
@@ -400,7 +714,7 @@
                         "key": "previewKFC"
                     },
                     "x": 270,
-                    "y": 86,
+                    "y": 76,
                     "originX": 0,
                     "originY": 0
                 },
@@ -414,7 +728,7 @@
                         "key": "previewPPP"
                     },
                     "x": 30,
-                    "y": 86,
+                    "y": 76,
                     "originX": 0,
                     "originY": 0
                 },
@@ -425,7 +739,7 @@
                     "scope": "CLASS",
                     "components": [],
                     "x": 284,
-                    "y": 42,
+                    "y": 32,
                     "tintTopLeft": "#523746",
                     "tintTopRight": "#523746",
                     "tintBottomLeft": "#523746",
@@ -442,7 +756,7 @@
                     "scope": "CLASS",
                     "components": [],
                     "x": 54,
-                    "y": 42,
+                    "y": 32,
                     "tintTopLeft": "#523746",
                     "tintTopRight": "#523746",
                     "tintBottomLeft": "#523746",
@@ -451,6 +765,48 @@
                     "font": "nokia",
                     "align": 1,
                     "fontSize": -16
+                },
+                {
+                    "type": "Container",
+                    "id": "e73bdb16-e31f-48b5-81f8-146d0b5c1273",
+                    "label": "anotherTabText",
+                    "scope": "CLASS",
+                    "components": [],
+                    "x": 266,
+                    "y": 247,
+                    "visible": false,
+                    "list": [
+                        {
+                            "type": "Rectangle",
+                            "id": "a7d97db7-6f06-4b7a-b8e6-36ae9ec3b1ae",
+                            "label": "rectangle",
+                            "components": [],
+                            "originX": 0,
+                            "originY": 0,
+                            "isFilled": true,
+                            "fillColor": "#523746",
+                            "strokeColor": "#B05FA9",
+                            "isStroked": true,
+                            "width": 171,
+                            "height": 16
+                        },
+                        {
+                            "type": "BitmapText",
+                            "id": "fcaf377d-9511-4266-ba83-c27454609be5",
+                            "label": "anotherTabTextReal_1",
+                            "scope": "CLASS",
+                            "components": [],
+                            "x": 9,
+                            "y": 3,
+                            "tintTopLeft": "#B05FA9",
+                            "tintTopRight": "#B05FA9",
+                            "tintBottomLeft": "#B05FA9",
+                            "tintBottomRight": "#B05FA9",
+                            "text": "!  Game will open in another tab",
+                            "font": "nokia",
+                            "fontSize": -8
+                        }
+                    ]
                 }
             ]
         },
@@ -471,7 +827,7 @@
                         "key": "logo"
                     },
                     "x": 240,
-                    "y": 125,
+                    "y": 116,
                     "scaleX": 2,
                     "scaleY": 2
                 },
@@ -482,7 +838,7 @@
                     "scope": "CLASS",
                     "components": [],
                     "x": 240,
-                    "y": 234,
+                    "y": 238,
                     "originX": 0.5,
                     "originY": 0.5,
                     "tintTopLeft": "#523746",
@@ -498,7 +854,8 @@
                 {
                     "type": "BitmapText",
                     "id": "d358b0c5-4da6-4238-bba2-d4b3b615f71e",
-                    "label": "progress",
+                    "label": "creditsText",
+                    "scope": "CLASS",
                     "components": [],
                     "x": 240,
                     "y": 30,
@@ -513,6 +870,32 @@
                     "align": 1,
                     "fontSize": -10,
                     "dropShadowColor": "#949494"
+                },
+                {
+                    "type": "Rectangle",
+                    "id": "39b77bf7-8579-4b21-a712-5337ce998700",
+                    "label": "KFCSub2",
+                    "scope": "CLASS",
+                    "components": [],
+                    "x": 243,
+                    "y": 201,
+                    "isFilled": true,
+                    "fillColor": "#523746",
+                    "width": 170,
+                    "height": 20
+                },
+                {
+                    "type": "BitmapText",
+                    "id": "fb879ca6-a4cb-4fa4-92ef-3c1fe9a23bd4",
+                    "label": "KFCSub",
+                    "scope": "CLASS",
+                    "components": [],
+                    "x": 243,
+                    "y": 197,
+                    "originX": 0.5,
+                    "text": "vs the Krampus Fellowship Clan",
+                    "font": "nokia",
+                    "fontSize": -8
                 }
             ]
         }

@@ -24,13 +24,6 @@
             },
             {
                 "url": [
-                    "assets/music/Grasslands_Bop_Metal_Version.mp3"
-                ],
-                "type": "audio",
-                "key": "ninja-music-1"
-            },
-            {
-                "url": [
                     "assets/music/factory.mp3"
                 ],
                 "type": "audio",
@@ -56,6 +49,20 @@
                 ],
                 "type": "audio",
                 "key": "main-game-2"
+            },
+            {
+                "url": [
+                    "assets/music/Grasslands_Bop_Metal_Version.mp3"
+                ],
+                "type": "audio",
+                "key": "ninja-music-1"
+            },
+            {
+                "url": [
+                    "assets/music/map-pack/Orange_Chicken_WIP_ROUGHEST.mp3"
+                ],
+                "type": "audio",
+                "key": "Orange_Chicken_WIP_ROUGHEST"
             },
             {
                 "url": [

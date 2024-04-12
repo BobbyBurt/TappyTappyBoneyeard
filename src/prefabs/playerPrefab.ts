@@ -6,6 +6,7 @@ import Phaser from "phaser";
 /* START-USER-IMPORTS */
 
 import Level from "~/scenes/Level";
+import LevelUI from "~/scenes/LevelUI";
 import StateController from "~/states/StateController";
 
 /* END-USER-IMPORTS */
@@ -156,13 +157,17 @@ export default class playerPrefab extends Phaser.Physics.Arcade.Sprite {
 	public puckBloodEmitter: Phaser.GameObjects.Particles.ParticleEmitter;
 	public puckBloodEmitterManager: Phaser.GameObjects.Particles.ParticleEmitterManager;
 
+	private altCostume = false;
+
 	start()
 	{
+		this.altCostume = this.scene.registry.get('character-alt');
+		
 		this.levelScene = this.scene as Level;
 
-		this.ninja = (this.levelScene.registry.get('ninja') && this.character === 'tapper' ? '_1' : '');
-
 		this.character = this.scene.registry.get('selected-character');
+
+		this.ninja = (__MAP_PACK__ && this.character === 'tapper' ? '_1' : '');
 
 		if (this.character === 'kid')
 		{
@@ -232,6 +237,8 @@ export default class playerPrefab extends Phaser.Physics.Arcade.Sprite {
 			&& this.stateController.currentState.name != 'uppercut')
 		{
 			this.punchCharged = true;
+			let levelUI = this.scene.scene.get('LevelUI') as LevelUI;
+			levelUI.setPunchCharge(true);
 		}
 
 	// jump charge
@@ -512,6 +519,10 @@ export default class playerPrefab extends Phaser.Physics.Arcade.Sprite {
 		{
 			fist = 'gappy-fist';
 		}
+		else if (this.character === 'tapper' && __MAP_PACK__)
+		{
+			fist = 'bird1fist_1';
+		}
 		
 		this.fist = this.scene.add.image(this.x, this.y, fist);
 		this.fist.setDepth(this.depth - 1);
@@ -550,20 +561,20 @@ export default class playerPrefab extends Phaser.Physics.Arcade.Sprite {
 		}
 		else if (this.character === 'tapper')
 		{
-			this.fist.setTexture('bird' + this.flapCharge + 'fist');
+			this.fist.setTexture('bird' + (this.flapCharge) + 'fist' + this.ninja);
 		}
 		else if (this.character === 'gappy')
 		{
-			this.fist.setTexture('gappy' + this.flapCharge + 'fist');
+			this.fist.setTexture('gappy' + this.flapCharge + 'fist' + (this.altCostume ? '-alt' : ''));
 		}
 		else if (this.character === 'kid')
 		{
-			this.fist.setTexture('apple');
+			this.fist.setTexture('apple' + (this.altCostume ? '-alt' : ''));
 		}
 
 		if (above)
 		{
-			this.fist.setRotation(this.flipX? -1.5 : 1.5);
+			this.fist.setAngle(this.flipX? -90 : 90);
 		}
 		else
 		{
@@ -615,19 +626,19 @@ export default class playerPrefab extends Phaser.Physics.Arcade.Sprite {
 
 	private createAnimations()
 	{
-		let key = 'tapper-atlas_1'
+		let key = 'tapper-atlas'
 
 		if (this.character === 'puck')
 		{
-			key = 'pucamuc';
+			key = 'pucamuc' + (this.altCostume ? '-alt' : '');
 		}
 		else if (this.character === 'kid')
 		{
-			key = 'kid';
+			key = 'kid' + (this.altCostume ? '-alt' : '');
 		}
 		else if (this.character === 'gappy')
 		{
-			key = 'gappy';
+			key = 'gappy' + (this.altCostume ? '-alt' : '');
 		}
 
 	// airborne

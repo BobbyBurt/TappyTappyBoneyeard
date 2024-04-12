@@ -29,7 +29,7 @@
                     "y": 299,
                     "isFilled": true,
                     "fillColor": "#91ACF7",
-                    "width": 1000,
+                    "width": 3000,
                     "height": 1000
                 },
                 {
@@ -338,7 +338,7 @@
                     },
                     "x": 352,
                     "y": 199,
-                    "scaleX": 8.415017240244449,
+                    "scaleX": 12,
                     "flipY": true
                 },
                 {

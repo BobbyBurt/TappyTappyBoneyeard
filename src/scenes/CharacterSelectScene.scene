@@ -69,10 +69,12 @@
                     "texture": {
                         "key": "illustration-tapper"
                     },
-                    "x": 136.271605335176,
-                    "y": 153.19600704684854,
+                    "x": 16.00000111013651,
+                    "y": 50.00000735744834,
                     "scaleX": 0.11421804694748702,
-                    "scaleY": 0.11421804694748702
+                    "scaleY": 0.11421804694748702,
+                    "originX": 0,
+                    "originY": 0
                 },
                 {
                     "type": "BitmapText",
@@ -93,8 +95,8 @@
                     "scope": "CLASS",
                     "components": [],
                     "x": 275,
-                    "y": 115,
-                    "text": "Doesn’t move on the ground, but has 5 or 6 jumps which he uses to move around.\n\n- More jumps!\n- Eats babies…\n",
+                    "y": 106,
+                    "text": "asdf\nasdf\nasdf\nasdf\n\nasdf",
                     "font": "nokia",
                     "fontSize": -8,
                     "maxWidth": 180
@@ -105,7 +107,7 @@
                     "label": "bgColour",
                     "components": [],
                     "x": 275,
-                    "y": 216,
+                    "y": 198,
                     "originX": 0,
                     "originY": 0,
                     "isFilled": true,
@@ -191,7 +193,7 @@
                         "frame": "flap/03"
                     },
                     "x": 417,
-                    "y": 222,
+                    "y": 223,
                     "scaleX": 2,
                     "scaleY": 2,
                     "originX": 0,
@@ -245,6 +247,71 @@
                     "alphaTopRight": 0.7,
                     "alphaBottomLeft": 0.7,
                     "alphaBottomRight": 0.7
+                },
+                {
+                    "type": "Image",
+                    "id": "ebe02785-9427-4180-892f-5fd1b8c6566b",
+                    "label": "gappyIcon_1",
+                    "scope": "CLASS",
+                    "components": [],
+                    "texture": {
+                        "key": "gappy-alt",
+                        "frame": "airborne-tired/00"
+                    },
+                    "x": 326,
+                    "y": 181,
+                    "scaleX": 2,
+                    "scaleY": 2,
+                    "originX": 0,
+                    "originY": 0
+                },
+                {
+                    "type": "Image",
+                    "id": "082915d3-98eb-429b-82ba-0a0e0903d913",
+                    "label": "puckIcon_1",
+                    "scope": "CLASS",
+                    "components": [],
+                    "texture": {
+                        "key": "pucamuc-alt",
+                        "frame": "flap/02"
+                    },
+                    "x": 372,
+                    "y": 181,
+                    "scaleX": 2,
+                    "scaleY": 2,
+                    "originX": 0,
+                    "originY": 0
+                },
+                {
+                    "type": "Image",
+                    "id": "6574e1df-5abb-4658-9201-f02711db29cd",
+                    "label": "kidIcon_1",
+                    "scope": "CLASS",
+                    "components": [],
+                    "texture": {
+                        "key": "kid-alt",
+                        "frame": "run/02"
+                    },
+                    "x": 417,
+                    "y": 182,
+                    "scaleX": 2,
+                    "scaleY": 2,
+                    "originX": 0,
+                    "originY": 0
+                },
+                {
+                    "type": "Rectangle",
+                    "id": "3159c4f0-5fe3-45a8-9c95-685d281a4fde",
+                    "label": "bgColour_4",
+                    "components": [],
+                    "x": 261,
+                    "y": 188,
+                    "originX": 0,
+                    "originY": 0,
+                    "isFilled": true,
+                    "fillColor": "#6a4c5d",
+                    "width": 50,
+                    "height": 30
                 }
             ]
         }
