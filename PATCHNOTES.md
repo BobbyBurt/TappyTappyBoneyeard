@@ -1,8 +1,8 @@
-## Version 32 (Map pack patch) - Apr 13 2024
+## Version 32 (patch) - Apr 13 2024
 
 ### Added
 
-- Added Broly to the credits sequence.
+- Added Broly to the map pack credits sequence.
 
 ### Changed
 
