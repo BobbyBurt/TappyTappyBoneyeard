@@ -5,7 +5,7 @@ This guide is for contributors to the planned community map pack or anyone else 
 
 ## Getting Started
 
-First, download the level editing kit [here](https://www.newgrounds.com/dump/item/d845da010a05d23f4ae6b3af63c7c539)
+First, download the level editing kit. (No longer public)
 
 Included in this folder is a special build of the game which automatically loads a level for testing and includes the assets unique to the community level pack. To test your levels, you'll need to host this build on a local server. You can do that easily with a program included in the folder called [miniweb.exe](https://miniweb.sourceforge.net/). Once you run it, beside `host:` you'll see an IP address / port. Copy and paste that into a web browser to run the game.
 
