@@ -802,7 +802,7 @@ export default class LevelUI extends Phaser.Scene {
 		restartText.align = 1;
 
 		// lists
-		const mobileButtonsList = [mobileButtonDiveImage, dive_icon, up_icon, fist_icon, mobileButtonJumpImage, mobileButtonPunchImage];
+		const mobileButtonsList = [mobileButtonDiveImage, dive_icon, up_icon, fist_icon, mobileButtonJumpImage, mobileButtonPunchImage, mobileButtonRestart, restartText];
 
 		// timerBox (components)
 		const timerBoxAlign = new Align(timerBox);
@@ -1263,7 +1263,7 @@ export default class LevelUI extends Phaser.Scene {
 	private transitionBG!: Phaser.GameObjects.Image;
 	public mobileButtonRestart!: Phaser.GameObjects.Image;
 	public restartText!: Phaser.GameObjects.BitmapText;
-	private mobileButtonsList!: Phaser.GameObjects.Image[];
+	private mobileButtonsList!: Array<Phaser.GameObjects.Image|Phaser.GameObjects.BitmapText>;
 
 	/* START-USER-CODE */
 
@@ -1296,6 +1296,16 @@ export default class LevelUI extends Phaser.Scene {
 		if (__MAP_PACK__) {
 			this.punchChargeFull.setTexture('bird2fist_1');
 		}
+
+		this.time.delayedCall(10, () => {
+			if (InputManager.activeInputMode !== 'touch') {
+				this.comboLabelText.setText(InputManager.activeInputMode)
+				this.mobileButtonsList.forEach((object) => {
+					// object.setVisible(false);
+					object.setAlpha(0);
+				});
+			}
+		});
 
 		this.setupCamera();
 

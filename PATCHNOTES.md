@@ -1,3 +1,14 @@
+## Version 32 (Map pack patch) - Apr 13 2024
+
+### Added
+
+- Added Broly to the credits sequence.
+
+### Changed
+
+- Mobile on-screen buttons will hide if a gamepad is being used instead of touch.
+- An uppercut can no longer be preformed with the punch and jump inputs on gamepad.
+
 ## Version 31 - Apr 12 2024
 
 ### Added
@@ -8,6 +19,7 @@
 - Added UI sfx.
 - Added a restart button on mobile.
 - Added the engine and editor software used to the credits.
+- Added a custom name and icon for adding the site to your homescreen on iOS.
 
 ### Changed
 

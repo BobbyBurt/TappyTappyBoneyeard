@@ -2,6 +2,7 @@ import playerPrefab from "~/prefabs/playerPrefab";
 import State from "states/State";
 import StateController from "./StateController";
 import SoundManager from "~/components/SoundManager";
+import InputManager from "~/components/InputManager";
 
 /** player flies forward hitting enemies in it's path */
 export default class Punch implements State {
@@ -20,7 +21,7 @@ export default class Punch implements State {
 	get allowUppercut()
 	{
 		let value = false;
-		if (this.player.scene.registry.get('mobile'))
+		if (this.player.scene.registry.get('mobile') && InputManager.activeInputMode !== 'gamepad')
 			return true;
 		// else if (this.player.scene.registry.get('new-uppercut-input'))
 		else if (true)

@@ -467,7 +467,7 @@
             "label": "bitmaptext_9",
             "components": [],
             "x": 22,
-            "y": 1709,
+            "y": 1913,
             "tintTopLeft": "#523746",
             "tintTopRight": "#523746",
             "tintBottomLeft": "#523746",
@@ -482,7 +482,7 @@
             "label": "bitmaptext_10",
             "components": [],
             "x": 144,
-            "y": 1712,
+            "y": 1916,
             "tintTopLeft": "#523746",
             "tintTopRight": "#523746",
             "tintBottomLeft": "#523746",
@@ -497,7 +497,7 @@
             "label": "bitmaptext_11",
             "components": [],
             "x": 150,
-            "y": 1724,
+            "y": 1928,
             "tintTopLeft": "#523746",
             "tintTopRight": "#523746",
             "tintBottomLeft": "#523746",
@@ -512,7 +512,7 @@
             "label": "frame_1",
             "components": [],
             "x": 241,
-            "y": 1619,
+            "y": 1823,
             "strokeColor": "#523746",
             "lineWidth": 3,
             "isStroked": true,
@@ -528,7 +528,7 @@
                 "key": "preview-The Perplex Plan"
             },
             "x": 241,
-            "y": 1619
+            "y": 1823
         },
         {
             "type": "BitmapText",
@@ -536,7 +536,7 @@
             "label": "bitmaptext_7",
             "components": [],
             "x": 257,
-            "y": 1724,
+            "y": 1928,
             "tintTopLeft": "#523746",
             "tintTopRight": "#523746",
             "tintBottomLeft": "#523746",
@@ -551,7 +551,7 @@
             "label": "bitmaptext_8",
             "components": [],
             "x": 22,
-            "y": 1923,
+            "y": 2127,
             "tintTopLeft": "#523746",
             "tintTopRight": "#523746",
             "tintBottomLeft": "#523746",
@@ -566,7 +566,7 @@
             "label": "bitmaptext_12",
             "components": [],
             "x": 223,
-            "y": 1926,
+            "y": 2130,
             "tintTopLeft": "#523746",
             "tintTopRight": "#523746",
             "tintBottomLeft": "#523746",
@@ -581,7 +581,7 @@
             "label": "bitmaptext_13",
             "components": [],
             "x": 229,
-            "y": 1938,
+            "y": 2142,
             "tintTopLeft": "#523746",
             "tintTopRight": "#523746",
             "tintBottomLeft": "#523746",
@@ -596,7 +596,7 @@
             "label": "frame_2",
             "components": [],
             "x": 241,
-            "y": 1837,
+            "y": 2041,
             "strokeColor": "#523746",
             "lineWidth": 3,
             "isStroked": true,
@@ -612,7 +612,7 @@
                 "key": "preview-MadChicks"
             },
             "x": 241,
-            "y": 1837
+            "y": 2041
         },
         {
             "type": "BitmapText",
@@ -620,7 +620,7 @@
             "label": "bitmaptext_14",
             "components": [],
             "x": 359,
-            "y": 1938,
+            "y": 2142,
             "tintTopLeft": "#523746",
             "tintTopRight": "#523746",
             "tintBottomLeft": "#523746",
@@ -635,7 +635,7 @@
             "label": "bitmaptext_15",
             "components": [],
             "x": 22,
-            "y": 2144,
+            "y": 2348,
             "tintTopLeft": "#523746",
             "tintTopRight": "#523746",
             "tintBottomLeft": "#523746",
@@ -650,7 +650,7 @@
             "label": "bitmaptext_16",
             "components": [],
             "x": 223,
-            "y": 2147,
+            "y": 2351,
             "tintTopLeft": "#523746",
             "tintTopRight": "#523746",
             "tintBottomLeft": "#523746",
@@ -665,7 +665,7 @@
             "label": "bitmaptext_17",
             "components": [],
             "x": 229,
-            "y": 2159,
+            "y": 2363,
             "tintTopLeft": "#523746",
             "tintTopRight": "#523746",
             "tintBottomLeft": "#523746",
@@ -680,7 +680,7 @@
             "label": "frame_3",
             "components": [],
             "x": 241,
-            "y": 2064,
+            "y": 2268,
             "strokeColor": "#523746",
             "lineWidth": 3,
             "isStroked": true,
@@ -696,7 +696,7 @@
                 "key": "preview-stann"
             },
             "x": 241,
-            "y": 2064
+            "y": 2268
         },
         {
             "type": "BitmapText",
@@ -704,7 +704,7 @@
             "label": "bitmaptext_18",
             "components": [],
             "x": 22,
-            "y": 2348,
+            "y": 2552,
             "tintTopLeft": "#523746",
             "tintTopRight": "#523746",
             "tintBottomLeft": "#523746",
@@ -719,7 +719,7 @@
             "label": "bitmaptext_19",
             "components": [],
             "x": 223,
-            "y": 2351,
+            "y": 2555,
             "tintTopLeft": "#523746",
             "tintTopRight": "#523746",
             "tintBottomLeft": "#523746",
@@ -734,7 +734,7 @@
             "label": "bitmaptext_20",
             "components": [],
             "x": 229,
-            "y": 2363,
+            "y": 2567,
             "tintTopLeft": "#523746",
             "tintTopRight": "#523746",
             "tintBottomLeft": "#523746",
@@ -749,7 +749,7 @@
             "label": "frame_4",
             "components": [],
             "x": 241,
-            "y": 2268,
+            "y": 2472,
             "strokeColor": "#523746",
             "lineWidth": 3,
             "isStroked": true,
@@ -765,7 +765,7 @@
                 "key": "preview-flipping-the-bird"
             },
             "x": 241,
-            "y": 2268
+            "y": 2472
         },
         {
             "type": "BitmapText",
@@ -773,7 +773,7 @@
             "label": "bitmaptext_21",
             "components": [],
             "x": 22,
-            "y": 2548,
+            "y": 2752,
             "tintTopLeft": "#523746",
             "tintTopRight": "#523746",
             "tintBottomLeft": "#523746",
@@ -788,7 +788,7 @@
             "label": "bitmaptext_22",
             "components": [],
             "x": 238,
-            "y": 2551,
+            "y": 2755,
             "tintTopLeft": "#523746",
             "tintTopRight": "#523746",
             "tintBottomLeft": "#523746",
@@ -803,7 +803,7 @@
             "label": "bitmaptext_23",
             "components": [],
             "x": 244,
-            "y": 2563,
+            "y": 2767,
             "tintTopLeft": "#523746",
             "tintTopRight": "#523746",
             "tintBottomLeft": "#523746",
@@ -818,7 +818,7 @@
             "label": "frame_5",
             "components": [],
             "x": 241,
-            "y": 2468,
+            "y": 2672,
             "strokeColor": "#523746",
             "lineWidth": 3,
             "isStroked": true,
@@ -834,7 +834,7 @@
                 "key": "preview-Roverkibb_Berry_Pie"
             },
             "x": 241,
-            "y": 2468
+            "y": 2672
         },
         {
             "type": "BitmapText",
@@ -842,7 +842,7 @@
             "label": "bitmaptext_24",
             "components": [],
             "x": 22,
-            "y": 2750,
+            "y": 2954,
             "tintTopLeft": "#523746",
             "tintTopRight": "#523746",
             "tintBottomLeft": "#523746",
@@ -857,7 +857,7 @@
             "label": "bitmaptext_25",
             "components": [],
             "x": 310,
-            "y": 2753,
+            "y": 2957,
             "tintTopLeft": "#523746",
             "tintTopRight": "#523746",
             "tintBottomLeft": "#523746",
@@ -872,7 +872,7 @@
             "label": "bitmaptext_26",
             "components": [],
             "x": 316,
-            "y": 2765,
+            "y": 2969,
             "tintTopLeft": "#523746",
             "tintTopRight": "#523746",
             "tintBottomLeft": "#523746",
@@ -887,7 +887,7 @@
             "label": "frame_6",
             "components": [],
             "x": 241,
-            "y": 2670,
+            "y": 2874,
             "strokeColor": "#523746",
             "lineWidth": 3,
             "isStroked": true,
@@ -903,7 +903,7 @@
                 "key": "preview-Spirosenjo"
             },
             "x": 241,
-            "y": 2670
+            "y": 2874
         },
         {
             "type": "BitmapText",
@@ -911,7 +911,7 @@
             "label": "bitmaptext_27",
             "components": [],
             "x": 22,
-            "y": 2953,
+            "y": 3157,
             "tintTopLeft": "#523746",
             "tintTopRight": "#523746",
             "tintBottomLeft": "#523746",
@@ -926,7 +926,7 @@
             "label": "bitmaptext_28",
             "components": [],
             "x": 155,
-            "y": 2956,
+            "y": 3160,
             "tintTopLeft": "#523746",
             "tintTopRight": "#523746",
             "tintBottomLeft": "#523746",
@@ -941,7 +941,7 @@
             "label": "bitmaptext_29",
             "components": [],
             "x": 161,
-            "y": 2968,
+            "y": 3172,
             "tintTopLeft": "#523746",
             "tintTopRight": "#523746",
             "tintBottomLeft": "#523746",
@@ -956,7 +956,7 @@
             "label": "frame_7",
             "components": [],
             "x": 241,
-            "y": 2873,
+            "y": 3077,
             "strokeColor": "#523746",
             "lineWidth": 3,
             "isStroked": true,
@@ -972,7 +972,7 @@
                 "key": "preview-Koffy"
             },
             "x": 241,
-            "y": 2873
+            "y": 3077
         },
         {
             "type": "Rectangle",
@@ -1007,7 +1007,7 @@
                 "key": "Parallax-Backing_1"
             },
             "x": -30,
-            "y": 3366,
+            "y": 3570,
             "scaleX": 2.2,
             "originX": 0,
             "originY": 0,
@@ -1019,7 +1019,7 @@
             "label": "rectangle_3",
             "components": [],
             "x": -30,
-            "y": 3242,
+            "y": 3446,
             "originX": 0,
             "originY": 0,
             "isFilled": true,
@@ -1036,7 +1036,7 @@
                 "key": "Paralax-Mountains"
             },
             "x": 128,
-            "y": 3577
+            "y": 3781
         },
         {
             "type": "Image",
@@ -1047,7 +1047,7 @@
                 "key": "Paralax-Mountains"
             },
             "x": 448,
-            "y": 3577
+            "y": 3781
         },
         {
             "type": "BitmapText",
@@ -1056,7 +1056,7 @@
             "scope": "CLASS",
             "components": [],
             "x": 79,
-            "y": 3035,
+            "y": 3239,
             "tintTopLeft": "#523746",
             "tintTopRight": "#523746",
             "tintBottomLeft": "#523746",
@@ -1076,7 +1076,7 @@
                 "frame": "airborne/00"
             },
             "x": 42,
-            "y": 3038,
+            "y": 3242,
             "scaleX": 2,
             "scaleY": 2
         },
@@ -1087,7 +1087,7 @@
             "scope": "CLASS",
             "components": [],
             "x": 79,
-            "y": 3083,
+            "y": 3287,
             "tintTopLeft": "#523746",
             "tintTopRight": "#523746",
             "tintBottomLeft": "#523746",
@@ -1107,7 +1107,7 @@
                 "frame": "run/03"
             },
             "x": 42,
-            "y": 3086,
+            "y": 3290,
             "scaleX": 2,
             "scaleY": 2
         },
@@ -1118,7 +1118,7 @@
             "scope": "CLASS",
             "components": [],
             "x": 79,
-            "y": 3134,
+            "y": 3338,
             "tintTopLeft": "#523746",
             "tintTopRight": "#523746",
             "tintBottomLeft": "#523746",
@@ -1138,7 +1138,7 @@
                 "frame": "flap/02"
             },
             "x": 42,
-            "y": 3137,
+            "y": 3341,
             "scaleX": 2,
             "scaleY": 2
         },
@@ -1148,7 +1148,7 @@
             "label": "bitmaptext_38",
             "components": [],
             "x": 240,
-            "y": 3487,
+            "y": 3691,
             "originX": 0.5,
             "tintTopLeft": "#523746",
             "tintTopRight": "#523746",
@@ -1167,7 +1167,7 @@
             "id": "42e5f132-2edc-411c-957a-805d6a568f00",
             "label": "rectangle_4",
             "components": [],
-            "y": 3382,
+            "y": 3586,
             "originX": 0,
             "originY": 0,
             "visible": false,
@@ -1185,7 +1185,7 @@
                 "key": "plane_1"
             },
             "x": 62,
-            "y": 3476,
+            "y": 3680,
             "flipX": true
         },
         {
@@ -1197,7 +1197,7 @@
                 "key": "soldiermid_1"
             },
             "x": 398,
-            "y": 3480,
+            "y": 3684,
             "originX": 0,
             "originY": 0,
             "flipX": true
@@ -1211,7 +1211,7 @@
                 "key": "soldieronballoon_1"
             },
             "x": 404,
-            "y": 3485,
+            "y": 3689,
             "originX": 0,
             "originY": 0,
             "flipX": true
@@ -1222,7 +1222,7 @@
             "label": "bitmaptext_42",
             "components": [],
             "x": 240,
-            "y": 3623,
+            "y": 3827,
             "originX": 0.5,
             "tintTopLeft": "#523746",
             "tintTopRight": "#523746",
@@ -1238,7 +1238,7 @@
             "label": "bitmaptext_39",
             "components": [],
             "x": 334,
-            "y": 1724,
+            "y": 1928,
             "tintTopLeft": "#523746",
             "tintTopRight": "#523746",
             "tintBottomLeft": "#523746",
@@ -1254,7 +1254,7 @@
             "scope": "CLASS",
             "components": [],
             "x": 240,
-            "y": 3316,
+            "y": 3520,
             "originX": 0.5,
             "tintTopLeft": "#523746",
             "tintTopRight": "#523746",
@@ -1273,7 +1273,7 @@
                 "key": "phaser-pixel-medium-shaded"
             },
             "x": 240,
-            "y": 3342,
+            "y": 3546,
             "originY": 0
         },
         {
@@ -1283,7 +1283,7 @@
             "scope": "CLASS",
             "components": [],
             "x": 240,
-            "y": 3233,
+            "y": 3437,
             "originX": 0.5,
             "tintTopLeft": "#523746",
             "tintTopRight": "#523746",
@@ -1300,7 +1300,7 @@
             "scope": "CLASS",
             "components": [],
             "x": 240,
-            "y": 3255,
+            "y": 3459,
             "originX": 0.5,
             "tintTopLeft": "#523746",
             "tintTopRight": "#523746",
@@ -1318,7 +1318,7 @@
             "scope": "CLASS",
             "components": [],
             "x": 240,
-            "y": 3209,
+            "y": 3413,
             "originX": 0.5,
             "tintTopLeft": "#523746",
             "tintTopRight": "#523746",
@@ -1327,6 +1327,75 @@
             "text": "Software:",
             "font": "nokia",
             "fontSize": -16
+        },
+        {
+            "type": "BitmapText",
+            "id": "4fdcca2c-f02f-4779-9c1f-5a005febcee7",
+            "label": "bitmaptext_40",
+            "components": [],
+            "x": 22,
+            "y": 1698,
+            "tintTopLeft": "#523746",
+            "tintTopRight": "#523746",
+            "tintBottomLeft": "#523746",
+            "tintBottomRight": "#523746",
+            "text": "Broly",
+            "font": "nokia",
+            "fontSize": -32
+        },
+        {
+            "type": "BitmapText",
+            "id": "b1f7b672-9dab-44c8-85d9-37a7bcc641f5",
+            "label": "bitmaptext_41",
+            "components": [],
+            "x": 155,
+            "y": 1709,
+            "tintTopLeft": "#523746",
+            "tintTopRight": "#523746",
+            "tintBottomLeft": "#523746",
+            "tintBottomRight": "#523746",
+            "text": "Promotional art",
+            "font": "nokia",
+            "fontSize": -8
+        },
+        {
+            "type": "Rectangle",
+            "id": "c3fd9f2c-67ce-44ed-9387-aadacad63bb0",
+            "label": "frame_10",
+            "components": [],
+            "x": 240,
+            "y": 1611,
+            "strokeColor": "#523746",
+            "lineWidth": 3,
+            "isStroked": true,
+            "width": 500,
+            "height": 134
+        },
+        {
+            "type": "Image",
+            "id": "0efcce10-58b2-4a6d-ab82-2905d47667c5",
+            "label": "preview_10",
+            "components": [],
+            "texture": {
+                "key": "preview-JohnTappington"
+            },
+            "x": 240,
+            "y": 1611
+        },
+        {
+            "type": "Image",
+            "id": "2a9355c3-6466-4561-b5da-c8c2c7ba27db",
+            "label": "paralax_Mountains_2",
+            "components": [],
+            "texture": {
+                "key": "Paralax-Mountains"
+            },
+            "x": 262,
+            "y": 3848.5,
+            "scaleX": 2,
+            "scaleY": 2,
+            "angle": -180,
+            "originY": 1
         }
     ],
     "plainObjects": [],
