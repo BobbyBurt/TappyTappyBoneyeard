@@ -1,3 +1,13 @@
+## Version 33 (patch) - Apr 14 2024
+
+### Changed
+
+- Edited the last bonus chapter to make it less difficult.
+
+### Fixed
+
+- Fixed the combo text GUI which had been changed to debug text. Oops!
+
 ## Version 32 (patch) - Apr 13 2024
 
 ### Added

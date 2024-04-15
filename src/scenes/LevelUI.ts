@@ -1299,7 +1299,6 @@ export default class LevelUI extends Phaser.Scene {
 
 		this.time.delayedCall(10, () => {
 			if (InputManager.activeInputMode !== 'touch') {
-				this.comboLabelText.setText(InputManager.activeInputMode)
 				this.mobileButtonsList.forEach((object) => {
 					// object.setVisible(false);
 					object.setAlpha(0);
