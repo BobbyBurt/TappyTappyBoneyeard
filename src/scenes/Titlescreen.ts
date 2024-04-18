@@ -1096,7 +1096,7 @@ export default class Titlescreen extends Phaser.Scene {
 			{
 				if (!__MAP_PACK__)
 				{
-					window.open('https://www.newgrounds.com/portal/view/5153570', '_blank');
+					window.open('https://www.newgrounds.com/portal/view/925714', '_blank');
 				}
 				else
 				{

@@ -1,3 +1,16 @@
+## Version 35 (patch) - Apr 18 2024
+
+### Fixed
+
+- Fixed incorrect Tapper sprites being loaded in the map pack.
+
+## Version 34 (patch) - Apr 15 2024
+
+### Fixed
+
+- Replaced the link to the map pack game page.
+- Fixed a bonus character's sprite which was incorrect.
+
 ## Version 33 (patch) - Apr 14 2024
 
 ### Changed

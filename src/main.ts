@@ -23,7 +23,7 @@ window.addEventListener('load', function ()
 	{
 		title: 'Bird Tapper',
 		url: 'https://www.newgrounds.com/projects/games/1923225/preview',
-		version: '31 update',
+		version: '34 patch',
 		
 	// visuals
 		type: Phaser.AUTO,
